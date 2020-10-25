@@ -153,9 +153,9 @@
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="common/header.jsp" %>
+      <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="user/myPage/common/nav.jsp" %>
+      <%@ include file="../../user/myPage/common/nav.jsp" %>
       <div class="content_mywish">
          <div class="dataInform_mywish">
             <div class="layoutSubbox_mywish">
@@ -225,6 +225,6 @@
          </div>
       </div>
       <!-- footer 영역 -->
-      <%@ include file="common/footer.jsp" %>
+      <%@ include file="../../common/footer.jsp" %>
    </body>
 </html>

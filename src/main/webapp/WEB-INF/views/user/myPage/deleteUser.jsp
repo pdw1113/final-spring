@@ -170,9 +170,9 @@
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="common/header.jsp" %>
+      <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="user/myPage/common/nav.jsp" %>
+      <%@ include file="../../user/myPage/common/nav.jsp" %>
       <form action="#" name="form1" id="form1" method="post" target="process">
          <div class="content_myleave">
             <div class="dataInform_myleave">
@@ -239,6 +239,6 @@
          });
       </script>
       <!-- footer 영역 -->
-      <%@ include file="common/footer.jsp" %>
+      <%@ include file="../../common/footer.jsp" %>
    </body>
 </html>
