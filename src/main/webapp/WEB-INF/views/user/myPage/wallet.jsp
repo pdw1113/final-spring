@@ -529,7 +529,7 @@
                             <li>
                                 <div class="stit_myPage_money">보유니즈머니</div>
                                 <div class="won_myPage_money">0<span>원</span></div>
-                                <a href="#" class="chargeBtn_myPage_money"><span>충전하기</span></a>
+                                <a href="charge.do" class="chargeBtn_myPage_money"><span>충전하기</span></a>
                             </li>
                         </ul>
                     </div>
