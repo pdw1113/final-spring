@@ -10,11 +10,7 @@
       <!-- 부가적인 테마 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
       <!-- include libraries(jQuery, bootstrap) -->
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
       <style>
          html,
          body {
@@ -22,21 +18,20 @@
          padding: 0;
          margin: 0;
          }
-         .header {
+          .header{    
          width: 100%;
-         height: 8rem;
-         background-color: aqua;
+         height: 6.2rem;
          }
-         .left-bar {
+         .left-bar{
          float: left;
          width: 13%;
-         height: 88.9rem;
-         background-color: aquamarine;
+         height: 92rem;
+         border-right: 1px solid gainsboro;
          }
-         .section {
+         .section{
          width: 87%;
          float: left;
-         height: 55.5rem;
+         height: 92rem;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -54,119 +49,6 @@
          margin-left: 20px;
          margin-right: 20px;
          border-bottom: 3px solid black;
-         }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
-         /* 전체 div */
-         .content_MemberManager {
-         width: 100%;
-         padding: 57px 0 125px 0;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .searchbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager:after {
-         content: "";
-         display: block;
-         clear: both;
-         }
-         /* 달력 date-picker */
-         label {
-         margin-left: 20px;
-         }
-         .date {
-         width: 140px;
-         margin: 0 1px 10px 1px;
-         }
-         .date>span:hover {
-         cursor: pointer;
-         }
-         /* 비밀번호 입력 div */
-         .dataInform_MemberManager .inform_MemberManager {
-         width: 100%;
-         overflow: hidden;
-         }
-         /*검색버튼*/
-         .searchBtn_MemberManager {
-         margin: -3px 14px 0px 0;
-         padding-bottom: 8px;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager {
-         background-color: #ddd;
-         border: none;
-         color: black;
-         font-weight: 600;
-         padding: 16px 32px;
-         text-align: center;
-         font-size: 16px;
-         margin: 4px 2px;
-         transition: 0.3s;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager:hover {
-         background-color: #fabe00;
-         font-weight: 600;
-         color: white;
-         }
-         /* 회원 리스트 table */
-         table.type07 {
-         border-collapse: collapse;
-         text-align: left;
-         line-height: 1.5;
-         margin-top: 20px;
-         }
-         table.type07 thead {
-         border-right: 1px solid #ccc;
-         border-left: 1px solid #ccc;
-         background: #bcbcbc;
-         }
-         table.type07 thead th {
-         padding: 10px;
-         font-weight: bold;
-         vertical-align: top;
-         color: #fff;
-         border: 1px solid #ccc;
-         text-align: center;
-         }
-         table.type07 td {
-         width: 350px;
-         padding: 10px;
-         vertical-align: top;
-         border-bottom: 1px solid #ccc;
-         border: 1px solid #ccc;
-         text-align: center;
-         }
-         .id_text_MemberManager {
-         font-size: 12px;
-         }
-         .nickname_text_MemberManager {
-         color: cornflowerblue;
-         font-size: 13px;
-         }
-         /* 반응형~ */
-         @media (max-width: 1360px) {
-         /* 사이드 여백 */
-         .content_MemberManager .layoutSubbox_MemberManager {
-         width: auto;
-         margin: 0 20px;
-         }
-         }
-         table,
-         td {
-         text-align: center;
-         vertical-align: middle;
          }
          .title_Mail {
          font-weight: 600;
@@ -291,7 +173,8 @@
          </div>
          <!-- 메일 내용 썸머노트 -->
          <div class="content_Mail">
-            <textarea id="summernote_Mail"></textarea>
+            <!-- <textarea id="summernote_Mail"></textarea> -->
+            <textarea rows="20" cols="220"></textarea>
          </div>
          <!-- 보내기 버튼 -->
          <div class="button_Mail">
@@ -355,37 +238,7 @@
             </div>
          </div>
       </div>
-      
-      <%@ include file="../../common/footer.jsp" %>
       <script>
-         $(document).ready(function () {
-         
-             //썸머노트
-             $('#summernote_Mail').summernote({
-                 toolbar: [
-                     // [groupName, [list of button]]
-                     ['fontname', ['fontname']],
-                     ['fontsize', ['fontsize']],
-                     ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                     ['color', ['forecolor', 'color']],
-                     ['table', ['table']],
-                     ['para', ['ul', 'ol', 'paragraph']],
-                     ['height', ['height']],
-                     ['insert', ['picture', 'link', 'video']],
-                     ['view', ['fullscreen', 'help']]
-                 ],
-                 height: 400,                 // 에디터 높이
-                 minHeight: null,             // 최소 높이
-                 maxHeight: null,             // 최대 높이
-                 focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                 lang: "ko-KR",					// 한글 설정
-                 placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
-                 fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
-         
-             });
-         });
-         
          // 모달 팝업 띄우기
          function emailCheck() {
              $('#findadress_Mail').modal().show();
