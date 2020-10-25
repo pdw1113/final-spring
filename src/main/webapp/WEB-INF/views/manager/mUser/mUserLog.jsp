@@ -36,21 +36,20 @@
          #datepicker>span:hover {
          cursor: pointer;
          }
-         .header {
+         .header{    
          width: 100%;
-         height: 5rem;
-         background-color: aqua;
+         height: 6.2rem;
          }
-         .left-bar {
+         .left-bar{
          float: left;
          width: 13%;
-         height: 55.5rem;
-         background-color: aquamarine;
+         height: 92rem;
+         border-right: 1px solid gainsboro;
          }
-         .section {
+         .section{
          width: 87%;
          float: left;
-         height: 55.5rem;
+         height: 92rem;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -306,7 +305,7 @@
       </style>
    </head>
    <body>
- <div class="header">
+ 	<div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">

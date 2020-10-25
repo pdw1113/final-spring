@@ -238,6 +238,7 @@
          .stat-li:first-child {
          border-left: 0;
          }
+         
          /* 속도가 느린거 같으면 이걸로 */
          /* https://gahyun-web-diary.tistory.com/7 */   
       </style>

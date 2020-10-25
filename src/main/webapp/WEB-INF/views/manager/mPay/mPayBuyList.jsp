@@ -147,14 +147,14 @@
          }
          /*두번째 폼태그*/
          #second-input{
-         width: 16rem;
+         width: 18rem;
          margin-left: 3rem;
          display: inline-block;
          padding-bottom: 1.7rem;
          padding-top: 1.95rem;
          }
          #second-input-2{
-         width: 16rem;
+         width: 18rem;
          margin-left: 0;
          display: inline-block;
          padding-bottom: 1.7rem;

@@ -30,7 +30,7 @@
          /* 로그인,회원가입 프레임 */
          .login_box_Mainhead {
          float: right;
-         margin-top: 15px;
+         margin-top: 1rem;
          }
          /* 로그인, 회원가입 감싸고있는 테두리 */
          .head_login_Mainhead {
@@ -39,7 +39,6 @@
          width: 80px;
          height: 30px;
          text-align: center;
-         line-height: 35px;
          margin-left: 10px;
          border-radius: 15px;
          font-size: 20px;
@@ -81,7 +80,7 @@
          border-bottom: 2px solid white;
          font-size: 30px;
          float: left;
-         margin-top: 8px;
+         margin-top: 0px;
          width: 380px;
          }
          /* 검색 인풋텍스트 */
@@ -151,7 +150,7 @@
                </div>
                <div class="main_searchbox_Mainhead">
                   <input class="main_searchtext_Mainhead" type="text">
-                  <a href="#"><img style="float: right; width: 23px; margin-top: 13px;"
+                  <a href="#"><img style="float: right; width: 23px; margin-top: 21px;"
                      src="resources/img/SearchGlass.png"></a>
                </div>
                <div class="main_search_Mainhead">
@@ -218,6 +217,7 @@
                      $(".manager_page").hide();
                  }
              }
+             $('body').css("font-family","Apple Color Emoji").css("line-height","1.6");
          });
       </script>
    </body>
