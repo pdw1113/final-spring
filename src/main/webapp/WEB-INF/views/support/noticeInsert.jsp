@@ -20,7 +20,7 @@
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <style type="text/css">
          /* jua 폰트 */
-         .font_jua {
+         .font_jua { 
          font-family: 'Jua', sans-serif;
          color: black;
          }

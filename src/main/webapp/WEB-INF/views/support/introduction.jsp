@@ -14,7 +14,7 @@
       <title>Document</title>
       <style>
          /* jua 폰트 */
-         .font_jua{
+         .font_jua{ 
          font-family: 'Jua', sans-serif;
          color: black;
          }

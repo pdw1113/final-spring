@@ -17,7 +17,7 @@
          font-family: "맑은 고딕";
          }
          /* jua 폰트 */
-         .font_jua{
+         .font_jua{ 
          font-family: 'Jua', sans-serif;
          }
          /* hanSans 폰트 */

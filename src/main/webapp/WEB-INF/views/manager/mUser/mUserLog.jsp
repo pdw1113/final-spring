@@ -306,7 +306,7 @@
       </style>
    </head>
    <body>
-   	<%@ include file="../../common/header.jsp" %>
+   	<%@ include file="../../common/header.jsp" %> 
 	<%@ include file="../common/mLeftBar.jsp" %>
       <div class="section">
          <!-- 내용 안의 헤더 부분 -->

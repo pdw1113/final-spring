@@ -14,7 +14,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       <style type="text/css">
          /* jua 폰트 */
-         .font_jua {
+         .font_jua {  
          font-family: 'Jua', sans-serif;
          color: black;
          }
