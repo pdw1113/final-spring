@@ -160,7 +160,7 @@
          }
          /* 반응형~ */
          @media (max-width: 1360px) {
-         /* 사이드 여백 */
+         /* 사이드 여백  */
          .content_MemberManager .layoutSubbox_MemberManager {
          width: auto;
          margin: 0 20px;
