@@ -272,14 +272,15 @@
          </div>
          <div class="box">
             <div class="box1">방문자수</div>
-            <div class="box2 box21">
+            <div class="box2">
                <%@ include file="mStatisticsGraph.jsp" %>
             </div>
          </div>
          <div class="box">
             <div class="box1">가입자수</div>
-            <div class="box2 box21">
-               <%@ include file="mStatisticsGraph.jsp" %>
+            <div class="box2">
+               <%@ include file="mStatisticsGraph2.jsp" %>
+               <%-- <%@ include file="../mPolicy/mPolicy.jsp" %> --%>
             </div>
          </div>
          <div class="box22">
