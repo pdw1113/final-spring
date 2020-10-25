@@ -792,8 +792,8 @@
       <input type="hidden" value="1" class="social5">
       <input type="hidden" value="1" class="social6">
       <input type="hidden" value="0" class="social7">
-      <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe class="headiframe" src="Mainhead.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 290px;"></iframe>
+      
+      <%@ include file="../../common/header.jsp" %>
       <!-- Work -->
       <div class="container frame sample">
          <div class="row">
@@ -1224,7 +1224,7 @@
       <!-- 위치 -->
       <div class="location"></div>
       <!-- 임시 풋터 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" class="ifooter" scrolling="no"></iframe>
+      <%@ include file="../../common/footer.jsp" %>
       <script>
          // 상수
          const workBtnContainer = document.querySelector('.work__categories');
@@ -1325,30 +1325,7 @@
                  ratedFill: "#FABE00",
                  readOnly: true
              });
-         
-             // $("#commentStar1").rateYo({
-             //     rating: $("#star1").val(),
-             //     ratedFill: "#FABE00",
-             //     starWidth: "20px",
-             //     readOnly: true
-             // });
-         
-             // $("#commentStar2").rateYo({
-             //     rating: $("#star2").val(),
-             //     ratedFill: "#FABE00",
-             //     starWidth: "20px",
-             //     readOnly: true
-             // });
-         
-             // $("#commentStar3").rateYo({
-             //     rating: $("#star3").val(),
-             //     ratedFill: "#FABE00",
-             //     starWidth: "20px",
-             //     readOnly: true
-             // });
-         
-             // https://rateyo.fundoocode.ninja/#
-         
+             
              // 구매 시간
              $('#buy_timebutton_down_detail').click(function () {
                  var num = $('#buy_time_detail').val();

@@ -438,6 +438,9 @@
     </style>
 </head>
 <body>
+	
+	<%@ include file="../common/header.jsp" %>
+
     <form action="">
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
@@ -901,5 +904,8 @@
         </ul>
     </div>
     </form>
+    
+    <%@ include file="../common/footer.jsp" %>
+    
 </body>
 </html>
