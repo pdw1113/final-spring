@@ -24,7 +24,7 @@
             float: left;
             height: 55.5rem;
         }
-
+  
 </style>
 <body>
 

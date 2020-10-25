@@ -39,7 +39,7 @@
          height: 6.2rem;
          
          }
-         
+             
          .left-bar {
          float: left;
          width: 13%;
