@@ -85,7 +85,7 @@
          .Lsit-Saction{
          margin: auto;
          width: 130rem;
-         height: 125rem;
+         height: 140rem;
          }
          /*리스트 버튼*/
          .List-Button{
@@ -191,12 +191,22 @@
          .col-xs-4{
          margin-bottom: 5rem;
          }
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
       </style>
    </head>
    <body>
-   
+	  <div class="header">   
    	  <%@ include file="../../common/header.jsp" %>
-   
+   	  </div>
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
             <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;웹개발</h2>

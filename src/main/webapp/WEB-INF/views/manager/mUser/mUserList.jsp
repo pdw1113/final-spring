@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -10,7 +10,7 @@
          type="text/css" />
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-       <!--제이쿼리CDN-->
+      <!--제이쿼리CDN-->
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
       <title>Document</title>
       <style>
@@ -52,7 +52,6 @@
          margin-right: 20px;
          border-bottom: 3px solid black;
          }
-     
          /* 전체 div */
          .content_MemberManager {
          width: 100%;
@@ -73,7 +72,6 @@
          display: block;
          clear: both;
          }
-
          /* 비밀번호 입력 div */
          .dataInform_MemberManager .inform_MemberManager {
          width: 100%;
@@ -153,12 +151,12 @@
          .caption_text_MemberManabger {
          color: red;
          }
-       /* 검색 테이블 */
+         /* 검색 테이블 */
          .searchhbox_table_MemberManager {
          margin: 15px auto 20px;
          border-top: 1px solid rgb(173, 173, 173);
          border-collapse: collapse;
-      }
+         }
          /* 검색테이블 td */
          .searchhbox_table_MemberManager td {
          height: 45px;
@@ -198,26 +196,22 @@
          margin-left: 20px;
          outline-style: none;
          }
-
          /* 체크박스 */
          .checkbox_MemberManager {
          font-size: 22px;
          float: left;
          margin-left: 16px;
          }
-
          /* 체크박스 크기 */
          .checkboxes_MemberManager {
          zoom: 1.5;
          padding-right: 5px;
          }
-
          .Admin_grant_Managerheader {
          position: relative;
          width: 1320px;
          margin: 0 auto;
          }
-
          /* 검색버튼 */
          .seaerch_button_PersnalAccess{
          width: 180px;
@@ -234,7 +228,6 @@
          margin-bottom: 10px;
          margin-left: 14px;
          }
-
          /* 관리자 권한부여 버튼 */
          .manager_button_PersnalAccess{
          width: 180px;
@@ -252,21 +245,28 @@
          margin-right: 35px;
          float: right;
          }
-
-        /* 날짜폼 */
+         /* 날짜폼 */
          .dateform_MemberManager{
-            font-size: 18px;
-            font-family: sans-serif;
-            height:25px;
-            margin-right:15px;
-            margin-left:15px;
+         font-size: 18px;
+         font-family: sans-serif;
+         height:25px;
+         margin-right:15px;
+         margin-left:15px;
          }
-         
          /* 아이디 검색창 */
          .select_mybuylist{
-            margin-left : 5px;
+         margin-left : 5px;
          }
-         
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
       </style>
    </head>
    <body>
@@ -305,19 +305,16 @@
                   <tr>
                      <td class="searchtable_title_MemberManager">회원구분</td>
                      <td>
-                     <span class="checkbox_MemberManager">
+                        <span class="checkbox_MemberManager">
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>일반회원</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>능력자</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>관리자</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>탈퇴회원</span>
-                      </span>
+                        </span>
                      </td>
                   </tr>
                   <!-- 회원가입일 -->
@@ -333,22 +330,17 @@
                   <tr>
                      <td class="searchtable_title_MemberManager">회원등급</td>
                      <td> 
-                     <span class="checkbox_MemberManager">
+                        <span class="checkbox_MemberManager">
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>흙손</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>동손</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>은손</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>금손</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>다이아손</span>
-
                         <input class="checkboxes_MemberManager" type="checkbox"value="1">
                         <span>타노스</span>
                         </span>
