@@ -8,6 +8,8 @@
       <title>Document</title>
       <!-- 합쳐지고 최소화된 최신 CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+      <!--제이쿼리CDN-->
+      <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
       <!-- 부가적인 테마 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
       <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
@@ -25,7 +27,7 @@
          }
          .header {
          width: 100%;
-         height: 5.2rem;
+         height: 6.2rem;
          /* background-color: aqua; */
          }
          .left-bar {
@@ -41,10 +43,11 @@
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
-         height: 35px;
-         line-height: 35px;
+         height: 3.5rem;
+         line-height: 3.5rem;
          border-bottom: 1px solid #ddd;
-         padding-left: 15px;
+         padding-left: 1.5rem;
+         font-size : 1.3rem;
          }
          .title_Managerheader {
          font-size: 30px;
@@ -56,13 +59,21 @@
          margin-right: 20px;
          border-bottom: 3px solid black;
          }
-         h2 {
+         .number {
          text-align: center;
          font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
+         font-size : 3rem;
+         font-weight: 500;
+    	 line-height: 1.1;
+   		 color: inherit;
+         margin-top: 20px;
+    	 margin-bottom: 10px;
+		 }
+       	 .stat-li{
+         float: left;
+    	 width: 30%;
+    	 list-style: none;
+    	 border-left: 1px solid #ddd;
          }
          /* 전체 div */
          .content_MemberManager {
@@ -135,7 +146,7 @@
          background: #bcbcbc;
          }
          table.type07 thead th {
-         padding: 10px;
+         padding: 1rem;
          font-weight: bold;
          vertical-align: top;
          color: #fff;
@@ -145,10 +156,11 @@
          }
          table.type07 td {
          border-collapse: collapse;
-         width: 350px;
-         padding: 10px;
+         width: 35rem;
+         padding: 1rem;
          vertical-align: top;
          border-bottom: 1px solid #ccc;
+         font-size: 1.5rem;
          /* border: 1px solid #ccc;  */
          text-align: center;
          }
@@ -216,34 +228,18 @@
          overflow-y: hidden;
          overflow-x: hidden;
          }
-         /* col:first-child {
-         width: 20%;
-         } */
          /* 숫자 올라가는  */
          /* https://goddino.tistory.com/37 */
-         ul {
+        .stat-ul {
          width: 100%;
          color: #666;
          text-align: center;
          }
-         li {
-         float: left;
-         width: 30%;
-         list-style: none;
-         border-left: 1px solid #ddd;
-         }
-         li:first-child {
+         .stat-li:first-child {
          border-left: 0;
          }
          /* 속도가 느린거 같으면 이걸로 */
-         /* https://gahyun-web-diary.tistory.com/7 */
-         .box21{
-         	height: 395px; 
-         	width: 770px;
-         
-        
-         }	
-         
+         /* https://gahyun-web-diary.tistory.com/7 */   
       </style>
    </head>
    <body>
@@ -258,24 +254,23 @@
             <div class="cate_Managerheader">통계 > <U>통계</U></div>
             <!-- <button style="position: absolute; top: 130px; left: 1750px;">저장</button>
                <div class="title_Managerheader">통계</div> -->
-            <ul>
-               <li>
+            <ul class="stat-ul">
+               <li class="stat-li"> 
                   <h2 class="number">1785</h2>
                   <i>Clients</i>
                </li>
-               <li>
+               <li class="stat-li">
                   <h2 class="number">987</h2>
                   <i>Gosu</i>
                </li>
-               <li>
+               <li class="stat-li">
                   <h2 class="number">350</h2>
                   <i>Deal</i>
                </li>
             </ul>
          </div>
          <div class="box">
-            <div class="box1">방문자수
-            </div>
+            <div class="box1">방문자수</div>
             <div class="box2 box21">
                <%@ include file="mStatisticsGraph.jsp" %>
             </div>
@@ -283,9 +278,7 @@
          <div class="box">
             <div class="box1">가입자수</div>
             <div class="box2 box21">
-               
-                  	
-                  <%@ include file="mStatisticsGraph.jsp" %>
+               <%@ include file="mStatisticsGraph.jsp" %>
             </div>
          </div>
          <div class="box22">
