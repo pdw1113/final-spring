@@ -134,9 +134,9 @@
          </li>
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">알림,상담</a>
-            <a href="mNoticeMail.do" class="Admin-Atag">메일 발송</a>
+            <a href="mNoticeMail.do" target="content" class="Admin-Atag">메일 발송</a>
             <a href="mNoticeKakao.do" target="content" class="Admin-Atag">카카오톡 알림톡</a>
-            <a href="mNoticeTalk.do" class="Admin-Atag">1:1채팅상담</a>
+            <a href="mNoticeTalk.do" target="content" class="Admin-Atag">1:1채팅상담</a>
          </li>
       </ul>
       <script>

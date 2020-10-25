@@ -11,12 +11,8 @@
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-      <!-- Date Picker 관련-->
-      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+       <!--제이쿼리CDN-->
+      <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
       <title>Document</title>
       <style>
          html,
@@ -24,17 +20,6 @@
          width: 100%;
          padding: 0;
          margin: 0;
-         }
-         /* 달력 date-picker */
-         label {
-         margin-left: 20px;
-         }
-         #datepicker {
-         width: 180px;
-         margin: 0 20px 20px 20px;
-         }
-         #datepicker>span:hover {
-         cursor: pointer;
          }
          .header{    
          width: 100%;
@@ -68,14 +53,6 @@
          margin-right: 20px;
          border-bottom: 3px solid black;
          }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
          /* 전체 div */
          .content_PersnalAccess {
          width: 100%;
@@ -95,14 +72,6 @@
          content: "";
          display: block;
          clear: both;
-         }
-         /* 달력 date-picker */
-         .date>span:hover {
-         cursor: pointer;
-         }
-         .date{
-         display: table-cell;
-         vertical-align: middle;
          }
          /*검색버튼*/
          .searchhBtn_PersnalAccess {
@@ -160,11 +129,6 @@
          width: auto;
          margin: 0 20px;
          }
-         }
-         table,
-         td {
-         text-align: center;
-         vertical-align: middle;
          }
          #shot_table_PersnalAccess {
          width: 70px;
@@ -224,7 +188,7 @@
          .searchtext_PersnalAccess {
          width: 450px;
          font-size: 17px;
-         height: 25px;
+         height: 28px;
          margin-left: 20px;
          outline-style: none;
          }
@@ -302,6 +266,14 @@
          margin-bottom: 10px;
          margin-left: 14px;
          }
+         .dateform_PersnalAccess{
+            font-size: 18px;
+            font-family: sans-serif;
+            height:27px;
+            margin-right:15px;
+            margin-left:9px;
+         }
+
       </style>
    </head>
    <body>
@@ -341,16 +313,8 @@
                      <td class="searchtable_title_PersnalAccess">검색기간</td>
                      <td>
                         <div class="datepicker_warp_PersnalAccess">
-                           <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                              <input class="form_control_PersnalAccess" type="text" readonly />
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                           </div>
-                           <div class="test">~</div>
-                           <div id="datepicker2" class="input-group date" data-date-format="yyyy-mm-dd">
-                              <input class="form_control_PersnalAccess" type="text" readonly />
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                           </div>
                            <div class="day_button_div_PersnalAccess">
+                              <input type="date" class="dateform_PersnalAccess"> ~ <input type="date" class="dateform_PersnalAccess">
                               <div class="day_button_PersnalAccess">
                                  오늘
                               </div>
@@ -399,7 +363,7 @@
                         <td id="long_table_PersnalAccess">2020-09-28 15:30:41</td>
                         <td id="long_table_PersnalAccess">182.226.35.175</td>
                         <td id="long_table_PersnalAccess">
-                           <span class="id_text_PersnalAccess">test_id_2</span> / 
+                           <span class="id_text_PersnalAccess">test_id_2</span>  
                            <span class="nickname_text_PersnalAccess">지존파워동민</span>
                         </td>
                         <td id="midle_table_PersnalAccess">천동민</td>
@@ -410,25 +374,11 @@
             </div>
          </div>
       </div>
-      <script>
-         //데이트 픽커
-         $(function () {
-             $("#datepicker").datepicker({ 
-                     autoclose: true, 
-                     todayHighlight: true,
-             }).datepicker('update', new Date());
-         
-             $("#datepicker2").datepicker({ 
-                     autoclose: true, 
-                     todayHighlight: true,
-             }).datepicker('update', new Date());
-         });
-         
+      <script> 
          $('.day_button_PersnalAccess').click(function(event){
              $('.day_button_PersnalAccess').css('background-color','white');
-             $(this).css('background-color','rgb(219, 219, 219);');
+             $(this).css('background-color','rgb(219, 219, 219)');
          });
-         
       </script>
    </body>
 </html>
