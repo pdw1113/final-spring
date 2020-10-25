@@ -6,11 +6,7 @@
       <meta charset="utf-8">
       <title>MY TEST PAGE</title>
       <!-- include libraries(jQuery, bootstrap) --> 
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <style>
          body,html{
          margin:0;
@@ -102,7 +98,7 @@
          margin-left: 50px;
          margin-right:50px;
          border-bottom: 1px solid gray;
-         padding-bottom: 65px;
+         padding-bottom: 35px;
          }
          .title_div_addproduct{
          margin-top: 15px;
@@ -113,7 +109,7 @@
          .input_div_addproduct{
          margin-top: 15px;
          margin-left: 50px;
-         padding-bottom: 15px;
+         padding-bottom: 20px;
          width: 1220px;
          }
          .input_text_addproduct{
@@ -152,7 +148,7 @@
          border-color: #a3a0a0;
          border-style: solid;
          border-width: 1px 1px 1px 0;
-         padding-top: 8px;
+         padding-top: 5px;
          padding-bottom: 10px;
          padding-right: 5px;
          }
@@ -162,36 +158,37 @@
          border-bottom: 1px solid rgb(236, 236, 236);
          }
          .input_money_addproduct{
-         margin-left: 15px;
          vertical-align: middle;
-         padding: 0 15px;
-         font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
-         position: relative;
-         height: 36px;
-         border: 1px solid #a3a0a0;
-         color: #333;
-         font-size: 16px;
-         width: 290px; 
-         margin-left: 90px; 
-         border-right: none;
+    	 padding: 0 15px;
+   		 font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
+    	 position: relative;
+    	 height: 36px;
+    	 border: 1px solid #a3a0a0;
+    	 color: #333;
+    	 font-size: 16px;
+    	 width: 260px;
+    	 margin-left: 90px;
+    	 border-right: none;
          }
          .finish_button_div_addproduct{
          margin-top: 30px;
          }
+         
          .finish_button_addproduct{
-         position: absolute;
-         left: 47%;
-         width: 120px;
-         height: 40px;
-         text-align: center;
-         line-height: 45px;
-         border-radius: 15px;
-         font-size: 25px;
-         border-radius: 7px 7px 7px 7px;
-         color: white;
-         background-color: #fabe00;
-         font-family: jua;
+		    width: 120px;
+		    height: 40px;
+		    text-align: center;
+		    line-height: 46px;
+		    font-size: 25px;
+		    border-radius: 7px 7px 7px 7px;
+		    color: white;
+		    background-color: #fabe00;
+		    font-family: jua;
+		    margin-left: 36.9rem;
+		    text-decoration: none;
+		    cursor:pointer;
          }
+         
       </style>
    </head>
    <body>
@@ -300,22 +297,20 @@
             <div class="status_div_addproduct">
                <div class="input_title_addproduct" style="margin-bottom: 10px;">포트폴리오(상품관련)</div>
                <div class="portfolio_addproduct">
-                  <textarea id="summernote_portfolio"></textarea>
+                  <textarea rows="20" cols="170" ></textarea>
                </div>
             </div>
             <!-- 자기소개 및 상품 소개 -->
             <div class="status_div_addproduct">
                <div class="input_title_addproduct" style="margin-bottom: 10px;">자기소개 및 상품소개</div>
                <div class="Introduce_addproduct">
-                  <textarea id="summernote_Introduce"></textarea>
+                  <textarea rows="20" cols="170" ></textarea>
                </div>
             </div>
          </div>
          <!--등록 완료 -->
          <div class="finish_button_div_addproduct">
-            <a href="#">
-               <div class="finish_button_addproduct">등록완료</div>
-            </a>
+               <div class="finish_button_addproduct" onclick="location.href='';">등록완료</div>
          </div>
       </div>
       
@@ -354,56 +349,5 @@
       function fileupload(){
          $('#upload').click();
       }
-      
-      $(document).ready(function() {
-         		//여기 아래 부분
-         		$('#summernote_portfolio').summernote({
-         			  toolbar: [
-             			    // [groupName, [list of button]]
-             			    ['fontname', ['fontname']],
-             			    ['fontsize', ['fontsize']],
-             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-             			    ['color', ['forecolor','color']],
-             			    ['table', ['table']],
-             			    ['para', ['ul', 'ol', 'paragraph']],
-             			    ['height', ['height']],
-             			    ['insert',['picture','link','video']],
-             			    ['view', ['fullscreen', 'help']]
-             			  ],
-         			  height: 300,                 // 에디터 높이
-         			  minHeight: null,             // 최소 높이
-         			  maxHeight: null,             // 최대 높이
-         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-         			  lang: "ko-KR",					// 한글 설정
-         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-         	          
-         		});
-      
-                 $('#summernote_Introduce').summernote({
-         			  toolbar: [
-             			    // [groupName, [list of button]]
-             			    ['fontname', ['fontname']],
-             			    ['fontsize', ['fontsize']],
-             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-             			    ['color', ['forecolor','color']],
-             			    ['table', ['table']],
-             			    ['para', ['ul', 'ol', 'paragraph']],
-             			    ['height', ['height']],
-             			    ['insert',['picture','link','video']],
-             			    ['view', ['fullscreen', 'help']]
-             			  ],
-         			  height: 200,                 // 에디터 높이
-         			  minHeight: null,             // 최소 높이
-         			  maxHeight: null,             // 최대 높이
-         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-         			  lang: "ko-KR",					// 한글 설정
-         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-         	          
-         		});
-         	});
    </script>
 </html>
