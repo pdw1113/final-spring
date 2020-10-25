@@ -1,424 +1,353 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      <!-- 부가적인 테마 -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-      <!-- include libraries(jQuery, bootstrap) -->
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+      <meta charset="utf-8">
+      <title>MY TEST PAGE</title>
+      <!-- include libraries(jQuery, bootstrap) --> 
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <style>
-         html,
-         body {
-         width: 100%;
-         padding: 0;
-         margin: 0;
-         }
-         .header {
-         width: 100%;
-         height: 8rem;
-         background-color: aqua;
-         }
-         .left-bar {
-         float: left;
-         width: 13%;
-         height: 88.9rem;
-         background-color: aquamarine;
-         }
-         .section {
-         width: 87%;
-         float: left;
-         height: 55.5rem;
-         }
-         .cate_Managerheader {
-         color: rgb(141, 141, 141);
-         height: 35px;
-         line-height: 35px;
-         border-bottom: 1px solid rgb(141, 141, 141);
-         padding-left: 15px;
-         }
-         .title_Managerheader {
-         font-size: 30px;
-         font-family: jua;
-         margin-top: 30px;
-         padding-bottom: 10px;
-         margin-bottom: 10px;
-         margin-left: 20px;
-         margin-right: 20px;
-         border-bottom: 3px solid black;
-         }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
-         /* 전체 div */
-         .content_MemberManager {
-         width: 100%;
-         padding: 57px 0 125px 0;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .searchbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager:after {
-         content: "";
-         display: block;
-         clear: both;
-         }
-         /* 달력 date-picker */
-         label {
-         margin-left: 20px;
-         }
-         .date {
-         width: 140px;
-         margin: 0 1px 10px 1px;
-         }
-         .date>span:hover {
-         cursor: pointer;
-         }
-         /* 비밀번호 입력 div */
-         .dataInform_MemberManager .inform_MemberManager {
-         width: 100%;
-         overflow: hidden;
-         }
-         /*검색버튼*/
-         .searchBtn_MemberManager {
-         margin: -3px 14px 0px 0;
-         padding-bottom: 8px;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager {
-         background-color: #ddd;
-         border: none;
-         color: black;
-         font-weight: 600;
-         padding: 16px 32px;
-         text-align: center;
-         font-size: 16px;
-         margin: 4px 2px;
-         transition: 0.3s;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager:hover {
-         background-color: #fabe00;
-         font-weight: 600;
-         color: white;
-         }
-         /* 회원 리스트 table */
-         table.type07 {
-         border-collapse: collapse;
-         text-align: left;
-         line-height: 1.5;
-         margin-top: 20px;
-         }
-         table.type07 thead {
-         border-right: 1px solid #ccc;
-         border-left: 1px solid #ccc;
-         background: #bcbcbc;
-         }
-         table.type07 thead th {
-         padding: 10px;
-         font-weight: bold;
-         vertical-align: top;
-         color: #fff;
-         border: 1px solid #ccc;
-         text-align: center;
-         }
-         table.type07 td {
-         width: 350px;
-         padding: 10px;
-         vertical-align: top;
-         border-bottom: 1px solid #ccc;
-         border: 1px solid #ccc;
-         text-align: center;
-         }
-         .id_text_MemberManager {
-         font-size: 12px;
-         }
-         .nickname_text_MemberManager {
-         color: cornflowerblue;
-         font-size: 13px;
-         }
-         /* 반응형~ */
-         @media (max-width: 1360px) {
-         /* 사이드 여백 */
-         .content_MemberManager .layoutSubbox_MemberManager {
-         width: auto;
-         margin: 0 20px;
-         }
-         }
-         table,
-         td {
-         text-align: center;
-         vertical-align: middle;
-         }
-         .title_Mail {
-         font-weight: 600;
-         font-size: 19px;
-         }
-         .input_div_Mail {
-         margin-left: 40px;
-         margin-top: 25px;
-         margin-bottom: 20px;
-         }
-         .input_recipient_mail {
-         border: 1px solid rgb(177, 177, 177);
-         margin-left: 20px;
-         width: 80%;
-         height: 30px;
-         }
-         .input_title_mail {
-         border: 1px solid rgb(177, 177, 177);
-         margin-left: 58px;
-         width: 80%;
-         height: 30px;
-         }
-         .address_mail {
-         border: 1px solid rgb(177, 177, 177);
-         height: 30px;
-         margin-left: 20px;
-         width: 70px;
-         background-color: white;
-         font-weight: 600;
-         }
-         .content_Mail {
-         margin: 40px;
-         }
-         .send_button_Mail {
-         width: 180px;
-         font-size: 19px;
-         background-color: rgb(247, 185, 185);
-         border-radius: 5px;
-         text-shadow: 0px -1px 1px rgba(0, 0, 0, 3);
-         border: 1px solid black;
-         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 3), inset 0 0 2px rgba(255, 255, 255, 3), 0 1px 2px rgba(0, 0, 0, 29);
-         font-family: sans-serif;
-         outline-style: none;
-         cursor: pointer;
-         margin-top: 10px;
-         margin-bottom: 10px;
-         margin-right: 40px;
-         float: right;
-         }
-         .adress_model_Mail {
-         position: fixed;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         }
-         .modal-header {
-         font-weight: 600;
-         font-size: 20px;
-         }
-         .searchemail_text_Mail {
-         align-content: center;
-         width: 50rem;
-         height: 3rem;
-         }
-         .searchemail_button_Mail {
-         padding: 6px;
-         margin-left: 5px;
-         border: 1px solid gray;
-         cursor: pointer;
-         border-radius: 3px;
-         }
-         .all_check_div_Mail {
-         vertical-align: middle;
-         font-size: 16px;
-         margin-top: 5px;
-         padding-bottom: 5px;
-         width: 50rem;
-         border-bottom: 1px solid rgb(184, 182, 182);
-         }
-         .checkbox_Mail {
-         zoom: 1.5;
-         vertical-align: -3px;
-         padding-right: 5px;
-         }
-         .email_check_div_Mail {
-         height: 500px;
-         overflow: auto;
-         }
-         .email_checkbox_div {
-         margin-top: 5px;
-         }
-         .chk_text_Mail{
-         margin-left: 8px;
+         body,html{
+         margin:0;
+         padding:0;
+         width:100%;
          }
          /*인풋 창 검은줄 없애기*/
-         input:focus {
+         input:focus { outline:none; }
+         /*"시간 상품등록" 텍스트*/
+         .tit_sect_addproduct{
+         margin: 35px 0 25px 0;
+         font-size: 32px;
+         font-weight: 500;
+         }   
+         /* 경고문 내용*/
+         .text {
+         color: #666;
+         font-size: 15px;
+         line-height: 22px;
+         }
+         /*경고문 틀*/
+         .warring_text_addproduct{
+         margin: 10px;
+         margin-left: 50px;
+         }
+         .productaddtext_addproduct{
+         width: auto;
+         color: #333;
+         font-size: 24px;
+         font-weight: 500;
+         line-height: 1.2;   
+         }
+         .product_input_addproduct{
+         margin-left: 50px;
+         margin-right:50px;
+         margin-bottom: 20px;
+         border-bottom: 1px solid gray;
+         }
+         .frame_addproduct{
+         width: 1320px;
+         margin: 0 auto;
+         border-top: solid #fabe00;
+         }
+         .img_addproduct{
+         position: relative;
+         width: 150px;
+         height: 150px; 
+         border-radius: 70%;
+         object-fit: cover;
+         overflow: hidden;
+         z-index: 0;
+         }
+         .img_addproduct2{
+         float: right;
+         margin-top: 120px;
+         margin-right: 10px;
+         background-color: white;
+         border: none;
          outline: none;
          }
-         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
-         .header div.login_box_Mainhead{
-         margin-top: 1.5rem;
-         line-height: 3rem;
-         margin-right: 0.3rem;
+         .input_image_addproducthtml{
+         visibility: hidden;
          }
-         .header div.login_box_Mainhead .head_login_Mainhead{
-         height: 3.6rem;
-         width: 8.6rem;
+         .priviewimg_addproduct{
+         margin-left: 50px;
+         float: left;
+         border-radius: 70%
+         }
+         .person_status_addproduct{
+         margin-left: 300px;
+         margin-bottom: 10px;
+         }
+         .img_buttondiv_addproduct{
+         border: 1px solid black;
+         width: 30px;
+         height: 30px;
+         }
+         .person_status_addproduct th{
+         font-size: 18px;
+         line-height: 36px;
+         }
+         .person_status_addproduct td{
+         border-bottom: 1px solid #e7e7e7;
+         font-size: 17px;
+         color: #666;
+         padding-left: 30px;
+         }
+         .frame1_addproduct{
+         margin-left: 50px;
+         margin-right:50px;
+         border-bottom: 1px solid gray;
+         padding-bottom: 35px;
+         }
+         .title_div_addproduct{
+         margin-top: 15px;
+         padding-bottom: 15px;
+         border-bottom: 1px solid rgb(236, 236, 236);
+         width: 1220px;
+         }
+         .input_div_addproduct{
+         margin-top: 15px;
+         margin-left: 50px;
+         padding-bottom: 70px;
+         width: 1220px;
+         }
+         .input_text_addproduct{
+         margin-left: 15px;
+         vertical-align: middle;
+         padding: 0 15px;
+         font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
+         position: relative;
+         height: 36px;
+         border: 1px solid #a3a0a0;
+         color: #333;
+         font-size: 16px;
+         width:1000px;
+         }
+         .input_title_addproduct{
+         font-size: 16px;
+         font-weight: 700;
+         }
+         .status_div_addproduct{
+         margin-top: 15px;
+         padding-bottom: 15px;
+         border-bottom: 1px solid rgb(236, 236, 236);
+         }
+         .category_select_addproduct {
+         height: 36px;
+         border: 1px solid #a3a0a0;
+         font-size: 16px;
+         width: 312px;
+         }
+         .career_addproduct{
+         margin-top: 15px;
+         padding-bottom: 15px;
+         border-bottom: 1px solid rgb(236, 236, 236);
+         }
+         .won_addproduct{
+         border-color: #a3a0a0;
+         border-style: solid;
+         border-width: 1px 1px 1px 0;
+         padding-top: 5px;
+         padding-bottom: 10px;
+         padding-right: 5px;
+         }
+         .price_div_addproduct{
+         margin-top: 15px;
+         padding-bottom: 15px;
+         border-bottom: 1px solid rgb(236, 236, 236);
+         }
+         .input_money_addproduct{
+         vertical-align: middle;
+        padding: 0 15px;
+          font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
+        position: relative;
+        height: 36px;
+        border: 1px solid #a3a0a0;
+        color: #333;
+        font-size: 16px;
+        width: 260px;
+        margin-left: 90px;
+        border-right: none;
+         }
+         .finish_button_div_addproduct{
+         margin-top: 30px;
+         }
+         .finish_button_addproduct{
+         position: absolute;
+         left: 47%;
+         width: 120px;
+         height: 40px;
+         text-align: center;
+         line-height: 45px;
+         border-radius: 15px;
+         font-size: 25px;
+         border-radius: 7px 7px 7px 7px;
+         color: white;
+         background-color: #fabe00;
+         font-family: jua;
          }
       </style>
    </head>
    <body>
-      <div class="header">
-         <%@ include file="../../common/header.jsp" %>
-      </div>
-      <div class="left-bar">
-         <%@ include file="../common/mLeftBar.jsp" %>
-      </div>
-      <div class="section">
-         <!-- 관리자 카테고리 및 제목  -->
-         <div class="mian-header">
-            <div class="cate_Managerheader">알림,상담 > <U>메일 발송</U></div>
-            <div class="title_Managerheader">메일 발송</div>
+   
+      <%@ include file="../../common/header.jsp" %>
+      <div class="frame_addproduct">
+         <div class="warring_text_addproduct">
+            <h2 class="tit_sect_addproduct">시간 상품등록</h2>
+            <p class="text">자신의 재능을 시간 단위로 판매하는 내용이 아닌 홍보성 글이나 무성의한 글은 검수과정에서 승인 거절될 수 있습니다.<br>
+               직거래를 유도하는 계좌이체 혹은 외부결제를 요구하지 마세요.<br>
+               연락처, 이메일 등 개인정보가 포함된 글은 관리자에서 임의로 삭제될 수 있습니다.
+            </p>
          </div>
-         <!-- 받는사람 -->
-         <div class="input_div_Mail">
-            <span class="title_Mail">받는사람</span><input type="text" class="input_recipient_mail">
-            <button class="address_mail" onclick="emailCheck();">주소록</button>
+         <div class="product_input_addproduct">
+            <h3 class="productaddtext_addproduct">상품 정보 입력</h3>
          </div>
-         <!-- 메일제목 -->
-         <div class="input_div_Mail">
-            <span class="title_Mail title">제목</span><input type="text" class="input_title_mail">
+         <div class="frame1_addproduct">
+            <!--이미지 파일 업로드-->
+            <input class="input_image_addproducthtml" type='file' id='upload' name='upload'/>
+            <!-- 이미지 미리보기 공간 -->
+            <div class="priviewimg_addproduct" id='preview'>
+               <button type="button" class="img_addproduct2" onclick="fileupload();" style="color: none;">
+               <img src="resources/img/btn_portrait_edit.png"> 
+               </button>
+               <img class="img_addproduct" src="resources/img/person_icon.png">
+            </div>
+            <!-- 닉네임 성별 나이 -->
+            <div class="person_status_addproduct">
+               <table>
+                  <tbody>
+                     <tr>
+                        <th>닉네임</th>
+                        <td>지존파워동민</td>
+                     </tr>
+                     <tr>
+                        <th>이름</th>
+                        <td>천동민</td>
+                     </tr>
+                     <tr>
+                        <th>성별</th>
+                        <td>남성</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
          </div>
-         <!-- 메일 내용 썸머노트 -->
-         <div class="content_Mail">
-            <textarea id="summernote_Mail"></textarea>
-         </div>
-         <!-- 보내기 버튼 -->
-         <div class="button_Mail">
-            <button class="send_button_Mail">보내기</button>
-         </div>
-      </div>
-      <!-- 이메일 검색 모달 -->
-      <div class="modal fade" id="findadress_Mail">
-         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-               <!-- 모달 헤더 -->
-               <div class="modal-header">
-                  <b>회원 주소록</b>
+         <div class="input_div_addproduct">
+            <!-- 제목 -->
+            <div class="status_div_addproduct">
+               <span class="input_title_addproduct">상품명 (한 줄 제목)</span> 
+               <input type="text" placeholder="제목 입력" class="input_text_addproduct">
+            </div>
+            <!-- 카테고리 -->
+            <div class="status_div_addproduct">
+               <span class="input_title_addproduct">카테고리</span>
+               <select style="margin-left: 90px; margin-right: 27px;" class="category_select_addproduct">
+                  <option value="">1차 분류</option>
+                  <option>디자이너</option>
+                  <option>IT개발자</option>
+                  <optio>
+                  사무/기획</option>
+                  <option>회계/인사</option>
+               </select>
+               <select  style="margin-right: 27px;" class="category_select_addproduct">
+                  <option value="">2차 분류</option>
+                  <option>디자이너</option>
+                  <option>IT개발자</option>
+                  <optio>
+                  사무/기획</option>
+                  <option>회계/인사</option>
+               </select>
+               <select  class="category_select_addproduct">
+                  <option value="">3차 분류</option>
+                  <option>디자이너</option>
+                  <option>IT개발자</option>
+                  <optio>
+                  사무/기획</option>
+                  <option>회계/인사</option>
+               </select>
+            </div>
+            <div class="status_div_addproduct">
+               <span class="input_title_addproduct">기본금액</span> 
+               <input  type="number" class="input_money_addproduct"><span class="won_addproduct">원</span>
+            </div>
+            <!-- 경력 -->
+            <div class="status_div_addproduct">
+               <span class="input_title_addproduct">경력</span>
+               <select class="category_select_addproduct" style="margin-left: 122px;">
+                  <option value="">선택</option>
+                  <option value="00">1년 미만</option>
+                  <option value="01">1년</option>
+                  <option value="02">2년</option>
+                  <option value="03">3년</option>
+                  <option value="04">4년</option>
+                  <option value="05">5년</option>
+                  <option value="06">6년</option>
+                  <option value="07">7년</option>
+                  <option value="08">8년</option>
+                  <option value="09">9년</option>
+                  <option value="10">10년 이상</option>
+                  <option value="15">15년 이상</option>
+                  <option value="20">20년 이상</option>
+               </select>
+            </div>
+            <!-- 수상내역 포트폴리오 -->
+            <div class="status_div_addproduct">
+               <div class="input_title_addproduct" style="margin-bottom: 10px;">포트폴리오(상품관련)</div>
+               <div class="portfolio_addproduct">
+                  <textarea rows="20" cols="170" ></textarea>
                </div>
-               <!-- 모달 바디 -->
-               <div class="modal-body">
-                  <div class="searchemail_div_Mail"><input type="text" class="searchemail_text_Mail"
-                     placeholder="E-MAIL을 입력하세요"><span class="searchemail_button_Mail">검색</span></div>
-                  <!-- 이메일 전체검색 -->
-                  <div class="all_check_div_Mail"><input type="checkbox" class="checkbox_Mail" id="allcheck_Mail"><span class="chk_text_Mail">이메일 전체선택</span></div>
-                  <!-- 이메일 목록 -->
-                  <div class="email_check_div_Mail">
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                  </div>
-               </div>
-               <!-- 모달 풋터 -->
-               <div class="modal-footer">
-                  <!-- 확인창 닫기창 -->
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+            <!-- 자기소개 및 상품 소개 -->
+            <div class="status_div_addproduct">
+               <div class="input_title_addproduct" style="margin-bottom: 10px;">자기소개 및 상품소개</div>
+               <div class="Introduce_addproduct">
+                  <textarea rows="20" cols="170" ></textarea>
                </div>
             </div>
          </div>
+         <!--등록 완료 -->
+         <div class="finish_button_div_addproduct">
+            <a href="#">
+               <div class="finish_button_addproduct">등록완료</div>
+            </a>
+         </div>
       </div>
+      
       <%@ include file="../../common/footer.jsp" %>
-      <script>
-         $(document).ready(function () {
-         
-             //썸머노트
-             $('#summernote_Mail').summernote({
-                 toolbar: [
-                     // [groupName, [list of button]]
-                     ['fontname', ['fontname']],
-                     ['fontsize', ['fontsize']],
-                     ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                     ['color', ['forecolor', 'color']],
-                     ['table', ['table']],
-                     ['para', ['ul', 'ol', 'paragraph']],
-                     ['height', ['height']],
-                     ['insert', ['picture', 'link', 'video']],
-                     ['view', ['fullscreen', 'help']]
-                 ],
-                 height: 400,                 // 에디터 높이
-                 minHeight: null,             // 최소 높이
-                 maxHeight: null,             // 최대 높이
-                 focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                 lang: "ko-KR",					// 한글 설정
-                 placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
-                 fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
-         
-             });
-         });
-         
-         // 모달 팝업 띄우기
-         function emailCheck() {
-             $('#findadress_Mail').modal().show();
-         }
-         
-         // 전체선택 체크 반응
-         $("#allcheck_Mail").click(function () {
-             if ($(this).is(":checked") == true) {
-                 $(".checkbox_Mail").each(function (index) {
-                     $(this).prop("checked", true);
-                 });
-             } else {
-                 $(".checkbox_Mail").each(function (index) {
-                     $(this).prop("checked", false);
-                 });
-             }
-         });
-         
-         // 전체선택 하나라도 체크 풀으면
-         $(".checkbox_Mail").click(function () {
-             if ($(this).is(":checked") == false) {
-                 $("#allcheck_Mail").prop("checked", false);
-             }
-         });
-      </script>
+      
    </body>
+   <script>
+      var upload = document.querySelector('#upload');
+      
+      /* FileReader 객체 생성 */
+      var reader = new FileReader();
+      
+         /* reader 시작시 함수 구현 */
+      reader.onload = (function () {
+      
+         this.image = document.createElement('img');
+         var vm = this;
+         
+         return function (e) {
+             /* base64 인코딩 된 스트링 데이터 */
+             vm.image.src = e.target.result
+         }
+      })()
+      
+      upload.addEventListener('change',function (e) {
+         var get_file = e.target.files;
+      
+         if(get_file){
+             reader.readAsDataURL(get_file[0]);
+         }
+         $('.img_addproduct').remove();
+         image.className = "img_addproduct";
+         preview.appendChild(image);
+      })
+      
+      function fileupload(){
+         $('#upload').click();
+      }
+   </script>
 </html>

@@ -89,6 +89,7 @@
          width: 20rem;
          height: 28rem;
          box-shadow: 0 0 10px 2px rgb(0,0,0,0.2);
+         background-color: white;
          }
          /* --------------------------- */
          /* ----- 채팅창 ----- */
@@ -103,6 +104,7 @@
          width: 20rem;
          height: 28rem;
          box-shadow: 0 0 10px 2px rgb(0,0,0,0.2);
+         background-color: white;
          }
          /* ------------------------ 채팅창 상단 ------------------------ */
          .chatTop{

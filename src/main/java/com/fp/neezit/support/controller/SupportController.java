@@ -25,4 +25,9 @@ public class SupportController {
 	public String noticeList() {
 		return "support/noticeList";
 	}
+	
+	@RequestMapping("recruit.do")
+	public String recruit() {
+		return "support/recruit";
+	}
 }
