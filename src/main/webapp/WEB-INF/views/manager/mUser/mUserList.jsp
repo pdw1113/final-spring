@@ -10,12 +10,8 @@
          type="text/css" />
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-      <!-- Date Picker 관련-->
-      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+       <!--제이쿼리CDN-->
+      <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
       <title>Document</title>
       <style>
          html,
@@ -24,10 +20,7 @@
          padding: 0;
          margin: 0;
          }
-         /* 달력 date-picker */
-         label {
-         margin-left: 20px;
-         }
+
          #datepicker {
          width: 180px;
          margin: 0 20px 20px 20px;
@@ -35,21 +28,20 @@
          #datepicker>span:hover {
          cursor: pointer;
          }
-         .header {
+         .header{    
          width: 100%;
-         height: 5rem;
-         background-color: aqua;
+         height: 6.2rem;
          }
-         .left-bar {
+         .left-bar{
          float: left;
          width: 13%;
-         height: 55.5rem;
-         background-color: aquamarine;
+         height: 92rem;
+         border-right: 1px solid gainsboro;
          }
-         .section {
+         .section{
          width: 87%;
          float: left;
-         height: 55.5rem;
+         height: 92rem;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -68,14 +60,7 @@
          margin-right: 20px;
          border-bottom: 3px solid black;
          }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
+     
          /* 전체 div */
          .content_MemberManager {
          width: 100%;
@@ -166,11 +151,6 @@
          margin: 0 20px;
          }
          }
-         table,
-         td {
-         text-align: center;
-         vertical-align: middle;
-         }
          #shot_table_MemberManager {
          width: 70px;
          }
@@ -188,12 +168,12 @@
          .caption_text_MemberManabger {
          color: red;
          }
-         /* 검색 테이블 */
-         .searchhbox_table_PersnalAccess {
+       /* 검색 테이블 */
+      	.searchhbox_table_MemberManager {
          margin: 15px auto 20px;
          border-top: 1px solid rgb(173, 173, 173);
          border-collapse: collapse;
-         }
+      }
          /* 검색테이블 td */
          .searchhbox_table_MemberManager td {
          height: 45px;
@@ -229,53 +209,31 @@
          .searchtext_MemberManager {
          width: 450px;
          font-size: 17px;
-         height: 25px;
+         height: 28px;
          margin-left: 20px;
          outline-style: none;
          }
+
          /* 체크박스 */
          .checkbox_MemberManager {
          font-size: 22px;
          float: left;
-         margin-left: 10px;
+         margin-left: 16px;
          }
+
+         /* 체크박스 크기 */
          .checkboxes_MemberManager {
          zoom: 1.5;
+         padding-right: 5px;
          }
+
          .Admin_grant_Managerheader {
          position: relative;
          width: 1320px;
          margin: 0 auto;
          }
-         .Admin_grant_button_Managerheader {
-         width: 180px;
-         font-size: 19px;
-         background-color: rgb(252, 230, 253);
-         border-radius: 5px;
-         text-shadow: 0px -1px 1px rgba(0, 0, 0, 3);
-         border: 1px solid black;
-         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 3), inset 0 0 2px rgba(255, 255, 255, 3), 0 1px 2px rgba(0, 0, 0, 29);
-         font-family: sans-serif;
-         outline-style: none;
-         cursor:pointer;
-         }
-         .form_control_MemberManager{
-         margin-left: 10px;
-         height: 25px;
-         font-size: 18px;
-         cursor:pointer;
-         }
-         .wave_MemberManager {
-         width: 23px;
-         font-size: 15px;
-         color: #6c6d70;
-         font-weight: 300;
-         line-height: 38px;
-         text-align: center;
-         }
-         .datepicker_warp_MemberManager{
-         display: table;
-         }
+
+         /* 검색버튼 */
          .seaerch_button_PersnalAccess{
          width: 180px;
          font-size: 19px;
@@ -291,6 +249,8 @@
          margin-bottom: 10px;
          margin-left: 14px;
          }
+
+         /* 관리자 권한부여 버튼 */
          .manager_button_PersnalAccess{
          width: 180px;
          font-size: 19px;
@@ -307,11 +267,29 @@
          margin-right: 35px;
          float: right;
          }
+
+		  /* 날짜폼 */
+         .dateform_MemberManager{
+            font-size: 18px;
+            font-family: sans-serif;
+            height:25px;
+            margin-right:15px;
+            margin-left:15px;
+         }
+         
+         /* 아이디 검색창 */
+         .select_mybuylist{
+         	margin-left : 5px;
+         }
       </style>
    </head>
    <body>
-   	<%@ include file="../../common/header.jsp" %> 
-	<%@ include file="../common/mLeftBar.jsp" %>
+      <div class="header">
+         <%@ include file="../../common/header.jsp" %>
+      </div>
+      <div class="left-bar">
+         <%@ include file="../common/mLeftBar.jsp" %>
+      </div>
       <div class="section">
          <!-- 내용 안의 헤더 부분 -->
          <div class="mian-header">
@@ -340,48 +318,54 @@
                   <!-- 회원구분 -->
                   <tr>
                      <td class="searchtable_title_MemberManager">회원구분</td>
-                     <td><span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                        value="1">일반회원</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">능력자</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">관리자</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">탈퇴회원</span>
+                     <td>
+                     <span class="checkbox_MemberManager">
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>일반회원</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>능력자</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>관리자</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>탈퇴회원</span>
+                      </span>
                      </td>
                   </tr>
                   <!-- 회원가입일 -->
                   <tr>
                      <td class="searchtable_title_MemberManager">회원가입일</td>
                      <td>
-                        <div class="datepicker_warp_MemberManager">
-                           <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                              <input class="form_control_MemberManager" type="text" readonly />
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                           </div>
-                           <div class="wave_MemberManager">~</div>
-                           <div id="datepicker2" class="input-group date" data-date-format="yyyy-mm-dd">
-                              <input class="form_control_MemberManager" type="text" readonly />
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                           </div>
+                        <div class="input_date_MemberManager">
+                           <input type="date" class="dateform_MemberManager"> ~ <input type="date" class="dateform_MemberManager">
                         </div>
                      </td>
                   </tr>
                   <!-- 회원등급 -->
                   <tr>
                      <td class="searchtable_title_MemberManager">회원등급</td>
-                     <td><span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                        value="1">흙손</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">동손</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">은손</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">금손</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">다이아손</span>
-                        <span class="checkbox_MemberManager"><input class="checkboxes_MemberManager" type="checkbox"
-                           value="1">타노스</span>
+                     <td> 
+                     <span class="checkbox_MemberManager">
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>흙손</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>동손</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>은손</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>금손</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>다이아손</span>
+
+                        <input class="checkboxes_MemberManager" type="checkbox"value="1">
+                        <span>타노스</span>
+                        </span>
                      </td>
                   </tr>
                </table>
@@ -426,19 +410,5 @@
             </div>
          </div>
       </div>
-      <script>
-         //데이트 픽커
-         $(function () {
-             $("#datepicker").datepicker({ 
-                     autoclose: true, 
-                     todayHighlight: true,
-             }).datepicker('update', new Date());
-         
-             $("#datepicker2").datepicker({ 
-                     autoclose: true, 
-                     todayHighlight: true,
-             }).datepicker('update', new Date());
-         });
-      </script>
    </body>
 </html>
