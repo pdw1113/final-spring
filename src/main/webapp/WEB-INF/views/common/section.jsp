@@ -64,6 +64,9 @@
          list-style: none; 
          display: inline-block;
          }
+         .main_contents_index:hover{
+         	cursor:pointer;
+         }
          /* 썸네일 사진 */
          .main_contents_img_index{
          width: 280px; 

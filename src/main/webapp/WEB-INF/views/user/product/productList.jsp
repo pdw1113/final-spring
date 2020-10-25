@@ -273,7 +273,7 @@
       <div class="Lsit-Saction">
          <div class="row">
             <div class="col-xs-4">
-               <a href="#" class="thumbnail">
+               <a href="productDetail.do" class="thumbnail">
                   <div class="list_img_div">
                      <img src="resources/img/1.png" class="list_contents_img_index">
                   </div>
@@ -609,7 +609,7 @@
                </a>
             </div>
          </div>
-         <nav>
+         <div>
             <ul class="pagination">
                <li>
                   <a href="#" aria-label="Previous">
@@ -627,7 +627,7 @@
                   </a>
                </li>
             </ul>
-         </nav>
+         </div>
       </div>
       
       <%@ include file="../../common/footer.jsp" %>
