@@ -126,7 +126,7 @@
    </head>
    <body>
       <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe src="Mainhead.html" width="100%" frameborder="0" scrolling="no" ></iframe>
+   	<%@ include file="../common/header.jsp" %>
       <div style="text-align: center; margin-bottom: -14rem; ">
          <h2 style="display: inline-block; font-size: 3rem;border-bottom: 3px solid rgb(250,190,0);" class="font_noto">
             회사 대표 및 운영진
@@ -212,6 +212,6 @@
          </ul>
       </div>
       <!-- 임시 풋터 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 290px; margin-top: -10rem;" scrolling="no"></iframe>
+      <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

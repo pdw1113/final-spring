@@ -128,8 +128,8 @@
    </head>
    <body>
       <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe class="headiframe" src="Mainhead.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 65px;"></iframe>
-      <iframe class="headiframe" src="customercenter.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 181px;"></iframe>
+   	<%@ include file="../common/header.jsp" %>
+	<%@ include file="common/nav.jsp" %>
       <div id="mainWrapper">
          <ul>
             <!-- 게시판 목록  -->
@@ -209,7 +209,7 @@
             </li>
          </ul>
       </div>
-      <iframe src="footer.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 203px;"></iframe>
+      <%@ include file="../common/footer.jsp" %>
       <script>
          $(document).on('click','#paging div',function(){
              alert('페이징');
