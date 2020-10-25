@@ -36,6 +36,31 @@ public class UserContoller {
 		return "user/myPage/profile";
 	}
 	
+	@RequestMapping("wallet.do")
+	public String wallet() {
+		return "user/myPage/wallet";
+	}
+	
+	@RequestMapping("modifyPwd.do")
+	public String modifyPwd() {
+		return "user/myPage/modifyPwd";
+	}
+	
+	@RequestMapping("deleteUser.do")
+	public String deleteUser() {
+		return "user/myPage/deleteUser";
+	}
+	
+	@RequestMapping("wishList.do")
+	public String wishList() {
+		return "user/myPage/wishList";
+	}
+	
+	@RequestMapping("buyList.do")
+	public String buyList() {
+		return "user/myPage/buyList";
+	}
+	
 	
 	
 }
