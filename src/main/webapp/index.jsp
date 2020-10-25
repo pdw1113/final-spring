@@ -89,6 +89,7 @@
       <%@ include file="WEB-INF/views/common/nav.jsp" %>
       <%@ include file="WEB-INF/views/common/section.jsp" %>
       <%@ include file="WEB-INF/views/common/footer.jsp" %>
+      <%@ include file="WEB-INF/views/common/talk.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom
