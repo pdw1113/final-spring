@@ -254,7 +254,7 @@
       <!-- header 영역 -->
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="../../user/myPage/common/nav.jsp" %>
+      <%@ include file="../myPage/common/nav.jsp" %>
       <!-- 프로필 영역 -->
       <div class="profile_myPage_profile">
          <h3>프로필</h3>

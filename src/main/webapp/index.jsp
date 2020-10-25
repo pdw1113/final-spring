@@ -38,7 +38,7 @@
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="common/header.jsp" %>
+      <%@ include file="WEB-INF/views/common/header.jsp" %>
       <!-- 슬라이드 영역 -->
       <div id="container">
          <div class="slide_wrap">
@@ -86,9 +86,9 @@
             <ul class="slide_pagination"></ul>
          </div>
       </div>
-      <%@ include file="common/nav.jsp" %>
-      <%@ include file="common/section.jsp" %>
-      <%@ include file="common/footer.jsp" %>
+      <%@ include file="WEB-INF/views/common/nav.jsp" %>
+      <%@ include file="WEB-INF/views/common/section.jsp" %>
+      <%@ include file="WEB-INF/views/common/footer.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom

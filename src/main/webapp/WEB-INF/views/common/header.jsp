@@ -16,6 +16,7 @@
          .index_head_Mainhead {
          height: 65px;
          background-color: #fabe00;
+         margin-bottom: 2rem;
          }
          /* 로고 이미지 */
          .head_logo_Mainhead {
@@ -140,7 +141,6 @@
       </style>
    </head>
    <body>
-      <header>
          <div class="index_head_Mainhead">
             <!-- 메인로고 -->
             <a href="#"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
@@ -161,13 +161,23 @@
             <!-- 로그아웃 -->
             <div>
                <div class="login_box_Mainhead">
-                  <a href="#">
-                     <div class="head_login_Mainhead" style="margin-right: 10px;">로그아웃</div>
+                  <a href="profile.do">
+                     <div class="head_login_Mainhead" style="width: 100px;">마이페이지</div>
                   </a>
                </div>
                <div class="login_box_Mainhead">
-                  <a href="#">
-                     <div class="head_login_Mainhead" style="width: 100px;">마이페이지</div>
+                  <a href="signUpMaster.do">
+                     <div class="head_login_Mainhead" style="width: 100px;">능력자등록</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="login.do">
+                     <div class="head_login_Mainhead" style="margin-right: 10px;">로그인</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="signUp.do">
+                     <div class="head_login_Mainhead" style="width: 100px;">회원가입</div>
                   </a>
                </div>
                <div class="login_box_Mainhead">
@@ -178,7 +188,6 @@
             </div>
             <span class="user_Mainhead"></span>
          </div>
-      </header>
       <script>
          $(document).ready(function () {
              // 사용자 아이디
