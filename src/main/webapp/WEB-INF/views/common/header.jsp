@@ -181,7 +181,7 @@
                   </a>
                </div>
                <div class="login_box_Mainhead">
-                  <a href="#">
+                  <a href="supportnav.do" id="manager_href">
                      <div class="head_login_Mainhead" id="manager_page">고객센터</div>
                   </a>
                </div>
@@ -205,7 +205,7 @@
                  $("#manager_page").empty();
                  $("#manager_page").append("관리자");
                  $(".manager_page").show();
-         
+         		 $("#manager_href").attr("href","mStatistics.do")
                  // 관리자 페이지일 경우
                  if (adminpage == 1) {
                      $(".head_search_div").empty();
