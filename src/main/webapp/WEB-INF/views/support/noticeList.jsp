@@ -145,7 +145,7 @@
                      </ul>
                   </li>
                   <!-- 게시물이 출력될 영역 -->
-                  <li>
+                  <li onclick="location.href='noticeDetail.do'">
                      <ul>
                         <li>1</li>
                         <li class="left" id="a">천동벌거숭이에 대한 고찰</li>

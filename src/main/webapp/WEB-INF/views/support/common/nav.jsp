@@ -124,9 +124,6 @@
          margin-top: 10px;
          height: auto;
          }
-         iframe{
-         display: block;   border: none;   height: 100vh;   width: 100vw;
-         }
       </style>
    </head>
    <body>
@@ -134,7 +131,7 @@
          <h1>고객센터</h1>
          <div class="container_mynav">
             <div class="dropdown_mynav">
-               <button class="dropbtn_mynav" value="1">공지사항</button>
+               <button class="dropbtn_mynav" value="1" onclick="location.href='noticeList.do'">공지사항</button>
             </div>
             <div class="dropdown_mynav">
                <button class="dropbtn_mynav" value="2">뭘하죠?
@@ -156,26 +153,18 @@
            if($(this).attr('value')=="1"){
                  $(".dropbtn_mynav").css("background-color","white");
                  $(this).css("background-color","#fabe00");
-                 $('.display_customercenter').empty();
-                 $('.display_customercenter').append("공지사항");
          
              }else if($(this).attr('value')=="2"){
                  $(".dropbtn_mynav").css("background-color","white");
                  $(this).css("background-color","#fabe00");
-                 $('.display_customercenter').empty();
-                 $('.display_customercenter').append("자주묻는 질문");
          
              }else if($(this).attr('value')=="3"){
                  $(".dropbtn_mynav").css("background-color","white");
                  $(this).css("background-color","#fabe00");
-                 $('.display_customercenter').empty();
-                 $('.display_customercenter').append("1:1 문의");
              
              }else if($(this).attr('value')=="4"){
                  $(".dropbtn_mynav").css("background-color","white");
                  $(this).css("background-color","#fabe00");
-                 $('.display_customercenter').empty();
-                 $('.display_customercenter').append("건의 게시판");
              }
          });
       </script>
