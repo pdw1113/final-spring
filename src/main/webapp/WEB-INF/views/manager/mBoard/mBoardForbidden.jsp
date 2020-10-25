@@ -24,7 +24,7 @@
             font-family: 'Jua', sans-serif;
             color: black;
         }
-	 	/* 테스트 */
+
         html,
         body {
             width: 100%;
@@ -33,16 +33,17 @@
         }
 
         .header {
-         width: 100%;
-         height: 6.2rem;
-         /* background-color: aqua; */
-         }
-         .left-bar {
-         float: left;
-         width: 13%;
-         height: 917px;
-         border-right: 1px solid gainsboro;
-         }
+            width: 100%;
+            height: 6.2rem;
+            /* background-color: aqua; */
+        }
+
+        .left-bar {
+            float: left;
+            width: 13%;
+            height: 917px;
+            border-right: 1px solid gainsboro;
+        }
 
         .section {
             width: 87%;
@@ -198,6 +199,7 @@
             transition: 300ms;
             font-weight: 600;
         }
+
         .clearButton {
             background-color: white;
             width: 60px;
@@ -215,8 +217,9 @@
             color: red;
         }
 
-        .finalButton, .finalButton1{
-            background-color:  whitesmoke;
+        .finalButton,
+        .finalButton1 {
+            background-color: whitesmoke;
             width: 210px;
             height: 30px;
             position: relative;
@@ -227,14 +230,14 @@
         }
 
         .finalButton:hover {
-            background-color:  rgb(219, 215, 215);
+            background-color: rgb(219, 215, 215);
             transition: 300ms;
             font-weight: 600;
             color: red;
         }
 
         .finalButton1:hover {
-            background-color:  rgb(219, 215, 215);
+            background-color: rgb(219, 215, 215);
             transition: 300ms;
             font-weight: 600;
             color: red;
@@ -304,19 +307,22 @@
             text-align: center;
 
         }
-        .searchArea1{
+
+        .searchArea1 {
             height: 20%;
             border-bottom: 2px solid rgb(132, 148, 163);
         }
-        .searchArea2{
+
+        .searchArea2 {
             height: 30%;
             border-bottom: 2px solid rgb(132, 148, 163);
         }
-        .searchArea3{
+
+        .searchArea3 {
             height: 50%;
         }
 
-        .chosung{
+        .chosung {
             background-color: white;
             width: 50px;
             height: 50px;
@@ -328,10 +334,10 @@
             margin: 5px;
             opacity: 1;
             position: relative;
-            top:-10px;
+            top: -10px;
         }
 
-        .chosung:hover{
+        .chosung:hover {
             opacity: 0.4;
         }
 
@@ -362,41 +368,74 @@
             border-bottom: 3px solid #b0e0e6;
         }
 
-        .bold{
+        .bold {
             font-weight: 900;
         }
 
-        .sb{
-            border-bottom: 2px solid  rgb(132, 148, 163);
+        .sb {
+            border-bottom: 2px solid rgb(132, 148, 163);
             height: 40px;
             line-height: 40px;
-            background-color:  aliceblue;
+            background-color: aliceblue;
         }
 
-        .searchForm{
-            position: relative; 
-            top:-20px; 
+        .searchForm {
+            position: relative;
+            top: -20px;
             left: 20px;
             text-align: justify;
             width: 220px;
             height: 40px;
         }
 
-        .searchForm td{
+        .searchForm td {
             border: 1px solid gray;
         }
 
-        .searchForm1{
+        .searchForm1 {
             width: 40px;
             height: 40px;
         }
 
+        .searchInput {
+            position: relative;
+            top: -15px;
+            left: 10px;
+            width: 210px;
+            height: 31px;
+            border-radius: 4px;
+        }
+
+        .searchButton {
+            position: relative;
+            top: -15px;
+            margin-left: 20px;
+            background-color: white;
+            width: 60px;
+            height: 31px;
+            font-size: medium;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 4px;
+            position: relative;
+            border: 2px solid seagreen;
+
+        }
+
+        .searchButton:hover {
+            cursor: pointer;
+            opacity: 0.4;
+        }
+
+        .dateWidth {
+            left: 70px;
+        }
     </style>
 
 </head>
 
 <body>
-      <div class="header">
+    <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
@@ -445,7 +484,8 @@
                                 </textarea>
                             </div>
                             <div>
-                                <button type="button" class="insertButton" value="" onclick="insert1()">추가 입력 확인</button>
+                                <button type="button" class="insertButton" value="" onclick="insert1()">추가 입력
+                                    확인</button>
                                 <button type="button" class="clearButton" onclick="clear1()">clear</button>
                                 <button type="button" class="finalButton">추가 최종 저장</button>
                             </div>
@@ -484,7 +524,8 @@
                                 </textarea>
                             </div>
                             <div>
-                                <button type="button" class="deleteButton" value="" onclick="delete1()">삭제 입력 확인</button>
+                                <button type="button" class="deleteButton" value="" onclick="delete1()">삭제 입력
+                                    확인</button>
                                 <button type="button" class="clearButton" onclick="clear2()">clear</button>
                                 <button type="button" class="finalButton1">삭제 최종 저장</button>
                             </div>
@@ -524,11 +565,17 @@
                         <div class="searchArea">
                             <div class="searchArea1">
                                 <p class="bold sb">검색창</p><br>
-                                <input type="text"><button type="button">검색</button>
-                                    <!-- <div class="searchForm1"></div> -->
+                                <input type="text" class="searchInput"><button type="button"
+                                    class="searchButton">검색</button>
+                                <!-- <div class="searchForm1"></div> -->
                             </div>
                             <div class="searchArea2">
                                 <p class="bold sb">등록일 조회</p>
+                                <div class="container col-xs-7 dateWidth">
+                                    <input type="date" class="form-control input-md">
+                                    <span class="date-span">~</span>
+                                    <input type="date" class="form-control input-md">
+                                </div>
                             </div>
                             <div class="searchArea3">
                                 <p class="bold sb">초성 검색</p>
@@ -549,7 +596,7 @@
                                 <button type="button" class="chosung">ㅎ</button>
 
                             </div>
-                            
+
 
 
                         </div>
@@ -571,8 +618,8 @@
         </div>
     </div>
     <script>
-        let input1=[];
-        let input2=[];
+        let input1 = [];
+        let input2 = [];
         let count1 = 1;
         let count2 = 1;
 
@@ -585,7 +632,7 @@
                 // console.log(input1);
                 var combineText1 = input1.join(",  ");
             }
-            document.getElementById("result1").value = combineText1;	
+            document.getElementById("result1").value = combineText1;
         }
 
         // 삭제 저장
@@ -657,7 +704,7 @@
                 rowAdd1().click();
             }
 
-            $(".insertText").keyup(function () {            
+            $(".insertText").keyup(function () {
                 $("#result1").text($(".insertText").val());
             });
 
@@ -675,14 +722,15 @@
 
 
         function clear1() {
-            document.getElementById("result1").value='';
+            document.getElementById("result1").value = '';
         }
 
         function clear2() {
-            document.getElementById("result2").value='';
+            document.getElementById("result2").value = '';
         }
 
     </script>
 
 </body>
+
 </html>
