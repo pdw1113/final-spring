@@ -110,7 +110,7 @@
       <!-- header 영역 -->
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="../../user/myPage/common/nav.jsp" %>
+      <%@ include file="../myPage/common/nav.jsp" %>
       <form action="#" name="form1" id="form1" method="post">
          <div class="content_myModifyPwd">
             <div class="dataInform_myleave">

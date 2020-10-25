@@ -96,7 +96,7 @@
          <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요">
          <!-- 버튼폼 -->
          <div class="button_login">
-            <a href="#">
+            <a href="findPwd.do">
                <div class="login_button_login" style="width: 130px;">PWD 찾기</div>
             </a>
             <a href="#">

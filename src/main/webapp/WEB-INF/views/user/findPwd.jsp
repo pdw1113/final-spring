@@ -93,7 +93,7 @@
          <input class="e-mail_find_pw" type="text" placeholder=" E-MAIL을 입력하세요">
          <!-- Button to Open the Modal -->
          <div class="button_login">
-            <div type="button" class="login_button_login" data-toggle="modal" onclick="emailCheck()">
+            <div type="button" class="login_button_login" data-toggle="modal" onclick="window.location.href='changePwd.do'">
                비밀번호 변경 URL 전송
             </div>
          </div>
