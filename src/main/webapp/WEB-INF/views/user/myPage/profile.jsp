@@ -10,21 +10,7 @@
       padding: 0;
       margin: 0;
       }
-      /* 폰트 */
-      h2, h3, th {
-      text-align: center;
-      font-family: jua;
-      font-weight: 600;
-      }
-      h4 {
-      text-align: left;
-      font-family: jua;
-      font-weight: 600;
-      }
-      ol,
-      ul {
-      list-style: none;
-      }
+
       /*프로필 영역*/
       .profile_myPage_profile {
       position: relative;
@@ -53,37 +39,28 @@
       height: 39px;
       z-index: 2;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile .mTit_myPage_profile {
-      font-size: 18px;
-      color: #272d32;
-      line-height: 1.2;
-      font-weight: 500;
-      padding: 0 0 12px 0;
-      margin: -2px 0 0 0;
-      border-bottom: 1px #FFE699 solid;
-      }
-      .profile_myPage_profile .profileInfo_myPage_profile table {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile {
       text-align: center;
       }
-      table {
+      .table_myPage_profile {
       width: 100%;
       border-collapse: collapse;
       border-spacing: 0;
       table-layout: fixed;
       word-break: break-all;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table th {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .th_myPage_profile {
       padding: 22px 0;
       vertical-align: top;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table th span {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .th_myPage_profile span {
       font-size: 16px;
       color: #272d32;
       font-weight: 500;
       line-height: 1.2;
       letter-spacing: -1px;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table td {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile td {
       position: relative;
       font-size: 13px;
       color: #9d9d9d;
@@ -93,7 +70,7 @@
       letter-spacing: -1px;
       border-bottom: 1px #e5e5e5 solid;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table td input {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile td input {
       height: 38px;
       line-height: 38px;
       font-size: 13px;
@@ -102,36 +79,25 @@
       border-radius: 5px;
       outline: none;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table th {
-      padding: 22px 0;
-      vertical-align: top;
-      }
       .profile_th_myPage_profile {
       border-bottom: 1px #e5e5e5 solid;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table th span {
-      font-size: 16px;
-      color: #272d32;
-      font-weight: 500;
-      line-height: 1.2;
-      letter-spacing: -1px;
-      }
-      .profile_myPage_profile .profileInfo_myPage_profile table .btnApp_myPage_profile {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .btnApp_myPage_profile {
       position: relative;
       padding: 0 112px 0 0;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table .btnApp_myPage_profile .pAppBtn_myPage_profile {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .btnApp_myPage_profile .pAppBtn_myPage_profile {
       position: absolute;
       right: 40px;
       top: 9px;
       width: 100px;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table .btnApp_myPage_profile:after {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .btnApp_myPage_profile:after {
       content: "";
       display: block;
       clear: both;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table .addTxt_myPage_profile {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .addTxt_myPage_profile {
       font-size: 13px;
       color: #9d9d9d;
       font-weight: 300;
@@ -139,25 +105,25 @@
       padding: 10px 0 0 0;
       letter-spacing: -1px;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table tr:last-child td {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile tr:last-child td {
       border: 0;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile table .btnApp_myPage_profile {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .btnApp_myPage_profile {
       position: relative;
       padding: 0 112px 0 0;
       }
-      button {
+
+      .phone_modify_profile {
+      background-color: #fabe00;
+      color: white;
+      padding: 5px;
       visibility: none;
       border: none;
       cursor: pointer;
       border-radius: 10px;
       outline: none;
       }
-      .phone_modify_profile {
-      background-color: #fabe00;
-      color: white;
-      padding: 5px;
-      }
+   
       /* 마케팅 수신 동의 영역*/
       .profile_myPage_profile .noticeSet_myPage_profile {
       width: 100%;
@@ -172,6 +138,7 @@
       line-height: 1.2;
       letter-spacing: -1px;
       padding: 30px 0 0 0;
+      font-family: jua;
       }
       .profile_myPage_profile .noticeSet_myPage_profile .nbox_myPage_profile {
       border: 1px #d4d4d4 solid;
@@ -202,6 +169,8 @@
       border-radius: 10px;
       margin: 40px 0 0 0;
       overflow: hidden;
+      text-align: center;
+      font-family: jua;
       }
       .joinFinBtn_myPage_profile a {
       text-decoration: none;
@@ -258,7 +227,7 @@
       <div class="profile_myPage_profile">
          <h3>프로필</h3>
          <div class="profileInfo_myPage_profile">
-            <table>
+            <table class="table_myPage_profile">
                <tbody>
                   <tr>
                      <th class="profile_th_myPage_profile" scope="row"><span>이메일</span></th>
