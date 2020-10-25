@@ -190,13 +190,6 @@
          padding: 0px;
          padding-left: 50px;
          }
-         /* 아이프레임 헤더 */
-         .headiframe {
-         width: 100vw;
-         margin-bottom: -180px;
-         /* position: fixed; */
-         z-index: 100;
-         }
          .title_img_div_detail {
          padding: 0px;
          overflow: hidden;
@@ -604,9 +597,6 @@
          padding-left: 10px;
          padding-top: 5px;
          display: none;
-         }
-         .sample {
-         margin-top: 100px;
          }
          /* 상뉴가 만든 class */
          .iconImgDetail {
@@ -1217,10 +1207,6 @@
       <button class="arrow-up">
       <i class="fas fa-arrow-up"></i>
       </button>
-      <!-- 채팅아이콘 -->
-      <div class="chatIcon font_jua">
-         <img src="./resources/img/chat-icon.png" class="iconImg">
-      </div>
       <!-- 위치 -->
       <div class="location"></div>
       <!-- 임시 풋터 아이프레임 -->

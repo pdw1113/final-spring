@@ -143,7 +143,7 @@
    <body>
          <div class="index_head_Mainhead">
             <!-- 메인로고 -->
-            <a href="#"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
+            <a href="index.jsp"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
             <div class="head_search_div">
                <!-- 검색창 폼 -->
                <div class="main_search_Mainhead">
@@ -181,8 +181,13 @@
                   </a>
                </div>
                <div class="login_box_Mainhead">
-                  <a href="#">
+                  <a href="supportnav.do" id="manager_href">
                      <div class="head_login_Mainhead" id="manager_page">고객센터</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="productInsert.do" id="manager_href">
+                     <div class="head_login_Mainhead" id="manager_page">상품등록</div>
                   </a>
                </div>
             </div>
@@ -205,7 +210,7 @@
                  $("#manager_page").empty();
                  $("#manager_page").append("관리자");
                  $(".manager_page").show();
-         
+         		 $("#manager_href").attr("href","mStatistics.do")
                  // 관리자 페이지일 경우
                  if (adminpage == 1) {
                      $(".head_search_div").empty();
