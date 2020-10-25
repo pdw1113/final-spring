@@ -155,7 +155,7 @@
       <!-- header 영역 -->
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="../../user/myPage/common/nav.jsp" %>
+      <%@ include file="common/nav.jsp" %>
       <div class="content_mywish">
          <div class="dataInform_mywish">
             <div class="layoutSubbox_mywish">

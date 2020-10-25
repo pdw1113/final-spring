@@ -386,7 +386,7 @@
       <!-- header 영역 -->
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="../../user/myPage/common/nav.jsp" %>
+      <%@ include file="common/nav.jsp" %>
       <div class="content_mypay">
          <div class="order">
             <div class="layoutSubbox_mypay">
