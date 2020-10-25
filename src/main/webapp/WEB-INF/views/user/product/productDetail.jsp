@@ -929,6 +929,11 @@
         .fs13 {
             font-size: 13px;
         }
+        
+	.footerDiv th, .footerDiv td{
+		font-size: 13px;
+	}
+
     </style>
 </head>
 
