@@ -136,7 +136,7 @@
             border: 1px solid var(--color-dark-white);
             border-radius: var(--size-border-radius);
             font-size: var(--font-regular);
-            padding: 8px 43px;
+            padding: 8px 41px;
             position: relative;
             height: 40px;
             font-family: jua;
