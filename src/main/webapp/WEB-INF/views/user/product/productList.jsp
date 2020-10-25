@@ -194,6 +194,9 @@
       </style>
    </head>
    <body>
+   
+   	  <%@ include file="../../common/header.jsp" %>
+   
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
             <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;웹개발</h2>
@@ -626,6 +629,9 @@
             </ul>
          </nav>
       </div>
+      
+      <%@ include file="../../common/footer.jsp" %>
+      
       <script>
          $(function(){
          /*마우스클릭시 버튼 색상변경*/

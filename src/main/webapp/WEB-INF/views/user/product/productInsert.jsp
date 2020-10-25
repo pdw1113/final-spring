@@ -195,8 +195,8 @@
       </style>
    </head>
    <body>
-      <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe src="Mainhead.html" width="100%" frameborder="0" scrolling="no" style="" ></iframe>
+   
+      <%@ include file="../../common/header.jsp" %>
       <div class="frame_addproduct">
          <div class="warring_text_addproduct">
             <h2 class="tit_sect_addproduct">시간 상품등록</h2>
@@ -318,8 +318,9 @@
             </a>
          </div>
       </div>
-      <!-- 임시 풋터 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 290px; margin-top: 90px;" scrolling="no"></iframe>
+      
+      <%@ include file="../../common/footer.jsp" %>
+      
    </body>
    <script>
       var upload = document.querySelector('#upload');

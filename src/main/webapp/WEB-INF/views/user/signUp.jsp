@@ -106,8 +106,9 @@
       </style>
    </head>
    <body>
-      <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe src="Mainhead.html" width="100%" frameborder="0" scrolling="no" ></iframe>
+   
+      <%@ include file="../common/header.jsp" %>
+      
       <!-- 가장 바깥에 있는 회원가입 창 틀 -->
       <div class="signupbox_signup">
          <!-- 회원가입 이미지 -->
@@ -158,8 +159,7 @@
          </a>
       </div>
       </a>
-      <!-- 임시 풋터 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 290px;" scrolling="no"></iframe>
+      <%@ include file="../common/footer.jsp" %>
    </body>
    <script>
       (function() { 
