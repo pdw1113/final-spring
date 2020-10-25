@@ -159,7 +159,7 @@
       <div class="content_mywish">
          <div class="dataInform_mywish">
             <div class="layoutSubbox_mywish">
-               <div class="tit2_mywish">나의 찜상품</div>
+               <div class="tit2_mywish">나의 관심상품</div>
                <!-- 상품 목록 리스트 start!! -->
                <!-- 상품 1 -->
                <div class="pOrderSearch_mywish">

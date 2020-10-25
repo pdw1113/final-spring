@@ -2,581 +2,645 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>니즈머니 충전</title>
-      <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <style>
-         /* 공통 CSS */
-         html,
-         body {
-         width: 100%;
-         padding: 0;
-         margin: 0;
-         }
-         h2 {
-         font-size: 34px;
-         color: #272d32;
-         line-height: 1.2;
-         font-weight: normal;
-         text-align: center;
-         letter-spacing: -1px;
-         padding: 0 0 24px 0;
-         border-bottom: 2px #50504d solid;
-         font-family: jua;
-         }
-         h4{
-         font-size: 25px;
-         color: #272d32;
-         font-weight: normal;
-         text-align: center;
-         font-family: jua;
-         margin: 15px 0 15px 0;
-         }
-         ul, li {
-         list-style: none;
-         margin: 0;
-         }
-         /* a태그 디자인 없애기 */
-         a:link {
-         color: red;
-         text-decoration: none;
-         }
-         a:visited {
-         color: black;
-         text-decoration: none;
-         }
-         a:hover {
-         color: gray;
-         text-decoration: none;
-         }
-         /* 전체 div */
-         .content_mypay {
-         width: 100%;
-         padding: 57px 0 125px 0;
-         }
-         .order_mypay {
-         width: 100%;
-         }
-         .content_mypay .layoutSubbox_mypay {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .content_mypay .layoutSubbox_mypay:after {
-         content: "";
-         display: block;
-         clear: both;
-         }
-         .orderWrap_mypay {
-         position: relative;
-         width: 100%;
-         }
-         /* 왼쪽 영역 */
-         .orderWrap_mypay .lsection_mypay {
-         width: 66.06%;
-         }
-         .orderWrap_mypay h3 {
-         position: relative;
-         font-size: 18px;
-         color: #272d32;
-         font-weight: 600;
-         line-height: 1.2;
-         padding: 38px 0 14px 0;
-         letter-spacing: -1px;
-         border-bottom: 1px #50504d solid;
-         }
-         .orderWrap_mypay .lsection_mypay .cashOption {
-         position: relative;
-         width: 100%;
-         overflow: hidden;
-         }
-         .orderWrap_mypay .lsection_mypay .cashOption .option {
-         display: flex;
-         }
-         .orderWrap_mypay .lsection_mypay .cashOption .option .sTit {
-         font-size: 15px;
-         color: #5c5c5c;
-         font-weight: 300;
-         line-height: 1.2;
-         padding: 40px 0;
-         margin: 0 29% 0 0;
-         letter-spacing: -1px;
-         }
-         /* input 숫자 증감 */
-         .orderWrap_mypay .lsection_mypay .cashOption .option .count{
-         margin-top: 31px;
-         }
-         span {cursor:pointer; }
-         .number{
-         margin:100px;
-         }
-         /* 수량 input */
-         input[type="number"]{
-         font-family: sans-serif;
-         height:34px;
-         width: 80px;
-         padding-inline-start: 12px;
-         text-align: center;
-         font-size: 14px;
-         border:1px solid #ddd;
-         border-radius:4px;
-         display: inline-block;
-         vertical-align: middle;
-         }
-         /* 수량 증감 버튼 */
-         .minus_mypay, .plus_mypay{
-         width:35px;
-         height:20px;
-         background:none;
-         border-radius:4px;
-         padding: 0px 2px 16px 0px;
-         display: inline-block;
-         vertical-align: middle;
-         text-align: center;
-         }
-         /* count img 해당버튼에 100%크기 맞추기*/
-         .orderWrap_mypay .lsection_mypay .cashOption .option .count .count_btn_mypay {
-         width: 100%;
-         }
-         /* 라디오버튼 글씨 */ 
-         .orderWrap_mypay .lsection_mypay .cashOption .option .sTit .custom-radio label {
-         font-family: sans-serif;
-         font-size: 16px;
-         color: #202020;
-         letter-spacing: 0;
-         }
-         /* 왼쪽 영역의 충전금액 */
-         .orderWrap_mypay .lsection_mypay .cashOption .option .won {
-         position: absolute;
-         right: 4%;
-         top: 29px;
-         font-size: 14px;
-         color: #202020;
-         line-height: 42px;
-         font-weight: 300;
-         text-align: center;
-         }
-         .orderWrap_mypay .lsection_mypay .cashOption .option .won span {
-         font-family: 'montserrat';
-         font-size: 16px;
-         color: #202020;
-         line-height: 42px;
-         }
-         /* 머니 충전 유의사항 */
-         .orderWrap_mypay .lsection_mypay .taxBillInfo {
-         width: 100%;
-         padding: 34px 0 30px 0;
-         margin: 153px 0 0 0;
-         background: #f3f5f6;
-         overflow: hidden;
-         }
-         .orderWrap_mypay .lsection_mypay .taxBillInfo .tTit {
-         font-size: 18px;
-         color: #272d32;
-         font-weight: 500;
-         line-height: 1.2;
-         letter-spacing: -1px;
-         padding: 0 0 0 40px;
-         }
-         .orderWrap_mypay .lsection_mypay .taxBillInfo ul {
-         padding: 0 0 0 40px;
-         }
-         .orderWrap_mypay .lsection_mypay .taxBillInfo ul li {
-         font-family: sans-serif;
-         display: block;
-         font-size: 13px;
-         color: #5c5c5c;
-         font-weight: 300;
-         line-height: 1.2;
-         letter-spacing: -1px;
-         padding: 8px 0 0 0;
-         word-break: keep-all;
-         }
-         /* 오른쪽 영역 */
-         .orderWrap_mypay .rsection_mypay {
-         position: absolute;
-         right: 0;
-         top: 0;
-         width: 30.30%;
-         margin: 72px 0 0 0;
-         border-top: 1px #50504d solid;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul {
-         padding: 8px 0;
-         border-bottom: 1px #dfdfdf solid;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li {
-         position: relative;
-         padding: 12px 0;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li .tit {
-         font-size: 15px;
-         color: #272d32;
-         line-height: 1.2;
-         font-family: sans-serif;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li span {
-         position: absolute;
-         right: 0;
-         top: 8px;
-         display: inline-block;
-         font-family: sans-serif;
-         font-size: 16px;
-         color: #202020;
-         line-height: 1.2;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li span u {
-         font-size: 14px;
-         color: #5c5c5c;
-         line-height: 1.2;
-         text-decoration: none;
-         padding: 0 0 0 3px;
-         }
-         /* 총 결제금액 */
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li span.total {
-         top: 5px;
-         font-size: 28px;
-         font-weight: 600;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .cont ul li span.total u {
-         font-size: 20px;
-         font-weight: 300;
-         font-family: sans-serif;
-         }
-         /* 결제수단 div */
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .payTit {
-         font-size: 15px;
-         color: #272d32;
-         padding: 20px 0 10px 0;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .payMethod {
-         height: 35px;
-         padding: 0 0 12px 0;
-         border-bottom: 1px #272d32 solid;
-         margin: 0 0 15px 0;
-         }
-         .custom-checkbox,
-         .custom-radio {
-         position: relative;
-         z-index: 1;
-         }
-         /* radio 버튼 custom */
-         input[type="radio"] {
-         display: none;
-         }
-         input[type="radio"]+label {
-         font-weight: 400;
-         font-size: 14px;
-         cursor: pointer;
-         }
-         input[type="radio"]+label span {
-         display: inline-block;
-         width: 18px;
-         height: 18px;
-         margin: -2px 10px 0 0;
-         vertical-align: middle;
-         cursor: pointer;
-         -moz-border-radius: 50%;
-         border-radius: 50%;
-         border: 3px solid #ffffff;
-         }
-         input[type="radio"]+label span {
-         background-color: #ffff;
-         border: 2px solid #9d9d9d;
-         }
-         /* 체크 했을 때 보여지는 radio 버튼 */
-         input[type="radio"]:checked+label {
-         color: #333;
-         font-weight: 700;
-         }
-         input[type="radio"]:checked+label span {
-         background-color: #fabe00;
-         border: 2px solid #ffffff;
-         box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
-         }
-         input[type="radio"]+label span,
-         input[type="radio"]:checked+label span {
-         -webkit-transition: background-color 0.24s linear;
-         -o-transition: background-color 0.24s linear;
-         -moz-transition: background-color 0.24s linear;
-         transition: background-color 0.24s linear;
-         }
-         /* checkbox custom */
-         input[type=checkbox] {
-         display: none;
-         margin: 0.2em;
-         }
-         input[type=checkbox]+label {
-         margin: 0.2em;
-         cursor: pointer;
-         padding: 0.2em;
-         }
-         input[type=checkbox]+label:before {
-         content: "\2714";
-         border: 0.1em solid#000000;
-         border-radius: 0.2em;
-         display: inline-block;
-         width: 0.8em;
-         height: 0.8em;
-         padding-left: 0.2em;
-         padding-bottom: 0.3em;
-         margin-right: 0.2em;
-         vertical-align: bottom;
-         color: transparent;
-         transition: .2s;
-         }
-         input[type=checkbox]+label:active:before {
-         transform: scale(0);
-         }
-         input[type=checkbox]:checked+label:before {
-         background-color: #fabe00;
-         border-color: #fabe00;
-         color: #fff;
-         }
-         /* 약관 div */
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .agreeOrdWrap {
-         padding: 20px 30px 10px;
-         border: 1px #d4d4d4 solid;
-         border-radius: 4px;
-         font-size: 14px;
-         }
-         /* 약관 전체 동의하기*/
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .agreeOrdWrap .allchk {
-         margin: 0 0 15px 0;
-         font-family: sans-serif;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .agreeOrdWrap .agreebox ul{
-         padding: 0 0 0 13px;
-         }
-         .orderWrap_mypay .rsection_mypay .amountArea .inbox .agreeOrdWrap .agreebox ul li {
-         display: block;
-         margin: 0 0 10px 0;
-         }
-         /* 충전하기 버튼 */
-         .pBtn_mypay{
-         display: block;
-         width: 100%;
-         background-color: #fabe00;
-         border-radius: 10px;
-         margin: 20px 0 0 0;
-         overflow: hidden;
-         cursor: pointer;
-         }
-         .pBtn_mypay a {
-         text-decoration: none;
-         color: white;
-         vertical-align: middle;
-         cursor: pointer;
-         pointer-events: none;
-         }
-         /* 반응형~ */
-         @media (max-width: 1360px) {
-         /* 사이드 여백 */
-         .content_mypay .layoutSubbox_mypay {
-         width: auto;
-         margin: 0 20px;
-         }
-         }
-      </style>
-   </head>
-   <body>
-      <!-- header 영역 -->
-      <%@ include file="../../common/header.jsp" %>
-      <!-- nav 영역 -->
-      <%@ include file="common/nav.jsp" %>
-      <div class="content_mypay">
-         <div class="order">
-            <div class="layoutSubbox_mypay">
-               <h2>니즈머니 보유캐시 주문/결제</h2>
-               <!-- order wrap -->
-               <div class="orderWrap_mypay">
-                  <!-- order section -->
-                  <div class="lsection_mypay">
-                     <h3>캐시충전</h3>
-                     <!-- 충전항목 -->
-                     <div class="cashOption">
-                        <div class="option">
-                           <div class="sTit">
-                              <div class="custom-radio">
-                                 <input type="radio" name="cashSelect" id="select01" value="10000" checked="checked">
-                                 <!-- 가격 -->
-                                 <label for="select01" class="checked"><span></span>10000<u>캐시</u></label>
-                                 <input type="hidden" value="10000" class="price1">
-                              </div>
-                           </div>
-                           <div class="count">
-                              <span class="minus_mypay" id="btn_minus_mypay"><img class="count_btn_mypay" src="./resources/img/left_button_sgm.png"></span>
-                              <input type="number" class="btn_number" id="count_val_mypay" value="1" readonly/>
-                              <span class="plus_mypay" id="btn_plus_mypay"><img class="count_btn_mypay" src="./resources/img/right_button_sgm.png"></span>
-                           </div>
-                           <div class="won"><span id="count_cash">10000원</span></div>
-                        </div>
-                     </div>
-                     <!-- //충전항목 -->
-                     <div class="taxBillInfo">
-                        <div class="tTit">머니 충전 유의사항</div>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+    <style>
+        html,
+        body {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li{
+            list-style: none;
+        }
+
+        /* 전체 div */
+        .content_myPage_money {
+            width: 100%;
+            padding: 57px 0 125px 0;
+        }
+
+        .content_myPage_money .layoutSubbox_myPage_money {
+            position: relative;
+            width: 1320px;
+            margin: 0 auto;
+        }
+
+        .content_myPage_money .layoutSubbox_myPage_money:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .mypage_myPage_money {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        a {
+            color: #a7a7a7;
+            text-decoration: none;
+        }
+
+        
+        /* 보유니즈머니 정보 */
+        .mypage_myPage_money .hTitle_myPage_money { /* 보유니즈머니 글씨 */
+            position: relative;
+            font-size: 20px;
+            color: #272d32;
+            line-height: 1.2;
+            font-weight: 500;
+            margin: 58px 0 0 0;
+            padding: 0 0 14px 0;
+            letter-spacing: -1px;
+            border-bottom: 1px #000 solid;
+            font-family: jua;
+        }
+
+        .accountWrap_myPage_money {
+            width: 100%;
+            min-height: 368px;
+            overflow: hidden;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money {
+            width: 100%;
+            background: #272d32;
+            padding: 30px 0;
+            margin: 60px 0 0 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li {
+            position: relative;
+            float: left;
+            width: 37%;
+            padding: 0 0 0 2.4%;
+            min-height: 120px;
+            border-right: 1px #52575b solid;
+            box-sizing: border-box;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money {
+            width: 26%;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p {
+            font-size: 20px;
+            color: #fff;
+            line-height: 1.2;
+            font-weight: 300;
+            letter-spacing: -1px;
+            padding: 28px 0 0 0;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p span {
+            display: block;
+            font-size: 20px;
+            font-weight: 400;
+            padding: 10px 0 0 0;
+            
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li:last-child {
+            border: 0;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li .stit_myPage_money {
+            font-size: 18px;
+            color: #fff;
+            font-weight: 400;
+            line-height: 1.2;
+            padding: 15px 0 30px 0;
+            letter-spacing: -1px;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li .won_myPage_money {
+            font-family: 'montserrat';
+            font-size: 38px;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li .won_myPage_money span {
+            font-family: 'montserrat';
+            font-size: 22px;
+            font-weight: 600;
+            padding: 0 0 0 10px;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money {
+            position: absolute;
+            right: 162px;
+            top: 5px;
+            display: block;
+            width: 120px;
+            border: 1px #dfdfdf solid;
+            border-radius: 50px;
+            text-align: center;
+        }
+
+        .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money span {
+            font-size: 15px;
+            color: #fff;
+            line-height: 36px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        /* 보유니즈머니 내역 table */
+        .accountWrap_myPage_money .awTit_myPage_money {
+            font-family: jua;
+            font-size: 20px;
+            color: #272d32;
+            font-weight: 500;
+            letter-spacing: -1px;
+            padding: 60px 0 14px 0;
+        }
+
+        .accountWrap_myPage_money .awTit_myPage_money + span{
+            float:right; 
+            padding-right:10px;
+            color: #6c6d70;
+        }
+
+        .cashTable_myPage_money {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            table-layout: fixed;
+            word-break: break-all;
+        }
+
+        colgroup {
+            display: table-column-group;
+        }
+
+        col {
+            display: table-column;
+        }
+
+        .cashTable_myPage_money table thead {
+            border-top: 1px solid #272d32;
+        }
+
+        .cashTable_myPage_money table thead tr th {
+            border-bottom: 1px #e5e5e5 solid;
+            border-left: 1px #e5e5e5 solid;
+            border-right: 1px #e5e5e5 solid;
+            padding: 21px 0;
+        }
+
+        .cashTable_myPage_money table tbody td{
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* 출금가능머니 노란색 테두리 */
+        .cashRequest_myPage_money {
+            position: relative;
+            text-align: center;
+            padding: 28px 0 29px;
+            margin: 80px 0 0 0;
+            border: 4px #fabe00 solid;
+            border-radius: 10px;
+        }
+
+        /* 출금가능머니 글자*/
+        .cashRequest_myPage_money .cTit_myPage_money {
+            position: absolute;
+            left: 27.6%;
+            top: 42px;
+            font-size: 15px;
+            color: #6c6d70;
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        /* 출금가능머니 숫자*/
+        .cashRequest_myPage_money .cashWon_myPage_money {
+            display: inline;
+            font-family: jua;
+            font-size: 38px;
+            color: #272d32;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        /* 출금가능머니 "원"*/
+        .cashRequest_myPage_money .cashWon_myPage_money span {
+            font-family: jua;
+            font-size: 22px;
+            font-weight: 600;
+            padding: 0 0 0 10px;
+        }
+
+        /* 충전 안내 */
+        .cashRtxt_myPage_money {
+            width: 100%;
+            padding: 10px 0 0 0;
+            overflow: hidden;
+        }
+
+        .cashRtxt_myPage_money ul li {
+            display: block;
+            font-size: 14px;
+            color: #9d9d9d;
+            font-weight: 300;
+            line-height: 1.2;
+            padding: 0 0 0 8px;
+            margin: 0 0 4px 0;
+            word-break: keep-all;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+
+
+        /* 반응형~ */
+        @media (max-width: 1360px) {
+            /* 사이드 여백 */
+            .content_myPage_money .layoutSubbox_myPage_money {
+                width: auto;
+                margin: 0 20px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul{
+                padding-left:20px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li {
+                position: relative;
+                float: left;
+                width: 37%;
+                padding: 0 0 0 2.4%;
+                min-height: 120px;
+                border-right: 1px #52575b solid;
+                box-sizing: border-box;
+            }
+            
+        }
+
+        @media (max-width: 1160px) {
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li {
+                width: 50%;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info {
+                float: none;
+                width: 100%;
+                padding: 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info p {
+                padding: 10px 0 0 0;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 1080px){
+            .cashRequest_myPage_money .cTit_myPage_money {
+                left: 20%;
+            }
+        }
+
+        @media (max-width: 940px) {
+            .cashRequest_myPage_money {
+                text-align: left;
+                padding: 40px 0 17px;
+            }
+            .cashRequest_myPage_money .cTit_myPage_money {
+                left: 24px;
+                top: 20px;
+            }
+            .cashRequest_myPage_money .cashWon_myPage_money {
+                padding: 0 0 0 24px;
+            }
+            .cashRequest_myPage_money .requestBtn_myPage_money {
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 860px){
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money {
+                right: 146px;
+                width: 100px;
+            }
+        }
+
+        @media (max-width: 740px){
+            .accountWrap_myPage_money .cashInfo_myPage_money {
+                padding: 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul{
+                padding:0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money {
+            width: 100%;
+
+        }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p {
+                padding: 30px 0;
+                text-align: center;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li {
+                float: none;
+                width: 100%;
+                min-height: 100%;
+                padding: 0 0 0 20px;
+                border: 0;
+                border-bottom: 1px #52575b solid;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .stit_myPage_money {
+                padding: 20px 0 30px 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .won_myPage_money {
+                padding: 0 0 30px 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money {
+                top: 15px;
+            }
+        }
+
+        @media (max-width: 640px){
+            .content_myPage_money .layoutSubbox_myPage_money {
+                margin: 0 12px;
+            }
+            .mypage_myPage_money h2 {
+                font-size: 20px;
+                padding: 0 0 14px 0;
+            }
+            .mypage_myPage_money .hTitle_myPage_money {
+                font-size: 15px;
+                margin: 30px 0 0 0;
+                padding: 0 0 10px 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money {
+                margin: 30px 0 0 0;
+                padding: 16px 0 0 0;
+            }
+            .accountWrap_myPage_money {
+                min-height: 260px;
+            }
+            .categoryTab_myPage_money .webTabs_myPage_money.four_myPage_money > ul > li {
+                width: 50%;
+            }
+            .categoryTab_myPage_money .webTabs_myPage_money > ul li.depth_myPage_money > a > span {
+                padding: 0 18px;
+                background-size: 10px 6px;
+            }
+            .categoryTab_myPage_money .webTabs_myPage_money ul li ul {
+                top: 40px;
+                padding: 4px 0 7px;
+            }
+            .categoryTab_myPage_money .webTabs_myPage_money ul li ul li a {
+                padding: 10px 0;
+                font-size: 13px;
+            }
+            .categoryTab_myPage_money .webTabs_myPage_money ul li a span {
+                font-size: 14px;
+                line-height: 40px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul{
+                padding:0;
+            }
+            
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .stit_myPage_money {
+                font-size: 13px;
+                padding: 15px 0 10px 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p {
+                font-size: 15px;
+                padding: 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p span {
+                font-size: 15px;
+                padding: 7px 0 15px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .won_myPage_money {
+                font-size: 22px;
+                padding: 0 0 15px 0;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .won_myPage_money span {
+                font-size: 15px;
+                padding: 0 0 0 8px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money {
+                right: 100px;
+                top: 10px;
+                width: 80px;
+            }
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money span {
+                font-size: 13px;
+                line-height: 28px;
+            }
+            .accountWrap_myPage_money .awTit_myPage_money {
+                font-size: 14px;
+                padding: 30px 0 10px 0;
+            }
+            .cashTable_myPage_money table thead tr th {
+                padding: 12px 0;
+            }
+            .cashTable_myPage_money table thead tr th span {
+                font-size: 13px;
+            }
+            .pagingArea_myPage_money.mto_myPage_money {
+                padding: 30px 0 0 0;
+            }
+            .cashRequest_myPage_money {
+                padding: 0;
+                margin: 40px 0 0 0;
+                border-width: 2px;
+                text-align: center;
+            }
+            .cashRequest_myPage_money .cTit_myPage_money {
+                position: relative;
+                left: 0;
+                top: 0;
+                width: 100%;
+                font-size: 12px;
+                padding: 15px 0 0 0;
+            }
+            .cashRequest_myPage_money .cashWon_myPage_money {
+                display: block;
+                padding: 0;
+                width: 100%;
+                font-size: 22px;
+                padding: 10px 0;
+            }
+            .cashRequest_myPage_money .cashWon_myPage_money span {
+                font-size: 15px;
+                padding: 0 0 0 6px;
+            }
+            .cashRequest_myPage_money .requestBtn_myPage_money {
+                position: relative;
+                left: 0;
+                right: auto;
+                top: 0;
+                width: 100%;
+            }
+            .cashRtxt_myPage_money ul li {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- header 영역 -->
+    <%@ include file="../../common/header.jsp" %>
+    <!-- nav 영역 -->
+    <%@ include file="../myPage/common/nav.jsp" %>
+    <div class="content_myPage_money">
+        <!-- mypage -->
+        <div class="mypage_myPage_money">
+            <div class="layoutSubbox_myPage_money">
+                <div class="hTitle_myPage_money">보유니즈머니</div>
+                <!-- account -->
+                <div class="accountWrap_myPage_money">
+                    <div class="cashInfo_myPage_money">
                         <ul>
-                           <li>서비스 구매 시 유효기간 만료일이 가까운 순서대로 사용됩니다.</li>
-                           <li>충전머니는 상품/서비스 구매를 위하여 사전에 일정 금액을 예치하는 것이므로 세금계산서 발행 대상이 아닙니다.</li>
-                           <li>충전머니를 사용하여 상품/서비스를 구매하실 때 결제 금액에 대한 세금계산서 신청이 가능합니다. (개인전문가는 발행 불가)</li>
-                           <li>충전머니의 영수증(신용카드 전표/현금영수증)은 개인 소득공제용으로만 사용하실 수 있습니다.</li>
+                            <li class="info_myPage_money">
+                                <p>문혜란 회원님의 <span>보유니즈머니 정보</span></p>
+                            </li>
+                            <li>
+                                <div class="stit_myPage_money">보유니즈머니</div>
+                                <div class="won_myPage_money">0<span>원</span></div>
+                                <a href="#" class="chargeBtn_myPage_money"><span>충전하기</span></a>
+                            </li>
                         </ul>
-                     </div>
-                  </div>
-                  <!-- //order section -->
-                  <!-- payment section -->
-                  <div class="rsection_mypay">
-                     <div class="amountArea">
-                        <div class="inbox">
-                           <div class="cont">
-                              <ul>
-                                 <li>
-                                    <div class="tit">보유캐시</div>
-                                    <span>0<u>원</u></span>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="cont">
-                              <ul>
-                                 <li>
-                                    <div class="tit">충전캐시</div>
-                                    <span id="charge_cash">10000<u>원</u></span>
-                                 </li>
-                                 <li>
-                                    <div class="tit">총 결제금액</div>
-                                    <span class="total">10000<u>원</u></span>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="payTit">결제수단</div>
-                           <div class="payMethod">
-                              <ul>
-                                 <li>
-                                    <div class="custom-radio_mypay"><input type="radio" name="order_pay_type"
-                                       id="credit_card" checked="checked" value="1"><label
-                                       for="credit_card" class="label"><span></span>카카오 페이</label>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- 약관 동의 div -->
-                           <div class="agreeOrdWrap">
-                              <div class="allchk">
-                                 <div class="custom-checkbox_mypay"><input type="checkbox" id="allAgree" 
-                                    ><label id="allchk" for="allAgree">약관 전체 동의</label>
-                                 </div>
-                              </div>
-                              <div class="agreebox">
-                                 <ul>
-                                    <li>
-                                       <div class="custom-checkbox_mypay"><input type="checkbox" id="orderAgree" class="chk"
-                                          name="orderAgree"><label
-                                          for="orderAgree">주문 상품정보 동의합니다 (필수)</label>
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <div class="custom-checkbox_mypay"><input type="checkbox" id="policyAgree" class="chk"
-                                          name="policyAgree"><label 
-                                          for="policyAgree">결제 시 개인정보 동의합니다. (필수)</label></div>
-                                    </li>
-                                    <li>
-                                       <div class="custom-checkbox_mypay"><input type="checkbox" id="marketingAgree" class="chk"
-                                          name="marketingAgree"><label 
-                                          for="marketingAgree">제 3자 제공 및 위탁동의합니다.</label></div>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <!-- 충전하기 버튼 -->
-                           <div type="button" class="pBtn_mypay" id="submit_myModifyPwd">
-                              <a href="#">
-                                 <h4>충전하기</h4>
-                              </a>
-                           </div>
+                    </div>
+
+
+                    <div class="awTit_myPage_money">보유니즈머니 내역</div>
+                    <span class="more_myPage_money">더보기</span>
+                    <div class="cashTable_myPage_money">
+                        <table>
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th><span>보유니즈머니 내역</span></th>
+                                    <th><span>충전/차감 머니</span></th>
+                                    <th><span>충전/차감 일자</span></th>
+                                    <th><span>상태</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>충전머니 예치</td>
+                                <td><span class="plus">+ 100,000</span></td>
+                                <td><span class="day">2020. 10. 10</span></td>
+                                <td>충전완료</td>
+                                </tr>
+                                <tr>
+                                <td>충전머니 예치</td>
+                                <td><span class="plus">+ 1,000,000</span></td>
+                                <td><span class="day">2019. 10. 10</span></td>
+                                <td>충전완료</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="cashRequest_myPage_money">
+                        <div class="cTit_myPage_money">출금 가능 니즈머니</div>
+                        <div class="cashWon_myPage_money">0<span>원</span></div>
+                        <a href="#" class="requestBtn_myPage_money" id="cancelReason"><span>출금하기</span></a>
                         </div>
-                     </div>
-                  </div>
-                  <!-- //payment section -->
-               </div>
-               <!-- order wrap -->
+                    </div>
+                    
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header" style="display: flex; justify-content: space-between;">
+                                <div><h2>출금 요청</h2></div>
+                                <div style="width: 40px; height: 40px;  cursor:pointer;background-color:#DDDDDD;text-align: center;" onClick="close_pop();">
+                                    <span class="pop_bt" style="font-size: 13pt; vertical-align: middle;" >
+                                        X
+                                    </span>
+                                </div>
+                            </div>
+                            <table class="withdrawTb_myPage_money"> <!-- DB에 출금일자 입력하여 관리자에서는 보여야 합니다.-->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">예금주</th>
+                                        <td><input type="text" name="" id=""></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">출금 계좌</th>
+                                        <td><input type="number" name="" id="" placeholder="'-'빼고 입력해주세요."></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">출금 금액</th>
+                                        <td><input type="number"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--End Modal-->
+
+
+                    <div class="cashRtxt_myPage_money">
+                        <ul>
+                            <li>12시 이전 신청 : 당일 16:00~18:00 입금</li>
+                            <li>12시 이후 신청 : 익일 16:00~18:00 입금</li>
+                            <li>금요일 12시 이후 신청</li>
+                            <li>차주 월요일 16:00~18:00 입금</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- //account -->
             </div>
-         </div>
-      </div>
-      <script>
-         // 머니 충전 
-         $('#btn_minus_mypay').click(function () {
-             var num = $('#count_val_mypay').val();
-             if (num > 1) {
-                 num--;
-                 $('#count_val_mypay').val(num);
-             }
-         });
-         
-         $('#btn_plus_mypay').click(function () {
-             var num = $('#count_val_mypay').val();
-             if (num < 99) {
-                 num++;
-                 $('#count_val_mypay').val(num);
-             }
-         });
-         
-         // 합계
-         $('#btn_minus_mypay, #btn_plus_mypay').click(function () {
-             var sum = $('.price1').val() * $('#count_val_mypay').val();
-             var html = sum + '<u>' + '원' + '</u>';
-             var html2 = sum + '원'
-             /* 왼쪽 lsection의 증가 */
-             $('#count_cash').empty();
-             $('#count_cash').append(html2);
-             /* 오른쪽 rsection의 증가 */
-             /* 충전머니 */
-             $('#charge_cash').empty();
-             $('#charge_cash').append(html);
-             /* 총 결제 금액 */
-             $('.total').empty();
-             $('.total').append(html);
-         });
-         
-         // 체크박스 전체 선택 상단의 전체 체크박스 클릭
-         $('#allAgree').click(function(){
-             // 클릭되었으면
-             if($('#allAgree').prop("checked")){
-                 // input태그의 class가 chk인 것을 찾아 체크
-                 $(".chk").prop("checked",true); 
-             }else{
-                 // input태그의 class가 chk인 것을 찾아 체크 해제
-                 $(".chk").prop("checked",false);
-             }
-         });
-         
-         // 전체선택했을 때 하나라도 해제되면 전체선택도 해제
-         $(".chk").click(function(){
-             var i =0;
-             $(".chk").each(function(index){
-                 if($(this).is(":checked")==false){
-                     i=1;
-                 }
-             });
-             if(i==1){
-                 $("#allAgree").prop("checked",false);
-             }else{
-                 $("#allAgree").prop("checked",true);
-             }
-         });
-         
-         // 충전하기 눌렀을 때 약관의 필수에 체크 안되어있으면 alert!!!
-         $('#submit_myModifyPwd').click(function(){
-             if($('#orderAgree').is(":checked")==true && $('#policyAgree').is(":checked")==true ){
-                 alert("success");
-             }else{
-                 alert("fail?");
-             }
-         });
-         
-         
+        </div>
+        <!-- //mypage -->
+    <script type="text/javascript">
+        $('#cancelReason').click(function(){
+            $('#myModal').show();
+        })
+        
+        //팝업 Close 기능
+        function close_pop(flag) {
+             $('#myModal').hide();
+        };
+        
       </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>

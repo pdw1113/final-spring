@@ -37,7 +37,6 @@
       font-weight: 600;
       line-height: 1.2;
       text-align: center;
-      margin-top: -145px;
       padding: 76px 0 36px 0;
       border-bottom: 3px #000 solid;
       }

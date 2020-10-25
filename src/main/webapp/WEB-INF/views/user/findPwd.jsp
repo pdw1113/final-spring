@@ -71,7 +71,7 @@
          font-size: 23px;
          color: rgb(78, 78, 78);
          }
-         h4{
+         .h4_find_pw{
          font-family: 'Black Han Sans';
          }
       </style>
@@ -108,7 +108,7 @@
                   <!-- Modal body -->
                   <div class="modal-body" >
                      <img src="resources/img/findPwd_x.png" width="45px" height="45px" style="margin-bottom: 20px;"/>
-                     <h4>E-MAIL ERROR</h4>
+                     <h4 class="h4_find_pw">E-MAIL ERROR</h4>
                      <p>해당 이메일은 니즈잇에 가입되어 있지 않습니다.</p>
                   </div>
                   <!-- Modal footer -->
@@ -128,7 +128,7 @@
                   <!-- Modal body -->
                   <div class="modal-body">
                      <img src="resources/img/findPwd_o.png" width="45px" height="45px" style="margin-bottom: 20px;"/>
-                     <h4>SEND SUCCESS</h4>
+                     <h4 class="h4_find_pw">SEND SUCCESS</h4>
                      <p>입력하신 이메일 주소로 비밀번호 변경 URL을 발송하였습니다.</p>
                   </div>
                   <!-- Modal footer -->
