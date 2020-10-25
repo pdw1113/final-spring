@@ -20,19 +20,7 @@
          padding: 0;
          margin: 0;
          }
-
-         #datepicker {
-         width: 180px;
-         margin: 0 20px 20px 20px;
-         }
-         #datepicker>span:hover {
-         cursor: pointer;
-         }
-<<<<<<< HEAD
-          .header{    
-=======
          .header{    
->>>>>>> f69cd0518101123ce2c0d4dd9d4525ddc54eb58c
          width: 100%;
          height: 6.2rem;
          }
@@ -85,14 +73,7 @@
          display: block;
          clear: both;
          }
-         /* 달력 date-picker */
-         .date>span:hover {
-         cursor: pointer;
-         }
-         .date{
-         display: table-cell;
-         vertical-align: middle;
-         }
+
          /* 비밀번호 입력 div */
          .dataInform_MemberManager .inform_MemberManager {
          width: 100%;
@@ -173,7 +154,7 @@
          color: red;
          }
        /* 검색 테이블 */
-      	.searchhbox_table_MemberManager {
+         .searchhbox_table_MemberManager {
          margin: 15px auto 20px;
          border-top: 1px solid rgb(173, 173, 173);
          border-collapse: collapse;
@@ -272,7 +253,7 @@
          float: right;
          }
 
-		  /* 날짜폼 */
+        /* 날짜폼 */
          .dateform_MemberManager{
             font-size: 18px;
             font-family: sans-serif;
@@ -283,8 +264,9 @@
          
          /* 아이디 검색창 */
          .select_mybuylist{
-         	margin-left : 5px;
+            margin-left : 5px;
          }
+         
       </style>
    </head>
    <body>
