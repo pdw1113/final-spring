@@ -47,6 +47,7 @@
          overflow: visible;
          position: relative;
          width: 1160px;
+         height: 500px;
          margin: 0.1rem auto;
          clear: both;
          }
@@ -155,10 +156,12 @@
             <div class="content_btn">
                <a href="" class="btn_design btn_move">이전</a>
                <a href="" class="btn_design btn_move">다음</a>
-               <a href="customer_notice_list.html" class="btn_design btn_list">목록</a>
+               <a href="noticeList.do" class="btn_design btn_list">목록</a>
             </div>
          </div>
       </div>
-      <%@ include file="../common/footer.jsp" %>
+      <div>
+      	<%@ include file="../common/footer.jsp" %>
+      </div>
    </body>
 </html>
