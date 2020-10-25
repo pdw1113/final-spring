@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -289,10 +290,10 @@
    </head>
    <body>
       <div class="header">
-         <iframe style=" width: 100%; margin-top: -5px; " src="Mainhead.html" frameborder="0"></iframe>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-         <iframe style="height: 770px; width: 230px;" src="administrator__leftBar.html" frameborder="0"></iframe>
+         <%@ include file="../common/mLeftBar.jsp" %>
       </div>
       <div class="section">
          <div class="mian-header">
@@ -409,6 +410,7 @@
             </div>
          </div>
       </div>
+      <%@ include file="../../common/footer.jsp" %>
       <script>
          function contentsView(obj) {
              if (obj.value == 'card3') {
@@ -433,8 +435,6 @@
                  return false;
              }
          };
-         
-         
       </script>
    </body>
 </html>

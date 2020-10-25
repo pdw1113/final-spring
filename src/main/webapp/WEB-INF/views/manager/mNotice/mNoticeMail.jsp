@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -267,8 +268,12 @@
       </style>
    </head>
    <body>
-      <div class="header"></div>
-      <div class="left-bar"></div>
+      <div class="header">
+      	<%@ include file="../../common/header.jsp" %>
+      </div>
+      <div class="left-bar">
+      	<%@ include file="../common/mLeftBar.jsp" %>
+      </div>
       <div class="section">
          <!-- 관리자 카테고리 및 제목 -->
          <div class="mian-header">
@@ -350,6 +355,8 @@
             </div>
          </div>
       </div>
+      
+      <%@ include file="../../common/footer.jsp" %>
       <script>
          $(document).ready(function () {
          
