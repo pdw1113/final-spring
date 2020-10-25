@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -110,41 +110,34 @@
    <body>
       <frame name="content" src="contents_of_frame.html" />
       <ul class="font_jua Admin-leftbar">
-      
          <li class="Admin-leftbar-li">
-            <a href="#" class="Admin-fistAtag">게시판 관리</a>
-            <a href="mBoardForbidden.do">금칙어 관리</a>
+            <a href="#" class="Admin-fistAtag">통계</a>
+            <a href="mStatistics.do">통계</a>
          </li>
-         
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">회원 관리</a>
             <a href="mUserList.do" target="content" class="Admin-Atag">회원 리스트</a>
             <a href="mUserLog.do" target="content" class="Admin-Atag">개인정보 접속 기록조회</a>
          </li>
-         
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">결제</a>
             <a href="mPayBuyList.do" target="content" class="Admin-Atag">구매확정 리스트</a>
             <a href="mPayRefundList.do" target="content" class="Admin-Atag">환불 리스트</a>
          </li>
-         
          <li class="Admin-leftbar-li">
-            <a href="#" class="Admin-fistAtag">통계</a>
-            <a href="mStatistics.do" target="content" class="Admin-Atag">통계</a>
-          </li>
-          
+            <a href="#" class="Admin-fistAtag">게시판 관리</a>
+            <a href="mBoardForbidden.do" target="content" class="Admin-Atag">금칙어 관리</a>
+         </li>
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">기본약관</a>
             <a href="mPolicy.do" class="Admin-Atag">기본정책 관리</a>
          </li>
-         
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">알림,상담</a>
             <a href="mNoticeMail.do" class="Admin-Atag">메일 발송</a>
             <a href="mNoticeKakao.do" target="content" class="Admin-Atag">카카오톡 알림톡</a>
             <a href="mNoticeTalk.do" class="Admin-Atag">1:1채팅상담</a>
          </li>
-         
       </ul>
       <script>
          var acc = $(".Admin-fistAtag");
