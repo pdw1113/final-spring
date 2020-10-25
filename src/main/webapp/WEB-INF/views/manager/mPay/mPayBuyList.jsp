@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -210,14 +210,6 @@
          .bottom-table-thead{
          background-color: #E2E2E2;
          }
-         /*페이지네이션*/
-         .pagination{
-         display: block;
-         text-align: center;
-         }
-         .pagination > li > a{
-         float: none;
-         }
          /*table-input*/
          .table-input{
          margin-left: 10rem;
@@ -231,6 +223,25 @@
          width: auto;
          margin: 0 20px;
          }
+         }
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
+         /*페이징 처리*/
+         #byPage{
+         display: block;
+         text-align: center;
+         }
+         #byPage > li > a{
+         float: none;
+         margin-left : -0.5rem;
          }
       </style>
    </head>
@@ -359,7 +370,7 @@
                   </tr>
                </table>
                <nav>
-                  <ul class="pagination">
+                  <ul class="pagination" id="byPage">
                      <li>
                         <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
