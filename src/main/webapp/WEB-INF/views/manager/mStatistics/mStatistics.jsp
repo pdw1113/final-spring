@@ -237,16 +237,21 @@
          }
          /* 속도가 느린거 같으면 이걸로 */
          /* https://gahyun-web-diary.tistory.com/7 */
+         .box21{
+         	height: 395px; 
+         	width: 770px;
+         
+        
+         }	
+         
       </style>
    </head>
    <body>
       <div class="header">
-         <iframe style=" width: 100%; margin-top: -5px; " src="Mainhead.html"
-            frameborder="0"></iframe>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-         <iframe style="height: 770px; width: 230px;" src="administrator__leftBar.html"
-            frameborder="0"></iframe>
+         <%@ include file="../common/mLeftBar.jsp" %>
       </div>
       <div class="section">
          <div class="mian-header">
@@ -271,16 +276,16 @@
          <div class="box">
             <div class="box1">방문자수
             </div>
-            <div class="box2">
-               <iframe style="height: 395px; width: 770px;" src="administrator__statistics__visitors.html"
-                  frameborder="0"></iframe>
+            <div class="box2 box21">
+               <%@ include file="mStatisticsGraph.jsp" %>
             </div>
          </div>
          <div class="box">
             <div class="box1">가입자수</div>
-            <div class="box2">
-               <iframe style="height: 395px; width: 770px;" src="administrator__statistics__visitors.html"
-                  frameborder="0"></iframe>
+            <div class="box2 box21">
+               
+                  	
+                  <%@ include file="mStatisticsGraph.jsp" %>
             </div>
          </div>
          <div class="box22">

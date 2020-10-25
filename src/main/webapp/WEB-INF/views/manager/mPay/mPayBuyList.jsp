@@ -235,12 +235,10 @@
    </head>
    <body>
       <div class="header">
-         <iframe style=" width: 100%; margin-top: -5px; " src="Mainhead.html"
-            frameborder="0"></iframe>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-         <iframe style="height: 770px; width: 230px;" src="administrator__leftBar.html"
-            frameborder="0"></iframe>
+         <%@ include file="../common/mLeftBar.jsp" %>
       </div>
       <div class="section">
          <div class="mian-header">
