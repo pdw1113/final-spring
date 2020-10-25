@@ -245,9 +245,9 @@
    </head>
    <body>
    	  <!-- header 영역 -->
-      <%@ include file="common/header.jsp" %>
+      <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
-      <%@ include file="user/myPage/common/nav.jsp" %>
+      <%@ include file="../../user/myPage/common/nav.jsp" %>
       <iframe src="Mainhead.html" frameborder="0" style="width: 100%;margin: 0 0px -30px 0px; "></iframe>
       <iframe src="myPage_nav.html" frameborder="0"
          style="width: 100%; height: 370px; margin: -20px 0px -20px 0px;"></iframe>
@@ -376,6 +376,6 @@
          
       </script>
       <!-- footer 영역 -->
-      <%@ include file="common/footer.jsp" %>
+      <%@ include file="../../common/footer.jsp" %>
    </body>
 </html>
