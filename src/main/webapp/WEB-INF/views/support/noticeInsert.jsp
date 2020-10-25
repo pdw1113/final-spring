@@ -20,7 +20,7 @@
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <style type="text/css">
          /* jua 폰트 */
-         .font_jua {
+         .font_jua { 
          font-family: 'Jua', sans-serif;
          color: black;
          }
@@ -98,8 +98,8 @@
       </style>
    </head>
    <body>
-      <iframe class="headiframe" src="Mainhead.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 65px;"></iframe>
-      <iframe class="headiframe" src="customercenter.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 181px;"></iframe>
+   	<%@ include file="../common/header.jsp" %>
+	<%@ include file="common/nav.jsp" %>
       <div class="notice_container">
          <div class="notice_input_div">
             <div class="notice_input_title">
@@ -114,7 +114,7 @@
             <button class="notice_deny_button" onclick="location.href='customer_notice_list.html'">취소하기</button>
          </div>
       </div>
-      <iframe src="footer.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 203px;"></iframe>
+      <%@ include file="../common/footer.jsp" %>
       <script>
          $(document).ready(function () {
          

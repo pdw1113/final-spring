@@ -31,7 +31,7 @@
          }
          .header{    
          width: 100%;
-         height: 5rem;
+         height: 6.2rem;
          }
          .left-bar{
          float: left;
@@ -102,6 +102,7 @@
          /*테이블의 첫번째 td*/
          .first-td{
          width: 25rem;
+         background-color : #F5F5F5;
          }
          /*테이블의 첫번째 td의 글자*/
          .top-table-p{
@@ -146,14 +147,14 @@
          }
          /*두번째 폼태그*/
          #second-input{
-         width: 15rem;
+         width: 18rem;
          margin-left: 3rem;
          display: inline-block;
          padding-bottom: 1.7rem;
          padding-top: 1.95rem;
          }
          #second-input-2{
-         width: 15rem;
+         width: 18rem;
          margin-left: 0;
          display: inline-block;
          padding-bottom: 1.7rem;
@@ -235,12 +236,11 @@
    </head>
    <body>
       <div class="header">
-         <iframe style=" width: 100%; margin-top: -5px; " src="Mainhead.html"
-            frameborder="0"></iframe>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-         <iframe style="height: 770px; width: 230px;" src="administrator__leftBar.html"
-            frameborder="0"></iframe>
+         <%@ include file="../common/mLeftBar.jsp" %>
+
       </div>
       <div class="section">
          <div class="mian-header">
@@ -254,7 +254,7 @@
                </div>
                <table class="table table-bordered top-table table-condensed">
                   <tr>
-                     <td class="active first-td">
+                     <td class="first-td">
                         <p class="font_jua top-table-p" id="top-table-p">등급</p>
                      </td>
                      <td>
@@ -270,7 +270,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="active first-td">
+                     <td class="first-td">
                         <p class="font_jua top-table-p">검색어</p>
                      </td>
                      <td>
@@ -287,7 +287,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="active first-td">
+                     <td class="first-td">
                         <p class="font_jua top-table-p">기간</p>
                      </td>
                      <td>

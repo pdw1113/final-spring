@@ -11,7 +11,7 @@
          width:100%;
          }
          footer {
-         margin-top: 40px;
+         margin-top: 2rem;
          width:100%;
          }
          .footerDiv{

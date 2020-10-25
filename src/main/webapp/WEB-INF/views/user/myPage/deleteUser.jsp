@@ -169,9 +169,10 @@
       </style>
    </head>
    <body>
-      <iframe src="Mainhead.html" frameborder="0" style="width: 100%;margin: 0 0px -30px 0px; "></iframe>
-      <iframe src="myPage_nav.html" frameborder="0"
-         style="width: 100%; height: 370px; margin: -20px 0px -20px 0px;"></iframe>
+      <!-- header 영역 -->
+      <%@ include file="../../common/header.jsp" %>
+      <!-- nav 영역 -->
+      <%@ include file="../../user/myPage/common/nav.jsp" %>
       <form action="#" name="form1" id="form1" method="post" target="process">
          <div class="content_myleave">
             <div class="dataInform_myleave">
@@ -237,6 +238,7 @@
              $('label', this).css('color', 'black');
          });
       </script>
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 220px;"></iframe>
+      <!-- footer 영역 -->
+      <%@ include file="../../common/footer.jsp" %>
    </body>
 </html>

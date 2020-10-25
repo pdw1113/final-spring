@@ -38,7 +38,7 @@
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="common/header.jsp" %>
+      <%@ include file="WEB-INF/views/common/header.jsp" %>
       <!-- 슬라이드 영역 -->
       <div id="container">
          <div class="slide_wrap">
@@ -86,9 +86,9 @@
             <ul class="slide_pagination"></ul>
          </div>
       </div>
-      <%@ include file="common/nav.jsp" %>
-      <%@ include file="common/section.jsp" %>
-      <%@ include file="common/footer.jsp" %>
+      <%@ include file="WEB-INF/views/common/nav.jsp" %>
+      <%@ include file="WEB-INF/views/common/section.jsp" %>
+      <%@ include file="WEB-INF/views/common/footer.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom
@@ -217,29 +217,5 @@
          })();
       </script>
       <script type="text/javascript" src="resources/js/typeit.min.js"></script>
-      <script type="text/javascript">
-         $(function(){
-           // var str1 = ["본 사이트는 KH 정보교육원", "수강생들을 위한 사이트로", "Spring 교육을 위한 사이트입니다."];
-           // var str2 = ["누구나 할 수 있는<br>_Spring Framework와<br>_쉬운 웹 개발 노하우<br>_지금 바로 함께 하세요!!"];
-           // var str3 = ["Hey, you!!<br>_Don't be hesitate,<br>_Right Now Start!!"];
-           
-           $('.type_text1').typeIt({
-             // string:str1,
-             html:true,
-             autoStart:true,
-             loop:true,
-             typeSpeed:100
-           })
-           .tiPause(1500)
-           .tiDelete(130)
-           .tiType(str2)
-           .tiPause(1700)
-           .tiDelete(130)
-           .tiType(str3)
-           .tiPause(1700)
-           .tiEmpty(); 
-         
-         });
-      </script>
    </body>
 </html>

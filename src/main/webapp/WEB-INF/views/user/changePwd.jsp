@@ -5,17 +5,16 @@
    <head>
       <meta charset="utf-8">
       <title>MY TEST PAGE</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <style>
          body,html{
          margin:0;
          padding:0;
          width:100%;
+         }
+         h2{
+         font-family: jua;
          }
          /* 로그인 폼 가장자리 틀  */
          .form_newPwd{
@@ -65,14 +64,10 @@
          font-family: jua;
          outline: none;
          }
-         h4,h2{
-         font-family: 'Black Han Sans';
-         }
       </style>
    </head>
    <body>
-      <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe src="Mainhead.html" width="100%" frameborder="0" scrolling="no" ></iframe>
+      <%@ include file="../common/header.jsp" %>
       <!-- 가장 바깥에 있는 로그인 창 틀 -->
       <div class="form_newPwd">
          <!-- 로그인 이미지 -->
@@ -91,7 +86,6 @@
          </div>
       </div>
       <br><br><br>
-      <!-- 임시로 넣어놓은 footer 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 290px;" scrolling="no"></iframe>
+      <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

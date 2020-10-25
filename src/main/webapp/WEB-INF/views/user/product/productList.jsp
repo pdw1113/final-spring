@@ -194,6 +194,9 @@
       </style>
    </head>
    <body>
+   
+   	  <%@ include file="../../common/header.jsp" %>
+   
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
             <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;웹개발</h2>
@@ -270,7 +273,7 @@
       <div class="Lsit-Saction">
          <div class="row">
             <div class="col-xs-4">
-               <a href="#" class="thumbnail">
+               <a href="productDetail.do" class="thumbnail">
                   <div class="list_img_div">
                      <img src="resources/img/1.png" class="list_contents_img_index">
                   </div>
@@ -606,7 +609,7 @@
                </a>
             </div>
          </div>
-         <nav>
+         <div>
             <ul class="pagination">
                <li>
                   <a href="#" aria-label="Previous">
@@ -624,8 +627,11 @@
                   </a>
                </li>
             </ul>
-         </nav>
+         </div>
       </div>
+      
+      <%@ include file="../../common/footer.jsp" %>
+      
       <script>
          $(function(){
          /*마우스클릭시 버튼 색상변경*/

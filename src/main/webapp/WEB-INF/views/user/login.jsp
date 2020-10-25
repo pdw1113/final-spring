@@ -86,8 +86,7 @@
       </style>
    </head>
    <body>
-      <!-- 임시로 넣어놓은 헤더 아이프레임 -->
-      <iframe src="Mainhead.html" width="100%" frameborder="0" scrolling="no" ></iframe>
+      <%@ include file="../common/header.jsp" %>
       <!-- 가장 바깥에 있는 로그인 창 틀 -->
       <div class="loginbox_login">
          <!-- 로그인 이미지 -->
@@ -97,7 +96,7 @@
          <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요">
          <!-- 버튼폼 -->
          <div class="button_login">
-            <a href="#">
+            <a href="findPwd.do">
                <div class="login_button_login" style="width: 130px;">PWD 찾기</div>
             </a>
             <a href="#">
@@ -125,7 +124,6 @@
             </div>
       </div>
       </a>
-      <!-- 임시 풋터 아이프레임 -->
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 290px;" scrolling="no"></iframe>
+      <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

@@ -16,6 +16,7 @@
          .index_head_Mainhead {
          height: 65px;
          background-color: #fabe00;
+         margin-bottom: 2rem;
          }
          /* 로고 이미지 */
          .head_logo_Mainhead {
@@ -29,7 +30,7 @@
          /* 로그인,회원가입 프레임 */
          .login_box_Mainhead {
          float: right;
-         margin-top: 15px;
+         margin-top: 1rem;
          }
          /* 로그인, 회원가입 감싸고있는 테두리 */
          .head_login_Mainhead {
@@ -38,7 +39,6 @@
          width: 80px;
          height: 30px;
          text-align: center;
-         line-height: 35px;
          margin-left: 10px;
          border-radius: 15px;
          font-size: 20px;
@@ -80,7 +80,7 @@
          border-bottom: 2px solid white;
          font-size: 30px;
          float: left;
-         margin-top: 8px;
+         margin-top: 0px;
          width: 380px;
          }
          /* 검색 인풋텍스트 */
@@ -140,10 +140,9 @@
       </style>
    </head>
    <body>
-      <header>
          <div class="index_head_Mainhead">
             <!-- 메인로고 -->
-            <a href="#"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
+            <a href="index.jsp"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
             <div class="head_search_div">
                <!-- 검색창 폼 -->
                <div class="main_search_Mainhead">
@@ -151,7 +150,7 @@
                </div>
                <div class="main_searchbox_Mainhead">
                   <input class="main_searchtext_Mainhead" type="text">
-                  <a href="#"><img style="float: right; width: 23px; margin-top: 13px;"
+                  <a href="#"><img style="float: right; width: 23px; margin-top: 21px;"
                      src="resources/img/SearchGlass.png"></a>
                </div>
                <div class="main_search_Mainhead">
@@ -161,24 +160,38 @@
             <!-- 로그아웃 -->
             <div>
                <div class="login_box_Mainhead">
-                  <a href="#">
-                     <div class="head_login_Mainhead" style="margin-right: 10px;">로그아웃</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="#">
+                  <a href="profile.do">
                      <div class="head_login_Mainhead" style="width: 100px;">마이페이지</div>
                   </a>
                </div>
                <div class="login_box_Mainhead">
-                  <a href="#">
+                  <a href="signUpMaster.do">
+                     <div class="head_login_Mainhead" style="width: 100px;">능력자등록</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="login.do">
+                     <div class="head_login_Mainhead" style="margin-right: 10px;">로그인</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="signUp.do">
+                     <div class="head_login_Mainhead" style="width: 100px;">회원가입</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="supportnav.do" id="manager_href">
                      <div class="head_login_Mainhead" id="manager_page">고객센터</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="productInsert.do" id="manager_href">
+                     <div class="head_login_Mainhead" id="manager_page">상품등록</div>
                   </a>
                </div>
             </div>
             <span class="user_Mainhead"></span>
          </div>
-      </header>
       <script>
          $(document).ready(function () {
              // 사용자 아이디
@@ -196,7 +209,7 @@
                  $("#manager_page").empty();
                  $("#manager_page").append("관리자");
                  $(".manager_page").show();
-         
+         		 $("#manager_href").attr("href","mStatistics.do")
                  // 관리자 페이지일 경우
                  if (adminpage == 1) {
                      $(".head_search_div").empty();
@@ -204,6 +217,7 @@
                      $(".manager_page").hide();
                  }
              }
+             $('body').css("font-family","Apple Color Emoji").css("line-height","1.6");
          });
       </script>
    </body>

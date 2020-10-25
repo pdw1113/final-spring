@@ -31,7 +31,7 @@
          }
          .header{    
          width: 100%;
-         height: 5rem;
+         height: 6.5rem;
          }
          .left-bar{
          float: left;
@@ -186,12 +186,10 @@
    </head>
    <body>
       <div class="header">
-         <iframe style=" width: 100%; margin-top: -5px; " src="Mainhead.html"
-            frameborder="0"></iframe>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-         <iframe style="height: 770px; width: 230px;" src="test-002.html"
-            frameborder="0"></iframe>
+         <%@ include file="../common/mLeftBar.jsp" %>
       </div>
       <div class="section">
          <div class="mian-header">

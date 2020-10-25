@@ -9,7 +9,6 @@
       <title>Slide Project</title>
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <style>
          html, body {
          padding: 0;
@@ -55,7 +54,7 @@
          background:white; 
          opacity:0; 
          position: absolute;
-         transition: opacity 0.4s;
+         transition: opacity 0.2s;
          z-index: -1;
          pointer-events: none;
          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -76,7 +75,7 @@
          }
          .container_mynav > li ul li{
          text-align: center;
-         width: 440px;
+         width: 41.25rem;
          }
          .container_mynav > li ul li:hover{
          background-color: white;
@@ -85,6 +84,7 @@
          }
          .container_mynav > li:hover ul{
          opacity: 1;
+         z-index: 999;
          pointer-events:auto;
          }
          .container_mynav ul li{
@@ -107,27 +107,17 @@
             <li>
                계정설정 <i class="fa fa-caret-down"></i>
                <ul>
-                  <li>프로필</li>
-                  <li>보유 니즈머니</li>
-                  <li>비밀번호 변경</li>
-                  <li>회원탈퇴</li>
+                  <li><a href="profile.do">프로필</a></li>
+                  <li><a href="wallet.do">보유 니즈머니</a></li>
+                  <li><a href="modifyPwd.do">비밀번호 변경</a></li>
+                  <li><a href="deleteUser.do">회원탈퇴</a></li>
                </ul>
             </li>
             <li>
                구매정보 <i class="fa fa-caret-down"></i>
                <ul>
-                  <li>관심상품</li>
-                  <li>구매내역</li>
-               </ul>
-            </li>
-            <li>
-               고객지원 <i class="fa fa-caret-down"></i>
-               <ul>
-                  <li>공지사항</li>
-                  <li>자주하는 질문(FAQ)</li>
-                  <li>니즈머니 환불신청</li>
-                  <li>문의/신고 등록</li>
-                  <li>나의 문의/신고내역</li>
+                  <li><a href="wishList.do">관심상품</a></li>
+                  <li><a href="buyList.do">구매내역</a></li>
                </ul>
             </li>
          </ul>

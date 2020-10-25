@@ -152,13 +152,14 @@
       </style>
    </head>
    <body>
-      <iframe src="Mainhead.html" frameborder="0" style="width: 100%;margin: 0 0px -30px 0px; "></iframe>
-      <iframe src="myPage_nav.html" frameborder="0"
-         style="width: 100%; height: 370px; margin: -20px 0px -20px 0px;"></iframe>
+      <!-- header 영역 -->
+      <%@ include file="../../common/header.jsp" %>
+      <!-- nav 영역 -->
+      <%@ include file="common/nav.jsp" %>
       <div class="content_mywish">
          <div class="dataInform_mywish">
             <div class="layoutSubbox_mywish">
-               <div class="tit2_mywish">나의 찜상품</div>
+               <div class="tit2_mywish">나의 관심상품</div>
                <!-- 상품 목록 리스트 start!! -->
                <!-- 상품 1 -->
                <div class="pOrderSearch_mywish">
@@ -223,6 +224,7 @@
             </div>
          </div>
       </div>
-      <iframe src="footer.html" frameborder="0" style="width: 100%; height: 220px;"></iframe>
+      <!-- footer 영역 -->
+      <%@ include file="../../common/footer.jsp" %>
    </body>
 </html>

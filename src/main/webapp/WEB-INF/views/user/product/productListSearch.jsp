@@ -214,6 +214,9 @@
       </style>
    </head>
    <body>
+   
+   	  <%@ include file="../../common/header.jsp" %>
+   
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
             <h2 class="font_jua">홈&nbsp;&nbsp; > &nbsp;&nbsp;웹개발</h2>
@@ -609,6 +612,9 @@
             </ul>
          </nav>
       </div>
+      
+      <%@ include file="../../common/footer.jsp" %>
+      
       <script>
          $(function(){
          

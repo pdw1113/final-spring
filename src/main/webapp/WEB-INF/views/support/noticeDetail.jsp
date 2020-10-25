@@ -14,7 +14,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       <style type="text/css">
          /* jua 폰트 */
-         .font_jua {
+         .font_jua {  
          font-family: 'Jua', sans-serif;
          color: black;
          }
@@ -126,8 +126,8 @@
       </style>
    </head>
    <body>
-      <iframe class="headiframe" src="Mainhead.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 65px;"></iframe>
-      <iframe class="headiframe" src="customercenter.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 181px;"></iframe>
+   	<%@ include file="../common/header.jsp" %>
+	<%@ include file="common/nav.jsp" %>
       <div class="notice_container">
          <div class="title_area">
             <h4 class="title_text">
@@ -159,6 +159,6 @@
             </div>
          </div>
       </div>
-      <iframe src="footer.html" frameborder="0" scrolling="no" data-link="#header"  style="width: 100%; height: 203px;"></iframe>
+      <%@ include file="../common/footer.jsp" %>
    </body>
 </html>
