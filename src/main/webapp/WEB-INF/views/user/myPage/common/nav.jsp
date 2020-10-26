@@ -100,7 +100,7 @@
          /* 사이드 여백 */
          .contain_mynav {
          width: auto;
-         margin: 0 20px;
+         margin: 0 20px; 
          }
          }
       </style>
