@@ -187,8 +187,8 @@
          border-bottom: 1px solid  #E2E2E2;
          letter-spacing: 0.15rem;
          }
-         /*table-td*/
-         #refundList-table > tbody > tr > td{
+         /*bottom-td*/
+         .table > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom-td1{
@@ -266,7 +266,7 @@
                <div class="font_jua top-title">
                   <h2>주문 검색</h2>
                </div>
-               <table class="table table-bordered top-table table-condensed table-hove" id="refundList-table">
+               <table class="table table-bordered top-table table-condensed table-hove">
                   <tr>
                      <td class="first-td">
                         <p class="font_jua top-table-p" id="top-table-p">등급</p>
@@ -323,7 +323,7 @@
                <button type="submit" class="font_jua top-btn">검색</button>
             </div>
             <div class="payment-main-bottom">
-               <table class="table table-hover table-condensed font_jua botto" id="refundList-table">
+               <table class="table table-hover table-condensed font_jua botto" id="bottom-tabel">
                   <thead class="bottom-table-thead">
                      <tr>
                         <th class="bottom-td1">번호</th>

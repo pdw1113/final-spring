@@ -187,8 +187,8 @@
          border-bottom: 1px solid  #E2E2E2;
          letter-spacing: 0.15rem;
          }
-         /*table-td*/
-         #pay-table > tbody > tr > td{
+         /*bottom-td*/
+         .table > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom-td1{
@@ -234,10 +234,6 @@
          height: 3.6rem;
          width: 8.6rem;
          }
-         /*tr 마우스커서*/
-         .buy-tr{
-         cursor: pointer;
-         }
          /*페이징 처리*/
          #byPage{
          display: block;
@@ -266,7 +262,7 @@
                <div class="font_jua top-title">
                   <h2>주문 검색</h2>
                </div>
-               <table class="table table-bordered top-table table-condensed" id="pay-table">
+               <table class="table table-bordered top-table table-condensed">
                   <tr>
                      <td class="first-td">
                         <p class="font_jua top-table-p" id="top-table-p">등급</p>
@@ -323,7 +319,7 @@
                <button type="submit" class="font_jua top-btn">검색</button>
             </div>
             <div class="payment-main-bottom">
-               <table class="table table-hover table-condensed font_jua botto" id="pay-table">
+               <table class="table table-hover table-condensed font_jua botto" id="bottom-tabel">
                   <thead class="bottom-table-thead">
                      <tr>
                         <th class="bottom-td1">번호</th>
@@ -336,7 +332,7 @@
                         <th class="bottom-td8">결제방식</th>
                      </tr>
                   </thead>
-                  <tr class="buy-tr">
+                  <tr>
                      <td class="bottom-td1">1</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -348,7 +344,7 @@
                      <td class="bottom-td7"><span>384,000원</span></td>
                      <td class="bottom-td8"><span>카카오뱅크</span></td>
                   </tr>
-                  <tr class="buy-tr">
+                  <tr>
                      <td class="bottom-td1">2</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -360,7 +356,7 @@
                      <td class="bottom-td7"><span>384,000원</span></td>
                      <td class="bottom-td8"><span>카카오뱅크</span></td>
                   </tr>
-                  <tr class="buy-tr">
+                  <tr>
                      <td class="bottom-td1">3</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -397,9 +393,7 @@
       </div>
       <script>
          $(function(){
-        	 $('.buy-tr').on('click',function(){
-          		location.href = "mPayBuyDetail.do"
-          	});
+         
          })
       </script>
    </body>

@@ -87,7 +87,6 @@
          /*테이블의 첫번째 td*/
          .first-td{
          width: 25rem;
-         background-color : #F5F5F5;
          }
          /*글자크기*/
          .first-table-p{
@@ -118,10 +117,7 @@
          letter-spacing: 0.15rem;
          }
          /*bottom-td*/
-         #bottom-tabel > tbody > tr > td{
-         vertical-align: middle;
-         }
-         #table03 > tbody > tr > td{
+         .table > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom03-td1{
@@ -195,7 +191,7 @@
                </div>
                <table class="table table-bordered top-table table-condensed" id="table03">
                   <tr>
-                     <td class="first-td">
+                     <td class="active first-td">
                         <p class="font_jua first-table-p">주문금액</p>
                      </td>
                      <td class="second-td">
@@ -209,7 +205,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="first-td">
+                     <td class="active first-td">
                         <p class="font_jua first-table-p">할인금액</p>
                      </td>
                      <td class="second-td">
@@ -223,7 +219,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="first-td" id="first-td-3">
+                     <td class="active first-td" id="first-td-3">
                         <p class="font_jua first-table-p">총결제금액</p>
                      </td>
                      <td class="second-td" id="second-td-3">
