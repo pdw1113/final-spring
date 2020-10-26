@@ -186,7 +186,6 @@
         <script>
             function emailCheck(){
                 var text = $(".e-mail_find_pw").val();
-       
                  if(text=="test@naver.com"){
                     $('#findPwd_o').modal().show();
                  }else{

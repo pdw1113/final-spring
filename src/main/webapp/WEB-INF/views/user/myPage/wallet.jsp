@@ -40,12 +40,6 @@
             width: 100%;
             overflow: hidden;
         }
-
-        a {
-            color: #a7a7a7;
-            text-decoration: none;
-        }
-
         
         /* 보유니즈머니 정보 */
         .mypage_myPage_money .hTitle_myPage_money { /* 보유니즈머니 글씨 */
@@ -145,6 +139,8 @@
             border: 1px #dfdfdf solid;
             border-radius: 50px;
             text-align: center;
+            color: #a7a7a7;
+            text-decoration: none;
         }
 
         .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money span {
@@ -500,6 +496,8 @@
                 right: auto;
                 top: 0;
                 width: 100%;
+                color: #a7a7a7;
+            	text-decoration: none;
             }
             .cashRtxt_myPage_money ul li {
                 font-size: 12px;
