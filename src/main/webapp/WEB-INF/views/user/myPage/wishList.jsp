@@ -16,6 +16,10 @@
          padding: 0;
          margin: 0;
          }
+         h2 {
+         text-align: center;
+         font-family: jua;
+         }
          ul,
          li {
          list-style: none;
