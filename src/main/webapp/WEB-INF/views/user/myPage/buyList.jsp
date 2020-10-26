@@ -194,6 +194,15 @@
          color: white;
          outline: none;
          }
+         
+         .space_mybuylist{
+         	width: 23px;
+            font-size: 15px;
+            color: #6c6d70;
+            font-weight: 300;
+            line-height: 38px;
+            text-align: center;
+         }
          /* 반응형~ */
          @media (max-width: 1360px) {
          /* 사이드 여백 */
@@ -219,15 +228,15 @@
                      <div class="select_mybuylist">
                         <select class="bdbox_mybuylist">
                            <option value="0">전체</option>
-                           <option value="2">환불요청중</option>
-                           <option value="3">환불완료</option>
+                           <option value="1">환불요청중</option>
+                           <option value="2">환불완료</option>
                         </select>
                      </div>
                      <!-- 달력 -->
                      <div class="date_mybuylist">
-                        <input type="date" name="" id="">
-                         <span>~</span> 
-                        <input type="date" name="" id="">
+                        <input type="date" name="" id="datepre_mybuylist">
+                         <div class="space_mybuylist">~</div>
+                        <input type="date" name="" id="datepost_mybuylist">
                      </div>
                      <!-- 검색 오늘 / 1주일 / 1개월 / 6개월 선택시 자동으로 datePicker에 입력되게 구현 필요 -->
                      <div class="period_mybuylist">
@@ -312,8 +321,15 @@
       <script>
          $('.choice_mybuylist').click(function(){
              $('.choice_mybuylist').css('background-color',"#ddd");
-             $(this).css('background','rgb(250,190,0);');
+             $(this).css('background','rgb(250,190,0)');
          });
+         
+         $('.btn_search_mybuylist').click(function(){
+        	 var date = $('#datepre_mybuylist').val();
+        	 console.log(date);
+         });
+         
+         
          
       </script>
       <!-- footer 영역 -->
