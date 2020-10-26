@@ -236,7 +236,7 @@
             </div>
          </div>
          <div class="input_div_addproduct">
-            <!-- 제목 -->
+            <!-- 제목  -->
             <div class="status_div_addproduct">
                <span class="input_title_addproduct">상품명 (한 줄 제목)</span> 
                <input type="text" placeholder="제목 입력" class="input_text_addproduct">
