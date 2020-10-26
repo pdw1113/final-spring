@@ -106,7 +106,7 @@
          text-align: right;
          }
          /*글자 수직중앙*/
-         .table>tbody>tr>td{
+         #table03>tbody>tr>td{
          vertical-align: middle;
          border-bottom: 1px solid #ddd;
          }
@@ -117,9 +117,6 @@
          #bottom-tabel{
          border-bottom: 1px solid  #E2E2E2;
          letter-spacing: 0.15rem;
-         }
-         /*bottom-td*/
-         .table > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom03-td1{
@@ -149,8 +146,9 @@
          color: gray;
          }
          /*환불사유 테이블*/
-         #lastTable03{
+         #lastTable03>tbody>tr>td{
          height: 25rem;
+         vertical-align: middle;
          }
          .btn03-div{
          text-align: center;
@@ -213,7 +211,7 @@
                <div class="font_jua top-title">
                   <h2>결제 정보<span class="font_jua num03">(주문번호 123123123)</span></h2>
                </div>
-               <table class="table table-bordered top-table table-condensed" id="table03">
+               <table class="refund_table table table-bordered top-table table-condensed" id="table03">
                   <tr>
                      <td class="first-td">
                         <p class="font_jua first-table-p">주문금액</p>
