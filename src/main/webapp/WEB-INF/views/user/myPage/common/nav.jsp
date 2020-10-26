@@ -29,6 +29,7 @@
          z-index: 222;
          }
          .a_mynav{
+         	color: black;
          	text-decoration:none;
          }
          .a_mynav:link{

@@ -325,7 +325,8 @@
          });
          
          $('.btn_search_mybuylist').click(function(){
-        	 
+        	 var date = $('#datepre_mybuylist').val();
+        	 console.log(date);
          });
          
          

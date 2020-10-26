@@ -126,7 +126,7 @@
             
             <!-- Button to Open the Modal -->
             <div class="button_login">
-                <div type="button" class="login_button_login" data-toggle="modal" onclick="emailCheck();">
+                <div type="button" class="login_button_login" data-toggle="modal" onclick="location.href='changePwd.do';">
                     비밀번호 변경 URL 전송
                 </div>
             </div>
