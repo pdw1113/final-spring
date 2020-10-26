@@ -40,12 +40,6 @@
             width: 100%;
             overflow: hidden;
         }
-
-        a {
-            color: #a7a7a7;
-            text-decoration: none;
-        }
-
         
         /* 보유니즈머니 정보 */
         .mypage_myPage_money .hTitle_myPage_money { /* 보유니즈머니 글씨 */
@@ -145,6 +139,8 @@
             border: 1px #dfdfdf solid;
             border-radius: 50px;
             text-align: center;
+            color: #a7a7a7;
+            text-decoration: none;
         }
 
         .accountWrap_myPage_money .cashInfo_myPage_money ul li .chargeBtn_myPage_money span {
@@ -176,7 +172,7 @@
             overflow: hidden;
         }
 
-        table {
+        .table_myPage_money {
             width: 100%;
             border-collapse: collapse;
             border-spacing: 0;
@@ -184,26 +180,18 @@
             word-break: break-all;
         }
 
-        colgroup {
-            display: table-column-group;
-        }
-
-        col {
-            display: table-column;
-        }
-
-        .cashTable_myPage_money table thead {
+        .cashTable_myPage_money .table_myPage_money thead {
             border-top: 1px solid #272d32;
         }
 
-        .cashTable_myPage_money table thead tr th {
+        .cashTable_myPage_money .table_myPage_money thead tr th {
             border-bottom: 1px #e5e5e5 solid;
             border-left: 1px #e5e5e5 solid;
             border-right: 1px #e5e5e5 solid;
             padding: 21px 0;
         }
 
-        .cashTable_myPage_money table tbody td{
+        .cashTable_myPage_money .table_myPage_money tbody td{
             font-size: 14px;
             text-align: center;
         }
@@ -468,10 +456,10 @@
                 font-size: 14px;
                 padding: 30px 0 10px 0;
             }
-            .cashTable_myPage_money table thead tr th {
+            .cashTable_myPage_money .table_myPage_money thead tr th {
                 padding: 12px 0;
             }
-            .cashTable_myPage_money table thead tr th span {
+            .cashTable_myPage_money .table_myPage_money thead tr th span {
                 font-size: 13px;
             }
             .pagingArea_myPage_money.mto_myPage_money {
@@ -508,6 +496,8 @@
                 right: auto;
                 top: 0;
                 width: 100%;
+                color: #a7a7a7;
+            	text-decoration: none;
             }
             .cashRtxt_myPage_money ul li {
                 font-size: 12px;
@@ -537,7 +527,7 @@
                             <li>
                                 <div class="stit_myPage_money">보유니즈머니</div>
                                 <div class="won_myPage_money">0<span>원</span></div>
-                                <a href="#" class="chargeBtn_myPage_money"><span>충전하기</span></a>
+                                <a href="charge.do" class="chargeBtn_myPage_money"><span>충전하기</span></a>
                             </li>
                         </ul>
                     </div>
@@ -546,7 +536,7 @@
                     <div class="awTit_myPage_money">보유니즈머니 내역</div>
                     <span class="more_myPage_money">더보기</span>
                     <div class="cashTable_myPage_money">
-                        <table>
+                        <table class="table_myPage_money">
                             <colgroup>
                                 <col>
                                 <col>

@@ -17,19 +17,12 @@
          padding: 0;
          margin: 0;
          }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
          /* 전체 div */
          .content_myleave {
          width: 100%;
          min-height: 368px;
          overflow: hidden;
+         margin-top:40px;
          }
          .dataInform_myleave {
          width: 696px;
@@ -160,6 +153,8 @@
          border-radius: 10px;
          margin: 60px 0 0 0;
          overflow: hidden;
+         text-align: center;
+         font-family: jua;
          }
          .pdBtn_myleave a {
          text-decoration: none;
@@ -221,6 +216,7 @@
                            value="기타"><label for="s_reason06" class="label"><span></span>기타</label></div>
                      </li>
                   </ul>
+                  <!-- 기타 버튼 누를 시 생성 -->
                   <ul class="directInput_myleave"><input type="text" name="user_leave_memo" id="user_leave_memo"
                      placeholder="직접 입력"></ul>
                </div>
