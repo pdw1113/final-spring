@@ -19,7 +19,7 @@
          margin: 0px;
          padding:0px;
          }
-         h1 {
+         .h1_mynav {
          background: white;
          font-size:2.4rem;
          text-align: center;
@@ -28,9 +28,14 @@
          width:100%;
          z-index: 222;
          }
-         a {
-         font-size: 1em;
+         .a_mynav{
+         	color: black;
+         	text-decoration:none;
          }
+         .a_mynav:link{
+         	color: #ffff;
+         }
+
          /* 주메뉴 */
          .container_mynav{
          background-color: #ffff;
@@ -95,29 +100,29 @@
          /* 사이드 여백 */
          .contain_mynav {
          width: auto;
-         margin: 0 20px;
+         margin: 0 20px; 
          }
          }
       </style>
    </head>
    <body>
       <nav class="contain_mynav">
-         <h1>마이페이지</h1>
+         <h1 class="h1_mynav">마이페이지</h1>
          <ul class="container_mynav">
             <li>
                계정설정 <i class="fa fa-caret-down"></i>
                <ul>
-                  <li><a href="profile.do">프로필</a></li>
-                  <li><a href="wallet.do">보유 니즈머니</a></li>
-                  <li><a href="modifyPwd.do">비밀번호 변경</a></li>
-                  <li><a href="deleteUser.do">회원탈퇴</a></li>
+                  <li><a class="a_mynav" href="profile.do">프로필</a></li>
+                  <li><a class="a_mynav" href="wallet.do">보유 니즈머니</a></li>
+                  <li><a class="a_mynav" href="modifyPwd.do">비밀번호 변경</a></li>
+                  <li><a class="a_mynav" href="deleteUser.do">회원탈퇴</a></li>
                </ul>
             </li>
             <li>
                구매정보 <i class="fa fa-caret-down"></i>
                <ul>
-                  <li><a href="wishList.do">관심상품</a></li>
-                  <li><a href="buyList.do">구매내역</a></li>
+                  <li><a class="a_mynav" href="wishList.do">관심상품</a></li>
+                  <li><a class="a_mynav" href="buyList.do">구매내역</a></li>
                </ul>
             </li>
          </ul>
