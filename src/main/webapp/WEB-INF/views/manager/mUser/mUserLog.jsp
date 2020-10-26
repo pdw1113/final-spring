@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -11,7 +11,7 @@
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-       <!--제이쿼리CDN-->
+      <!--제이쿼리CDN-->
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
       <title>Document</title>
       <style>
@@ -267,17 +267,26 @@
          margin-left: 14px;
          }
          .dateform_PersnalAccess{
-            font-size: 18px;
-            font-family: sans-serif;
-            height:27px;
-            margin-right:15px;
-            margin-left:9px;
+         font-size: 18px;
+         font-family: sans-serif;
+         height:27px;
+         margin-right:15px;
+         margin-left:9px;
          }
-
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
       </style>
    </head>
    <body>
- 	<div class="header">
+      <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">

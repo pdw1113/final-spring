@@ -147,14 +147,24 @@
          input:focus {
          outline: none;
          }
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
       </style>
    </head>
    <body>
       <div class="header">
-      	<%@ include file="../../common/header.jsp" %>
+         <%@ include file="../../common/header.jsp" %>
       </div>
       <div class="left-bar">
-      	<%@ include file="../common/mLeftBar.jsp" %>
+         <%@ include file="../common/mLeftBar.jsp" %>
       </div>
       <div class="section">
          <!-- 관리자 카테고리 및 제목  -->

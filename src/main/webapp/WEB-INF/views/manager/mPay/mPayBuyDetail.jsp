@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -87,6 +87,7 @@
          /*테이블의 첫번째 td*/
          .first-td{
          width: 25rem;
+         background-color : #F5F5F5;
          }
          /*글자크기*/
          .first-table-p{
@@ -117,7 +118,10 @@
          letter-spacing: 0.15rem;
          }
          /*bottom-td*/
-         .table > tbody > tr > td{
+         #bottom-tabel > tbody > tr > td{
+         vertical-align: middle;
+         }
+         #table03 > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom03-td1{
@@ -160,6 +164,16 @@
          margin: 0 20px;
          }
          }
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
       </style>
    </head>
    <body>
@@ -181,7 +195,7 @@
                </div>
                <table class="table table-bordered top-table table-condensed" id="table03">
                   <tr>
-                     <td class="active first-td">
+                     <td class="first-td">
                         <p class="font_jua first-table-p">주문금액</p>
                      </td>
                      <td class="second-td">
@@ -195,7 +209,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="active first-td">
+                     <td class="first-td">
                         <p class="font_jua first-table-p">할인금액</p>
                      </td>
                      <td class="second-td">
@@ -209,7 +223,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <td class="active first-td" id="first-td-3">
+                     <td class="first-td" id="first-td-3">
                         <p class="font_jua first-table-p">총결제금액</p>
                      </td>
                      <td class="second-td" id="second-td-3">

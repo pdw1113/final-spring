@@ -112,7 +112,7 @@
       <ul class="font_jua Admin-leftbar">
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">통계</a>
-            <a href="mStatistics.do">통계</a>
+            <a href="mStatistics.do" class="Admin-Atag">통계</a>
          </li>
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">회원 관리</a>

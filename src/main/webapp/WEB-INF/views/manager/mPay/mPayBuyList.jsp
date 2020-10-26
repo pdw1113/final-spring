@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -187,8 +187,8 @@
          border-bottom: 1px solid  #E2E2E2;
          letter-spacing: 0.15rem;
          }
-         /*bottom-td*/
-         .table > tbody > tr > td{
+         /*table-td*/
+         #pay-table > tbody > tr > td{
          vertical-align: middle;
          }
          .bottom-td1{
@@ -210,14 +210,6 @@
          .bottom-table-thead{
          background-color: #E2E2E2;
          }
-         /*페이지네이션*/
-         .pagination{
-         display: block;
-         text-align: center;
-         }
-         .pagination > li > a{
-         float: none;
-         }
          /*table-input*/
          .table-input{
          margin-left: 10rem;
@@ -231,6 +223,29 @@
          width: auto;
          margin: 0 20px;
          }
+         }
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
+         /*tr 마우스커서*/
+         .buy-tr{
+         cursor: pointer;
+         }
+         /*페이징 처리*/
+         #byPage{
+         display: block;
+         text-align: center;
+         }
+         #byPage > li > a{
+         float: none;
+         margin-left : -0.5rem;
          }
       </style>
    </head>
@@ -251,7 +266,7 @@
                <div class="font_jua top-title">
                   <h2>주문 검색</h2>
                </div>
-               <table class="table table-bordered top-table table-condensed">
+               <table class="table table-bordered top-table table-condensed" id="pay-table">
                   <tr>
                      <td class="first-td">
                         <p class="font_jua top-table-p" id="top-table-p">등급</p>
@@ -308,7 +323,7 @@
                <button type="submit" class="font_jua top-btn">검색</button>
             </div>
             <div class="payment-main-bottom">
-               <table class="table table-hover table-condensed font_jua botto" id="bottom-tabel">
+               <table class="table table-hover table-condensed font_jua botto" id="pay-table">
                   <thead class="bottom-table-thead">
                      <tr>
                         <th class="bottom-td1">번호</th>
@@ -321,7 +336,7 @@
                         <th class="bottom-td8">결제방식</th>
                      </tr>
                   </thead>
-                  <tr>
+                  <tr class="buy-tr">
                      <td class="bottom-td1">1</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -333,7 +348,7 @@
                      <td class="bottom-td7"><span>384,000원</span></td>
                      <td class="bottom-td8"><span>카카오뱅크</span></td>
                   </tr>
-                  <tr>
+                  <tr class="buy-tr">
                      <td class="bottom-td1">2</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -345,7 +360,7 @@
                      <td class="bottom-td7"><span>384,000원</span></td>
                      <td class="bottom-td8"><span>카카오뱅크</span></td>
                   </tr>
-                  <tr>
+                  <tr class="buy-tr">
                      <td class="bottom-td1">3</td>
                      <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
                      <td class="bottom-td3"><span>test_id_2</span><br>
@@ -359,7 +374,7 @@
                   </tr>
                </table>
                <nav>
-                  <ul class="pagination">
+                  <ul class="pagination" id="byPage">
                      <li>
                         <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -382,7 +397,9 @@
       </div>
       <script>
          $(function(){
-         
+        	 $('.buy-tr').on('click',function(){
+          		location.href = "mPayBuyDetail.do"
+          	});
          })
       </script>
    </body>

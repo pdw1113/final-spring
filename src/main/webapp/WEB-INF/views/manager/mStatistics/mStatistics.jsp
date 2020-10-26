@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -64,16 +64,16 @@
          font-family: jua;
          font-size : 3rem;
          font-weight: 500;
-    	 line-height: 1.1;
-   		 color: inherit;
+         line-height: 1.1;
+         color: inherit;
          margin-top: 20px;
-    	 margin-bottom: 10px;
-		 }
-       	 .stat-li{
+         margin-bottom: 10px;
+         }
+         .stat-li{
          float: left;
-    	 width: 30%;
-    	 list-style: none;
-    	 border-left: 1px solid #ddd;
+         width: 30%;
+         list-style: none;
+         border-left: 1px solid #ddd;
          }
          /* 전체 div */
          .content_MemberManager {
@@ -230,7 +230,7 @@
          }
          /* 숫자 올라가는  */
          /* https://goddino.tistory.com/37 */
-        .stat-ul {
+         .stat-ul {
          width: 100%;
          color: #666;
          text-align: center;
@@ -238,7 +238,16 @@
          .stat-li:first-child {
          border-left: 0;
          }
-         
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         }
          /* 속도가 느린거 같으면 이걸로 */
          /* https://gahyun-web-diary.tistory.com/7 */   
       </style>
@@ -256,7 +265,7 @@
             <!-- <button style="position: absolute; top: 130px; left: 1750px;">저장</button>
                <div class="title_Managerheader">통계</div> -->
             <ul class="stat-ul">
-               <li class="stat-li"> 
+               <li class="stat-li">
                   <h2 class="number">1785</h2>
                   <i>Clients</i>
                </li>
@@ -272,14 +281,15 @@
          </div>
          <div class="box">
             <div class="box1">방문자수</div>
-            <div class="box2 box21">
+            <div class="box2">
                <%@ include file="mStatisticsGraph.jsp" %>
             </div>
          </div>
          <div class="box">
             <div class="box1">가입자수</div>
-            <div class="box2 box21">
-               <%@ include file="mStatisticsGraph.jsp" %>
+            <div class="box2">
+               <%@ include file="mStatisticsGraph2.jsp" %>
+               <%-- <%@ include file="../mPolicy/mPolicy.jsp" %> --%>
             </div>
          </div>
          <div class="box22">
