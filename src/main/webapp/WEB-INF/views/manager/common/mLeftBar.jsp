@@ -144,7 +144,7 @@
          var i;
          
          $(document).ready(function () {
-             $(".Admin-Atag").hide(); /* 아코디언 메뉴 숨기기*/
+             $(".Admin-Atag").hide(); /* 아코디언 메뉴 숨기기 */
              $(".Admin-fistAtag").eq(0).trigger("click");
          
          
