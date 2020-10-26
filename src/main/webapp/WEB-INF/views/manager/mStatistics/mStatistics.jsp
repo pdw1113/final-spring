@@ -22,8 +22,7 @@
          width: 100%;
          padding: 0;
          margin: 0;
-         z-index: 1;
-         background-color: white;
+
          }
          .header {
          width: 100%;
@@ -33,11 +32,14 @@
          .left-bar {
          float: left;
          width: 13%;
+         width:250px;
          height: 917px;
          border-right: 1px solid gainsboro;
          }
+
+         
          .section {
-         width: 87%;
+         width: 86%;
          float: left;
          height: 55.5rem;
          }
@@ -68,70 +70,17 @@
          color: inherit;
          margin-top: 20px;
          margin-bottom: 10px;
+         
          }
          .stat-li{
          float: left;
          width: 30%;
          list-style: none;
          border-left: 1px solid #ddd;
+         margin-left:25px;
          }
-         /* 전체 div */
-         .content_MemberManager {
-         width: 100%;
-         padding: 57px 0 125px 0;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .searchbox_MemberManager {
-         position: relative;
-         width: 1320px;
-         margin: 0 auto;
-         }
-         .content_MemberManager .layoutSubbox_MemberManager:after {
-         content: "";
-         display: block;
-         clear: both;
-         }
-         /* 달력 date-picker */
-         label {
-         margin-left: 20px;
-         }
-         .date {
-         width: 140px;
-         margin: 0 1px 10px 1px;
-         }
-         .date>span:hover {
-         cursor: pointer;
-         }
-         /* 비밀번호 입력 div */
-         .dataInform_MemberManager .inform_MemberManager {
-         width: 100%;
-         overflow: hidden;
-         }
-         /*검색버튼*/
-         .searchBtn_MemberManager {
-         margin: -3px 14px 0px 0;
-         padding-bottom: 8px;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager {
-         background-color: #ddd;
-         border: none;
-         color: black;
-         font-weight: 600;
-         padding: 16px 32px;
-         text-align: center;
-         font-size: 16px;
-         margin: 4px 2px;
-         transition: 0.3s;
-         }
-         .searchBtn_MemberManager .btn_search_MemberManager:hover {
-         background-color: #fabe00;
-         font-weight: 600;
-         color: white;
-         }
+         
+
          /* 회원 리스트 table */
          table.type07 {
          border-collapse: collapse;
@@ -179,11 +128,7 @@
          margin: 0 20px;
          } */
          }
-         table,
-         td {
-         text-align: center;
-         vertical-align: middle;
-         }
+
          .box {
          width: 750px;
          height: 380px;
@@ -250,12 +195,29 @@
          }
          /* 속도가 느린거 같으면 이걸로 */
          /* https://gahyun-web-diary.tistory.com/7 */   
+         .fontsize{
+         	font-size:13px;
+         }
+         
+         .noReact{
+         width: 1903px;
+         }
+         
+         .index_head_Mainhead{
+		 width: 1903px;	
+         }
+
+         
+         
       </style>
    </head>
    <body>
       <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
+      
+      <div class="noReact">
+      
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
       </div>
@@ -298,7 +260,7 @@
                <div class="layoutSubbox_MemberManager">
                   <table class="type07">
                      <thead>
-                        <tr>
+                        <tr class="fontsize">
                            <th scope="cols">순위</th>
                            <th scope="cols">조회수</th>
                            <th scope="cols">주문상품</th>
@@ -331,7 +293,7 @@
                <div class="layoutSubbox_MemberManager">
                   <table class="type07">
                      <thead>
-                        <tr>
+                        <tr class="fontsize">
                            <th scope="cols">순위</th>
                            <th scope="cols">상품</th>
                            <th scope="cols">닉네임</th>
@@ -359,6 +321,7 @@
             </div>
          </div>
       </div>
+     </div> 
       <script>
          $(function () {
              var count0 = count1 = count2 = 0;

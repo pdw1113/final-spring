@@ -430,6 +430,14 @@
         .dateWidth {
             left: 70px;
         }
+        
+         .noReact{
+         width: 1903px;
+         }
+         
+         .index_head_Mainhead{
+		 width: 1903px;	
+         }
     </style>
 
 </head>
@@ -438,6 +446,8 @@
     <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
+      
+      <div class="noReact">
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
       </div>
@@ -616,6 +626,7 @@
                 <!-- <button class="saveButton">최종 저장</button> -->
             </div>
         </div>
+    </div>
     </div>
     <script>
         let input1 = [];
