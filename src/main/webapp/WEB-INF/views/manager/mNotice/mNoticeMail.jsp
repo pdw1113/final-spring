@@ -10,6 +10,7 @@
       <!-- 부가적인 테마 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
       <!-- include libraries(jQuery, bootstrap) -->
+
       <style>
          html,
          body {
@@ -58,19 +59,19 @@
          margin-top: 25px;
          margin-bottom: 20px;
          }
-         .input_recipient_mail {
+         .input_recipient_Mail {
          border: 1px solid rgb(177, 177, 177);
          margin-left: 20px;
          width: 80%;
          height: 30px;
          }
-         .input_title_mail {
+         .input_title_Mail {
          border: 1px solid rgb(177, 177, 177);
          margin-left: 58px;
          width: 80%;
          height: 30px;
          }
-         .address_mail {
+         .address_Mail {
          border: 1px solid rgb(177, 177, 177);
          height: 30px;
          margin-left: 20px;
@@ -107,12 +108,12 @@
          font-weight: 600;
          font-size: 20px;
          }
-         .searchemail_text_Mail {
+         .searcheMail_text_Mail {
          align-content: center;
          width: 50rem;
          height: 3rem;
          }
-         .searchemail_button_Mail {
+         .searcheMail_button_Mail {
          padding: 6px;
          margin-left: 5px;
          border: 1px solid gray;
@@ -132,11 +133,11 @@
          vertical-align: -3px;
          padding-right: 5px;
          }
-         .email_check_div_Mail {
+         .eMail_check_div_Mail {
          height: 500px;
          overflow: auto;
          }
-         .email_checkbox_div {
+         .eMail_checkbox_div {
          margin-top: 5px;
          }
          .chk_text_Mail{
@@ -146,8 +147,7 @@
          input:focus {
          outline: none;
          }
-              /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
-         .header div.login_box_Mainhead{
+            .header div.login_box_Mainhead{
          margin-top: 1.5rem;
          line-height: 3rem;
          margin-right: 0.3rem;
@@ -175,12 +175,12 @@
          </div>
          <!-- 받는사람 -->
          <div class="input_div_Mail">
-            <span class="title_Mail">받는사람</span><input type="text" class="input_recipient_mail">
-            <button class="address_mail" onclick="emailCheck();">주소록</button>
+            <span class="title_Mail">받는사람</span><input type="text" class="input_recipient_Mail">
+            <button class="address_Mail" onclick="eMailCheck();">주소록</button>
          </div>
          <!-- 메일제목 -->
          <div class="input_div_Mail">
-            <span class="title_Mail title">제목</span><input type="text" class="input_title_mail">
+            <span class="title_Mail title">제목</span><input type="text" class="input_title_Mail">
          </div>
          <!-- 메일 내용 썸머노트 -->
          <div class="content_Mail">
@@ -202,42 +202,42 @@
                </div>
                <!-- 모달 바디 -->
                <div class="modal-body">
-                  <div class="searchemail_div_Mail"><input type="text" class="searchemail_text_Mail"
-                     placeholder="E-MAIL을 입력하세요"><span class="searchemail_button_Mail">검색</span></div>
+                  <div class="searcheMail_div_Mail"><input type="text" class="searcheMail_text_Mail"
+                     placeholder="E-Mail을 입력하세요"><span class="searcheMail_button_Mail">검색</span></div>
                   <!-- 이메일 전체검색 -->
                   <div class="all_check_div_Mail"><input type="checkbox" class="checkbox_Mail" id="allcheck_Mail"><span class="chk_text_Mail">이메일 전체선택</span></div>
                   <!-- 이메일 목록 -->
-                  <div class="email_check_div_Mail">
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
-                     <div class="email_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="useremail_Mail">cdm1234@gmail.com</span>)</div>
+                  <div class="eMail_check_div_Mail">
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
+                     <div class="eMail_checkbox_div"><input type="checkbox" class="checkbox_Mail"><span class="chk_text_Mail">"천동민"</span> (<span id="usereMail_Mail">cdm1234@gMail.com</span>)</div>
                   </div>
                </div>
                <!-- 모달 풋터 -->
@@ -251,7 +251,7 @@
       </div>
       <script>
          // 모달 팝업 띄우기
-         function emailCheck() {
+         function eMailCheck() {
              $('#findadress_Mail').modal().show();
          }
          
