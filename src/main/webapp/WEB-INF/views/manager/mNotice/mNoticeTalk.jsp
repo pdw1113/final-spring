@@ -10,19 +10,19 @@
    <style>
       .header {
       width: 100%;
-      height: 6.2rem;
+      height: 6.5rem;
       /* background-color: aqua; */
       }
       .left-bar {
       float: left;
       width: 13%;
-      height: 917px;
+      height: 100vh;
       border-right: 1px solid gainsboro;
       }
       .section {
       width: 87%;
       float: left;
-      height: 55.5rem;
+      height: 100vh;
       }
       /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
       .header div.login_box_Mainhead{
