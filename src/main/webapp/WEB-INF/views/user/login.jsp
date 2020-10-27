@@ -46,18 +46,41 @@
          }
          /* ID찾기 PWD찾기 로그인 버튼 */
          .login_button_login{
-         float:left;
-         width: 105px;
-         height: 40px;
-         text-align: center;
-         line-height: 45px;
-         margin-left: 10px;
-         border-radius: 15px;
-         font-size: 25px;
-         border-radius: 7px 7px 7px 7px;
-         color: white;
-         background-color: #fabe00;
-         font-family: jua;
+            float:left;
+            width: 105px;
+            height: 40px;
+            text-align: center;
+            line-height: 45px;
+            margin-left: 10px;
+            border-radius: 15px;
+            font-size: 25px;
+            border-radius: 7px 7px 7px 7px;
+            color: white;
+            background-color: #fabe00;
+            font-family: jua;
+            width: 130px;
+         }
+
+         .login_button_form{
+            float:left;
+            width: 105px;
+            height: 40px;
+            text-align: center;
+            line-height: 45px;
+            margin-left: 10px;
+            border-radius: 15px;
+            font-size: 25px;
+            border-radius: 7px 7px 7px 7px;
+            color: white;
+            background-color: #fabe00;
+            font-family: jua;
+            outline: 0;
+            border: none;
+            float: right; 
+            margin-right: 30px;
+         }
+         .login_button_form:hover{
+             cursor: pointer;
          }
          /* 카카오톡으로 로그인 */
          .kakao_login{
@@ -83,47 +106,69 @@
          }
          /*인풋 창 검은줄 없애기*/
          input:focus { outline:none; }
+
+         .img_css_1{
+            width: 38px; 
+            margin-top: 15px; 
+            margin-left: 78px;
+         }
+
+         .img_css_2{
+            width: 38px; 
+            margin-top: 15px; 
+            margin-left: 65px;
+         }
+
+         .span_kakao{
+            display: table-cell;
+            padding-left: 10px;
+            text-align: left;
+            vertical-align: middle;
+         }
+
+         .span_naver{
+            display: table-cell;
+            padding-left: 10px;
+            text-align: left;
+            vertical-align: middle;
+         }
       </style>
    </head>
    <body>
       <%@ include file="../common/header.jsp" %>
+      <form action="login.do" method="post">
       <!-- 가장 바깥에 있는 로그인 창 틀 -->
       <div class="loginbox_login">
          <!-- 로그인 이미지 -->
          <img  class="login_img_login" src="./resources/img/Login_logo.png">
          <!-- 아이디 비번 입력폼 -->
-         <input class="login_input_login" type="text" placeholder="E-MAIL을 입력하세요">
-         <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요">
+         <input class="login_input_login" type="text" placeholder="E-MAIL을 입력하세요" name="id">
+         <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요" name="pwd">
          <!-- 버튼폼 -->
          <div class="button_login">
             <a href="findPwd.do">
-               <div class="login_button_login" style="width: 130px;">PWD 찾기</div>
+               <div class="login_button_login">PWD 찾기</div>
             </a>
-            <a href="#">
-               <div class="login_button_login" style="float: right; margin-right: 30px;">로그인</div>
-            </a>
+            <span>
+               <button class="login_button_form">로그인</button>
+            <span>
          </div>
          <!-- 카톡로그인 -->
          <a href="#">
             <div class="kakao_login">
-               <img src="./resources/img/kakaotalk_login_img.png" style="width: 38px; margin-top: 15px; margin-left: 78px;"/>
-               <span style="display: table-cell;
-                  padding-left: 10px;
-                  text-align: left;
-                  vertical-align: middle;">카카오톡으로 로그인</span>
+               <img src="./resources/img/kakaotalk_login_img.png" class="img_css_1">
+               <span class="span_kakao">카카오톡으로 로그인</span>
             </div>
          </a>
          <!-- 네이버 로그인 -->
          <a href="#">
             <div class="naver_login">
-               <img src="./resources/img/naver_login_img.png" style="width: 38px; margin-top: 15px; margin-left: 65px;"> 
-               <span style="display: table-cell;
-                  padding-left: 10px;
-                  text-align: left;
-                  vertical-align: middle;">네이버로 로그인</span>
+               <img src="./resources/img/naver_login_img.png" class="img_css_2"> 
+               <span class="span_naver">네이버로 로그인</span>
             </div>
-      </div>
-      </a>
+	      </div>
+	      </a>
+      </form>
       <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

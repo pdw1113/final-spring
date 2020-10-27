@@ -2,6 +2,8 @@ package com.fp.neezit.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserContoller {
@@ -60,6 +62,35 @@ public class UserContoller {
 	public String buyList() {
 		return "user/myPage/buyList";
 	}
+	
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public String memberLogin(@RequestParam("id") String id,
+							  @RequestParam("pwd") String pwd) {
+		
+		System.out.println("ID : " + id);
+		System.out.println("PWD : " + pwd);
+		
+		return "index";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

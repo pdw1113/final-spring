@@ -4,9 +4,14 @@
    <head>
       <meta charset="UTF-8">
       <title>Slide Project</title>
+      <!-- font -->
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+      
+      <!-- JQuery -->
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="resources/js/typeit.min.js"></script>
       <style>
          html, body { padding: 0; margin: 0; width:100%; height:100%}
          *, *:before, *:after { box-sizing: inherit; }
@@ -38,7 +43,7 @@
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="WEB-INF/views/common/header.jsp" %>
+      <%@ include file="common/header.jsp" %>
       <!-- 슬라이드 영역 -->
       <div id="container">
          <div class="slide_wrap">
@@ -86,10 +91,10 @@
             <ul class="slide_pagination"></ul>
          </div>
       </div>
-      <%@ include file="WEB-INF/views/common/nav.jsp" %>
-      <%@ include file="WEB-INF/views/common/section.jsp" %>
-      <%@ include file="WEB-INF/views/common/footer.jsp" %>
-      <%@ include file="WEB-INF/views/common/talk.jsp" %>
+      <%@ include file="common/nav.jsp" %>
+      <%@ include file="common/section.jsp" %>
+      <%@ include file="common/footer.jsp" %>
+      <%@ include file="common/talk.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom
@@ -217,6 +222,5 @@
            });
          })();
       </script>
-      <script type="text/javascript" src="resources/js/typeit.min.js"></script>
    </body>
 </html>
