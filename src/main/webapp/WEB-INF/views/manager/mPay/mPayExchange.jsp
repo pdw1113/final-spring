@@ -82,6 +82,9 @@
          border-top: 2px solid #e2e2e2;
          font-size: large;
          }
+         #table04>tbody>tr>td{
+         vertical-align: middle;
+         }
          .btn04-div04{
          text-align: center;
          letter-spacing: 5rem;
@@ -225,6 +228,16 @@
                }else{
                 $(".checkbox04").prop("checked", false);
                }
+            })
+            
+            $('.btn04').on('click',function(){
+            	let input = confirm('출금승인하시겠습니까?'); 
+            	alert(input);
+            	if(input){
+            		
+            	}else{
+            		return false;
+            	};
             })
          })
       </script>
