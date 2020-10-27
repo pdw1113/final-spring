@@ -5,7 +5,7 @@
       <meta charset="UTF-8">
       <title>Slide Project</title>
       <!-- font -->
-      <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
       
       <!-- JQuery -->
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -35,10 +35,10 @@
          .slide_pagination .dot.dot_active { background: #333; }
          .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
          /* 인피니티 능력자들 타이틀 */
-         .slide_p{ font-family: 'Black Han Sans'; color : rgb(250,190,0); font-size: 20px; margin :10px 10px 10px; }
+         .slide_p{ font-family: 'Noto Sans KR', sans-serif; color : rgb(250,190,0); font-size: 20px; margin :10px 10px 10px; }
          .slide_grade_Nav{ width: 20px; height: 33px;}
          /* 슬라이드 폰트 */
-         .type_text1 { font-family: 'Black Han Sans', sans-serif; top: 0px; left: 0px; position: relative; width:400px; height:400px;}
+         .type_text1 { font-family: 'Noto Sans KR', sans-serif; top: 0px; left: 0px; position: relative; width:400px; height:400px;}
       </style>
    </head>
    <body>
