@@ -63,6 +63,16 @@ public class UserContoller {
 		return "user/myPage/buyList";
 	}
 	
+	@RequestMapping("charge.do")
+	public String charge() {
+		return "user/myPage/charge";
+	}
+	
+	@RequestMapping("walletDetail.do")
+	public String walletDetail() {
+		return "user/myPage/walletDetail";
+	}
+	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam("id") String id,
 							  @RequestParam("pwd") String pwd) {
@@ -72,26 +82,5 @@ public class UserContoller {
 		
 		return "index";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

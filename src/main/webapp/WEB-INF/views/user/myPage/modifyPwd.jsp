@@ -14,20 +14,14 @@
          padding: 0;
          margin: 0;
          }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul, li {
-         list-style: none;
-         }
          /* 전체 div */
          .content_myModifyPwd {
+         margin-top:40px;
          width: 100%;
          min-height: 368px;
          overflow: hidden;
          }
-         .dataInform_myleave {
+         .dataInform_myModifyPwd {
          width: 696px;
          margin: 0 auto;
          overflow: hidden;
@@ -44,11 +38,11 @@
          font-family: jua;
          }
          /* 비밀번호 입력 div */
-         .dataInform_myleave .inform_myleave {
+         .dataInform_myModifyPwd .inform_myModifyPwd {
          width: 100%;
          overflow: hidden;
          }
-         input[type='password'] {
+         .new_pw_myModifyPwd {
          width: 100%;
          height: 50px;
          font-size: 15px;
@@ -63,7 +57,8 @@
          border-radius: 10px;
          outline: none;
          }
-         .dataInform_myleave .inform_myModifyPwd ul li {
+         .dataInform_myModifyPwd .inform_myModifyPwd ul li {
+         list-style: none;
          display: block;
          margin: 0 0 18px 0;
          }
@@ -74,20 +69,20 @@
          font-size: 12px;
          }
          /* 비밀번호 일치 여부 */
-         .inform_myModifyPwd ul div.alert-danger{ /* 비밀번호 재확인 불일치 */
+         .inform_myModifyPwd ul div.alert-danger_myModifyPwd{ /* 비밀번호 재확인 불일치 */
          display: none;
          font-size: 12px;
          margin: -10px 8px;
          color:red;
          }
-         .inform_myModifyPwd ul div.alert-success{ /* 비밀번호 재확인 일치 */
+         .inform_myModifyPwd ul div.alert-success_myModifyPwd{ /* 비밀번호 재확인 일치 */
          display: none;
          font-size: 12px;
          margin: -10px 8px;
          color:#009BFA;
          }
          /* 비밀번호 변경 버튼 */
-         .pdBtn_myleave {
+         .pdBtn_myModifyPwd {
          display: table;
          width: 696px;
          height: 50px;
@@ -96,8 +91,10 @@
          margin: 60px 0 0 0;
          overflow: hidden;
          cursor: pointer;
+         text-align: center;
+         font-family: jua;
          }
-         .pdBtn_myleave a {
+         .pdBtn_myModifyPwd > a {
          text-decoration: none;
          color: white;
          vertical-align: middle;
@@ -111,26 +108,24 @@
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
       <%@ include file="../myPage/common/nav.jsp" %>
-      <form action="#" name="form1" id="form1" method="post">
+      <form action="#" name="form1" id="form1_myModifyPwd" method="post">
          <div class="content_myModifyPwd">
-            <div class="dataInform_myleave">
+            <div class="dataInform_myModifyPwd">
                <div class="tit2_myModifyPwd">비밀번호 변경</div>
                <div class="inform_myModifyPwd">
                   <ul>
-                     <li><input type="password" name="user_pw" id="user_pw" placeholder="기존 비밀번호를 입력해 주십시오."></li>
-                     <li><input type="password" class="new_pw" name="new_pw" id="pwd1" placeholder="변경할 비밀번호를 입력해 주십시오."></li>
+                     <li><input type="password" class="new_pw_myModifyPwd" name="user_pw" id="user_pw_myModifyPwd" placeholder="기존 비밀번호를 입력해 주십시오."></li>
+                     <li><input type="password" class="new_pw_myModifyPwd" name="new_pw" id="pwd1_myModifyPwd" placeholder="변경할 비밀번호를 입력해 주십시오."></li>
                      <!-- 정규표현식을 통해 일치한 해당 <span>태그에 color:#009BFA 으로 변화 -->
-                     <p class="guid_my_modifyPwd">※ 비밀번호는 <span>최소 8자리 이상,</span> <span>영문+숫자 조합이며,</span> <span>특수기호 1개 이상</span> 입력하셔야 합니다.</p>
+                     <p class="guid_my_modifyPwd">※ 비밀번호는 <span>최소 8자리 이상,</span> <span>영문+숫자 조합이며,</span><span>특수기호 1개 이상</span> 입력하셔야 합니다.</p>
                      <!-- 정규표현식에 맞으면 활성화 되는 기능 필요...(정규표현식할 때 구현) -->
-                     <li><input type="password" class="new_pw" name="re_pw" id="pwd2" placeholder="변경할 비밀번호를 한번 더 입력해 주십시오."></li>
-                     <div class="alert alert-success" id="alert-success">※ 비밀번호 확인이 완료되었습니다.</div>
-                     <div class="alert alert-danger" id="alert-danger">※ 비밀번호가 맞지 않습니다.</div>
+                     <li><input type="password" class="new_pw_myModifyPwd" name="re_pw" id="pwd2_myModifyPwd" placeholder="변경할 비밀번호를 한번 더 입력해 주십시오."></li>
+                     <div class="alert-success_myModifyPwd" id="alert-success_myModifyPwd">※ 비밀번호 확인이 완료되었습니다.</div>
+                     <div class="alert-danger_myModifyPwd" id="alert-danger_myModifyPwd">※ 비밀번호가 맞지 않습니다.</div>
                   </ul>
                </div>
-               <div type="button" class="pdBtn_myleave" id="submit_myModifyPwd">
-                  <a href="#">
-                     <h2>비밀번호 변경</h2>
-                  </a>
+               <div class="pdBtn_myModifyPwd" id="submit_myModifyPwd">
+                  <h2>비밀번호 변경</h2>
                </div>
             </div>
          </div>
@@ -149,24 +144,24 @@
          
          // 비밀번호 재확인 일치 여부
          $(document).ready(function () {
-             $('#alert-success').hide();
-             $('#alert-danger').hide();
+             $('#alert-success_myModifyPwd').hide();
+             $('#alert-danger_myModifyPwd').hide();
          
              // inform_myModifyPwd div에서 del키나 백스페이스를 누르고 떼어냈을 시 체크,
              $('.inform_myModifyPwd').keyup(function (event) {
                  if (event.keyCode === 8 || event.keyCode === 46) {
-                     if ($("#pwd1").val() != $("#pwd2").val()) {
+                     if ($("#pwd1_myModifyPwd").val() != $("#pwd2_myModifyPwd").val()) {
                          notsame();
                      }
                  }
              });
          
              //  keyup() - 키보드에서 손을 떼어냈을때 실행됨
-             $(".new_pw").keyup(function (event) {
+             $(".new_pw_myModifyPwd").keyup(function (event) {
                  
                  // var user_pw == "DB에서 가져온 기존 비밀번호"
-                 pwd1 = $("#pwd1").val();
-                 pwd2 = $("#pwd2").val();
+                 pwd1 = $("#pwd1_myModifyPwd").val();
+                 pwd2 = $("#pwd2_myModifyPwd").val();
          
                  if (pwd1 != '' && pwd2 != '') {
                      if (pwd1 == pwd2) {
@@ -181,7 +176,7 @@
              // 기존 비밀번호 일치 여부 && 비밀번호 재확인 일치 여부 success 될 때
              $('#submit_myModifyPwd').click(function () {
                  // user_pw = 기존비밀번호 저장
-                 var user_pw = $("#user_pw").val();
+                 var user_pw = $("#user_pw_myModifyPwd").val();
                  if (user_pw != '') {
                      if (user_pw == "qwer1234!" && checked == 1) {
                          alert("변경되었습니다.");
@@ -197,17 +192,17 @@
          });
          /* pwd1 != pwd2 */
          function notsame() {
-             $("#alert-success").hide();
-             $("#alert-danger").show();
-             $('.pdBtn_myleave a').css('pointer-events', 'none');
+             $("#alert-success_myModifyPwd").hide();
+             $("#alert-danger_myModifyPwd").show();
+             $('.pdBtn_myModifyPwd a').css('pointer-events', 'none');
              checked = 0;
          }
          /* pwd1 == pwd2 */
          function same(){
-             $("#alert-success").show();
-             $("#alert-danger").hide();
+             $("#alert-success_myModifyPwd").show();
+             $("#alert-danger_myModifyPwd").hide();
               // 일치하면 a 태그 활성화 (css에서 비활성화함)
-              $('.pdBtn_myleave a').css('pointer-events', 'auto');
+              $('.pdBtn_myModifyPwd a').css('pointer-events', 'auto');
               checked = 1;
          }
       </script>

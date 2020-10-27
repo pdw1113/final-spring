@@ -16,14 +16,6 @@
          padding: 0;
          margin: 0;
          }
-         h2 {
-         text-align: center;
-         font-family: jua;
-         }
-         ul,
-         li {
-         list-style: none;
-         }
          /* 전체 div */
          .content_mywish {
          width: 100%;
@@ -106,7 +98,7 @@
          margin: 37px 20px 20px 20px;
          }
          /* 별점 */ 
-         .pWrap_mywish .rating_mywish i{
+         .pWrap_mywish .rating_mywish > i{
          color:orange;
          }
          /* 찜상품 div의 오른쪽 부분 찜해제버튼 + 가격 */
@@ -144,7 +136,7 @@
          /* 반응형~ */
          @media (max-width: 1360px) {
          /* 사이드 여백 */
-         .content_mybuylist .layoutSubbox_mybuylist {
+         .content_mywish .layoutSubbox_mywish {
          width: auto;
          margin: 0 20px;
          }

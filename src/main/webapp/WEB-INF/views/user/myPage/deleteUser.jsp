@@ -45,7 +45,7 @@
          width: 100%;
          overflow: hidden;
          }
-         input[type='password'] {
+         .password_myleave {
          width: 100%;
          height: 50px;
          font-size: 15px;
@@ -61,6 +61,7 @@
          outline: none;
          }
          .dataInform_myleave .inform_myleave ul li {
+         list-style: none;
          display: block;
          margin: 0 0 18px 0;
          }
@@ -75,6 +76,7 @@
          z-index: 1;
          }
          .dataInform_myleave .reason_myleave ul li {
+         list-style: none;
          font-size: 15px;
          color: #9d9d9d;
          font-weight: 500;
@@ -87,15 +89,15 @@
          display: none;
          }
          /* 탈퇴 사유 radio 버튼 custom */
-         input[type="radio"] {
+         .radio_myleave {
          display: none;
          }
-         input[type="radio"]+label {
+         .radio_myleave+label {
          font-weight: 400;
          font-size: 14px;
          cursor: pointer;
          }
-         input[type="radio"]+label span {
+         .radio_myleave+label span {
          display: inline-block;
          width: 18px;
          height: 18px;
@@ -106,29 +108,29 @@
          border-radius: 50%;
          border: 3px solid #ffffff;
          }
-         input[type="radio"]+label span {
+         .radio_myleave+label span {
          background-color: #ffff;
          border: 2px solid #9d9d9d;
          }
          /* 체크 했을 때 보여지는 radio 버튼 */
-         input[type="radio"]:checked+label {
+         .radio_myleave:checked+label {
          color: #333;
          font-weight: 700;
          }
-         input[type="radio"]:checked+label span {
+         .radio_myleave:checked+label span {
          background-color: #fabe00;
          border: 2px solid #ffffff;
          box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
          }
-         input[type="radio"]+label span,
-         input[type="radio"]:checked+label span {
+         .radio_myleave+label span,
+         .radio_myleave:checked+label span {
          -webkit-transition: background-color 0.24s linear;
          -o-transition: background-color 0.24s linear;
          -moz-transition: background-color 0.24s linear;
          transition: background-color 0.24s linear;
          }
          /* 기타 text */
-         .reason_myleave input[type='text'] {
+         .reason_myleave .text_myleave {
          width: 100%;
          height: 50px;
          font-size: 15px;
@@ -174,51 +176,50 @@
                <div class="tit2_myleave">비밀번호 및 탈퇴사유를 입력해 주십시오.</div>
                <div class="inform_myleave">
                   <ul>
-                     <li><input type="password" name="user_pw" id="user_pw" placeholder="비밀번호를 입력해 주십시오."></li>
+                     <li><input type="password" class="password_myleave" name="user_pw" id="user_pw" placeholder="비밀번호를 입력해 주십시오."></li>
                   </ul>
                </div>
                <div class="tit2_myleave">탈퇴 사유</div>
                <div class="reason_myleave">
                   <ul>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason01"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason01" class="radio_myleave"
                            value="다른 계정이름으로 사용하기 위해서"><label for="s_reason01" class="label"><span></span>다른
                            계정이름으로 사용하기 위해서</label>
                         </div>
                      </li>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason02"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason02" class="radio_myleave"
                            value="사용빈도가 낮고, 개인정보 유출이 우려되서"><label for="s_reason02"
                            class="label"><span></span>사용빈도가 낮고, 개인정보 유출이
                            우려되서</label>
                         </div>
                      </li>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason03"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason03" class="radio_myleave"
                            value="사이트 이용 시 장애가 많아서"><label for="s_reason03" class="label"><span></span>사이트
                            이용 시 장애가 많아서</label>
                         </div>
                      </li>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason04"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason04" class="radio_myleave"
                            value="서비스의 질에 대한 불만이 있어서"><label for="s_reason04" class="label"><span></span>서비스의
                            질에 대한 불만이 있어서</label>
                         </div>
                      </li>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason05"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason05" class="radio_myleave"
                            value="사이트 이용 시 고객응대가 나빠서"><label for="s_reason05" class="label"><span></span>사이트 이용
                            시 고객응대가 나빠서</label>
                         </div>
                      </li>
                      <li>
-                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason06"
+                        <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason06" class="radio_myleave"
                            value="기타"><label for="s_reason06" class="label"><span></span>기타</label></div>
                      </li>
                   </ul>
                   <!-- 기타 버튼 누를 시 생성 -->
-                  <ul class="directInput_myleave"><input type="text" name="user_leave_memo" id="user_leave_memo"
-                     placeholder="직접 입력"></ul>
+                  <ul class="directInput_myleave"><input type="text" class="text_myleave" name="user_leave_memo" id="user_leave_memo" placeholder="직접 입력"></ul>
                </div>
                <div class="pdBtn_myleave">
                   <a href="#">
@@ -231,7 +232,7 @@
       <script>
          $("input[name='user_leave']").click(function () {
              $('.directInput_myleave').css('display', ($(this).val() == '기타') ? 'block' : 'none');
-             $('label', this).css('color', 'black');
+             $('.custom-radio_myleave label', this).css('color', 'black');
          });
       </script>
       <!-- footer 영역 -->

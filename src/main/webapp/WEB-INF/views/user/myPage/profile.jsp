@@ -31,7 +31,7 @@
       width: 100%;
       overflow: hidden;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile .picUpload_myPage_profile .upload_myPage_profile input {
+      .profile_myPage_profile .profileInfo_myPage_profile .picUpload_myPage_profile .upload_myPage_profile > input {
       position: absolute;
       left: 0;
       top: 0;
@@ -60,7 +60,7 @@
       line-height: 1.2;
       letter-spacing: -1px;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile td {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile >tbody > tr> td {
       position: relative;
       font-size: 13px;
       color: #9d9d9d;
@@ -70,7 +70,7 @@
       letter-spacing: -1px;
       border-bottom: 1px #e5e5e5 solid;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile td input {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile >tbody > tr> td > .btnApp_myPage_profile > input {
       height: 38px;
       line-height: 38px;
       font-size: 13px;
@@ -105,7 +105,7 @@
       padding: 10px 0 0 0;
       letter-spacing: -1px;
       }
-      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile tr:last-child td {
+      .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile >tbody > tr:last-child td {
       border: 0;
       }
       .profile_myPage_profile .profileInfo_myPage_profile .table_myPage_profile .btnApp_myPage_profile {
@@ -146,7 +146,7 @@
       padding: 15px 0;
       border-radius: 10px;
       }
-      .profile_myPage_profile .noticeSet_myPage_profile .nbox_myPage_profile ul li {
+      .profile_myPage_profile .noticeSet_myPage_profile .nbox_myPage_profile > ul > li {
       display: inline-block;
       padding: 0 20px;
       }
@@ -178,16 +178,16 @@
       vertical-align: middle;
       }
       /* checkbox custom */
-      input[type=checkbox]+label {
+      .checkbox_myprofile+label {
       margin: 0.2em;
       cursor: pointer;
       padding: 0.2em;
       }
-      input[type=checkbox] {
+      .checkbox_myprofile {
       display: none;
       margin: 0.2em;
       }
-      input[type=checkbox]+label:before {
+      .checkbox_myprofile+label:before {
       content: "\2714";
       border: 0.1em solid#000000;
       border-radius: 0.2em;
@@ -201,10 +201,10 @@
       color: transparent;
       transition: .2s;
       }
-      input[type=checkbox]+label:active:before {
+      .checkbox_myprofile+label:active:before {
       transform: scale(0);
       }
-      input[type=checkbox]:checked+label:before {
+      .checkbox_myprofile:checked+label:before {
       background-color: #fabe00;
       border-color: #fabe00;
       color: #fff;
@@ -249,7 +249,7 @@
                      <th scope="row"><span>휴대폰번호</span></th>
                      <td>
                         <div class="btnApp_myPage_profile">
-                           <input type="text" id="user_hp" name="user_hp" value="01083754499" readonly="true">
+                           <input type="text" id="user_hp_profile" name="user_hp" value="01083754499" readonly="true">
                            <div class="pAppBtn_myPage_profile">
                               <button class="phone_modify_profile" onclick="modify_ph();">수정</button>
                            </div>
@@ -266,12 +266,12 @@
             <div class="nbox_myPage_profile">
                <ul>
                   <li>
-                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="user_update_myPage_profile"
+                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="checkbox_myprofile"
                         name="user_sms" id="smsYes" value="Y"><label for="smsYes" class="">알림톡</label><span
                         class="checkmark_myPage_profile"></span></div>
                   </li>
                   <li>
-                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="user_update_myPage_profile"
+                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="checkbox_myprofile"
                         name="user_mailing" id="emailYes" value="Y"><label for="emailYes">이메일</label><span
                         class="checkmark_myPage_profile"></span>
                      </div>
@@ -290,16 +290,16 @@
          function modify_ph() {
          
            if (sw == 0) {
-             $('#user_hp').attr('readonly', false);
-             $('#user_hp').css('border-color', '#fabe00');
-             $('#user_hp').css('background','lightyellow');
+             $('#user_hp_profile').attr('readonly', false);
+             $('#user_hp_profile').css('border-color', '#fabe00');
+             $('#user_hp_profile').css('background','lightyellow');
              $('.phone_modify_profile').css('background-color', 'green');
              $('.phone_modify_profile').text('확인');
              sw = 1;
            } else {
-             $('#user_hp').attr('readonly', true);
-             $('#user_hp').css('border-color', '#000');
-             $('#user_hp').css('background','white');
+             $('#user_hp_profile').attr('readonly', true);
+             $('#user_hp_profile').css('border-color', '#000');
+             $('#user_hp_profile').css('background','white');
              $('.phone_modify_profile').css('background-color', '#fabe00');
              $('.phone_modify_profile').text('수정');
              sw = 0;
