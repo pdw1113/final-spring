@@ -36,13 +36,13 @@
          .left-bar{
          float: left;
          width: 13%;
-         height: 92rem;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
          .section{
          width: 87%;
          float: left;
-         height: 92rem;
+         height: 100vh;
          }
          .cate_Managerheader{
          color:rgb(141, 141, 141);

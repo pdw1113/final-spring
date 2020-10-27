@@ -3,13 +3,20 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+   <div class="header">
+         <%@ include file="../../common/header.jsp" %>
+    </div>
+      <div class="left-bar">
+         <%@ include file="../common/mLeftBar.jsp" %>
+      </div>
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
-      <!-- 부가적인 테마 -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-      <!-- include libraries(jQuery, bootstrap) -->
+
+    <!-- 썸머노트 script -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
       <style>
          html,
@@ -20,18 +27,18 @@
          }
           .header{    
          width: 100%;
-         height: 6.2rem;
+         height: 6.5rem;
          }
          .left-bar{
          float: left;
          width: 13%;
-         height: 92rem;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
          .section{
          width: 87%;
          float: left;
-         height: 92rem;
+         height: 100vh;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -147,7 +154,7 @@
          input:focus {
          outline: none;
          }
-            .header div.login_box_Mainhead{
+         .header div.login_box_Mainhead{
          margin-top: 1.5rem;
          line-height: 3rem;
          margin-right: 0.3rem;
@@ -158,15 +165,11 @@
          width: 8.6rem;
          transition-duration:0s;
          }
+         
       </style>
    </head>
    <body>
-      <div class="header">
-         <%@ include file="../../common/header.jsp" %>
-      </div>
-      <div class="left-bar">
-         <%@ include file="../common/mLeftBar.jsp" %>
-      </div>
+     
       <div class="section">
          <!-- 관리자 카테고리 및 제목  -->
          <div class="mian-header">
@@ -184,8 +187,8 @@
          </div>
          <!-- 메일 내용 썸머노트 -->
          <div class="content_Mail">
-            <!-- <textarea id="summernote_Mail"></textarea> -->
-            <textarea rows="20" cols="220"></textarea>
+            <textarea id="summernote_Mail"></textarea> 
+          
          </div>
          <!-- 보내기 버튼 -->
          <div class="button_Mail">
@@ -250,6 +253,35 @@
          </div>
       </div>
       <script>
+      
+      $(document).ready(function () {
+
+          //썸머노트
+          $('#summernote_Mail').summernote({
+              toolbar: [
+                  // [groupName, [list of button]]
+                  ['fontname', ['fontname']],
+                  ['fontsize', ['fontsize']],
+                  ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                  ['color', ['forecolor', 'color']],
+                  ['table', ['table']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['height', ['height']],
+                  ['insert', ['picture', 'link', 'video']],
+                  ['view', ['fullscreen', 'help']]
+              ],
+              height: 400,                 // 에디터 높이
+              minHeight: null,             // 최소 높이
+              maxHeight: null,             // 최대 높이
+              focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+              lang: "ko-KR",					// 한글 설정
+              placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+              fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+
+          });
+      });
+      
          // 모달 팝업 띄우기
          function eMailCheck() {
              $('#findadress_Mail').modal().show();

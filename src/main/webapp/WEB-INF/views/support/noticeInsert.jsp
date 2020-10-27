@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html>
    <head>
+    <div class="header">
+         <%@ include file="../common/header.jsp" %>
+    </div>
+    
+	<div class="nav">
+		<%@ include file="common/nav.jsp" %>
+	</div>
+	
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>공지사항</title>
@@ -38,23 +46,13 @@
          width: 100%;
          height: 100%;
          }
-         a {
-         text-decoration: none;
-         }
-         ul,
-         li {
-         list-style: none;
-         text-align: center;
-         padding: 0;
-         margin: 0;
-         }
-         .notice_input_div{
+         .input_div_noticeInsert{
          width: 69%;
          margin: 0 auto;
          margin-top: 10px;
          height: 65rem;
          }
-         .notice_input_title{
+         .input_title_noticeInsert{
          margin-top: 20px;
          margin-bottom: 25px;
          }
@@ -65,12 +63,12 @@
          border: 1px solid rgb(179, 179, 179);
          padding-left: 7px;
          }
-         .notice_button_div{
+         .button_div_noticeInsert{
          width: 69%;
          margin: 0 auto;
          margin-top: 10px;
          }
-         .notice_input_button{
+         .input_button_noticeInsert{
          float: right;
          width: 100px;
          height: 45px;
@@ -82,7 +80,7 @@
          font-weight: bold;
          background-color: rgb(250, 190, 0);
          }
-         .notice_deny_button{
+         .deny_button_noticeInsert{
          float: right;
          width: 100px;
          height: 45px;
@@ -95,26 +93,44 @@
          margin-right: 20px;
          background-color: rgb(189, 189, 189);
          }
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         transition-duration:0s;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         transition-duration:0s;
+         }
+         .nav div.container_mynav{
+         width: 132rem;
+         }
+         .nav div.dropdown_mynav{
+         width: 33rem;
+         }
+         .nav button.dropbtn_mynav{
+         width: 33rem;
+         }
       </style>
+      
    </head>
-   <body>
-   	<%@ include file="../common/header.jsp" %>
-	<%@ include file="common/nav.jsp" %>
-      <div class="notice_container">
-         <div class="notice_input_div">
-            <div class="notice_input_title">
+   <body >
+      <div class="container_noticeInsert">
+         <div class="input_div_noticeInsert">
+            <div class="input_title_noticeInsert">
                <input type="text" class="notice_title_text" placeholder="제목을 입력하세요.">
             </div>
-            <div class="notice_input_content">
+            <div class="input_content_noticeInsert">
                <textarea id="summernote_notice"></textarea>
             </div>
          </div>
-         <div class="notice_button_div">
-            <button class="notice_input_button" onclick="input()">등록하기</button>
-            <button class="notice_deny_button" onclick="location.href='customer_notice_list.html'">취소하기</button>
+         <div class="button_div_noticeInsert">
+            <button class="input_button_noticeInsert" onclick="input()">등록하기</button>
+            <button class="deny_button_noticeInsert" onclick="location.href='noticeList.do';">취소하기</button>
          </div>
       </div>
-      <%@ include file="../common/footer.jsp" %>
       <script>
          $(document).ready(function () {
          
@@ -140,7 +156,6 @@
              placeholder: '내용을 입력하세요',	//placeholder 설정
              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
              fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
-         
          });
          });
          

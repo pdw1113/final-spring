@@ -26,14 +26,14 @@
          }
          .header {
          width: 100%;
-         height: 6.2rem;
+         height: 6.5rem;
          /* background-color: aqua; */
          }
          .left-bar {
          float: left;
          width: 13%;
          width:250px;
-         height: 917px;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
 
@@ -41,7 +41,7 @@
          .section {
          width: 86%;
          float: left;
-         height: 55.5rem;
+         height: 100vh;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
