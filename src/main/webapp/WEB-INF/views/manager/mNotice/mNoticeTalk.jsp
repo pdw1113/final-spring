@@ -23,6 +23,7 @@
       width: 87%;
       float: left;
       height: 100vh;
+      font-size : 100px;
       }
       /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
       .header div.login_box_Mainhead{
@@ -32,8 +33,10 @@
       }
       .header div.login_box_Mainhead .head_login_Mainhead{
       height: 3.6rem;
-      width: 8.6rem;
+      width: 8.6rem; 
+      transition: none;
       }
+      
    </style>
    <body>
       <div class="header">

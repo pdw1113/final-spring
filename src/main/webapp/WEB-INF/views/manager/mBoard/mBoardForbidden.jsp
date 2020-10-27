@@ -32,24 +32,21 @@
             margin: 0;
         }
 
-        .header {
-            width: 100%;
-            height: 6.2rem;
-            /* background-color: aqua; */
-        }
-
-        .left-bar {
-            float: left;
-            width: 13%;
-            height: 917px;
-            border-right: 1px solid gainsboro;
-        }
-
-        .section {
-            width: 87%;
-            float: left;
-            height: 55.5rem;
-        }
+		.header{    
+         width: 100%;
+         height: 6.5rem;
+         }
+         .left-bar{
+         float: left;
+         width: 13%;
+         height: 100vh;
+         border-right: 1px solid gainsboro;
+         }
+         .section{
+         width: 87%;
+         float: left;
+         height: 100vh;
+         }
 
         .cate_Managerheader {
             color: rgb(141, 141, 141);
@@ -436,8 +433,20 @@
          }
          
          .index_head_Mainhead{
-       width: 1903px;   
-         }
+       	 width: 1903px;   
+       	 
+         } 
+         /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+	      .header div.login_box_Mainhead{
+	      margin-top: 1.5rem;
+	      line-height: 3rem;
+	      margin-right: 0.3rem;
+	      }
+	      .header div.login_box_Mainhead .head_login_Mainhead{
+	      height: 3.6rem;
+	      width: 8.6rem;
+	      }  
+
     </style>
 
 </head>
