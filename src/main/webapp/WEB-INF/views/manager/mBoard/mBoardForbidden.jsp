@@ -1113,8 +1113,8 @@
             document.getElementById("result2").value = '';
         }
 
-    </script>
-
+    </script> 
+                  
 </body>
 
 
