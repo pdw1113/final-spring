@@ -13,11 +13,7 @@
             padding: 0;
             margin: 0;
         }
-
-        ul li{
-            list-style: none;
-        }
-
+        
         /* 전체 div */
         .content_myPage_money {
             width: 100%;
@@ -160,11 +156,13 @@
             letter-spacing: -1px;
             padding: 60px 0 14px 0;
         }
+        
 
-        .accountWrap_myPage_money .awTit_myPage_money + span{
+        .accountWrap_myPage_money .awTit_myPage_money + a{
             float:right; 
             padding-right:10px;
             color: #6c6d70;
+            text-decoration: none;
         }
 
         .cashTable_myPage_money {
@@ -180,11 +178,11 @@
             word-break: break-all;
         }
 
-        .cashTable_myPage_money .table_myPage_money thead {
+        .cashTable_myPage_money .table_myPage_money .thead_money {
             border-top: 1px solid #272d32;
         }
 
-        .cashTable_myPage_money .table_myPage_money thead tr th {
+        .cashTable_myPage_money .table_myPage_money .thead_money tr th {
             border-bottom: 1px #e5e5e5 solid;
             border-left: 1px #e5e5e5 solid;
             border-right: 1px #e5e5e5 solid;
@@ -204,6 +202,25 @@
             margin: 80px 0 0 0;
             border: 4px #fabe00 solid;
             border-radius: 10px;
+        }
+        
+        /* 출금하기 버튼 CSS */
+        .cashRequest_myPage_money .requestBtn_myPage_money {
+        	width: 8rem;
+        	height: 3rem;
+        	float: right;
+        	margin-right: 2rem;
+        	border-radius:10px;
+        	border: 0;
+        	background: #fabe00;
+        	outline: none;
+        	cursor: pointer;
+        }
+        
+        /* 출금하기 버튼 글자 CSS */
+        .cashRequest_myPage_money .requestBtn_myPage_money span {
+        	font-size: 1.3rem;
+        	font-family: jua;
         }
 
         /* 출금가능머니 글자*/
@@ -227,10 +244,11 @@
             font-weight: 500;
             line-height: 1.2;
             letter-spacing: -1px;
+            margin-left: 130px;
         }
 
         /* 출금가능머니 "원"*/
-        .cashRequest_myPage_money .cashWon_myPage_money span {
+        .cashRequest_myPage_money .cashWon_myPage_money > span {
             font-family: jua;
             font-size: 22px;
             font-weight: 600;
@@ -244,7 +262,7 @@
             overflow: hidden;
         }
 
-        .cashRtxt_myPage_money ul li {
+        .cashRtxt_myPage_money > ul > li {
             display: block;
             font-size: 14px;
             color: #9d9d9d;
@@ -256,7 +274,7 @@
         }
 
         /* The Modal (background) */
-        .modal {
+        .modal_money {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
@@ -270,13 +288,58 @@
         }
 
         /* Modal Content/Box */
-        .modal-content {
+        .modal_content_money {
             background-color: #fefefe;
             margin: 15% auto; /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
             width: 30%; /* Could be more or less, depending on screen size */                          
         }
+        
+          .modal_header_wallet{
+          	width: 100%;
+          	display: inline;
+
+          }
+          .close_wallet{
+          	float: right;
+	        outline: none;
+	        cursor: pointer;
+          }
+          .x_wallet{
+          	font-size: 30px;
+          }
+          .tit_wallet > ul > li {
+          	display: block;
+          	margin: 0 0 12px 0;
+          }
+          .bankCode_wallet {
+          	width: 100%;
+          	margin-bottom: 5px;
+          }
+          .bankuser_wallet, .bankno_wallet, .price_wallet {
+          	margin-top: 5px;
+          	margin-bottom: 5px;
+          	width: 98.5%;
+          	height: 30px;
+          }
+          .bankSend_wallet{
+          	width: 100px;
+          	margin: 0 auto;
+          }
+          
+          .bankBtn_wallet{
+          	margin-top: 5px;
+          	border : 0px;
+            background: #fabe00;
+            border-radius: 5px;
+            width: 8rem;
+            height: 2rem;
+            outline: none;
+            cursor: pointer;
+            font-family: jua;
+            font-size: 15px;
+          }
 
 
         /* 반응형~ */
@@ -305,12 +368,12 @@
             .accountWrap_myPage_money .cashInfo_myPage_money ul li {
                 width: 50%;
             }
-            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info {
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money {
                 float: none;
                 width: 100%;
                 padding: 0;
             }
-            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info p {
+            .accountWrap_myPage_money .cashInfo_myPage_money ul li.info_myPage_money p {
                 padding: 10px 0 0 0;
                 text-align: center;
             }
@@ -456,14 +519,11 @@
                 font-size: 14px;
                 padding: 30px 0 10px 0;
             }
-            .cashTable_myPage_money .table_myPage_money thead tr th {
+            .cashTable_myPage_money .table_myPage_money .thead_money tr th {
                 padding: 12px 0;
             }
-            .cashTable_myPage_money .table_myPage_money thead tr th span {
+            .cashTable_myPage_money .table_myPage_money .thead_money tr th span {
                 font-size: 13px;
-            }
-            .pagingArea_myPage_money.mto_myPage_money {
-                padding: 30px 0 0 0;
             }
             .cashRequest_myPage_money {
                 padding: 0;
@@ -503,7 +563,6 @@
                 font-size: 12px;
             }
         }
-
     </style>
 </head>
 
@@ -531,19 +590,11 @@
                             </li>
                         </ul>
                     </div>
-
-
                     <div class="awTit_myPage_money">보유니즈머니 내역</div>
-                    <span class="more_myPage_money">더보기</span>
+                    <a href="walletDetail.do" class="more_myPage_money">더보기</a>
                     <div class="cashTable_myPage_money">
                         <table class="table_myPage_money">
-                            <colgroup>
-                                <col>
-                                <col>
-                                <col>
-                                <col>
-                            </colgroup>
-                            <thead>
+                            <thead class="thead_money">
                                 <tr>
                                     <th><span>보유니즈머니 내역</span></th>
                                     <th><span>충전/차감 머니</span></th>
@@ -551,17 +602,18 @@
                                     <th><span>상태</span></th>
                                 </tr>
                             </thead>
+                            <!-- 보여지는 리스트 개수는 최신 5~10개로 제한 그 이상은 더보기 버튼으로 확인 -->
                             <tbody>
                                 <tr>
                                 <td>충전머니 예치</td>
-                                <td><span class="plus">+ 100,000</span></td>
-                                <td><span class="day">2020. 10. 10</span></td>
+                                <td><span class="plus_money">+ 100,000</span></td>
+                                <td><span class="day_money">2020. 10. 10</span></td>
                                 <td>충전완료</td>
                                 </tr>
                                 <tr>
                                 <td>충전머니 예치</td>
-                                <td><span class="plus">+ 1,000,000</span></td>
-                                <td><span class="day">2019. 10. 10</span></td>
+                                <td><span class="plus_money">+ 1,000,000</span></td>
+                                <td><span class="day_money">2019. 10. 10</span></td>
                                 <td>충전완료</td>
                                 </tr>
                             </tbody>
@@ -571,44 +623,62 @@
                     <div class="cashRequest_myPage_money">
                         <div class="cTit_myPage_money">출금 가능 니즈머니</div>
                         <div class="cashWon_myPage_money">0<span>원</span></div>
-                        <a href="#" class="requestBtn_myPage_money" id="cancelReason"><span>출금하기</span></a>
-                        </div>
+                        <!-- 출금하기 버튼은 0원 초과되면 생기게 구현할 예정 -->
+                        <button class="requestBtn_myPage_money" id="cancelReason_wallet"><span>출금하기</span></button>
                     </div>
                     
 
                     <!-- The Modal -->
-                    <div id="myModal" class="modal">
+                    <div id="myModal_wallet" class="modal_money">
                         <!-- Modal content -->
-                        <div class="modal-content">
-                            <div class="modal-header" style="display: flex; justify-content: space-between;">
-                                <div><h2>출금 요청</h2></div>
-                                <div style="width: 40px; height: 40px;  cursor:pointer;background-color:#DDDDDD;text-align: center;" onClick="close_pop();">
-                                    <span class="pop_bt" style="font-size: 13pt; vertical-align: middle;" >
-                                        X
-                                    </span>
-                                </div>
+                        <div class="modal_content_money">
+                            <div class="modal_header_wallet">
+	                            <div class="close_wallet" onclick="close_Wallet();">
+			                   		<i class="fas fa-times x_wallet"></i>
+			                	</div>
+                                <div><h2>보유머니 출금 요청</h2></div>
+	                            <ul>
+									<li>
+										<select class="bankCode_wallet">
+											<option value="">은행 선택</option>
+	                                        <option value="001">산업</option>
+	                                        <option value="002">기업</option>
+	                                        <option value="003">국민</option>
+	                                        <option value="004">수협</option>
+	                                        <option value="005">농협</option>
+	                                        <option value="006">우리</option>
+	                                        <option value="007">SC</option>
+	                                        <option value="008">씨티</option>
+	                                        <option value="009">대구</option>
+	                                        <option value="010">부산</option>
+	                                        <option value="011">광주</option>
+	                                        <option value="012">제주</option>
+	                                        <option value="013">전북</option>
+	                                        <option value="014">경남</option>
+	                                        <option value="015">새마을금고</option>
+	                                        <option value="016">신협</option>
+	                                        <option value="017">상호저축</option>
+	                                        <option value="018">HSBC</option>
+	                                        <option value="019">도이치</option>
+	                                        <option value="020">우체국</option>
+	                                        <option value="021">KEB하나</option>
+	                                        <option value="022">신한</option>
+	                                        <option value="023">케이뱅크</option>
+	                                        <option value="024">카카오뱅크</option>
+	            						</select>
+									</li>
+									<li><input type="text" name="bankuser" class="bankuser_wallet" id="bankuser" value="" placeholder="예금주명 입력"></li>
+									<li><input type="text" name="bankno" class="bankno_wallet" id="bankno" value="" placeholder="’-’ 없이 계좌번호 입력"></li>
+									<li><input type="text" name="price" class="price_wallet" id="price" value="" placeholder="출금 머니 금액을 입력해 주십시오."></li>
+								</ul>
+								
                             </div>
-                            <table class="withdrawTb_myPage_money"> <!-- DB에 출금일자 입력하여 관리자에서는 보여야 합니다.-->
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">예금주</th>
-                                        <td><input type="text" name="" id=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">출금 계좌</th>
-                                        <td><input type="number" name="" id="" placeholder="'-'빼고 입력해주세요."></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">출금 금액</th>
-                                        <td><input type="number"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="bankSend_wallet">
+                            	<button class="bankBtn_wallet" id="bankSendBtn_wallet">계좌 확인</button>
+                            </div>
                         </div>
                     </div>
                     <!--End Modal-->
-
-
                     <div class="cashRtxt_myPage_money">
                         <ul>
                             <li>12시 이전 신청 : 당일 16:00~18:00 입금</li>
@@ -621,17 +691,26 @@
                 <!-- //account -->
             </div>
         </div>
+       </div>
         <!-- //mypage -->
-    <script type="text/javascript">
-        $('#cancelReason').click(function(){
-            $('#myModal').show();
-        })
-        
-        //팝업 Close 기능
-        function close_pop(flag) {
-             $('#myModal').hide();
-        };
-        
+    	<script type="text/javascript">
+	        $('#cancelReason_wallet').click(function(){
+	            $('#myModal_wallet').show();
+	        })
+	        
+	        //팝업 Close 기능
+	        function close_Wallet(flag) {
+	             $('#myModal_wallet').hide();
+	        };
+	        
+	        //계좌 확인 버튼 데이터 찍어보기
+	        $('#bankSendBtn_wallet').click(function(){
+	        	var bankCode = $('.bankCode_wallet option:selected').val();
+	        	var bankUser = $('#bankuser').val();
+	        	var bankNo = $('#bankno').val();
+	        	var price = $('#price').val();
+	        	alert("은행코드"+bankCode+"예금주:"+bankUser+"계좌번호"+bankNo+"금액"+price);
+	        });
       </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>

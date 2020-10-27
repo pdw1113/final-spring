@@ -61,6 +61,16 @@ public class UserContoller {
 		return "user/myPage/buyList";
 	}
 	
+	@RequestMapping("charge.do")
+	public String charge() {
+		return "user/myPage/charge";
+	}
+	
+	@RequestMapping("walletDetail.do")
+	public String walletDetail() {
+		return "user/myPage/walletDetail";
+	}
+	
 	
 	
 }

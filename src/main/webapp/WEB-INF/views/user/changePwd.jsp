@@ -13,79 +13,151 @@
          padding:0;
          width:100%;
          }
-         h2{
+         .form_changePwd > h2{
          font-family: jua;
          }
-         /* 로그인 폼 가장자리 틀  */
-         .form_newPwd{
+         
+         .form_changePwd{
          border: 9px solid #fabe00;
          width: 620px;
-         height: 500px;
+         height: 524px;
          border-radius: 70px 70px 70px 70px;
          margin: 0 auto;
          text-align: center;
          }
          /* 니즈 잇 로고 이미지 */
-         .login_img_login{
+         .logo_changePwd{
          padding-top: 20px;
          width: 260px;
          filter: drop-shadow(-4px 5px 3px #808080);
          padding-bottom: 15px;
          }
-         /* 로그인, 비밀번호 입력창 */
-         .input_newPwd{
+         
+         .input_changePwd{
          border: 3px solid #fabe00;
          border-radius: 7px 7px 7px 7px;
          height: 30px;
          width: 550px;
          font-size: 20px;
          margin-bottom: 15px;
+         outline:none;
          }
-         input:focus { outline:none; }
-         /* ID찾기, PWD찾기, 로그인 버튼 DIV (버튼아님 버튼 프레임임) */
-         .button_newPwd{
+         
+         .button_changePwd{
          padding-top: 5px;
          padding-left:20px;
          height: 50px;
          padding-bottom: 10px;
          }
-         /* ID찾기 PWD찾기 로그인 버튼 */
-         .login_button_newPwd{
+         
+         .login_button_changePwd{
          float:left;
-         width: 550px;
+         width: 93%;
          height: 40px;
          text-align: center;
          line-height: 45px;
-         margin-left: 5px;
+         margin-left: 10px;
          font-size: 25px;
          border-radius: 7px 7px 7px 7px;
          color: white;
          background-color: #fabe00;
          font-family: jua;
          outline: none;
+         cursor: pointer;
+         }
+         
+         /* 비밀번호 일치 여부 */
+         .form_changePwd div.alert-danger_changePwd{ /* 비밀번호 재확인 불일치 */
+         display: none;
+         font-size: 12px;
+         margin: -10px 8px 10px;
+         color:red;
+         }
+         .form_changePwd div.alert-success_changePwd{ /* 비밀번호 재확인 일치 */
+         display: none;
+         font-size: 12px;
+         margin: -10px 8px 10px;
+         color:#009BFA;
          }
       </style>
    </head>
    <body>
       <%@ include file="../common/header.jsp" %>
       <!-- 가장 바깥에 있는 로그인 창 틀 -->
-      <div class="form_newPwd">
+      <div class="form_changePwd">
          <!-- 로그인 이미지 -->
-         <img  class="login_img_login" src="./resources/img/Login_logo.png">
+         <img  class="logo_changePwd" src="./resources/img/Login_logo.png">
          <br><br><br>
          <h2>비밀번호 변경</h2>
          <br><br>
          <!-- 새로운 비번 입력폼 -->
-         <input class="input_newPwd" type="password" placeholder=" 새 비밀번호">
-         <input class="input_newPwd" type="password" placeholder=" 비밀번호 확인">
+         <input class="input_changePwd" id="pwd1_changePwd" type="password" placeholder=" 새 비밀번호">
+         <input class="input_changePwd" id="pwd2_changePwd" type="password" placeholder=" 비밀번호 확인">
+         <div class="alert-success_changePwd" id="alert-success_changePwd">※ 비밀번호 확인이 완료되었습니다.</div>
+         <div class="alert-danger_changePwd" id="alert-danger_changePwd">※ 비밀번호가 맞지 않습니다.</div>
          <!-- Button to Open the Modal -->
-         <div class="button_newPwd">
-            <div type="button" class="login_button_newPwd" data-toggle="modal" onclick="emailCheck()">
+         <div class="button_changePwd">
+            <div class="login_button_changePwd" onclick="emailCheck()">
                비밀번호 변경
             </div>
          </div>
       </div>
       <br><br><br>
+      <script>
+	      // var pwd1 = 변경할 비밀번호
+	      // var pwd2 = 변경할 비밀번호 재확인
+	      /*
+	         var checked = pwd1,pwd2 일치 여부
+	         1) checked = 0 이면 불일치
+	         2) checked = 1 이면 일치
+	      */ 
+	      var pwd1;
+	      var pwd2;
+	      var checked = 0;
+	      
+	      // 비밀번호 재확인 일치 여부
+	      $(document).ready(function () {
+	          $('#alert-success_changePwd').hide();
+	          $('#alert-danger_changePwd').hide();
+	      
+	          // inform_myModifyPwd div에서 del키나 백스페이스를 누르고 떼어냈을 시 체크,
+	          $('.form_changePwd').keyup(function (event) {
+	              if (event.keyCode === 8 || event.keyCode === 46) {
+	                  if ($("#pwd1_changePwd").val() != $("#pwd2_changePwd").val()) {
+	                      notsame();
+	                  }
+	              }
+	          });
+	      
+	          //  keyup() - 키보드에서 손을 떼어냈을때 실행됨
+	          $(".input_changePwd").keyup(function (event) {
+	              
+	              // var user_pw == "DB에서 가져온 기존 비밀번호"
+	              pwd1 = $("#pwd1_changePwd").val();
+	              pwd2 = $("#pwd2_changePwd").val();
+	      
+	              if (pwd1 != '' && pwd2 != '') {
+	                  if (pwd1 == pwd2) {
+	                      same();
+	                  } else if (pwd1 != pwd2) {
+	                      notsame();
+	                  }
+	              }
+	          });
+	      });
+         /* pwd1 != pwd2 */
+         function notsame() {
+             $("#alert-success_changePwd").hide();
+             $("#alert-danger_changePwd").show();
+             checked = 0;
+         }
+         /* pwd1 == pwd2 */
+         function same(){
+             $("#alert-success_changePwd").show();
+             $("#alert-danger_changePwd").hide();
+              checked = 1;
+         }
+      </script>
       <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

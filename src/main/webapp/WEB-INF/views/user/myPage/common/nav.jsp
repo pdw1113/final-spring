@@ -14,11 +14,6 @@
          padding: 0;
          margin: 0;
          }
-         ul, li{
-         list-style: none;
-         margin: 0px;
-         padding:0px;
-         }
          .h1_mynav {
          background: white;
          font-size:2.4rem;
@@ -35,6 +30,9 @@
          .a_mynav:link{
          	color: #ffff;
          }
+         .a_mynav:hover{
+         	color: orange;
+         }
 
          /* 주메뉴 */
          .container_mynav{
@@ -50,6 +48,7 @@
          justify-content: space-between;
          margin: 0 auto;
          font-family: jua;
+         padding: 0;
          }
          /* 주메뉴 hover */
          .container_mynav li:hover{
@@ -64,6 +63,8 @@
          pointer-events: none;
          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
          border : 1px lightgray;
+         list-style: none;
+         padding: 0;
          }
          .container_mynav:after{
          content:'';
