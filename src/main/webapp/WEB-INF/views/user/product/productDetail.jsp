@@ -571,7 +571,7 @@
          .star1,
          .star2 {
          border: none;
-         width: 30px;
+         width: 21px;
          background-color: white;
          }
          /* 능력인증 → 영상링크 before 가상요소 */
@@ -777,6 +777,13 @@
          height: 3.6rem;
          width: 8.6rem;
          }
+         .fa-star{
+         color: rgb(250, 190, 0);
+         font-size : 18px;
+      	 }
+         .starSpacing{
+         letter-spacing: -2px;
+         }
       </style>
    </head>
    <body>
@@ -834,9 +841,17 @@
                         </div>
                         <div class="col-xs-8">
                            <p class=" user_title_text"><img src="resources/img/lv1.png" class="main_rank_index">
-                              지존파워동민 (<input type="text" value="3.9" class="star1">) 
+                              지존파워동민
                            </p>
-                           <div id="rateYo"></div>
+                           <div id="starTest" class="starSpacing">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                     &nbsp; ( <input type="text" value="4.5" class="star1">&nbsp;&nbsp;)
+                           </div>
+                           
                            <div class="row mt20">
                               <div class="col-xs-offset-1 col-xs-5 user_status_detail">
                                  <p>7건</p>
@@ -1052,11 +1067,17 @@
                                        <div class="row">
                                           <div class="col-xs-4">
                                              <span>
-                                                <div id="commentStar1"></div>
+                                                <div id="commentStar1" class="starSpacing">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                      </div>
                                              </span>
                                           </div>
                                           <div class="starLocation2">
-                                             <input type="text" value="1.6" class="star2" id="star1">
+                                             <input type="text" value="1" class="star2" id="star1">
                                           </div>
                                           <div class="pull-right">
                                              <span>찐유니짱이다 20.10.16</span>
@@ -1079,11 +1100,17 @@
                                        <div class="row">
                                           <div class="col-xs-4">
                                              <span>
-                                                <div id="commentStar2"></div>
+                                                <div id="commentStar2" class="starSpacing">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                            </div>
                                              </span>
                                           </div>
                                           <div class="starLocation2">
-                                             <input type="text" value="2.6" class="star2" id="star2">
+                                             <input type="text" value="2" class="star2" id="star2">
                                           </div>
                                           <div class="pull-right">
                                              <span>찐유니짱이다 20.10.16</span>
@@ -1106,11 +1133,17 @@
                                        <div class="row">
                                           <div class="col-xs-4">
                                              <span>
-                                                <div id="commentStar3"></div>
+                                                <div id="commentStar3" class="starSpacing">
+                                                	<i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
                                              </span>
                                           </div>
                                           <div class="starLocation2">
-                                             <input type="text" value="4.6" class="star2" id="star3">
+                                             <input type="text" value="4" class="star2" id="star3">
                                           </div>
                                           <div class="pull-right">
                                              <span>찐유니짱이다 20.10.16</span>
@@ -1242,7 +1275,7 @@
          const Projects = document.querySelectorAll('.project');
          const upup = document.querySelector('.category_detail');
          const upHeight = upup.getBoundingClientRect().height;
-         
+     
          // 스크롤
          workBtnContainer.addEventListener('click', (event) => {
              const target = event.target;

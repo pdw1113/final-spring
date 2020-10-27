@@ -31,18 +31,18 @@
          }
          .header{    
          width: 100%;
-         height: 6.2rem;;
+         height: 6.5rem;;
          }
          .left-bar{
          float: left;
          width: 13%;
-         height: 92rem;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
          .section{
          width: 87%;
          float: left;
-         height: 92rem;
+         height: 100vh;
          }
          .cate_Managerheader{
          color:rgb(141, 141, 141);
@@ -81,6 +81,9 @@
          letter-spacing: 0.15rem;
          border-top: 2px solid #e2e2e2;
          font-size: large;
+         }
+         #table04>tbody>tr>td{
+         vertical-align: middle;
          }
          .btn04-div04{
          text-align: center;
@@ -225,6 +228,16 @@
                }else{
                 $(".checkbox04").prop("checked", false);
                }
+            })
+            
+            $('.btn04').on('click',function(){
+            	let input = confirm('출금승인하시겠습니까?'); 
+            	alert(input);
+            	if(input){
+            		
+            	}else{
+            		return false;
+            	};
             })
          })
       </script>

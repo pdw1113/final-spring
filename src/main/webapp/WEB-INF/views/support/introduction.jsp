@@ -197,7 +197,7 @@
             </li>
             <li class="team-item">
                <div class="profile profile_purple">
-                  <img src="resources/img/정호_PIC.PNG">
+                  <img src="resources/img/정호_PIC.jpg">
                   <div class="profile-contents">
                      <h2>Jo JungHoe <span>모사꾼</span></h2>
                      <p>

@@ -14,7 +14,6 @@
       <!--xeicon-cdn-->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
       <!--bxslider-cdn-->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="resources/js/bxslider.min.js"></script>
       <!--bxslider-script-->
       <script>
@@ -1129,5 +1128,17 @@
             </ul>
          </div>
       </div>
+      <script>
+      $(function(){
+    	  $('.bx-next').css('right','5%');
+    	  
+    	  var main_contents_css = { 
+    	            'margin-right': '60px', 
+    	            'margin-left': '60px' 
+    	        };
+    	  
+    	  $('.main_contents_index').css(main_contents_css);
+      });
+      </script>
    </body>
 </html>

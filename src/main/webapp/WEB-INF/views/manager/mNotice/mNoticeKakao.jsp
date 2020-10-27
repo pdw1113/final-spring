@@ -19,7 +19,7 @@
          .font_jua {
          font-family: 'Jua', sans-serif;
          color: black;
-         }
+         }    
          html,
          body {
          width: 100%;
@@ -28,18 +28,18 @@
          }
          .header {
          width: 100%;
-         height: 6.2rem;
+         height: 6.5rem;
          }
          .left-bar {
          float: left;
          width: 13%;
-         height: 917px;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
          .section {
          width: 87%;
          float: left;
-         height: 55.5rem;
+         height: 100vh;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -203,12 +203,23 @@
          height: 3.6rem;
          width: 8.6rem;
          }
+         .noReact{
+         width: 1903px;
+         }
+         
+         .index_head_Mainhead{
+		 width: 1903px;	
+         }
+         
       </style>
    </head>
    <body>
       <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
+      
+      <div class="noReact">
+      
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
       </div>
@@ -332,6 +343,7 @@
             <div class="introduction">
             </div>
          </div>
+      </div>
       </div>
       <script>
          function contentsView(obj) {

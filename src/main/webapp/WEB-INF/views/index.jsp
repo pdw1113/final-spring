@@ -4,41 +4,19 @@
    <head>
       <meta charset="UTF-8">
       <title>Slide Project</title>
-      <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+      <!-- font -->
+      <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+      
+      <!-- JQuery -->
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
-      <style>
-         html, body { padding: 0; margin: 0; width:100%; height:100%}
-         *, *:before, *:after { box-sizing: inherit; }
-         .clearfix:after { content: ''; display: block; clear: both; float: none; }
-         .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
-         .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
-         .link:hover, .link:focus { color: #9fd6c2; }
-         /* 슬라이드 내부 */
-         #container { width: 1000px; margin: auto;}
-         .slide_wrap { position: relative; width: 800px; margin: auto; /*padding-bottom: 30px;*/ }
-         .slide_box { width: 100%; margin: auto; overflow-x: hidden; height: 400px; overflow-y: hidden; }
-         .slide_content { display: table; float: left; width: 800px; height: 400px; }
-         .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 20px; font-weight: bold; color: #555;  }
-         /* 슬라이드 좌우버튼 */
-         .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 30px; color: #999; background: none; border: 1px solid white; cursor: pointer; }
-         .slide_btn_box > .slide_btn_prev { left: -100px; }
-         .slide_btn_box > .slide_btn_next { right: -100px; }
-         /* 슬라이드 라디오 버튼 */
-         .slide_pagination { position: absolute; display:flex; top : 415px; left: 20%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-100%); }
-         .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-         .slide_pagination .dot.dot_active { background: #333; }
-         .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
-         /* 인피니티 능력자들 타이틀 */
-         .slide_p{ font-family: 'Black Han Sans'; color : rgb(250,190,0); font-size: 20px; margin :10px 10px 10px; }
-         .slide_grade_Nav{ width: 20px; height: 33px;}
-         /* 슬라이드 폰트 */
-         .type_text1 { font-family: 'Black Han Sans', sans-serif; top: 0px; left: 0px; position: relative; width:400px; height:400px;}
-      </style>
+      <script type="text/javascript" src="resources/js/typeit.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="resources/css/index.css">
    </head>
    <body>
       <!-- header 영역 -->
-      <%@ include file="WEB-INF/views/common/header.jsp" %>
+      <%@ include file="common/header.jsp" %>
       <!-- 슬라이드 영역 -->
       <div id="container">
          <div class="slide_wrap">
@@ -47,35 +25,35 @@
             <div class="slide_box">
                <div class="slide_list clearfix">
                   <div class="slide_content slide01">
-                     <p class="type_text1" style="font-size: 40px">
+                     <p class="type_text1">
                         디테일부터 바로잡는<br>
                         일러스트 & 포토샵
                      </p>
-                     <img src="resources/img/nha1.png"  width="400px" height="400px" style="object-fit: cover;">
+                     <img src="resources/img/main-1.png" class="img_main_st">
                   </div>
                   <div class="slide_content slide02">
-                     <p class="type_text1" style="font-size: 40px">스프링을 정복한 자<br>
+                     <p class="type_text1">스프링을 정복한 자<br>
                         스프링 프레임워크, 스프링 부트 등 쌉가능
                      </p>
-                     <img src="resources/img/cdm1.png"  width="400px" height="400px" style="object-fit: cover;">
+                     <img src="resources/img/main-2.png" class="img_main_st">
                   </div>
                   <div class="slide_content slide03">
-                     <p class="type_text1" style="font-size: 40px">간지가 나는 천동민의<br>
+                     <p class="type_text1">간지가 나는 천동민의<br>
                         리액트로 다 만들어드려요!
                      </p>
-                     <img src="resources/img/cdm2.png"  width="400px" height="400px" style="object-fit: cover;">
+                     <img src="resources/img/main-3.png" class="img_main_st">
                   </div>
                   <div class="slide_content slide04">
-                     <p class="type_text1" style="font-size: 40px">타입스크립트?<br>
+                     <p class="type_text1">타입스크립트?<br>
                         나 천동민에겐 껌이지
                      </p>
-                     <img src="resources/img/cdm3.png"width="400px" height="400px" style="object-fit: cover;">
+                     <img src="resources/img/main-4.png" class="img_main_st">
                   </div>
                   <div class="slide_content slide05">
-                     <p class="type_text1" style="font-size: 40px">나처럼 간지나는 웹사이트<br>
+                     <p class="type_text1">나처럼 간지나는 웹사이트<br>
                         천동민이 직접 만들어드립니다 
                      </p>
-                     <img src="resources/img/cdm4.png" width="400px" height="400px" style="object-fit: cover;">
+                     <img src="resources/img/main-5.png" class="img_main_st">
                   </div>
                </div>
             </div>
@@ -86,10 +64,10 @@
             <ul class="slide_pagination"></ul>
          </div>
       </div>
-      <%@ include file="WEB-INF/views/common/nav.jsp" %>
-      <%@ include file="WEB-INF/views/common/section.jsp" %>
-      <%@ include file="WEB-INF/views/common/footer.jsp" %>
-      <%@ include file="WEB-INF/views/common/talk.jsp" %>
+      <%@ include file="common/nav.jsp" %>
+      <%@ include file="common/section.jsp" %>
+      <%@ include file="common/footer.jsp" %>
+      <%@ include file="common/talk.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom
@@ -217,6 +195,5 @@
            });
          })();
       </script>
-      <script type="text/javascript" src="resources/js/typeit.min.js"></script>
    </body>
 </html>

@@ -20,7 +20,7 @@
    		 height: 36rem;
          }
       </style>
-   </head>
+   </head> 
    <body>
       <div class="container">
          <canvas id="myChart2"></canvas>

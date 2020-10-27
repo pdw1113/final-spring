@@ -142,7 +142,7 @@
    <body>
          <div class="index_head_Mainhead">
             <!-- 메인로고 -->
-            <a href="index.jsp"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
+            <a href="index.do"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
             <div class="head_search_div">
                <!-- 검색창 폼 -->
                <div class="main_search_Mainhead">

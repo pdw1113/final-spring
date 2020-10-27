@@ -17,23 +17,23 @@
       <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
       <style>
-         html,
+         html,  
          body {
-         width: 100%;
+         width: 100%; 
          padding: 0;
          margin: 0;
 
          }
          .header {
          width: 100%;
-         height: 6.2rem;
+         height: 6.5rem;
          /* background-color: aqua; */
          }
          .left-bar {
          float: left;
          width: 13%;
          width:250px;
-         height: 917px;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
 
@@ -41,7 +41,7 @@
          .section {
          width: 86%;
          float: left;
-         height: 55.5rem;
+         height: 100vh;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);

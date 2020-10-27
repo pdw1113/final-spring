@@ -23,18 +23,18 @@
          }
          .header{    
          width: 100%;
-         height: 6.2rem;
+         height: 6.5rem;
          }
          .left-bar{
          float: left;
          width: 13%;
-         height: 92rem;
+         height: 100vh;
          border-right: 1px solid gainsboro;
          }
          .section{
          width: 87%;
          float: left;
-         height: 92rem;
+         height: 100vh;
          }
          .cate_Managerheader {
          color: rgb(141, 141, 141);
@@ -54,34 +54,34 @@
          border-bottom: 3px solid black;
          }
          /* 전체 div */
-         .content_PersnalAccess {
+         .content_mUserLog {
          width: 100%;
          padding: 57px 0 125px 0;
          }
-         .content_PersnalAccess .layoutSubbox_PersnalAccess {
+         .content_mUserLog .layoutSubbox_mUserLog {
          position: relative;
          width: 1320px;
          margin: 0 auto;
          }
-         .searchhbox_PersnalAccess {
+         .searchhbox_mUserLog {
          position: relative;
          width: 1320px;
          margin: 0 auto;
          }
-         .content_PersnalAccess .layoutSubbox_PersnalAccess:after {
+         .content_mUserLog .layoutSubbox_mUserLog:after {
          content: "";
          display: block;
          clear: both;
          }
          /*검색버튼*/
-         .searchhBtn_PersnalAccess {
+         .searchhBtn_mUserLog {
          margin: -3px 14px 0px 0;
          padding-bottom: 8px;
          }
          .main-section {
          margin: 0 auto;
          }
-         .searchhBtn_PersnalAccess .btn_searchh_PersnalAccess:hover {
+         .searchhBtn_mUserLog .btn_searchh_mUserLog:hover {
          background-color: #fabe00;
          font-weight: 600;
          color: white;
@@ -114,57 +114,57 @@
          border: 1px solid #ccc;
          text-align: center;
          }
-         .id_text_PersnalAccess {
+         .id_text_mUserLog {
          font-size: 14px;
          }
-         .nickname_text_PersnalAccess {
+         .nickname_text_mUserLog {
          color: cornflowerblue;
          font-size: 14px;
          }
          /* 반응형~ */
          @media (max-width: 1360px) {
          /* 사이드 여백 */
-         .content_PersnalAccess .layoutSubbox_PersnalAccess,
+         .content_mUserLog .layoutSubbox_mUserLog,
          .main-section {
          width: auto;
          margin: 0 20px;
          }
          }
-         #shot_table_PersnalAccess {
+         #shot_table_mUserLog {
          width: 70px;
          }
-         #midle_table_PersnalAccess {
+         #midle_table_mUserLog {
          width: 90px;
          }
-         #long_table_PersnalAccess {
+         #long_table_mUserLog {
          width: 270px;
          }
-         .caption_PersnalAccess {
+         .caption_mUserLog {
          text-align: left;
          margin-bottom: 10px;
          }
          /* 검색결과 숫자 */
-         .caption_text_MemberManabger {
+         .caption_text_mUserLog {
          color: red;
          }
          /* 검색 테이블 */
-         .searchhbox_table_PersnalAccess {
+         .searchhbox_table_mUserLog {
          margin: 15px auto 20px;
          border-top: 1px solid rgb(173, 173, 173);
          border-collapse: collapse;
          }
          /* 검색테이블 td */
-         .searchhbox_table_PersnalAccess td {
+         .searchhbox_table_mUserLog td {
          height: 45px;
          }
          /* 검색테이블 th,td */
-         .searchhbox_table_PersnalAccess th,
+         .searchhbox_table_mUserLog th,
          td {
          border-bottom: 1px solid rgb(173, 173, 173);
          border-collapse: collapse;
          }
          /* 검색 테이블 주제 */
-         .searchtable_title_PersnalAccess {
+         .searchtable_title_mUserLog {
          width: 140px;
          text-align: left;
          padding-left: 10px;
@@ -172,20 +172,20 @@
          background-color: rgb(236, 236, 236);
          }
          /* 검색 테이블 요소*/
-         .searchtable_content_PersnalAccess {
+         .searchtable_content_mUserLog {
          width: 1130px;
          text-align: left;
          padding-left: 10px;
          }
          /* 아이디,등급,이름,닉네임 목록 */
-         .bdbox_PersnalAccess {
+         .bdbox_mUserLog {
          width: 140px;
          font-size: 17px;
          height: 30px;
          outline-style: none;
          }
          /* 검색창 */
-         .searchtext_PersnalAccess {
+         .searchtext_mUserLog {
          width: 450px;
          font-size: 17px;
          height: 28px;
@@ -193,12 +193,12 @@
          outline-style: none;
          }
          /* 체크박스 */
-         .checkbox_PersnalAccess {
+         .checkbox_mUserLog {
          font-size: 22px;
          float: left;
          margin-left: 10px;
          }
-         .checkboxes_PersnalAccess {
+         .checkboxes_mUserLog {
          zoom: 1.5;
          }
          .Admin_grant_Managerheader {
@@ -218,7 +218,7 @@
          outline-style: none;
          cursor:pointer;
          }
-         .form_control_PersnalAccess{
+         .form_control_mUserLog{
          margin-left: 10px;
          height: 25px;
          font-size: 18px;
@@ -232,13 +232,13 @@
          line-height: 38px;
          text-align: center;
          }
-         .datepicker_warp_PersnalAccess{
+         .datepicker_warp_mUserLog{
          display: table;
          }
-         .day_button_div_PersnalAccess{
+         .day_button_div_mUserLog{
          display: flex;
          }
-         .day_button_PersnalAccess{
+         .day_button_mUserLog{
          border: 1px solid gray;
          margin-left: 15px;
          width: 50px;
@@ -250,8 +250,9 @@
          padding-top: 2px;
          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 3), inset 0 0 2px rgba(255, 255, 255, 3), 0 1px 2px rgba(0, 0, 0, 29);
          cursor:pointer;
+         line-height: 18px;
          }
-         .seaerch_button_PersnalAccess{
+         .seaerch_button_mUserLog{
          width: 180px;
          font-size: 19px;
          background-color: rgb(219, 219, 219);
@@ -266,7 +267,7 @@
          margin-bottom: 10px;
          margin-left: 14px;
          }
-         .dateform_PersnalAccess{
+         .dateform_mUserLog{
          font-size: 18px;
          font-family: sans-serif;
          height:27px;
@@ -278,10 +279,12 @@
          margin-top: 1.5rem;
          line-height: 3rem;
          margin-right: 0.3rem;
+         transition-duration:0s;
          }
          .header div.login_box_Mainhead .head_login_Mainhead{
          height: 3.6rem;
          width: 8.6rem;
+         transition-duration:0s;
          }
       </style>
    </head>
@@ -299,47 +302,47 @@
             <div class="title_Managerheader">개인정보 접속기록 조회</div>
          </div>
          <div class="main-section">
-            <div class="searchhbox_PersnalAccess">
+            <div class="searchhbox_mUserLog">
                <!-- 검색 테이블 -->
-               <table class="searchhbox_table_PersnalAccess">
+               <table class="searchhbox_table_mUserLog">
                   <tr>
                      <!-- 검색어 -->
-                     <td class="searchtable_title_PersnalAccess">검색어</td>
-                     <td class="searchtable_content_PersnalAccess">
+                     <td class="searchtable_title_mUserLog">검색어</td>
+                     <td class="searchtable_content_mUserLog">
                         <div class="select_mybuylist">
-                           <select class="bdbox_PersnalAccess">
+                           <select class="bdbox_mUserLog">
                               <option value="">아이디</option>
                               <option value="">등급</option>
                               <option value="">이름</option>
                               <option value="">닉네임</option>
                            </select>
-                           <input type="text" class="searchtext_PersnalAccess"></input>
+                           <input type="text" class="searchtext_mUserLog"></input>
                         </div>
                      </td>
                   </tr>
                   <!-- 검색 기간 -->
                   <tr>
-                     <td class="searchtable_title_PersnalAccess">검색기간</td>
+                     <td class="searchtable_title_mUserLog">검색기간</td>
                      <td>
-                        <div class="datepicker_warp_PersnalAccess">
-                           <div class="day_button_div_PersnalAccess">
-                              <input type="date" class="dateform_PersnalAccess"> ~ <input type="date" class="dateform_PersnalAccess">
-                              <div class="day_button_PersnalAccess">
+                        <div class="datepicker_warp_mUserLog">
+                           <div class="day_button_div_mUserLog">
+                              <input type="date" class="dateform_mUserLog"> ~ <input type="date" class="dateform_mUserLog">
+                              <div class="day_button_mUserLog">
                                  오늘
                               </div>
-                              <div class="day_button_PersnalAccess">
+                              <div class="day_button_mUserLog">
                                  7일
                               </div>
-                              <div class="day_button_PersnalAccess">
+                              <div class="day_button_mUserLog">
                                  15일
                               </div>
-                              <div class="day_button_PersnalAccess">
+                              <div class="day_button_mUserLog">
                                  1개월
                               </div>
-                              <div class="day_button_PersnalAccess">
+                              <div class="day_button_mUserLog">
                                  3개월
                               </div>
-                              <div class="day_button_PersnalAccess">
+                              <div class="day_button_mUserLog">
                                  6개월
                               </div>
                            </div>
@@ -349,13 +352,13 @@
                </table>
             </div>
             <div class="Admin_grant_Managerheader ">
-               <button class="seaerch_button_PersnalAccess">검색</button>
+               <button class="seaerch_button_mUserLog">검색</button>
             </div>
             <!-- 검색결과 -->
-            <div class="layoutSubbox_PersnalAccess">
+            <div class="layoutSubbox_mUserLog">
                <table class="type07">
-                  <caption class="caption_PersnalAccess"> 검색
-                     <span class="caption_text_MemberManabger">1</span>건 / 전체 <span class="caption_text_MemberManabger">
+                  <caption class="caption_mUserLog"> 검색
+                     <span class="caption_text_mUserLog">1</span>건 / 전체 <span class="caption_text_mUserLog">
                      1</span>명
                   </caption>
                   <thead>
@@ -369,14 +372,14 @@
                   </thead>
                   <tbody>
                      <tr>
-                        <td id="long_table_PersnalAccess">2020-09-28 15:30:41</td>
-                        <td id="long_table_PersnalAccess">182.226.35.175</td>
-                        <td id="long_table_PersnalAccess">
-                           <span class="id_text_PersnalAccess">test_id_2</span>  
-                           <span class="nickname_text_PersnalAccess">지존파워동민</span>
+                        <td id="long_table_mUserLog">2020-09-28 15:30:41</td>
+                        <td id="long_table_mUserLog">182.226.35.175</td>
+                        <td id="long_table_mUserLog">
+                           <span class="id_text_mUserLog">test_id_2</span>  
+                           <span class="nickname_text_mUserLog">지존파워동민</span>
                         </td>
-                        <td id="midle_table_PersnalAccess">천동민</td>
-                        <td id="midle_table_PersnalAccess">은손</td>
+                        <td id="midle_table_mUserLog">천동민</td>
+                        <td id="midle_table_mUserLog">은손</td>
                      </tr>
                   </tbody>
                </table>
@@ -384,8 +387,8 @@
          </div>
       </div>
       <script> 
-         $('.day_button_PersnalAccess').click(function(event){
-             $('.day_button_PersnalAccess').css('background-color','white');
+         $('.day_button_mUserLog').click(function(event){
+             $('.day_button_mUserLog').css('background-color','white');
              $(this).css('background-color','rgb(219, 219, 219)');
          });
       </script>
