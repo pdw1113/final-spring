@@ -445,7 +445,7 @@
 
 <body>
     <div class="header">
-=======
+
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -824,7 +824,7 @@
    </head>
    <body>
       <div class="header">
->>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
+
          <%@ include file="../../common/header.jsp" %>
       </div>
       
@@ -997,7 +997,7 @@
                <br>ㆍ금칙어 등록시 단어별 구분은 ',' 콤마(,)로 등록합니다.(예: 운영자,관리자 등)
                <!-- <button class="saveButton">최종 저장</button> -->
             </div>
-<<<<<<< HEAD
+
         </div>
     </div>
     </div>
@@ -1113,126 +1113,11 @@
             document.getElementById("result2").value = '';
         }
 
-    </script>
-
+    </script> 
+                  
 </body>
 
-=======
-         </div>
-      </div>
-      <script>
-         let input1 = [];
-         let input2 = [];
-         let count1 = 1;
-         let count2 = 1;
-         
-         // 추가 저장
-         function insert1() {
-         
-             for (var i = 0; i < count1; i++) {
-                 input1[i] = document.getElementById("iText" + (i + 1)).value;
-                 // console.log(input1[i]);
-                 // console.log(input1);
-                 var combineText1 = input1.join(",  ");
-             }
-             document.getElementById("result1").value = combineText1;
-         }
-         
-         // 삭제 저장
-         function delete1() {
-             for (var i = 0; i < count2; i++) {
-                 input2[i] = document.getElementById("dText" + (i + 1)).value;
-                 console.log(input2[i]);
-                 var combineText2 = input2.join(",  ");
-             }
-             document.getElementById("result2").value = combineText2;
-         }
-         
-         function rowAdd1() {
-             count1 += 1;
-             insertRow = document.all("testShow1").insertRow();
-         
-             let insertRow_Num = insertRow.insertCell();
-             insertRow_Num.innerHTML = count1;
-         
-             // 키워드
-             insertRow_Key = insertRow.insertCell();
-             insertRow_Key.id;
-         
-             for (var i = 0; i < count1; i++) {
-                 insertRow_Key.innerHTML = "<input type='text' class='insertText' id=" + "iText" + (i + 1) + ">";
-             }
-         }
-         
-         function rowDelete1() {
-             if (count1 < 2) {
-                 alert("지울 수 없습니다.");
-             } else {
-                 count1 -= 1;
-                 $('#testShow1 tr:last').remove();
-                 input1.splice(count1, 1);
-             }
-         }
-         
-         function rowAdd2() {
-         
-             count2 += 1;
-             dinsertRow = document.all("testShow2").insertRow();
-         
-             // No.
-             let dinsertRow_Num = dinsertRow.insertCell();
-             dinsertRow_Num.innerHTML = count2;
-         
-             // 키워드
-             dinsertRow_Key = dinsertRow.insertCell();
-             dinsertRow_Key.id;
-         
-             for (var i = 0; i < count2; i++) {
-                 dinsertRow_Key.innerHTML = "<input type='text' class='deleteText' id=" + "dText" + (i + 1) + ">";
-             }
-         }
-         
-         function rowDelete2() {
-             if (count2 < 2) {
-                 alert("지울 수 없습니다.");
-             } else {
-                 count2 -= 1;
-                 $('#testShow2 tr:last').remove();
-                 input2.splice(count2, 1);
-             }
-         }
-         
-         $(document).on("keydown", "input[class=insertText]", function (key) {
-             if (key.keyCode == 13) {
-                 rowAdd1().click();
-             }
-         
-             $(".insertText").keyup(function () {
-                 $("#result1").text($(".insertText").val());
-             });
-         
-         });
-         
-         $(document).on("keydown", "input[class=deleteText]", function (key) {
-             if (key.keyCode == 13) {
-                 rowAdd2().click();
-             }
-         
-             $(".deleteText").keyup(function () {
-                 $("#result2").text($(".deleteText").val());
-             });
-         });
-         
-         
-         function clear1() {
-             document.getElementById("result1").value = '';
-         }
-         
-         function clear2() {
-             document.getElementById("result2").value = '';
-         }
-         
-      </script>
-   </body>
->>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
+
+        
+
 </html>

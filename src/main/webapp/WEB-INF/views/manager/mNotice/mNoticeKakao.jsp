@@ -19,7 +19,7 @@
          .font_jua {
          font-family: 'Jua', sans-serif;
          color: black;
-         }
+         }    
          html,
          body {
          width: 100%;
@@ -203,12 +203,23 @@
          height: 3.6rem;
          width: 8.6rem;
          }
+         .noReact{
+         width: 1903px;
+         }
+         
+         .index_head_Mainhead{
+		 width: 1903px;	
+         }
+         
       </style>
    </head>
    <body>
       <div class="header">
          <%@ include file="../../common/header.jsp" %>
       </div>
+      
+      <div class="noReact">
+      
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
       </div>
@@ -332,6 +343,7 @@
             <div class="introduction">
             </div>
          </div>
+      </div>
       </div>
       <script>
          function contentsView(obj) {
