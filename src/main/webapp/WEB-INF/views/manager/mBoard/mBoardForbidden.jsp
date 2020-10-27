@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -443,6 +443,8 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
     <div class="header">
 
    <head>
@@ -822,8 +824,8 @@
       </style>
    </head>
    <body>
+>>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
       <div class="header">
-
          <%@ include file="../../common/header.jsp" %>
       </div>
       
@@ -994,9 +996,7 @@
                <br>ㆍ게시판에 스팸글 또는 욕설 등의 글이 등록되지 않도록 차단하는 기능입니다.
                <br>ㆍ게시글을 등록할 때 금칙어가 포함되어 있을 경우 게시글이 등록되지 않도록 제한합니다.
                <br>ㆍ금칙어 등록시 단어별 구분은 ',' 콤마(,)로 등록합니다.(예: 운영자,관리자 등)
-               <!-- <button class="saveButton">최종 저장</button> -->
             </div>
-
         </div>
     </div>
     </div>
@@ -1115,8 +1115,5 @@
     </script> 
                   
 </body>
-
-
-        
 
 </html>
