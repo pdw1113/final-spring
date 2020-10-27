@@ -1,10 +1,9 @@
 package com.fp.neezit.user.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserContoller {
@@ -65,13 +64,34 @@ public class UserContoller {
 	}
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public String memberLogin(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
+	public String memberLogin(@RequestParam("id") String id,
+							  @RequestParam("pwd") String pwd) {
 		
 		System.out.println("ID : " + id);
 		System.out.println("PWD : " + pwd);
 		
 		return "index";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

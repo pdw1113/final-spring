@@ -8,7 +8,6 @@ public class User {
 	private String phone;
 	private String email;
 	private String pwd;
-	private String address;
 	private Date enrollDate;
 	private Date updateDate;
 	private String mStatus;
@@ -18,14 +17,13 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String phone, String email, String pwd, String address, Date enrollDate, Date updateDate,
+	public User(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate,
 			String mStatus) {
 		super();
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.pwd = pwd;
-		this.address = address;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
 		this.mStatus = mStatus;
@@ -62,15 +60,7 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
+	
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
@@ -97,8 +87,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", phone=" + phone + ", email=" + email + ", pwd=" + pwd + ", address=" + address
-				+ ", enrollDate=" + enrollDate + ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
+		return "User [name=" + name + ", phone=" + phone + ", email=" + email + ", pwd=" + pwd + 
+				", enrollDate=" + enrollDate + ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
 	}
 	
 }
