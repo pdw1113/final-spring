@@ -10,7 +10,6 @@
       <!-- 부가적인 테마 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
       <!-- include libraries(jQuery, bootstrap) -->
-
       <style>
          html,
          body {
@@ -146,6 +145,18 @@
          /*인풋 창 검은줄 없애기*/
          input:focus {
          outline: none;
+         }
+              /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
+         .header div.login_box_Mainhead{
+         margin-top: 1.5rem;
+         line-height: 3rem;
+         margin-right: 0.3rem;
+         transition-duration:0s;
+         }
+         .header div.login_box_Mainhead .head_login_Mainhead{
+         height: 3.6rem;
+         width: 8.6rem;
+         transition-duration:0s;
          }
       </style>
    </head>

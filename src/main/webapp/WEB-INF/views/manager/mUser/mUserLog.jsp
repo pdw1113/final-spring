@@ -278,10 +278,12 @@
          margin-top: 1.5rem;
          line-height: 3rem;
          margin-right: 0.3rem;
+         transition-duration:0s;
          }
          .header div.login_box_Mainhead .head_login_Mainhead{
          height: 3.6rem;
          width: 8.6rem;
+         transition-duration:0s;
          }
       </style>
    </head>
