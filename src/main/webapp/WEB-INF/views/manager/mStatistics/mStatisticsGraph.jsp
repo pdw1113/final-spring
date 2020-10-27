@@ -19,7 +19,7 @@
     	 width: 100%;
    		 height: 36rem;
          }
-      </style>
+      </style> 
    </head>
    <body>
       <div class="container">
