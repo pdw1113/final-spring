@@ -10,8 +10,6 @@
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-      <!-- JQUERY-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       <style>
          /* 기본 셋팅 */
          *{ margin: 0; padding: 0; }
