@@ -1128,5 +1128,17 @@
             </ul>
          </div>
       </div>
+      <script>
+      $(function(){
+    	  $('.bx-next').css('right','5%');
+    	  
+    	  var main_contents_css = { 
+    	            'margin-right': '60px', 
+    	            'margin-left': '60px' 
+    	        };
+    	  
+    	  $('.main_contents_index').css(main_contents_css);
+      });
+      </script>
    </body>
 </html>
