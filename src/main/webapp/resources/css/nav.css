@@ -29,7 +29,7 @@ background: linear-gradient(rgb(255, 211, 66), rgb(250, 190, 0));
 margin: 0 auto;
 width: 86px;
 }
-nav ul {
+nav ul { 
 overflow: hidden;
 }
 .nav_img {

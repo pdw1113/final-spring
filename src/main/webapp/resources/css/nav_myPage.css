@@ -30,7 +30,7 @@ border:1px #e5e5e5 solid;
 border-top: solid rgb(250, 190, 0) 2px;
 width: 82.5rem;
 display: flex;
-/*가로 row*/
+/*가로 row*/ 
 flex-direction: row;
 /* 한줄에 가득차면 다음줄로 이동 안하겠다.*/
 flex-wrap: nowrap;

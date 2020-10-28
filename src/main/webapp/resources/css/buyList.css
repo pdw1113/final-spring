@@ -36,7 +36,7 @@ margin-top: -2px auto -1px;
 border-radius: 5px;
 transition: 0.3s;
 outline: none;
-cursor:pointer;
+cursor:pointer; 
 box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 .btn_align_mybuylist .btn_search_mybuylist:hover {

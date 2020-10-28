@@ -34,7 +34,7 @@ font-family: 'Jua', sans-serif;
 font-family: 'Noto Sans KR', sans-serif;
 }
 /* -------------- */
-/* 오른쪽 하단 채팅 아이콘 */
+/* 오른쪽 하단 채팅 아이콘 */ 
 .chatIcon{
 position: fixed;
 bottom: 0px;
