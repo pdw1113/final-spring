@@ -1,0 +1,209 @@
+@charset "UTF-8";
+body,html{
+margin:0;
+padding:0;
+width:100%;
+}
+/*인풋 창 검은줄 없애기*/
+input:focus { outline:none; }
+/*"시간 상품등록" 텍스트*/
+.tit_sect_addproduct{
+margin: 35px 0 25px 0;
+font-size: 32px;
+font-weight: 500;
+}   
+/* 경고문 내용*/
+.text {
+color: #666;
+font-size: 15px;
+line-height: 22px;
+}
+/*경고문 틀*/
+.warring_text_addproduct{
+margin: 10px;
+margin-left: 50px;
+}
+.productaddtext_addproduct{
+width: auto;
+color: #333;
+font-size: 24px;
+font-weight: 500;
+line-height: 1.2;   
+}
+.product_input_addproduct{
+margin-left: 50px;
+margin-right:50px;
+margin-bottom: 20px;
+border-bottom: 1px solid gray;
+}
+.frame_addproduct{
+width: 1320px;
+margin: 0 auto;
+border-top: solid #fabe00;
+}
+.img_addproduct{
+position: relative;
+width: 150px;
+height: 150px; 
+border-radius: 70%;
+object-fit: cover;
+overflow: hidden;
+z-index: 0;
+}
+.img_addproduct2{
+float: right;
+margin-top: 120px;
+margin-right: 10px;
+background-color: white;
+border: none;
+outline: none;
+color:none;
+}
+.input_image_addproducthtml{
+visibility: hidden;
+}
+.priviewimg_addproduct{
+margin-left: 50px;
+float: left;
+border-radius: 70%
+}
+.person_status_addproduct{
+margin-left: 300px;
+margin-bottom: 10px;
+}
+.img_buttondiv_addproduct{
+border: 1px solid black;
+width: 30px;
+height: 30px;
+}
+.person_status_addproduct th{
+font-size: 18px;
+line-height: 36px;
+}
+.person_status_addproduct td{
+border-bottom: 1px solid #e7e7e7;
+font-size: 17px;
+color: #666;
+padding-left: 30px;
+}
+.frame1_addproduct{
+margin-left: 50px;
+margin-right:50px;
+border-bottom: 1px solid gray;
+padding-bottom: 65px;
+}
+.title_div_addproduct{
+margin-top: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgb(236, 236, 236);
+width: 1220px;
+}
+.input_div_addproduct{
+margin-top: 15px;
+margin-left: 50px;
+padding-bottom: 15px;
+width: 1220px;
+}
+.input_text_addproduct{
+margin-left: 15px;
+vertical-align: middle;
+padding: 0 15px;
+font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
+position: relative;
+height: 36px;
+border: 1px solid #a3a0a0;
+color: #333;
+font-size: 16px;
+width:1000px;
+}
+.input_title_addproduct{
+font-size: 16px;
+font-weight: 700;
+}
+.status_div_addproduct{
+margin-top: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgb(236, 236, 236);
+}
+.category_select_addproduct {
+height: 36px;
+border: 1px solid #a3a0a0;
+font-size: 16px;
+width: 312px;
+}
+.career_addproduct{
+margin-top: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgb(236, 236, 236);
+}
+.won_addproduct{
+border-color: #a3a0a0;
+border-style: solid;
+border-width: 1px 1px 1px 0;
+padding-top: 6px;
+padding-bottom: 10px;
+padding-right: 5px;
+}
+.price_div_addproduct{
+margin-top: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgb(236, 236, 236);
+}
+.input_money_addproduct{
+margin-left: 15px;
+vertical-align: middle;
+padding: 0 15px;
+font-family: Malgun Gothic, sans-serif, Dotum, '돋움', arial;
+position: relative;
+height: 36px;
+border: 1px solid #a3a0a0;
+color: #333;
+font-size: 16px;
+width: 290px; 
+margin-left: 90px; 
+border-right: none;
+}
+.finish_button_div_addproduct{
+margin-top: 30px;
+}
+.finish_button_addproduct{
+width: 120px;
+height: 40px;
+text-align: center;
+line-height: 45px;
+border-radius: 15px;
+font-size: 25px;
+border-radius: 7px 7px 7px 7px;
+color: white;
+background-color: #fabe00;
+font-family: jua;
+margin-left: 625px;
+cursor:pointer;
+}
+.header div.login_box_Mainhead{
+margin-top: 1.5rem;
+line-height: 3rem;
+margin-right: 0.3rem;
+transition-duration:0s;
+}
+.header div.login_box_Mainhead .head_login_Mainhead{
+height: 3.6rem;
+width: 8.6rem;
+transition-duration:0s;
+}
+
+.m-r-27{
+	margin-right:27px;
+}
+
+.m-l-90{
+	margin-left:90px;
+}
+
+.m-l-122{
+	margin-left: 122px;
+}
+
+.m-b-10{
+	margin-bottom: 10px;
+}

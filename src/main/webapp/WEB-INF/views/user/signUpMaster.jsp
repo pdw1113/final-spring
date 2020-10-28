@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Document</title>
 
     <!-- JUA 폰트-->
@@ -13,429 +15,7 @@
     <!-- JQUERY-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <style>
-        /* 기본 셋팅 */
-        body,html{
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-
-        ul{
-            padding: 0;
-        }
-
-        li{
-            list-style: none;
-        }
-
-        hr{
-            width: 90%;
-        }
-
-        a{
-            text-decoration: none;
-        }
-        
-        .green{
-            color: springgreen;
-        }
-        .red{
-            color: red;
-        }
-        /* ------------------------ */
-
-        /* margin */
-        .margin-first-sgm{
-            margin-bottom: 0.3rem;
-        }
-
-        .minus-margin-sgm{
-            margin-bottom: -2rem;
-        }
-
-        .margin-top-sgm{
-            margin-top: 1rem;
-        }
-        /* ------------------------ */
-
-        /* jua 폰트 */
-        .font_jua{
-          font-family: 'Jua', sans-serif;
-        }
-
-        /* 능력자 등록 정보입력 창 */
-        .info-container-sgm{
-            text-align: center; 
-            margin: 0 auto; 
-            border: 3px solid rgb(250, 190, 0); 
-            border-radius: 15px; 
-            width: 50rem; 
-            height: fit-content;
-            box-shadow: 0 0 25px 3px rgb(0,0,0,0.22);
-        }
-
-        /* input width 500px*/
-        .input_master{
-            border: 0.2rem solid black;
-            border-radius: 7px;
-            height: 1.2em;
-            width: 500px;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        /* input width 570px*/
-        .input_master_2{
-            border: 0.2rem solid black;
-            border-radius: 7px;
-            height: 1.2em;
-            width: 570px;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        /* input width 260px*/
-        .input_master_3{
-            border: 0.2rem solid black;
-            border-radius: 7px;
-            height: 1.2em;
-            width: 150px;
-            font-size: 20px;
-            margin-bottom: 15px;
-            font-family: 'Jua', sans-serif;
-        }
-
-        /* 버튼 */
-        .btn_sgm{
-            height: 1.2em;
-            text-align: center;
-            margin-left: 10px;
-            font-size: 1.3rem;
-            border-radius: 7px;
-            border: 3px solid black;
-            color: white;
-            background-color: black;
-            padding: 0.2em 0;
-            box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
-        }
-
-        .btn_sgm_2{
-            height: 1.2em;
-            text-align: center;
-            margin-left: 10px;
-            font-size: 1.3rem;
-            border-radius: 7px;
-            background-color: red; 
-            color: white; 
-            border: 3px solid red;
-            padding: 0.2em 0;
-            box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
-        }
-
-        .btn_sgm:hover{
-            cursor: pointer;
-            opacity: 0.6;
-        }
-
-        .btn_sgm_2:hover{
-            cursor: pointer;
-            opacity: 0.6;
-        }
-        /* -------------------------- */
-
-        /*인풋 창 검은줄 없애기*/
-        input:focus { outline:none; }
-
-        /* 능력인증 → 학력인증 before 가상요소 */
-        .edu-ability:before{
-            content: attr(title);
-            position: relative;
-            left: -270px;
-            font-size: 1rem;
-        }
-
-        /* 능력인증 → 자격증 before 가상요소 */
-        .certify-ability:before{
-            content: attr(title);
-            position: relative;
-            left: -232px;
-            font-size: 1rem;
-        }
-
-        /* 능력인증 → 소셜미디어 before 가상요소 */
-        .social-media:before{
-            content: attr(title);
-            position: relative;
-            left: -253px;
-            font-size: 1rem;
-        }
-
-        /* 능력인증 → 영상링크 before 가상요소 */ 
-        .video-link:before{
-            content: attr(title);
-            position: relative;
-            left: -259px;
-            font-size: 1rem;
-        }
-
-        /* 라디오 버튼 디자인 */
-        div.radio-wrap {
-            display: inline-flex;
-            align-items: center;
-            transform : scale(1.2);
-        }
-
-        input[type='checkbox']:hover, input[type='checkbox']+label:hover{
-            cursor: pointer;
-            opacity: 0.4;
-        }
-
-        /* input[type='radio'],
-        input[type='radio']:checked {
-            appearance: none;
-            width: 1.3rem;
-            height: 1.3rem;
-            border-radius: 100%;
-            margin-right: 0.1rem;   
-        }
-
-        input[type='radio'] {
-            border: 3px solid rgb(250,190,0);
-        }
-
-        .toggle-sgm{
-            background-color: rgb(250,190,0);
-        }
-
-        input[type='radio']:focus {
-            outline: 0;
-        }
-
-        input[type='radio']:hover{
-            cursor: pointer;
-            opacity: 0.6;
-        } */
-        /* -------------------- */
-
-        /* textarea 디자인 */
-        .noresize-ta{
-            resize: none;
-            width: 36rem;
-            height: 20rem;
-            border: 3px solid black;
-            border-radius: 7px;
-        }
-
-        /* focus 할 때 검은 테두리 없애기 */
-        .noresize-ta:focus{
-            outline: 0;
-        }
-
-        /* border-radius: 100% */
-        .border-radius-100{
-            border-radius: 100%;
-        }
-        
-        /* img 커버 div */
-        .img-container-sgm{
-            overflow: hidden; 
-            margin-top: 0.5rem; 
-            margin-bottom: 2rem; 
-            width: 12rem; 
-            height: 12rem; 
-            display: inline-block; 
-            transition: 1s;
-        }
-
-        .img-container-sgm-2{
-            overflow: hidden; 
-            margin-top: 0.5rem; 
-            margin-bottom: 3.5rem; 
-            width: 12rem; 
-            height: 10rem; 
-            display: inline-block; 
-            transition: 1s;
-        }
-
-        /* 능력자 사진 옆 설명 */
-        .img-container-info{
-            overflow: hidden; 
-            display: inline-block; 
-            text-align: left;
-            width: 20rem; 
-            height: 6rem; 
-            margin-top: 0.5rem;
-            margin-left: 2rem; 
-            padding-left: 1rem;
-            position: absolute;
-            top: 4rem;
-            background-color: rgb(250, 190, 0);
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
-            font-family: 'Jua', sans-serif;
-            transition: 1s;
-            box-shadow: 12px 4px 8px 0px rgb(0,0,0,0.6);
-        }
-
-        /* 신분증 사진 옆 설명 */
-        .img-container-info-2{
-            position: relative; 
-            top: -200px; 
-            right: -520px;
-            border: 3px solid black;
-            width: fit-content;
-            height: fit-content;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
-            margin-bottom: -90px;
-            padding-bottom: 10px;
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        .img-container-sgm:hover{
-            margin: 0.5rem;
-            margin-bottom: 2rem;
-            width: 15rem;
-            height: 15rem;
-            box-shadow: 0px 10px 3px 1px  rgb(0,0,0,0.25);
-        }
-
-        .img-container-sgm-2:hover{
-            margin-top: 0.5rem;
-            width: 14rem;
-            height: 12rem;
-            box-shadow: 0px 25px 20px 1px  rgb(0,0,0,0.25);
-        }
-        /* --------------------- */
-
-        /* img 사이즈 */
-        .img-style-size{
-            width: 100%; 
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .img-style-size2{
-            width: 100%;
-            height: 100%;
-        }
-
-        .img-style-size:hover, .img-style-size2:hover{
-            cursor: pointer;
-        }
-
-        /* title 및 sub-title*/
-        .title-sgm{
-            margin-top: 0.5em; 
-            font-size: 2em;
-        }
-
-        .sub-title-sgm{
-            font-size: 1.5em; 
-            margin-bottom: 0.5em;
-        }
-        /* ---------------- */
-
-        /* text-algin:center */
-        .text-align-center-sgm{
-            text-align: center;
-        }
-
-        /* 카테고리 등록 창 */
-        .select-sgm{
-            border: 3px solid black; 
-            border-radius: 7px; 
-            font-size: 1rem; 
-            margin-right: 1em;
-        }
-
-        /* 카테고리 등록 좌,우,백 버튼 */
-        .lr-btn-img-size{
-            width: 1.7rem; 
-            height: 1.7rem;
-            border-radius: 20%;
-            box-shadow: 0 0 3px 2px rgb(0,0,0,0.2);
-        }
-
-        .lr-btn-img-size:hover{
-            cursor: pointer;
-            opacity: 0.6;
-        }
-
-        .l-btn-container{
-            position: relative; 
-            bottom: 5rem; 
-            margin-right: 1rem;
-        }
-
-        .r-btn-container{
-            position: relative; 
-            bottom: 5rem; 
-            margin-right: 1rem;
-        }
-
-        .d-btn-container{
-            position: relative;
-            bottom: 2.3rem;
-            right: 4.5rem;
-            margin-right: -2rem;
-        }
-
-        /* ----------------------- */
-
-        .hide-span-sgm{
-            position: absolute; 
-            padding-left: 10px; 
-            padding-top: 5px;
-            display: none;
-        }
-
-        .instagram:before, .twitter:before, .blog:before, .git:before{
-            content: '';
-            position: absolute;
-            margin-left: -34px;
-            margin-top: 2px;
-            background-size: cover;
-            background-position: center;
-            width:1.7rem;
-            height: 1.7rem;
-        }
-
-        .instagram:before{
-            background-image: url("resources/img/instagram.png");
-        }
-        .twitter:before{
-            background-image: url("resources/img/twitter.png");
-        }
-        .blog:before{
-            background-image: url("resources/img/blog.png");
-        }
-        .git:before{
-            background-image: url("resources/img/git.png")
-        }
-
-        /* 유튜브 아이프레임 크기 */
-        iframe{
-            margin: 0 auto;
-            width: 550px;
-            display: block;
-            height: 300px;
-            margin-bottom: 10px;
-        }
-
-        /* 업로드 버튼 'OK' 표시*/
-        .upCheck{
-            position: absolute;
-            margin-left: 10px;
-            margin-top: 4px;
-            color: rgb(250, 190, 0);
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="resources/css/signUpMaster.css">
 </head>
 <body>
 	
@@ -726,21 +306,21 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master" type="text" placeholder="고등학교" style="width: 500px;">
+                        <input class="input_master width_500" type="text" placeholder="고등학교">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="대학교" style="width: 242px;">
-                        <input class="input_master" type="text" placeholder="학과" style="width: 242px;">
+                        <input class="input_master width_242" type="text" placeholder="대학교">
+                        <input class="input_master width_242" type="text" placeholder="학과">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="대학원" style="width: 242px;">
-                        <input class="input_master" type="text" placeholder="학과" style="width: 242px;">
+                        <input class="input_master width_242" type="text" placeholder="대학원">
+                        <input class="input_master width_242" type="text" placeholder="학과">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
@@ -769,7 +349,7 @@
                         <input type="file" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
-                    <img src="resources/img/plus-icon.png" class="lr-btn-img-size" id="add-input" style="position: absolute; margin-top: -140px; margin-left: -330px;">
+                    <img src="resources/img/plus-icon.png" class="lr-btn-img-size btn_add_input" id="add-input">
                 </div>
             </li>
 
@@ -879,13 +459,13 @@
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="home" name="a" value="자택"/>
-                        <label class="font_jua" for="home" style="background-color: rgb(250, 190, 0); border: 1px solid black; border-radius: 20%;">자택</label>
+                        <label class="font_jua home_choose" for="home">자택</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="work" value="출근"/>
-                        <label class="font_jua" for="work" style="background-color: rgb(250, 190, 0); border: 1px solid black; border-radius: 20%;">출근</label>
+                        <label class="font_jua home_choose" for="work">출근</label>
                     </div>
-                    <span style="position: absolute; margin-left: 10px;">*(중복선택가능)</span>
+                    <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
                 <div>
                     <input class="input_master_3" type="time" name="" id="">
