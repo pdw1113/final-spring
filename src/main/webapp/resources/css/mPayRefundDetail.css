@@ -17,7 +17,7 @@
          .left-bar{
          float: left;
          width: 13%;
-         height: 100vh;
+         height: 110.5rem;
          border-right: 1px solid gainsboro;
          }
          .section{
@@ -56,6 +56,9 @@
          content: "";
          display: block;
          clear: both;
+         }
+         .main-section{
+         height: 100vh;
          }
          /*결제섹션 상단부분*/
          .payment-main-03{
@@ -125,6 +128,9 @@
          .num03{
          font-size: large;
          color: gray;
+         }
+         #lastTable03{
+         border-bottom: 1px solid #E2E2E2;
          }
          /*환불사유 테이블*/
          #lastTable03>tbody>tr>td{
