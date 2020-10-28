@@ -12,14 +12,7 @@
          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <!-- 차트 링크 -->
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-      <style>
-         #myChart2 {
-         position: relative;
-    	 top: -2.5rem;
-    	 width: 100%;
-   		 height: 36rem;
-         }
-      </style>
+      <link rel="stylesheet" type="text/css" href="resources/css/mStatisticsGraph2.css">
    </head> 
    <body>
       <div class="container">
