@@ -15,7 +15,7 @@ height: 2780px;
 .crew_top{
 width: 100%;
 height: 600px;
-background: url(./resources/img/crew.jpg);
+background: url(../img/crew.jpg);
 background-size: cover;
 background-position: 50% 50%;
 }
