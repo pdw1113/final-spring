@@ -86,7 +86,7 @@
             </li>
             <!-- 검색 폼 영역 -->
             <li class='SearchOption'>
-               <div>
+               <div id='search_div_notice'>
                   <select id='selSearchOption' class="input_design">
                      <option value='A'>제목+내용</option>
                      <option value='T'>제목</option>
@@ -100,17 +100,27 @@
       </div>
       <%@ include file="../common/footer.jsp" %>
       <script>
-         $(document).on('click','#paging div',function(){
-             alert('페이징');
-         });
-         
-         $('#btn_search').click(function(){
-             alert('검색');
-         })
-         
-         $('#a').click(function(){
-             location.href="customer_notice_detail.html";
-         })
+		      var id = "admin";
+		      
+		      $(document).on('click','#paging div',function(){
+		          alert('페이징');
+		      });
+		      
+		      $('#btn_search').click(function(){
+		          alert('검색');
+		      })
+		
+		      if(id=="admin"){
+		         $('#search_div_notice').append("<input type='button' value='글 작성' class='input_design btn_search' id='btn_write_notice'/>");
+		      }
+		      
+		       $('#btn_write_notice').click(function(){
+		          $(location).attr('href',"noticeInsert.do");
+		      })
+		      
+		      $('#a').click(function(){
+		          location.href="customer_notice_detail.html";
+		      })
       </script>
    </body>
 </html>
