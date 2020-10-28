@@ -46,46 +46,46 @@ text-decoration: none;
 }
 /* Nav 아이콘 마우스 올릴 때 효과 (hover) */
 .web_icon:hover {
-content: url(resources/img/webDev-removebg_white.png);
+content: url(../img/webDev-removebg_white.png);
 }
 .db_icon:hover {
-content: url(resources/img/database_white.png);
+content: url(../img/database_white.png);
 }
 .phone_icon:hover {
-content: url(resources/img/cell-phone_white.png);
+content: url(../img/cell-phone_white.png);
 }
 .embed_icon:hover {
-content: url(resources/img/embedded_bold2_white.png);
+content: url(../img/embedded_bold2_white.png);
 }
 .chain_icon:hover {
-content: url(resources/img/blockchain_white.png);
+content: url(../img/blockchain_white.png);
 }
 .devlop_icon:hover {
-content: url(resources/img/development_white.png);
+content: url(../img/development_white.png);
 }
 .server_icon:hover {
-content: url(resources/img/server_white.png);
+content: url(../img/server_white.png);
 }
 .game_icon:hover {
-content: url(resources/img/game_white.png);
+content: url(../img/game_white.png);
 }
 .security_icon:hover {
-content: url(resources/img/security_white.png);
+content: url(../img/security_white.png);
 }
 .shop_icon:hover {
-content: url(resources/img/shop_icon_white.png);
+content: url(../img/shop_icon_white.png);
 }
 .analysis_icon:hover {
-content: url(resources/img/analysis_white.png);
+content: url(../img/analysis_white.png);
 }
 .quality_icon:hover {
-content: url(resources/img/QA2_white.png);
+content: url(../img/QA2_white.png);
 }
 .chatbot_icon:hover {
-content: url(resources/img/PngItem_white.png);
+content: url(../img/PngItem_white.png);
 }
 .etc_icon:hover {
-content: url(resources/img/etc_white.png);
+content: url(../img/etc_white.png);
 }
 nav li p {
 color: black;
