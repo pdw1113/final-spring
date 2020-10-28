@@ -5,47 +5,7 @@
       <meta charset="UTF-8">
       <title>footer</title>
       <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
-      <style>
-         body, html{
-         margin:0;
-         width:100%;
-         }
-         footer {
-         margin-top: 2rem;
-         width:100%;
-         }
-         .footerDiv{
-         border-top: 5px solid rgb(250,190,0);
-         text-align: center;
-         padding: 10px 0px 10px 20px;
-         line-height: 22px;
-         color: lightgray;
-         font-family: 'Gothic A1', sans-serif;
-         font-size: 13px;
-         }
-         .footerTable{
-         color: black;
-         text-align: left;
-         margin: auto;
-         }
-         .footerTable td{
-         padding: 0px 40px 0px 0px;
-         }
-         .footerA{
-         text-decoration: none;
-         color: black;
-         }
-         .footerP{
-         color: lightgray;
-         }
-         .footerFirstRow{
-         font-weight:bold;
-         text-align: center;
-         }
-         .footeryoutubeimg{
-         width: 50px;
-         }
-      </style>
+      <link rel="stylesheet" type="text/css" href="resources/css/footer.css">
    </head>
    <body>
       <footer>
