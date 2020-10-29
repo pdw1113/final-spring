@@ -23,7 +23,7 @@
          <!-- 정보 입력폼 -->
          <input class="signup_input_signup" type="text" placeholder="이름(실명)을 입력하세요.">
          <input class="signup_input_signup short_input" type="text" placeholder=" -를 포함한 휴대폰 번호">
-         <div class="overlapping_check_number_signup" id="overlapping_check_number_signup" value="0">
+         <div class="overlapping_check_number_signup" id="overlapping_check_number_signup" value="1">
          </div>
          <input class="signup_input_signup" type="text" placeholder="E-MAIL을 입력하세요.">
          <!-- 인증메일 발송 -->

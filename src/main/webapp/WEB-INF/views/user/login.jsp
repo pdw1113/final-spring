@@ -20,7 +20,7 @@
          <!-- 로그인 이미지 -->
          <img  class="login_img_login" src="./resources/img/Login_logo.png">
          <!-- 아이디 비번 입력폼 -->
-         <input class="login_input_login" type="text" placeholder="E-MAIL을 입력하세요" name="id">
+         <input class="login_input_login" type="text" placeholder="E-MAIL을 입력하세요" name="email">
          <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요" name="pwd">
          <!-- 버튼폼 -->
          <div class="button_login">
