@@ -16,4 +16,8 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.loginUser",u);
 	}
 
+	public int phoneCheck(String phone) {
+		return sqlSession.selectOne("userMapper.phoneCheck", phone);
+	}
+
 }

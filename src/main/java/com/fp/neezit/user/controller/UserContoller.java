@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fp.neezit.user.model.service.UserService;
@@ -104,6 +105,12 @@ public class UserContoller {
 	 * 	커맨드 객체로 Model을 사용하게 되면 뷰(view)로 전달하고자 하는 데이터를 맵 형식(key, value)로 담을 때 사용한다.
 	 *  scope는 request이다.
 	 */
+	/**
+	 * 로그인 세션 메소드
+	 * @param u
+	 * @param model
+	 * @return 
+	 */
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String memberLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
 		User loginUser = uService.loginUser(u);
@@ -116,6 +123,25 @@ public class UserContoller {
 		}else {
 			model.addAttribute("msg", "로그인 실패!");
 			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * 휴대폰번호 중복체크 AJAX
+	 * @param phone
+	 * @return
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping("phoneCheck.do")
+	public String idCheck(String phone) throws IOException  {
+		
+		int result = uService.phoneCheck(phone);
+		
+		if(result > 0) { // 중복 존재
+			return "fail";
+		}else {
+			return "ok";
 		}
 	}
 	
@@ -232,4 +258,6 @@ public class UserContoller {
         }
         return "redirect:index.do";
     }
+    
+    
 }

@@ -26,4 +26,9 @@ public class UserServiceImpl implements UserService{
 		return loginUser;
 	}
 
+	@Override
+	public int phoneCheck(String phone) {
+		return uDao.phoneCheck(phone);
+	}
+
 }
