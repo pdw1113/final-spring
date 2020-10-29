@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userMapper">
+
+	<resultMap type="User" id="userResultSet">
+		<id property="email" column="USER_EMAIL"/>
+		<result property="pwd" column="USER_PASSWORD"/>
+		<result property="name" column="USER_NAME"/>
+		<result property="email" column="USER_EMAIL"/>
+		<result property="phone" column="USER_PHONE"/>
+		<result property="enrollDate" column="USER_ENROLLDATE"/>
+		<result property="updateDate" column="USER_UPDATEDATE"/>
+		<result property="status" column="USER_STATUS"/>
+	</resultMap>
+	
+	<!-- parameterType : #{id}로 들어가는 매개변수의 타입 -->
+	<!-- resultMap -->
+	<select id="loginUser" parameterType="User" resultMap="userResultSet">
+		<!-- 암호화 전 -->
+		SELECT *
+		FROM NEEZ_USER
+		WHERE USER_EMAIL = #{email}
+		AND USER_PASSWORD = #{pwd}
+		AND USER_STATUS = 'N'
+	</select>
+  
+</mapper>

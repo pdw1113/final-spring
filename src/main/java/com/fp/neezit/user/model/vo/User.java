@@ -10,15 +10,14 @@ public class User {
 	private String pwd;
 	private Date enrollDate;
 	private Date updateDate;
-	private String mStatus;
+	private String status;
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate,
-			String mStatus) {
+	public User(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate, String status) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -26,7 +25,7 @@ public class User {
 		this.pwd = pwd;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
-		this.mStatus = mStatus;
+		this.status = status;
 	}
 
 	public String getName() {
@@ -60,7 +59,7 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
@@ -77,18 +76,20 @@ public class User {
 		this.updateDate = updateDate;
 	}
 
-	public String getmStatus() {
-		return mStatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setmStatus(String mStatus) {
-		this.mStatus = mStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", phone=" + phone + ", email=" + email + ", pwd=" + pwd + 
-				", enrollDate=" + enrollDate + ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
+		return "User [name=" + name + ", phone=" + phone + ", email=" + email + ", pwd=" + pwd + ", enrollDate="
+				+ enrollDate + ", updateDate=" + updateDate + ", status=" + status + "]";
 	}
+	
+	
 	
 }
