@@ -25,13 +25,16 @@
          <input class="signup_input_signup short_input" type="text" placeholder=" -를 포함한 휴대폰 번호">
          <div class="overlapping_check_number_signup" id="overlapping_check_number_signup" value="1">
          </div>
-         <input class="signup_input_signup" type="text" placeholder="E-MAIL을 입력하세요.">
-         <!-- 인증메일 발송 -->
-         <div class="buttons_signup">
-            <a href="#">
-               <div class="signup_button_signup">인증메일 발송</div>
-            </a>
-         </div>
+         <form action="signUp.do" method="post">
+         	<input class="signup_input_signup" type="text" placeholder="E-MAIL을 입력하세요." name="email">
+
+	         <!-- 인증메일 발송 -->
+	         <div class="buttons_signup">
+	            <span>
+	               <button class="signup_button_signup">인증메일 발송</button>
+	            </span>
+	         </div>
+         </form>
          <!-- 인증코드 입력 텍스트폼이랑 제한시간 -->
          <input class="signup_input_signup short_input" type="text" placeholder="인증코드를 입력하세요.">
          <span class="timelimit_signup">제한시간 : </span>
