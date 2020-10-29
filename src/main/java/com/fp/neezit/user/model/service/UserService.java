@@ -6,4 +6,6 @@ public interface UserService {
 	
 	User loginUser(User u);
 
+	int phoneCheck(String phone);
+
 }

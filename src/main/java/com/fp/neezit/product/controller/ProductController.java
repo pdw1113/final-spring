@@ -23,6 +23,6 @@ public class ProductController {
 	
 	@RequestMapping("productListSearch.do")
 	public String productListSearch() {
-		return "user/product/productListSearch";
+		return "user/product/productListSearch"; 
 	}
 }
