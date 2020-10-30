@@ -141,8 +141,11 @@
 		         console.log(data);
 		         if(data !== "fail"){
 		         	alert("번호가 인증되었습니다.")
+		       	 	 $("#ranNum").attr("readonly",true);
+					 $("#ranNum").css("background-color","rgb(225,225,225)");
 		         }else{
 		         	alert("인증에 실패하였습니다.");
+		         	 $("#ranNum").focus();
 		         }
 		         },
 		         error:function(jqxhr, textStatus, errorThrown){
