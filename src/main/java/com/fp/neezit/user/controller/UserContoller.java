@@ -214,8 +214,8 @@ public class UserContoller {
             System.out.println("인증번호 :" + dice);
 
             // 사진 파일 전송 
-            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
-            messageHelper.addInline("g.gif", file);
+//            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
+//            messageHelper.addInline("g.gif", file);
             
             // MimeMessage 전송
             mailSender.send(message);
