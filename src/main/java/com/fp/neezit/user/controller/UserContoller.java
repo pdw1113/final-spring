@@ -2,15 +2,17 @@ package com.fp.neezit.user.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -143,15 +145,22 @@ public class UserContoller {
 		}else {
 			return "ok";
 		}
+		
+		// @ReponseBody
+		// 클라이언트에서 서버로 필요한 데이터를 전송하기 위해서 JSON이라는 데이터를 요청 본문에 담아서 서버로 보내면, 
+		// 서버에서는 @RequestBody 어노테이션을 사용하여 HTTP 요청 본문에 담긴 값들을 자바 객체로 변환 시켜, 객체에 저장시킵니다.
+		// 서버에서 클라이언트로 응답 데이터를 전송하기 위해서 @ResponseBody 를 사용하여 
+		// 자바 객체를 HTTP 응답 본문의 객체로 변환하여 클라이언트로 전송시키는 역할을 합니다.
 	}
 	
     @Inject    //서비스를 호출하기 위해서 의존성을 주입
     JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
 	
 	// EMAIL 인증
-	@RequestMapping(value = "signUp.do", method=RequestMethod.POST)
-    public String mailSending(String email, Model model, HttpServletResponse response_email) throws IOException {
-
+    @ResponseBody
+	@RequestMapping(value = "emailNum.do", method=RequestMethod.POST)
+    public String mailSending(String email) throws IOException {
+		System.out.println("들어왔다");
 		// 인증번호 난수(랜덤 숫자)
         Random r = new Random();
         
@@ -202,7 +211,7 @@ public class UserContoller {
             messageHelper.setText(content);  // 메일 내용
             
             // 인증번호 출력용
-            System.out.println(dice);
+            System.out.println("인증번호 :" + dice);
 
             // 사진 파일 전송 
             FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
@@ -211,53 +220,30 @@ public class UserContoller {
             // MimeMessage 전송
             mailSender.send(message);
             
+            // String으로 넘겨주기위해 Integer를 이용한다.
+            String diceString = Integer.toString(dice);
+            
+            return diceString;
+            
         } catch (Exception e) {
+        	
             System.out.println(e);
+            return "fail";
         }
-        
-        // 
-        model.addAttribute("dice", dice);
-        
-        response_email.setContentType("text/html; charset=UTF-8");
-        PrintWriter out_email = response_email.getWriter();
-        out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-        out_email.flush();
-        
-        return "/user/email";
     }
-	
-    //이메일로 받은 인증번호를 입력하고 전송 버튼을 누르면 맵핑되는 메소드.
-    //내가 입력한 인증번호와 메일로 입력한 인증번호가 맞는지 확인해서 맞으면 회원가입 페이지로 넘어가고,
-    //틀리면 다시 원래 페이지로 돌아오는 메소드
+
+    // 사용자가 입력한 인증번호를 비교하는 메소드
+    @ResponseBody
     @RequestMapping(value = "{dice}.do", method = RequestMethod.POST)
-    public String join_injeung(Model model, String confirm_number, @PathVariable String dice, HttpServletResponse response_equals) throws IOException {
+    public String join_injeung(Model model, String confirm_number, @PathVariable String dice) throws IOException {
     											   // @PathVaribale : value의 {dice}를 받아온다.
         
         System.out.println("인증번호 : " + dice);
-        System.out.println("사용자가 입력한 인증번호 : "+ confirm_number);
+        System.out.println("사용자가 입력한 인증번호 : " + confirm_number);
 
         // 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
-        if (confirm_number.equals(dice)) {
-
-//            response_equals.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out_equals = response_equals.getWriter();
-//            out_equals.println("<script>alert('인증번호가 일치하였습니다. 회원가입창으로 이동합니다.');</script>");
-//            out_equals.flush();
-            
-        }else if (confirm_number != dice) {
-        	
-            model.addAttribute("msg","이메일 인증 실패!");
-            
-//            response_equals.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out_equals = response_equals.getWriter();
-//            out_equals.println("<script>alert('인증번호가 일치하지않습니다. 인증번호를 다시 입력해주세요.');</script>");
-//            out_equals.flush();
-
-            return "common/errorPage";
-            
-        }
-        return "redirect:index.do";
+        if (confirm_number.equals(dice)) return "ok";
+        
+        return "fail";
     }
-    
-    
 }

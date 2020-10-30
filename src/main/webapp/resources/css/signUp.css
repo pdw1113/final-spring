@@ -1,4 +1,4 @@
-@charset "UTF-8";
+		  @charset "UTF-8";
 body,html{
 margin:0;
 padding:0;
@@ -52,6 +52,26 @@ background-color: #fabe00;
 font-family: jua;
 outline: 0;
 border: none;
+}
+.cfBtn{
+float:left;
+width: 60px;
+height: 40px;
+text-align: center;
+line-height: 45px;
+margin-left: 10px;
+border-radius: 15px;
+font-size: 25px;
+border-radius: 7px 7px 7px 7px;
+color: white;
+background-color: #fabe00;
+font-family: jua;
+outline: 0;
+border: none;
+}
+.cfBtn:hover{
+cursor: pointer;
+opacity: 0.6;
 }
 .signup_button_signup:hover{
 cursor: pointer;
