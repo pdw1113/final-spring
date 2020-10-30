@@ -7,11 +7,13 @@
       <title>MY TEST PAGE</title>
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
       <link rel="stylesheet" type="text/css" href="resources/css/signUp.css">
+      <link rel="stylesheet" type="text/css" href="resources/css/loading.css">
    </head>
    <body>
       <%@ include file="../common/header.jsp" %>
       <!-- 가장 바깥에 있는 회원가입 창 틀 -->
       <div class="signupbox_signup">
+      
          <!-- 회원가입 이미지 -->
          <img  class="signup_img_signup" src="./resources/img/Login_logo.png">
          <!-- 정보 입력폼 -->
@@ -48,6 +50,7 @@
                <span>
                <button class="signup_button_signup color_black" onclick='return validate();'>회원가입</button>
                </span>
+				   
             </div>
          </form>
          <!-- 카카오톡 회원가입 -->
@@ -74,7 +77,9 @@
          // 이메일 인증번호 전송
          function emailNum(){
 	         let email = $("#email").val();
-	         
+	          	$(".signupbox_signup").prepend(
+   						"<div class='loading-container'><div class='loading'></div><div id='loading-text'>loading</div></div>"
+   				);
 	         $.ajax({
 		         url:"emailNum.do",
 		         data:{email:email},
@@ -83,9 +88,14 @@
 		         console.log(data);
 		         if(data !== "fail"){
 		         	alert("메일이 발송되었습니다. 인증번호를 입력해 주세요.");
+		         	 $(".loading-container").remove();
 		         	dice = data;
+					 $("#email").attr("readonly",true);
+					 $("#email").css("background-color","rgb(225,225,225)");
+					 $("#ranNum").focus();
 		         }else{
 		         	alert("메일 발송에 실패하였습니다.");
+		         	 $("#email").focus();
 		         }
 	         },
 	         error:function(jqxhr, textStatus, errorThrown){
@@ -95,9 +105,27 @@
 		         console.log(jqxhr);
 		         console.log(textStatus);
 		         console.log(errorThrown);
+		         $("#email").focus();
 		         }
 	         });
+
          };
+         
+         
+         //로딩
+         function loading(count){
+			
+        	 var countdown = setInterval(function(){
+                 //해당 태그에 아래 내용을 출력
+                     //0초면 초기화 후 이동되는 사이트
+                     if (count == 0) {
+                    	
+                         clearInterval(countdown);
+                         }
+                     count--;//카운트 감소
+                 }, 1000);
+         }
+         
          
          // 이메일 인증번호 체크
          function numCheck(){
