@@ -15,7 +15,7 @@
          <!-- 회원가입 이미지 -->
          <img  class="signup_img_signup" src="./resources/img/Login_logo.png">
          <!-- 정보 입력폼 -->
-         <form action="123456.do" method="POST"> 
+         <form action="123456.do" method="POST">  
             <!-- 이름 -->
             <input class="signup_in" type="text" placeholder="이름(실명)을 입력하세요." name="name">
             <!-- 휴대폰 번호 -->
