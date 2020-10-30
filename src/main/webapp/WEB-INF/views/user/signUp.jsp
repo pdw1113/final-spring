@@ -17,7 +17,7 @@
          <!-- 회원가입 이미지 -->
          <img  class="signup_img_signup" src="./resources/img/Login_logo.png">
          <!-- 정보 입력폼 -->
-         <form action="123456.do" method="POST">  
+         <form action="123456.do" method="POST" autocomplete="off">  
             <!-- 이름 -->
             <input class="signup_in" type="text" placeholder="이름(실명)을 입력하세요." name="name">
             <!-- 휴대폰 번호 -->
@@ -28,7 +28,7 @@
                </span>
             </div>
             <!-- 이메일  -->
-            <input class="signup_in" type="text" placeholder="E-MAIL을 입력하세요." id="email" name="email">
+            <input class="signup_in" type="text" placeholder="E-MAIL을 입력하세요."  id="email" name="email">
             <!-- 인증메일 발송 -->
             <div class="buttons_signup">
                <span>
@@ -37,7 +37,7 @@
             </div>
             <!-- 인증코드 입력 텍스트폼이랑 제한시간 -->
             <div class="confirmCon">
-               <input class="signup_in short_input" type="text" placeholder="인증코드를 입력하세요." id="ranNum" name="ranNum">
+               <input class="signup_in short_input" type="text" placeholder="인증코드를 입력하세요."  id="ranNum" name="ranNum">
                <button class="cfBtn" type="button" onclick="numCheck();">확인</button>
                <span class="timelimit_signup">제한시간 : </span>
                <span>${dice}</span>
@@ -95,6 +95,7 @@
 					 $("#ranNum").focus();
 		         }else{
 		         	alert("메일 발송에 실패하였습니다.");
+		         	$(".loading-container").remove();
 		         	 $("#email").focus();
 		         }
 	         },
