@@ -8,4 +8,6 @@ public interface UserService {
 
 	int phoneCheck(String phone);
 
+	int insertMember(User u);
+
 }

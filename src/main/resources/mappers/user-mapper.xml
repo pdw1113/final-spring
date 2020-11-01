@@ -31,5 +31,10 @@
 		FROM NEEZ_USER
 		WHERE USER_PHONE = #{phone}
 	</select>
+	
+	<insert id="insertUser" parameterType="User">
+		INSERT INTO NEEZ_USER
+		VALUES(#{name},#{phone},#{email},#{pwd},default,default,default)
+	</insert>
   
 </mapper>
