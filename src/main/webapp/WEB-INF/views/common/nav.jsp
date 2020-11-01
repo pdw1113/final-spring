@@ -15,85 +15,85 @@
       <div class="wrapper_Nav">
          <nav class="wrapper_NavIcon">
             <li>
-               <a href="productList.do">
+               <a href="productList.do?navNo=10">
                   <img class="nav_img web_icon" src="resources/img/webDev-removebg-preview.png"><br>
                   <p>웹개발</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=20">
                   <img class="nav_img db_icon" src="resources/img/database_black.png"><br>
                   <p>데이터베이스</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=30">
                   <img class="nav_img phone_icon" src="resources/img/cell-phone.png"><br>
                   <p>모바일앱</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=40">
                   <img class="nav_img embed_icon" src="resources/img/embedded_bold2.png"><br>
                   <p>임베디드</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=50">
                   <img class="nav_img chain_icon" src="resources/img/blockchain.png"><br>
                   <p>블록체인</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=60">
                   <img class="nav_img server_icon" src="resources/img/server.png"><br>
                   <p>서버</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=70">
                   <img class="nav_img shop_icon" src="resources/img/shop_icon.png"><br>
                   <p>쇼핑몰</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=80">
                   <img class="nav_img devlop_icon" src="resources/img/development.png"><br>
                   <p>프로그램개발</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=90">
                   <img class="nav_img game_icon" src="resources/img/game.png"><br>
                   <p>게임</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=100">
                   <img class="nav_img analysis_icon" src="resources/img/analysis.png"><br>
                   <p>데이터분석</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=110">
                   <img class="nav_img security_icon" src="resources/img/security.png"><br>
                   <p>보안</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=120">
                   <img class="nav_img quality_icon" src="resources/img/QA2_black.png"><br>
                   <p>품질보증</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=130">
                   <img class="nav_img chatbot_icon" src="resources/img/PngItem_5002858.png"><br>
                   <p>챗봇</p>
                </a>
             </li>
             <li>
-               <a href="#">
+               <a href="productList.do?navNo=140">
                   <img class="nav_img etc_icon" src="resources/img/etc.png"><br>
                   <p>기타</p>
                </a>
