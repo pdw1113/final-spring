@@ -30,7 +30,7 @@ public class UserDao {
 	public int emailCheck(String email) {
 		return sqlSession.selectOne("userMapper.emailCheck",email);
 	}
-		
+	
 	public List<ProductCategory> category() {
 		return sqlSession.selectList("productMapper.category");
 	}

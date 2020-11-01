@@ -1,5 +1,7 @@
 package com.fp.neezit.user.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
+
+import net.sf.json.JSONArray;
 
 /*
  * 	Alt + Shift + J : 메소드에 주석 달기
@@ -40,8 +45,14 @@ public class UserContoller {
 		return "user/findPwd";
 	}
 	
-	@RequestMapping("signUpMaster.do")
-	public String signUpMaster() {
+	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
+	public String signUpMaster(Model model) throws Exception {
+		
+		// 상품 카테고리 3분류
+		List<ProductCategory> category = null;
+		category = uService.category();
+		model.addAttribute("category", JSONArray.fromObject(category));
+		
 		return "user/signUpMaster";
 	}
 	
