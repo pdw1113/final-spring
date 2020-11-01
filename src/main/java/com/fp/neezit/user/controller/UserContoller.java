@@ -1,29 +1,24 @@
 package com.fp.neezit.user.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Dice;
 import com.fp.neezit.user.model.vo.User;
 
 @SessionAttributes("loginUser") // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
@@ -34,6 +29,10 @@ public class UserContoller {
 	// @Autowired를 걸어줌으로써 자동으로 인스턴스를 사용할 수 있게 된다.(자동할당)
 	@Autowired
 	private UserService uService;
+	
+	// 이메일 인증 비밀번호
+	@Autowired
+	private Dice diceObj;
 	
 	@RequestMapping("login.do")
 	public String login() {
@@ -108,7 +107,7 @@ public class UserContoller {
 	 *  scope는 request이다.
 	 */
 	/**
-	 * 로그인 세션 메소드
+	 * 1. 로그인 세션 메소드
 	 * @param u
 	 * @param model
 	 * @return 
@@ -129,7 +128,7 @@ public class UserContoller {
 	}
 	
 	/**
-	 * 휴대폰번호 중복체크 AJAX
+	 * 2. 휴대폰번호 중복체크 AJAX
 	 * @param phone
 	 * @return
 	 * @throws IOException
@@ -153,19 +152,29 @@ public class UserContoller {
 		// 자바 객체를 HTTP 응답 본문의 객체로 변환하여 클라이언트로 전송시키는 역할을 합니다.
 	}
 	
-    @Inject    //서비스를 호출하기 위해서 의존성을 주입
-    JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
+    @Inject    					// 서비스를 호출하기 위해서 의존성을 주입
+    JavaMailSender mailSender;	// 메일 서비스를 사용하기 위해 의존성을 주입함.
 	
-	// EMAIL 인증
+    /**
+     * 3. EMAIL 인증
+     * @param email
+     * @return
+     * @throws IOException
+     */
     @ResponseBody
 	@RequestMapping(value = "emailNum.do", method=RequestMethod.POST)
     public String mailSending(String email) throws IOException {
-		System.out.println("들어왔다");
+    	
 		// 인증번호 난수(랜덤 숫자)
         Random r = new Random();
         
         // 이메일로 받는 인증코드 부분 (난수) (0 ~ 4589361) + 49311;
-        int dice = r.nextInt(4589362) + 49311; 
+        int diceInt = r.nextInt(4589362) + 49311; 
+        
+        // String으로 바꿔준다.
+        String dice = Integer.toString(diceInt);
+        
+        diceObj.setDice(dice);
         
         // 보내는 사람 Email
         String setfrom = "cjsehdals0430@gmail.com";
@@ -211,7 +220,7 @@ public class UserContoller {
             messageHelper.setText(content);  // 메일 내용
             
             // 인증번호 출력용
-            System.out.println("인증번호 :" + dice);
+            System.out.println("랜덤 생성된 인증번호 :" + dice);
 
             // 사진 파일 전송 
 //            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
@@ -220,10 +229,7 @@ public class UserContoller {
             // MimeMessage 전송
             mailSender.send(message);
             
-            // String으로 넘겨주기위해 Integer를 이용한다.
-            String diceString = Integer.toString(dice);
-            
-            return diceString;
+            return "ok";
             
         } catch (Exception e) {
         	
@@ -232,18 +238,88 @@ public class UserContoller {
         }
     }
 
-    // 사용자가 입력한 인증번호를 비교하는 메소드
+    /**
+     * 3─1. EMAIL 인증번호 비교 메소드 
+     * @param model
+     * @param confirm_number
+     * @param dice
+     * @return
+     * @throws IOException
+     */
     @ResponseBody
-    @RequestMapping(value = "{dice}.do", method = RequestMethod.POST)
-    public String join_injeung(Model model, String confirm_number, @PathVariable String dice) throws IOException {
+    @RequestMapping(value = "dice.do", method = RequestMethod.POST)
+    public String join_injeung(Model model, String confirm_number) throws IOException {
     											   // @PathVaribale : value의 {dice}를 받아온다.
-        
+    	String dice = diceObj.getDice();
         System.out.println("인증번호 : " + dice);
         System.out.println("사용자가 입력한 인증번호 : " + confirm_number);
-
-        // 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
-        if (confirm_number.equals(dice)) return "ok";
         
+        // 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
+        if(dice != null) {
+        	
+        	// 확인버튼 누를 때
+	        if (confirm_number.equals(dice)) {
+	        	
+	        	// 확인 버튼 눌렀는지 체크용
+	        	diceObj.setBtn("ok");
+		        return "ok";
+	        }
+	        
+	        // 회원가입 버튼 누를 때 ( 확인 버튼 누른 후에 회원가입 버튼 눌러야 회원가입이 될 수 있도록)
+	        else if(!confirm_number.equals(dice)) {
+	        	
+	        	// 확인 버튼 눌르면 getBtn()이 ok
+	        	if(diceObj.getBtn() == "ok") {
+	        		return "ok";
+	        		
+	        	// 확인 버튼 안누르면 getBtn()이 null
+	        	}else {
+	        		return "fail";
+	        	}
+	        }
+        }
         return "fail";
     }
+    
+    // 예전 로직
+//    @ResponseBody
+//    @RequestMapping(value = "{dice}.do", method = RequestMethod.POST)
+//    public String join_injeung(Model model, String confirm_number, @PathVariable String dice, Dice diceObj) throws IOException {
+//    											   // @PathVaribale : value의 {dice}를 받아온다.
+//    	System.out.println(diceObj.getDice());
+//        System.out.println("인증번호 : " + dice);
+//        System.out.println("사용자가 입력한 인증번호 : " + confirm_number);
+//
+//        // 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
+//        if (confirm_number.equals(dice)) return "ok";
+//        
+//        return "fail";
+//    }
+    
+	// 암호화 처리
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+    
+ 	/**
+ 	 * 4. 회원가입 메소드
+ 	 * @param u
+ 	 * @param model
+ 	 * @return
+ 	 */
+ 	@RequestMapping("uinsert.do")
+ 	public String insertMember(User u, Model model) {
+
+ 		System.out.println("암호화 전 : " + u);
+ 		u.setPwd(bcryptPasswordEncoder.encode(u.getPwd()));
+ 		System.out.println("암호화 후 " + u);
+ 		
+ 		// 이제 서비스로 이동
+ 		int result = uService.insertMember(u);
+ 		if(result > 0) {
+ 			return "redirect:index.do";
+ 		}else {
+ 			model.addAttribute("msg","회원가입실패");
+ 			return "common/errorPage";
+ 		}
+ 	}
 }

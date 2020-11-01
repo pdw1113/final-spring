@@ -20,4 +20,8 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.phoneCheck", phone);
 	}
 
+	public int insertMember(User u) {
+		return sqlSession.insert("userMapper.insertUser", u);
+	}
+
 }

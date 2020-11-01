@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService{
 		return uDao.phoneCheck(phone);
 	}
 
+	@Override
+	public int insertMember(User u) {
+		return uDao.insertMember(u);
+	}
+
 }
