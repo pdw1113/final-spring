@@ -10,4 +10,6 @@ public interface UserService {
 
 	int insertMember(User u);
 
+	int emailCheck(String email);
+
 }

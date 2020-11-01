@@ -32,6 +32,13 @@
 		WHERE USER_PHONE = #{phone}
 	</select>
 	
+	<!-- 이메일 중복 체크 -->
+	<select id="emailCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
 	<insert id="insertUser" parameterType="User">
 		INSERT INTO NEEZ_USER
 		VALUES(#{name},#{phone},#{email},#{pwd},default,default,default)
