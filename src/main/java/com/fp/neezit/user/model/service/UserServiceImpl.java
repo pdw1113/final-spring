@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService{
 		return uDao.insertMember(u);
 	}
 
+	@Override
+	public int emailCheck(String email) {
+		return uDao.emailCheck(email);
+	}
+
 }

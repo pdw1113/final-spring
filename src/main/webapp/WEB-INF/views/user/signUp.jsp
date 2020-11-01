@@ -80,92 +80,88 @@
       
       <!-- AJAX 이메일 인증 -->
       <script>
+      
          // 이메일 인증번호 전송
          function emailNum(){
+        	 // EMAIL
 	         let email = $("#email").val();
-	          	$(".signupbox_signup").prepend(
-   						"<div class='loading-container'><div class='loading'></div><div id='loading-text'>loading</div></div>"
-   				);
+	         // 로딩 DIV
+	         let loadingDiv = "<div class='loading-container'><div class='loading'></div><div id='loading-text'>loading</div></div>";
+	         // 로딩 DIV 생성
+	         $(".signupbox_signup").prepend(loadingDiv);
+	         // 이메일 인증번호 전송 AJAX
 	         $.ajax({
 		         url:"emailNum.do",
 		         data:{email:email},
 		         type:"post",
 		         success:function(data){
-		         if(data !== "fail"){
-		         	 $(".loading-container").remove();
-		         	 alert("메일이 발송되었습니다. 인증번호를 입력해 주세요.");
-					 $("#email").attr("readonly",true);
-					 $("#email").css("background-color","rgb(225,225,225)");
-					 $("#ranNum").focus();
-		         }else{
-		         	alert("메일 발송에 실패하였습니다.");
-		         	$(".loading-container").remove();
-		         	 $("#email").focus();
-		         }
-	         },
-	         error:function(jqxhr, textStatus, errorThrown){
-		         console.log("ajax 처리 실패");
-		         
-		         // 에러 로그
-		         console.log(jqxhr);
-		         console.log(textStatus);
-		         console.log(errorThrown);
-		         $("#email").focus();
-		         }
-	         });
-
-         };
+			       	 // 성공했을 때
+			         if(data === "ok"){
+			         	 $(".loading-container").remove();
+			         	 alert("메일이 발송되었습니다. 인증번호를 입력해 주세요.");
+						 $("#email").attr("readonly",true);
+						 $("#email").css("background-color","rgb(225,225,225)");
+						 $("#ranNum").focus();
+				     // 이메일 중복 될 때
+			         }else if(data === "duplicate"){
+			         	 $(".loading-container").remove();
+			        	 alert("이미 존재하는 이메일이 있습니다.");
+						 $("#ranNum").focus();
+					 // 전송실패 시
+			         }else{
+			         	 alert("메일 발송에 실패하였습니다.");
+			         	 $(".loading-container").remove();
+			         	 $("#email").focus();
+			         }
+		         },
+		         error:function(jqxhr, textStatus, errorThrown){
+			         console.log("ajax 처리 실패");
+			         $("#email").focus();
+			         }
+		         });
+         	};
          
          // 이메일 인증번호 체크
          function numCheck(){
-	         
+        	 // 입력한 인증번호
 	         let userNum = $("#ranNum").val();
-	         
+	         // 인증번호 비교 AJAX
 	         $.ajax({
 		         url: "dice.do",
 		         data:
 		         {confirm_number : userNum},
 		         type:"post",
 		         success:function(data){
-		         console.log(data);
-		         if(data !== "fail"){
-		         	alert("번호가 인증되었습니다.");
-		       	 	$("#ranNum").attr("readonly",true);
-					$("#ranNum").css("background-color","rgb(225,225,225)");
-		         }else{
-		         	alert("이메일 인증에 실패하였습니다.");
-		         	$("#ranNum").focus();
-		         }
+			         // 번호 비교 성공 시
+			         if(data === "ok"){
+			         	alert("번호가 인증되었습니다.");
+			       	 	$("#ranNum").attr("readonly",true);
+						$("#ranNum").css("background-color","rgb(225,225,225)");
+					 // 번호 비교 실패 시
+			         }else{
+			         	alert("이메일 인증에 실패하였습니다.");
+			         	$("#ranNum").focus();
+			         }
 		         },
 		         error:function(jqxhr, textStatus, errorThrown){
 			         console.log("ajax 처리 실패");
-			         
-			         // 에러 로그
-			         console.log(jqxhr);
-			         console.log(textStatus);
-			         console.log(errorThrown);
+			         $("#ranNum").focus();
 		         }
 	         });
          }
          
-         // 회원가입 버튼 눌렀을 때
+         // 회원가입 버튼 종합 검사
          function validate(){
-        	 
-        	 let check = true;
+
+        	 // 확인 버튼 안눌렀을 시
         	 let userNum = "a";
-        	 
-	         // 12자리보다 작을 때
-	         if($("#phone").val().length < 12){
-	         	alert("휴대폰번호를 입력해주세요.")
-	         	$("#phone").focus();
-	         	return false;
-	         	
+        	 // AJAX Boolean 값
+        	 let check = true;
 	         // 중복된 휴대폰번호일 때
-	         }else if($("#phDuplCk").val() == 0){
+	         if($("#phDuplCk").val() == 0){
 	         	alert("이미 사용중인 휴대폰 번호입니다.");
 	         	$("#phone").focus();
 	         	return false;
-	         	
 	         //	numCheck()의 활성화 되었을 때
 	         }else{
 	        	 $.ajax({
@@ -175,50 +171,46 @@
 			         {confirm_number : userNum},
 			         type:"post",
 			         success:function(data){
-			         console.log(data);
-			         if(data == "ok"){
-			         }else{
-			         	alert("이메일 인증을 완료해주세요.");
-			         	check = false;
-			         }
+				         if(data == "ok"){
+				        	 
+				         }else{
+				         	alert("이메일 인증을 완료해주세요.");
+				         	check = false;
+				         }
 			         },
 			         error:function(jqxhr, textStatus, errorThrown){
 				         console.log("ajax 처리 실패");
-				         
-				         // 에러 로그
-				         console.log(jqxhr);
-				         console.log(textStatus);
-				         console.log(errorThrown);
 				         check = false;
 			         }
 		         });
-	        	 console.log(check);
 	        	 return check;
 	         }
          }
          
       	 // 휴대폰 번호 중복체크 AJAX
          $(function(){
+        	 // 핸드폰번호 입력 시마다 AJAX 통신
 	         $("#phone").on("keyup",function(){
+	        	// #phone의 값
 	         	let phone = $(this).val();
-	         	
+	         	// 12자리보다 작을 때는 AJAX 통신 X
 	         	if(phone.length < 12){
 	         		$(".dpck_ph").hide();
 	         		$("#phDupCk").val(0);
 	         		return; // 함수 실행 중지.
 	         	}
-	         	
 	         	$.ajax({
 	         		url:"phoneCheck.do",
 	         		data:{phone:phone},
 	         		type:"post",
 	         		success:function(data){
-	         			console.log(data);
+	         			// 중복되지 않았을 때
 	         			if(data == "ok"){
 	                         $('#dpck_ph').css('color','green');
 	                         $('#dpck_ph').text("사용가능");
 	           			     $(".dpck_ph").show();
 	         				 $("#phDuplCk").val(1);
+	         			// 중복됐을 때
 	         			}else{
 	                         $('#dpck_ph').css('color','red');
 	                         $('#dpck_ph').text("사용불가");
@@ -228,11 +220,6 @@
 	         		},
 	         		error:function(jqxhr, textStatus, errorThrown){
 	         			console.log("ajax 처리 실패");
-	         			
-	         			// 에러 로그
-	         			console.log(jqxhr);
-	         			console.log(textStatus);
-	         			console.log(errorThrown);
 	         		}
 	         	});
 	         });
@@ -241,47 +228,47 @@
       
       <!-- 정규표현식 / 유효성검사 -->
       <script>
-      
+        // 유효성검사
         function regExp(){
            var vName    = document.getElementById('name');
            var vPhone   = document.getElementById('phone');
            var vEmail   = document.getElementById('email');
 
-           /* 이름 검사*/
-           // 2글자이상, 한글만
+           /* 이름 검사 : 2글자 이상, 한글*/
            if(!chk(/^[가-힣]{2,}$/,vName,"이름은 한글로 2글자 이상을 넣으세요!")){
                return false;
            }
-
-           /* 전화번호 검사*/
-           // 전화번호 앞자리는 2 ~ 3자리 숫자
-           // 두번째 자리는 3 ~ 3자리 숫자
-           // 세번째 자리는 4자리 숫자
+           /* 핸드폰 검사 */
            if(!chk(/^\d{3}-\d{3,4}-\d{4}$/,vPhone,"휴대폰 번호를 확인해주세요.")){
                return false;
            }
-
-           /* 이메일 검사 */
-           // 4글자 이상 + @ + 1글자이상 주소.글자1~3
+           /* 이메일 검사 : 4글자 이상 + @ + 1글자이상 주소.글자1~3 */
            if(!chk(/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/,vEmail,"이메일형식에 어긋납니다.")){
                 return false;
            }
-           
-           chkPW();
+           /* 비밀번호 검사 */
+           return chkPW();
         } 
-
+		
+        // 유효성 검사 콜백 함수
         function chk(re,ele,msg){
             if(!re.test(ele.value)){
-                alert(msg);   // ex) 이름은 한글이여야 합니다.
-                ele.select(); // 드래그
-                return false; // 넘어가지 않게 한다.
+            	// alert 메시지
+                alert(msg);   
+             	// 드래그
+                ele.select(); 
+             	// 넘어가지 않게 한다.
+                return false; 
             }
-            return true;      // 위의 값이 아니면 넘긴다.
+            // 위의 값이 아니면 넘긴다.
+            return true;
         }
         
+        // 비밀번호 검사
         function chkPW(){
-
+			 // 비밀번호
         	 var pw = $("#pwd").val();
+			 // 비밀번호 재입력
         	 var pw2 = $("#pwd2").val();
         	 var num = pw.search(/[0-9]/g);
         	 var eng = pw.search(/[a-z]/ig);
@@ -300,19 +287,20 @@
               alert("비밀번호 확인!");
               return false;
         	 }else {
-        	  console.log("통과"); 
         	  return true;
         	 }
         }
         
-
+	    // 회원가입 버튼 클릭 시
     	function vali() {
-      		if(validate() && regExp()){
+	    	// 정규표현식, 휴대폰 검사, 이메일 검사를 동시에 검사한다.
+      		if(regExp() && validate()){
       			return true;
       		}else{
       			return false;
       		}
     	}
+	    
     </script>
    </body>
 </html>

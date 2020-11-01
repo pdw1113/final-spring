@@ -24,4 +24,8 @@ public class UserDao {
 		return sqlSession.insert("userMapper.insertUser", u);
 	}
 
+	public int emailCheck(String email) {
+		return sqlSession.selectOne("userMapper.emailCheck",email);
+	}
+
 }
