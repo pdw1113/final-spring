@@ -1,9 +1,12 @@
 package com.fp.neezit.user.model.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.dao.UserDao;
 import com.fp.neezit.user.model.vo.User;
 
@@ -29,6 +32,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int phoneCheck(String phone) {
 		return uDao.phoneCheck(phone);
+	}
+
+	@Override
+	public List<ProductCategory> category() throws Exception {
+		return uDao.category();
 	}
 
 }

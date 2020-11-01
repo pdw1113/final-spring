@@ -1,9 +1,12 @@
 package com.fp.neezit.user.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 
 @Repository("uDao")
@@ -18,6 +21,10 @@ public class UserDao {
 
 	public int phoneCheck(String phone) {
 		return sqlSession.selectOne("userMapper.phoneCheck", phone);
+	}
+
+	public List<ProductCategory> category() {
+		return sqlSession.selectList("productMapper.category");
 	}
 
 }
