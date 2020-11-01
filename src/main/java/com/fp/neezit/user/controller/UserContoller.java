@@ -1,6 +1,7 @@
 package com.fp.neezit.user.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.Dice;
 import com.fp.neezit.user.model.vo.User;
+
+import net.sf.json.JSONArray;
 
 @SessionAttributes("loginUser") // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
 @Controller
@@ -49,8 +53,15 @@ public class UserContoller {
 		return "user/findPwd";
 	}
 	
-	@RequestMapping("signUpMaster.do")
-	public String signUpMaster() {
+	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
+	public String signUpMaster(Model model) throws Exception {
+		
+		
+		// 상품 카테고리 3분류
+				List<ProductCategory> category = null;
+				category = uService.category();
+				model.addAttribute("category", JSONArray.fromObject(category));
+		
 		return "user/signUpMaster";
 	}
 	
