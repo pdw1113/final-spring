@@ -44,7 +44,7 @@
             <!-- 인증코드 입력 텍스트폼이랑 제한시간 -->
             <div class="confirmCon">
                <input class="signup_in short_input" type="text" placeholder="인증코드를 입력하세요."  id="ranNum" name="ranNum">
-               <button class="cfBtn" type="button" onclick="numCheck();">확인</button>
+               <button class="cfBtn" type="button" onclick="numCheck();" disabled="disabled">확인</button>
                <span class="timelimit_signup">제한시간 : </span>
             </div>
             
@@ -102,6 +102,8 @@
 						 $("#email").attr("readonly",true);
 						 $("#email").css("background-color","rgb(225,225,225)");
 						 $("#ranNum").focus();
+						 //제한시간 함수
+						 timelimit();
 				     // 이메일 중복 될 때
 			         }else if(data === "duplicate"){
 			         	 $(".loading-container").remove();
@@ -301,6 +303,34 @@
       		}
     	}
 	    
+	    
+	    // 인증번호 시간초
+	    function timelimit(){
+	    	count = 300;
+	    	$(".cfBtn").attr("disabled",false);
+	    	$(".cfBtn").css("background-color","#fabe00");
+	    	$(".cfBtn").css("pointer-events","auto");
+	    	 var countdown = setInterval(function(){
+	    		 $(".timelimit_signup").empty();
+		    	 var min = parseInt((count%3600)/60);
+		    	 var sec = count%60;
+	            //해당 태그에 아래 내용을 출력
+	            if(sec<10){
+	            	sec="0"+sec;
+	            }
+	      		$(".timelimit_signup").prepend("제한시간 : " + min+":"+sec);
+	                //0초면 초기화 후 작동되는 조건문
+	                if (count == 0) {
+	                    clearInterval(countdown);
+	 					$(".timelimit_signup").empty();
+	 					$(".timelimit_signup").prepend("제한시간 만료");
+	 					$(".cfBtn").attr("disabled",true);
+	 				  	$(".cfBtn").css("background-color","#e2e2e2");
+	 			    	$(".cfBtn").css("pointer-events","none");
+	                    }
+	                count--;//카운트 감소
+	            }, 1000);
+	    	}
     </script>
    </body>
 </html>
