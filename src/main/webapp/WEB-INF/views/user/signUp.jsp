@@ -102,7 +102,7 @@
 						 $("#email").attr("readonly",true);
 						 $("#email").css("background-color","rgb(225,225,225)");
 						 $("#ranNum").focus();
-						 //제한시간 함수
+						 // 제한시간 함수
 						 timelimit();
 				     // 이메일 중복 될 때
 			         }else if(data === "duplicate"){
@@ -303,34 +303,52 @@
       		}
     	}
 	    
-	    
-	    // 인증번호 시간초
-	    function timelimit(){
-	    	count = 300;
-	    	$(".cfBtn").attr("disabled",false);
-	    	$(".cfBtn").css("background-color","#fabe00");
-	    	$(".cfBtn").css("pointer-events","auto");
-	    	 var countdown = setInterval(function(){
-	    		 $(".timelimit_signup").empty();
-		    	 var min = parseInt((count%3600)/60);
-		    	 var sec = count%60;
-	            //해당 태그에 아래 내용을 출력
-	            if(sec<10){
-	            	sec="0"+sec;
-	            }
-	      		$(".timelimit_signup").prepend("제한시간 : " + min+":"+sec);
-	                //0초면 초기화 후 작동되는 조건문
-	                if (count == 0) {
-	                    clearInterval(countdown);
-	 					$(".timelimit_signup").empty();
-	 					$(".timelimit_signup").prepend("제한시간 만료");
-	 					$(".cfBtn").attr("disabled",true);
-	 				  	$(".cfBtn").css("background-color","#e2e2e2");
-	 			    	$(".cfBtn").css("pointer-events","none");
-	                    }
-	                count--;//카운트 감소
-	            }, 1000);
-	    	}
+    	// 인증번호 시간초
+    	function timelimit() {
+    	  // 5분 300초
+    	  count = 300;
+    	  // 버튼 디자인 변경
+    	  $(".cfBtn").attr("disabled", false);
+    	  $(".cfBtn").css("background-color", "#fabe00");
+    	  $(".cfBtn").css("pointer-events", "auto");
+    	  // 1초마다 실행
+    	  var countdown = setInterval(function () {
+    		// 제한시간 비우기
+    	    $(".timelimit_signup").empty();
+    		// 분
+    	    var min = parseInt((count % 3600) / 60);
+    		// 초
+    	    var sec = count % 60;
+    	    // 10초 이하일 때 09, 08, 07 식으로 표기.
+    	    if (sec < 10) {
+    	      sec = "0" + sec;
+    	    }
+    	    // 제한시간에다가 시간 텍스트
+    	    $(".timelimit_signup").prepend("제한시간 : " + min + ":" + sec);
+    	    // 0초면 초기화 후 작동되는 조건문
+    	    if (count == 0) {
+    	      // 초기화
+    	      clearInterval(countdown);
+    	      // 버튼 디자인 변경
+    	      $(".timelimit_signup").empty();
+    	      $(".timelimit_signup").prepend("제한시간 만료");
+    	      $(".cfBtn").attr("disabled", true);
+    	      $(".cfBtn").css("background-color", "#e2e2e2");
+    	      $(".cfBtn").css("pointer-events", "none");
+    	      
+	         	$.ajax({
+	         		url:"diceReset.do",
+	         		type:"post",
+	         		success:function(data){
+	         			alert("인증번호가 만료되었습니다. 새로고침 후 다시 시도해주세요.");
+	         		}
+	         	});
+    	    }
+    	    // 1초마다 1초씩 감소
+    	    count--; //카운트 감소
+    	  }, 1000);
+    	}
+
     </script>
    </body>
 </html>
