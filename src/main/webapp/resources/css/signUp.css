@@ -53,6 +53,7 @@ font-family: jua;
 outline: 0;
 border: none;
 }
+
 .cfBtn{
 float:left;
 width: 60px;
@@ -64,15 +65,18 @@ border-radius: 15px;
 font-size: 25px;
 border-radius: 7px 7px 7px 7px;
 color: white;
-background-color: #fabe00;
+background-color: #e2e2e2;
 font-family: jua;
 outline: 0;
 border: none;
+pointer-events:none;"
 }
+
 .cfBtn:hover{
 cursor: pointer;
 opacity: 0.6;
 }
+
 .signup_button_signup:hover{
 cursor: pointer;
 opacity: 0.6;
