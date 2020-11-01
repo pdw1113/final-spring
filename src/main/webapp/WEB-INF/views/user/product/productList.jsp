@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
    <head>
@@ -30,37 +32,37 @@
    	  </div>
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
-            <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;웹개발</h2>
+            <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;<span id="category1"></span></h2>
          </div>
-         <table class="table table-bordered table-condensed">
+         <table class="table table-bordered table-condensed" >
+         
+         <!--<c:set var="cd" value="JSON.parse('${categoryList}')"/>-->
+         
+        <c:forEach var="c" items="${ categoryList2 }" varStatus="status2">
             <tr>
-               <td class="active List-NavTableTd">
-                  <p class="font_hanSans List-NavPtag">개발언어</p>
+       		
+               <td class="active List-NavTableTd" >
+	                 <p class="font_hanSans List-NavPtag" >
+			               <c:if test="${c.level == 1}">
+			               		${ c.cateName }
+			              </c:if>
+	                  </p>
                </td>
-               <td>
-                  <button class="font_jua List-Button">Java</button> 
-                  <button class="font_jua List-Button">Java</button> 
-                  <button class="font_jua List-Button">JSP</button> 
-                  <button class="font_jua List-Button">XML</button>
-                  <button class="font_jua List-Button">.NET</button>
-                  <button class="font_jua List-Button">Ajax</button>
-                  <button class="font_jua List-Button">Ruby</button>
-                  <button class="font_jua List-Button">ASP</button>
-                  <button class="font_jua List-Button">PHP</button>
-                  <button class="font_jua List-Button">HTML</button>
-                  <button class="font_jua List-Button">APM</button>
-                  <button class="font_jua List-Button">PERL</button>
-                  <button class="font_jua List-Button">Python</button>
-                  <button class="font_jua List-Button">Node.js</button>
-                  <button class="font_jua List-Button">C#</button>
-                  <button class="font_jua List-Button">CSS</button>
-                  <button class="font_jua List-Button">jQuery</button>
-                  <button class="font_jua List-Button">Servlet</button>
-                  <button class="font_jua List-Button">JavaScript</button>
-                  <button class="font_jua List-Button">Go</button>
+
+               <td id="testTable">
+	               <c:forEach var="c" items="${ categoryList }" varStatus="status1">
+		                <c:if test="${status2.current.cateCode == status1.current.cateCodeRef}" >
+		             		 <button class="font_jua List-Button" > ${ status1.current.cateName }</button> 
+		               </c:if>
+               	</c:forEach> 
+                  <p class="font_hanSans List-NavPtag"></p> 
+               </td>
+               
+       
                </td>
             </tr>
-            <tr>
+    	  </c:forEach> 
+           <!--  <tr>
                <td class="active">
                   <p class="font_hanSans List-NavPtag">DBMS</p>
                </td>
@@ -73,7 +75,7 @@
                   <button class="font_jua List-Button">Oracle</button>
                   <button class="font_jua List-Button">PostgreSQL</button>
                </td>
-            </tr>
+            </tr> -->
             <tr>
                <td class="active row Cancle-Container">
                   <p class="font_jua List-NavPtag">선택한필터</p>
@@ -528,6 +530,98 @@
          
          /*썸네일 간격및 크기조정*/
          $('.col-xs-4 ').css('width', '40rem').css('margin-right','2.1rem').css('margin-left','2.1rem');
+
+         </script>
+      <script>
+         // 컨트롤러에서 데이터 받기
+         var jsonData = JSON.parse('${categoryList}');
+         //console.log(jsonData);
+         
+         var cate1Arr = new Array();
+         var cate1Obj = new Object();
+         
+         
+         
+         // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
+         for(var i = 0; i < jsonData.length; i++) {
+        	 
+        	 
+          
+          if(jsonData[i].level == "1") {
+           cate1Obj = new Object();  //초기화
+           cate1Obj.cateCode = jsonData[i].cateCode;
+           cate1Obj.cateName = jsonData[i].cateName;
+           cate1Arr.push(cate1Obj);
+           console.log(cate1Arr);
+           
+          }
+         /*  console.log(cate1Obj.cateCode );
+          console.log(cate1Obj.cateName); */
+         }
+         
+
+         // 1차 분류 셀렉트 박스에 데이터 삽입
+         var cate1Select = $("#category1")
+ 
+      	for(var i = 0; i < cate1Arr.length; i++) {
+         	 cate1Select.append("<span value='" + cate1Arr[i].cateCode + "'>"
+               + cate1Arr[i].cateName + "</span>"); 
+         } 
+         
+         
+         //------------------------------------------------------------//
+       
+         $(document).on("change", "category", function(){
+        	 
+        	 var jsonData2 = JSON.parse('${ categoryList2 }');
+
+			 var cate2Arr = new Array();
+			 var cate2Obj = new Object();
+			 
+			 // 2차 분류 셀렉트 박스에 삽입할 데이터 준비
+			 for(var i = 0; i < jsonData2.length; i++) {
+			  
+			  if(jsonData2[i].level == "2") {
+			   cate2Obj = new Object();  //초기화
+			   cate2Obj.cateCode = jsonData2[i].cateCode;
+			   cate2Obj.cateName = jsonData2[i].cateName;
+			   cate2Obj.cateCodeRef = jsonData2[i].cateCodeRef;
+			   
+			   cate2Arr.push(cate2Obj);
+			  }
+			  console.log(cate2Arr);
+			 }
+			 
+			 var cate2Select = JSON.parse('${ categoryList }');
+			 
+			 /*
+			 for(var i = 0; i < cate2Arr.length; i++) {
+			   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+			        + cate2Arr[i].cateName + "</option>");
+			 }
+			 */
+			 
+			 cate2Select.children().remove();
+			
+			 $("option:selected", this).each(function(){
+			  
+			  var selectVal = $(this).val();  
+			  cate2Select.append("<option value=''>전체</option>");
+			  
+			  for(var i = 0; i < cate2Arr.length; i++) {
+			   if(selectVal == cate2Arr[i].cateCodeRef) {
+			    cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+			         + cate2Arr[i].cateName + "</option>");
+			   }
+			  }
+			  
+			 });
+			 
+			});
+         
+         
+         	$('form').css('display','inline-block');
+         
       </script>
    </body>
 </html>

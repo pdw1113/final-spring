@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 카테고리 호출 -->
+<mapper namespace = "productMapper" >
+
+	<select id="category" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+			start with CATECODEREF is null
+			connect by prior CATECODE = CATECODEREF
+	</select>
+	
+	<select id="categoryList" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+			start with CATECODE = #{navNo}
+			connect by prior CATECODE = CATECODEREF
+	</select>
+
+	<select id="categoryList2" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		 select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+            WHERE LEVEL = 1
+			start with CATECODEREF = #{navNo}
+			connect by prior CATECODE = CATECODEREF
+	</select>
+	
+<!-- 	<select id="categoryList3" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		 select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+            WHERE CATECODEREF = 10
+			start with CATECODE = 10
+			connect by prior CATECODE = CATECODEREF
+	</select> -->
+  
+</mapper>
+

@@ -15,6 +15,7 @@
       <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <link rel="stylesheet" type="text/css" href="resources/css/productInsert.css">
+      
    </head>
    <body>
       <div class="frame_addproduct">
@@ -66,31 +67,24 @@
             </div>
             <!-- 카테고리 -->
             <div class="status_div_addproduct">
-               <span class="input_title_addproduct">카테고리</span>
-               <select class="category_select_addproduct m-r-27 m-l-90">
-                  <option value="">1차 분류</option>
-                  <option>디자이너</option>
-                  <option>IT개발자</option>
-                  <optio>
-                  사무/기획</option>
-                  <option>회계/인사</option>
-               </select>
-               <select class="category_select_addproduct m-r-27">
-                  <option value="">2차 분류</option>
-                  <option>디자이너</option>
-                  <option>IT개발자</option>
-                  <optio>
-                  사무/기획</option>
-                  <option>회계/인사</option>
-               </select>
-               <select  class="category_select_addproduct">
-                  <option value="">3차 분류</option>
-                  <option>디자이너</option>
-                  <option>IT개발자</option>
-                  <optio>
-                  사무/기획</option>
-                  <option>회계/인사</option>
-               </select>
+            
+         <span class="input_title_addproduct">카테고리</span>   
+            
+      <form role="form" method="post" autocomplete="off" id="success">
+         <select class="category1 category_select_addproduct m-r-27 m-l-90">
+            <option value="">1차 분류</option>
+         </select>
+        
+         <select class="category2 category_select_addproduct m-r-27">
+            <option value="">2차 분류</option>
+         </select>
+        
+         <select class="category3 category_select_addproduct">
+            <option value="">3차 분류</option>
+         </select>
+      </form>
+            
+    
             </div>
             <div class="status_div_addproduct">
                <span class="input_title_addproduct">기본금액</span> 
@@ -136,6 +130,9 @@
             <div class="finish_button_addproduct" onclick="">등록완료</div>
          </div>
       </div>
+      
+
+      
       <%@ include file="../../common/footer.jsp" %>
    </body>
    <script>
@@ -222,4 +219,127 @@
          		});
          	});
    </script>
+   <script>
+         // 컨트롤러에서 데이터 받기
+         var jsonData = JSON.parse('${category}');
+         console.log(jsonData);
+         
+         var cate1Arr = new Array();
+         var cate1Obj = new Object();
+         
+         // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
+         for(var i = 0; i < jsonData.length; i++) {
+          
+          if(jsonData[i].level == "1") {
+           cate1Obj = new Object();  //초기화
+           cate1Obj.cateCode = jsonData[i].cateCode;
+           cate1Obj.cateName = jsonData[i].cateName;
+           cate1Arr.push(cate1Obj);
+          }
+         }
+         
+         // 1차 분류 셀렉트 박스에 데이터 삽입
+         var cate1Select = $("select.category1")
+         
+         for(var i = 0; i < cate1Arr.length; i++) {
+          cate1Select.append("<option value='" + cate1Arr[i].cateCode + "'>"
+               + cate1Arr[i].cateName + "</option>"); 
+         }
+         
+         
+         $(document).on("change", "select.category1", function(){
+         
+         	 var cate2Arr = new Array();
+         	 var cate2Obj = new Object();
+         	 
+         	 // 2차 분류 셀렉트 박스에 삽입할 데이터 준비
+         	 for(var i = 0; i < jsonData.length; i++) {
+         	  
+         	  if(jsonData[i].level == "2") {
+         	   cate2Obj = new Object();  //초기화
+         	   cate2Obj.cateCode = jsonData[i].cateCode;
+         	   cate2Obj.cateName = jsonData[i].cateName;
+         	   cate2Obj.cateCodeRef = jsonData[i].cateCodeRef;
+         	   
+         	   cate2Arr.push(cate2Obj);
+         	  }
+         	 }
+         	 
+         	 var cate2Select = $("select.category2");
+         	 
+         	 /*
+         	 for(var i = 0; i < cate2Arr.length; i++) {
+         	   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+         	        + cate2Arr[i].cateName + "</option>");
+         	 }
+         	 */
+         	 
+         	 cate2Select.children().remove();
+         
+         	 $("option:selected", this).each(function(){
+         	  
+         	  var selectVal = $(this).val();  
+         	  cate2Select.append("<option value=''>전체</option>");
+         	  
+         	  for(var i = 0; i < cate2Arr.length; i++) {
+         	   if(selectVal == cate2Arr[i].cateCodeRef) {
+         	    cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+         	         + cate2Arr[i].cateName + "</option>");
+         	   }
+         	  }
+         	  
+         	 });
+         	 
+         	});
+         
+         
+         
+         
+         $(document).on("change", "select.category2", function(){
+             
+         	 var cate3Arr = new Array();
+         	 var cate3Obj = new Object();
+         	 
+         	 // 3차 분류 셀렉트 박스에 삽입할 데이터 준비
+         	 for(var i = 0; i < jsonData.length; i++) {
+         	  
+         	  if(jsonData[i].level == "3") {
+         	   cate3Obj = new Object();  //초기화
+         	   cate3Obj.cateCode = jsonData[i].cateCode;
+         	   cate3Obj.cateName = jsonData[i].cateName;
+         	   cate3Obj.cateCodeRef = jsonData[i].cateCodeRef;
+         	   
+         	   cate3Arr.push(cate3Obj);
+         	  }
+         	 }
+         	 
+         	 var cate3Select = $("select.category3");
+         	 
+         	 /*
+         	 for(var i = 0; i < cate2Arr.length; i++) {
+         	   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+         	        + cate2Arr[i].cateName + "</option>");
+         	 }
+         	 */
+         	 
+         	 cate3Select.children().remove();
+         
+         	 $("option:selected", this).each(function(){
+         	  
+         	  var selectVal = $(this).val();  
+         	  cate3Select.append("<option value=''>전체</option>");
+         	  
+         	  for(var i = 0; i < cate3Arr.length; i++) {
+         	   if(selectVal == cate3Arr[i].cateCodeRef) {
+         	    cate3Select.append("<option value='" + cate3Arr[i].cateCode + "'>"
+         	         + cate3Arr[i].cateName + "</option>");
+         	   }
+         	  }
+         	  
+         	 });
+         	 
+         	});
+         	$('form').css('display','inline-block');
+         
+      </script>
 </html>

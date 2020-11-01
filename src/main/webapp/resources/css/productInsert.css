@@ -207,3 +207,6 @@ transition-duration:0s;
 .m-b-10{
 	margin-bottom: 10px;
 }
+#success{
+    display: inline-block;
+}
