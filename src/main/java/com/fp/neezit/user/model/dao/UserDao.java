@@ -35,4 +35,8 @@ public class UserDao {
 		return sqlSession.selectList("productMapper.category");
 	}
 
+	public int modifyPhone(String[] arr) {
+		return sqlSession.update("userMapper.modifyPhone", arr);
+	}
+
 }

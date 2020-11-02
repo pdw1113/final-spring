@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -8,72 +9,67 @@
       <link rel="stylesheet" type="text/css" href="resources/css/header.css">
    </head>
    <body>
-         <div class="index_head_Mainhead">
-            <!-- 메인로고 -->
-            <a href="index.do"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
-            <div class="head_search_div">
-               <!-- 검색창 폼 -->
-               <div class="main_search_Mainhead">
-                  < <!-- 이거 그냥 텍스트로 쓴거 빨간색 신경 ㄴㄴ -->
-               </div>
-               <div class="main_searchbox_Mainhead">
-                  <input class="main_searchtext_Mainhead" type="text">
-                  <a href="#"><img style="float: right; width: 23px; margin-top: 21px;"
-                     src="resources/img/SearchGlass.png"></a>
-               </div>
-               <div class="main_search_Mainhead">
-                  >
-               </div>
+      <div class="index_head_Mainhead">
+         <!-- 메인로고 -->
+         <a href="index.do"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
+         <div class="head_search_div">
+            <!-- 검색창 폼 -->
+            <div class="main_search_Mainhead">
+               < <!-- 이거 그냥 텍스트로 쓴거 빨간색 신경 ㄴㄴ -->
             </div>
-            <!-- 로그아웃 -->
-            <div>
-               <div class="login_box_Mainhead">
-                  <a href="profile.do">
-                     <div class="head_login_Mainhead" style="width: 100px;">마이페이지</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="signUpMaster.do">
-                     <div class="head_login_Mainhead" style="width: 100px;">능력자등록</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="login.do">
-                     <div class="head_login_Mainhead" style="margin-right: 10px;">로그인</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="signUp.do">
-                     <div class="head_login_Mainhead" style="width: 100px;">회원가입</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="supportnav.do" id="manager_href">
-                     <div class="head_login_Mainhead" id="manager_page">고객센터</div>
-                  </a>
-               </div>
-               <div class="login_box_Mainhead">
-                  <a href="productInsert.do" id="manager_href">
-                     <div class="head_login_Mainhead" id="manager_page">상품등록</div>
-                  </a>
-               </div>
+            <div class="main_searchbox_Mainhead">
+               <input class="main_searchtext_Mainhead" type="text">
+               <a href="#"><img src="resources/img/SearchGlass.png" class="s_img"></a>
             </div>
-            <span class="user_Mainhead"></span>
+            <div class="main_search_Mainhead">
+               >
+            </div>
          </div>
-      <script>
+         
+         <c:if test="${ empty sessionScope.loginUser }">
+	         <div>
+	               <div class="login_box_Mainhead">
+	                  <a href="loginPage.do">
+	                     <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그인</div>
+	                  </a>
+	               </div>
+	               <div class="login_box_Mainhead">
+	                  <a href="signUp.do">
+	                     <div class="head_login_Mainhead w_100p">회원가입</div>
+	                  </a>
+	               </div>
+	         </div>
+         </c:if>
+         <c:if test="${ !empty sessionScope.loginUser }">
+         	 <div>
+	            <div class="login_box_Mainhead">
+	               <a href="logout.do">
+	                  <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
+	               </a>
+	            </div>
+	            <div class="login_box_Mainhead">
+	               <a href="profile.do">
+	                  <div class="head_login_Mainhead w_100p">마이페이지</div>
+	               </a>
+	            </div>
+	            <div class="login_box_Mainhead">
+	               <a href="signUpMaster.do">
+	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
+	               </a>
+	            </div>
+	            <div class="login_box_Mainhead">
+	               <a href="productInsert.do" id="manager_href">
+	                  <div class="head_login_Mainhead" id="manager_page">상품등록</div>
+	               </a>
+	            </div>
+	         	<span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
+	         </div>
+         </c:if>
+      </div>
+      
+	  <script>
          $(document).ready(function () {
-             // 사용자 아이디
-             var id = "admin";
-         
-             // 관리자 페이지 스위치 1이면 관리자페이지 0이면 아님..
-             var adminpage = 0;
-         
-             // 아이디 값이 있으면
-             if (id != "") {
-                 $(".user_Mainhead").append(id + "님 환영합니다.")
-             }
-         
-             if (id == "admin") {
+             if (name == "admin") {
                  $("#manager_page").empty();
                  $("#manager_page").append("관리자");
                  $(".manager_page").show();
@@ -86,7 +82,6 @@
                  }
              }
              $('body').css("font-family","Apple Color Emoji").css("line-height","1.6");
-             
          });
       </script>
    </body>

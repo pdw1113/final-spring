@@ -43,8 +43,17 @@ public class UserServiceImpl implements UserService{
 	public int emailCheck(String email) {
 		return uDao.emailCheck(email);
 	}
+	
+	@Override
 	public List<ProductCategory> category() throws Exception {
 		return uDao.category();
 	}
+
+	@Override
+	public int modifyPhone(String[] arr) {
+		return uDao.modifyPhone(arr);
+	}
+	
+	
 
 }

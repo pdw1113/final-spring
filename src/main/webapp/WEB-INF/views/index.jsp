@@ -21,7 +21,10 @@
       <div id="container">
          <div class="slide_wrap">
             <!-- 슬라이드 타이틀 -->
-            <img class="slide_grade_Nav" src="resources/img/lv6.png"><span class="slide_p">인피니티 능력자들</span>
+            <div class="infinity-cover">
+            	<img class="slide_grade_Nav" src="resources/img/lv6.png">
+            	<span class="slide_p">인피니티 능력자들</span>
+            </div>
             <div class="slide_box">
                <div class="slide_list clearfix">
                   <div class="slide_content slide01">
