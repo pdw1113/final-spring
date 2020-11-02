@@ -156,7 +156,7 @@ html,
       vertical-align: middle;
       }
       /* 저장하기 버튼 */
-      .joinFinBtn_myPage_profile {
+      .joinFinBtn_myPage_profile{
       display: table;
       width: 696px;
       height: 50px;
@@ -167,10 +167,15 @@ html,
       text-align: center;
       font-family: jua;
       }
-      .joinFinBtn_myPage_profile a {
+      .joinFinBtn_myPage_profile button{
       text-decoration: none;
+      outline: 0;
       color: white;
       vertical-align: middle;
+      }
+      .joinFinBtn_myPage_profile button:hover{
+      cursor: poniter;
+      opacity: 0.6;
       }
       /* checkbox custom */
       .checkbox_myprofile+label {

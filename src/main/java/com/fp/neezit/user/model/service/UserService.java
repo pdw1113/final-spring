@@ -1,6 +1,5 @@
 package com.fp.neezit.user.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

@@ -11,13 +11,16 @@ public class User {
 	private Date enrollDate;
 	private Date updateDate;
 	private String status;
+	private String marketingT;
+	private String marketingE;
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate, String status) {
+	public User(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate, String status,
+			String marketingT, String marketingE) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -26,6 +29,8 @@ public class User {
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
 		this.status = status;
+		this.marketingT = marketingT;
+		this.marketingE = marketingE;
 	}
 
 	public String getName() {
@@ -84,12 +89,27 @@ public class User {
 		this.status = status;
 	}
 
+	public String getMarketingT() {
+		return marketingT;
+	}
+
+	public void setMarketingT(String marketingT) {
+		this.marketingT = marketingT;
+	}
+
+	public String getMarketingE() {
+		return marketingE;
+	}
+
+	public void setMarketingE(String marketingE) {
+		this.marketingE = marketingE;
+	}
+
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", phone=" + phone + ", email=" + email + ", pwd=" + pwd + ", enrollDate="
-				+ enrollDate + ", updateDate=" + updateDate + ", status=" + status + "]";
+				+ enrollDate + ", updateDate=" + updateDate + ", status=" + status + ", marketingT=" + marketingT
+				+ ", marketingE=" + marketingE + "]";
 	}
-	
-	
-	
+
 }
