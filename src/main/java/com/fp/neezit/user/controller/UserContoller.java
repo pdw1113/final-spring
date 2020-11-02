@@ -180,6 +180,15 @@ public class UserContoller {
 			System.out.println("중복O");
 			return "fail";
 		}
+	}
+	
+	@RequestMapping("marketing.do")
+	public String marketing(String marketingT, String marketingE, HttpSession session, Model model) {
+		
+		System.out.println(marketingT);
+		System.out.println(marketingE);
+		
+		return "redirect:profile.do";
 		
 		
 	}

@@ -53,6 +53,8 @@
                </tbody>
             </table>
          </div>
+         
+	 <form action="marketing.do">
          <div class="noticeSet_myPage_profile">
             <div class="tit_myPage_profile">
                <h4>마케팅 수신동의</h4>
@@ -60,29 +62,57 @@
             <div class="nbox_myPage_profile">
                <ul>
                   <li>
-                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="checkbox_myprofile"
-                        name="user_sms" id="smsYes" value="Y"><label for="smsYes" class="">알림톡</label><span
-                        class="checkmark_myPage_profile"></span></div>
+                     <div class="custom-checkbox_myPage_profile">
+	                     <input type="checkbox" class="checkbox_myprofile" name="marketingT" id="marketingT" value="Y" onclick="changeVal();">
+	                     <label for="smsYes">알림톡</label>
+	                     <span class="checkmark_myPage_profile"></span>
+                     </div>
                   </li>
                   <li>
-                     <div class="custom-checkbox_myPage_profile"><input type="checkbox" class="checkbox_myprofile"
-                        name="user_mailing" id="emailYes" value="Y"><label for="emailYes">이메일</label><span
-                        class="checkmark_myPage_profile"></span>
+                     <div class="custom-checkbox_myPage_profile">
+                     	<input type="checkbox" class="checkbox_myprofile" name="marketingE" id="marketingE" value="Y" onclick="changeVal();">
+                        <label for="emailYes">이메일</label>
+                        <span class="checkmark_myPage_profile"></span>
                      </div>
                   </li>
                </ul>
             </div>
          </div>
          <div class="joinFinBtn_myPage_profile">
-            <a href="#">
+            <button type="button">
                <h2>저장하기</h2>
-            </a>
+            </button>
          </div>
+      </form>
       </div>
       
       <script>
-  
-	     // 휴대폰 번호 변경
+        // 첫 화면 로딩 시
+/*         (function(){
+          	let $marketingT = $("#marketingT");
+          	let $marketingE = $("#marketingE");
+          	
+          	if($marketingT.val() === "Y"){
+          		$marketingT.attr("checked",true);
+          	}else{
+          		$marketingT.attr("checked",false);
+          	}
+          	
+          	if($marketingE.val() === "Y"){
+          		$marketingE.attr("checked",true);
+          	}else{
+          		$marketingE.attr("checked",false);
+          	}
+        })(); */
+        
+        
+/*         function changeVal(){
+        	alert('a');
+        } */
+      </script>
+      
+      <script>
+	    // 휴대폰 번호 변경
 	    function modifyPhone(){
 	    // 핸드폰 번호
 	   	let phone = $("#user_hp_profile").val();
@@ -101,8 +131,9 @@
 			         type:"post",
 			         success:function(data){
 				       	 // 성공했을 때
-				         if(data === "ok"){
+				         if(data == "ok"){
 				        	 alert("성공");
+				        	 window.location.reload();
 					     // 휴대폰 중복 될 때
 				         }else{
 				         	 alert("이미 등록되어 있는 휴대폰번호입니다.");
@@ -116,7 +147,6 @@
 	    	 }
 	      };
       </script>
-      
       
       <script>
          var sw = 0;
