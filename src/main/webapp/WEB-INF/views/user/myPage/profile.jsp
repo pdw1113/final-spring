@@ -64,14 +64,14 @@
                   <li>
                      <div class="custom-checkbox_myPage_profile">
 	                     <input type="checkbox" class="checkbox_myprofile" name="marketingT" id="marketingT" value="Y" onclick="changeVal();">
-	                     <label for="smsYes">알림톡</label>
+	                     <label for="marketingT">알림톡</label>
 	                     <span class="checkmark_myPage_profile"></span>
                      </div>
                   </li>
                   <li>
                      <div class="custom-checkbox_myPage_profile">
                      	<input type="checkbox" class="checkbox_myprofile" name="marketingE" id="marketingE" value="Y" onclick="changeVal();">
-                        <label for="emailYes">이메일</label>
+                        <label for="marketingE">이메일</label>
                         <span class="checkmark_myPage_profile"></span>
                      </div>
                   </li>
@@ -79,7 +79,7 @@
             </div>
          </div>
          <div class="joinFinBtn_myPage_profile">
-            <button type="button">
+            <button type="button" class="submitBtn_profile">
                <h2>저장하기</h2>
             </button>
          </div>
@@ -106,9 +106,9 @@
         })(); */
         
         
-/*         function changeVal(){
+         function changeVal(){
         	alert('a');
-        } */
+        }
       </script>
       
       <script>

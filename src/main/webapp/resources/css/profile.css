@@ -167,14 +167,20 @@ html,
       text-align: center;
       font-family: jua;
       }
-      .joinFinBtn_myPage_profile button{
+      .joinFinBtn_myPage_profile:hover{
+      opacity: 0.6;
+      }
+      .joinFinBtn_myPage_profile > button.submitBtn_profile{
       text-decoration: none;
-      outline: 0;
+      outline: none;
+      background-color: #fabe00;
+      border:0px;
       color: white;
       vertical-align: middle;
+      cursor: pointer;
       }
-      .joinFinBtn_myPage_profile button:hover{
-      cursor: poniter;
+      .joinFinBtn_myPage_profile:hover{
+      cursor: pointer;
       opacity: 0.6;
       }
       /* checkbox custom */
