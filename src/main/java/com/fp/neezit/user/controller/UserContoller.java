@@ -1,6 +1,10 @@
 package com.fp.neezit.user.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -142,26 +146,36 @@ public class UserContoller {
 	 */
 	@ResponseBody
 	@RequestMapping("modifyPhone.do")
-	public String modifyPhone(String phone, String sessionPhone) {
+	public String modifyPhone(String phone, String sessionPhone , HttpSession session, Model model) {
 		
 		// 중복된 휴대폰인지 체크
 		int dupl = uService.phoneCheck(phone);
 		
+		User u = (User)session.getAttribute("loginUser");
+		
 		if(dupl == 0) { // 중복 X
 			System.out.println("중복X");
+		
+			HashMap<String, String> map = new HashMap<String, String>();
 			
-			String[] arr = new String[2];
+			map.put("phone", phone);
+			map.put("sessionPhone", sessionPhone);
 			
-			arr[0] = phone;
-			arr[1] = sessionPhone;
+			int result = uService.modifyPhone(map);
 			
-			int result = uService.modifyPhone(arr);
+			System.out.println("바꿀번호 :" + map.get("phone") );
+			System.out.println("원래번호 :" + map.get("sessionPhone"));
+			System.out.println("result :" + result);
+			
 			
 			if(result == 1) {
+				u.setPhone(phone);
+				model.addAttribute("loginUser",u); 
 				return "ok";
 			}else {
 				return "fail";
 			}
+			
 		}else {			  // 중복 O
 			System.out.println("중복O");
 			return "fail";
