@@ -81,16 +81,17 @@
       </div>
       
       <script>
-	      // 휴대폰 번호 변경
-	      function modifyPhone(){
-	    	 // 핸드폰 번호
-	         let phone = $("#user_hp_profile").val();
-	    	 let sessionPhone = "${ loginUser.phone }";
+  
+	     // 휴대폰 번호 변경
+	    function modifyPhone(){
+	    // 핸드폰 번호
+	   	let phone = $("#user_hp_profile").val();
+ 	 	let sessionPhone = "${ loginUser.phone }";
 	    	 // 아무 변화 없을 시 함수 실행 X
 	    	 if(sessionPhone == phone){
 	    		 return;
 	    	 }else{
-		         // 이메일 인증번호 전송 AJAX
+		         // 휴대폰 번호 전송 AJAX
 		         $.ajax({
 			         url:"modifyPhone.do",
 			         data:

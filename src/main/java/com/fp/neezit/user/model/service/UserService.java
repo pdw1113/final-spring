@@ -1,5 +1,7 @@
 package com.fp.neezit.user.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
@@ -17,6 +19,6 @@ public interface UserService {
 
 	int emailCheck(String email);
 
-	int modifyPhone(String[] arr);
+	int modifyPhone(HashMap<String, String> map);
 
 }

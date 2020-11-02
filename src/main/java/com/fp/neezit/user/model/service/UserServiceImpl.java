@@ -1,5 +1,7 @@
 package com.fp.neezit.user.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,10 +52,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int modifyPhone(String[] arr) {
-		return uDao.modifyPhone(arr);
+	public int modifyPhone(HashMap<String, String> map) {
+		return uDao.modifyPhone(map);
 	}
-	
+
 	
 
 }

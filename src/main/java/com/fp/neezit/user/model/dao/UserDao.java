@@ -1,5 +1,7 @@
 package com.fp.neezit.user.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -35,8 +37,8 @@ public class UserDao {
 		return sqlSession.selectList("productMapper.category");
 	}
 
-	public int modifyPhone(String[] arr) {
-		return sqlSession.update("userMapper.modifyPhone", arr);
+	public int modifyPhone(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.modifyPhone", map);
 	}
 
 }

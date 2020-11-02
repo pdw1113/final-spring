@@ -52,10 +52,10 @@
 	</select>
 
 	<!-- 휴대폰번호 변경 -->
-	<update id="modifyPhone" parameterType="string">
+	<update id="modifyPhone" parameterType="hashmap">
 		UPDATE NEEZ_USER
-	 	SET USER_PHONE = #{arr[0]}
-	 	WHERE USER_PHONE = #{arr[1]}
+	 	SET USER_PHONE = #{phone}
+	 	WHERE USER_PHONE = #{sessionPhone}
 	</update>
   
 </mapper>
