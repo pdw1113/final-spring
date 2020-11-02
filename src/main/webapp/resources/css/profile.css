@@ -168,7 +168,7 @@ html,
       font-family: jua;
       }
       .joinFinBtn_myPage_profile:hover{
-      opacity: 0.6;
+      opacity: 0.6; 
       }
       .joinFinBtn_myPage_profile > button.submitBtn_profile{
       text-decoration: none;

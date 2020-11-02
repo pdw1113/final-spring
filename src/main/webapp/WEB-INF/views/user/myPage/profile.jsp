@@ -25,7 +25,7 @@
                <tbody>
                   <tr>
                      <th class="profile_th_myPage_profile" scope="row"><span>이메일</span></th>
-                     <td>
+                     <td> 
                         <div class="btnApp_myPage_profile">
                            <input type="text" id="user_id" name="user_id" value="${ loginUser.email }" readonly="true">
                         </div>
