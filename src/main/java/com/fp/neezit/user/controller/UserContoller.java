@@ -3,11 +3,14 @@ package com.fp.neezit.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
@@ -30,10 +33,9 @@ public class UserContoller {
 	@Autowired
 	private UserService uService;
 	
-	@RequestMapping("login.do")
-	public String login() {
-		return "user/login";
-	}
+	// 암호화 처리
+	@Autowired		  // spring-security.xml에 등록되어 있음.				
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping("signUp.do")
 	public String signUp() {
@@ -43,17 +45,6 @@ public class UserContoller {
 	@RequestMapping("findPwd.do")
 	public String findPwd() {
 		return "user/findPwd";
-	}
-	
-	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
-	public String signUpMaster(Model model) throws Exception {
-		
-		// 상품 카테고리 3분류
-		List<ProductCategory> category = null;
-		category = uService.category();
-		model.addAttribute("category", JSONArray.fromObject(category));
-		
-		return "user/signUpMaster";
 	}
 	
 	@RequestMapping("changePwd.do")
@@ -101,17 +92,24 @@ public class UserContoller {
 		return "user/myPage/walletDetail";
 	}
 	
+	
+	@RequestMapping("loginPage.do")
+	public String login() {
+		return "user/login";
+	}
+	
 	/**
-	 * 1. 로그인 세션 메소드
+	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
 	 * @param u
 	 * @param model
 	 * @return 
 	 */
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
-	public String memberLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
-		User loginUser = uService.loginUser(u);
+	public String userLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
 		
-		if(loginUser != null) {
+		User loginUser = uService.loginUser(u);
+														   // 입력 비밀번호   , 복호화 비밀번호
+		if(loginUser != null && bcryptPasswordEncoder.matches(u.getPwd(), loginUser.getPwd())) {
 			// model은 request영역이다. 그것을 상단의 @SessionAttributes가 session영역으로 바꿔준다.
 			// request → session
 			model.addAttribute("loginUser",loginUser); 
@@ -122,4 +120,70 @@ public class UserContoller {
 		}
 	}
 	
+	/**
+	 * 2. 로그아웃 세션 메소드 
+	 * (@SessionAttributes가 있기 때문에 session.invalidate()가 먹히지 않으므로)
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("logout.do")
+	public String logout(SessionStatus status) {
+		
+		status.setComplete();
+		
+		return "redirect:index.do";
+	}
+	
+	/**
+	 * 3. 휴대폰번호 변경 메소드
+	 * @param phone
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("modifyPhone.do")
+	public String modifyPhone(String phone, String sessionPhone) {
+		
+		// 중복된 휴대폰인지 체크
+		int dupl = uService.phoneCheck(phone);
+		
+		if(dupl == 0) { // 중복 X
+			System.out.println("중복X");
+			
+			String[] arr = new String[2];
+			
+			arr[0] = phone;
+			arr[1] = sessionPhone;
+			
+			int result = uService.modifyPhone(arr);
+			
+			if(result == 1) {
+				return "ok";
+			}else {
+				return "fail";
+			}
+		}else {			  // 중복 O
+			System.out.println("중복O");
+			return "fail";
+		}
+		
+		
+	}
+	
+	/**
+	 * 10. 능력자 등록 메소드
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
+	public String signUpMaster(Model model) throws Exception {
+		
+		// 상품 카테고리 3분류
+		List<ProductCategory> category = null;
+		category = uService.category();
+		model.addAttribute("category", JSONArray.fromObject(category));
+		
+		return "user/signUpMaster";
+	}
 }

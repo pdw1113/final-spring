@@ -130,3 +130,11 @@ body,
          input:focus {
          outline: none;
          }
+         .w_100p{
+         width:100px;
+         }
+         .s_img{
+         float: right; 
+         width: 23px; 
+         margin-top: 21px;
+         }
