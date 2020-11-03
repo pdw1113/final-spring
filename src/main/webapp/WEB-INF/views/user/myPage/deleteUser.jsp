@@ -16,7 +16,7 @@
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
       <%@ include file="../../user/myPage/common/nav.jsp" %>
-      <form action="#" name="form1" id="form1" method="post" target="process">
+      <form action="userdelete.do" method="post">
          <div class="content_myleave">
             <div class="dataInform_myleave">
                <div class="tit2_myleave">비밀번호 및 탈퇴사유를 입력해 주십시오.</div>
@@ -67,15 +67,30 @@
                   <!-- 기타 버튼 누를 시 생성 -->
                   <ul class="directInput_myleave"><input type="text" class="text_myleave" name="user_leave_memo" id="user_leave_memo" placeholder="직접 입력"></ul>
                </div>
-               <div class="pdBtn_myleave">
-                  <a href="#">
-                     <h2>회원 탈퇴</h2>
-                  </a>
+               <div>
+                     <button class="pdBtn_myleave">회원 탈퇴</button>
                </div>
             </div>
          </div>
       </form>
       <script>
+      	let sw = "${sw}";
+      	if(sw!=null){
+      		if(sw==1){
+      			alert("회원 탈퇴 완료");
+      			sw=null;
+      			location.href="index.do";
+      		}else if(sw==2){
+      			alert("회원 탈퇴 실패");
+      			sw=null;
+      			location.href="deleteUser.do";
+      		}else if(sw==3){
+      			alert("비밀번호가 일치하지 않습니다.");
+      			sw=null;
+      			location.href="deleteUser.do";
+      		}
+      	}
+      
          $("input[name='user_leave']").click(function () {
              $('.directInput_myleave').css('display', ($(this).val() == '기타') ? 'block' : 'none');
              $('.custom-radio_myleave label', this).css('color', 'black');

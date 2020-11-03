@@ -19,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
+import com.sun.mail.imap.protocol.Status;
 
 import net.sf.json.JSONArray;
 
@@ -69,6 +70,11 @@ public class UserContoller {
 	@RequestMapping("deleteUser.do")
 	public String deleteUser() {
 		return "user/myPage/deleteUser";
+	}
+	
+	@RequestMapping("diffPwd.do")
+	public String diffPwd() {
+		return "user/myPage/modifyPwd";
 	}
 	
 	@RequestMapping("wishList.do")
@@ -245,5 +251,26 @@ public class UserContoller {
 		model.addAttribute("category", JSONArray.fromObject(category));
 		
 		return "user/signUpMaster";
+	}
+	
+	
+	@RequestMapping("userdelete.do")
+	public String userdelete(Model model, String user_pw, HttpSession session, SessionStatus status) {
+	
+		User u = (User)session.getAttribute("loginUser");
+		if(u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd())) {
+			int result = uService.userdelete(u);
+		if(result==1) {
+				status.setComplete();
+				model.addAttribute("sw", 1);
+				return "user/myPage/deleteUser";
+			}else {
+				model.addAttribute("sw", 2);
+				return "user/myPage/deleteUser";
+			}
+		}else{
+			model.addAttribute("sw", 3);
+			return "user/myPage/deleteUser";
+		}
 	}
 }

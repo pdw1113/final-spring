@@ -31,7 +31,7 @@
                   </ul>
                </div>
                <button class="pdBtn_myModifyPwd" id="submit_myModifyPwd" onclick="return chkPW();">
-                  <h2>비밀번호 변경</h2>
+                  비밀번호 변경
                </button>
             </div>
          </div>
@@ -40,9 +40,11 @@
       <script>
       
       let msg = "${msg}"
-      if(msg !== ""){
-    	  alert(msg);
-      }
+          if(msg !== ""){
+        	  alert(msg);
+        	  msg="";
+        	  location.href="diffPwd.do";
+          }
       
       // 유효성 검사
       function chkPW(){

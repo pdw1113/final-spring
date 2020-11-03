@@ -78,9 +78,9 @@
                </ul>
             </div>
          </div>
-         <div class="joinFinBtn_myPage_profile">
-            <button type="submit" class="submitBtn_profile">
-               <h2>저장하기</h2>
+         <div>
+            <button type="submit" class="joinFinBtn_myPage_profile">
+               저장하기
             </button>
          </div>
       </form>

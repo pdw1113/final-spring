@@ -75,4 +75,11 @@
 		WHERE USER_EMAIL = #{email}
 	</update>
 	
+	<!-- 유저삭제 -->
+	<update id="userDelete" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_STATUS='Y'
+		WHERE USER_EMAIL=#{email}
+	</update>
+	
 </mapper>

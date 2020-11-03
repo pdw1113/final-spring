@@ -24,4 +24,6 @@ public interface UserService {
 
 	int modifyPwd(User u);
 
+	int userdelete(User u);
+
 }

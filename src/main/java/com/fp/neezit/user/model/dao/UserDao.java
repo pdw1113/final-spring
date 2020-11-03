@@ -49,4 +49,8 @@ public class UserDao {
 		return sqlSession.update("userMapper.modifyPwd",u);
 	}
 
+	public int userdelete(User u) {
+		return sqlSession.update("userMapper.userDelete",u);
+	}
+
 }

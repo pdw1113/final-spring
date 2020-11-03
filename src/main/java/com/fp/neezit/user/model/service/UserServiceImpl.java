@@ -65,6 +65,11 @@ public class UserServiceImpl implements UserService{
 		return uDao.modifyPwd(u);
 	}
 
+	@Override
+	public int userdelete(User u) {
+		return uDao.userdelete(u);
+	}
+
 	
 
 }
