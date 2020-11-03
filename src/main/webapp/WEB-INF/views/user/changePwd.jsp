@@ -25,12 +25,14 @@
          <div class="alert-danger_changePwd" id="alert-danger_changePwd">※ 비밀번호가 맞지 않습니다.</div>
          <!-- Button to Open the Modal -->
          <div class="button_changePwd">
-            <div class="login_button_changePwd" onclick="emailCheck()">
-               비밀번호 변경
-            </div>
+            <button class="login_button_changePwd" onclick="emailCheck()">
+               	비밀번호 변경
+            </button>
          </div>
       </div>
+      
       <br><br><br>
+      
       <script>
 	      // var pwd1 = 변경할 비밀번호
 	      // var pwd2 = 변경할 비밀번호 재확인
@@ -73,6 +75,7 @@
 	              }
 	          });
 	      });
+	      
          /* pwd1 != pwd2 */
          function notsame() {
              $("#alert-success_changePwd").hide();

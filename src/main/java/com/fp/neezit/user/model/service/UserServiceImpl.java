@@ -1,6 +1,5 @@
 package com.fp.neezit.user.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,8 +51,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int modifyPhone(HashMap<String, String> map) {
-		return uDao.modifyPhone(map);
+	public int modifyPhone(User u) {
+		return uDao.modifyPhone(u);
+	}
+
+	@Override
+	public int marketing(User u) {
+		return uDao.marketing(u);
+	}
+
+	@Override
+	public int modifyPwd(User u) {
+		return uDao.modifyPwd(u);
+	}
+
+	@Override
+	public int userdelete(User u) {
+		return uDao.userdelete(u);
 	}
 
 	

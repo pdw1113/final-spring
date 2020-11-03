@@ -79,16 +79,18 @@
          height: 50px;
          background-color: #fabe00;
          border-radius: 10px;
+         border: 0px;
          margin: 60px 0 0 0;
          overflow: hidden;
          cursor: pointer;
          text-align: center;
          font-family: jua;
-         }
-         .pdBtn_myModifyPwd > a {
-         text-decoration: none;
          color: white;
+         font-size: 1.5rem;
+         font-weight: bolder;
+         outline: none;
+         }
+         .pdBtn_myModifyPwd:hover {
+         opacity:0.6;
          vertical-align: middle;
-         cursor: pointer;
-         pointer-events: none;
          }
