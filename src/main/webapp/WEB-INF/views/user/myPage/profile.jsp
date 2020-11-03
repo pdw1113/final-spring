@@ -79,7 +79,7 @@
             </div>
          </div>
          <div class="joinFinBtn_myPage_profile">
-            <button type="button" class="submitBtn_profile">
+            <button type="submit" class="submitBtn_profile">
                <h2>저장하기</h2>
             </button>
          </div>
@@ -88,27 +88,20 @@
       
       <script>
         // 첫 화면 로딩 시
-/*         (function(){
+        (function(){
+          	let mT = "${ loginUser.marketingT }";
+          	let mE = "${ loginUser.marketingE }";
+          	
           	let $marketingT = $("#marketingT");
           	let $marketingE = $("#marketingE");
           	
-          	if($marketingT.val() === "Y"){
+          	if(mT === "Y"){
           		$marketingT.attr("checked",true);
-          	}else{
-          		$marketingT.attr("checked",false);
           	}
-          	
-          	if($marketingE.val() === "Y"){
+          	if(mE === "Y"){
           		$marketingE.attr("checked",true);
-          	}else{
-          		$marketingE.attr("checked",false);
           	}
-        })(); */
-        
-        
-         function changeVal(){
-        	alert('a');
-        }
+        })();
       </script>
       
       <script>
@@ -116,18 +109,15 @@
 	    function modifyPhone(){
 	    // 핸드폰 번호
 	   	let phone = $("#user_hp_profile").val();
- 	 	let sessionPhone = "${ loginUser.phone }";
 	    	 // 아무 변화 없을 시 함수 실행 X
-	    	 if(sessionPhone == phone){
+	    	 if("${loginUser.phone}" == phone){
 	    		 return;
 	    	 }else{
 		         // 휴대폰 번호 전송 AJAX
 		         $.ajax({
 			         url:"modifyPhone.do",
 			         data:
-			         {phone:phone,
-			          sessionPhone:sessionPhone	 
-			         },
+			         {phone:phone},
 			         type:"post",
 			         success:function(data){
 				       	 // 성공했을 때
@@ -149,6 +139,7 @@
       </script>
       
       <script>
+         // 핸드폰 변경
          var sw = 0;
          function modify_ph() {
          

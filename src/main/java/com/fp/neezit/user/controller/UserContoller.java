@@ -66,11 +66,6 @@ public class UserContoller {
 		return "user/myPage/wallet";
 	}
 	
-	@RequestMapping("modifyPwd.do")
-	public String modifyPwd() {
-		return "user/myPage/modifyPwd";
-	}
-	
 	@RequestMapping("deleteUser.do")
 	public String deleteUser() {
 		return "user/myPage/deleteUser";
@@ -96,10 +91,14 @@ public class UserContoller {
 		return "user/myPage/walletDetail";
 	}
 	
-	
 	@RequestMapping("loginPage.do")
-	public String login() {
+	public String loginPage() {
 		return "user/login";
+	}
+	
+	@RequestMapping("modifyPwdPage.do")
+	public String modifyPwdPage() {
+		return "user/myPage/modifyPwd";
 	}
 	
 	/**
@@ -146,7 +145,7 @@ public class UserContoller {
 	 */
 	@ResponseBody
 	@RequestMapping("modifyPhone.do")
-	public String modifyPhone(String phone, String sessionPhone , HttpSession session, Model model) {
+	public String modifyPhone(String phone, HttpSession session, Model model) {
 		
 		// 중복된 휴대폰인지 체크
 		int dupl = uService.phoneCheck(phone);
@@ -154,22 +153,12 @@ public class UserContoller {
 		User u = (User)session.getAttribute("loginUser");
 		
 		if(dupl == 0) { // 중복 X
-			System.out.println("중복X");
-		
-			HashMap<String, String> map = new HashMap<String, String>();
 			
-			map.put("phone", phone);
-			map.put("sessionPhone", sessionPhone);
+			u.setPhone(phone);
 			
-			int result = uService.modifyPhone(map);
-			
-			System.out.println("바꿀번호 :" + map.get("phone") );
-			System.out.println("원래번호 :" + map.get("sessionPhone"));
-			System.out.println("result :" + result);
-			
+			int result = uService.modifyPhone(u);
 			
 			if(result == 1) {
-				u.setPhone(phone);
 				model.addAttribute("loginUser",u); 
 				return "ok";
 			}else {
@@ -177,21 +166,69 @@ public class UserContoller {
 			}
 			
 		}else {			  // 중복 O
-			System.out.println("중복O");
 			return "fail";
 		}
 	}
 	
+	/**
+	 * 4. 마케팅 수신동의 변경 메소드
+	 * @param marketingT
+	 * @param marketingE
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("marketing.do")
 	public String marketing(String marketingT, String marketingE, HttpSession session, Model model) {
+
+		User u = (User)session.getAttribute("loginUser");
 		
-		System.out.println(marketingT);
-		System.out.println(marketingE);
+		if(marketingT == null) {
+			marketingT = "N";
+		}
+		if(marketingE == null) {
+			marketingE = "N";
+		}
+
+		u.setMarketingT(marketingT);
+		u.setMarketingE(marketingE);
 		
-		return "redirect:profile.do";
+		int result = uService.marketing(u);
 		
-		
+		if(result == 1) {
+			model.addAttribute("loginUser", u);
+			return "redirect:profile.do";
+		}else {
+			model.addAttribute("msg", "마케팅 수신동의 설정 실패!");
+			return "common/errorPage";
+		}
 	}
+	
+	@RequestMapping("modifyPwd.do")
+	public String modifyPwd(String originalPwd, String newPwd, Model model, HttpSession session, SessionStatus status) {
+
+		User u = (User)session.getAttribute("loginUser");
+		
+		// Session 비밀번호와 기존 비밀번호가 일치 할 때
+		if(u != null && bcryptPasswordEncoder.matches(originalPwd, u.getPwd())) {
+
+	 		u.setPwd(bcryptPasswordEncoder.encode(newPwd));
+	 		
+			int result = uService.modifyPwd(u);
+			
+			if(result == 1) {
+				status.setComplete();
+				return "redirect:index.do";
+			}else {
+				model.addAttribute("msg", "비밀번호 변경 실패!");
+				return "common/errorPage";
+			}
+		}else {
+			model.addAttribute("msg", "기존 비밀번호와 일치하지 않습니다.");
+			return "user/myPage/modifyPwd";
+		}
+	}
+	
 	
 	/**
 	 * 10. 능력자 등록 메소드
