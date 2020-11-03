@@ -37,8 +37,16 @@ public class UserDao {
 		return sqlSession.selectList("productMapper.category");
 	}
 
-	public int modifyPhone(HashMap<String, String> map) {
-		return sqlSession.update("userMapper.modifyPhone", map);
+	public int modifyPhone(User u) {
+		return sqlSession.update("userMapper.modifyPhone", u);
+	}
+
+	public int marketing(User u) {
+		return sqlSession.update("userMapper.marketing",u);
+	}
+
+	public int modifyPwd(User u) {
+		return sqlSession.update("userMapper.modifyPwd",u);
 	}
 
 }

@@ -18,6 +18,10 @@ public interface UserService {
 
 	int emailCheck(String email);
 
-	int modifyPhone(HashMap<String, String> map);
+	int modifyPhone(User u);
+
+	int marketing(User u);
+
+	int modifyPwd(User u);
 
 }
