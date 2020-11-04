@@ -62,15 +62,16 @@ public class ProductController {
    @RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
    public String getGoodsRegister(Model model,HttpSession session){
 	   	  
+	   	  // 로그인 세션 정보
 	      User u = (User)session.getAttribute("loginUser");
 	      
+	      // 능력자 정보
 	      UserMaster master = pService.getMaster(u);
-	      
-	      // 상품 카테고리 3분류
-	      List<ProductCategory> category = pService.category();
+	      System.out.println(master);
+	      // 능력자 카테고리 정보
+	      List<String> category = pService.category(master);
 	      System.out.println(category);
-	      model.addAttribute("category", JSONArray.fromObject(category));
-	      System.out.println(JSONArray.fromObject(category));
+	      model.addAttribute("category", category);
 	      
 	      model.addAttribute("master",master);
 	      

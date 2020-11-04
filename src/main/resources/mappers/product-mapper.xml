@@ -31,13 +31,10 @@
 		<result property="count" column="PRODCUT_COUNT"/>
 	</resultMap>
 	
-
-	<select id="category" resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		select
-			LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-			start with CATECODEREF is null
-			connect by prior CATECODE = CATECODEREF
+	<select id="category" parameterType="UserMaster" resultType="string">
+		SELECT CATENAME FROM GOODS_CATEGORY
+		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
+		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
 	</select>
 	
 	<select id="categoryList" resultType="com.fp.neezit.product.model.vo.ProductCategory">
@@ -67,7 +64,7 @@
 	</select> -->
 	
 	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
-			SELECT MASTER_NICKNAME,MASTER_RANKNAME 
+			SELECT *
 			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
 	</select>
 	
