@@ -24,19 +24,11 @@
     <form action="">
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
-            <div class="font_jua title-sgm">능력자 등록</div>
+            <div class="font_jua title-sgm">능력자 관리</div>
             <span>
                 <div class="img-container-sgm border-radius-100">
-                    <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
+                    <img src="${ 능력자세션.사진변수 }" class="img-style-size" id="profile_img">
                     <input type="file" id="profile_file" hidden>
-                </div>
-                <div class="img-container-info">
-                    <br>
-                    * 다른 사람의 사진을 도용하는 것은 불법입니다.
-                    <br>
-                    * 정면 얼굴사진을 업로드 해주시기 바랍니다.
-                    <br>
-                    * 최대 용량은 5MB까지 입니다.
                 </div>
             </span>
         </div>
