@@ -18,6 +18,11 @@ public interface ProductService {
 
    public UserMaster getMaster(User u);
 
+   /**
+    * 5. 상품 등록
+	* @param product
+	* @return
+    */
    public int insertProduct(Product product);
 
 }

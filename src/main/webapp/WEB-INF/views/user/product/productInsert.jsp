@@ -20,7 +20,7 @@
 
 <body>
 	<div class="frame_addproduct">
-		<form action="pInsert.do" role="form" method="post" autocomplete="off" id="success">
+		<form action="pInsert.do" role="form" method="post" autocomplete="off" id="success" enctype="multipart/form-data" >
 			<div class="warring_text_addproduct">
 				<h2 class="tit_sect_addproduct">시간 상품등록</h2>
 				<p class="text">

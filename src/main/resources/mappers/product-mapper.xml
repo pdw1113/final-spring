@@ -21,6 +21,7 @@
 		<result property="nickName" column="MASTER_NICKNAME"/>
 		<result property="title" column="PRODUCT_TITLE"/>
 		<result property="pic" column="PRODUCT_PIC"/>
+		<result property="renamePic" column="PRODUCT_RENAMEPIC"/>
 		<result property="category" column="PRODUCT_CATEGORY"/>
 		<result property="price" column="PRODCUT_PRICE"/>
 		<result property="career" column="PRODUCT_CAREER"/>
@@ -70,7 +71,7 @@
 	
 	<insert id="insertProduct" parameterType="Product">
 		INSERT INTO PRODUCT VALUES
-		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},'dongmin.png','카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 	
 </mapper>
