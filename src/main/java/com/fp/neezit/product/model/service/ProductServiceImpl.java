@@ -19,17 +19,17 @@ public class ProductServiceImpl implements ProductService{
    
    // 카테고리
    @Override
-   public List<ProductCategory> category() throws Exception {
+   public List<ProductCategory> category() {
       return pDao.category();
    }
 
    @Override
-   public List<ProductCategory> categoryList(int navNo) throws Exception {
+   public List<ProductCategory> categoryList(int navNo){
       return pDao.categoryList(navNo);
    }
 
    @Override
-   public List<ProductCategory> categoryList2(int navNo) throws Exception {
+   public List<ProductCategory> categoryList2(int navNo){
       return pDao.categoryList2(navNo);
    }
 

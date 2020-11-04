@@ -16,7 +16,7 @@ public interface UserService {
 
 	int phoneCheck(String phone);
 	
-	public List<ProductCategory> category() throws Exception;
+	public List<ProductCategory> category();
 
 	int insertMember(User u);
 

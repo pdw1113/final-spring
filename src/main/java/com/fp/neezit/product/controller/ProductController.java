@@ -35,31 +35,36 @@ public class ProductController {
    }
    
    @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
-   public String productList(Model model, int navNo) throws Exception{
+   public String productList(Model model, int navNo){
       List<ProductCategory> category = null;
       List<ProductCategory> category2 = null;
       category = pService.categoryList(navNo);
       category2 = pService.categoryList2(navNo);
       
-      
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
    
-      
       return "user/product/productList";
    }
    
+   /**
+    * 2. 상품등록 페이지 이동 메소드
+    * @param model
+    * @param session
+    * @return
+    * @throws Exception
+    */
    @RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
-   public String getGoodsRegister(Model model,HttpSession session) throws Exception{
-	   
+   public String getGoodsRegister(Model model,HttpSession session){
+	   	  
 	      User u = (User)session.getAttribute("loginUser");
 	      
 	      UserMaster master = pService.getMaster(u);
 	      
-	      System.out.println(master);
 	      // 상품 카테고리 3분류
 	      List<ProductCategory> category = null;
 	      category = pService.category();
+	      System.out.println(category);
 	      model.addAttribute("category", JSONArray.fromObject(category));
 	      
 	      model.addAttribute("master",master);
@@ -67,21 +72,23 @@ public class ProductController {
 	      return "user/product/productInsert";
    }
    
+   /**
+    * 3. 상품등록 메소드
+    * @param model
+ 	* @param product
+ 	* @return
+ 	*/
    @RequestMapping(value = "pInsert.do")
    public String insertProduct(Model model,Product product) {
-	   
-	   System.out.println(product);
-	   
-		
+	   	  
 		  int result = pService.insertProduct(product);
 		 
 		  if(result==1) {
-			  System.out.println("삽입 완료");
+			   return "user/product/productDetail";
 		  }else {
-			  System.out.println("삽입 실패");
+			   return "user/product/productDetail";
 		  }
 		 
-	   return "user/product/productDetail";
    }
 
 }
