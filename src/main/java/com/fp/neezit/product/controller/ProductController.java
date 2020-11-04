@@ -70,6 +70,7 @@ public class ProductController {
 	      List<ProductCategory> category = pService.category();
 	      System.out.println(category);
 	      model.addAttribute("category", JSONArray.fromObject(category));
+	      System.out.println(JSONArray.fromObject(category));
 	      
 	      model.addAttribute("master",master);
 	      

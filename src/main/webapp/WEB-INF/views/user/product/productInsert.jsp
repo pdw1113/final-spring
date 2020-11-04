@@ -129,7 +129,6 @@
 	<script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${category}');
-         console.log(jsonData);
          
          var cate1Arr = new Array();
          var cate1Obj = new Object();
