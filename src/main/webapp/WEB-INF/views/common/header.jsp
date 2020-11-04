@@ -38,6 +38,11 @@
 	                     <div class="head_login_Mainhead w_100p">회원가입</div>
 	                  </a>
 	               </div>
+	               <div class="login_box_Mainhead">
+	                  <a href="signUp.do">
+	                     <div class="head_login_Mainhead w_100p">회원가입</div>
+	                  </a>
+	               </div>
 	         </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
