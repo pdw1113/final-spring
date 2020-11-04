@@ -1,6 +1,7 @@
 package com.fp.neezit.user.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,10 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
@@ -65,16 +70,7 @@ public class UserContoller {
 	public String wallet() {
 		return "user/myPage/wallet";
 	}
-	
-	@RequestMapping("modifyPwd.do")
-	public String modifyPwd() {
-		return "user/myPage/modifyPwd";
-	}
-	
-	@RequestMapping("deleteUser.do")
-	public String deleteUser() {
-		return "user/myPage/deleteUser";
-	}
+
 	
 	@RequestMapping("wishList.do")
 	public String wishList() {
@@ -97,10 +93,35 @@ public class UserContoller {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	/****** 페이지 이동 메소드 ******/
+	
 	@RequestMapping("loginPage.do")
-	public String login() {
+	public String loginPage() {
 		return "user/login";
 	}
+	
+	@RequestMapping("modifyPwdPage.do")
+	public String modifyPwdPage() {
+		return "user/myPage/modifyPwd";
+	}
+	
+	@RequestMapping("deleteUserPage.do")
+	public String deleteUser() {
+		return "user/myPage/deleteUser";
+	}
+	
+	@RequestMapping("test.do")
+	public String test() {
+		return "user/signUpMasterManage";
+	}
+	
+	
 	
 	/**
 	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
@@ -119,8 +140,8 @@ public class UserContoller {
 			model.addAttribute("loginUser",loginUser); 
 			return "redirect:index.do";
 		}else {
-			model.addAttribute("msg", "로그인 실패!");
-			return "common/errorPage";
+			model.addAttribute("msg", "1");
+			return "user/login";
 		}
 	}
 	
@@ -146,7 +167,7 @@ public class UserContoller {
 	 */
 	@ResponseBody
 	@RequestMapping("modifyPhone.do")
-	public String modifyPhone(String phone, String sessionPhone , HttpSession session, Model model) {
+	public String modifyPhone(String phone, HttpSession session, Model model) {
 		
 		// 중복된 휴대폰인지 체크
 		int dupl = uService.phoneCheck(phone);
@@ -154,22 +175,12 @@ public class UserContoller {
 		User u = (User)session.getAttribute("loginUser");
 		
 		if(dupl == 0) { // 중복 X
-			System.out.println("중복X");
-		
-			HashMap<String, String> map = new HashMap<String, String>();
 			
-			map.put("phone", phone);
-			map.put("sessionPhone", sessionPhone);
+			u.setPhone(phone);
 			
-			int result = uService.modifyPhone(map);
-			
-			System.out.println("바꿀번호 :" + map.get("phone") );
-			System.out.println("원래번호 :" + map.get("sessionPhone"));
-			System.out.println("result :" + result);
-			
+			int result = uService.modifyPhone(u);
 			
 			if(result == 1) {
-				u.setPhone(phone);
 				model.addAttribute("loginUser",u); 
 				return "ok";
 			}else {
@@ -177,21 +188,136 @@ public class UserContoller {
 			}
 			
 		}else {			  // 중복 O
-			System.out.println("중복O");
 			return "fail";
 		}
 	}
 	
+	/**
+	 * 4. 마케팅 수신동의 변경 메소드
+	 * @param marketingT
+	 * @param marketingE
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("marketing.do")
 	public String marketing(String marketingT, String marketingE, HttpSession session, Model model) {
+
+		User u = (User)session.getAttribute("loginUser");
 		
-		System.out.println(marketingT);
-		System.out.println(marketingE);
+		if(marketingT == null) {
+			marketingT = "N";
+		}
+		if(marketingE == null) {
+			marketingE = "N";
+		}
+
+		u.setMarketingT(marketingT);
+		u.setMarketingE(marketingE);
 		
-		return "redirect:profile.do";
+		int result = uService.marketing(u);
 		
-		
+		if(result == 1) {
+			model.addAttribute("loginUser", u);
+			return "redirect:profile.do";
+		}else {
+			model.addAttribute("msg", "마케팅 수신동의 설정 실패!");
+			return "common/errorPage";
+		}
 	}
+	
+	/**
+<<<<<<< HEAD
+	 * 10. 능력자 등록 카테고리 메소드
+=======
+	 * 5. 비밀번호 변경 메소드
+	 * @param originalPwd
+	 * @param newPwd
+	 * @param model
+	 * @param session
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("modifyPwd.do")
+	public String modifyPwd(String originalPwd, String newPwd, Model model, HttpSession session, SessionStatus status) {
+
+		User u = (User)session.getAttribute("loginUser");
+		
+		// Session 비밀번호와 기존 비밀번호가 일치 할 때
+		if(u != null && bcryptPasswordEncoder.matches(originalPwd, u.getPwd())) {
+
+	 		u.setPwd(bcryptPasswordEncoder.encode(newPwd));
+	 		
+			int result = uService.modifyPwd(u);
+			
+			if(result == 1) {
+				status.setComplete();
+				return "redirect:index.do";
+			}else {
+				model.addAttribute("msg", "비밀번호 변경 실패!");
+				return "common/errorPage";
+			}
+		}else {
+			model.addAttribute("msg", "기존 비밀번호와 일치하지 않습니다.");
+			return "user/myPage/modifyPwd";
+		}
+	}
+	
+	/**
+	 * 6. 회원탈퇴 메소드
+	 * @param model
+	 * @param user_pw
+	 * @param session
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("deleteUser.do")
+	public String userdelete(String user_pw, String user_leave, Model model, HttpSession session, SessionStatus status) {
+	
+		User u = (User)session.getAttribute("loginUser");
+		
+		if(u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd())) {
+			
+			int result = uService.userdelete(u);
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			map.put("email", u.getEmail());
+			map.put("reason", user_leave);
+			
+			int reason = uService.reason(map);
+			
+			if(result == 1 && reason == 1) {
+					status.setComplete();
+					model.addAttribute("sw", 1);
+					return "user/myPage/deleteUser";
+			}else {
+					model.addAttribute("sw", 2);
+					return "user/myPage/deleteUser";
+			}
+		}else{
+			model.addAttribute("sw", 3);
+			return "user/myPage/deleteUser";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 10. 능력자 등록 메소드
@@ -199,8 +325,8 @@ public class UserContoller {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
-	public String signUpMaster(Model model) throws Exception {
+	@RequestMapping(value = "signUpMasterCategory.do" , method = RequestMethod.GET)
+	public String signUpMasterCategory(Model model) throws Exception {
 		
 		// 상품 카테고리 3분류
 		List<ProductCategory> category = null;
@@ -208,5 +334,49 @@ public class UserContoller {
 		model.addAttribute("category", JSONArray.fromObject(category));
 		
 		return "user/signUpMaster";
+	}
+	
+	/**
+	 * 11. 능력자 등록  메소드
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.POST)
+	public String signUpMaster(UserMaster msu,UserMasterSchool msc,UserMasterSns msn, UserMasterQualifcation mqf,Model model){
+		int result = uService.insertMaster(msu);
+		int schoolresult =  uService.insertMasterSchool(msc);
+		int snsresult =  uService.insertMasterSns(msn);
+		int qfcresult =  uService.insertMasterQfc(mqf);
+ 		if(result > 0) {
+ 			model.addAttribute(result);
+ 			model.addAttribute(schoolresult);
+ 			model.addAttribute(snsresult);
+ 			model.addAttribute(qfcresult);
+ 			return "user/signUpMaster";
+ 		}else {
+ 			model.addAttribute("msg","능력자등록실패!");
+ 			return "common/errorPage";
+ 		}
+		
+	}
+	
+	/**
+	 * 12. 닉네임 중복체크 AJAX
+	 * @param nickName
+	 * @return 
+	 * @throws IOException
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("nickCheck.do")
+	public String nickCheck(String nickname) throws IOException  {
+		
+		int result = uService.nickCheck(nickname);
+		
+		if(result > 0) { // 중복 존재
+			return "fail";
+		}else {
+			return "ok";
+		}
 	}
 }

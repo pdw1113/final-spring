@@ -535,7 +535,7 @@
       <script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${categoryList}');
-         //console.log(jsonData);
+         console.log(jsonData);
          
          var cate1Arr = new Array();
          var cate1Obj = new Object();

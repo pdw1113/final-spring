@@ -161,20 +161,19 @@ html,
       width: 696px;
       height: 50px;
       background-color: #fabe00;
+      border: 0px;
       border-radius: 10px;
       margin: 40px 0 0 0;
       overflow: hidden;
       text-align: center;
       font-family: jua;
-      }
-      .joinFinBtn_myPage_profile button{
-      text-decoration: none;
-      outline: 0;
+      font-size: 1.5rem;
+      cursor: pointer;
       color: white;
-      vertical-align: middle;
+      outline:none;
       }
-      .joinFinBtn_myPage_profile button:hover{
-      cursor: poniter;
+      .joinFinBtn_myPage_profile:hover{
+      cursor: pointer;
       opacity: 0.6;
       }
       /* checkbox custom */

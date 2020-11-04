@@ -47,6 +47,16 @@
 	      </div>
 	      </a>
       </form>
+      
+      <script>
+    	let msg = "${msg}";
+      	if(msg!=null){
+      		if(msg==1){
+      			alert("등록되지 않은 회원입니다.");
+      			location.href="loginPage.do";
+      		}
+      	}
+      </script>
       <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,14 +21,15 @@
 	
 	<%@ include file="../common/header.jsp" %>
 
-    <form action="">
+    <form action="signUpMaster.do" method="POST">
+    <input type="hidden" value="${ loginUser.email }" name="USER_EMAIL"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">능력자 등록</div>
             <span>
                 <div class="img-container-sgm border-radius-100">
                     <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" hidden>
+                    <input type="file" id="profile_file" name="MASTER_PROFILE_PIC" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -98,38 +98,76 @@
             <li>
                 <div class="sub-title-sgm">별명 등록</div>
                 <div>
-                    <input class="input_master" type="text">
+                    <input class="input_master" type="text" name="MASTER_NICKNAME" id="nickname" placeholder="한글 2글자 이상 작성">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
                     <span class="hide-span-sgm green">사용가능</span>
                     <span class="hide-span-sgm red">사용불가</span>
                 </div>
             </li>
-            <script>
-                clicked="true";
-                $("#dupl_check").click(function() {
-                    if (clicked) {
-                        $('.green').show();
-                        $('.red').hide();
-                        clicked = false;
-                    } else {
-                        $('.green').hide();
-                        $('.red').show();
-                        clicked = true;
-                    }
+            <script>        
+            
+            function regExp(){
+                var vNick    = document.getElementById('nickname');
+       
+                /* 이름 검사 : 2글자 이상, 한글*/
+                if(!chk(/^[가-힣]{2,}$/,vNick ,"이름은 한글로 2글자 이상을 넣으세요!")){
+                    return false;
+                }
+
+             } 
+            
+            function chk(re,ele,msg){
+                if(!re.test(ele.value)){
+                   // alert 메시지
+                    alert(msg);   
+                    // 드래그
+                    ele.select(); 
+                    // 넘어가지 않게 한다.
+                    return false; 
+                }
+                // 위의 값이 아니면 넘긴다.
+                return true;
+            }
+            
+             	 // 별명 중복체크 AJAX
+                $(function(){
+       	         $("#dupl_check").on("click",function(){
+       	        	// #nickname의 값
+       	         	let nickname = $('#nickname').val();     	   
+       	         	$.ajax({
+       	         		url:"nickCheck.do",
+       	         		data:{nickname:nickname},
+       	         		type:"post",
+       	         		success:function(data){
+       	         			// 중복되지 않았을 때
+       	         			if(data == "ok" && regExp() != false){
+       	                        $('.green').show();
+       	                        $('.red').hide();
+       	         			// 중복됐을 때
+       	         			}else{
+       	                        $('.green').hide();
+       	                        $('.red').show();
+       	         			}
+       	         		},
+       	         		error:function(jqxhr, textStatus, errorThrown){
+       	         			console.log("ajax 처리 실패");
+       	         		}
+       	         	});
+       	         });
                 });
             </script>
+            
 
 
             <hr>
             <!-- 카테고리 등록 -->
-            
             <li>
                 <div class="sub-title-sgm">카테고리 등록</div>
                 <div>
                     <div>
                         <select size="8" class="category1 font_jua select-sgm">
                             <option disabled class="text-align-center-sgm">1 분류</option>
-                            <option disabled>-----------</option>
+                            <option disabled>----------</option>
                          <!--    <option>데이터베이스</option>
                             <option>프레임워크</option>
                             <option>백엔드</option>
@@ -142,7 +180,7 @@
                         </select>
                         <select size="8" class="category2 font_jua select-sgm" >
                             <option disabled class="text-align-center-sgm">2 분류</option>
-                            <option disabled>-----------</option>
+                            <option disabled>----------</option>
                             <!-- <option>데이터베이스</option>
                             <option>프레임워크</option>
                             <option>백엔드</option>
@@ -179,11 +217,218 @@
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
                             <option disabled>-----------</option>
                         </select>
+                        <input type="hidden" id="array2" name="MASTER_CATEGORY"/>
                     </div>
                 </div>
             </li>
-           
+           <script>
+         // 컨트롤러에서 데이터 받기
+         var jsonData = JSON.parse('${category}');
+         console.log(jsonData);
+         
+         var cate1Arr = new Array();
+         var cate1Obj = new Object();
+         var testArray = new Object();
+         
+         var check1;
+         var check2;
+         var check3;
+        var masterId = [];
 
+         // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
+         for(var i = 0; i < jsonData.length; i++) {
+          
+          if(jsonData[i].level == "1") {
+           cate1Obj = new Object();  //초기화
+           cate1Obj.cateCode = jsonData[i].cateCode;
+           cate1Obj.cateName = jsonData[i].cateName;
+           cate1Arr.push(cate1Obj);
+          }
+         }
+         
+         // 1차 분류 셀렉트 박스에 데이터 삽입
+         var cate1Select = $("select.category1")
+         
+         for(var i = 0; i < cate1Arr.length; i++) {
+          cate1Select.append("<option value='" + cate1Arr[i].cateCode + "'>"
+               + cate1Arr[i].cateName + "</option>"); 
+         }
+
+         
+         
+         $(document).on("change", "select.category1", function(){
+
+             var cate2Arr = new Array();
+             var cate2Obj = new Object();
+             
+             // 2차 분류 셀렉트 박스에 삽입할 데이터 준비
+             for(var i = 0; i < jsonData.length; i++) {
+              
+              if(jsonData[i].level == "2") {
+               cate2Obj = new Object();  //초기화
+               cate2Obj.cateCode = jsonData[i].cateCode;
+               cate2Obj.cateName = jsonData[i].cateName;
+               cate2Obj.cateCodeRef = jsonData[i].cateCodeRef;
+               
+               cate2Arr.push(cate2Obj);
+              }
+             }
+             
+             var cate2Select = $("select.category2");
+             
+             cate2Select.children().remove();
+         
+             $("option:selected", this).each(function(){
+              
+              var selectVal = $(this).val();  
+                   /* check1 = $(this).text();  */ 
+                   check1 = $(this).val(); 
+                   
+              cate2Select.append("<option disabled value=''>2 분류</option>");
+              cate2Select.append("<option disabled>----------</option>");
+              
+              console.log(check1);
+              
+              for(var i = 0; i < cate2Arr.length; i++) {
+               if(selectVal == cate2Arr[i].cateCodeRef) {
+                cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+                     + cate2Arr[i].cateName + "</option>");
+               }
+              }
+              
+             });
+             
+            });
+
+         $(document).on("change", "select.category2", function(){
+
+             var cate3Arr = new Array();
+             var cate3Obj = new Object();
+             
+             // 3차 분류 셀렉트 박스에 삽입할 데이터 준비
+             for(var i = 0; i < jsonData.length; i++) {
+              
+              if(jsonData[i].level == "3") {
+               cate3Obj = new Object();  //초기화
+               cate3Obj.cateCode = jsonData[i].cateCode;
+               cate3Obj.cateName = jsonData[i].cateName;
+               cate3Obj.cateCodeRef = jsonData[i].cateCodeRef;
+               
+               cate3Arr.push(cate3Obj);
+              }
+             }
+             
+             var cate3Select = $("select.category3");
+
+             cate3Select.children().remove();
+         
+             $("option:selected", this).each(function(){
+                
+               /* check2 = $(this).text(); */
+               check2 = $(this).val(); 
+               console.log(check2);
+              
+              var selectVal = $(this).val();  
+              cate3Select.append("<option disabled value=''>3 분류</option>");
+              cate3Select.append("<option disabled>----------</option>");
+              
+              for(var i = 0; i < cate3Arr.length; i++) {
+               if(selectVal == cate3Arr[i].cateCodeRef) {
+                cate3Select.append("<option value='" + cate3Arr[i].cateCode + "'>"
+                     + cate3Arr[i].cateName + "</option>");
+               }
+              }
+              
+             });
+             
+            });
+     
+                // 나의 카테고리로 추가시키는 함수
+                const addCategory = function(){
+                    let temp    = [];
+                    let obj     = $('#my-cate option');
+                    let x       = 0;
+
+
+                    // select박스의 선택된 값 가져오기.   
+                  check3 = $('#3rd-cate option:selected').val();
+                  let choice = $('#3rd-cate option:selected').text();
+
+                   /*  masterId = check1+ "," + check2 + "," + check3; */
+
+                    // 현재 option의 값을 임시 배열에 저장
+                    $(obj).each(function(i){
+                        temp[i] = $(this).val();
+                        
+                    });
+
+
+                    // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
+                    $(temp).each(function(i){
+
+                        if(choice == temp[i]){
+                            x++;
+                        }
+                    });
+
+                    // 중복 값이 없을 경우 select박스에 option값 추가하기.
+                    if(x == 0 && choice != undefined){
+                        $("#my-cate").append("<option>" + choice + "</option>");
+                        masterId.push(check3);
+                        
+                        console.log(masterId);
+                    }
+                }
+
+                // [>] 버튼 클릭 시 추가
+                $('#plus-category').click(function(){
+                    addCategory();
+                    $("#array2").val(masterId);
+                });
+
+                // [<] 버튼 클릭 시 삭제
+                $('#minus-category').click(function(){
+
+                      var index = $("#my-cate option").index($("#my-cate option:selected")) - 2;
+            
+                     if(index>-1){
+                          masterId.splice(index,1);
+                          console.log(masterId);
+                          
+                           $('#my-cate option:selected').remove();
+                           $("#array2").val(masterId);
+                     };
+
+                });
+
+                // 더블클릭 시 추가
+                $('#3rd-cate').dblclick(function(){
+                    addCategory();
+                    $("#array2").val(masterId);
+                });
+
+                // 더블클릭 시 삭제 - 동적 요소에 이벤트를 바인딩 해야 할 때 사용해야 한다.
+                $(document).on("dblclick","#my-cate option",function(){
+                   
+                   var index = $("#my-cate option").index($("#my-cate option:selected")) - 2; 
+                   masterId.splice(index,1);
+                   console.log(masterId);
+
+                   $('#my-cate option:selected').remove();
+                   $("#array2").val(masterId);
+                    
+                });
+
+                // 전체 삭제
+                $('#delete-all').click(function(){
+                    let yes = confirm("정말 초기화 하시겠습니까?");
+                    if(yes){
+                        $('#my-cate option:gt(1)').remove();
+                        masterId = [];
+                        $("#array2").val(masterId);
+                    }
+                });
+            </script>
             <hr>
 
             <!-- 능력 인증 -->
@@ -193,7 +438,7 @@
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
                         <img src="resources/img/profile.png" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" hidden>
+                        <input type="file" id="idCard_file" name="MASTER_ID_PIC">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -250,23 +495,21 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="고등학교">
-                        
-                        <input type="file" hidden onchange="ok(this);">
+                        <input class="input_master width_500" type="text" placeholder="고등학교" name="MASTER_HIGH">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학교">
-                        <input class="input_master width_242" type="text" placeholder="학과">
+                        <input class="input_master width_242" type="text" placeholder="대학교" name="MASTER_UNIV">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV_DEPT">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);">
+                        <input type="file" name="MASTER_UNIV_PIC" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학원">
-                        <input class="input_master width_242" type="text" placeholder="학과">
+                        <input class="input_master width_242" type="text" placeholder="대학원" name="MASTER_UNIV2">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV2_DEPT">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);">
+                        <input type="file" hidden name="MASTER_UNIV2_PIC" onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
@@ -274,47 +517,45 @@
 
             <!-- 자격증 -->
             <li>
-                <div class="certify-ability " title="자격증(최대 5개)">
+                <div class="certify-ability " title="자격증(최대5개)">
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증">
+                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION1">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);">
+                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION1_PIC">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증">
+                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION2">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);">
+                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION2_PIC">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증">
+                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION3">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);">
+                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION3_PIC">
                         <span class="upCheck">OK</span>
                     </div>
                     <img src="resources/img/plus-icon.png" class="lr-btn-img-size btn_add_input" id="add-input">
                 </div>
             </li>
 
-            <script>
-            	let count = 0;
-            	let number = 4;
+			<script>
+               let count = 0;
+               let number = 4;
 
                 $('#add-input').click(function(){
 
-                	if(count <2) {
-                		
-                		let inputTag = "<div><input name=' MASTER_QUALIFICATION" + number + "' class='input_master' type='text' placeholder='자격증'><span class='btn_sgm font_jua' onclick='picUpload(this);'>업로드</span>";
-                        let inputTag2 = "<input type='file' hidden onchange='ok(this);'><span class='upCheck'>OK</span></div>";
+                   if(count <2) {
+                      
+                      let inputTag = "<div><input name='MASTER_QUALIFICATION" + number + "' class='input_master' type='text' placeholder='자격증'><span class='btn_sgm font_jua' onclick='picUpload(this);'>업로드</span>";
+                        let inputTag2 = "<input type='file' hidden onchange='ok(this);' name='MASTER_QUALIFICATION" + number + "_PIC'><span class='upCheck'>OK</span></div>";
                       
                         $(this).parent().append(inputTag + inputTag2);
                         
-                		count++;
-                		number++;
-                		console.log(count);
- 
-                	} 
+                      count++;
+                      number++;
+                   } 
                 })
 
 
@@ -329,31 +570,34 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="인스타그램">
+                        <input class="input_master_2" type="text" placeholder="인스타그램" name=MASTER_INSTAGRAM>
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="트위터">
+                        <input class="input_master_2" type="text" placeholder="트위터" name="MASTER_TWITTER">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="블로그">
+                        <input class="input_master_2" type="text" placeholder="블로그" name="MASTER_BLOG">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="GIT">
+                        <input class="input_master_2" type="text" placeholder="GIT" name="MASTER_GIT">
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);">
+                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        name="MASTER_YOTUBUE1">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);">
+                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        name="MASTER_YOTUBUE2">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);">
+                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        name="MASTER_YOTUBUE3">
                         <div>
                         </div>
                     </div>
@@ -380,8 +624,7 @@
             </script>
 
             <hr>
-
-            <!-- 작업 가능 시간 -->
+			 <!-- 작업 가능 시간 -->
             <li>
                 <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
@@ -424,9 +667,9 @@
                     <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
                 <div>
-                    <input class="input_master_3" type="time" name="" id="">
+                    <input class="input_master_3" type="time" name="MASTER_STARTTIME" id="">
                     &nbsp;~&nbsp;
-                    <input class="input_master_3" type="time" name="" id="">
+                    <input class="input_master_3" type="time" name="MASTER_ENDTIME" id="">
                 </div>
             </li>
 
@@ -434,280 +677,74 @@
 
             <!-- 저장 / 취소 버튼 -->
             <li class="margin-top-sgm">
-                <span class="btn_sgm">저장</span>
-                <span class="btn_sgm_2">취소</span>
+                <span class="btn_sgm" onclick="document.forms[0].submit()">저장</span>
+                <span class="btn_sgm_2" id="cancel">취소</span>
             </li>
         </ul>
     </div>
+    <input type="hidden" id="array" name="MASTER_WORKDAY"/>
+    <input type="hidden" id="array1" name="MASTER_WORKSTYLE"/>
     </form>
     
-    <input type="hidden" id="array"/>
-    <input type="hidden" id="array1"/>
-    <input type="text" id="array2"/>
     
     <%@ include file="../common/footer.jsp" %>
     
-    
-    <script>
-    
+  
+      <script>
+      $(function(){
+    	   $('#cancel').on('click', function(){
+    		 if(confirm("정말로 취소하시겠습니까?") == false) {
+    	            return false;
+    	        }else{
+    	        	location.href='index.do';
+    	        }
+    	   });
+      });
+ 
+      
+      
     // 선호하는 요일
     $(document).on("change", ".checkSelect", function(){
-    	
-		var send_array = Array();
-		var send_cnt = 0;
-		var chkbox = $(".checkSelect");
-		
-		for(i=0;i<chkbox.length;i++) {
-		    if (chkbox[i].checked == true){
-		        send_array[send_cnt] = chkbox[i].value;
-		        send_cnt++;
-		    }
-		}
+       
+      var send_array = Array();
+      var send_cnt = 0;
+      var chkbox = $(".checkSelect");
+      
+      for(i=0;i<chkbox.length;i++) {
+          if (chkbox[i].checked == true){
+              send_array[send_cnt] = chkbox[i].value;
+              send_cnt++;
+          }
+      }
 
-		console.log(send_array);
-		
-		$("#array").val(send_array);
-    });	
+      console.log(send_array);
+      
+      $("#array").val(send_array);
+    });   
     
     // 선호하는 방식
     $(document).on("change", ".checkSelect1", function(){
-		var send_array1 = Array();
-		var send_cnt1 = 0;
-		var chkbox1 = $(".checkSelect1");
-		
-		for(i=0;i<chkbox1.length;i++) {
-		    if (chkbox1[i].checked == true){
-		        send_array1[send_cnt1] = chkbox1[i].value;
-		        send_cnt1++;
-		    }
-		}
-		
-		console.log(send_array1);
-		
-		$("#array1").val(send_array1);
-		
-		
-		
-    });	
-    
-   
-		
-	</script>    
-    <script>
-         // 컨트롤러에서 데이터 받기
-         var jsonData = JSON.parse('${category}');
-         console.log(jsonData);
-         
-         var cate1Arr = new Array();
-         var cate1Obj = new Object();
-         var testArray = new Object();
-         
-         var check1;
-         var check2;
-         var check3;
-    	 var masterId = [];
-
-         // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
-         for(var i = 0; i < jsonData.length; i++) {
-          
-          if(jsonData[i].level == "1") {
-           cate1Obj = new Object();  //초기화
-           cate1Obj.cateCode = jsonData[i].cateCode;
-           cate1Obj.cateName = jsonData[i].cateName;
-           cate1Arr.push(cate1Obj);
+      var send_array1 = Array();
+      var send_cnt1 = 0;
+      var chkbox1 = $(".checkSelect1");
+      
+      for(i=0;i<chkbox1.length;i++) {
+          if (chkbox1[i].checked == true){
+              send_array1[send_cnt1] = chkbox1[i].value;
+              send_cnt1++;
           }
-         }
-         
-         // 1차 분류 셀렉트 박스에 데이터 삽입
-         var cate1Select = $("select.category1")
-         
-         for(var i = 0; i < cate1Arr.length; i++) {
-          cate1Select.append("<option value='" + cate1Arr[i].cateCode + "'>"
-               + cate1Arr[i].cateName + "</option>"); 
-         }
-
-         
-         
-         $(document).on("change", "select.category1", function(){
-
-         	 var cate2Arr = new Array();
-         	 var cate2Obj = new Object();
-         	 
-         	 // 2차 분류 셀렉트 박스에 삽입할 데이터 준비
-         	 for(var i = 0; i < jsonData.length; i++) {
-         	  
-         	  if(jsonData[i].level == "2") {
-         	   cate2Obj = new Object();  //초기화
-         	   cate2Obj.cateCode = jsonData[i].cateCode;
-         	   cate2Obj.cateName = jsonData[i].cateName;
-         	   cate2Obj.cateCodeRef = jsonData[i].cateCodeRef;
-         	   
-         	   cate2Arr.push(cate2Obj);
-         	  }
-         	 }
-         	 
-         	 var cate2Select = $("select.category2");
-         	 
-         	 cate2Select.children().remove();
-         
-         	 $("option:selected", this).each(function(){
-         	  
-         	  var selectVal = $(this).val();  
-         	 		/* check1 = $(this).text();  */ 
-         	 		check1 = $(this).val(); 
-         	 		
-         	  cate2Select.append("<option disabled value=''>2 분류</option>");
-         	  cate2Select.append("<option disabled>----------</option>");
-         	  
-         	  console.log(check1);
-         	  
-         	  for(var i = 0; i < cate2Arr.length; i++) {
-         	   if(selectVal == cate2Arr[i].cateCodeRef) {
-         	    cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
-         	         + cate2Arr[i].cateName + "</option>");
-         	   }
-         	  }
-         	  
-         	 });
-         	 
-         	});
-
-         $(document).on("change", "select.category2", function(){
-
-         	 var cate3Arr = new Array();
-         	 var cate3Obj = new Object();
-         	 
-         	 // 3차 분류 셀렉트 박스에 삽입할 데이터 준비
-         	 for(var i = 0; i < jsonData.length; i++) {
-         	  
-         	  if(jsonData[i].level == "3") {
-         	   cate3Obj = new Object();  //초기화
-         	   cate3Obj.cateCode = jsonData[i].cateCode;
-         	   cate3Obj.cateName = jsonData[i].cateName;
-         	   cate3Obj.cateCodeRef = jsonData[i].cateCodeRef;
-         	   
-         	   cate3Arr.push(cate3Obj);
-         	  }
-         	 }
-         	 
-         	 var cate3Select = $("select.category3");
-
-         	 cate3Select.children().remove();
-         
-         	 $("option:selected", this).each(function(){
-         		 
-         		/* check2 = $(this).text(); */
-         		check2 = $(this).val(); 
-         		console.log(check2);
-         	  
-         	  var selectVal = $(this).val();  
-         	  cate3Select.append("<option disabled value=''>3 분류</option>");
-         	  cate3Select.append("<option disabled>----------</option>");
-         	  
-         	  for(var i = 0; i < cate3Arr.length; i++) {
-         	   if(selectVal == cate3Arr[i].cateCodeRef) {
-         	    cate3Select.append("<option value='" + cate3Arr[i].cateCode + "'>"
-         	         + cate3Arr[i].cateName + "</option>");
-         	   }
-         	  }
-         	  
-         	 });
-         	 
-         	});
-     
-                // 나의 카테고리로 추가시키는 함수
-                const addCategory = function(){
-                    let temp    = [];
-                    let obj     = $('#my-cate option');
-                    let x       = 0;
-
-
-                    // select박스의 선택된 값 가져오기.   
-                  check3 = $('#3rd-cate option:selected').val();
-                  let choice = $('#3rd-cate option:selected').text();
-
-                   /*  masterId = check1+ "," + check2 + "," + check3; */
-
-                    // 현재 option의 값을 임시 배열에 저장
-                    $(obj).each(function(i){
-                        temp[i] = $(this).val();
-                        
-                    });
-
-
-                    // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
-                    $(temp).each(function(i){
-
-                        if(choice == temp[i]){
-                            x++;
-                        }
-                    });
-
-                    // 중복 값이 없을 경우 select박스에 option값 추가하기.
-                    if(x == 0 && choice != undefined){
-                        $("#my-cate").append("<option>" + choice + "</option>");
-                        masterId.push(check3);
-                        
-                        console.log(masterId);
-                    }
-                }
-
-                // [>] 버튼 클릭 시 추가
-                $('#plus-category').click(function(){
-                    addCategory();
-                    $("#array2").val(masterId);
-                });
-
-                // [<] 버튼 클릭 시 삭제
-                $('#minus-category').click(function(){
-
-                		var index = $("#my-cate option").index($("#my-cate option:selected")) - 2;
-            
-            			if(index>-1){
-	                    	masterId.splice(index,1);
-	                    	console.log(masterId);
-	                    	
-	                        $('#my-cate option:selected').remove();
-	                        $("#array2").val(masterId);
-            			};
-
-                });
-
-                // 더블클릭 시 추가
-                $('#3rd-cate').dblclick(function(){
-                    addCategory();
-                    $("#array2").val(masterId);
-                });
-
-                // 더블클릭 시 삭제 - 동적 요소에 이벤트를 바인딩 해야 할 때 사용해야 한다.
-                $(document).on("dblclick","#my-cate option",function(){
-                	
-                	var index = $("#my-cate option").index($("#my-cate option:selected")) - 2; 
-                	masterId.splice(index,1);
-                	console.log(masterId);
-
-                	$('#my-cate option:selected').remove();
-                	$("#array2").val(masterId);
-                    
-                    
-                });
-
-                // 전체 삭제
-                $('#delete-all').click(function(){
-                    let yes = confirm("정말 초기화 하시겠습니까?");
-                    if(yes){
-                        $('#my-cate option:gt(1)').remove();
-                        masterId = [];
-                        $("#array2").val(masterId);
-
-                    }
-                    
-                    
-                    
-                });
-
-                
-            </script>
+      }
+      
+      console.log(send_array1);
+      
+      $("#array1").val(send_array1);
+    });   
+    
+    
+    
+    
+      
+   </script>    
     
 </body>
 </html>

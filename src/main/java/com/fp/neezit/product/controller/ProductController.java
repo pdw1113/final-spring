@@ -2,6 +2,8 @@ package com.fp.neezit.product.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 import net.sf.json.JSONArray;
 
@@ -48,15 +52,18 @@ public class ProductController {
    
    
    @RequestMapping(value = "productInsert.do" , method = RequestMethod.GET)
-   public String getGoodsRegister(Model model) throws Exception{
-      
-      
-      // 상품 카테고리 3분류
-      List<ProductCategory> category = null;
-      category = pService.category();
-      model.addAttribute("category", JSONArray.fromObject(category));
-      
-      return "user/product/productInsert";
+   public String getGoodsRegister(Model model,HttpSession session) throws Exception{
+	   
+	      User u = (User)session.getAttribute("loginUser");
+	      
+	      UserMaster master = pService.getMaster(u);
+	      
+	      // 상품 카테고리 3분류
+	      List<ProductCategory> category = null;
+	      category = pService.category();
+	      model.addAttribute("category", JSONArray.fromObject(category));
+	      
+	      return "user/product/productInsert";
    }
 
    

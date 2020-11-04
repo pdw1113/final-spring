@@ -17,6 +17,7 @@
 		<result property="marketingE" column="USER_MARKETING_E"/>
 	</resultMap>
 	
+	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User" resultMap="userResultSet">
 		<!-- 암호화 전 -->
@@ -54,10 +55,67 @@
 	</select>
 
 	<!-- 휴대폰번호 변경 -->
-	<update id="modifyPhone" parameterType="hashmap">
+	<update id="modifyPhone" parameterType="User">
 		UPDATE NEEZ_USER
 	 	SET USER_PHONE = #{phone}
-	 	WHERE USER_PHONE = #{sessionPhone}
+	 	WHERE USER_EMAIL = #{email}
 	</update>
   
+  	<!-- 능력자 등록 -->
+	<insert id="insertMaster"> 
+		INSERT INTO NEEZ_MASTER (USER_EMAIL, MASTER_RANKNAME, MASTER_PROFILE_PIC, MASTER_NICKNAME, MASTER_CATEGORY, MASTER_ID_PIC, MASTER_WORKDAY, MASTER_WORKSTYLE, MASTER_STARTTIME, MASTER_ENDTIME)
+		VALUES(#{USER_EMAIL},default,#{MASTER_PROFILE_PIC},#{MASTER_NICKNAME},#{MASTER_CATEGORY},#{MASTER_ID_PIC},#{MASTER_WORKDAY},#{MASTER_WORKSTYLE},#{MASTER_STARTTIME},#{MASTER_ENDTIME})
+	</insert>
+	
+	 <!-- 능력자 학력 등록 -->
+	<insert id="insertMasterSchool"> 
+		INSERT INTO SCHOOL (USER_EMAIL, MASTER_HIGH, MASTER_UNIV, MASTER_UNIV_DEPT, MASTER_UNIV_PIC, MASTER_UNIV2, MASTER_UNIV2_DEPT, MASTER_UNIV2_PIC)
+		VALUES(#{USER_EMAIL},#{MASTER_HIGH},#{MASTER_UNIV},#{MASTER_UNIV_DEPT},#{MASTER_UNIV_PIC},#{MASTER_UNIV2},#{MASTER_UNIV2_DEPT},#{MASTER_UNIV2_PIC})
+	</insert>
+	
+	 <!-- 능력자 sns 등록 -->
+	<insert id="insertMasterSns"> 
+		INSERT INTO SNS (USER_EMAIL, MASTER_INSTAGRAM, MASTER_TWITTER, MASTER_BLOG, MASTER_GIT, MASTER_YOTUBUE1, MASTER_YOTUBUE2, MASTER_YOTUBUE3)
+		VALUES(#{USER_EMAIL},#{MASTER_INSTAGRAM},#{MASTER_TWITTER},#{MASTER_BLOG},#{MASTER_GIT},#{MASTER_YOTUBUE1},#{MASTER_YOTUBUE2},#{MASTER_YOTUBUE3})
+	</insert>
+	
+	 <!-- 능력자 자격증 등록 -->
+	<insert id="insertMasterQfc"> 
+		INSERT INTO QUALIFICATION (USER_EMAIL, MASTER_QUALIFICATION1, MASTER_QUALIFICATION1_PIC, MASTER_QUALIFICATION2, MASTER_QUALIFICATION2_PIC, MASTER_QUALIFICATION3, MASTER_QUALIFICATION3_PIC, MASTER_QUALIFICATION4, MASTER_QUALIFICATION4_PIC, MASTER_QUALIFICATION5, MASTER_QUALIFICATION5_PIC)
+		VALUES(#{USER_EMAIL},#{MASTER_QUALIFICATION1},#{MASTER_QUALIFICATION1_PIC},#{MASTER_QUALIFICATION2},#{MASTER_QUALIFICATION2_PIC},#{MASTER_QUALIFICATION3},#{MASTER_QUALIFICATION3_PIC},#{MASTER_QUALIFICATION4},#{MASTER_QUALIFICATION4_PIC},#{MASTER_QUALIFICATION5},#{MASTER_QUALIFICATION5_PIC})
+	</insert>
+	
+	<!-- 별명 중복 체크 -->
+	<select id="nickCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_MASTER
+		WHERE MASTER_NICKNAME = #{nickname}
+	</select>
+	
+	<!-- 마케팅 수신동의 변경 -->
+	<update id="marketing" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_MARKETING_T = #{marketingT},
+			USER_MARKETING_E = #{marketingE}
+		WHERE USER_EMAIL = #{email}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+  	<update id="modifyPwd" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_PASSWORD = #{pwd}
+		WHERE USER_EMAIL = #{email}
+	</update>
+	
+	<!-- 유저삭제 -->
+	<update id="userDelete" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_STATUS='Y'
+		WHERE USER_EMAIL=#{email}
+	</update>
+	
+	<insert id="reason" parameterType="hashmap">
+		INSERT INTO REASON
+		VALUES(#{email}, #{reason})
+	</insert>
 </mapper>
