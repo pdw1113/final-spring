@@ -24,8 +24,13 @@ public class ProductController {
    ProductService pService;
 
    @RequestMapping("productDetail.do")
-   public String supportnav() {
+   public String productDetail() {
       return "user/product/productDetail";
+   }
+   
+   @RequestMapping("productListSearch.do")
+   public String productListSearch() {
+      return "user/product/productListSearch"; 
    }
    
    @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
@@ -43,15 +48,7 @@ public class ProductController {
       return "user/product/productList";
    }
    
-   
-   
-   @RequestMapping("productListSearch.do")
-   public String productListSearch() {
-      return "user/product/productListSearch"; 
-   }
-   
-   
-   @RequestMapping(value = "productInsert.do" , method = RequestMethod.GET)
+   @RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
    public String getGoodsRegister(Model model,HttpSession session) throws Exception{
 	   
 //	      User u = (User)session.getAttribute("loginUser");
