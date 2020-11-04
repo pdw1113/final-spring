@@ -24,8 +24,13 @@ public class ProductController {
    ProductService pService;
 
    @RequestMapping("productDetail.do")
-   public String supportnav() {
+   public String productDetail() {
       return "user/product/productDetail";
+   }
+   
+   @RequestMapping("productListSearch.do")
+   public String productListSearch() {
+      return "user/product/productListSearch"; 
    }
    
    @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
@@ -43,27 +48,19 @@ public class ProductController {
       return "user/product/productList";
    }
    
-   
-   
-   @RequestMapping("productListSearch.do")
-   public String productListSearch() {
-      return "user/product/productListSearch"; 
-   }
-   
-   
-   @RequestMapping(value = "productInsert.do" , method = RequestMethod.GET)
+   @RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
    public String getGoodsRegister(Model model,HttpSession session) throws Exception{
-	   
-	      User u = (User)session.getAttribute("loginUser");
-	      
-	      UserMaster master = pService.getMaster(u);
-	      
-	      // 상품 카테고리 3분류
-	      List<ProductCategory> category = null;
-	      category = pService.category();
-	      model.addAttribute("category", JSONArray.fromObject(category));
-	      
-	      return "user/product/productInsert";
+      
+//         User u = (User)session.getAttribute("loginUser");
+         
+//         UserMaster master = pService.getMaster(u);
+         
+         // 상품 카테고리 3분류
+         List<ProductCategory> category = null;
+         category = pService.category();
+         model.addAttribute("category", JSONArray.fromObject(category));
+         
+         return "user/product/productInsert";
    }
 
    
