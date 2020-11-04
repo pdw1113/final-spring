@@ -19,8 +19,8 @@ public class ProductServiceImpl implements ProductService{
    
    // 카테고리
    @Override
-   public List<ProductCategory> category() {
-      return pDao.category();
+   public List<String> category(UserMaster master) {
+      return pDao.category(master);
    }
 
    @Override

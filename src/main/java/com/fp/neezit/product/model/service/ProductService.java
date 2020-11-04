@@ -10,7 +10,7 @@ import com.fp.neezit.user.model.vo.UserMaster;
 public interface ProductService {
 
    // 카테고리
-   public List<ProductCategory> category();
+   public List<String> category(UserMaster master);
 
    public List<ProductCategory> categoryList(int navNo);
    
