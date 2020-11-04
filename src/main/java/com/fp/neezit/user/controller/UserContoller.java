@@ -92,13 +92,6 @@ public class UserContoller {
 		return "user/myPage/walletDetail";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	/****** 페이지 이동 메소드 ******/
 	
 	@RequestMapping("loginPage.do")
@@ -121,15 +114,13 @@ public class UserContoller {
 		return "user/signUpMasterManage";
 	}
 	
-	
-	
 	/**
 	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
 	 * @param u
 	 * @param model
 	 * @return 
 	 */
-	@RequestMapping(value="login.do",method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String userLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
 		
 		User loginUser = uService.loginUser(u);
@@ -227,9 +218,6 @@ public class UserContoller {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * 10. 능력자 등록 카테고리 메소드
-=======
 	 * 5. 비밀번호 변경 메소드
 	 * @param originalPwd
 	 * @param newPwd
@@ -302,23 +290,6 @@ public class UserContoller {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * 10. 능력자 등록 메소드
 	 * @param model
@@ -369,7 +340,7 @@ public class UserContoller {
 	 */
 	@ResponseBody // AJAX
 	@RequestMapping("nickCheck.do")
-	public String nickCheck(String nickname) throws IOException  {
+	public String nickCheck(String nickname){
 		
 		int result = uService.nickCheck(nickname);
 		

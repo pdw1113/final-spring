@@ -60,6 +60,7 @@
 	            <div class="login_box_Mainhead">
 	               <a href="signUpMasterCategory.do">
 	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
+	               </a>
 	               <a href="signUpMaster.do">
 	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
 	               </a>

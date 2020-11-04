@@ -46,7 +46,7 @@ public class UserSignUpController {
 	 */
 	@ResponseBody // AJAX
 	@RequestMapping("phoneCheck.do")
-	public String idCheck(String phone) throws IOException  {
+	public String idCheck(String phone){
 		
 		int result = uService.phoneCheck(phone);
 		
@@ -159,7 +159,7 @@ public class UserSignUpController {
      */
     @ResponseBody
     @RequestMapping(value = "dice.do", method = RequestMethod.POST)
-    public String join_injeung(String confirm_number) throws IOException {
+    public String join_injeung(String confirm_number){
     	
     	String dice = diceObj.getDice();
         System.out.println("인증번호 : " + dice);
@@ -199,7 +199,7 @@ public class UserSignUpController {
      */
     @ResponseBody
     @RequestMapping(value = "diceReset.do", method = RequestMethod.POST)
-    public String diceReset() throws IOException {
+    public String diceReset(){
     	// 인증번호 난수(랜덤 숫자)
         Random r = new Random();
         
