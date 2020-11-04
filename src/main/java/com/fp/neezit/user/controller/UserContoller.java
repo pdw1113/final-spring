@@ -1,5 +1,7 @@
 package com.fp.neezit.user.controller;
 
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +19,10 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
@@ -221,6 +227,9 @@ public class UserContoller {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * 10. 능력자 등록 카테고리 메소드
+=======
 	 * 5. 비밀번호 변경 메소드
 	 * @param originalPwd
 	 * @param newPwd
@@ -316,8 +325,8 @@ public class UserContoller {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.GET)
-	public String signUpMaster(Model model) throws Exception {
+	@RequestMapping(value = "signUpMasterCategory.do" , method = RequestMethod.GET)
+	public String signUpMasterCategory(Model model) throws Exception {
 		
 		// 상품 카테고리 3분류
 		List<ProductCategory> category = null;
@@ -326,5 +335,48 @@ public class UserContoller {
 		
 		return "user/signUpMaster";
 	}
-
+	
+	/**
+	 * 11. 능력자 등록  메소드
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "signUpMaster.do" , method = RequestMethod.POST)
+	public String signUpMaster(UserMaster msu,UserMasterSchool msc,UserMasterSns msn, UserMasterQualifcation mqf,Model model){
+		int result = uService.insertMaster(msu);
+		int schoolresult =  uService.insertMasterSchool(msc);
+		int snsresult =  uService.insertMasterSns(msn);
+		int qfcresult =  uService.insertMasterQfc(mqf);
+ 		if(result > 0) {
+ 			model.addAttribute(result);
+ 			model.addAttribute(schoolresult);
+ 			model.addAttribute(snsresult);
+ 			model.addAttribute(qfcresult);
+ 			return "user/signUpMaster";
+ 		}else {
+ 			model.addAttribute("msg","능력자등록실패!");
+ 			return "common/errorPage";
+ 		}
+		
+	}
+	
+	/**
+	 * 12. 닉네임 중복체크 AJAX
+	 * @param nickName
+	 * @return 
+	 * @throws IOException
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("nickCheck.do")
+	public String nickCheck(String nickname) throws IOException  {
+		
+		int result = uService.nickCheck(nickname);
+		
+		if(result > 0) { // 중복 존재
+			return "fail";
+		}else {
+			return "ok";
+		}
+	}
 }
