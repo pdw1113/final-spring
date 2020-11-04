@@ -7,6 +7,7 @@ public class Product {
    private String nickName;   // 별명    [외래키]
    private int no;            // 글번호
    private String title;      // 글제목
+   private String pic; 		// 사진
    private String category;   // 카테고리
    private int price;         // 가격
    private String career;      // 경력
@@ -21,23 +22,28 @@ public class Product {
       // TODO Auto-generated constructor stub
    }
 
-   public Product(String nickName, int no, String title, String category, int price, String career, String portfolio,
-         String introduce, Date createDate, Date modifyDate, int count) {
-      super();
-      this.nickName = nickName;
-      this.no = no;
-      this.title = title;
-      this.category = category;
-      this.price = price;
-      this.career = career;
-      this.portfolio = portfolio;
-      this.introduce = introduce;
-      this.createDate = createDate;
-      this.modifyDate = modifyDate;
-      this.count = count;
-   }
+   
 
-   public String getNickName() {
+   public Product(String nickName, int no, String title, String pic, String category, int price, String career,
+		String portfolio, String introduce, Date createDate, Date modifyDate, int count) {
+	super();
+	this.nickName = nickName;
+	this.no = no;
+	this.title = title;
+	this.pic = pic;
+	this.category = category;
+	this.price = price;
+	this.career = career;
+	this.portfolio = portfolio;
+	this.introduce = introduce;
+	this.createDate = createDate;
+	this.modifyDate = modifyDate;
+	this.count = count;
+}
+
+
+
+public String getNickName() {
       return nickName;
    }
 
@@ -124,11 +130,27 @@ public class Product {
    public void setCount(int count) {
       this.count = count;
    }
+   
 
-   @Override
-   public String toString() {
-      return "Product [nickName=" + nickName + ", no=" + no + ", title=" + title + ", category=" + category
-            + ", price=" + price + ", career=" + career + ", portfolio=" + portfolio + ", introduce=" + introduce
-            + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", count=" + count + "]";
-   }
+	   public String getPic() {
+		return pic;
+	}
+
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Product [nickName=" + nickName + ", no=" + no + ", title=" + title + ", pic=" + pic + ", category="
+				+ category + ", price=" + price + ", career=" + career + ", portfolio=" + portfolio + ", introduce="
+				+ introduce + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", count=" + count + "]";
+	}
+
+
+
+
 }

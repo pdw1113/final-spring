@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fp.neezit.product.model.dao.ProductDao;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -36,5 +37,10 @@ public class ProductServiceImpl implements ProductService{
    public UserMaster getMaster(User u) {
       return pDao.getMaster(u);
    }
+
+	@Override
+	public int insertProduct(Product product) {
+		return pDao.insertProduct(product);
+}
 
 }

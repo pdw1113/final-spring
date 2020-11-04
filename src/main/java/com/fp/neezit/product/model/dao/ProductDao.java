@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -31,6 +32,10 @@ public class ProductDao{
 
 	public UserMaster getMaster(User u) {
 		return sqlSession.selectOne("productMapper.getMaster",u);
+	}
+
+	public int insertProduct(Product product) {
+		return sqlSession.insert("productMapper.insertProduct",product);
 	}
 	
 }
