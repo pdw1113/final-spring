@@ -72,13 +72,9 @@
 				<!-- 카테고리 -->
 				<div class="status_div_addproduct">
 
-					<span class="input_title_addproduct">카테고리</span> <select
-						class="category1 category_select_addproduct m-r-27 m-l-90">
+					<span class="input_title_addproduct">카테고리</span> 
+					<select class="category1 category_select_addproduct m-r-27 m-l-90">
 						<option value="">1차 분류</option>
-					</select> <select class="category2 category_select_addproduct m-r-27">
-						<option value="">2차 분류</option>
-					</select> <select class="category3 category_select_addproduct">
-						<option value="">3차 분류</option>
 					</select>
 
 				</div>
@@ -130,91 +126,7 @@
 	</div>
 	<%@ include file="../../common/footer.jsp"%>
 </body>
-<script>
-      var upload = document.querySelector('#upload');
-      
-      /* FileReader 객체 생성 */
-      var reader = new FileReader();
-      
-         /* reader 시작시 함수 구현 */
-      reader.onload = (function () {
-      
-         this.image = document.createElement('img');
-         var vm = this;
-         
-         return function (e) {
-             /* base64 인코딩 된 스트링 데이터 */
-             vm.image.src = e.target.result
-         }
-      })()
-      
-      upload.addEventListener('change',function (e) {
-         var get_file = e.target.files;
-      
-         if(get_file){
-             reader.readAsDataURL(get_file[0]);
-         }
-         $('.img_addproduct').remove();
-         image.className = "img_addproduct";
-         preview.appendChild(image);
-      })
-      
-      function fileupload(){
-         $('#upload').click();
-      }
-      
-      $(document).ready(function() {
-         		//여기 아래 부분
-         		$('#summernote_portfolio').summernote({
-         			  toolbar: [
-             			    // [groupName, [list of button]]
-             			    ['fontname', ['fontname']],
-             			    ['fontsize', ['fontsize']],
-             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-             			    ['color', ['forecolor','color']],
-             			    ['table', ['table']],
-             			    ['para', ['ul', 'ol', 'paragraph']],
-             			    ['height', ['height']],
-             			    ['insert',['picture','link','video']],
-             			    ['view', ['fullscreen', 'help']]
-             			  ],
-         			  height: 300,                 // 에디터 높이
-         			  minHeight: null,             // 최소 높이
-         			  maxHeight: null,             // 최대 높이
-         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-         			  lang: "ko-KR",					// 한글 설정
-         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-         	          
-         		});
-      
-                 $('#summernote_Introduce').summernote({
-         			  toolbar: [
-             			    // [groupName, [list of button]]
-             			    ['fontname', ['fontname']],
-             			    ['fontsize', ['fontsize']],
-             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-             			    ['color', ['forecolor','color']],
-             			    ['table', ['table']],
-             			    ['para', ['ul', 'ol', 'paragraph']],
-             			    ['height', ['height']],
-             			    ['insert',['picture','link','video']],
-             			    ['view', ['fullscreen', 'help']]
-             			  ],
-         			  height: 200,                 // 에디터 높이
-         			  minHeight: null,             // 최소 높이
-         			  maxHeight: null,             // 최대 높이
-         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-         			  lang: "ko-KR",					// 한글 설정
-         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-         	          
-         		});
-         	});
-   </script>
-<script>
+	<script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${category}');
          console.log(jsonData);
@@ -337,4 +249,91 @@
          	$('form').css('display','inline-block');
          
       </script>
+
+
+<!-- 썸머노트 -->
+<script>
+      var upload = document.querySelector('#upload');
+      
+      /* FileReader 객체 생성 */
+      var reader = new FileReader();
+      
+         /* reader 시작시 함수 구현 */
+      reader.onload = (function () {
+      
+         this.image = document.createElement('img');
+         var vm = this;
+         
+         return function (e) {
+             /* base64 인코딩 된 스트링 데이터 */
+             vm.image.src = e.target.result
+         }
+      })()
+      
+      upload.addEventListener('change',function (e) {
+         var get_file = e.target.files;
+      
+         if(get_file){
+             reader.readAsDataURL(get_file[0]);
+         }
+         $('.img_addproduct').remove();
+         image.className = "img_addproduct";
+         preview.appendChild(image);
+      })
+      
+      function fileupload(){
+         $('#upload').click();
+      }
+      
+      $(document).ready(function() {
+         		//여기 아래 부분
+         		$('#summernote_portfolio').summernote({
+         			  toolbar: [
+             			    // [groupName, [list of button]]
+             			    ['fontname', ['fontname']],
+             			    ['fontsize', ['fontsize']],
+             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+             			    ['color', ['forecolor','color']],
+             			    ['table', ['table']],
+             			    ['para', ['ul', 'ol', 'paragraph']],
+             			    ['height', ['height']],
+             			    ['insert',['picture','link','video']],
+             			    ['view', ['fullscreen', 'help']]
+             			  ],
+         			  height: 300,                 // 에디터 높이
+         			  minHeight: null,             // 최소 높이
+         			  maxHeight: null,             // 최대 높이
+         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+         			  lang: "ko-KR",					// 한글 설정
+         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+         	          
+         		});
+      
+                 $('#summernote_Introduce').summernote({
+         			  toolbar: [
+             			    // [groupName, [list of button]]
+             			    ['fontname', ['fontname']],
+             			    ['fontsize', ['fontsize']],
+             			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+             			    ['color', ['forecolor','color']],
+             			    ['table', ['table']],
+             			    ['para', ['ul', 'ol', 'paragraph']],
+             			    ['height', ['height']],
+             			    ['insert',['picture','link','video']],
+             			    ['view', ['fullscreen', 'help']]
+             			  ],
+         			  height: 200,                 // 에디터 높이
+         			  minHeight: null,             // 최소 높이
+         			  maxHeight: null,             // 최대 높이
+         			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+         			  lang: "ko-KR",					// 한글 설정
+         			  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+         			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+             			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+         	          
+         		});
+         	});
+   </script>
 </html>
