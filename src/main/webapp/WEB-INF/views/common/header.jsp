@@ -39,8 +39,8 @@
 	                  </a>
 	               </div>
 	               <div class="login_box_Mainhead">
-	                  <a href="signUp.do">
-	                     <div class="head_login_Mainhead w_100p">회원가입</div>
+	                  <a href="test.do">
+	                     <div class="head_login_Mainhead w_100p">능력자관리</div>
 	                  </a>
 	               </div>
 	         </div>

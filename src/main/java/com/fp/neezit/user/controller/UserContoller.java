@@ -1,6 +1,5 @@
 package com.fp.neezit.user.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
-import com.sun.mail.imap.protocol.Status;
 
 import net.sf.json.JSONArray;
 
@@ -111,6 +109,13 @@ public class UserContoller {
 	public String deleteUser() {
 		return "user/myPage/deleteUser";
 	}
+	
+	@RequestMapping("test.do")
+	public String test() {
+		return "user/signUpMasterManage";
+	}
+	
+	
 	
 	/**
 	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
