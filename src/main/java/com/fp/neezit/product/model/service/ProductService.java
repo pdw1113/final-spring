@@ -17,5 +17,4 @@ public interface ProductService {
 
    public UserMaster getMaster(User u);
 
-   
 }
