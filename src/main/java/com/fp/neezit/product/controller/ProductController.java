@@ -34,6 +34,11 @@ public class ProductController {
       return "user/product/productListSearch"; 
    }
    
+   /** 1. 상품 리스트 메소드
+    * @param model
+ 	* @param navNo
+ 	* @return
+ 	*/
    @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
    public String productList(Model model, int navNo){
       List<ProductCategory> category = null;
@@ -62,8 +67,7 @@ public class ProductController {
 	      UserMaster master = pService.getMaster(u);
 	      
 	      // 상품 카테고리 3분류
-	      List<ProductCategory> category = null;
-	      category = pService.category();
+	      List<ProductCategory> category = pService.category();
 	      System.out.println(category);
 	      model.addAttribute("category", JSONArray.fromObject(category));
 	      
