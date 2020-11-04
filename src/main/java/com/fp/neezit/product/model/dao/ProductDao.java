@@ -6,31 +6,36 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 
 @Repository
 public class ProductDao{
-
+	
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
+	
 	// 카테고리
-	public List<ProductCategory> category() throws Exception {
+	public List<ProductCategory> category(){
 		return sqlSession.selectList("productMapper.category");
 	}
 
-	public List<ProductCategory> categoryList(int navNo) throws Exception {
+	public List<ProductCategory> categoryList(int navNo){
 		return sqlSession.selectList("productMapper.categoryList", navNo);
 	}
 
-	public List<ProductCategory> categoryList2(int navNo) throws Exception {
+	public List<ProductCategory> categoryList2(int navNo){
 		return sqlSession.selectList("productMapper.categoryList2", navNo);
 	}
 
 	public UserMaster getMaster(User u) {
 		return sqlSession.selectOne("productMapper.getMaster",u);
+	}
+
+	public int insertProduct(Product product) {
+		return sqlSession.insert("productMapper.insertProduct",product);
 	}
 	
 }
