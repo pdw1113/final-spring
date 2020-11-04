@@ -58,6 +58,9 @@ margin: 160px 10px 0 5px;
 .input_image_addproducthtml{
 visibility: hidden;
 }
+.pro_nicname{
+border: none;
+}
 .priviewimg_addproduct{
 margin-left: 20px;
 float: left;
