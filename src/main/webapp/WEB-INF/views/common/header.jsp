@@ -53,7 +53,7 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="signUpMaster.do">
+	               <a href="signUpMasterCategory.do">
 	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
 	               </a>
 	            </div>

@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.User;
 
 @Repository("uDao")
@@ -39,6 +43,26 @@ public class UserDao {
 
 	public int modifyPhone(HashMap<String, String> map) {
 		return sqlSession.update("userMapper.modifyPhone", map);
+	}
+
+	public int insertMaster(UserMaster msu) {
+		return sqlSession.insert("userMapper.insertMaster",msu);
+	}
+
+	public int insertMasterSchool(UserMasterSchool msc) {
+		return sqlSession.insert("userMapper.insertMasterSchool",msc);
+	}
+
+	public int insertMasterSns(UserMasterSns msn) {
+		return sqlSession.insert("userMapper.insertMasterSns",msn);
+	}
+
+	public int insertMasterQfc(UserMasterQualifcation mqf) {
+		return sqlSession.insert("userMapper.insertMasterQfc",mqf);
+	}
+
+	public int nickCheck(String nickname) {
+		return sqlSession.selectOne("userMapper.nickCheck",nickname);
 	}
 
 }

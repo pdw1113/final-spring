@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.User;
 
 public interface UserService {
@@ -19,5 +23,15 @@ public interface UserService {
 	int emailCheck(String email);
 
 	int modifyPhone(HashMap<String, String> map);
+
+	int insertMaster(UserMaster msu);
+
+	int insertMasterSchool(UserMasterSchool msc);
+
+	int insertMasterSns(UserMasterSns msn);
+
+	int insertMasterQfc(UserMasterQualifcation mqf);
+
+	int nickCheck(String nickname);
 
 }

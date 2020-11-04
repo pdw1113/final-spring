@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.dao.UserDao;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.User;
 
 @Service("uService")
@@ -54,6 +58,31 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int modifyPhone(HashMap<String, String> map) {
 		return uDao.modifyPhone(map);
+	}
+
+	@Override
+	public int insertMaster(UserMaster msu) {
+		return  uDao.insertMaster(msu);
+	}
+
+	@Override
+	public int insertMasterSchool(UserMasterSchool msc) {
+		return uDao.insertMasterSchool(msc);
+	}
+
+	@Override
+	public int insertMasterSns(UserMasterSns msn) {
+		return uDao.insertMasterSns(msn);
+	}
+
+	@Override
+	public int insertMasterQfc(UserMasterQualifcation mqf) {
+		return uDao.insertMasterQfc(mqf);
+	}
+
+	@Override
+	public int nickCheck(String nickname) {
+		return uDao.nickCheck(nickname);
 	}
 
 	
