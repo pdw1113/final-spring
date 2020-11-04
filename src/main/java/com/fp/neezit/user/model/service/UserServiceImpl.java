@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService{
 		return uDao.userdelete(u);
 	}
 
+	@Override
+	public int reason(HashMap<String, String> map) {
+		return uDao.reason(map);
+	}
+
 	
 
 }

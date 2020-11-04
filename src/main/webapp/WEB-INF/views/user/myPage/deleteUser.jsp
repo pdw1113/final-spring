@@ -16,7 +16,7 @@
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
       <%@ include file="../../user/myPage/common/nav.jsp" %>
-      <form action="userdelete.do" method="post">
+      <form action="deleteUser.do" method="post">
          <div class="content_myleave">
             <div class="dataInform_myleave">
                <div class="tit2_myleave">비밀번호 및 탈퇴사유를 입력해 주십시오.</div>
@@ -30,32 +30,32 @@
                   <ul>
                      <li>
                         <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason01" class="radio_myleave"
-                           value="다른 계정이름으로 사용하기 위해서"><label for="s_reason01" class="label"><span></span>다른
+                           value="1"><label for="s_reason01" class="label"><span></span>다른
                            계정이름으로 사용하기 위해서</label>
                         </div>
                      </li>
                      <li>
                         <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason02" class="radio_myleave"
-                           value="사용빈도가 낮고, 개인정보 유출이 우려되서"><label for="s_reason02"
+                           value="2"><label for="s_reason02"
                            class="label"><span></span>사용빈도가 낮고, 개인정보 유출이
                            우려되서</label>
                         </div>
                      </li>
                      <li>
                         <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason03" class="radio_myleave"
-                           value="사이트 이용 시 장애가 많아서"><label for="s_reason03" class="label"><span></span>사이트
+                           value="3"><label for="s_reason03" class="label"><span></span>사이트
                            이용 시 장애가 많아서</label>
                         </div>
                      </li>
                      <li>
                         <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason04" class="radio_myleave"
-                           value="서비스의 질에 대한 불만이 있어서"><label for="s_reason04" class="label"><span></span>서비스의
+                           value="4"><label for="s_reason04" class="label"><span></span>서비스의
                            질에 대한 불만이 있어서</label>
                         </div>
                      </li>
                      <li>
                         <div class="custom-radio_myleave"><input type="radio" name="user_leave" id="s_reason05" class="radio_myleave"
-                           value="사이트 이용 시 고객응대가 나빠서"><label for="s_reason05" class="label"><span></span>사이트 이용
+                           value="5"><label for="s_reason05" class="label"><span></span>사이트 이용
                            시 고객응대가 나빠서</label>
                         </div>
                      </li>
@@ -68,11 +68,22 @@
                   <ul class="directInput_myleave"><input type="text" class="text_myleave" name="user_leave_memo" id="user_leave_memo" placeholder="직접 입력"></ul>
                </div>
                <div>
-                     <button class="pdBtn_myleave">회원 탈퇴</button>
+                     <button class="pdBtn_myleave" type="submit" onclick="return deleteUser();">회원 탈퇴</button>
                </div>
             </div>
          </div>
       </form>
+      
+      <script>
+      function deleteUser(){
+          let memo = $("#user_leave_memo").val();
+          $("#s_reason06").val(memo);
+          return true;
+      }
+      
+      </script>
+      
+      
       <script>
       	let sw = "${sw}";
       	if(sw!=null){
@@ -83,11 +94,11 @@
       		}else if(sw==2){
       			alert("회원 탈퇴 실패");
       			sw=null;
-      			location.href="deleteUser.do";
+      			location.href="deleteUserPage.do";
       		}else if(sw==3){
       			alert("비밀번호가 일치하지 않습니다.");
       			sw=null;
-      			location.href="deleteUser.do";
+      			location.href="deleteUserPage.do";
       		}
       	}
       
