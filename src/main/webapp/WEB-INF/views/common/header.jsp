@@ -39,8 +39,8 @@
 	                  </a>
 	               </div>
 	               <div class="login_box_Mainhead">
-	                  <a href="signUp.do">
-	                     <div class="head_login_Mainhead w_100p">회원가입</div>
+	                  <a href="test.do">
+	                     <div class="head_login_Mainhead w_100p">능력자관리</div>
 	                  </a>
 	               </div>
 	         </div>
@@ -58,12 +58,14 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
+	               <a href="signUpMasterCategory.do">
+	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
 	               <a href="signUpMaster.do">
 	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="productInsert.do" id="manager_href">
+	               <a href="productInsertPage.do" id="manager_href">
 	                  <div class="head_login_Mainhead" id="manager_page">상품등록</div>
 	               </a>
 	            </div>

@@ -1,7 +1,5 @@
 package com.fp.neezit.user.model.vo;
 
-import java.util.Arrays;
-
 public class UserMaster {
    private String USER_EMAIL;                   //유저 이메일
    private String MASTER_RANKNAME;       //마스터 랭크
