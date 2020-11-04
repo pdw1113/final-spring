@@ -26,4 +26,6 @@ public interface UserService {
 
 	int userdelete(User u);
 
+	int reason(HashMap<String, String> map);
+
 }

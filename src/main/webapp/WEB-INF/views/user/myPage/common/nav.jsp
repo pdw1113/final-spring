@@ -24,7 +24,7 @@
                   <li><a class="a_mynav" href="profile.do">프로필</a></li>
                   <li><a class="a_mynav" href="wallet.do">보유 니즈머니</a></li>
                   <li><a class="a_mynav" href="modifyPwdPage.do">비밀번호 변경</a></li>
-                  <li><a class="a_mynav" href="deleteUser.do">회원탈퇴</a></li>
+                  <li><a class="a_mynav" href="deleteUserPage.do">회원탈퇴</a></li>
                </ul>
             </li>
             <li>

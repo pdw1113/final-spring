@@ -66,16 +66,7 @@ public class UserContoller {
 	public String wallet() {
 		return "user/myPage/wallet";
 	}
-	
-	@RequestMapping("deleteUser.do")
-	public String deleteUser() {
-		return "user/myPage/deleteUser";
-	}
-	
-	@RequestMapping("diffPwd.do")
-	public String diffPwd() {
-		return "user/myPage/modifyPwd";
-	}
+
 	
 	@RequestMapping("wishList.do")
 	public String wishList() {
@@ -97,6 +88,15 @@ public class UserContoller {
 		return "user/myPage/walletDetail";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	/****** 페이지 이동 메소드 ******/
+	
 	@RequestMapping("loginPage.do")
 	public String loginPage() {
 		return "user/login";
@@ -105,6 +105,11 @@ public class UserContoller {
 	@RequestMapping("modifyPwdPage.do")
 	public String modifyPwdPage() {
 		return "user/myPage/modifyPwd";
+	}
+	
+	@RequestMapping("deleteUserPage.do")
+	public String deleteUser() {
+		return "user/myPage/deleteUser";
 	}
 	
 	/**
@@ -124,8 +129,8 @@ public class UserContoller {
 			model.addAttribute("loginUser",loginUser); 
 			return "redirect:index.do";
 		}else {
-			model.addAttribute("msg", "로그인 실패!");
-			return "common/errorPage";
+			model.addAttribute("msg", "1");
+			return "user/login";
 		}
 	}
 	
@@ -210,6 +215,15 @@ public class UserContoller {
 		}
 	}
 	
+	/**
+	 * 5. 비밀번호 변경 메소드
+	 * @param originalPwd
+	 * @param newPwd
+	 * @param model
+	 * @param session
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("modifyPwd.do")
 	public String modifyPwd(String originalPwd, String newPwd, Model model, HttpSession session, SessionStatus status) {
 
@@ -235,6 +249,61 @@ public class UserContoller {
 		}
 	}
 	
+	/**
+	 * 6. 회원탈퇴 메소드
+	 * @param model
+	 * @param user_pw
+	 * @param session
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("deleteUser.do")
+	public String userdelete(String user_pw, String user_leave, Model model, HttpSession session, SessionStatus status) {
+	
+		User u = (User)session.getAttribute("loginUser");
+		
+		if(u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd())) {
+			
+			int result = uService.userdelete(u);
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			map.put("email", u.getEmail());
+			map.put("reason", user_leave);
+			
+			int reason = uService.reason(map);
+			
+			if(result == 1 && reason == 1) {
+					status.setComplete();
+					model.addAttribute("sw", 1);
+					return "user/myPage/deleteUser";
+			}else {
+					model.addAttribute("sw", 2);
+					return "user/myPage/deleteUser";
+			}
+		}else{
+			model.addAttribute("sw", 3);
+			return "user/myPage/deleteUser";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 10. 능력자 등록 메소드
@@ -252,25 +321,5 @@ public class UserContoller {
 		
 		return "user/signUpMaster";
 	}
-	
-	
-	@RequestMapping("userdelete.do")
-	public String userdelete(Model model, String user_pw, HttpSession session, SessionStatus status) {
-	
-		User u = (User)session.getAttribute("loginUser");
-		if(u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd())) {
-			int result = uService.userdelete(u);
-		if(result==1) {
-				status.setComplete();
-				model.addAttribute("sw", 1);
-				return "user/myPage/deleteUser";
-			}else {
-				model.addAttribute("sw", 2);
-				return "user/myPage/deleteUser";
-			}
-		}else{
-			model.addAttribute("sw", 3);
-			return "user/myPage/deleteUser";
-		}
-	}
+
 }

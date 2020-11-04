@@ -53,4 +53,8 @@ public class UserDao {
 		return sqlSession.update("userMapper.userDelete",u);
 	}
 
+	public int reason(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.reason", map);
+	}
+
 }

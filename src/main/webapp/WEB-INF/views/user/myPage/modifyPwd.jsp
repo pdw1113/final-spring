@@ -43,7 +43,7 @@
           if(msg !== ""){
         	  alert(msg);
         	  msg="";
-        	  location.href="diffPwd.do";
+        	  location.href="modifyPwdPage.do";
           }
       
       // 유효성 검사

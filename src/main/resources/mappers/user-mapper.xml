@@ -82,4 +82,9 @@
 		WHERE USER_EMAIL=#{email}
 	</update>
 	
+	<insert id="reason" parameterType="hashmap">
+		INSERT INTO REASON
+		VALUES(#{email}, #{reason})
+	</insert>
+	
 </mapper>
