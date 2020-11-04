@@ -72,11 +72,17 @@ public class ProductController {
 	      
 	      // 능력자 정보
 	      UserMaster master = pService.getMaster(u);
-	      System.out.println(master);
+	      
 	      // 능력자 카테고리 정보
-	      List<String> category = pService.category(master);
-	      System.out.println(category);
-	      model.addAttribute("category", category);
+	      List<String> category = pService.masterCategory(master);
+	      
+	      // List를 String으로 치환
+	      String string = category.toString();
+	      
+	      // "[", "]" 잘라내기.
+	      String real = string.substring(1,string.length()-1);
+	      
+	      model.addAttribute("category", real);
 	      
 	      model.addAttribute("master",master);
 	      

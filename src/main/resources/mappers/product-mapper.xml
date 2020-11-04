@@ -21,7 +21,6 @@
 		<result property="nickName" column="MASTER_NICKNAME"/>
 		<result property="title" column="PRODUCT_TITLE"/>
 		<result property="pic" column="PRODUCT_PIC"/>
-		<result property="renamePic" column="PRODUCT_RENAMEPIC"/>
 		<result property="category" column="PRODUCT_CATEGORY"/>
 		<result property="price" column="PRODCUT_PRICE"/>
 		<result property="career" column="PRODUCT_CAREER"/>
@@ -32,10 +31,12 @@
 		<result property="count" column="PRODCUT_COUNT"/>
 	</resultMap>
 	
-	<select id="category" parameterType="UserMaster" resultType="string">
-		SELECT CATENAME FROM GOODS_CATEGORY
-		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
-		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+	<select id="category" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+			start with CATECODEREF is null
+			connect by prior CATECODE = CATECODEREF
 	</select>
 	
 	<select id="categoryList" resultType="com.fp.neezit.product.model.vo.ProductCategory">
@@ -69,10 +70,16 @@
 			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
 	</select>
 	
-	<insert id="insertProduct" parameterType="Product">
-		INSERT INTO PRODUCT VALUES
-		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
-	</insert>
+    <insert id="insertProduct" parameterType="Product">
+      INSERT INTO PRODUCT VALUES
+      (#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+    </insert>
+	
+	<select id="masterCategory" parameterType="UserMaster" resultType="string">
+		SELECT CATENAME FROM GOODS_CATEGORY
+		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
+		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+	</select>
 	
 </mapper>
 

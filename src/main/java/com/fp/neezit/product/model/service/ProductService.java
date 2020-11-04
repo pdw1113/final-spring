@@ -10,7 +10,7 @@ import com.fp.neezit.user.model.vo.UserMaster;
 public interface ProductService {
 
    // 카테고리
-   public List<String> category(UserMaster master);
+   public List<ProductCategory> category();
 
    public List<ProductCategory> categoryList(int navNo);
    
@@ -24,5 +24,11 @@ public interface ProductService {
 	* @return
     */
    public int insertProduct(Product product);
+
+   /** 6. 상품등록 카테고리 가져오기
+	 * @param master
+	 * @return
+	 */
+	public List<String> masterCategory(UserMaster master); 
 
 }
