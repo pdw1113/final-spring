@@ -37,7 +37,7 @@
                <button type="button" class="img_addproduct2" onclick="fileupload();">
                <img src="resources/img/btn_portrait_edit.png"> 
                </button>
-               <img class="img_addproduct" src="resources/img/person_icon.png">
+               <img class="img_addproduct" src="resources/img/not_image.png">
             </div>
             <!-- 닉네임 성별 나이 -->
             <div class="person_status_addproduct">
@@ -52,8 +52,8 @@
                         <td>천동민</td>
                      </tr>
                      <tr>
-                        <th>성별</th>
-                        <td>남성</td>
+                        <th>등급</th>
+                        <td>다이아</td>
                      </tr>
                   </tbody>
                </table>
