@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -121,13 +122,14 @@
 
             <hr>
             <!-- 카테고리 등록 -->
+            
             <li>
                 <div class="sub-title-sgm">카테고리 등록</div>
                 <div>
                     <div>
                         <select size="8" class="category1 font_jua select-sgm">
                             <option disabled class="text-align-center-sgm">1 분류</option>
-                            <option disabled>----------</option>
+                            <option disabled>-----------</option>
                          <!--    <option>데이터베이스</option>
                             <option>프레임워크</option>
                             <option>백엔드</option>
@@ -140,7 +142,7 @@
                         </select>
                         <select size="8" class="category2 font_jua select-sgm" >
                             <option disabled class="text-align-center-sgm">2 분류</option>
-                            <option disabled>----------</option>
+                            <option disabled>-----------</option>
                             <!-- <option>데이터베이스</option>
                             <option>프레임워크</option>
                             <option>백엔드</option>
@@ -180,65 +182,7 @@
                     </div>
                 </div>
             </li>
-            <script>
-                // 나의 카테고리로 추가시키는 함수
-                const addCategory = function(){
-                    let temp    = [];
-                    let obj     = $('#my-cate option');
-                    let x       = 0;
-
-                    // select박스의 선택된 값 가져오기.
-                    let choice = $('#3rd-cate option:selected').val();
-
-                    // 현재 option의 값을 임시 배열에 저장
-                    $(obj).each(function(i){
-                        temp[i] = $(this).val();
-                    });
-                    console.log(temp)
-
-                    // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
-                    $(temp).each(function(i){
-
-                        if(choice == temp[i]){
-                            x++;
-                        }
-                    });
-                    console.log(x);
-
-                    // 중복 값이 없을 경우 select박스에 option값 추가하기.
-                    if(x == 0 && choice != undefined){
-                        $("#my-cate").append("<option>" + choice + "</option>");
-                    }
-                }
-
-                // [>] 버튼 클릭 시 추가
-                $('#plus-category').click(function(){
-                    addCategory();
-                });
-
-                // [<] 버튼 클릭 시 삭제
-                $('#minus-category').click(function(){
-                    $('#my-cate option:selected').remove();
-                });
-
-                // 더블클릭 시 추가
-                $('#3rd-cate option').dblclick(function(){
-                    addCategory();
-                });
-
-                // 더블클릭 시 삭제 - 동적 요소에 이벤트를 바인딩 해야 할 때 사용해야 한다.
-                $(document).on("dblclick","#my-cate option",function(){
-                    $('#my-cate option:selected').remove();
-                });
-
-                // 전체 삭제
-                $('#delete-all').click(function(){
-                    let yes = confirm("정말 초기화 하시겠습니까?");
-                    if(yes){
-                        $('#my-cate option:gt(1)').remove();
-                    }
-                });
-            </script>
+           
 
             <hr>
 
@@ -307,7 +251,7 @@
                 <div class="edu-ability" title="학력">
                     <div>
                         <input class="input_master width_500" type="text" placeholder="고등학교">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        
                         <input type="file" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
@@ -330,7 +274,7 @@
 
             <!-- 자격증 -->
             <li>
-                <div class="certify-ability " title="자격증(최대10개)">
+                <div class="certify-ability " title="자격증(최대 5개)">
                     <div>
                         <input class="input_master" type="text" placeholder="자격증">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
@@ -354,11 +298,23 @@
             </li>
 
             <script>
+            	let count = 0;
+            	let number = 4;
+
                 $('#add-input').click(function(){
 
-                    let inputTag = "<div><input class='input_master' type='text' placeholder='자격증'><span class='btn_sgm font_jua' onclick='picUpload(this);'>업로드</span>";
-                    let inputTag2 = "<input type='file' hidden onchange='ok(this);'><span class='upCheck'>OK</span></div>"
-                    $(this).parent().append(inputTag + inputTag2);
+                	if(count <2) {
+                		
+                		let inputTag = "<div><input name=' MASTER_QUALIFICATION" + number + "' class='input_master' type='text' placeholder='자격증'><span class='btn_sgm font_jua' onclick='picUpload(this);'>업로드</span>";
+                        let inputTag2 = "<input type='file' hidden onchange='ok(this);'><span class='upCheck'>OK</span></div>";
+                      
+                        $(this).parent().append(inputTag + inputTag2);
+                        
+                		count++;
+                		number++;
+                		console.log(count);
+ 
+                	} 
                 })
 
 
@@ -430,39 +386,39 @@
                 <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
                     <div class="radio-wrap">
-                        <input type="checkbox" id="monday" value="월"/>
+                        <input type="checkbox" id="monday" value="월" class="checkSelect"/>
                         <label class="font_jua" for="monday">월</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="tuesday" value="화"/>
+                        <input type="checkbox" id="tuesday" value="화" class="checkSelect"/>
                         <label class="font_jua" for="tuesday">화</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="wednesday" value="수"/>
+                        <input type="checkbox" id="wednesday" value="수" class="checkSelect"/>
                         <label class="font_jua" for="wednesday">수</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="thursday" value="목"/>
+                        <input type="checkbox" id="thursday" value="목" class="checkSelect"/>
                         <label class="font_jua" for="thursday">목</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="friday" value="금"/>
+                        <input type="checkbox" id="friday" value="금" class="checkSelect"/>
                         <label class="font_jua" for="friday">금</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="saturday" value="토"/>
+                        <input type="checkbox" id="saturday" value="토" class="checkSelect"/>
                         <label class="font_jua" for="saturday">토</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="sunday" value="일"/>
+                        <input type="checkbox" id="sunday" value="일" class="checkSelect"/>
                         <label class="font_jua" for="sunday">일</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="home" name="a" value="자택"/>
+                        <input type="checkbox" id="home" name="a" value="자택" class="checkSelect1"/>
                         <label class="font_jua home_choose" for="home">자택</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="work" value="출근"/>
+                        <input type="checkbox" id="work" value="출근" class="checkSelect1"/>
                         <label class="font_jua home_choose" for="work">출근</label>
                     </div>
                     <span class="dupl_choose">*(중복선택가능)</span>
@@ -485,8 +441,58 @@
     </div>
     </form>
     
+    <input type="hidden" id="array"/>
+    <input type="hidden" id="array1"/>
+    <input type="text" id="array2"/>
+    
     <%@ include file="../common/footer.jsp" %>
     
+    
+    <script>
+    
+    // 선호하는 요일
+    $(document).on("change", ".checkSelect", function(){
+    	
+		var send_array = Array();
+		var send_cnt = 0;
+		var chkbox = $(".checkSelect");
+		
+		for(i=0;i<chkbox.length;i++) {
+		    if (chkbox[i].checked == true){
+		        send_array[send_cnt] = chkbox[i].value;
+		        send_cnt++;
+		    }
+		}
+
+		console.log(send_array);
+		
+		$("#array").val(send_array);
+    });	
+    
+    // 선호하는 방식
+    $(document).on("change", ".checkSelect1", function(){
+		var send_array1 = Array();
+		var send_cnt1 = 0;
+		var chkbox1 = $(".checkSelect1");
+		
+		for(i=0;i<chkbox1.length;i++) {
+		    if (chkbox1[i].checked == true){
+		        send_array1[send_cnt1] = chkbox1[i].value;
+		        send_cnt1++;
+		    }
+		}
+		
+		console.log(send_array1);
+		
+		$("#array1").val(send_array1);
+		
+		
+		
+    });	
+    
+   
+		
+	</script>    
     <script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${category}');
@@ -494,7 +500,13 @@
          
          var cate1Arr = new Array();
          var cate1Obj = new Object();
+         var testArray = new Object();
          
+         var check1;
+         var check2;
+         var check3;
+    	 var masterId = [];
+
          // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
          for(var i = 0; i < jsonData.length; i++) {
           
@@ -513,10 +525,11 @@
           cate1Select.append("<option value='" + cate1Arr[i].cateCode + "'>"
                + cate1Arr[i].cateName + "</option>"); 
          }
+
          
          
          $(document).on("change", "select.category1", function(){
-         
+
          	 var cate2Arr = new Array();
          	 var cate2Obj = new Object();
          	 
@@ -535,20 +548,18 @@
          	 
          	 var cate2Select = $("select.category2");
          	 
-         	 /*
-         	 for(var i = 0; i < cate2Arr.length; i++) {
-         	   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
-         	        + cate2Arr[i].cateName + "</option>");
-         	 }
-         	 */
-         	 
          	 cate2Select.children().remove();
          
          	 $("option:selected", this).each(function(){
          	  
          	  var selectVal = $(this).val();  
+         	 		/* check1 = $(this).text();  */ 
+         	 		check1 = $(this).val(); 
+         	 		
          	  cate2Select.append("<option disabled value=''>2 분류</option>");
          	  cate2Select.append("<option disabled>----------</option>");
+         	  
+         	  console.log(check1);
          	  
          	  for(var i = 0; i < cate2Arr.length; i++) {
          	   if(selectVal == cate2Arr[i].cateCodeRef) {
@@ -560,12 +571,9 @@
          	 });
          	 
          	});
-         
-         
-         
-         
+
          $(document).on("change", "select.category2", function(){
-             
+
          	 var cate3Arr = new Array();
          	 var cate3Obj = new Object();
          	 
@@ -583,17 +591,14 @@
          	 }
          	 
          	 var cate3Select = $("select.category3");
-         	 
-         	 /*
-         	 for(var i = 0; i < cate2Arr.length; i++) {
-         	   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
-         	        + cate2Arr[i].cateName + "</option>");
-         	 }
-         	 */
-         	 
+
          	 cate3Select.children().remove();
          
          	 $("option:selected", this).each(function(){
+         		 
+         		/* check2 = $(this).text(); */
+         		check2 = $(this).val(); 
+         		console.log(check2);
          	  
          	  var selectVal = $(this).val();  
          	  cate3Select.append("<option disabled value=''>3 분류</option>");
@@ -601,7 +606,7 @@
          	  
          	  for(var i = 0; i < cate3Arr.length; i++) {
          	   if(selectVal == cate3Arr[i].cateCodeRef) {
-         	    cate3Select.append("<option value='" + cate3Arr[i].cateName + "'>"
+         	    cate3Select.append("<option value='" + cate3Arr[i].cateCode + "'>"
          	         + cate3Arr[i].cateName + "</option>");
          	   }
          	  }
@@ -610,7 +615,99 @@
          	 
          	});
      
-      </script>
+                // 나의 카테고리로 추가시키는 함수
+                const addCategory = function(){
+                    let temp    = [];
+                    let obj     = $('#my-cate option');
+                    let x       = 0;
+
+
+                    // select박스의 선택된 값 가져오기.   
+                  check3 = $('#3rd-cate option:selected').val();
+                  let choice = $('#3rd-cate option:selected').text();
+
+                   /*  masterId = check1+ "," + check2 + "," + check3; */
+
+                    // 현재 option의 값을 임시 배열에 저장
+                    $(obj).each(function(i){
+                        temp[i] = $(this).val();
+                        
+                    });
+
+
+                    // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
+                    $(temp).each(function(i){
+
+                        if(choice == temp[i]){
+                            x++;
+                        }
+                    });
+
+                    // 중복 값이 없을 경우 select박스에 option값 추가하기.
+                    if(x == 0 && choice != undefined){
+                        $("#my-cate").append("<option>" + choice + "</option>");
+                        masterId.push(check3);
+                        
+                        console.log(masterId);
+                    }
+                }
+
+                // [>] 버튼 클릭 시 추가
+                $('#plus-category').click(function(){
+                    addCategory();
+                    $("#array2").val(masterId);
+                });
+
+                // [<] 버튼 클릭 시 삭제
+                $('#minus-category').click(function(){
+
+                		var index = $("#my-cate option").index($("#my-cate option:selected")) - 2;
+            
+            			if(index>-1){
+	                    	masterId.splice(index,1);
+	                    	console.log(masterId);
+	                    	
+	                        $('#my-cate option:selected').remove();
+	                        $("#array2").val(masterId);
+            			};
+
+                });
+
+                // 더블클릭 시 추가
+                $('#3rd-cate').dblclick(function(){
+                    addCategory();
+                    $("#array2").val(masterId);
+                });
+
+                // 더블클릭 시 삭제 - 동적 요소에 이벤트를 바인딩 해야 할 때 사용해야 한다.
+                $(document).on("dblclick","#my-cate option",function(){
+                	
+                	var index = $("#my-cate option").index($("#my-cate option:selected")) - 2; 
+                	masterId.splice(index,1);
+                	console.log(masterId);
+
+                	$('#my-cate option:selected').remove();
+                	$("#array2").val(masterId);
+                    
+                    
+                });
+
+                // 전체 삭제
+                $('#delete-all').click(function(){
+                    let yes = confirm("정말 초기화 하시겠습니까?");
+                    if(yes){
+                        $('#my-cate option:gt(1)').remove();
+                        masterId = [];
+                        $("#array2").val(masterId);
+
+                    }
+                    
+                    
+                    
+                });
+
+                
+            </script>
     
 </body>
 </html>
