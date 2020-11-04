@@ -119,7 +119,7 @@ public class ProductController {
 	   }
 	
    /**
-	 * 4. 파일이 저장될 경로를 설정 메소드
+	 * 4. 파일이 저장될 경로를 설정 메소드 
 	 * @param file
 	 * @param request
 	 * @return
