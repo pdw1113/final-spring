@@ -55,10 +55,10 @@
 	</select>
 
 	<!-- 휴대폰번호 변경 -->
-	<update id="modifyPhone" parameterType="hashmap">
+	<update id="modifyPhone" parameterType="User">
 		UPDATE NEEZ_USER
 	 	SET USER_PHONE = #{phone}
-	 	WHERE USER_PHONE = #{sessionPhone}
+	 	WHERE USER_EMAIL = #{email}
 	</update>
   
   	<!-- 능력자 등록 -->
@@ -91,4 +91,31 @@
 		FROM NEEZ_MASTER
 		WHERE MASTER_NICKNAME = #{nickname}
 	</select>
+	
+	<!-- 마케팅 수신동의 변경 -->
+	<update id="marketing" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_MARKETING_T = #{marketingT},
+			USER_MARKETING_E = #{marketingE}
+		WHERE USER_EMAIL = #{email}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+  	<update id="modifyPwd" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_PASSWORD = #{pwd}
+		WHERE USER_EMAIL = #{email}
+	</update>
+	
+	<!-- 유저삭제 -->
+	<update id="userDelete" parameterType="User">
+		UPDATE NEEZ_USER
+		SET USER_STATUS='Y'
+		WHERE USER_EMAIL=#{email}
+	</update>
+	
+	<insert id="reason" parameterType="hashmap">
+		INSERT INTO REASON
+		VALUES(#{email}, #{reason})
+	</insert>
 </mapper>

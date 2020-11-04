@@ -161,23 +161,16 @@ html,
       width: 696px;
       height: 50px;
       background-color: #fabe00;
+      border: 0px;
       border-radius: 10px;
       margin: 40px 0 0 0;
       overflow: hidden;
       text-align: center;
       font-family: jua;
-      }
-      .joinFinBtn_myPage_profile:hover{
-      opacity: 0.6;
-      }
-      .joinFinBtn_myPage_profile > button.submitBtn_profile{
-      text-decoration: none;
-      outline: none;
-      background-color: #fabe00;
-      border:0px;
-      color: white;
-      vertical-align: middle;
+      font-size: 1.5rem;
       cursor: pointer;
+      color: white;
+      outline:none;
       }
       .joinFinBtn_myPage_profile:hover{
       cursor: pointer;

@@ -38,6 +38,11 @@
 	                     <div class="head_login_Mainhead w_100p">회원가입</div>
 	                  </a>
 	               </div>
+	               <div class="login_box_Mainhead">
+	                  <a href="test.do">
+	                     <div class="head_login_Mainhead w_100p">능력자관리</div>
+	                  </a>
+	               </div>
 	         </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
@@ -53,8 +58,13 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
+<<<<<<< HEAD
 	               <a href="signUpMasterCategory.do">
 	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
+=======
+	               <a href="signUpMaster.do">
+	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
+>>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">

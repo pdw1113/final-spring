@@ -20,9 +20,14 @@
 <body>
 	
 	<%@ include file="../common/header.jsp" %>
+<<<<<<< HEAD
 
     <form action="signUpMaster.do" method="POST">
     <input type="hidden" value="${ loginUser.email }" name="USER_EMAIL"/>
+=======
+	
+    <form action="">
+>>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">능력자 등록</div>

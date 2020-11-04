@@ -1,6 +1,5 @@
 package com.fp.neezit.user.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,8 +40,24 @@ public class UserDao {
 		return sqlSession.selectList("productMapper.category");
 	}
 
-	public int modifyPhone(HashMap<String, String> map) {
-		return sqlSession.update("userMapper.modifyPhone", map);
+	public int modifyPhone(User u) {
+		return sqlSession.update("userMapper.modifyPhone", u);
+	}
+
+	public int marketing(User u) {
+		return sqlSession.update("userMapper.marketing",u);
+	}
+
+	public int modifyPwd(User u) {
+		return sqlSession.update("userMapper.modifyPwd",u);
+	}
+
+	public int userdelete(User u) {
+		return sqlSession.update("userMapper.userDelete",u);
+	}
+
+	public int reason(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.reason", map);
 	}
 
 	public int insertMaster(UserMaster msu) {
