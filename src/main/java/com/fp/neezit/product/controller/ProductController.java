@@ -54,9 +54,9 @@ public class ProductController {
    @RequestMapping(value = "productInsert.do" , method = RequestMethod.GET)
    public String getGoodsRegister(Model model,HttpSession session) throws Exception{
 	   
-	      User u = (User)session.getAttribute("loginUser");
-	      
-	      UserMaster master = pService.getMaster(u);
+//	      User u = (User)session.getAttribute("loginUser");
+//	      
+//	      UserMaster master = pService.getMaster(u);
 	      
 	      // 상품 카테고리 3분류
 	      List<ProductCategory> category = null;
