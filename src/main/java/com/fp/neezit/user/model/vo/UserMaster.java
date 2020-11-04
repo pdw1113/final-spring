@@ -1,18 +1,16 @@
 package com.fp.neezit.user.model.vo;
 
-import java.util.Arrays;
-
 public class UserMaster {
-   private String USER_EMAIL;  			 	 	//유저 이메일
-   private String MASTER_RANKNAME; 		//마스터 랭크
-   private String MASTER_PROFILE_PIC; 		// 프로필 이미지
-   private String MASTER_NICKNAME; 		// 닉네임
-   private String MASTER_CATEGORY; 		// 카테고리
-   private String MASTER_ID_PIC; 				// 신분증 이미지
-   private String MASTER_WORKDAY; 		// 근무가능 요일
-   private String MASTER_WORKSTYLE; 		// 자택,출근 스타일
-   private String MASTER_STARTTIME; 		// 몇시에서
-   private String MASTER_ENDTIME; 			// 몇시까지
+   private String USER_EMAIL;                   //유저 이메일
+   private String MASTER_RANKNAME;       //마스터 랭크
+   private String MASTER_PROFILE_PIC;       // 프로필 이미지
+   private String MASTER_NICKNAME;       // 닉네임
+   private String MASTER_CATEGORY;       // 카테고리
+   private String MASTER_ID_PIC;             // 신분증 이미지
+   private String MASTER_WORKDAY;       // 근무가능 요일
+   private String MASTER_WORKSTYLE;       // 자택,출근 스타일
+   private String MASTER_STARTTIME;       // 몇시에서
+   private String MASTER_ENDTIME;          // 몇시까지
    public UserMaster() {
       super();
       // TODO Auto-generated constructor stub
