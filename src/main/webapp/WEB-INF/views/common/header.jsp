@@ -65,7 +65,7 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="productInsert.do" id="manager_href">
+	               <a href="productInsertPage.do" id="manager_href">
 	                  <div class="head_login_Mainhead" id="manager_page">상품등록</div>
 	               </a>
 	            </div>
