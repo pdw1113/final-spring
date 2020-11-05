@@ -16,12 +16,16 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="resources/css/signUpMaster.css">
+    
+    <!-- favicon 404 에러 해결용 -->
+    <link rel="shortcut icon" href="#">
+
 </head>
 <body>
 	
 	<%@ include file="../common/header.jsp" %>
 
-    <form action="signUpMaster.do" method="POST">
+    <form action="signUpMaster.do" method="POST" enctype="multipart/form-data" name="master">
     <input type="hidden" value="${ loginUser.email }" name="USER_EMAIL"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
@@ -29,7 +33,7 @@
             <span>
                 <div class="img-container-sgm border-radius-100">
                     <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="MASTER_PROFILE_PIC" hidden>
+                    <input type="file" id="profile_file" name="M_PROFILE_PIC_ORI" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -438,7 +442,7 @@
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
                         <img src="resources/img/profile.png" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" name="MASTER_ID_PIC">
+                        <input type="file" id="idCard_file" name="M_ID_PIC_ORI">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -502,14 +506,14 @@
                         <input class="input_master width_242" type="text" placeholder="대학교" name="MASTER_UNIV">
                         <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV_DEPT">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" name="MASTER_UNIV_PIC" hidden onchange="ok(this);">
+                        <input type="file" name="M_UNIV_PIC_ORI" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master width_242" type="text" placeholder="대학원" name="MASTER_UNIV2">
                         <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV2_DEPT">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden name="MASTER_UNIV2_PIC" onchange="ok(this);">
+                        <input type="file"  name="M_UNIV2_PIC_ORI" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
@@ -521,48 +525,42 @@
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION1">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION1_PIC">
+                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION1_PIC_ORI">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION2">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION2_PIC">
+                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION2_PIC_ORI">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION3">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="MASTER_QUALIFICATION3_PIC">
+                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION3_PIC_ORI">
                         <span class="upCheck">OK</span>
                     </div>
-                    <img src="resources/img/plus-icon.png" class="lr-btn-img-size btn_add_input" id="add-input">
+                    <div>
+                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION4">
+                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION4_PIC_ORI">
+                        <span class="upCheck">OK</span>
+                    </div>
+                    <div>
+                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION5">
+                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION5_PIC_ORI">
+                        <span class="upCheck">OK</span>
+                    </div>
+
                 </div>
             </li>
 
 			<script>
-               let count = 0;
-               let number = 4;
-
-                $('#add-input').click(function(){
-
-                   if(count <2) {
-                      
-                      let inputTag = "<div><input name='MASTER_QUALIFICATION" + number + "' class='input_master' type='text' placeholder='자격증'><span class='btn_sgm font_jua' onclick='picUpload(this);'>업로드</span>";
-                        let inputTag2 = "<input type='file' hidden onchange='ok(this);' name='MASTER_QUALIFICATION" + number + "_PIC'><span class='upCheck'>OK</span></div>";
-                      
-                        $(this).parent().append(inputTag + inputTag2);
-                        
-                      count++;
-                      number++;
-                   } 
-                })
-
-
                 let ok = function(obj){
                     $(obj).next().css("display","inline");
                 };
-            </script>
+            </script> 
             
             <hr>
 
@@ -630,34 +628,34 @@
                 <div class="margin-first-sgm">
                     <div class="radio-wrap">
                         <input type="checkbox" id="monday" value="월" class="checkSelect"/>
-                        <label class="font_jua" for="monday">월</label>
+                        <label class="font_jua day11" for="monday">월</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="tuesday" value="화" class="checkSelect"/>
-                        <label class="font_jua" for="tuesday">화</label>
+                        <label class="font_jua day11" for="tuesday">화</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="wednesday" value="수" class="checkSelect"/>
-                        <label class="font_jua" for="wednesday">수</label>
+                        <label class="font_jua day11" for="wednesday">수</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="thursday" value="목" class="checkSelect"/>
-                        <label class="font_jua" for="thursday">목</label>
+                        <label class="font_jua day11" for="thursday">목</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="friday" value="금" class="checkSelect"/>
-                        <label class="font_jua" for="friday">금</label>
+                        <label class="font_jua day11" for="friday">금</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="saturday" value="토" class="checkSelect"/>
-                        <label class="font_jua" for="saturday">토</label>
+                        <label class="font_jua day11" for="saturday">토</label>
                     </div>
                     <div class="radio-wrap">
                         <input type="checkbox" id="sunday" value="일" class="checkSelect"/>
-                        <label class="font_jua" for="sunday">일</label>
+                        <label class="font_jua day11" for="sunday">일</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="home" name="a" value="자택" class="checkSelect1"/>
+                        <input type="checkbox" id="home" name="a" value="자택" class="checkSelect1 "/>
                         <label class="font_jua home_choose" for="home">자택</label>
                     </div>
                     <div class="radio-wrap">
@@ -677,7 +675,7 @@
 
             <!-- 저장 / 취소 버튼 -->
             <li class="margin-top-sgm">
-                <span class="btn_sgm" onclick="document.forms[0].submit()">저장</span>
+                <span class="btn_sgm"  onclick="return vali()">저장</span>
                 <span class="btn_sgm_2" id="cancel">취소</span>
             </li>
         </ul>
@@ -688,7 +686,78 @@
     
     
     <%@ include file="../common/footer.jsp" %>
+  	
+   	<script>
+   	
+   	var popupX = (document.body.offsetWidth/2) - (500/2);
+    //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+    var popupY = (window.screen.height/2)-(300/2);
+    //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+
+
+
+    function success() {
+        window.open('popUp.do', 'popup-test', 'status=no,toolbar=no,scrollbars=no, width=500, height=300, left='+ popupX + ', top='+ popupY);
+    }
+       
+    function vali() {
+   
+        if(validate()){
+           return true;
+        }else{
+           return false;
+        }
+   }
     
+
+    function validate(){ 
+
+         if(!document.master.M_PROFILE_PIC_ORI.value){
+             alert("사진을 넣어주세요"); 
+               return false;
+      }
+   
+        if(!document.master.MASTER_NICKNAME.value){
+                alert("별명을 입력해주세요"); 
+                document.master.MASTER_NICKNAME.focus();
+                  return false;
+          }
+        
+        if(!document.master.MASTER_CATEGORY.value){
+                alert("카테고리 등록을 해주세요"); 
+                  return false;
+         }
+        
+        if(!document.master.M_ID_PIC_ORI.value){
+                alert("신분증 등록을 해주세요"); 
+                  return false;
+         } 
+        
+        if(!document.master.MASTER_WORKDAY.value){
+                alert("선호하는 업무 요일을 선택해주세요"); 
+                  return false;
+         }
+        
+        if(!document.master.MASTER_WORKSTYLE.value){
+                alert("선호하는 업무 방식을 선택해주세요"); 
+                  return false;
+         }
+        
+        if(!document.master.MASTER_STARTTIME.value){
+                alert("시작 시간을 선택해주세요"); 
+                  return false;
+         }
+        
+        if(!document.master.MASTER_ENDTIME.value){
+                alert("끝나는 시간을 선택해주세요"); 
+                  return false;
+         }
+        success();
+        document.forms[0].submit();
+     }
+
+     </script> 
   
       <script>
       $(function(){
