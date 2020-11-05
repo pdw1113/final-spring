@@ -183,7 +183,7 @@
                             <option>기타등등</option> -->
                         </select>
                         <select size="8" class="category2 font_jua select-sgm" >
-                            <option disabled class="text-align-center-sgm">2 분류</option>
+                            <option disabled class="text-align-center-sgm" id="text-align">2 분류</option>
                             <option disabled>----------</option>
                             <!-- <option>데이터베이스</option>
                             <option>프레임워크</option>
@@ -196,7 +196,7 @@
                             <option>기타등등</option> -->
                         </select>
                         <select size="8" class="category3 font_jua select-sgm" id="3rd-cate">
-                            <option disabled class="text-align-center-sgm">3 분류</option>
+                            <option disabled class="text-align-center-sgm" id="text-align">3 분류</option>
                             <option disabled>----------</option>
                            <!--  <option>데이터베이스</option>
                             <option>프레임워크</option>
@@ -219,7 +219,7 @@
                             </span>
                         <select size="8" class="font_jua select-sgm" id="my-cate">
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
-                            <option disabled>-----------</option>
+                            <option disabled>-------------------------------------------</option>
                         </select>
                         <input type="hidden" id="array2" name="MASTER_CATEGORY"/>
                     </div>

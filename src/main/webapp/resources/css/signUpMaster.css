@@ -368,3 +368,17 @@ margin-right: 70px;
 .day11{
 margin-right: 10px;
 }
+#my-cate{
+display: block;
+margin: 20px auto;
+width: 350px;
+}	
+#minus-category{
+transform: rotate(90deg);	
+}
+#plus-category{
+transform: rotate(90deg);
+}
+#text-align{
+text-align: center;
+}
