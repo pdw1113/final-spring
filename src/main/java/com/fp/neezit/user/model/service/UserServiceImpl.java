@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<ProductCategory> category() throws Exception {
+	public List<ProductCategory> category(){
 		return uDao.category();
 	}
 
