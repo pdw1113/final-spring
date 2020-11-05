@@ -72,9 +72,11 @@ public class ProductController {
 	      
 	      // 능력자 정보
 	      UserMaster master = pService.getMaster(u);
+	      System.out.println(master);
 	      
 	      // 능력자 카테고리 정보
 	      List<String> category = pService.masterCategory(master);
+	      System.out.println(category);
 	      
 	      // List를 String으로 치환
 	      String string = category.toString();
@@ -163,4 +165,24 @@ public class ProductController {
 	   }
 	   return renamePic;
    }
+   
+   @RequestMapping("myProductList.do")
+   public String myProductList(Product product, Model model, HttpSession session) {
+	   
+   	  // 로그인 세션 정보
+      User u = (User)session.getAttribute("loginUser");
+      
+      // 능력자 정보
+      UserMaster master = pService.getMaster(u);
+      
+      // 나의 상품 목록
+      List<Product> myProductList = pService.myProductList(master);
+      System.out.println(myProductList);
+      
+      model.addAttribute("myProductList", myProductList);
+      
+      return "user/product/myProductList";
+   }
+   
+   
 }

@@ -137,8 +137,8 @@
 		    // for문으로 select option에 추가한다.
 		    for(a in arr){
 		    	$("#category").append("<option>" + arr[a] + "</option>");
-		    }   
-		})()
+		    }
+		})();
 	</script>
 
 

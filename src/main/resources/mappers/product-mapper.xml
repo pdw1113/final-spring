@@ -21,6 +21,7 @@
 		<result property="nickName" column="MASTER_NICKNAME"/>
 		<result property="title" column="PRODUCT_TITLE"/>
 		<result property="pic" column="PRODUCT_PIC"/>
+		<result property="renamePic" column="PRODUCT_RENAMEPIC"/>
 		<result property="category" column="PRODUCT_CATEGORY"/>
 		<result property="price" column="PRODCUT_PRICE"/>
 		<result property="career" column="PRODUCT_CAREER"/>
@@ -56,6 +57,53 @@
 			connect by prior CATECODE = CATECODEREF
 	</select>
 	
+	<!-- 상품 등록 -->
+    <insert id="insertProduct" parameterType="Product">
+      INSERT INTO PRODUCT VALUES
+      (#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+    </insert>
+    	
+	<!-- 능력자 정보 가져오기 -->
+	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
+			SELECT *
+			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
+	</select>
+	
+	<!-- 능력자 카테고리 가져오기 -->
+	<select id="masterCategory" parameterType="UserMaster" resultType="string">
+		SELECT CATENAME FROM GOODS_CATEGORY
+		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
+		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+	</select>
+	
+	<!-- 나의 상품 목록 가져오기 -->
+	<select id="myProductList" parameterType="UserMaster" resultMap="productResultSet">
+		SELECT * FROM PRODUCT
+		WHERE MASTER_NICKNAME = #{MASTER_NICKNAME}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!-- 	<select id="categoryList3" resultType="com.fp.neezit.product.model.vo.ProductCategory">
 		 select
 			LEVEL, CATENAME, CATECODE, CATECODEREF
@@ -64,22 +112,6 @@
 			start with CATECODE = 10
 			connect by prior CATECODE = CATECODEREF
 	</select> -->
-	
-	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
-			SELECT *
-			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
-	</select>
-	
-    <insert id="insertProduct" parameterType="Product">
-      INSERT INTO PRODUCT VALUES
-      (#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
-    </insert>
-	
-	<select id="masterCategory" parameterType="UserMaster" resultType="string">
-		SELECT CATENAME FROM GOODS_CATEGORY
-		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
-		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
-	</select>
 	
 </mapper>
 
