@@ -133,11 +133,11 @@ public class ProductController {
 	 * @return
 	 */
    private String saveFile(MultipartFile file, HttpServletRequest request) {
+	   
 	   // 파일이 저장될 경로를 설정하기
 	   // 웹 서버의 contextPath를 불러와서 폴더의 경로를 가져온다
 	   // webapp하위의 resources
 	   String root = request.getSession().getServletContext().getRealPath("resources");
-	   System.out.println("root : " + root);
 
 	   // 파일 경로
 	   // \를 문자로 인식시키기 위해서는 "\\"를 사용한다.
@@ -166,6 +166,13 @@ public class ProductController {
 	   return renamePic;
    }
    
+   /**
+    * 5. 나의 상품 목록 메소드
+    * @param product
+ 	* @param model
+ 	* @param session
+ 	* @return
+ 	*/
    @RequestMapping("myProductList.do")
    public String myProductList(Product product, Model model, HttpSession session) {
 	   
@@ -177,7 +184,6 @@ public class ProductController {
       
       // 나의 상품 목록
       List<Product> myProductList = pService.myProductList(master);
-      System.out.println(myProductList);
       
       model.addAttribute("myProductList", myProductList);
       

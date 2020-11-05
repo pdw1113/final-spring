@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Component("diceObj")
 public class Dice {
 	
-	private String dice;
-	private String btn;
+	private String dice;	// 랜덤 숫자
+	private String btn;		// 버튼 클릭 확인
 
 	public Dice() {
 		super();

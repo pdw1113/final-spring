@@ -160,13 +160,40 @@ border-left: 0;
 }
 /*!!헤더css 깨짐으로 부트스트랩 쓴 페이지에만 적용하는 코드!!*/
 .header div.login_box_Mainhead{
-margin-top: 1.5rem;
-line-height: 3rem;
+margin-top: 1.7rem;
+/* line-height: 3rem;
 margin-right: 0.3rem;
-}
+transition-duration:0s; */
+}  
 .header div.login_box_Mainhead .head_login_Mainhead{
 height: 3.6rem;
-width: 8.6rem;
+transition-duration:0s;
+width:auto;
+padding-left: 10px;
+padding-right:10px;
+}
+
+.header div.down_p1, div.down_p2{
+height: 3.6rem;
+transition-duration:0s;
+width:91px;
+padding-left: 10px;
+padding-right:10px;
+}
+.header div.down_p1{
+   top:57px;
+}
+
+.header div.down_p2{
+   top:117px;
+}
+
+.header div.down_p1:after, div.down_p2:after,div.down_p1:before, div.down_p2:before{
+height:25px;
+}
+
+.header div.down_p1:after, div.down_p2:after{
+   right:9px;
 }
 /* 속도가 느린거 같으면 이걸로 */
 /* https://gahyun-web-diary.tistory.com/7 */   
