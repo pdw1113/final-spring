@@ -1,148 +1,198 @@
 @charset "UTF-8";
-  html,
-         body {
-         width: 100%;
-         padding: 0;
-         margin: 0;
-         }
-          .header{    
-         width: 100%;
-         height: 6.5rem;
-         }
-         .left-bar{
-         float: left;
-         width: 13%;
-         height: 100vh;
-         border-right: 1px solid gainsboro;
-         }
-         .section{
-         width: 87%;
-         float: left;
-         height: 100vh;
-         }
-         .cate_Managerheader {
-         color: rgb(141, 141, 141);
-         height: 35px;
-         line-height: 35px;
-         border-bottom: 1px solid rgb(141, 141, 141);
-         padding-left: 15px;
-         }
-         .title_Managerheader {
-         font-size: 30px;
-         font-family: jua;
-         margin-top: 30px;
-         padding-bottom: 10px;
-         margin-bottom: 10px;
-         margin-left: 20px;
-         margin-right: 20px;
-         border-bottom: 3px solid black;
-         }
-         .title_Mail {
-         font-weight: 600;
-         font-size: 19px;
-         }
-         .input_div_Mail {
-         margin-left: 40px;
-         margin-top: 25px;
-         margin-bottom: 20px;
-         }
-         .input_recipient_Mail {
-         border: 1px solid rgb(177, 177, 177);
-         margin-left: 20px;
-         width: 80%;
-         height: 30px;
-         }
-         .input_title_Mail {
-         border: 1px solid rgb(177, 177, 177);
-         margin-left: 58px;
-         width: 80%;
-         height: 30px;
-         }
-         .address_Mail {
-         border: 1px solid rgb(177, 177, 177);
-         height: 30px;
-         margin-left: 20px;
-         width: 70px;
-         background-color: white;
-         font-weight: 600;
-         }
-         .content_Mail {
-         margin: 40px;
-         }
-         .send_button_Mail {
-         width: 180px;
-         font-size: 19px;
-         background-color: rgb(247, 185, 185);
-         border-radius: 5px;
-         text-shadow: 0px -1px 1px rgba(0, 0, 0, 3);
-         border: 1px solid black;
-         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 3), inset 0 0 2px rgba(255, 255, 255, 3), 0 1px 2px rgba(0, 0, 0, 29);
-         font-family: sans-serif;
-         outline-style: none;
-         cursor: pointer;
-         margin-top: 10px;
-         margin-bottom: 10px;
-         margin-right: 40px;
-         float: right;
-         }
-         .adress_model_Mail {
-         position: fixed;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         }
-         .modal-header {
-         font-weight: 600;
-         font-size: 20px;
-         }
-         .searcheMail_text_Mail {
-         align-content: center;
-         width: 50rem;
-         height: 3rem;
-         }
-         .searcheMail_button_Mail {
-         padding: 6px;
-         margin-left: 5px;
-         border: 1px solid gray;
-         cursor: pointer;
-         border-radius: 3px;
-         }
-         .all_check_div_Mail {
-         vertical-align: middle;
-         font-size: 16px;
-         margin-top: 5px;
-         padding-bottom: 5px;
-         width: 50rem;
-         border-bottom: 1px solid rgb(184, 182, 182);
-         }
-         .checkbox_Mail {
-         zoom: 1.5;
-         vertical-align: -3px;
-         padding-right: 5px;
-         }
-         .eMail_check_div_Mail {
-         height: 500px;
-         overflow: auto;
-         }
-         .eMail_checkbox_div {
-         margin-top: 5px;
-         }
-         .chk_text_Mail{
-         margin-left: 8px;
-         }
-         /*인풋 창 검은줄 없애기*/
-         input:focus {
-         outline: none;
-         }
-         .header div.login_box_Mainhead{
-         margin-top: 1.5rem;
-         line-height: 3rem;
-         margin-right: 0.3rem;
-         transition-duration:0s;
-         }
-         .header div.login_box_Mainhead .head_login_Mainhead{
-         height: 3.6rem;
-         width: 8.6rem;
-         transition-duration:0s;
-         }
-         
+
+html, body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.header {
+	width: 100%;
+	height: 6.5rem;
+}
+
+.left-bar {
+	float: left;
+	width: 13%;
+	height: 100vh;
+	border-right: 1px solid gainsboro;
+}
+
+.section {
+	width: 87%;
+	float: left;
+	height: 100vh;
+}
+
+.cate_Managerheader {
+	color: rgb(141, 141, 141);
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 1px solid rgb(141, 141, 141);
+	padding-left: 15px;
+}
+
+.title_Managerheader {
+	font-size: 30px;
+	font-family: jua;
+	margin-top: 30px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+	border-bottom: 3px solid black;
+}
+
+.title_Mail {
+	font-weight: 600;
+	font-size: 19px;
+}
+
+.input_div_Mail {
+	margin-left: 40px;
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+
+.input_recipient_Mail {
+	border: 1px solid rgb(177, 177, 177);
+	margin-left: 20px;
+	width: 80%;
+	height: 30px;
+}
+
+.input_title_Mail {
+	border: 1px solid rgb(177, 177, 177);
+	margin-left: 58px;
+	width: 80%;
+	height: 30px;
+}
+
+.address_Mail {
+	border: 1px solid rgb(177, 177, 177);
+	height: 30px;
+	margin-left: 20px;
+	width: 70px;
+	background-color: white;
+	font-weight: 600;
+}
+
+.content_Mail {
+	margin: 40px;
+}
+
+.send_button_Mail {
+	width: 180px;
+	font-size: 19px;
+	background-color: rgb(247, 185, 185);
+	border-radius: 5px;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 3);
+	border: 1px solid black;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 3), inset 0 0 2px
+		rgba(255, 255, 255, 3), 0 1px 2px rgba(0, 0, 0, 29);
+	font-family: sans-serif;
+	outline-style: none;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 40px;
+	float: right;
+}
+
+.adress_model_Mail {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modal-header {
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.searcheMail_text_Mail {
+	align-content: center;
+	width: 50rem;
+	height: 3rem;
+}
+
+.searcheMail_button_Mail {
+	padding: 6px;
+	margin-left: 5px;
+	border: 1px solid gray;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+.all_check_div_Mail {
+	vertical-align: middle;
+	font-size: 16px;
+	margin-top: 5px;
+	padding-bottom: 5px;
+	width: 50rem;
+	border-bottom: 1px solid rgb(184, 182, 182);
+}
+
+.checkbox_Mail {
+	zoom: 1.5;
+	vertical-align: -3px;
+	padding-right: 5px;
+}
+
+.eMail_check_div_Mail {
+	height: 500px;
+	overflow: auto;
+}
+
+.eMail_checkbox_div {
+	margin-top: 5px;
+}
+
+.chk_text_Mail {
+	margin-left: 8px;
+}
+/*인풋 창 검은줄 없애기*/
+input:focus {
+	outline: none;
+}
+
+.header div.login_box_Mainhead {
+	margin-top: 1.7rem;
+	/* line-height: 3rem;
+margin-right: 0.3rem;
+transition-duration:0s; */
+}
+
+.header div.login_box_Mainhead .head_login_Mainhead {
+	height: 3.6rem;
+	transition-duration: 0s;
+	width: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.header div.down_p1, div.down_p2 {
+	height: 3.6rem;
+	transition-duration: 0s;
+	width: 91px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.header div.down_p1 {
+	top: 57px;
+}
+
+.header div.down_p2 {
+	top: 117px;
+}
+
+.header div.down_p1:after, div.down_p2:after, div.down_p1:before, div.down_p2:before
+	{
+	height: 25px;
+}
+
+.header div.down_p1:after, div.down_p2:after {
+	right: 9px;
+}
