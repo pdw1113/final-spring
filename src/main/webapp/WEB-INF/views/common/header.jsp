@@ -58,21 +58,32 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="signUpMasterCategory.do">
-	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
-	               <a href="signUpMaster.do">
-	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
-	               </a>
+	               <span class="accordion_header">
+                      <div class="head_login_Mainhead w_100p" id="product">상품관리</div>
+                      <a href="productInsertPage.do">
+                        <div class="down_p1">상품등록</div>
+                      </a>
+                      <a href="myProductList.do">
+                        <div class="down_p2">상품목록</div>
+                      </a>
+                   </span>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="productInsertPage.do" id="manager_href">
-	                  <div class="head_login_Mainhead" id="manager_page">상품등록</div>
+	               <a href="signUpMasterCategory.do">
+	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
 	               </a>
 	            </div>
 	         	<span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
 	         </div>
          </c:if>
       </div>
+      
+      <script>
+	       $("#product").click(function(){
+	          $(this).next().children(".down_p1").slideToggle(300);
+	          $(this).next().next().children(".down_p2").slideToggle(300);
+	       });
+   	  </script>
       
 	  <script>
          $(document).ready(function () {

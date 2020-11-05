@@ -114,6 +114,7 @@
 		WHERE USER_EMAIL=#{email}
 	</update>
 	
+	<!-- 탈퇴사유 -->
 	<insert id="reason" parameterType="hashmap">
 		INSERT INTO REASON
 		VALUES(#{email}, #{reason})

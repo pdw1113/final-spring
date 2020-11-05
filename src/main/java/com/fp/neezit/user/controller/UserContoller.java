@@ -98,7 +98,7 @@ public class UserContoller {
 	public String walletDetail() {
 		return "user/myPage/walletDetail";
 	}
-
+	
 	/****** 페이지 이동 메소드 ******/
 
 	@RequestMapping("loginPage.do")
@@ -120,7 +120,7 @@ public class UserContoller {
 	public String test() {
 		return "user/signUpMasterManage";
 	}
-
+	
 	@RequestMapping("popUp.do")
 	public String popUp() {
 		return "user/popUp";
@@ -233,8 +233,9 @@ public class UserContoller {
 	}
 
 	/**
-	 * <<<<<<< HEAD 10. 능력자 등록 카테고리 메소드 ======= 5. 비밀번호 변경 메소드
+	 *
 	 * 
+	 * 5. 비밀번호 변경 메소드
 	 * @param originalPwd
 	 * @param newPwd
 	 * @param model
@@ -306,7 +307,7 @@ public class UserContoller {
 			return "user/myPage/deleteUser";
 		}
 	}
-
+	
 	/**
 	 * 10. 능력자 등록 메소드
 	 * 
@@ -460,8 +461,8 @@ public class UserContoller {
 	 */
 	@ResponseBody // AJAX
 	@RequestMapping("nickCheck.do")
-	public String nickCheck(String nickname) throws IOException {
-
+	public String nickCheck(String nickname){
+		
 		int result = uService.nickCheck(nickname);
 
 		if (result > 0) { // 중복 존재

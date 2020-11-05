@@ -1,0 +1,83 @@
+@charset "UTF-8";
+        body,html{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        /* jua 폰트 */
+        .font_jua{
+          font-family: 'Jua', sans-serif;
+        }
+
+        /* 추천 능력자들 최고 부모 div */
+        .main_container_index{
+          margin-bottom: 190px;
+        }
+
+        /* 추천 능력자들 제목 */
+        .main_title_index{
+          font-family: 'Black Han Sans', sans-serif;
+          font-style: italic;
+          font-size: 3em;
+
+          margin-left: auto; 
+          margin-right: auto; 
+          margin-bottom: 50px;
+          width: fit-content; 
+          
+          display: block;
+        }
+
+        /* 4개를 감싸는 ul 태그 */
+        .main_contents_container_index{
+          text-align: center;
+        }
+
+        /* 별 img */
+        .main_star_container_index > img{
+          margin: 0 -2px;
+          width: 13px; 
+          height: 13px;
+          object-fit: cover;
+        }
+
+        /* ul의 li 태그[사람 한명 한명] */
+        .main_contents_index{
+          margin-right: 80px;
+          margin-bottom: 30px;
+          width: fit-content;
+          list-style: none; 
+          display: inline-block;
+        }
+
+        /* 썸네일 사진 */
+        .main_contents_img_index{
+          width: 280px; 
+          height: 200px; 
+          border-radius: 5%;
+          
+          box-shadow: 0 0 10px rgb(0,0,0,0.7);
+          object-fit: cover; 
+        }
+
+        /* 내용 설명 */
+        .main_explain_index{
+          margin: 2px 0px;
+        }
+
+        /* 손바닥 사진 */
+        .main_rank_index{
+          width: 18px; 
+          height: 27px;
+
+          object-fit: cover; 
+        }
+
+        /* 선택 사진 */
+        .main_choice_img_index{
+          width: 15px; 
+          height: 15px;
+
+          object-fit: cover; 
+        }
