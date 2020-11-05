@@ -2,10 +2,10 @@ package com.fp.neezit.product.model.vo;
 
 public class ProductCategory {
 	
-	private String cateName;
-	private String cateCode;
-	private String cateCodeRef;
-	private int level;
+	private String cateName;	// 카테고리명
+	private String cateCode;	// 카테고리 코드
+	private String cateCodeRef;	// 카테고리 부모 코드
+	private int level;			// 카테고리 1분류, 2분류, 3분류
 	
 	public String getCateName() {
 		return cateName;
@@ -44,10 +44,4 @@ public class ProductCategory {
 		return "ProductCategory [cateName=" + cateName + ", cateCode=" + cateCode + ", cateCodeRef=" + cateCodeRef
 				+ ", level=" + level + "]";
 	}
-	
-	
-	
-	
-	
-
 }
