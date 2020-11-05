@@ -205,6 +205,7 @@ border-bottom-right-radius: 50px;
 font-family: 'Jua', sans-serif;
 transition: 1s;
 box-shadow: 12px 4px 8px 0px rgb(0,0,0,0.6);
+padding-bottom: 25px;
 }
 /* 신분증 사진 옆 설명 */
 .img-container-info-2{
@@ -315,16 +316,16 @@ width:1.7rem;
 height: 1.7rem;
 }
 .instagram:before{
-background-image: url("resources/img/instagram.png");
+background-image: url("../img/instagram.png");
 }
 .twitter:before{
-background-image: url("resources/img/twitter.png");
+background-image: url("../img/twitter.png");
 }
 .blog:before{
-background-image: url("resources/img/blog.png");
+background-image: url("../img/blog.png");
 }
 .git:before{
-background-image: url("resources/img/git.png")
+background-image: url("../img/git.png")
 }
 /* 유튜브 아이프레임 크기 */
 iframe{
@@ -346,6 +347,7 @@ display: none;
 background-color: rgb(250, 190, 0); 
 border: 1px solid black; 
 border-radius: 20%;
+margin-right: 10px;
 }
 .dupl_choose{
 position: absolute; 
@@ -362,4 +364,7 @@ width: 242px;
 .width_500{
 width: 500px;
 margin-right: 70px;
+}
+.day11{
+margin-right: 10px;
 }

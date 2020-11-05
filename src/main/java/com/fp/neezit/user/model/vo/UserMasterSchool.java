@@ -5,25 +5,30 @@ public class UserMasterSchool {
 	private String MASTER_HIGH;
 	private String MASTER_UNIV;
 	private String MASTER_UNIV_DEPT;
-	private String MASTER_UNIV_PIC;
+	private String MASTER_UNIV_PIC_ORI;
+	private String MASTER_UNIV_PIC_RE;
 	private String MASTER_UNIV2;
 	private String MASTER_UNIV2_DEPT;
-	private String MASTER_UNIV2_PIC;
+	private String MASTER_UNIV2_PIC_ORI;
+	private String MASTER_UNIV2_PIC_RE;
 	public UserMasterSchool() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public UserMasterSchool(String uSER_EMAIL, String mASTER_HIGH, String mASTER_UNIV, String mASTER_UNIV_DEPT,
-			String mASTER_UNIV_PIC, String mASTER_UNIV2, String mASTER_UNIV2_DEPT, String mASTER_UNIV2_PIC) {
+			String mASTER_UNIV_PIC_ORI, String mASTER_UNIV_PIC_RE, String mASTER_UNIV2, String mASTER_UNIV2_DEPT,
+			String mASTER_UNIV2_PIC_ORI, String mASTER_UNIV2_PIC_RE) {
 		super();
 		USER_EMAIL = uSER_EMAIL;
 		MASTER_HIGH = mASTER_HIGH;
 		MASTER_UNIV = mASTER_UNIV;
 		MASTER_UNIV_DEPT = mASTER_UNIV_DEPT;
-		MASTER_UNIV_PIC = mASTER_UNIV_PIC;
+		MASTER_UNIV_PIC_ORI = mASTER_UNIV_PIC_ORI;
+		MASTER_UNIV_PIC_RE = mASTER_UNIV_PIC_RE;
 		MASTER_UNIV2 = mASTER_UNIV2;
 		MASTER_UNIV2_DEPT = mASTER_UNIV2_DEPT;
-		MASTER_UNIV2_PIC = mASTER_UNIV2_PIC;
+		MASTER_UNIV2_PIC_ORI = mASTER_UNIV2_PIC_ORI;
+		MASTER_UNIV2_PIC_RE = mASTER_UNIV2_PIC_RE;
 	}
 	public String getUSER_EMAIL() {
 		return USER_EMAIL;
@@ -49,11 +54,17 @@ public class UserMasterSchool {
 	public void setMASTER_UNIV_DEPT(String mASTER_UNIV_DEPT) {
 		MASTER_UNIV_DEPT = mASTER_UNIV_DEPT;
 	}
-	public String getMASTER_UNIV_PIC() {
-		return MASTER_UNIV_PIC;
+	public String getMASTER_UNIV_PIC_ORI() {
+		return MASTER_UNIV_PIC_ORI;
 	}
-	public void setMASTER_UNIV_PIC(String mASTER_UNIV_PIC) {
-		MASTER_UNIV_PIC = mASTER_UNIV_PIC;
+	public void setMASTER_UNIV_PIC_ORI(String mASTER_UNIV_PIC_ORI) {
+		MASTER_UNIV_PIC_ORI = mASTER_UNIV_PIC_ORI;
+	}
+	public String getMASTER_UNIV_PIC_RE() {
+		return MASTER_UNIV_PIC_RE;
+	}
+	public void setMASTER_UNIV_PIC_RE(String mASTER_UNIV_PIC_RE) {
+		MASTER_UNIV_PIC_RE = mASTER_UNIV_PIC_RE;
 	}
 	public String getMASTER_UNIV2() {
 		return MASTER_UNIV2;
@@ -67,19 +78,25 @@ public class UserMasterSchool {
 	public void setMASTER_UNIV2_DEPT(String mASTER_UNIV2_DEPT) {
 		MASTER_UNIV2_DEPT = mASTER_UNIV2_DEPT;
 	}
-	public String getMASTER_UNIV2_PIC() {
-		return MASTER_UNIV2_PIC;
+	public String getMASTER_UNIV2_PIC_ORI() {
+		return MASTER_UNIV2_PIC_ORI;
 	}
-	public void setMASTER_UNIV2_PIC(String mASTER_UNIV2_PIC) {
-		MASTER_UNIV2_PIC = mASTER_UNIV2_PIC;
+	public void setMASTER_UNIV2_PIC_ORI(String mASTER_UNIV2_PIC_ORI) {
+		MASTER_UNIV2_PIC_ORI = mASTER_UNIV2_PIC_ORI;
+	}
+	public String getMASTER_UNIV2_PIC_RE() {
+		return MASTER_UNIV2_PIC_RE;
+	}
+	public void setMASTER_UNIV2_PIC_RE(String mASTER_UNIV2_PIC_RE) {
+		MASTER_UNIV2_PIC_RE = mASTER_UNIV2_PIC_RE;
 	}
 	@Override
 	public String toString() {
-		return "MasterSchool [USER_EMAIL=" + USER_EMAIL + ", MASTER_HIGH=" + MASTER_HIGH + ", MASTER_UNIV="
-				+ MASTER_UNIV + ", MASTER_UNIV_DEPT=" + MASTER_UNIV_DEPT + ", MASTER_UNIV_PIC=" + MASTER_UNIV_PIC
-				+ ", MASTER_UNIV2=" + MASTER_UNIV2 + ", MASTER_UNIV2_DEPT=" + MASTER_UNIV2_DEPT + ", MASTER_UNIV2_PIC="
-				+ MASTER_UNIV2_PIC + "]";
+		return "UserMasterSchool [USER_EMAIL=" + USER_EMAIL + ", MASTER_HIGH=" + MASTER_HIGH + ", MASTER_UNIV="
+				+ MASTER_UNIV + ", MASTER_UNIV_DEPT=" + MASTER_UNIV_DEPT + ", MASTER_UNIV_PIC_ORI="
+				+ MASTER_UNIV_PIC_ORI + ", MASTER_UNIV_PIC_RE=" + MASTER_UNIV_PIC_RE + ", MASTER_UNIV2=" + MASTER_UNIV2
+				+ ", MASTER_UNIV2_DEPT=" + MASTER_UNIV2_DEPT + ", MASTER_UNIV2_PIC_ORI=" + MASTER_UNIV2_PIC_ORI
+				+ ", MASTER_UNIV2_PIC_RE=" + MASTER_UNIV2_PIC_RE + "]";
 	}
-	
 	
 }
