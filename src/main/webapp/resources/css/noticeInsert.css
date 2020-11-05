@@ -77,6 +77,29 @@ width:auto;
 padding-left: 10px;
 padding-right:10px;
 }
+
+.header div.down_p1, div.down_p2{
+height: 3.6rem;
+transition-duration:0s;
+width:91px;
+padding-left: 10px;
+padding-right:10px;
+}
+.header div.down_p1{
+   top:57px;
+}
+
+.header div.down_p2{
+   top:117px;
+}
+
+.header div.down_p1:after, div.down_p2:after,div.down_p1:before, div.down_p2:before{
+height:25px;
+}
+
+.header div.down_p1:after, div.down_p2:after{
+   right:9px;
+}
 .nav div.container_mynav{
 width: 132rem;
 }
