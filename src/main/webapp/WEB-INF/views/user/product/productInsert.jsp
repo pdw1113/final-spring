@@ -73,8 +73,7 @@
 				<div class="status_div_addproduct">
 
 					<span class="input_title_addproduct">카테고리</span> 
-					<select class="category1 category_select_addproduct m-r-27 m-l-90">
-						<option value="">1차 분류</option>
+					<select class="category1 category_select_addproduct m-r-27 m-l-90" id="category">
 					</select>
 
 				</div>
@@ -128,11 +127,18 @@
 	</body>
 	
 	<script>
-	    let category = '${category}';
-	    let arr = category.split(",");
-	    for(a in arr){
-	        console.log(a + " : " + arr[a] + " 배열 : " + arr);
-	    }   
+		(function(){
+			// Controller에서 받아온 능력자 카테고리
+		    let category = '${category}';
+		    
+		    // 문자열을 ,구분자로 잘라내어 배열에 담는다.
+		    let arr = category.split(", ");
+		    
+		    // for문으로 select option에 추가한다.
+		    for(a in arr){
+		    	$("#category").append("<option>" + arr[a] + "</option>");
+		    }
+		})();
 	</script>
 
 

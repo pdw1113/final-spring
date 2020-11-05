@@ -32,10 +32,12 @@
 		<result property="count" column="PRODCUT_COUNT"/>
 	</resultMap>
 	
-	<select id="category" parameterType="UserMaster" resultType="string">
-		SELECT CATENAME FROM GOODS_CATEGORY
-		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
-		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+	<select id="category" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+			start with CATECODEREF is null
+			connect by prior CATECODE = CATECODEREF
 	</select>
 	
 	<select id="categoryList" resultType="com.fp.neezit.product.model.vo.ProductCategory">
@@ -55,6 +57,53 @@
 			connect by prior CATECODE = CATECODEREF
 	</select>
 	
+	<!-- 상품 등록 -->
+    <insert id="insertProduct" parameterType="Product">
+      INSERT INTO PRODUCT VALUES
+      (#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+    </insert>
+    	
+	<!-- 능력자 정보 가져오기 -->
+	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
+			SELECT *
+			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
+	</select>
+	
+	<!-- 능력자 카테고리 가져오기 -->
+	<select id="masterCategory" parameterType="UserMaster" resultType="string">
+		SELECT CATENAME FROM GOODS_CATEGORY
+		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
+		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+	</select>
+	
+	<!-- 나의 상품 목록 가져오기 -->
+	<select id="myProductList" parameterType="UserMaster" resultMap="productResultSet">
+		SELECT * FROM PRODUCT
+		WHERE MASTER_NICKNAME = #{MASTER_NICKNAME}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!-- 	<select id="categoryList3" resultType="com.fp.neezit.product.model.vo.ProductCategory">
 		 select
 			LEVEL, CATENAME, CATECODE, CATECODEREF
@@ -63,16 +112,6 @@
 			start with CATECODE = 10
 			connect by prior CATECODE = CATECODEREF
 	</select> -->
-	
-	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
-			SELECT *
-			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
-	</select>
-	
-	<insert id="insertProduct" parameterType="Product">
-		INSERT INTO PRODUCT VALUES
-		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
-	</insert>
 	
 </mapper>
 

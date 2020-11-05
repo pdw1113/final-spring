@@ -18,8 +18,8 @@ public class ProductDao{
 	SqlSessionTemplate sqlSession;
 	
 	// 카테고리
-	public List<String> category(UserMaster master){
-		return sqlSession.selectList("productMapper.category", master);
+	public List<ProductCategory> category(){
+		return sqlSession.selectList("productMapper.category");
 	}
 
 	public List<ProductCategory> categoryList(int navNo){
@@ -36,6 +36,14 @@ public class ProductDao{
 
 	public int insertProduct(Product product) {
 		return sqlSession.insert("productMapper.insertProduct",product);
+	}
+
+	public List<String> masterCategory(UserMaster master) {
+		return sqlSession.selectList("productMapper.masterCategory",master);
+	}
+
+	public List<Product> myProductList(UserMaster master) {
+		return sqlSession.selectList("productMapper.myProductList", master);
 	}
 	
 }
