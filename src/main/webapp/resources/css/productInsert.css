@@ -178,19 +178,19 @@ background-color: #fabe00;
 font-family: jua;
 margin-left: 625px;
 cursor:pointer;
+border-style: none;
+}
+.header div.head_login_Mainhead{
+	width:86px;
 }
 .header div.login_box_Mainhead{
-margin-top: 1.7rem;
+margin-top: 1.6rem;
 /* line-height: 3rem;
 margin-right: 0.3rem;
 transition-duration:0s; */
 }  
 .header div.login_box_Mainhead .head_login_Mainhead{
 height: 3.6rem;
-transition-duration:0s;
-width:auto;
-padding-left: 10px;
-padding-right:10px;
 }
 
 .header div.down_p1, div.down_p2{
@@ -200,8 +200,13 @@ width:91px;
 padding-left: 10px;
 padding-right:10px;
 }
+
 .header div.down_p1{
    top:57px;
+}
+
+.header div.w_100p{
+	width:106px;
 }
 
 .header div.down_p2{
@@ -215,6 +220,7 @@ height:25px;
 .header div.down_p1:after, div.down_p2:after{
    right:9px;
 }
+
 
 .m-r-27{
    margin-right:27px;

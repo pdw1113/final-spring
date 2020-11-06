@@ -4,7 +4,7 @@
 <html>
    <head>
     <div class="header">
-         <%@ include file="../common/header.jsp" %>
+         <%@ include file="../manager/common/mheader.jsp" %>
     </div>
     
 	<div class="nav">
