@@ -11,6 +11,9 @@
       
       <link rel="stylesheet" type="text/css" href="resources/css/login.css">
 
+	<!-- JUA 폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    
    </head>
    <body>
       <%@ include file="../common/header.jsp" %>
