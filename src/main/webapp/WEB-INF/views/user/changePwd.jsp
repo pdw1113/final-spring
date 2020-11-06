@@ -15,7 +15,7 @@
       <div class="form_changePwd">
          <!-- 로그인 이미지 -->
          <img  class="logo_changePwd" src="./resources/img/Login_logo.png">
-         <br><br><br>
+         <br><br><br> 
          <h2>비밀번호 변경</h2>
          <br><br>
          <!-- 새로운 비번 입력폼 -->
