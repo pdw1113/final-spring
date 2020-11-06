@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="container">
-			<span class="text1">'spring’에 대한 검색 결과</span> <span class="text2">"5개"</span>
+			<span class="text1">'spring’에 대한 검색 결과</span> <span class="text2">"5개"</span> 
 		</div>
 		
 		 <div class="checkbox">
