@@ -13,7 +13,7 @@
          <!-- 메인로고 -->
          <a href="index.do"><img class="head_logo_Mainhead" src="resources/img/LOGO.png"></a>
          <div class="head_search_div">
-            <span class='main_manager_Mainhead'>관리자 페이지</span>
+            <span class='main_manager_Mainhead'>관리자 페이지</span> 
          </div>
          	 <div>
 	            <div class="login_box_Mainhead">
