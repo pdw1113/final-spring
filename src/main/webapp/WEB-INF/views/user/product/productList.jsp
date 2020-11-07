@@ -188,39 +188,102 @@
                      </div>
                   </div>
 	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
+                  <div class="list_contents_marign">
+                     <p class="font_noto list_explain_index">
+                        자바 뉴비들 드루와
+                     </p>
+                     <div>
+                        <img src="resources/img/lv1.png" class="list_rank_index">
+                        <span class="font_noto">조정호</span>
+                        <span class="list_star_container_index">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        </span>
+                        <span class="font_noto">(5.0)</span>
+                        <span>
+                        <span class="font_noto">213명선택</span>
+                        <img src="resources/img/buy.png" class="list_choice_img_index">
+                        </span>
+                     </div>
+                  </div>
+	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
+                  <div class="list_contents_marign">
+                     <p class="font_noto list_explain_index">
+                        자바 뉴비들 드루와
+                     </p>
+                     <div>
+                        <img src="resources/img/lv1.png" class="list_rank_index">
+                        <span class="font_noto">조정호</span>
+                        <span class="list_star_container_index">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        </span>
+                        <span class="font_noto">(5.0)</span>
+                        <span>
+                        <span class="font_noto">213명선택</span>
+                        <img src="resources/img/buy.png" class="list_choice_img_index">
+                        </span>
+                     </div>
+                  </div>
+	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
+                  <div class="list_contents_marign">
+                     <p class="font_noto list_explain_index">
+                        자바 뉴비들 드루와
+                     </p>
+                     <div>
+                        <img src="resources/img/lv1.png" class="list_rank_index">
+                        <span class="font_noto">조정호</span>
+                        <span class="list_star_container_index">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        <img src="resources/img/star.png">
+                        </span>
+                        <span class="font_noto">(5.0)</span>
+                        <span>
+                        <span class="font_noto">213명선택</span>
+                        <img src="resources/img/buy.png" class="list_choice_img_index">
+                        </span>
+                     </div>
+                  </div>
+	           </div>
 		 	</div>
 		<!-- Paging -->
 		<div class="pagination">
 		  <a href="#">&laquo;</a>
-		  <a class="active" href="#">1</a>
-		  <a href="#">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">6</a>
-		  <a href="#">&raquo;</a>
+		  <a class="page_product">1</a>
+		  <a href="#" class="page_product">2</a>
+		  <a href="#" class="page_product">3</a>
+		  <a href="#" class="page_product">4</a>
+		  <a href="#" class="page_product">5</a>
+		  <a href="#" class="page_product">6</a>
+		  <a href="#" class="page_product">&raquo;</a>
 		</div>
-      
-      
-<!--       <div class="pagination_wrap">
-         <ul class="pagination">
-            <li>
-               <a href="#" aria-label="Previous">
-               <span aria-hidden="true">&laquo;</span>
-               </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-               <a href="#" aria-label="Next">
-               <span aria-hidden="true">&raquo;</span>
-               </a>
-            </li>
-         </ul>
-      </div> -->
       
       <%@ include file="../../common/footer.jsp" %>
       
@@ -374,7 +437,14 @@
          
          
          	$('form').css('display','inline-block');
-         
+         	
+         	
+         	// 페이지 클릭시 active 클래스 추가 및 제거 되는 스크립트
+           $('.pagination a').click(function(){
+        	   $('.pagination a').removeClass('active');
+        	   $(this).addClass('active');
+           });
+           
       </script>
    </body>
 </html>

@@ -75,10 +75,10 @@ background-color: red;
 /*리스트Section*/
 .Lsit-Saction{
 margin: 0 auto;
-width: 77%;
+width: 1306px;
 display: flex;
 flex-wrap: wrap;
-justify-content: space-between;
+justify-content: flex-start;
 }
 /*리스트 버튼*/
 .List-Button{
@@ -112,8 +112,6 @@ margin: 1.2rem 0 1.2rem 0;
 font-size: 12px;
 display: flex;
 justify-content: space-between;
-}
-.selectbox{
 }
 .btn-group{
 float: right;
@@ -195,4 +193,4 @@ justify-content: center;
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 /*썸네일 간격및 크기조정*/
-.productOne{margin-bottom: 5rem; text-decoration:none;}
+.productOne{    text-decoration: none; margin: 0px 3.6rem 5rem 3.6rem;}
