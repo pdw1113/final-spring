@@ -45,5 +45,9 @@ public class ProductDao{
 	public List<Product> myProductList(UserMaster master) {
 		return sqlSession.selectList("productMapper.myProductList", master);
 	}
+
+	public Product myProductDetail(int no) {
+		return sqlSession.selectOne("productMapper.myProductDetail", no);
+	}
 	
 }

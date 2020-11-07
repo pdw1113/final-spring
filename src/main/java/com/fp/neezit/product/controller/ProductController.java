@@ -190,5 +190,29 @@ public class ProductController {
       return "user/product/myProductList";
    }
    
+   /**
+    * 6. 나의 상품 상세 메소드
+    * @param product
+ 	* @param model
+ 	* @param session
+ 	* @return
+ 	*/
+   @RequestMapping("myProductDetail.do")
+   public String myProductDetail(int no, Model model) {
+	   System.out.println("들어왔다");
+	   
+	  Product p = pService.myProductDetail(no);
+	  
+	  if(p != null) {
+		  model.addAttribute("product",p);
+		  System.out.println(p);
+		  return "user/product/productDetail";
+	  }
+	  
+	  return "common/errorPage";
+   }
+   
+   
+   
    
 }

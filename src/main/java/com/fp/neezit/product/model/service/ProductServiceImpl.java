@@ -53,4 +53,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.myProductList(master);
 	}
 
+	@Override
+	public Product myProductDetail(int no) {
+		return pDao.myProductDetail(no);
+	}
+
 }

@@ -36,6 +36,8 @@ public interface ProductService {
 	 * @param master
 	 * @return
 	 */
-	public List<Product> myProductList(UserMaster master); 
+	public List<Product> myProductList(UserMaster master);
+
+	public Product myProductDetail(int no); 
 
 }
