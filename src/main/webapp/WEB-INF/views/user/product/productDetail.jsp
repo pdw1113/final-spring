@@ -53,7 +53,7 @@
           <li>#Spring</li>
           <li>#CSS</li>
         </ul>
-        <h1 class="product_title">[Spring/CSS] Spring과 CSS의 극적인 만남, 노빠꾸 벌구숭이의 논산 개철이의 뭔소리야? </h1>
+        <h1 class="product_title">${ product.title }</h1>
 
         <div class="master_info">
           <div class="master_img">
@@ -90,7 +90,7 @@
       <section class="p2p_class_img">
         <!-- Swiper -->
         <div class="img_area">
-          <img src="resources/img/1.png">
+          <img src="resources/pUploadFiles/${ product.renamePic }">
         </div>
       </section>
       <!-- // 상품 이미지 -->
@@ -103,10 +103,7 @@
         <div class="p_col_right">
           <div>
             <p class="text_area">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Asperiores a quo eos tempore molestiae rerum possimus laborum,
-              magnam odit impedit molestias, quaerat eaque perferendis quas!
-              Ducimus ut nobis molestiae illo.
+			    ${ product.portfolio }
             </p>
           </div>
         </div>
@@ -122,9 +119,7 @@
         <div class="p_col_right">
           <div>
             <p class="text_area">
-              코로나로 인해 온라인 수업 위주로 진행하고 있습니다.
-              천동벌거숭이를 보고싶다구요?
-              다 알고 있습니다 .하지만 그건 어쩔 수 없다구요
+			    ${ product.introduce }
             </p>
           </div>
         </div>
@@ -288,12 +283,13 @@
         <ul class="p_flex job_where">
           <li>자택(온라인)</li>
           <li>출장</li>
+          <li>09:00 ~ 10:00</li>
         </ul>
         <hr>
         <ul class="p_flex">
           <li>시간당 요금</li>
           <li>
-            <span>50,000원</span>
+            <span>${ product.price }&nbsp;원</span>
           </li>
         </ul>
         <ul class="p_flex">

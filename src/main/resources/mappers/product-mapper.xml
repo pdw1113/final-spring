@@ -82,6 +82,11 @@
 		WHERE MASTER_NICKNAME = #{MASTER_NICKNAME}
 	</select>
 	
+	<select id="myProductDetail" parameterType="int" resultMap="productResultSet">
+		SELECT * FROM PRODUCT
+		WHERE PRODUCT_NO = #{no}
+	</select>
+	
 	
 	
 	
