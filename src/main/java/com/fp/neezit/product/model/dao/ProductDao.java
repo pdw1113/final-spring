@@ -49,5 +49,9 @@ public class ProductDao{
 	public Product myProductDetail(int no) {
 		return sqlSession.selectOne("productMapper.myProductDetail", no);
 	}
+
+	public UserMaster getProductDetail(String nickName) {
+		return sqlSession.selectOne("productMapper.getProductDetail", nickName);
+	}
 	
 }

@@ -38,6 +38,8 @@ public interface ProductService {
 	 */
 	public List<Product> myProductList(UserMaster master);
 
-	public Product myProductDetail(int no); 
+	public Product myProductDetail(int no);
+
+	public UserMaster getProductDetail(String nickName); 
 
 }

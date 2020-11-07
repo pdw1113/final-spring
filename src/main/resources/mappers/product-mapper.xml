@@ -82,9 +82,16 @@
 		WHERE MASTER_NICKNAME = #{MASTER_NICKNAME}
 	</select>
 	
+	<!-- 상품 정보 가져오기 - 1 -->
 	<select id="myProductDetail" parameterType="int" resultMap="productResultSet">
 		SELECT * FROM PRODUCT
 		WHERE PRODUCT_NO = #{no}
+	</select>
+	
+	<!-- 상품 정보 가져오기 - 2 -->
+	<select id="getProductDetail" parameterType="string" resultMap="userMasterResultSet">
+		SELECT * FROM NEEZ_MASTER 
+		WHERE MASTER_NICKNAME = #{nickName}
 	</select>
 	
 	
