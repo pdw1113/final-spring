@@ -5,7 +5,7 @@ padding:0;
 width:100%;
 }
 /*인풋 창 검은줄 없애기*/
-input:focus { outline:none; }
+input:focus { outline:none; } 
 /*"시간 상품등록" 텍스트*/
 .tit_sect_addproduct{
 margin: 35px 0 25px 0;
@@ -196,7 +196,7 @@ height: 3.6rem;
 .header div.down_p1, div.down_p2{
 height: 3.6rem;
 transition-duration:0s;
-width:91px;
+width:106px;
 padding-left: 10px;
 padding-right:10px;
 }
