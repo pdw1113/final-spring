@@ -191,7 +191,7 @@ public class ProductController {
    }
    
    /**
-    * 6. 나의 상품 상세 메소드
+    * 6. 상품 상세 메소드
     * @param product
  	* @param model
  	* @param session
@@ -199,13 +199,16 @@ public class ProductController {
  	*/
    @RequestMapping("myProductDetail.do")
    public String myProductDetail(int no, Model model) {
-	   System.out.println("들어왔다");
-	   
+	  
+	  // 상품 정보 가져오기
 	  Product p = pService.myProductDetail(no);
 	  
-	  if(p != null) {
-		  model.addAttribute("product",p);
-		  System.out.println(p);
+	  // 상품 정보 가져오기 2
+	  UserMaster m = pService.getProductDetail(p.getNickName());
+	  
+	  if(p != null && m != null) {
+		  model.addAttribute("product", p);
+		  model.addAttribute("master", m);
 		  return "user/product/productDetail";
 	  }
 	  

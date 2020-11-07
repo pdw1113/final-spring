@@ -57,10 +57,10 @@
 
         <div class="master_info">
           <div class="master_img">
-            <img src="resources/img/승백_PIC.jpg">
+            <img src="resources/masterImg/${ master.MASTER_PROFILE_PIC_RE }">
           </div>
           <div class="short_info">
-            <em class="master_nickname">카피닌자 천카시</em>
+            <em class="master_nickname">${ master.MASTER_NICKNAME }</em>
             <span class="master_star">
               <i class="star_img">
                 <img src="resources/img/star.png">

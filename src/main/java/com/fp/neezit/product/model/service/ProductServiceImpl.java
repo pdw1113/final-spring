@@ -58,4 +58,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.myProductDetail(no);
 	}
 
+	@Override
+	public UserMaster getProductDetail(String nickName) {
+		return pDao.getProductDetail(nickName);
+	}
+
 }
