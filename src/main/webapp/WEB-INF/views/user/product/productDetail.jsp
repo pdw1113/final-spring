@@ -57,10 +57,10 @@
 
         <div class="master_info">
           <div class="master_img">
-            <img src="resources/masterImg/${ master.MASTER_PROFILE_PIC_RE }">
+            <img src="resources/masterImg/${ master.mProPicRe }">
           </div>
           <div class="short_info">
-            <em class="master_nickname">${ master.MASTER_NICKNAME }</em>
+            <em class="master_nickname">${ master.mNickname }</em>
             <span class="master_star">
               <i class="star_img">
                 <img src="resources/img/star.png">
