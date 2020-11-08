@@ -43,6 +43,6 @@ public interface ProductService {
 
 	public UserMaster getProductDetail(String nickName);
 	
-	public UserMasterSns getProductSnsDetail(String user_EMAIL);
+	public UserMasterSns getProductSnsDetail(String email);
 
 }

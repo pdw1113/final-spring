@@ -1,132 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 카테고리 호출 -->
-<mapper namespace = "productMapper" >
+<mapper namespace="productMapper">
 
 	<resultMap type="UserMaster" id="userMasterResultSet">
-		<id property="mNickname" column="MASTER_NICKNAME"/>
-		<result property="mEmail" column="USER_EMAIL"/>
-		<result property="mRankname" column="MASTER_RANKNAME"/>
-		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE"/>
-		<result property="mCategory" column="MASTER_CATEGORY"/>
-		<result property="mIdPicRe" column="MASTER_ID_PIC_RE"/>
-		<result property="mWorkDay" column="MASTER_WORKDAY"/>
-		<result property="mWorkStyle" column="MASTER_WORKSTYLE"/>
-		<result property="mStartTime" column="MASTER_STARTTIME"/>
-		<result property="mEndTime" column="MASTER_ENDTIME"/>
+		<id property="mNickname" column="MASTER_NICKNAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
+		<result property="mCategory" column="MASTER_CATEGORY" />
+		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
+		<result property="mWorkDay" column="MASTER_WORKDAY" />
+		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
+		<result property="mStartTime" column="MASTER_STARTTIME" />
+		<result property="mEndTime" column="MASTER_ENDTIME" />
 	</resultMap>
-	
+
 	<resultMap type="Product" id="productResultSet">
-		<id property="no" column="PRODUCT_NO"/>
-		<result property="nickName" column="MASTER_NICKNAME"/>
-		<result property="title" column="PRODUCT_TITLE"/>
-		<result property="pic" column="PRODUCT_PIC"/>
-		<result property="renamePic" column="PRODUCT_RENAMEPIC"/>
-		<result property="category" column="PRODUCT_CATEGORY"/>
-		<result property="price" column="PRODCUT_PRICE"/>
-		<result property="career" column="PRODUCT_CAREER"/>
-		<result property="portfolio" column="PRODUCT_PORTFOLIO"/>
-		<result property="introduce" column="PRODUCT_INTRODUCE"/>
-		<result property="createDate" column="PRODUCT_CREATE_DATE"/>
-		<result property="modifyDate" column="PRODUCT_MODIFY_DATE"/>
-		<result property="count" column="PRODCUT_COUNT"/>
+		<id property="no" column="PRODUCT_NO" />
+		<result property="nickName" column="MASTER_NICKNAME" />
+		<result property="title" column="PRODUCT_TITLE" />
+		<result property="pic" column="PRODUCT_PIC" />
+		<result property="renamePic" column="PRODUCT_RENAMEPIC" />
+		<result property="category" column="PRODUCT_CATEGORY" />
+		<result property="price" column="PRODCUT_PRICE" />
+		<result property="career" column="PRODUCT_CAREER" />
+		<result property="portfolio" column="PRODUCT_PORTFOLIO" />
+		<result property="introduce" column="PRODUCT_INTRODUCE" />
+		<result property="createDate" column="PRODUCT_CREATE_DATE" />
+		<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
+		<result property="count" column="PRODCUT_COUNT" />
 	</resultMap>
-	
-	<select id="category" resultType="com.fp.neezit.product.model.vo.ProductCategory">
+
+	<resultMap type="UserMasterSns" id="snsResultSet">
+		<result property="email" column="USER_EMAIL" />
+		<result property="snsInsta" column="MASTER_INSTAGRAM" />
+		<result property="snsTwit" column="MASTER_TWITTER" />
+		<result property="snsBlog" column="MASTER_BLOG" />
+		<result property="snsGit" column="MASTER_GIT" />
+		<result property="snsYou1" column="MASTER_YOTUBUE1" />
+		<result property="snsYou2" column="MASTER_YOTUBUE2" />
+		<result property="snsYou3" column="MASTER_YOTUBUE3" />
+	</resultMap>
+
+	<select id="category"
+		resultType="com.fp.neezit.product.model.vo.ProductCategory">
 		select
-			LEVEL, CATENAME, CATECODE, CATECODEREF
+		LEVEL, CATENAME, CATECODE, CATECODEREF
 		from GOODS_CATEGORY
-			start with CATECODEREF is null
-			connect by prior CATECODE = CATECODEREF
-	</select>
-	
-	<select id="categoryList" resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		select
-			LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-			start with CATECODE = #{navNo}
-			connect by prior CATECODE = CATECODEREF
+		start with CATECODEREF is null
+		connect by prior CATECODE = CATECODEREF
 	</select>
 
-	<select id="categoryList2" resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		 select
-			LEVEL, CATENAME, CATECODE, CATECODEREF
+	<select id="categoryList"
+		resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+		LEVEL, CATENAME, CATECODE, CATECODEREF
 		from GOODS_CATEGORY
-            WHERE LEVEL = 1
-			start with CATECODEREF = #{navNo}
-			connect by prior CATECODE = CATECODEREF
+		start with CATECODE = #{navNo}
+		connect by prior CATECODE = CATECODEREF
 	</select>
-	
+
+	<select id="categoryList2"
+		resultType="com.fp.neezit.product.model.vo.ProductCategory">
+		select
+		LEVEL, CATENAME, CATECODE, CATECODEREF
+		from GOODS_CATEGORY
+		WHERE LEVEL = 1
+		start with CATECODEREF = #{navNo}
+		connect by prior CATECODE = CATECODEREF
+	</select>
+
 	<!-- 상품 등록 -->
-    <insert id="insertProduct" parameterType="Product">
-      INSERT INTO PRODUCT VALUES
-      (#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
-    </insert>
-    	
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT VALUES
+		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},'카테고리입니다',#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+
 	<!-- 능력자 정보 가져오기 -->
-	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
-			SELECT *
-			FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
+	<select id="getMaster" parameterType="User"
+		resultMap="userMasterResultSet">
+		SELECT *
+		FROM NEEZ_MASTER WHERE USER_EMAIL=#{email}
 	</select>
-	
+
 	<!-- 능력자 카테고리 가져오기 -->
-	<select id="masterCategory" parameterType="UserMaster" resultType="string">
+	<select id="masterCategory" parameterType="UserMaster"
+		resultType="string">
 		SELECT CATENAME FROM GOODS_CATEGORY
-		WHERE CATECODE IN (SELECT REGEXP_SUBSTR(#{MASTER_CATEGORY},'[^,]+', 1, LEVEL) CATECODE FROM DUAL
-		CONNECT BY REGEXP_SUBSTR(#{MASTER_CATEGORY}, '[^,]+', 1, LEVEL) IS NOT NULL)
+		WHERE CATECODE IN
+		(SELECT REGEXP_SUBSTR(#{mCategory},'[^,]+', 1, LEVEL) CATECODE
+		FROM DUAL
+		CONNECT BY REGEXP_SUBSTR(#{mCategory}, '[^,]+', 1,
+		LEVEL) IS NOT NULL)
 	</select>
-	
+
 	<!-- 나의 상품 목록 가져오기 -->
-	<select id="myProductList" parameterType="UserMaster" resultMap="productResultSet">
+	<select id="myProductList" parameterType="UserMaster"
+		resultMap="productResultSet">
 		SELECT * FROM PRODUCT
-		WHERE MASTER_NICKNAME = #{MASTER_NICKNAME}
+		WHERE MASTER_NICKNAME =
+		#{mNickname}
 	</select>
-	
+
 	<!-- 상품 정보 가져오기 - 1 -->
-	<select id="myProductDetail" parameterType="int" resultMap="productResultSet">
+	<select id="myProductDetail" parameterType="int"
+		resultMap="productResultSet">
 		SELECT * FROM PRODUCT
 		WHERE PRODUCT_NO = #{no}
 	</select>
-	
+
 	<!-- 상품 정보 가져오기 - 2 -->
-	<select id="getProductDetail" parameterType="string" resultMap="userMasterResultSet">
-		SELECT * FROM NEEZ_MASTER 
+	<select id="getProductDetail" parameterType="string"
+		resultMap="userMasterResultSet">
+		SELECT * FROM NEEZ_MASTER
 		WHERE MASTER_NICKNAME = #{nickName}
 	</select>
-	
-	<select id="getProductSnsDetail" parameterType="string" resultMap="userMaster">
-	
+
+	<select id="getProductSnsDetail" parameterType="string"
+		resultMap="snsResultSet">
+		SELECT * FROM SNS
+		WHERE USER_EMAIL = #{email}
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!-- 	<select id="categoryList3" resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		 select
-			LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-            WHERE CATECODEREF = 10
-			start with CATECODE = 10
-			connect by prior CATECODE = CATECODEREF
-	</select> -->
-	
 </mapper>
 

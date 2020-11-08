@@ -65,8 +65,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public UserMasterSns getProductSnsDetail(String user_EMAIL) {
-		return pDao.getProductSnsDetail(user_EMAIL);
+	public UserMasterSns getProductSnsDetail(String email) {
+		return pDao.getProductSnsDetail(email);
 	}
 
 }

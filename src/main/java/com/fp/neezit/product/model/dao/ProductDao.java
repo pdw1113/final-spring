@@ -55,8 +55,8 @@ public class ProductDao{
 		return sqlSession.selectOne("productMapper.getProductDetail", nickName);
 	}
 
-	public UserMasterSns getProductSnsDetail(String user_EMAIL) {
-		return sqlSession.selectOne("productMapper.getProductSnsDetail", user_EMAIL);
+	public UserMasterSns getProductSnsDetail(String email) {
+		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
 	}
 	
 }
