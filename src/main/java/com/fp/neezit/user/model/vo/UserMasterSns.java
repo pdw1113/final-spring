@@ -1,7 +1,7 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterSns {
-	private String snsEmail;
+	private String email;
 	private String snsInsta;
 	private String snsTwit;
 	private String snsBlog;
@@ -15,10 +15,10 @@ public class UserMasterSns {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserMasterSns(String snsEmail, String snsInsta, String snsTwit, String snsBlog, String snsGit,
-			String snsYou1, String snsYou2, String snsYou3) {
+	public UserMasterSns(String email, String snsInsta, String snsTwit, String snsBlog, String snsGit, String snsYou1,
+			String snsYou2, String snsYou3) {
 		super();
-		this.snsEmail = snsEmail;
+		this.email = email;
 		this.snsInsta = snsInsta;
 		this.snsTwit = snsTwit;
 		this.snsBlog = snsBlog;
@@ -28,12 +28,12 @@ public class UserMasterSns {
 		this.snsYou3 = snsYou3;
 	}
 
-	public String getSnsEmail() {
-		return snsEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setSnsEmail(String snsEmail) {
-		this.snsEmail = snsEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSnsInsta() {
@@ -94,7 +94,7 @@ public class UserMasterSns {
 
 	@Override
 	public String toString() {
-		return "UserMasterSns [snsEmail=" + snsEmail + ", snsInsta=" + snsInsta + ", snsTwit=" + snsTwit + ", snsBlog="
+		return "UserMasterSns [email=" + email + ", snsInsta=" + snsInsta + ", snsTwit=" + snsTwit + ", snsBlog="
 				+ snsBlog + ", snsGit=" + snsGit + ", snsYou1=" + snsYou1 + ", snsYou2=" + snsYou2 + ", snsYou3="
 				+ snsYou3 + "]";
 	}

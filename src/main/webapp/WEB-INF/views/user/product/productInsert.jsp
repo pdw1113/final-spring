@@ -51,7 +51,7 @@
 						<tbody>
 							<tr>
 								<th>닉네임</th>
-								<td><input class="pro_nicname" type="text" name="nickName" value="${master.MASTER_NICKNAME}" readonly="readonly"></td>
+								<td><input class="pro_nicname" type="text" name="nickName" value="${master.mNickname}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th>이름</th>
@@ -59,7 +59,7 @@
 							</tr>
 							<tr>
 								<th>등급</th>
-								<td>${master.MASTER_RANKNAME}</td>
+								<td>${master.mRankname}</td>
 							</tr>
 						</tbody>
 					</table>

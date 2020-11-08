@@ -325,7 +325,7 @@ public class UserContoller {
 
 		return "user/signUpMaster";
 	}
-
+	
 	/**
 	 * 11. 능력자 등록 메소드
 	 * 
@@ -336,24 +336,28 @@ public class UserContoller {
 	@RequestMapping(value = "signUpMaster.do", method = RequestMethod.POST)
 	public String signUpMaster(UserMaster msu, UserMasterSchool msc, UserMasterSns msn, UserMasterQualifcation mqf,
 			Model model, HttpServletRequest request,
-			@RequestParam(name = "M_PROFILE_PIC_ORI", required = false) MultipartFile file1,
-			@RequestParam(name = "M_ID_PIC_ORI", required = false) MultipartFile file2,
-			@RequestParam(name = "M_UNIV_PIC_ORI", required = false) MultipartFile file3,
-			@RequestParam(name = "M_UNIV2_PIC_ORI", required = false) MultipartFile file4,
-			@RequestParam(name = "M_QUALIFICATION1_PIC_ORI", required = false) MultipartFile file5,
-			@RequestParam(name = "M_QUALIFICATION2_PIC_ORI", required = false) MultipartFile file6,
-			@RequestParam(name = "M_QUALIFICATION3_PIC_ORI", required = false) MultipartFile file7,
-			@RequestParam(name = "M_QUALIFICATION4_PIC_ORI", required = false) MultipartFile file8,
-			@RequestParam(name = "M_QUALIFICATION5_PIC_ORI", required = false) MultipartFile file9) {
+			@RequestParam(name = "_mProPicOri", required = false) MultipartFile file1,
+			@RequestParam(name = "_mIdPicOri", required = false) MultipartFile file2,
+			@RequestParam(name = "_sUnivPicOri", required = false) MultipartFile file3,
+			@RequestParam(name = "_sUniv2PicOri", required = false) MultipartFile file4,
+			@RequestParam(name = "_q1PicOri", required = false) MultipartFile file5,
+			@RequestParam(name = "_q2PicOri", required = false) MultipartFile file6,
+			@RequestParam(name = "_q3PicOri", required = false) MultipartFile file7,
+			@RequestParam(name = "_q4PicOri", required = false) MultipartFile file8,
+			@RequestParam(name = "_q5PicOri", required = false) MultipartFile file9) {
+		// 객체의 변수명과 파일의 변수명이 같으면, File 객체를 String 객체로 변환 시킬 수 없기 때문에,
+		// setter를 통해 File객체의 getOriginalFilename()메소드를 통하여 설정해준다.
+		
 		// @RequestParam어노테이션을 이용한 업로드 파일 접근
 		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
 		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
-
+		
 		if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
+			
 			// 서버에 업로드 해야한다.
 			String renameFileName1 = uPic.saveFile1(file1, request);
 			String renameFileName2 = uPic.saveFile2(file2, request);
-
+			 
 			if (renameFileName1 != null && renameFileName2 != null) { // 파일이 잘 저장된 경우
 				msu.setmProPicOri(file1.getOriginalFilename()); // 파일명만 DB에저장
 				msu.setmProPicRe(renameFileName1);
@@ -362,6 +366,7 @@ public class UserContoller {
 				msu.setmIdPicRe(renameFileName2);
 
 			}
+			System.out.println("닉네임 가져오니 ? : " + msu);
 		}
 
 		if (!file3.getOriginalFilename().equals("")) {
@@ -369,8 +374,8 @@ public class UserContoller {
 			String renameFileName3 = uPic.saveFile3(file3, request);
 
 			if (renameFileName3 != null) { // 파일이 잘 저장된 경우
-				msc.setMASTER_UNIV_PIC_ORI(file3.getOriginalFilename()); // 파일명만 DB에저장
-				msc.setMASTER_UNIV_PIC_RE(renameFileName3);
+				msc.setsUnivPicOri(file3.getOriginalFilename()); // 파일명만 DB에저장
+				msc.setsUnivPicRe(renameFileName3);
 			}
 		}
 
@@ -379,8 +384,8 @@ public class UserContoller {
 			String renameFileName4 = uPic.saveFile4(file4, request);
 
 			if (renameFileName4 != null) { // 파일이 잘 저장된 경우
-				msc.setMASTER_UNIV2_PIC_ORI(file4.getOriginalFilename()); // 파일명만 DB에저장
-				msc.setMASTER_UNIV2_PIC_RE(renameFileName4);
+				msc.setsUniv2PicOri(file4.getOriginalFilename()); // 파일명만 DB에저장
+				msc.setsUniv2PicRe(renameFileName4);
 			}
 		}
 
@@ -389,8 +394,8 @@ public class UserContoller {
 			String renameFileName5 = uPic.saveFile5(file5, request);
 
 			if (renameFileName5 != null) { // 파일이 잘 저장된 경우
-				mqf.setMASTER_QUALIFICATION1_PIC_ORI(file5.getOriginalFilename()); // 파일명만 DB에저장
-				mqf.setMASTER_QUALIFICATION1_PIC_RE(renameFileName5);
+				mqf.setQ1PicOri(file5.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ1PicRe(renameFileName5);
 			}
 		}
 
@@ -399,19 +404,19 @@ public class UserContoller {
 			String renameFileName6 = uPic.saveFile6(file6, request);
 
 			if (renameFileName6 != null) { // 파일이 잘 저장된 경우
-				mqf.setMASTER_QUALIFICATION2_PIC_ORI(file6.getOriginalFilename()); // 파일명만 DB에저장
-				mqf.setMASTER_QUALIFICATION2_PIC_RE(renameFileName6);
+				mqf.setQ2PicOri(file6.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ2PicRe(renameFileName6);
 
 			}
 		}
-
+		
 		if (!file7.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName7 = uPic.saveFile7(file7, request);
 
 			if (renameFileName7 != null) { // 파일이 잘 저장된 경우
-				mqf.setMASTER_QUALIFICATION3_PIC_ORI(file7.getOriginalFilename()); // 파일명만 DB에저장
-				mqf.setMASTER_QUALIFICATION3_PIC_RE(renameFileName7);
+				mqf.setQ3PicOri(file7.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ3PicOri(renameFileName7);
 			}
 		}
 
@@ -420,8 +425,8 @@ public class UserContoller {
 			String renameFileName8 = uPic.saveFile8(file8, request);
 
 			if (renameFileName8 != null) { // 파일이 잘 저장된 경우
-				mqf.setMASTER_QUALIFICATION4_PIC_ORI(file8.getOriginalFilename()); // 파일명만 DB에저장
-				mqf.setMASTER_QUALIFICATION4_PIC_RE(renameFileName8);
+				mqf.setQ4PicOri(file8.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ4PicOri(renameFileName8);
 			}
 		}
 
@@ -430,8 +435,8 @@ public class UserContoller {
 			String renameFileName9 = uPic.saveFile9(file9, request);
 
 			if (renameFileName9 != null) { // 파일이 잘 저장된 경우
-				mqf.setMASTER_QUALIFICATION5_PIC_ORI(file9.getOriginalFilename()); // 파일명만 DB에저장
-				mqf.setMASTER_QUALIFICATION5_PIC_RE(renameFileName9);
+				mqf.setQ5PicOri(file9.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ5PicOri(renameFileName9);
 			}
 		}
 

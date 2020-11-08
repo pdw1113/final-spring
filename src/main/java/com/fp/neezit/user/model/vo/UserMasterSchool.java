@@ -1,7 +1,7 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterSchool {
-	private String sEmail;
+	private String email;
 	private String sHigh;
 	private String sUniv;
 	private String sUnivDept;
@@ -17,10 +17,10 @@ public class UserMasterSchool {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserMasterSchool(String sEmail, String sHigh, String sUniv, String sUnivDept, String sUnivPicOri,
+	public UserMasterSchool(String email, String sHigh, String sUniv, String sUnivDept, String sUnivPicOri,
 			String sUnivPicRe, String sUniv2, String sUniv2Dept, String sUniv2PicOri, String sUniv2PicRe) {
 		super();
-		this.sEmail = sEmail;
+		this.email = email;
 		this.sHigh = sHigh;
 		this.sUniv = sUniv;
 		this.sUnivDept = sUnivDept;
@@ -32,12 +32,12 @@ public class UserMasterSchool {
 		this.sUniv2PicRe = sUniv2PicRe;
 	}
 
-	public String getsEmail() {
-		return sEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setsEmail(String sEmail) {
-		this.sEmail = sEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getsHigh() {
@@ -114,9 +114,10 @@ public class UserMasterSchool {
 
 	@Override
 	public String toString() {
-		return "UserMasterSchool [sEmail=" + sEmail + ", sHigh=" + sHigh + ", sUniv=" + sUniv + ", sUnivDept="
-				+ sUnivDept + ", sUnivPicOri=" + sUnivPicOri + ", sUnivPicRe=" + sUnivPicRe + ", sUniv2=" + sUniv2
-				+ ", sUniv2Dept=" + sUniv2Dept + ", sUniv2PicOri=" + sUniv2PicOri + ", sUniv2PicRe=" + sUniv2PicRe
-				+ "]";
+		return "UserMasterSchool [email=" + email + ", sHigh=" + sHigh + ", sUniv=" + sUniv + ", sUnivDept=" + sUnivDept
+				+ ", sUnivPicOri=" + sUnivPicOri + ", sUnivPicRe=" + sUnivPicRe + ", sUniv2=" + sUniv2 + ", sUniv2Dept="
+				+ sUniv2Dept + ", sUniv2PicOri=" + sUniv2PicOri + ", sUniv2PicRe=" + sUniv2PicRe + "]";
 	}
+
+	
 }

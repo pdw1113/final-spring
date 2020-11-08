@@ -9,7 +9,8 @@
    <typeAliases>
       <typeAlias type="com.fp.neezit.user.model.vo.User" alias="User"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserMaster" alias="UserMaster"/>
-      <typeAlias type="com.fp.neezit.product.model.vo.Product" alias="Product"/>
+      <typeAlias type="com.fp.neezit.user.model.vo.UserMasterSns" alias="UserMasterSns"/>
+      <typeAlias type="com.fp.neezit.product.model.vo.Product" alias="Product"/>    
    </typeAliases>
    
    <!-- 

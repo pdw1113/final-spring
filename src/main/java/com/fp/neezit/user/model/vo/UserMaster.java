@@ -1,7 +1,7 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMaster {
-   private String mEmail;       // 유저 이메일
+   private String email;       // 유저 이메일
    private String mRankname;    // 마스터 랭크
    private String mProPicOri;	// 프로필 오리진 이미지
    private String mProPicRe; 	// 프로필 리네임 이미지
@@ -19,11 +19,11 @@ public class UserMaster {
       // TODO Auto-generated constructor stub
    }
 
-	public UserMaster(String mEmail, String mRankname, String mProPicOri, String mProPicRe, String mNickname,
+	public UserMaster(String email, String mRankname, String mProPicOri, String mProPicRe, String mNickname,
 			String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle, String mStartTime,
 			String mEndTime) {
 		super();
-		this.mEmail = mEmail;
+		this.email = email;
 		this.mRankname = mRankname;
 		this.mProPicOri = mProPicOri;
 		this.mProPicRe = mProPicRe;
@@ -37,12 +37,12 @@ public class UserMaster {
 		this.mEndTime = mEndTime;
 	}
 
-	public String getmEmail() {
-		return mEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setmEmail(String mEmail) {
-		this.mEmail = mEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getmRankname() {
@@ -135,7 +135,7 @@ public class UserMaster {
 
 	@Override
 	public String toString() {
-		return "UserMaster [mEmail=" + mEmail + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri
+		return "UserMaster [email=" + email + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri
 				+ ", mProPicRe=" + mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri="
 				+ mIdPicOri + ", mIdPicRe=" + mIdPicRe + ", mWorkday=" + mWorkDay + ", mWorkStyle=" + mWorkStyle
 				+ ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + "]";

@@ -1,7 +1,7 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterQualifcation {
-	private String qEmail; 
+	private String email; 
 	private String q1;
 	private String q1PicOri;
 	private String q1PicRe;
@@ -23,11 +23,11 @@ public class UserMasterQualifcation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserMasterQualifcation(String qEmail, String q1, String q1PicOri, String q1PicRe, String q2, String q2PicOri,
+	public UserMasterQualifcation(String email, String q1, String q1PicOri, String q1PicRe, String q2, String q2PicOri,
 			String q2PicRe, String q3, String q3PicOri, String q3PicRe, String q4, String q4PicOri, String q4PicRe,
 			String q5, String q5PicOri, String q5PicRe) {
 		super();
-		this.qEmail = qEmail;
+		this.email = email;
 		this.q1 = q1;
 		this.q1PicOri = q1PicOri;
 		this.q1PicRe = q1PicRe;
@@ -45,12 +45,12 @@ public class UserMasterQualifcation {
 		this.q5PicRe = q5PicRe;
 	}
 
-	public String getqEmail() {
-		return qEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setqEmail(String qEmail) {
-		this.qEmail = qEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getQ1() {
@@ -175,7 +175,7 @@ public class UserMasterQualifcation {
 
 	@Override
 	public String toString() {
-		return "UserMasterQualifcation [qEmail=" + qEmail + ", q1=" + q1 + ", q1PicOri=" + q1PicOri + ", q1PicRe="
+		return "UserMasterQualifcation [email=" + email + ", q1=" + q1 + ", q1PicOri=" + q1PicOri + ", q1PicRe="
 				+ q1PicRe + ", q2=" + q2 + ", q2PicOri=" + q2PicOri + ", q2PicRe=" + q2PicRe + ", q3=" + q3
 				+ ", q3PicOri=" + q3PicOri + ", q3PicRe=" + q3PicRe + ", q4=" + q4 + ", q4PicOri=" + q4PicOri
 				+ ", q4PicRe=" + q4PicRe + ", q5=" + q5 + ", q5PicOri=" + q5PicOri + ", q5PicRe=" + q5PicRe + "]";
