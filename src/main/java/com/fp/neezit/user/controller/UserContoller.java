@@ -355,11 +355,11 @@ public class UserContoller {
 			String renameFileName2 = uPic.saveFile2(file2, request);
 
 			if (renameFileName1 != null && renameFileName2 != null) { // 파일이 잘 저장된 경우
-				msu.setMASTER_PROFILE_PIC_ORI(file1.getOriginalFilename()); // 파일명만 DB에저장
-				msu.setMASTER_PROFILE_PIC_RE(renameFileName1);
+				msu.setmProPicOri(file1.getOriginalFilename()); // 파일명만 DB에저장
+				msu.setmProPicRe(renameFileName1);
 
-				msu.setMASTER_ID_PIC_ORI(file2.getOriginalFilename());
-				msu.setMASTER_ID_PIC_RE(renameFileName2);
+				msu.setmIdPicOri(file2.getOriginalFilename());
+				msu.setmIdPicRe(renameFileName2);
 
 			}
 		}

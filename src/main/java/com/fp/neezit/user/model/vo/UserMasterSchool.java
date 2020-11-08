@@ -1,102 +1,122 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterSchool {
-	private String USER_EMAIL;
-	private String MASTER_HIGH;
-	private String MASTER_UNIV;
-	private String MASTER_UNIV_DEPT;
-	private String MASTER_UNIV_PIC_ORI;
-	private String MASTER_UNIV_PIC_RE;
-	private String MASTER_UNIV2;
-	private String MASTER_UNIV2_DEPT;
-	private String MASTER_UNIV2_PIC_ORI;
-	private String MASTER_UNIV2_PIC_RE;
+	private String sEmail;
+	private String sHigh;
+	private String sUniv;
+	private String sUnivDept;
+	private String sUnivPicOri;
+	private String sUnivPicRe;
+	private String sUniv2;
+	private String sUniv2Dept;
+	private String sUniv2PicOri;
+	private String sUniv2PicRe;
+	
 	public UserMasterSchool() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserMasterSchool(String uSER_EMAIL, String mASTER_HIGH, String mASTER_UNIV, String mASTER_UNIV_DEPT,
-			String mASTER_UNIV_PIC_ORI, String mASTER_UNIV_PIC_RE, String mASTER_UNIV2, String mASTER_UNIV2_DEPT,
-			String mASTER_UNIV2_PIC_ORI, String mASTER_UNIV2_PIC_RE) {
+
+	public UserMasterSchool(String sEmail, String sHigh, String sUniv, String sUnivDept, String sUnivPicOri,
+			String sUnivPicRe, String sUniv2, String sUniv2Dept, String sUniv2PicOri, String sUniv2PicRe) {
 		super();
-		USER_EMAIL = uSER_EMAIL;
-		MASTER_HIGH = mASTER_HIGH;
-		MASTER_UNIV = mASTER_UNIV;
-		MASTER_UNIV_DEPT = mASTER_UNIV_DEPT;
-		MASTER_UNIV_PIC_ORI = mASTER_UNIV_PIC_ORI;
-		MASTER_UNIV_PIC_RE = mASTER_UNIV_PIC_RE;
-		MASTER_UNIV2 = mASTER_UNIV2;
-		MASTER_UNIV2_DEPT = mASTER_UNIV2_DEPT;
-		MASTER_UNIV2_PIC_ORI = mASTER_UNIV2_PIC_ORI;
-		MASTER_UNIV2_PIC_RE = mASTER_UNIV2_PIC_RE;
+		this.sEmail = sEmail;
+		this.sHigh = sHigh;
+		this.sUniv = sUniv;
+		this.sUnivDept = sUnivDept;
+		this.sUnivPicOri = sUnivPicOri;
+		this.sUnivPicRe = sUnivPicRe;
+		this.sUniv2 = sUniv2;
+		this.sUniv2Dept = sUniv2Dept;
+		this.sUniv2PicOri = sUniv2PicOri;
+		this.sUniv2PicRe = sUniv2PicRe;
 	}
-	public String getUSER_EMAIL() {
-		return USER_EMAIL;
+
+	public String getsEmail() {
+		return sEmail;
 	}
-	public void setUSER_EMAIL(String uSER_EMAIL) {
-		USER_EMAIL = uSER_EMAIL;
+
+	public void setsEmail(String sEmail) {
+		this.sEmail = sEmail;
 	}
-	public String getMASTER_HIGH() {
-		return MASTER_HIGH;
+
+	public String getsHigh() {
+		return sHigh;
 	}
-	public void setMASTER_HIGH(String mASTER_HIGH) {
-		MASTER_HIGH = mASTER_HIGH;
+
+	public void setsHigh(String sHigh) {
+		this.sHigh = sHigh;
 	}
-	public String getMASTER_UNIV() {
-		return MASTER_UNIV;
+
+	public String getsUniv() {
+		return sUniv;
 	}
-	public void setMASTER_UNIV(String mASTER_UNIV) {
-		MASTER_UNIV = mASTER_UNIV;
+
+	public void setsUniv(String sUniv) {
+		this.sUniv = sUniv;
 	}
-	public String getMASTER_UNIV_DEPT() {
-		return MASTER_UNIV_DEPT;
+
+	public String getsUnivDept() {
+		return sUnivDept;
 	}
-	public void setMASTER_UNIV_DEPT(String mASTER_UNIV_DEPT) {
-		MASTER_UNIV_DEPT = mASTER_UNIV_DEPT;
+
+	public void setsUnivDept(String sUnivDept) {
+		this.sUnivDept = sUnivDept;
 	}
-	public String getMASTER_UNIV_PIC_ORI() {
-		return MASTER_UNIV_PIC_ORI;
+
+	public String getsUnivPicOri() {
+		return sUnivPicOri;
 	}
-	public void setMASTER_UNIV_PIC_ORI(String mASTER_UNIV_PIC_ORI) {
-		MASTER_UNIV_PIC_ORI = mASTER_UNIV_PIC_ORI;
+
+	public void setsUnivPicOri(String sUnivPicOri) {
+		this.sUnivPicOri = sUnivPicOri;
 	}
-	public String getMASTER_UNIV_PIC_RE() {
-		return MASTER_UNIV_PIC_RE;
+
+	public String getsUnivPicRe() {
+		return sUnivPicRe;
 	}
-	public void setMASTER_UNIV_PIC_RE(String mASTER_UNIV_PIC_RE) {
-		MASTER_UNIV_PIC_RE = mASTER_UNIV_PIC_RE;
+
+	public void setsUnivPicRe(String sUnivPicRe) {
+		this.sUnivPicRe = sUnivPicRe;
 	}
-	public String getMASTER_UNIV2() {
-		return MASTER_UNIV2;
+
+	public String getsUniv2() {
+		return sUniv2;
 	}
-	public void setMASTER_UNIV2(String mASTER_UNIV2) {
-		MASTER_UNIV2 = mASTER_UNIV2;
+
+	public void setsUniv2(String sUniv2) {
+		this.sUniv2 = sUniv2;
 	}
-	public String getMASTER_UNIV2_DEPT() {
-		return MASTER_UNIV2_DEPT;
+
+	public String getsUniv2Dept() {
+		return sUniv2Dept;
 	}
-	public void setMASTER_UNIV2_DEPT(String mASTER_UNIV2_DEPT) {
-		MASTER_UNIV2_DEPT = mASTER_UNIV2_DEPT;
+
+	public void setsUniv2Dept(String sUniv2Dept) {
+		this.sUniv2Dept = sUniv2Dept;
 	}
-	public String getMASTER_UNIV2_PIC_ORI() {
-		return MASTER_UNIV2_PIC_ORI;
+
+	public String getsUniv2PicOri() {
+		return sUniv2PicOri;
 	}
-	public void setMASTER_UNIV2_PIC_ORI(String mASTER_UNIV2_PIC_ORI) {
-		MASTER_UNIV2_PIC_ORI = mASTER_UNIV2_PIC_ORI;
+
+	public void setsUniv2PicOri(String sUniv2PicOri) {
+		this.sUniv2PicOri = sUniv2PicOri;
 	}
-	public String getMASTER_UNIV2_PIC_RE() {
-		return MASTER_UNIV2_PIC_RE;
+
+	public String getsUniv2PicRe() {
+		return sUniv2PicRe;
 	}
-	public void setMASTER_UNIV2_PIC_RE(String mASTER_UNIV2_PIC_RE) {
-		MASTER_UNIV2_PIC_RE = mASTER_UNIV2_PIC_RE;
+
+	public void setsUniv2PicRe(String sUniv2PicRe) {
+		this.sUniv2PicRe = sUniv2PicRe;
 	}
+
 	@Override
 	public String toString() {
-		return "UserMasterSchool [USER_EMAIL=" + USER_EMAIL + ", MASTER_HIGH=" + MASTER_HIGH + ", MASTER_UNIV="
-				+ MASTER_UNIV + ", MASTER_UNIV_DEPT=" + MASTER_UNIV_DEPT + ", MASTER_UNIV_PIC_ORI="
-				+ MASTER_UNIV_PIC_ORI + ", MASTER_UNIV_PIC_RE=" + MASTER_UNIV_PIC_RE + ", MASTER_UNIV2=" + MASTER_UNIV2
-				+ ", MASTER_UNIV2_DEPT=" + MASTER_UNIV2_DEPT + ", MASTER_UNIV2_PIC_ORI=" + MASTER_UNIV2_PIC_ORI
-				+ ", MASTER_UNIV2_PIC_RE=" + MASTER_UNIV2_PIC_RE + "]";
+		return "UserMasterSchool [sEmail=" + sEmail + ", sHigh=" + sHigh + ", sUniv=" + sUniv + ", sUnivDept="
+				+ sUnivDept + ", sUnivPicOri=" + sUnivPicOri + ", sUnivPicRe=" + sUnivPicRe + ", sUniv2=" + sUniv2
+				+ ", sUniv2Dept=" + sUniv2Dept + ", sUniv2PicOri=" + sUniv2PicOri + ", sUniv2PicRe=" + sUniv2PicRe
+				+ "]";
 	}
-	
 }
