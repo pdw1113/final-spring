@@ -20,6 +20,7 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 import net.sf.json.JSONArray;
 
@@ -201,10 +202,14 @@ public class ProductController {
    public String myProductDetail(int no, Model model) {
 	  
 	  // 상품 정보 가져오기
-	  Product p = pService.myProductDetail(no);
+	  Product p = pService.getProductDetail(no);
 	  
 	  // 상품 정보 가져오기 2
 	  UserMaster m = pService.getProductDetail(p.getNickName());
+	  
+	  UserMasterSns sns = pService.getProductSnsDetail(m.getmEmail());
+	  
+	  
 	  
 	  if(p != null && m != null) {
 		  model.addAttribute("product", p);

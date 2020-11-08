@@ -1,120 +1,143 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMaster {
-   private String USER_EMAIL;               // 유저 이메일
-   private String MASTER_RANKNAME;       	// 마스터 랭크
-   private String MASTER_PROFILE_PIC_ORI;	// 프로필 이미지
-   private String MASTER_PROFILE_PIC_RE; 	// 프로필 이미지
-   private String MASTER_NICKNAME;       	// 닉네임
-   private String MASTER_CATEGORY;       	// 카테고리
-   private String MASTER_ID_PIC_ORI;		// 신분증 이미지
-   private String MASTER_ID_PIC_RE;			// 신분증 이미지
-   private String MASTER_WORKDAY;       	// 근무가능 요일
-   private String MASTER_WORKSTYLE;     	// 자택,출근 스타일
-   private String MASTER_STARTTIME;      	// 몇시에서
-   private String MASTER_ENDTIME;         	// 몇시까지
+   private String mEmail;       // 유저 이메일
+   private String mRankname;    // 마스터 랭크
+   private String mProPicOri;	// 프로필 오리진 이미지
+   private String mProPicRe; 	// 프로필 리네임 이미지
+   private String mNickname;    // 닉네임
+   private String mCategory;    // 카테고리
+   private String mIdPicOri;	// 신분증 이미지
+   private String mIdPicRe;		// 신분증 이미지
+   private String mWorkDay;     // 근무가능 요일
+   private String mWorkStyle;   // 자택,출근 스타일
+   private String mStartTime;   // 몇시에서
+   private String mEndTime;     // 몇시까지
+   
    public UserMaster() {
       super();
       // TODO Auto-generated constructor stub
    }
-public UserMaster(String uSER_EMAIL, String mASTER_RANKNAME, String mASTER_PROFILE_PIC_ORI,
-		String mASTER_PROFILE_PIC_RE, String mASTER_NICKNAME, String mASTER_CATEGORY, String mASTER_ID_PIC_ORI,
-		String mASTER_ID_PIC_RE, String mASTER_WORKDAY, String mASTER_WORKSTYLE, String mASTER_STARTTIME,
-		String mASTER_ENDTIME) {
-	super();
-	USER_EMAIL = uSER_EMAIL;
-	MASTER_RANKNAME = mASTER_RANKNAME;
-	MASTER_PROFILE_PIC_ORI = mASTER_PROFILE_PIC_ORI;
-	MASTER_PROFILE_PIC_RE = mASTER_PROFILE_PIC_RE;
-	MASTER_NICKNAME = mASTER_NICKNAME;
-	MASTER_CATEGORY = mASTER_CATEGORY;
-	MASTER_ID_PIC_ORI = mASTER_ID_PIC_ORI;
-	MASTER_ID_PIC_RE = mASTER_ID_PIC_RE;
-	MASTER_WORKDAY = mASTER_WORKDAY;
-	MASTER_WORKSTYLE = mASTER_WORKSTYLE;
-	MASTER_STARTTIME = mASTER_STARTTIME;
-	MASTER_ENDTIME = mASTER_ENDTIME;
-}
-public String getUSER_EMAIL() {
-	return USER_EMAIL;
-}
-public void setUSER_EMAIL(String uSER_EMAIL) {
-	USER_EMAIL = uSER_EMAIL;
-}
-public String getMASTER_RANKNAME() {
-	return MASTER_RANKNAME;
-}
-public void setMASTER_RANKNAME(String mASTER_RANKNAME) {
-	MASTER_RANKNAME = mASTER_RANKNAME;
-}
-public String getMASTER_PROFILE_PIC_ORI() {
-	return MASTER_PROFILE_PIC_ORI;
-}
-public void setMASTER_PROFILE_PIC_ORI(String mASTER_PROFILE_PIC_ORI) {
-	MASTER_PROFILE_PIC_ORI = mASTER_PROFILE_PIC_ORI;
-}
-public String getMASTER_PROFILE_PIC_RE() {
-	return MASTER_PROFILE_PIC_RE;
-}
-public void setMASTER_PROFILE_PIC_RE(String mASTER_PROFILE_PIC_RE) {
-	MASTER_PROFILE_PIC_RE = mASTER_PROFILE_PIC_RE;
-}
-public String getMASTER_NICKNAME() {
-	return MASTER_NICKNAME;
-}
-public void setMASTER_NICKNAME(String mASTER_NICKNAME) {
-	MASTER_NICKNAME = mASTER_NICKNAME;
-}
-public String getMASTER_CATEGORY() {
-	return MASTER_CATEGORY;
-}
-public void setMASTER_CATEGORY(String mASTER_CATEGORY) {
-	MASTER_CATEGORY = mASTER_CATEGORY;
-}
-public String getMASTER_ID_PIC_ORI() {
-	return MASTER_ID_PIC_ORI;
-}
-public void setMASTER_ID_PIC_ORI(String mASTER_ID_PIC_ORI) {
-	MASTER_ID_PIC_ORI = mASTER_ID_PIC_ORI;
-}
-public String getMASTER_ID_PIC_RE() {
-	return MASTER_ID_PIC_RE;
-}
-public void setMASTER_ID_PIC_RE(String mASTER_ID_PIC_RE) {
-	MASTER_ID_PIC_RE = mASTER_ID_PIC_RE;
-}
-public String getMASTER_WORKDAY() {
-	return MASTER_WORKDAY;
-}
-public void setMASTER_WORKDAY(String mASTER_WORKDAY) {
-	MASTER_WORKDAY = mASTER_WORKDAY;
-}
-public String getMASTER_WORKSTYLE() {
-	return MASTER_WORKSTYLE;
-}
-public void setMASTER_WORKSTYLE(String mASTER_WORKSTYLE) {
-	MASTER_WORKSTYLE = mASTER_WORKSTYLE;
-}
-public String getMASTER_STARTTIME() {
-	return MASTER_STARTTIME;
-}
-public void setMASTER_STARTTIME(String mASTER_STARTTIME) {
-	MASTER_STARTTIME = mASTER_STARTTIME;
-}
-public String getMASTER_ENDTIME() {
-	return MASTER_ENDTIME;
-}
-public void setMASTER_ENDTIME(String mASTER_ENDTIME) {
-	MASTER_ENDTIME = mASTER_ENDTIME;
-}
-@Override
-public String toString() {
-	return "UserMaster [USER_EMAIL=" + USER_EMAIL + ", MASTER_RANKNAME=" + MASTER_RANKNAME + ", MASTER_PROFILE_PIC_ORI="
-			+ MASTER_PROFILE_PIC_ORI + ", MASTER_PROFILE_PIC_RE=" + MASTER_PROFILE_PIC_RE + ", MASTER_NICKNAME="
-			+ MASTER_NICKNAME + ", MASTER_CATEGORY=" + MASTER_CATEGORY + ", MASTER_ID_PIC_ORI=" + MASTER_ID_PIC_ORI
-			+ ", MASTER_ID_PIC_RE=" + MASTER_ID_PIC_RE + ", MASTER_WORKDAY=" + MASTER_WORKDAY + ", MASTER_WORKSTYLE="
-			+ MASTER_WORKSTYLE + ", MASTER_STARTTIME=" + MASTER_STARTTIME + ", MASTER_ENDTIME=" + MASTER_ENDTIME + "]";
-}
- 
-   
+
+	public UserMaster(String mEmail, String mRankname, String mProPicOri, String mProPicRe, String mNickname,
+			String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle, String mStartTime,
+			String mEndTime) {
+		super();
+		this.mEmail = mEmail;
+		this.mRankname = mRankname;
+		this.mProPicOri = mProPicOri;
+		this.mProPicRe = mProPicRe;
+		this.mNickname = mNickname;
+		this.mCategory = mCategory;
+		this.mIdPicOri = mIdPicOri;
+		this.mIdPicRe = mIdPicRe;
+		this.mWorkDay = mWorkDay;
+		this.mWorkStyle = mWorkStyle;
+		this.mStartTime = mStartTime;
+		this.mEndTime = mEndTime;
+	}
+
+	public String getmEmail() {
+		return mEmail;
+	}
+
+	public void setmEmail(String mEmail) {
+		this.mEmail = mEmail;
+	}
+
+	public String getmRankname() {
+		return mRankname;
+	}
+
+	public void setmRankname(String mRankname) {
+		this.mRankname = mRankname;
+	}
+
+	public String getmProPicOri() {
+		return mProPicOri;
+	}
+
+	public void setmProPicOri(String mProPicOri) {
+		this.mProPicOri = mProPicOri;
+	}
+
+	public String getmProPicRe() {
+		return mProPicRe;
+	}
+
+	public void setmProPicRe(String mProPicRe) {
+		this.mProPicRe = mProPicRe;
+	}
+
+	public String getmNickname() {
+		return mNickname;
+	}
+
+	public void setmNickname(String mNickname) {
+		this.mNickname = mNickname;
+	}
+
+	public String getmCategory() {
+		return mCategory;
+	}
+
+	public void setmCategory(String mCategory) {
+		this.mCategory = mCategory;
+	}
+
+	public String getmIdPicOri() {
+		return mIdPicOri;
+	}
+
+	public void setmIdPicOri(String mIdPicOri) {
+		this.mIdPicOri = mIdPicOri;
+	}
+
+	public String getmIdPicRe() {
+		return mIdPicRe;
+	}
+
+	public void setmIdPicRe(String mIdPicRe) {
+		this.mIdPicRe = mIdPicRe;
+	}
+
+	public String getmWorkDay() {
+		return mWorkDay;
+	}
+
+	public void setmWorkDay(String mWorkDay) {
+		this.mWorkDay = mWorkDay;
+	}
+
+	public String getmWorkStyle() {
+		return mWorkStyle;
+	}
+
+	public void setmWorkStyle(String mWorkStyle) {
+		this.mWorkStyle = mWorkStyle;
+	}
+
+	public String getmStartTime() {
+		return mStartTime;
+	}
+
+	public void setmStartTime(String mStartTime) {
+		this.mStartTime = mStartTime;
+	}
+
+	public String getmEndTime() {
+		return mEndTime;
+	}
+
+	public void setmEndTime(String mEndTime) {
+		this.mEndTime = mEndTime;
+	}
+
+	@Override
+	public String toString() {
+		return "UserMaster [mEmail=" + mEmail + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri
+				+ ", mProPicRe=" + mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri="
+				+ mIdPicOri + ", mIdPicRe=" + mIdPicRe + ", mWorkday=" + mWorkDay + ", mWorkStyle=" + mWorkStyle
+				+ ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + "]";
+	}
 }
