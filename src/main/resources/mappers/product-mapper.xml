@@ -14,6 +14,7 @@
 		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
 		<result property="mStartTime" column="MASTER_STARTTIME" />
 		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
 
 	<resultMap type="Product" id="productResultSet">

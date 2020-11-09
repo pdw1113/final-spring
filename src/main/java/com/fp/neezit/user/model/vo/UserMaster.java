@@ -13,6 +13,7 @@ public class UserMaster {
    private String mWorkStyle;   // 자택,출근 스타일
    private String mStartTime;   // 몇시에서
    private String mEndTime;     // 몇시까지
+   private String mStar;		// 별점
    
    public UserMaster() {
       super();
@@ -21,7 +22,7 @@ public class UserMaster {
 
 	public UserMaster(String email, String mRankname, String mProPicOri, String mProPicRe, String mNickname,
 			String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle, String mStartTime,
-			String mEndTime) {
+			String mEndTime, String mStar) {
 		super();
 		this.email = email;
 		this.mRankname = mRankname;
@@ -35,6 +36,7 @@ public class UserMaster {
 		this.mWorkStyle = mWorkStyle;
 		this.mStartTime = mStartTime;
 		this.mEndTime = mEndTime;
+		this.mStar = mStar;
 	}
 
 	public String getEmail() {
@@ -133,11 +135,19 @@ public class UserMaster {
 		this.mEndTime = mEndTime;
 	}
 
+	public String getmStar() {
+		return mStar;
+	}
+
+	public void setmStar(String mStar) {
+		this.mStar = mStar;
+	}
+
 	@Override
 	public String toString() {
-		return "UserMaster [email=" + email + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri
-				+ ", mProPicRe=" + mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri="
-				+ mIdPicOri + ", mIdPicRe=" + mIdPicRe + ", mWorkday=" + mWorkDay + ", mWorkStyle=" + mWorkStyle
-				+ ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + "]";
+		return "UserMaster [email=" + email + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri + ", mProPicRe="
+				+ mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri=" + mIdPicOri
+				+ ", mIdPicRe=" + mIdPicRe + ", mWorkDay=" + mWorkDay + ", mWorkStyle=" + mWorkStyle + ", mStartTime="
+				+ mStartTime + ", mEndTime=" + mEndTime + ", mStar=" + mStar + "]";
 	}
 }
