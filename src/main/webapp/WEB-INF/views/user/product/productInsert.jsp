@@ -76,9 +76,19 @@
 
 					<span class="input_title_addproduct">카테고리</span> 
 					<select class="category1 category_select_addproduct m-r-27 m-l-90" id="category">
-					</select>
-
-				</div>
+               </select>
+               <button type="button" class="cate_add_btn" id="add">추가</button>
+	            </div>
+	
+	            <div class="status_div_addproduct">
+	
+	               <span class="input_title_addproduct">추가됨</span>
+	               <span class="m-l-add" id="added">
+	               </span>
+	            </div>
+	            
+	            <input type="hidden" class="input_text_addproduct" name="category" id="hiddenInput">
+	            
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">기본금액</span> 
 					<input type="number" class="input_money_addproduct" name="price"><span
@@ -142,6 +152,52 @@
 		    }
 		})();
 	</script>
+	
+    <script>
+        // 나의 카테고리로 추가시키는 함수
+        const addCategory = function(){
+             let temp    = [];
+             let category = [];
+             let obj     = $('#added span');
+             let x       = 0;
+
+             // select박스의 선택된 값 가져오기.
+             let choice = $('#category option:selected').val();
+
+             // 현재 option의 값을 임시 배열에 저장
+             $(obj).each(function(i){
+                 temp[i] = $(this).html();
+             });
+
+             // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
+             $(temp).each(function(i){
+
+                 if(choice == temp[i]){
+                     x++;
+                 }
+             });
+
+             // 중복 값이 없을 경우 select박스에 option값 추가하기.
+             if(x == 0 && choice != undefined){
+                 $("#added").append("<span>" + choice + "</span>");
+             }
+             
+             // Controller 전달용 
+             let obj2 = $('#added span');
+             
+             $(obj2).each(function(i){
+            	 category[i] = $(this).html();
+             });
+             console.log(category);
+             
+             // 전송 form의 name="category"에 추가하기
+             $("#hiddenInput").val(category);
+         }
+
+        $("#add").click(function(){
+           addCategory();
+        });
+     </script>
 
 
 <!-- 썸머노트 -->

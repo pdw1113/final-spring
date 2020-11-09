@@ -64,12 +64,12 @@
       color: rgb(250, 190, 0);
       display: list-item;
     }
-
+    
     .product_info .product_tag li:after {
       content: '';
       position: absolute;
       top: 50%;
-      right: -4px;
+      right: -6px;
       transform: translateY(-50%);
       width: 2px;
       height: 2px;
