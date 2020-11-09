@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="resources/css/nav.css">
    </head>
    <body>
-      <!-- Nav 영역 -->
+<!-- Nav 영역 -->
       <div class="wrapper_Nav">
          <nav class="wrapper_NavIcon">
             <li>
@@ -51,19 +51,19 @@
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=90">
+               <a href="productList.do?navNo=70">
                   <img class="nav_img game_icon" src="resources/img/game.png"><br>
                   <p>게임</p>
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=100">
+               <a href="productList.do?navNo=80">
                   <img class="nav_img analysis_icon" src="resources/img/analysis.png"><br>
                   <p>데이터분석</p>
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=110">
+               <a href="productList.do?navNo=90">
                   <img class="nav_img security_icon" src="resources/img/security.png"><br>
                   <p>보안</p>
                </a>

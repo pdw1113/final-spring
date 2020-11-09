@@ -120,7 +120,7 @@ public class ProductController {
 	   	  int result = pService.insertProduct(product);
 		 
 		  if(result==1) {
-			   return "redirect:myProductDetail.do";
+			   return "redirect:myProductList.do";
 		  }else {
 			   return "redirect:index.do";
 		  }
