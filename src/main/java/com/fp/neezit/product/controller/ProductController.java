@@ -205,6 +205,7 @@ public class ProductController {
 	  
 	  // 상품 정보 가져오기 2
 	  UserMaster m = pService.getProductDetail(p.getNickName());
+	  System.out.println(m);
 	  
 	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
 	  

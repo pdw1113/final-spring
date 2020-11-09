@@ -466,8 +466,8 @@
       box-shadow: 0 0 5px 2px rgb(0, 0, 0, 0.2);
     }
 
-    .dayOpacity{
-      opacity: 1;
+    .dayOn{
+      opacity: 1 !important;
     }
 
     /* 자택, 출장 */

@@ -317,9 +317,25 @@
 		</div>
 	</div>
 
-
-
 	<script>
+		
+		$(".job_where li");
+	
+		// 요일 유무에 따른 CSS 변화
+		let recDay = "${master.mWorkDay}";
+		let arrDay = recDay.split(",");
+		let daylist = $(".day_list li");
+		for(var i = 0; i < arrDay.length; i++ ){
+			
+			for(var j = 0; j < daylist.length; j++ ){
+				if(arrDay[i] === daylist[j].innerText){
+					daylist[j].classList.add('dayOn');
+				}
+				
+			}
+		}
+	
+		// youtube 유무에 따른 css 변화
 		let youLink = $(".youtube_show");
 		for(var i = 0; i < youLink.length; i++){
 			if(youLink[i].getAttribute("value") == "https://"){
