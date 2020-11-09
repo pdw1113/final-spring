@@ -253,7 +253,9 @@ height:25px;
 .m-l-add{
    margin-left:105px;
 }
-
+.m-l-30{
+   margin-left:30px;	
+}
 .m-l-add span{
    color: rgb(250,190,0);
    font-style: italic;

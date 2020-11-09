@@ -216,7 +216,7 @@
       display: flex;
     }
 
-    .sns_img_container:hover {
+    .sns_img_container a:hover {
       cursor: pointer;
       opacity: 0.6;
     }
@@ -680,4 +680,8 @@
     .star_btn:hover{
       cursor: pointer;
 
+    }
+    
+    .snsNone{
+   	  opacity:0.1;
     }

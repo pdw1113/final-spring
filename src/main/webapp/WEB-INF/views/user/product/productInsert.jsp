@@ -75,9 +75,11 @@
 				<div class="status_div_addproduct">
 
 					<span class="input_title_addproduct">카테고리</span> 
-					<select class="category1 category_select_addproduct m-r-27 m-l-90" id="category">
-               </select>
-               <button type="button" class="cate_add_btn" id="add">추가</button>
+					<select class="category1 category_select_addproduct m-l-90" id="oneCate">
+					</select>
+					<select class="category1 category_select_addproduct m-r-27 m-l-30" id="category">
+	                </select>
+	                <button type="button" class="cate_add_btn" id="add">추가</button>
 	            </div>
 	
 	            <div class="status_div_addproduct">
