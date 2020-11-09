@@ -186,6 +186,7 @@
 				</div>
 			</section>
 			<!-- // 환불규정 -->
+		
 
 			<section class="idx sec_common p2p_class_cmt" id="review">
 				<div class="p_col_left">
@@ -245,7 +246,6 @@
 		</div>
 		<!-- // 왼쪽 영역 -->
 
-
 		<!-- 오른쪽 가격 영역 -->
 		<div class="sticky_area" id="sticky">
 			<div class="sticky_navi">
@@ -262,7 +262,7 @@
 				<ul class="p_flex job_where">
 					<li>자택(온라인)</li>
 					<li>출장</li>
-					<li>09:00 ~ 10:00</li>
+					<li class="dayOn">asd</li>
 				</ul>
 				<hr>
 				<ul class="p_flex">
@@ -318,20 +318,33 @@
 	</div>
 
 	<script>
-		
-		$(".job_where li");
 	
+		let starttime = "${master.mStartTime}";
+		let endtime = "${master.mEndTime}";
+		
+		$(".job_where li:last-child").html(starttime + " ~ " + endtime);
+		
+		// 자택 / 출징 CSS 변화
+		let goho = "${master.mWorkStyle}";
+		let gohoDay = goho.split(",");
+		let goholist = $(".job_where li");
+		for(var i = 0; i < 2; i++){
+			for(var j = 0; j < 2; j++){
+ 				if(goholist[j].innerText.match(goho[i]) != null){
+					goholist[j].classList.add('dayOn');
+				}
+			}
+		}
+		
 		// 요일 유무에 따른 CSS 변화
 		let recDay = "${master.mWorkDay}";
 		let arrDay = recDay.split(",");
 		let daylist = $(".day_list li");
 		for(var i = 0; i < arrDay.length; i++ ){
-			
 			for(var j = 0; j < daylist.length; j++ ){
 				if(arrDay[i] === daylist[j].innerText){
 					daylist[j].classList.add('dayOn');
 				}
-				
 			}
 		}
 	
@@ -353,8 +366,8 @@
        				alert("능력자가 등록하지 않았어요ㅠㅠ");
        			}
        		}
-       		
        	}
+       	
       </script>
 
 	<script>

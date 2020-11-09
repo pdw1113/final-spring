@@ -76,6 +76,7 @@
 
 					<span class="input_title_addproduct">카테고리</span> 
 					<select class="category1 category_select_addproduct m-l-90" id="oneCate">
+					<option>대분류를 선택해주세요.</option>
 					</select>
 					<select class="category1 category_select_addproduct m-r-27 m-l-30" id="category">
 	                </select>
@@ -89,6 +90,7 @@
 	               </span>
 	            </div>
 	            
+	            <!-- 등록한 카테고리 -->
 	            <input type="hidden" class="input_text_addproduct" name="category" id="hiddenInput">
 	            
 				<div class="status_div_addproduct">
@@ -131,9 +133,11 @@
 					</div>
 				</div>
 			</div>
+			<!-- 대분류 카테고리 -->
+			<input type="hidden" name="cateone" value="" id="cateone">
 			<!--등록 완료 -->
 			<div class="finish_button_div_addproduct">
-				<button class="finish_button_addproduct">등록완료</button>
+				<button class="finish_button_addproduct" onclick="return validate();">등록완료</button>
 			</div>
 		</form>
 	</div>
@@ -141,6 +145,27 @@
 	</body>
 	
 	<script>
+		// 대분류 가져오기
+		(function(){
+			let $mycate = '${category}';
+			let allCate = ["웹개발", "데이터베이스", "모바일웹", "임베디드", "블록체인", "서버", "게임", "데이터분석", "보안"];
+			
+			for(var i = 0; i < allCate.length; i++){
+				if($mycate.match(allCate[i]) != null){
+					$("#oneCate").append("<option>" + allCate[i] + "</option>");
+				}
+			}
+			
+		})();
+		
+		// option태그는 onclick, onselect등 먹히질 않으니 
+		// select태그에 onchange메소드를 걸어준다.
+		$("#oneCate").change(function(){
+			let oneSelected = $('#oneCate option:selected').val();
+			$("#cateone").val(oneSelected);
+			console.log($("#cateone").val());
+		});
+		
 		(function(){
 			// Controller에서 받아온 능력자 카테고리
 		    let category = '${category}';
@@ -153,6 +178,20 @@
 		    	$("#category").append("<option>" + arr[a] + "</option>");
 		    }
 		})();
+
+		
+		// 대분류 선택 안하면 "대분류를 선택해주세요"가 등록되어버린다.
+		let dame = $('#oneCate option:selected').val();
+		$("#cateone").val(dame);
+		
+		// 유효성 검사
+		function validate(){
+			if($("#cateone").val().match("대분류")){
+				alert("대분류를 선택해 주세요.");
+				return false;
+			}
+			return true;
+		}
 	</script>
 	
     <script>
