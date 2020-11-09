@@ -240,3 +240,35 @@ height:25px;
 #success{
     display: inline-block;
 }
+
+
+.cate_add_btn{
+   height: 36px;
+   border: 1px solid #a3a0a0;
+   font-size: 16px;
+   width: 50px;
+}
+
+/* 추가 */
+.m-l-add{
+   margin-left:105px;
+}
+
+.m-l-add span{
+   color: rgb(250,190,0);
+   font-style: italic;
+   font-weight: bold;
+}
+
+.m-l-add span:after{
+   content: ' · ';
+}
+
+.m-l-add span:before{
+   content: '#';
+}
+
+.m-l-add span:last-child:after{
+   content: none;
+}
+/* *** */

@@ -102,10 +102,11 @@ public class ProductController {
    @RequestMapping(value = "pInsert.do")
 	  public String insertProduct(Model model,Product product, HttpServletRequest request,
 		   	 @RequestParam(name="upload", required=false) MultipartFile file) {
+	   
 		  // @RequestParam어노테이션을 이용한 업로드 파일 접근
 		  // form의 enctype이 multipart/form-data로 작성되어있어야하고, method=POST이어야한다.
 	      // MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
-			  
+		  
 		  // 상품이미지 등록
 		  if(!file.getOriginalFilename().equals("")) {
 			  // 서버에 업로드 해야한다.
@@ -115,13 +116,13 @@ public class ProductController {
 				product.setRenamePic(renamePic);
 			  }
 		  }
-		  
+		  System.out.println(product);
 	   	  int result = pService.insertProduct(product);
 		 
 		  if(result==1) {
-			   return "user/product/productDetail";
+			   return "redirect:myProductDetail.do";
 		  }else {
-			   return "user/product/productDetail";
+			   return "redirect:index.do";
 		  }
 	   }
 	
@@ -212,6 +213,7 @@ public class ProductController {
 	  if(p != null && m != null) {
 		  model.addAttribute("product", p);
 		  model.addAttribute("master", m);
+		  model.addAttribute("sns", sns);
 		  return "user/product/productDetail";
 	  }
 	  

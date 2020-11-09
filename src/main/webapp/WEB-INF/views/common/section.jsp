@@ -101,30 +101,6 @@
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/4.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
             </ul>
             <ul class="main_contents_container_index">
                <li class="main_contents_index">
@@ -199,31 +175,6 @@
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/8.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-            </ul>
          </div>
       </div>
       <div class="main_container_index">
@@ -302,30 +253,6 @@
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/4.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
             </ul>
             <ul class="main_contents_container_index">
                <li class="main_contents_index">
@@ -379,30 +306,6 @@
                <li class="main_contents_index">
                   <div>
                      <img src="resources/img/7.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/8.jpg" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
                         자바 뉴비들 드루와
                      </p>
@@ -433,30 +336,6 @@
             <ul class="main_contents_container_index">
                <li class="main_contents_index">
                   <div>
-                     <img src="resources/img/1.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
                      <img src="resources/img/2.png" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
                         자바 뉴비들 드루와
@@ -601,30 +480,6 @@
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/8.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
             </ul>
          </div>
       </div>
@@ -632,30 +487,6 @@
          <span class="main_title_index">가성비 갑</span>
          <div class="slider">
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/1.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
                <li class="main_contents_index">
                   <div>
                      <img src="resources/img/2.png" class="main_contents_img_index">
@@ -730,30 +561,6 @@
                </li>
             </ul>
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/5.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
                <li class="main_contents_index">
                   <div>
                      <img src="resources/img/6.jpeg" class="main_contents_img_index">
@@ -835,30 +642,6 @@
             <ul class="main_contents_container_index">
                <li class="main_contents_index">
                   <div>
-                     <img src="resources/img/1.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
                      <img src="resources/img/2.png" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
                         자바 뉴비들 드루와
@@ -931,30 +714,6 @@
                </li>
             </ul>
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/5.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
                <li class="main_contents_index">
                   <div>
                      <img src="resources/img/6.jpeg" class="main_contents_img_index">
