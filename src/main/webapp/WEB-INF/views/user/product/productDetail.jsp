@@ -112,7 +112,7 @@
 				<div class="p_col_right">
 					<div class="sns_flex_container">
 						<div class="sns_img_container">
-							<a href="${ sns.snsGit }"> <img src="resources/img/git.png">
+							<a href=""> <img src="resources/img/git.png">
 							</a>
 						</div>
 						<div class="sns_img_container">
@@ -132,10 +132,19 @@
 					</div>
 
 					<script>
-          	let aa = $(".sns_img_container a").attr("href");
-          	console.log(aa);
-          
-          </script>
+						// sns 클릭 및 유무에 따른 css 변경
+			          	let aa = $(".sns_img_container a");
+			          	for(var i = 0; i < aa.length; i++){
+			          		if(aa[i].getAttribute("href") == ""){
+			          			aa[i].parentNode.classList.add('snsNone');
+			          			console.log(aa[i].removeAttribute("href"));
+			          			aa[i].onclick = function(){
+			          				alert("능력자가 등록하지 않았어요ㅠㅠ");
+			          			}
+			          		}
+			          		
+			          	}
+			        </script>
 
 					<hr class="hr_sns">
 
