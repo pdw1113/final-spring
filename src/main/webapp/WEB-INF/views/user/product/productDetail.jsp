@@ -131,21 +131,6 @@
 						</div>
 					</div>
 
-					<script>
-						// sns 클릭 및 유무에 따른 css 변경
-			          	let aa = $(".sns_img_container a");
-			          	for(var i = 0; i < aa.length; i++){
-			          		if(aa[i].getAttribute("href") == ""){
-			          			aa[i].parentNode.classList.add('snsNone');
-			          			console.log(aa[i].removeAttribute("href"));
-			          			aa[i].onclick = function(){
-			          				alert("능력자가 등록하지 않았어요ㅠㅠ");
-			          			}
-			          		}
-			          		
-			          	}
-			        </script>
-
 					<hr class="hr_sns">
 
 					<div>
@@ -331,6 +316,31 @@
 			</div>
 		</div>
 	</div>
+
+
+
+	<script>
+		let youLink = $(".youtube_show");
+		for(var i = 0; i < youLink.length; i++){
+			if(youLink[i].getAttribute("value") == "https://"){
+				youLink[i].parentNode.removeChild(youLink[i]);
+			}
+		}
+	
+		// sns 클릭 및 유무에 따른 css 변경
+       	let snsLink = $(".sns_img_container a");
+       	for(var i = 0; i < snsLink.length; i++){
+       		if(snsLink[i].getAttribute("href") == ""){
+       			snsLink[i].parentNode.classList.add('snsNone');
+       			snsLink[i].removeAttribute("href");
+       			snsLink[i].onclick = function(){
+       				alert("능력자가 등록하지 않았어요ㅠㅠ");
+       			}
+       		}
+       		
+       	}
+      </script>
+
 	<script>
   		// tag 추가
 		let list = "${ product.category }";

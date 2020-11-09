@@ -466,7 +466,7 @@
       box-shadow: 0 0 5px 2px rgb(0, 0, 0, 0.2);
     }
 
-    .day_list li:nth-child(2n) {
+    .dayOpacity{
       opacity: 1;
     }
 
