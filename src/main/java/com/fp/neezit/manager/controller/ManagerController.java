@@ -8,7 +8,7 @@ public class ManagerController {
 	
 	@RequestMapping("supportnav.do")
 	public String supportnav() {
-		return "support/common/nav";
+		return "support/common/nav"; 
 	}
 
 	@RequestMapping("mStatistics.do")
