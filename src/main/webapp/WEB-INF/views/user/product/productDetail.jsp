@@ -53,7 +53,7 @@
 						<em class="master_nickname">${ master.mNickname }</em> <span
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
-						</i> <i class="grade_total"> 5.0 <sapn>(10)</sapn>
+						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(10)</sapn>
 						</i>
 						</span>
 					</div>
@@ -284,8 +284,8 @@
 					<li>일간</li>
 				</ul>
 				<ul class="btn_area btn_m">
-					<li class="wish"><a href="#" onclick="alert('로그인이 필요합니다')">
-							<i class="far fa-heart"></i>
+					<li class="wish"><a href="#" onclick="heart();">
+							<i class="fa-heart far"></i>
 					</a></li>
 					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
 							바로 구매하기 </a></li>
@@ -318,10 +318,27 @@
 	</div>
 
 	<script>
+		// 찜하기
+		function heart(){
+			let $heart = $(".fa-heart");
+			if($heart.hasClass("far")){
+				$heart.removeClass("far");
+				$heart.addClass("fas");		
+				alert("찜 되었습니다.");		
+			}else{
+				$heart.removeClass("fas");
+				$heart.addClass("far");	
+				alert("찜해제 되었습니다.");
+			}
+		}
 	
+		// 별 넣기
+		let star = "${master.mStar}";
+		$("#starPoint").html(star.substring(0,3));
+		
+		// 시간 CSS 변화
 		let starttime = "${master.mStartTime}";
 		let endtime = "${master.mEndTime}";
-		
 		$(".job_where li:last-child").html(starttime + " ~ " + endtime);
 		
 		// 자택 / 출징 CSS 변화
