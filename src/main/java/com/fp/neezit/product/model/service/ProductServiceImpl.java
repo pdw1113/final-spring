@@ -97,4 +97,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.getReplyCount(nickName);
 	}
 
+	@Override
+	public List<Product> productList(int navNo) {
+		return pDao.productList(navNo);
+	}
+
 }

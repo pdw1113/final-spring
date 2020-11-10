@@ -79,4 +79,11 @@ public interface ProductService {
 	 */
 	public int getReplyCount(String nickName);
 
+	/**
+	 * Nav.jsp 상품 목록 대분류로 가져오기
+	 * @param navNo
+	 * @return
+	 */
+	public List<Product> productList(int navNo);
+
 }
