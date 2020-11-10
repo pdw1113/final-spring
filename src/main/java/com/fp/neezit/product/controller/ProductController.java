@@ -55,15 +55,15 @@ public class ProductController {
  	* @param navNo
  	* @return
  	*/
-   @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
+   @RequestMapping(value = "productList.do", method = RequestMethod.GET)
    public String productList(Model model, int navNo){
-      List<ProductCategory> category = null;
-      List<ProductCategory> category2 = null;
-      category = pService.categoryList(navNo);
-      category2 = pService.categoryList2(navNo);
-      
+      List<ProductCategory> category = pService.categoryList(navNo);
+      List<ProductCategory> category2 = pService.categoryList2(navNo);
+      List<Product> productList = pService.productList(navNo);
+    		  
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
+      model.addAttribute("productList", productList);
    
       return "user/product/productList";
    }

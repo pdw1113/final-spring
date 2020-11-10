@@ -75,205 +75,37 @@
          </div>
       </div>
       <!--리스트 섹션-->
-      <div class="Lsit-Saction">
-            <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-	           <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-            <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-	           <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-	            <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-	            <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-	            <div class="productOne">
-	              <a href="productDetail.do" class="thumbnail">
-	                 <div class="list_img_div">
-	                    <img src="resources/img/1.png" class="list_contents_img_index">
-	                 </div>
-	              </a>
-                  <div class="list_contents_marign">
-                     <p class="font_noto list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_noto">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_noto">(5.0)</span>
-                        <span>
-                        <span class="font_noto">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-	           </div>
-		 	</div>
-		<!-- Paging -->
+	<div class="Lsit-Saction">
+		<c:forEach var="product" items="${ productList }" varStatus="status">
+			<div class="productOne">
+				<a href="productDetail.do" class="thumbnail">
+					<div class="list_img_div">
+						<img src="resources/pUploadFiles/${ product.renamePic }" class="list_contents_img_index">
+					</div>
+				</a>
+				<div class="list_contents_marign">
+					<p class="font_noto list_explain_index">${ product.title }</p>
+					<div>
+						<img src="resources/img/lv1.png" class="list_rank_index"> 
+						<span class="font_noto">${ product.nickName }</span> 
+						<span class="list_star_container_index"> 
+							<img src="resources/img/star.png"> 
+							<img src="resources/img/star.png"> 
+							<img src="resources/img/star.png"> 
+							<img src="resources/img/star.png"> 
+							<img src="resources/img/star.png">
+						</span> 
+						<span class="font_noto">(5.0)</span> 
+						<span> 
+							<span class="font_noto">213명선택</span> 
+							<img src="resources/img/buy.png" class="list_choice_img_index">
+						</span>
+					</div>
+				</div>
+			</div>
+        </c:forEach>
+	</div>
+	<!-- Paging -->
 		<div class="pagination">
 		  <a href="#">&laquo;</a>
 		  <a class="page_product">1</a>
@@ -288,70 +120,106 @@
       <%@ include file="../../common/footer.jsp" %>
       
       <script>
-         $(function(){
-         /*마우스클릭시 버튼 색상변경*/
-         $('.List-Button').click(function(){
-            $(this).toggleClass('yellowButton');
-         
-            let ClickWord = $(this).html();
-         
-            $('.last-nav-td button').filter(function(){
-               if($(this).html() === ClickWord){
-                  $(this).remove();
-               }
-            });
-         
-            /*카테고리 클릭시 필터로 넘어가는 기능 (미완성)*/
-            var btn = this.outerHTML;
-         
-            if(this.className == "font_noto List-Button yellowButton"){
-               $('.last-nav-td').append(btn); /*버튼클릭시 필터란에 선택한 버튼 추가*/
-            };
-         });
-         
-         /* ★★★ 상뉴가 만든 코드 ★★★★ */
-         
-         /* 클릭 시 동적으로 추가 된 요소 제거*/
-         /* 
-            왜 $('.last-nav-td button').click(function(){})이 작동되지 않을까??
-            
-            이유 : https://jeongmatt.blogspot.com/2020/10/append-appendto-script-javascriptjquery.html
-         
-         */
-         $(document).on("click", ".last-nav-td button", function(){
-         
-            $(this).remove();
-         
-            let ClickWord = $(this).html();
-            
-            $('.List-Button').filter(function(){
-               if($(this).html() === ClickWord){
-                  $(this).toggleClass('yellowButton');
-               }
-            });
-         
-         });
-         
-         /* ★★★ 상뉴가 만든 코드 ★★★★ */
-         
-         /*드롭다운시 텍스트 변경*/
-         $('.dropdown-menu li a').click(function(){
-         var selText = $(this).text();
-         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
-         });
-         
-         /*초기화 클릭시 버튼색 없어짐*/
-         $('.List-NavButton').on('click',function(){
-            $('.last-nav-td').children().remove(); /*td에있는 버튼들 제거*/
-            $('.List-Button').attr('class','font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
-         })
-         });
-         
-         </script>
+							$(function() {
+								/*마우스클릭시 버튼 색상변경*/
+								$('.List-Button')
+										.click(
+												function() {
+													$(this).toggleClass(
+															'yellowButton');
+
+													let ClickWord = $(this)
+															.html();
+
+													$('.last-nav-td button')
+															.filter(
+																	function() {
+																		if ($(
+																				this)
+																				.html() === ClickWord) {
+																			$(
+																					this)
+																					.remove();
+																		}
+																	});
+
+													/*카테고리 클릭시 필터로 넘어가는 기능 (미완성)*/
+													var btn = this.outerHTML;
+
+													if (this.className == "font_noto List-Button yellowButton") {
+														$('.last-nav-td')
+																.append(btn); /*버튼클릭시 필터란에 선택한 버튼 추가*/
+													}
+													;
+												});
+
+								/* ★★★ 상뉴가 만든 코드 ★★★★ */
+
+								/* 클릭 시 동적으로 추가 된 요소 제거*/
+								/* 
+								   왜 $('.last-nav-td button').click(function(){})이 작동되지 않을까??
+								   
+								   이유 : https://jeongmatt.blogspot.com/2020/10/append-appendto-script-javascriptjquery.html
+								
+								 */
+								$(document)
+										.on(
+												"click",
+												".last-nav-td button",
+												function() {
+
+													$(this).remove();
+
+													let ClickWord = $(this)
+															.html();
+
+													$('.List-Button')
+															.filter(
+																	function() {
+																		if ($(
+																				this)
+																				.html() === ClickWord) {
+																			$(
+																					this)
+																					.toggleClass(
+																							'yellowButton');
+																		}
+																	});
+
+												});
+
+								/* ★★★ 상뉴가 만든 코드 ★★★★ */
+
+								/*드롭다운시 텍스트 변경*/
+								$('.dropdown-menu li a')
+										.click(
+												function() {
+													var selText = $(this)
+															.text();
+													$(this)
+															.parents(
+																	'.btn-group')
+															.find(
+																	'.dropdown-toggle')
+															.html(
+																	selText
+																			+ ' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
+												});
+
+								/*초기화 클릭시 버튼색 없어짐*/
+								$('.List-NavButton').on(
+										'click',
+										function() {
+											$('.last-nav-td').children()
+													.remove(); /*td에있는 버튼들 제거*/
+											$('.List-Button').attr('class',
+													'font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
+										})
+							});
+						</script>
       <script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${categoryList}');
-         console.log(jsonData);
          
          var cate1Arr = new Array();
          var cate1Obj = new Object();
@@ -368,11 +236,8 @@
            cate1Obj.cateCode = jsonData[i].cateCode;
            cate1Obj.cateName = jsonData[i].cateName;
            cate1Arr.push(cate1Obj);
-           console.log(cate1Arr);
            
           }
-         /*  console.log(cate1Obj.cateCode );
-          console.log(cate1Obj.cateName); */
          }
          
 
@@ -405,7 +270,6 @@
 			   
 			   cate2Arr.push(cate2Obj);
 			  }
-			  console.log(cate2Arr);
 			 }
 			 
 			 var cate2Select = JSON.parse('${ categoryList }');

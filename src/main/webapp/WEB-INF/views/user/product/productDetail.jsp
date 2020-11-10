@@ -303,11 +303,9 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
-=======
-	
+
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
@@ -478,7 +476,6 @@
 	    
 	</script>
 
->>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
 	<script>
 		// 찜하기
 		function heart(){

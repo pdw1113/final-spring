@@ -89,6 +89,13 @@
 		start with CATECODEREF = #{navNo}
 		connect by prior CATECODE = CATECODEREF
 	</select>
+	
+	<select id="getProductList" parameterType="_int" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+		WHERE CATECODE = #{navNo}
+	</select>
 
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="Product">
