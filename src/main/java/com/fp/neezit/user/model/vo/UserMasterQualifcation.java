@@ -1,161 +1,183 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterQualifcation {
-	private String USER_EMAIL; 
-	private String MASTER_QUALIFICATION1;
-	private String MASTER_QUALIFICATION1_PIC_ORI;
-	private String MASTER_QUALIFICATION1_PIC_RE;
-	private String MASTER_QUALIFICATION2;
-	private String MASTER_QUALIFICATION2_PIC_ORI;
-	private String MASTER_QUALIFICATION2_PIC_RE;
-	private String MASTER_QUALIFICATION3;
-	private String MASTER_QUALIFICATION3_PIC_ORI;
-	private String MASTER_QUALIFICATION3_PIC_RE;
-	private String MASTER_QUALIFICATION4;
-	private String MASTER_QUALIFICATION4_PIC_ORI;
-	private String MASTER_QUALIFICATION4_PIC_RE;
-	private String MASTER_QUALIFICATION5;
-	private String MASTER_QUALIFICATION5_PIC_ORI;
-	private String MASTER_QUALIFICATION5_PIC_RE;
+	private String email; 
+	private String q1;
+	private String q1PicOri;
+	private String q1PicRe;
+	private String q2;
+	private String q2PicOri;
+	private String q2PicRe;
+	private String q3;
+	private String q3PicOri;
+	private String q3PicRe;
+	private String q4;
+	private String q4PicOri;
+	private String q4PicRe;
+	private String q5;
+	private String q5PicOri;
+	private String q5PicRe;
+	
 	public UserMasterQualifcation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserMasterQualifcation(String uSER_EMAIL, String mASTER_QUALIFICATION1, String mASTER_QUALIFICATION1_PIC_ORI,
-			String mASTER_QUALIFICATION1_PIC_RE, String mASTER_QUALIFICATION2, String mASTER_QUALIFICATION2_PIC_ORI,
-			String mASTER_QUALIFICATION2_PIC_RE, String mASTER_QUALIFICATION3, String mASTER_QUALIFICATION3_PIC_ORI,
-			String mASTER_QUALIFICATION3_PIC_RE, String mASTER_QUALIFICATION4, String mASTER_QUALIFICATION4_PIC_ORI,
-			String mASTER_QUALIFICATION4_PIC_RE, String mASTER_QUALIFICATION5, String mASTER_QUALIFICATION5_PIC_ORI,
-			String mASTER_QUALIFICATION5_PIC_RE) {
+
+	public UserMasterQualifcation(String email, String q1, String q1PicOri, String q1PicRe, String q2, String q2PicOri,
+			String q2PicRe, String q3, String q3PicOri, String q3PicRe, String q4, String q4PicOri, String q4PicRe,
+			String q5, String q5PicOri, String q5PicRe) {
 		super();
-		USER_EMAIL = uSER_EMAIL;
-		MASTER_QUALIFICATION1 = mASTER_QUALIFICATION1;
-		MASTER_QUALIFICATION1_PIC_ORI = mASTER_QUALIFICATION1_PIC_ORI;
-		MASTER_QUALIFICATION1_PIC_RE = mASTER_QUALIFICATION1_PIC_RE;
-		MASTER_QUALIFICATION2 = mASTER_QUALIFICATION2;
-		MASTER_QUALIFICATION2_PIC_ORI = mASTER_QUALIFICATION2_PIC_ORI;
-		MASTER_QUALIFICATION2_PIC_RE = mASTER_QUALIFICATION2_PIC_RE;
-		MASTER_QUALIFICATION3 = mASTER_QUALIFICATION3;
-		MASTER_QUALIFICATION3_PIC_ORI = mASTER_QUALIFICATION3_PIC_ORI;
-		MASTER_QUALIFICATION3_PIC_RE = mASTER_QUALIFICATION3_PIC_RE;
-		MASTER_QUALIFICATION4 = mASTER_QUALIFICATION4;
-		MASTER_QUALIFICATION4_PIC_ORI = mASTER_QUALIFICATION4_PIC_ORI;
-		MASTER_QUALIFICATION4_PIC_RE = mASTER_QUALIFICATION4_PIC_RE;
-		MASTER_QUALIFICATION5 = mASTER_QUALIFICATION5;
-		MASTER_QUALIFICATION5_PIC_ORI = mASTER_QUALIFICATION5_PIC_ORI;
-		MASTER_QUALIFICATION5_PIC_RE = mASTER_QUALIFICATION5_PIC_RE;
+		this.email = email;
+		this.q1 = q1;
+		this.q1PicOri = q1PicOri;
+		this.q1PicRe = q1PicRe;
+		this.q2 = q2;
+		this.q2PicOri = q2PicOri;
+		this.q2PicRe = q2PicRe;
+		this.q3 = q3;
+		this.q3PicOri = q3PicOri;
+		this.q3PicRe = q3PicRe;
+		this.q4 = q4;
+		this.q4PicOri = q4PicOri;
+		this.q4PicRe = q4PicRe;
+		this.q5 = q5;
+		this.q5PicOri = q5PicOri;
+		this.q5PicRe = q5PicRe;
 	}
-	public String getUSER_EMAIL() {
-		return USER_EMAIL;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setUSER_EMAIL(String uSER_EMAIL) {
-		USER_EMAIL = uSER_EMAIL;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getMASTER_QUALIFICATION1() {
-		return MASTER_QUALIFICATION1;
+
+	public String getQ1() {
+		return q1;
 	}
-	public void setMASTER_QUALIFICATION1(String mASTER_QUALIFICATION1) {
-		MASTER_QUALIFICATION1 = mASTER_QUALIFICATION1;
+
+	public void setQ1(String q1) {
+		this.q1 = q1;
 	}
-	public String getMASTER_QUALIFICATION1_PIC_ORI() {
-		return MASTER_QUALIFICATION1_PIC_ORI;
+
+	public String getQ1PicOri() {
+		return q1PicOri;
 	}
-	public void setMASTER_QUALIFICATION1_PIC_ORI(String mASTER_QUALIFICATION1_PIC_ORI) {
-		MASTER_QUALIFICATION1_PIC_ORI = mASTER_QUALIFICATION1_PIC_ORI;
+
+	public void setQ1PicOri(String q1PicOri) {
+		this.q1PicOri = q1PicOri;
 	}
-	public String getMASTER_QUALIFICATION1_PIC_RE() {
-		return MASTER_QUALIFICATION1_PIC_RE;
+
+	public String getQ1PicRe() {
+		return q1PicRe;
 	}
-	public void setMASTER_QUALIFICATION1_PIC_RE(String mASTER_QUALIFICATION1_PIC_RE) {
-		MASTER_QUALIFICATION1_PIC_RE = mASTER_QUALIFICATION1_PIC_RE;
+
+	public void setQ1PicRe(String q1PicRe) {
+		this.q1PicRe = q1PicRe;
 	}
-	public String getMASTER_QUALIFICATION2() {
-		return MASTER_QUALIFICATION2;
+
+	public String getQ2() {
+		return q2;
 	}
-	public void setMASTER_QUALIFICATION2(String mASTER_QUALIFICATION2) {
-		MASTER_QUALIFICATION2 = mASTER_QUALIFICATION2;
+
+	public void setQ2(String q2) {
+		this.q2 = q2;
 	}
-	public String getMASTER_QUALIFICATION2_PIC_ORI() {
-		return MASTER_QUALIFICATION2_PIC_ORI;
+
+	public String getQ2PicOri() {
+		return q2PicOri;
 	}
-	public void setMASTER_QUALIFICATION2_PIC_ORI(String mASTER_QUALIFICATION2_PIC_ORI) {
-		MASTER_QUALIFICATION2_PIC_ORI = mASTER_QUALIFICATION2_PIC_ORI;
+
+	public void setQ2PicOri(String q2PicOri) {
+		this.q2PicOri = q2PicOri;
 	}
-	public String getMASTER_QUALIFICATION2_PIC_RE() {
-		return MASTER_QUALIFICATION2_PIC_RE;
+
+	public String getQ2PicRe() {
+		return q2PicRe;
 	}
-	public void setMASTER_QUALIFICATION2_PIC_RE(String mASTER_QUALIFICATION2_PIC_RE) {
-		MASTER_QUALIFICATION2_PIC_RE = mASTER_QUALIFICATION2_PIC_RE;
+
+	public void setQ2PicRe(String q2PicRe) {
+		this.q2PicRe = q2PicRe;
 	}
-	public String getMASTER_QUALIFICATION3() {
-		return MASTER_QUALIFICATION3;
+
+	public String getQ3() {
+		return q3;
 	}
-	public void setMASTER_QUALIFICATION3(String mASTER_QUALIFICATION3) {
-		MASTER_QUALIFICATION3 = mASTER_QUALIFICATION3;
+
+	public void setQ3(String q3) {
+		this.q3 = q3;
 	}
-	public String getMASTER_QUALIFICATION3_PIC_ORI() {
-		return MASTER_QUALIFICATION3_PIC_ORI;
+
+	public String getQ3PicOri() {
+		return q3PicOri;
 	}
-	public void setMASTER_QUALIFICATION3_PIC_ORI(String mASTER_QUALIFICATION3_PIC_ORI) {
-		MASTER_QUALIFICATION3_PIC_ORI = mASTER_QUALIFICATION3_PIC_ORI;
+
+	public void setQ3PicOri(String q3PicOri) {
+		this.q3PicOri = q3PicOri;
 	}
-	public String getMASTER_QUALIFICATION3_PIC_RE() {
-		return MASTER_QUALIFICATION3_PIC_RE;
+
+	public String getQ3PicRe() {
+		return q3PicRe;
 	}
-	public void setMASTER_QUALIFICATION3_PIC_RE(String mASTER_QUALIFICATION3_PIC_RE) {
-		MASTER_QUALIFICATION3_PIC_RE = mASTER_QUALIFICATION3_PIC_RE;
+
+	public void setQ3PicRe(String q3PicRe) {
+		this.q3PicRe = q3PicRe;
 	}
-	public String getMASTER_QUALIFICATION4() {
-		return MASTER_QUALIFICATION4;
+
+	public String getQ4() {
+		return q4;
 	}
-	public void setMASTER_QUALIFICATION4(String mASTER_QUALIFICATION4) {
-		MASTER_QUALIFICATION4 = mASTER_QUALIFICATION4;
+
+	public void setQ4(String q4) {
+		this.q4 = q4;
 	}
-	public String getMASTER_QUALIFICATION4_PIC_ORI() {
-		return MASTER_QUALIFICATION4_PIC_ORI;
+
+	public String getQ4PicOri() {
+		return q4PicOri;
 	}
-	public void setMASTER_QUALIFICATION4_PIC_ORI(String mASTER_QUALIFICATION4_PIC_ORI) {
-		MASTER_QUALIFICATION4_PIC_ORI = mASTER_QUALIFICATION4_PIC_ORI;
+
+	public void setQ4PicOri(String q4PicOri) {
+		this.q4PicOri = q4PicOri;
 	}
-	public String getMASTER_QUALIFICATION4_PIC_RE() {
-		return MASTER_QUALIFICATION4_PIC_RE;
+
+	public String getQ4PicRe() {
+		return q4PicRe;
 	}
-	public void setMASTER_QUALIFICATION4_PIC_RE(String mASTER_QUALIFICATION4_PIC_RE) {
-		MASTER_QUALIFICATION4_PIC_RE = mASTER_QUALIFICATION4_PIC_RE;
+
+	public void setQ4PicRe(String q4PicRe) {
+		this.q4PicRe = q4PicRe;
 	}
-	public String getMASTER_QUALIFICATION5() {
-		return MASTER_QUALIFICATION5;
+
+	public String getQ5() {
+		return q5;
 	}
-	public void setMASTER_QUALIFICATION5(String mASTER_QUALIFICATION5) {
-		MASTER_QUALIFICATION5 = mASTER_QUALIFICATION5;
+
+	public void setQ5(String q5) {
+		this.q5 = q5;
 	}
-	public String getMASTER_QUALIFICATION5_PIC_ORI() {
-		return MASTER_QUALIFICATION5_PIC_ORI;
+
+	public String getQ5PicOri() {
+		return q5PicOri;
 	}
-	public void setMASTER_QUALIFICATION5_PIC_ORI(String mASTER_QUALIFICATION5_PIC_ORI) {
-		MASTER_QUALIFICATION5_PIC_ORI = mASTER_QUALIFICATION5_PIC_ORI;
+
+	public void setQ5PicOri(String q5PicOri) {
+		this.q5PicOri = q5PicOri;
 	}
-	public String getMASTER_QUALIFICATION5_PIC_RE() {
-		return MASTER_QUALIFICATION5_PIC_RE;
+
+	public String getQ5PicRe() {
+		return q5PicRe;
 	}
-	public void setMASTER_QUALIFICATION5_PIC_RE(String mASTER_QUALIFICATION5_PIC_RE) {
-		MASTER_QUALIFICATION5_PIC_RE = mASTER_QUALIFICATION5_PIC_RE;
+
+	public void setQ5PicRe(String q5PicRe) {
+		this.q5PicRe = q5PicRe;
 	}
+
 	@Override
 	public String toString() {
-		return "UserMasterQualifcation [USER_EMAIL=" + USER_EMAIL + ", MASTER_QUALIFICATION1=" + MASTER_QUALIFICATION1
-				+ ", MASTER_QUALIFICATION1_PIC_ORI=" + MASTER_QUALIFICATION1_PIC_ORI + ", MASTER_QUALIFICATION1_PIC_RE="
-				+ MASTER_QUALIFICATION1_PIC_RE + ", MASTER_QUALIFICATION2=" + MASTER_QUALIFICATION2
-				+ ", MASTER_QUALIFICATION2_PIC_ORI=" + MASTER_QUALIFICATION2_PIC_ORI + ", MASTER_QUALIFICATION2_PIC_RE="
-				+ MASTER_QUALIFICATION2_PIC_RE + ", MASTER_QUALIFICATION3=" + MASTER_QUALIFICATION3
-				+ ", MASTER_QUALIFICATION3_PIC_ORI=" + MASTER_QUALIFICATION3_PIC_ORI + ", MASTER_QUALIFICATION3_PIC_RE="
-				+ MASTER_QUALIFICATION3_PIC_RE + ", MASTER_QUALIFICATION4=" + MASTER_QUALIFICATION4
-				+ ", MASTER_QUALIFICATION4_PIC_ORI=" + MASTER_QUALIFICATION4_PIC_ORI + ", MASTER_QUALIFICATION4_PIC_RE="
-				+ MASTER_QUALIFICATION4_PIC_RE + ", MASTER_QUALIFICATION5=" + MASTER_QUALIFICATION5
-				+ ", MASTER_QUALIFICATION5_PIC_ORI=" + MASTER_QUALIFICATION5_PIC_ORI + ", MASTER_QUALIFICATION5_PIC_RE="
-				+ MASTER_QUALIFICATION5_PIC_RE + "]";
+		return "UserMasterQualifcation [email=" + email + ", q1=" + q1 + ", q1PicOri=" + q1PicOri + ", q1PicRe="
+				+ q1PicRe + ", q2=" + q2 + ", q2PicOri=" + q2PicOri + ", q2PicRe=" + q2PicRe + ", q3=" + q3
+				+ ", q3PicOri=" + q3PicOri + ", q3PicRe=" + q3PicRe + ", q4=" + q4 + ", q4PicOri=" + q4PicOri
+				+ ", q4PicRe=" + q4PicRe + ", q5=" + q5 + ", q5PicOri=" + q5PicOri + ", q5PicRe=" + q5PicRe + "]";
 	}
-	
-	
-	
 }

@@ -137,6 +137,7 @@
 			         // 번호 비교 성공 시
 			         if(data === "ok"){
 			         	alert("번호가 인증되었습니다.");
+			         	clearInterval(countdown);
 			       	 	$("#ranNum").attr("readonly",true);
 						$("#ranNum").css("background-color","rgb(225,225,225)");
 					 // 번호 비교 실패 시

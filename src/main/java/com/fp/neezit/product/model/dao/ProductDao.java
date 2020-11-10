@@ -1,5 +1,7 @@
 package com.fp.neezit.product.model.dao;
 
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,8 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 @Repository
 public class ProductDao{
@@ -44,6 +49,42 @@ public class ProductDao{
 
 	public List<Product> myProductList(UserMaster master) {
 		return sqlSession.selectList("productMapper.myProductList", master);
+	}
+
+	public Product getProductDetail(int no) {
+		return sqlSession.selectOne("productMapper.myProductDetail", no);
+	}
+
+	public UserMaster getProductDetail(String nickName) {
+		return sqlSession.selectOne("productMapper.getProductDetail", nickName);
+	}
+
+	public UserMasterSns getProductSnsDetail(String email) {
+		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
+	}
+
+	public int wishInsert(HashMap<String, String> map) {
+		return sqlSession.insert("productMapper.insertWish",map);
+	}
+
+	public int insertReply(Reply r) {
+		return sqlSession.insert("productMapper.insertReply",r);
+	}
+
+	public ArrayList<Reply> selectReplyList(int pNo) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList", pNo);
+	}
+
+	public int updateMasterStar(int pNo) {
+		return sqlSession.update("productMapper.updateMasterStar", pNo);
+	}
+
+	public int getReplyCount(String nickName) {
+		return sqlSession.selectOne("productMapper.getReplyCount", nickName);
+	}
+
+	public List<Product> productList(int navNo) {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductList", navNo);
 	}
 	
 }

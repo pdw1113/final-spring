@@ -15,6 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<!-- JUA 폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 </head>
 
@@ -49,7 +51,7 @@
 						<tbody>
 							<tr>
 								<th>닉네임</th>
-								<td><input class="pro_nicname" type="text" name="nickName" value="${master.MASTER_NICKNAME}" readonly="readonly"></td>
+								<td><input class="pro_nicname" type="text" name="nickName" value="${master.mNickname}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th>이름</th>
@@ -57,7 +59,7 @@
 							</tr>
 							<tr>
 								<th>등급</th>
-								<td>${master.MASTER_RANKNAME}</td>
+								<td>${master.mRankname}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,10 +75,24 @@
 				<div class="status_div_addproduct">
 
 					<span class="input_title_addproduct">카테고리</span> 
-					<select class="category1 category_select_addproduct m-r-27 m-l-90" id="category">
+					<select class="category1 category_select_addproduct m-l-90" id="oneCate">
+					<option>대분류를 선택해주세요.</option>
 					</select>
-
-				</div>
+					<select class="category1 category_select_addproduct m-r-27 m-l-30" id="category">
+	                </select>
+	                <button type="button" class="cate_add_btn" id="add">추가</button>
+	            </div>
+	
+	            <div class="status_div_addproduct">
+	
+	               <span class="input_title_addproduct">추가됨</span>
+	               <span class="m-l-add" id="added">
+	               </span>
+	            </div>
+	            
+	            <!-- 등록한 카테고리 -->
+	            <input type="hidden" class="input_text_addproduct" name="category" id="hiddenInput">
+	            
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">기본금액</span> 
 					<input type="number" class="input_money_addproduct" name="price"><span
@@ -117,9 +133,11 @@
 					</div>
 				</div>
 			</div>
+			<!-- 대분류 카테고리 -->
+			<input type="hidden" name="cateone" value="" id="cateone">
 			<!--등록 완료 -->
 			<div class="finish_button_div_addproduct">
-				<button class="finish_button_addproduct">등록완료</button>
+				<button class="finish_button_addproduct" onclick="return validate();">등록완료</button>
 			</div>
 		</form>
 	</div>
@@ -127,6 +145,27 @@
 	</body>
 	
 	<script>
+		// 대분류 가져오기
+		(function(){
+			let $mycate = '${category}';
+			let allCate = ["웹개발", "데이터베이스", "모바일웹", "임베디드", "블록체인", "서버", "게임", "데이터분석", "보안"];
+			
+			for(var i = 0; i < allCate.length; i++){
+				if($mycate.match(allCate[i]) != null){
+					$("#oneCate").append("<option>" + allCate[i] + "</option>");
+				}
+			}
+			
+		})();
+		
+		// option태그는 onclick, onselect등 먹히질 않으니 
+		// select태그에 onchange메소드를 걸어준다.
+		$("#oneCate").change(function(){
+			let oneSelected = $('#oneCate option:selected').val();
+			$("#cateone").val(oneSelected);
+			console.log($("#cateone").val());
+		});
+		
 		(function(){
 			// Controller에서 받아온 능력자 카테고리
 		    let category = '${category}';
@@ -139,7 +178,67 @@
 		    	$("#category").append("<option>" + arr[a] + "</option>");
 		    }
 		})();
+
+		
+		// 대분류 선택 안하면 "대분류를 선택해주세요"가 등록되어버린다.
+		let dame = $('#oneCate option:selected').val();
+		$("#cateone").val(dame);
+		
+		// 유효성 검사
+		function validate(){
+			if($("#cateone").val().match("대분류")){
+				alert("대분류를 선택해 주세요.");
+				return false;
+			}
+			return true;
+		}
 	</script>
+	
+    <script>
+        // 나의 카테고리로 추가시키는 함수
+        const addCategory = function(){
+             let temp    = [];
+             let category = [];
+             let obj     = $('#added span');
+             let x       = 0;
+
+             // select박스의 선택된 값 가져오기.
+             let choice = $('#category option:selected').val();
+
+             // 현재 option의 값을 임시 배열에 저장
+             $(obj).each(function(i){
+                 temp[i] = $(this).html();
+             });
+
+             // 선택한 옵션값이 임시 배열 속 문자열과 같은 경우 임시 변수값 증가
+             $(temp).each(function(i){
+
+                 if(choice == temp[i]){
+                     x++;
+                 }
+             });
+
+             // 중복 값이 없을 경우 select박스에 option값 추가하기.
+             if(x == 0 && choice != undefined){
+                 $("#added").append("<span>" + choice + "</span>");
+             }
+             
+             // Controller 전달용 
+             let obj2 = $('#added span');
+             
+             $(obj2).each(function(i){
+            	 category[i] = $(this).html();
+             });
+             console.log(category);
+             
+             // 전송 form의 name="category"에 추가하기
+             $("#hiddenInput").val(category);
+         }
+
+        $("#add").click(function(){
+           addCategory();
+        });
+     </script>
 
 
 <!-- 썸머노트 -->

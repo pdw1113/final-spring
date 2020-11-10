@@ -1,85 +1,101 @@
 package com.fp.neezit.user.model.vo;
 
 public class UserMasterSns {
-	private String USER_EMAIL;
-	private String MASTER_INSTAGRAM;
-	private String MASTER_TWITTER;
-	private String MASTER_BLOG;
-	private String MASTER_GIT;
-	private String MASTER_YOTUBUE1;
-	private String MASTER_YOTUBUE2;
-	private String MASTER_YOTUBUE3;
+	private String email;
+	private String snsInsta;
+	private String snsTwit;
+	private String snsBlog;
+	private String snsGit;
+	private String snsYou1;
+	private String snsYou2;
+	private String snsYou3;
+	
 	public UserMasterSns() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserMasterSns(String uSER_EMAIL, String mASTER_INSTAGRAM, String mASTER_TWITTER, String mASTER_BLOG,
-			String mASTER_GIT, String mASTER_YOTUBUE1, String mASTER_YOTUBUE2, String mASTER_YOTUBUE3) {
+
+	public UserMasterSns(String email, String snsInsta, String snsTwit, String snsBlog, String snsGit, String snsYou1,
+			String snsYou2, String snsYou3) {
 		super();
-		USER_EMAIL = uSER_EMAIL;
-		MASTER_INSTAGRAM = mASTER_INSTAGRAM;
-		MASTER_TWITTER = mASTER_TWITTER;
-		MASTER_BLOG = mASTER_BLOG;
-		MASTER_GIT = mASTER_GIT;
-		MASTER_YOTUBUE1 = mASTER_YOTUBUE1;
-		MASTER_YOTUBUE2 = mASTER_YOTUBUE2;
-		MASTER_YOTUBUE3 = mASTER_YOTUBUE3;
+		this.email = email;
+		this.snsInsta = snsInsta;
+		this.snsTwit = snsTwit;
+		this.snsBlog = snsBlog;
+		this.snsGit = snsGit;
+		this.snsYou1 = snsYou1;
+		this.snsYou2 = snsYou2;
+		this.snsYou3 = snsYou3;
 	}
-	public String getUSER_EMAIL() {
-		return USER_EMAIL;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setUSER_EMAIL(String uSER_EMAIL) {
-		USER_EMAIL = uSER_EMAIL;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getMASTER_INSTAGRAM() {
-		return MASTER_INSTAGRAM;
+
+	public String getSnsInsta() {
+		return snsInsta;
 	}
-	public void setMASTER_INSTAGRAM(String mASTER_INSTAGRAM) {
-		MASTER_INSTAGRAM = mASTER_INSTAGRAM;
+
+	public void setSnsInsta(String snsInsta) {
+		this.snsInsta = snsInsta;
 	}
-	public String getMASTER_TWITTER() {
-		return MASTER_TWITTER;
+
+	public String getSnsTwit() {
+		return snsTwit;
 	}
-	public void setMASTER_TWITTER(String mASTER_TWITTER) {
-		MASTER_TWITTER = mASTER_TWITTER;
+
+	public void setSnsTwit(String snsTwit) {
+		this.snsTwit = snsTwit;
 	}
-	public String getMASTER_BLOG() {
-		return MASTER_BLOG;
+
+	public String getSnsBlog() {
+		return snsBlog;
 	}
-	public void setMASTER_BLOG(String mASTER_BLOG) {
-		MASTER_BLOG = mASTER_BLOG;
+
+	public void setSnsBlog(String snsBlog) {
+		this.snsBlog = snsBlog;
 	}
-	public String getMASTER_GIT() {
-		return MASTER_GIT;
+
+	public String getSnsGit() {
+		return snsGit;
 	}
-	public void setMASTER_GIT(String mASTER_GIT) {
-		MASTER_GIT = mASTER_GIT;
+
+	public void setSnsGit(String snsGit) {
+		this.snsGit = snsGit;
 	}
-	public String getMASTER_YOTUBUE1() {
-		return MASTER_YOTUBUE1;
+
+	public String getSnsYou1() {
+		return snsYou1;
 	}
-	public void setMASTER_YOTUBUE1(String mASTER_YOTUBUE1) {
-		MASTER_YOTUBUE1 = mASTER_YOTUBUE1;
+
+	public void setSnsYou1(String snsYou1) {
+		this.snsYou1 = snsYou1;
 	}
-	public String getMASTER_YOTUBUE2() {
-		return MASTER_YOTUBUE2;
+
+	public String getSnsYou2() {
+		return snsYou2;
 	}
-	public void setMASTER_YOTUBUE2(String mASTER_YOTUBUE2) {
-		MASTER_YOTUBUE2 = mASTER_YOTUBUE2;
+
+	public void setSnsYou2(String snsYou2) {
+		this.snsYou2 = snsYou2;
 	}
-	public String getMASTER_YOTUBUE3() {
-		return MASTER_YOTUBUE3;
+
+	public String getSnsYou3() {
+		return snsYou3;
 	}
-	public void setMASTER_YOTUBUE3(String mASTER_YOTUBUE3) {
-		MASTER_YOTUBUE3 = mASTER_YOTUBUE3;
+
+	public void setSnsYou3(String snsYou3) {
+		this.snsYou3 = snsYou3;
 	}
+
 	@Override
 	public String toString() {
-		return "MasterSns [USER_EMAIL=" + USER_EMAIL + ", MASTER_INSTAGRAM=" + MASTER_INSTAGRAM + ", MASTER_TWITTER="
-				+ MASTER_TWITTER + ", MASTER_BLOG=" + MASTER_BLOG + ", MASTER_GIT=" + MASTER_GIT + ", MASTER_YOTUBUE1="
-				+ MASTER_YOTUBUE1 + ", MASTER_YOTUBUE2=" + MASTER_YOTUBUE2 + ", MASTER_YOTUBUE3=" + MASTER_YOTUBUE3
-				+ "]";
+		return "UserMasterSns [email=" + email + ", snsInsta=" + snsInsta + ", snsTwit=" + snsTwit + ", snsBlog="
+				+ snsBlog + ", snsGit=" + snsGit + ", snsYou1=" + snsYou1 + ", snsYou2=" + snsYou2 + ", snsYou3="
+				+ snsYou3 + "]";
 	}
-	
-	
 }

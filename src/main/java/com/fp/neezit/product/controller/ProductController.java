@@ -1,10 +1,14 @@
 package com.fp.neezit.product.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +17,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import net.sf.json.JSONArray;
-
+@SessionAttributes("product") 
 @Controller
 public class ProductController {
-   
+
    @Autowired
    ProductService pService;
 
@@ -44,15 +55,15 @@ public class ProductController {
  	* @param navNo
  	* @return
  	*/
-   @RequestMapping(value = "productList.do" , method = RequestMethod.GET)
+   @RequestMapping(value = "productList.do", method = RequestMethod.GET)
    public String productList(Model model, int navNo){
-      List<ProductCategory> category = null;
-      List<ProductCategory> category2 = null;
-      category = pService.categoryList(navNo);
-      category2 = pService.categoryList2(navNo);
-      
+      List<ProductCategory> category = pService.categoryList(navNo);
+      List<ProductCategory> category2 = pService.categoryList2(navNo);
+      List<Product> productList = pService.productList(navNo);
+    		  
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
+      model.addAttribute("productList", productList);
    
       return "user/product/productList";
    }
@@ -72,11 +83,9 @@ public class ProductController {
 	      
 	      // 능력자 정보
 	      UserMaster master = pService.getMaster(u);
-	      System.out.println(master);
 	      
 	      // 능력자 카테고리 정보
 	      List<String> category = pService.masterCategory(master);
-	      System.out.println(category);
 	      
 	      // List를 String으로 치환
 	      String string = category.toString();
@@ -86,7 +95,7 @@ public class ProductController {
 	      
 	      model.addAttribute("category", real);
 	      
-	      model.addAttribute("master",master);
+	      model.addAttribute("master", master);
 	      
 	      return "user/product/productInsert";
    }
@@ -103,10 +112,11 @@ public class ProductController {
    @RequestMapping(value = "pInsert.do")
 	  public String insertProduct(Model model,Product product, HttpServletRequest request,
 		   	 @RequestParam(name="upload", required=false) MultipartFile file) {
+	   
 		  // @RequestParam어노테이션을 이용한 업로드 파일 접근
 		  // form의 enctype이 multipart/form-data로 작성되어있어야하고, method=POST이어야한다.
 	      // MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
-			  
+		  
 		  // 상품이미지 등록
 		  if(!file.getOriginalFilename().equals("")) {
 			  // 서버에 업로드 해야한다.
@@ -120,9 +130,9 @@ public class ProductController {
 	   	  int result = pService.insertProduct(product);
 		 
 		  if(result==1) {
-			   return "user/product/productDetail";
+			   return "redirect:myProductList.do";
 		  }else {
-			   return "user/product/productDetail";
+			   return "redirect:index.do";
 		  }
 	   }
    
@@ -190,5 +200,97 @@ public class ProductController {
       return "user/product/myProductList";
    }
    
+   /**
+    * 6. 상품 상세 메소드
+    * @param product
+ 	* @param model
+ 	* @param session
+ 	* @return
+ 	*/
+   @RequestMapping("myProductDetail.do")
+   public String myProductDetail(int no, Model model) {
+	  
+	  // 상품 정보 가져오기
+	  Product p = pService.getProductDetail(no);
+	  
+	  // 상품 정보 가져오기 2
+	  UserMaster m = pService.getProductDetail(p.getNickName());
+
+	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+	  
+	  int replyCount = pService.getReplyCount(p.getNickName());
+	  
+	  if(p != null && m != null) {
+		  model.addAttribute("product", p);
+		  model.addAttribute("master", m);
+		  model.addAttribute("sns", sns);
+		  model.addAttribute("replyCount", replyCount);
+		  return "user/product/productDetail";
+	  }
+	  
+	  return "common/errorPage";
+   }
+   
+	/**
+	 * 08. 찜목록 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishInsert.do")
+	public String wishInsert(String email, String no ,HttpSession session){
+		// 2개의 객체를 insert 하기위해 HashMap
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("no", no);
+		int result = pService.wishInsert(map);
+		System.out.println(result);
+		
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+   
+	/**
+	 * 7. 댓글 등록 메소드
+	 * @param r
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="addReply.do")
+	public String addReply(Reply r) {
+		int result = pService.insertReply(r);
+		System.out.println(r.getpNo());
+		
+		if(result == 1) {
+			
+			int starResult = pService.updateMasterStar(r.getpNo());
+			
+			if(starResult == 1) return "success";
+			else return "fail";
+			
+		}else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 8. 댓글 리스트 조회
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
+	@RequestMapping(value="rList.do", produces="application/json; charset=UTF-8")
+	public void getReplyList(HttpServletResponse response, int pNo) throws JsonIOException, IOException {
+		ArrayList<Reply> rList = pService.selectReplyList(pNo);
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(rList,response.getWriter());
+	}
+	
    
 }

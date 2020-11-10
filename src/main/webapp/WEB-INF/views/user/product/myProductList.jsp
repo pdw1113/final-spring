@@ -27,7 +27,11 @@
         <c:forEach var="product" items="${ myProductList }" varStatus="status">
 	        <li class="main_contents_index">
 	          <div>
-	            <a href="#">
+	          	
+				<c:url var="myProductDetail" value="myProductDetail.do">
+					<c:param name="no" value="${ product.no }"/>
+				</c:url>
+	            <a href="${ myProductDetail }">
 	              <img src="resources/pUploadFiles/${ product.renamePic }" class="main_contents_img_index">
 	            </a>
 	            <p class="font_jua main_explain_index">

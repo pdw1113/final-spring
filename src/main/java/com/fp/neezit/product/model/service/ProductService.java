@@ -1,11 +1,16 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 public interface ProductService {
 
@@ -36,7 +41,50 @@ public interface ProductService {
 	 * @param master
 	 * @return
 	 */
-	public List<Product> myProductList(UserMaster master); 
+	public List<Product> myProductList(UserMaster master);
+
+	public Product getProductDetail(int no);
+
+	public UserMaster getProductDetail(String nickName);
+	
+	public UserMasterSns getProductSnsDetail(String email);
+
+	public int wishInsert(HashMap<String, String> map);
+	
+	/**
+	 * 댓글 등록 메소드
+	 * @param r
+	 * @return
+	 */
+	public int insertReply(Reply r);
+
+	/**
+	 * 댓글 목록 메소드
+	 * @param pNo
+	 * @return
+	 */
+	public ArrayList<Reply> selectReplyList(int pNo);
+
+	/**
+	 * 능력자 별점 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateMasterStar(int pNo);
+
+	/**
+	 * 능력자의 구매자 수
+	 * @param nickName
+	 * @return
+	 */
+	public int getReplyCount(String nickName);
+
+	/**
+	 * Nav.jsp 상품 목록 대분류로 가져오기
+	 * @param navNo
+	 * @return
+	 */
+	public List<Product> productList(int navNo);
 
    
 }

@@ -9,6 +9,7 @@ public class Product {
 	private String title;       // 글제목
 	private String pic; 		// 사진
 	private String renamePic;	// 사진 저장 파일명
+	private String cateone;		// 1분류 카테고리
 	private String category;    // 카테고리
 	private int price;          // 가격
 	private String career;      // 경력
@@ -23,14 +24,15 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String nickName, int no, String title, String pic, String renamePic, String category, int price,
-			String career, String portfolio, String introduce, Date createDate, Date modifyDate, int count) {
+	public Product(String nickName, int no, String title, String pic, String renamePic, String cateone, String category,
+			int price, String career, String portfolio, String introduce, Date createDate, Date modifyDate, int count) {
 		super();
 		this.nickName = nickName;
 		this.no = no;
 		this.title = title;
 		this.pic = pic;
 		this.renamePic = renamePic;
+		this.cateone = cateone;
 		this.category = category;
 		this.price = price;
 		this.career = career;
@@ -63,6 +65,30 @@ public class Product {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getRenamePic() {
+		return renamePic;
+	}
+
+	public void setRenamePic(String renamePic) {
+		this.renamePic = renamePic;
+	}
+
+	public String getCateone() {
+		return cateone;
+	}
+
+	public void setCateone(String cateone) {
+		this.cateone = cateone;
 	}
 
 	public String getCategory() {
@@ -129,28 +155,11 @@ public class Product {
 		this.count = count;
 	}
 
-	public String getPic() {
-		return pic;
-	}
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
-
-	public final String getRenamePic() {
-		return renamePic;
-	}
-
-	public final void setRenamePic(String renamePic) {
-		this.renamePic = renamePic;
-	}
-
 	@Override
 	public String toString() {
 		return "Product [nickName=" + nickName + ", no=" + no + ", title=" + title + ", pic=" + pic + ", renamePic="
-				+ renamePic + ", category=" + category + ", price=" + price + ", career=" + career + ", portfolio="
-				+ portfolio + ", introduce=" + introduce + ", createDate=" + createDate + ", modifyDate=" + modifyDate
-				+ ", count=" + count + "]";
+				+ renamePic + ", cateone=" + cateone + ", category=" + category + ", price=" + price + ", career="
+				+ career + ", portfolio=" + portfolio + ", introduce=" + introduce + ", createDate=" + createDate
+				+ ", modifyDate=" + modifyDate + ", count=" + count + "]";
 	}
-
 }

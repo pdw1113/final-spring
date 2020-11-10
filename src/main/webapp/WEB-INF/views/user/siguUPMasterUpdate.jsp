@@ -22,18 +22,18 @@
 
 </head>
 <body>
-	
-	<%@ include file="../common/header.jsp" %>
+   
+   <%@ include file="../common/header.jsp" %>
 
-    <form action="signUpMaster.do" method="POST" enctype="multipart/form-data" name="master">
+    <form action="signUpMasterUpdate.do" method="POST" enctype="multipart/form-data" name="master">
     <input type="hidden" value="${ loginUser.email }" name="email"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
-            <div class="font_jua title-sgm">능력자 등록</div>
+            <div class="font_jua title-sgm">능력자 </div>
             <span>
                 <div class="img-container-sgm border-radius-100">
-                    <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="_mProPicOri" hidden>
+                    <img src="resources/masterImg/${masterList.mProPicRe}" class="img-style-size" id="profile_img" onclick="picUpload(this);">
+                    <input type="file" id="profile_file" name="_mProPicOri" class="pick" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -102,7 +102,8 @@
             <li>
                 <div class="sub-title-sgm">별명 등록</div>
                 <div>
-                    <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성">
+                    <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성"
+                    value="${masterList.mNickname}">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
                     <span class="hide-span-sgm green">사용가능</span>
                     <span class="hide-span-sgm red">사용불가</span>
@@ -133,31 +134,31 @@
                 return true;
             }
             
-             	 // 별명 중복체크 AJAX
+                 // 별명 중복체크 AJAX
                 $(function(){
-       	         $("#dupl_check").on("click",function(){
-       	        	// #nickname의 값
-       	         	let nickname = $('#nickname').val();     	   
-       	         	$.ajax({
-       	         		url:"nickCheck.do",
-       	         		data:{nickname:nickname},
-       	         		type:"post",
-       	         		success:function(data){
-       	         			// 중복되지 않았을 때
-       	         			if(data == "ok" && regExp() != false){
-       	                        $('.green').show();
-       	                        $('.red').hide();
-       	         			// 중복됐을 때
-       	         			}else{
-       	                        $('.green').hide();
-       	                        $('.red').show();
-       	         			}
-       	         		},
-       	         		error:function(jqxhr, textStatus, errorThrown){
-       	         			console.log("ajax 처리 실패");
-       	         		}
-       	         	});
-       	         });
+                   $("#dupl_check").on("click",function(){
+                     // #nickname의 값
+                      let nickname = $('#nickname').val();           
+                      $.ajax({
+                         url:"nickCheck.do",
+                         data:{nickname:nickname},
+                         type:"post",
+                         success:function(data){
+                            // 중복되지 않았을 때
+                            if(data == "ok" && regExp() != false){
+                                  $('.green').show();
+                                  $('.red').hide();
+                            // 중복됐을 때
+                            }else{
+                                  $('.green').hide();
+                                  $('.red').show();
+                            }
+                         },
+                         error:function(jqxhr, textStatus, errorThrown){
+                            console.log("ajax 처리 실패");
+                         }
+                      });
+                   });
                 });
             </script>
             
@@ -217,7 +218,7 @@
                             </span>
                             <span class="d-btn-container">
                                 <img src="resources/img/rollback.png" class="lr-btn-img-size" id="delete-all">
-                          	 </span>
+                              </span>
                           </div>
                         <select size="8" class="font_jua select-sgm" id="my-cate">
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
@@ -433,7 +434,22 @@
                         masterId = [];
                         $("#array2").val(masterId);
                     }
-                });
+                });  
+                
+
+                (function(){
+                   // Controller에서 받아온 능력자 카테고리
+                    let category = '${categoryList}';
+                    
+                    // 문자열을 ,구분자로 잘라내어 배열에 담는다.
+                    let arr = category.split(", ");
+                    
+                    // for문으로 select option에 추가한다.
+                    for(a in arr){
+                       $("#my-cate").append("<option>" + arr[a] + "</option>");
+                    }
+                })();
+
             </script>
             <hr>
 
@@ -443,8 +459,8 @@
                 <div class="text-align-center-sgm minus-margin-sgm">
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
-                        <img src="resources/img/profile.png" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" name="_mIdPicOri">
+                        <img src="resources/masterImg/${masterList.mIdPicRe}" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
+                        <input type="file" id="idCard_file" name="_mIdPicOri" class="pick">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -495,25 +511,32 @@
         
                     reader.readAsDataURL(file); // DataURL 형식으로 파일을 읽어준다.
                 });
+                
+
             </script>
 
             <!-- 학력 인증 -->
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="고등학교" name="sHigh">
+                        <input class="input_master width_500" type="text" placeholder="고등학교" name="sHigh"
+                        value="${SchoolList.sHigh}">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept">
+                        <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv"
+                         value="${SchoolList.sUniv}">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept"
+                         value="${SchoolList.sUnivDept}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept">
+                        <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2"
+                        value="${SchoolList.sUniv2}">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept"
+                        value="${SchoolList.sUniv2Dept}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
@@ -525,31 +548,36 @@
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q1">
+                        <input class="input_master" type="text" placeholder="자격증" name="q1"
+                         value="${QualifcationList.q1}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q2">
+                        <input class="input_master" type="text" placeholder="자격증" name="q2"
+                        value="${QualifcationList.q2}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q3">
+                        <input class="input_master" type="text" placeholder="자격증" name="q3"
+                        value="${QualifcationList.q3}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q4">
+                        <input class="input_master" type="text" placeholder="자격증" name="q4"
+                        value="${QualifcationList.q4}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q5">
+                        <input class="input_master" type="text" placeholder="자격증" name="q5"
+                        value="${QualifcationList.q5}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
@@ -558,7 +586,7 @@
                 </div>
             </li>
 
-			<script>
+         <script>
                 let ok = function(obj){
                     $(obj).next().css("display","inline");
                 };
@@ -570,34 +598,38 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="인스타그램" name=snsInsta>
+                        <input class="input_master_2" type="text" placeholder="인스타그램" name="snsInsta"
+                        value="${SnsList.snsInsta }">
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="트위터" name="snsTwit">
+                        <input class="input_master_2" type="text" placeholder="트위터" name="snsTwit"
+                        value="${SnsList.snsTwit}">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="블로그" name="snsBlog">
+                        <input class="input_master_2" type="text" placeholder="블로그" name="snsBlog"
+                        value="${SnsList.snsBlog}">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="GIT" name="snsGit">
+                        <input class="input_master_2" type="text" placeholder="GIT" name="snsGit"
+                         value="${SnsList.snsGit}">
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="snsYou1">
+                        <input class="input_master_2" type="text"  onfocusout="youtube(this);"
+                        name="snsYou1" value="${SnsList.snsYou1}">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="snsYou2">
+                        <input class="input_master_2" type="text"  onfocusout="youtube(this);"
+                        name="snsYou2" value="${SnsList.snsYou2}">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="snsYou3">
+                        <input class="input_master_2" type="text"  onfocusout="youtube(this);"
+                        name="snsYou3" value="${SnsList.snsYou3}">
                         <div>
                         </div>
                     </div>
@@ -624,52 +656,52 @@
             </script>
 
             <hr>
-			 <!-- 작업 가능 시간 -->
+          <!-- 작업 가능 시간 -->
             <li>
                 <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
                     <div class="radio-wrap">
-                        <input type="checkbox" id="monday" value="월" class="checkSelect"/>
+                        <input type="checkbox" id="monday" value="월" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="monday">월</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="tuesday" value="화" class="checkSelect"/>
+                        <input type="checkbox" id="tuesday" value="화" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="tuesday">화</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="wednesday" value="수" class="checkSelect"/>
+                        <input type="checkbox" id="wednesday" value="수" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="wednesday">수</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="thursday" value="목" class="checkSelect"/>
+                        <input type="checkbox" id="thursday" value="목" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="thursday">목</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="friday" value="금" class="checkSelect"/>
+                        <input type="checkbox" id="friday" value="금" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="friday">금</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="saturday" value="토" class="checkSelect"/>
+                        <input type="checkbox" id="saturday" value="토" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="saturday">토</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="sunday" value="일" class="checkSelect"/>
+                        <input type="checkbox" id="sunday" value="일" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="sunday">일</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="home" name="a" value="자택" class="checkSelect1 "/>
+                        <input type="checkbox" id="home" name="work-style" value="자택" class="checkSelect1 "/>
                         <label class="font_jua home_choose" for="home">자택</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="work" value="출근" class="checkSelect1"/>
+                        <input type="checkbox" id="work" name="work-style" value="출근" class="checkSelect1"/>
                         <label class="font_jua home_choose" for="work">출근</label>
                     </div>
                     <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
                 <div>
-                    <input class="input_master_3" type="time" name="mStartTime">
+                    <input class="input_master_3" type="time" name="mStartTime" id="" value="${masterList.mStartTime }">
                     &nbsp;~&nbsp;
-                    <input class="input_master_3" type="time" name="mEndTime">
+                    <input class="input_master_3" type="time" name="mEndTime" id="" value="${masterList.mEndTime }">
                 </div>
             </li>
 
@@ -677,8 +709,7 @@
 
             <!-- 저장 / 취소 버튼 -->
             <li class="margin-top-sgm">
-                <span class="btn_sgm"  onclick="return vali()">저장</span>
-                <span class="btn_sgm_2" id="cancel">취소</span>
+                <span class="btn_sgm"  onclick="document.forms[0].submit()">저장</span>
             </li>
         </ul>
     </div>
@@ -688,13 +719,52 @@
     
     
     <%@ include file="../common/footer.jsp" %>
-  	
-   	<script>
-   	
-   	let popupX = (document.body.offsetWidth/2) - (500/2);
+     
+      <script>
+    /*day check*/
+    (function(){
+        let workday= '${ masterList.mWorkDay }';
+        let arr1 = workday.split(",");
+        let arr2 = $("input[name=work-day]");
+    
+        for(var i=0; i<arr2.length; i++){
+    
+           for(var j=0; j<arr1.length; j++){
+           
+          if(   arr1[j] == $("input[name=work-day]")[i].attributes[2].value  ){
+    
+                 document.getElementsByClassName('checkSelect')[i].checked = true;
+    
+              };
+           };      
+    
+        };
+        
+        /*work-style check*/
+        let workstyle= '${ masterList.mWorkStyle }';
+        let arr3 = workstyle.split(",");
+        let arr4 = $("input[name=work-style]");
+        for(var i=0; i<arr4.length; i++){
+            
+            for(var j=0; j<arr3.length; j++){
+            
+           if(   arr3[j] == $("input[name=work-style]")[i].attributes[3].value){
+                  document.getElementsByClassName('checkSelect1')[i].checked = true;
+     
+               };
+            };      
+     
+         };
+         
+  
+    })();
+      
+      
+      
+      let popupX = (document.body.offsetWidth/2) - (500/2);
     //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
-   	let popupY = (window.screen.height/2)-(300/2);
+      let popupY = (window.screen.height/2)-(300/2);
     //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 
 
@@ -710,65 +780,66 @@
         }else{
            return false;
         }
-   }
+   	}
     
 
     function validate(){ 
 
-         if(!document.master._mProPicOri.value){
+        if(!document.master.M_PROFILE_PIC_ORI.value){
              alert("사진을 넣어주세요"); 
                return false;
-      }
+        } 
    
-        if(!document.master.mNickname.value){
+        if(!document.master.MASTER_NICKNAME.value){
                 alert("별명을 입력해주세요"); 
-                document.master.mNickname.focus();
-                  return false;
-          }
-        
-        if(!document.master.mCategory.value){
-                alert("카테고리 등록을 해주세요"); 
+                document.master.MASTER_NICKNAME.focus();
                   return false;
          }
         
-        if(!document.master._mIdPicOri.value){
-                alert("신분증 등록을 해주세요"); 
+         if(!document.master.MASTER_CATEGORY.value){
+                alert("카테고리 등록을 해주세요"); 
                   return false;
          } 
         
-        if(!document.master.mWorkDay.value){
+         if(!document.master.M_ID_PIC_ORI.value){
+                alert("신분증 등록을 해주세요"); 
+                  return false;
+         }  
+        
+         if(!document.master.MASTER_WORKDAY.value){
                 alert("선호하는 업무 요일을 선택해주세요"); 
                   return false;
-         }
+         } 
         
-        if(!document.master.mWorkStyle.value){
+         if(!document.master.MASTER_WORKSTYLE.value){
                 alert("선호하는 업무 방식을 선택해주세요"); 
                   return false;
          }
         
-        if(!document.master.mStartTime.value){
+        if(!document.master.MASTER_STARTTIME.value){
                 alert("시작 시간을 선택해주세요"); 
                   return false;
-         }
+         } 
         
-        if(!document.master.mEndTime.value){
+        if(!document.master.MASTER_ENDTIME.value){
                 alert("끝나는 시간을 선택해주세요"); 
                   return false;
          }
         success();
         document.forms[0].submit();
      }
+
      </script> 
   
       <script>
       $(function(){
-    	   $('#cancel').on('click', function(){
-    		 if(confirm("정말로 취소하시겠습니까?") == false) {
-    	            return false;
-    	        }else{
-    	        	location.href='index.do';
-    	        }
-    	   });
+          $('#cancel').on('click', function(){
+           if(confirm("정말로 취소하시겠습니까?") == false) {
+                   return false;
+               }else{
+                  location.href='index.do';
+               }
+          });
       });
  
       

@@ -365,6 +365,9 @@ width: 242px;
 width: 500px;
 margin-right: 70px;
 }
+.width_600{
+width: 500px;
+}
 .day11{
 margin-right: 10px;
 }
@@ -381,4 +384,9 @@ transform: rotate(90deg);
 }
 #text-align{
 text-align: center;
+}
+.l-btn-div{
+position: relative;
+margin-top: 100px;
+margin-bottom: -40px;
 }
