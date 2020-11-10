@@ -42,4 +42,6 @@ public interface UserService {
 
 	int nickCheck(String nickname);
 
+	int changePw(HashMap<String, String> map);
+
 }

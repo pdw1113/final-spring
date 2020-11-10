@@ -5,11 +5,16 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
+import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +33,7 @@ import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.Dice;
 import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
@@ -49,7 +55,11 @@ public class UserContoller {
 
 	@Autowired
 	private UserMasterPic uPic;
-
+	
+	@Autowired
+	private UserSignUpController usign;
+		
+		
 	// 암호화 처리
 	@Autowired // spring-security.xml에 등록되어 있음.
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -65,7 +75,8 @@ public class UserContoller {
 	}
 
 	@RequestMapping("changePwd.do")
-	public String changePwd() {
+	public String changePwd(Model model, String email) {
+		model.addAttribute("email",email);
 		return "user/changePwd";
 	}
 
@@ -309,6 +320,37 @@ public class UserContoller {
 	}
 	
 	/**
+	 * 7. 비밀번호 찾기를 통해 비밀번호 재설정
+	 * @param pwd1
+	 * @param email
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "changePw.do")
+	public String changePw(String pwd1, String email, HttpSession session,Model model) {
+		
+		String pwd = (bcryptPasswordEncoder.encode(pwd1));
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		System.out.println("이메일 :" + email);
+		System.out.println("패스워드 : " + pwd);
+		map.put("email", email);
+		map.put("pwd", pwd);
+		
+		int result = uService.changePw(map);
+		
+		if (result == 1) {
+			model.addAttribute("sw",1);
+			return "user/changePwd";
+		} else {
+			model.addAttribute("sw",2);
+			return "index";
+		}
+		
+	}
+	
+	/**
 	 * 10. 능력자 등록 메소드
 	 * 
 	 * @param model
@@ -476,5 +518,22 @@ public class UserContoller {
 			return "ok";
 		}
 	}
-
+	
+	/**
+	 * 13. 이메일 DB에 존재 확인 후 메일 송신
+	 * @param email
+	 * @return
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("emailCheck.do")
+	public String emailCheck(String email,Model model) {
+		
+		int result = uService.emailCheck(email);
+		if (result == 1) { // 저장된 이메일 확인
+			String t = "비밀번호 찾기 인증 이메일 입니다.";
+			model.addAttribute("email",email);
+			return usign.sendEmail(email, t);
+		}
+		return "fail";
+	}
 }

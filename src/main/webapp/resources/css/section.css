@@ -80,11 +80,11 @@ height: fit-content;
 overflow: hidden;
 text-decoration: none;
 transform: translateY(-50%); color: #5a5a5a; }/*글자를 감추기 위해 크기를 100px(before 크기)로 맞추고 overflow:hidden 적용시켜준다 */
-.bx-controls-direction .bx-prev{
-left: 5%;
+.bx-controls-direction .bx-prev {
+left: 10%;
 }
 .bx-controls-direction .bx-next{
-right: 2%;
+right: 10%;
 }
 .bx-controls-direction .bx-prev:before{
 content: "\e93d"; font-family: "xeicon"; /*검사창에서 xi-angle-left-thin:before 를보면 content: "\e93d" 를 가지고 있으므로 적용 시켜준다*/

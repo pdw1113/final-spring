@@ -134,4 +134,12 @@
 		INSERT INTO REASON
 		VALUES(#{email}, #{reason})
 	</insert>
+	
+	<!-- 비밀번호 찾기 재설정 -->
+	<update id="changePw" parameterType="hashmap">
+		UPDATE NEEZ_USER
+		SET
+		USER_PASSWORD = #{pwd}
+		WHERE USER_EMAIL = #{email}
+	</update>
 </mapper>

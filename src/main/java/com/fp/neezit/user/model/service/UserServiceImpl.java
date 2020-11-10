@@ -104,6 +104,11 @@ public class UserServiceImpl implements UserService{
 		return uDao.nickCheck(nickname);
 	}
 
+	@Override
+	public int changePw(HashMap<String, String> map) {
+		return uDao.changePw(map);
+	}
+
 	
 
 }

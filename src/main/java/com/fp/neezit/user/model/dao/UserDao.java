@@ -80,4 +80,8 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.nickCheck",nickname);
 	}
 
+	public int changePw(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.changePw",map);
+	}
+
 }
