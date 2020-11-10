@@ -532,6 +532,14 @@ public class UserContoller {
 		}
 	}
 	
+	
+	/**
+	 * ??. 카카오페이 사이트 접근
+	 * 
+	 * @param total_pay
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "kakaopay.do", method = RequestMethod.POST)
 	public String userLogin(String total_pay, Model model) { // view에 전달하는 데이터를 Model에 담는다.
 		model.addAttribute("total_pay", total_pay); 
@@ -539,8 +547,16 @@ public class UserContoller {
 	}
 	
 	
-	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) public
-	    String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	/**
+	 * ??. 카카오페이 니즈머니 충전
+	 * 
+	 * @param model
+	 * @param money
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) 
+		public String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
 	  
 		User u = (User) session.getAttribute("loginUser");
 		  

@@ -65,7 +65,7 @@
                     
                     <div class="cashRequest_myPage_money">
                         <div class="cTit_myPage_money">출금 가능 니즈머니</div>
-                        <div class="cashWon_myPage_money">0<span>원</span></div>
+                        <div class="cashWon_myPage_money">${cash}<span>원</span></div>
                         <!-- 출금하기 버튼은 0원 초과되면 생기게 구현할 예정 -->
                         <button class="requestBtn_myPage_money" id="cancelReason_wallet"><span>출금하기</span></button>
                     </div>
