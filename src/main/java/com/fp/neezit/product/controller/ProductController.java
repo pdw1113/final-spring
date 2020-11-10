@@ -240,10 +240,13 @@ public class ProductController {
 		int result = pService.insertReply(r);
 		System.out.println(r.getpNo());
 		
-		if(result > 0) {
-			int starResult = pService.updateStar(r.getpNo());
+		if(result == 1) {
 			
-			return "success";
+			int starResult = pService.updateMasterStar(r.getpNo());
+			
+			if(starResult == 1) return "success";
+			else return "fail";
+			
 		}else {
 			return "fail";
 		}

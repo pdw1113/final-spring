@@ -61,4 +61,11 @@ public interface ProductService {
 	 */
 	public ArrayList<Reply> selectReplyList(int pNo);
 
+	/**
+	 * 
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateMasterStar(int pNo);
+
 }

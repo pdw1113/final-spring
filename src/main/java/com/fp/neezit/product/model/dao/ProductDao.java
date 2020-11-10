@@ -68,5 +68,9 @@ public class ProductDao{
 	public ArrayList<Reply> selectReplyList(int pNo) {
 		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList", pNo);
 	}
+
+	public int updateMasterStar(int pNo) {
+		return sqlSession.update("productMapper.updateMasterStar", pNo);
+	}
 	
 }
