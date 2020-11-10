@@ -3,11 +3,16 @@ package com.fp.neezit.user.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
+import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +33,7 @@ import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.Dice;
 import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
@@ -52,7 +58,11 @@ public class UserContoller {
 
 	@Autowired
 	private UserMasterPic uPic;
-
+	
+	@Autowired
+	private UserSignUpController usign;
+		
+		
 	// 암호화 처리
 	@Autowired // spring-security.xml에 등록되어 있음.
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -68,7 +78,8 @@ public class UserContoller {
 	}
 
 	@RequestMapping("changePwd.do")
-	public String changePwd() {
+	public String changePwd(Model model, String email) {
+		model.addAttribute("email",email);
 		return "user/changePwd";
 	}
 
@@ -78,7 +89,14 @@ public class UserContoller {
 	}
 
 	@RequestMapping("wallet.do")
-	public String wallet() {
+	public String wallet(HttpSession session,Model model) {
+		User u = (User) session.getAttribute("loginUser");
+		
+		// 보유 니즈머니 가져오기
+		int cash = uService.userCash(u.getEmail());
+		
+		model.addAttribute("cash",cash);
+		
 		return "user/myPage/wallet";
 	}
 
@@ -93,7 +111,14 @@ public class UserContoller {
 	}
 
 	@RequestMapping("charge.do")
-	public String charge() {
+	public String charge(HttpSession session,Model model) {
+		User u = (User) session.getAttribute("loginUser");
+		
+		// 보유 니즈머니 가져오기
+		int cash = uService.userCash(u.getEmail());
+		
+		model.addAttribute("cash",cash);
+		
 		return "user/myPage/charge";
 	}
 
@@ -317,6 +342,37 @@ public class UserContoller {
 	}
 	
 	/**
+	 * 7. 비밀번호 찾기를 통해 비밀번호 재설정
+	 * @param pwd1
+	 * @param email
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "changePw.do")
+	public String changePw(String pwd1, String email, HttpSession session,Model model) {
+		
+		String pwd = (bcryptPasswordEncoder.encode(pwd1));
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		System.out.println("이메일 :" + email);
+		System.out.println("패스워드 : " + pwd);
+		map.put("email", email);
+		map.put("pwd", pwd);
+		
+		int result = uService.changePw(map);
+		
+		if (result == 1) {
+			model.addAttribute("sw",1);
+			return "user/changePwd";
+		} else {
+			model.addAttribute("sw",2);
+			return "index";
+		}
+		
+	}
+	
+	/**
 	 * 10. 능력자 등록 메소드
 	 * 
 	 * @param model
@@ -484,7 +540,54 @@ public class UserContoller {
 		}
 	}
 	
+	@RequestMapping(value = "kakaopay.do", method = RequestMethod.POST)
+	public String userLogin(String total_pay, Model model) { // view에 전달하는 데이터를 Model에 담는다.
+		model.addAttribute("total_pay", total_pay); 
+		return "common/kakaopay";
+	}
+	
+	
+	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) public
+	    String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	  
+		User u = (User) session.getAttribute("loginUser");
+		  
+		String email = u.getEmail();
+		 
+		HashMap<String, String> map = new HashMap<String, String>();
+		  
+		map.put("email", email);
+		map.put("money",money);
+		 
+		int result = uService.neezcharge(map);
+		 
+		if(result==1) {
+			return "redirect:wallet.do";
+		}else {
+			System.out.println("결제오류");
+			return "redirect:index.do";
+		}
+	 }
+	
 	/**
+	 * 13. 이메일 DB에 존재 확인 후 메일 송신
+	 * @param email
+	 * @return
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("emailCheck.do")
+	public String emailCheck(String email,Model model) {
+		
+		int result = uService.emailCheck(email);
+		if (result == 1) { // 저장된 이메일 확인
+			String t = "비밀번호 찾기 인증 이메일 입니다.";
+			model.addAttribute("email",email);
+			return usign.sendEmail(email, t);
+		}
+		return "fail";
+	}
+	
+	/*
 	 * 13.능력자 관리 리스트  (  )
 	 * 
 	 * @param msu
@@ -667,5 +770,4 @@ public class UserContoller {
 		}
 
 	}
-
 }

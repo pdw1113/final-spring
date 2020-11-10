@@ -24,11 +24,11 @@
                     <div class="cashInfo_myPage_money">
                         <ul>
                             <li class="info_myPage_money">
-                                <p>문혜란 회원님의 <span>보유니즈머니 정보</span></p>
+                                <p>${loginUser.name} 회원님의 <span>보유니즈머니 정보</span></p>
                             </li>
                             <li>
                                 <div class="stit_myPage_money">보유니즈머니</div>
-                                <div class="won_myPage_money">0<span>원</span></div>
+                                <div class="won_myPage_money">${cash}<span>원</span></div>
                                 <a href="charge.do" class="chargeBtn_myPage_money"><span>충전하기</span></a>
                             </li>
                         </ul>

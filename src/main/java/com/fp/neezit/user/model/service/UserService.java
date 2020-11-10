@@ -42,6 +42,12 @@ public interface UserService {
 
 	int nickCheck(String nickname);
 
+	int userCash(String email);
+
+	int neezcharge(HashMap<String, String> map);
+	
+	int changePw(HashMap<String, String> map);
+
 	int master(User u);
 
 	UserMasterSchool getMasterSch(User u);
@@ -57,6 +63,5 @@ public interface UserService {
 	int updateMasterSns(UserMasterSns msn);
 
 	int updateMasterQfc(UserMasterQualifcation mqf);
-
 
 }

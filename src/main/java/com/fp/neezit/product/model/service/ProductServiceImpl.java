@@ -1,6 +1,7 @@
 package com.fp.neezit.product.model.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.fp.neezit.product.model.dao.ProductDao;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -76,5 +78,18 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.wishInsert(map);
 	}
 
+	public int insertReply(Reply r) {
+		return pDao.insertReply(r);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReplyList(int pNo) {
+		return pDao.selectReplyList(pNo);
+	}
+
+	@Override
+	public int updateMasterStar(int pNo) {
+		return pDao.updateMasterStar(pNo);
+	}
 
 }

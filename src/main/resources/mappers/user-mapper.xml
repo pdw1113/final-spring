@@ -187,6 +187,27 @@
 		VALUES(#{email}, #{reason})
 	</insert>
 	
+	<!-- 보유 니즈머니 -->
+	<select id="userCash" parameterType="string" resultType="_int">
+		SELECT USER_CASH 
+		FROM CASH
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 카카오페이 니즈머니 충전 -->
+	<update id="neezcharge" parameterType="hashmap">
+		UPDATE CASH SET USER_CASH =
+		USER_CASH + #{money} WHERE USER_EMAIL=#{email}
+	</update>
+	
+	<!-- 비밀번호 찾기 재설정 -->
+	<update id="changePw" parameterType="hashmap">
+		UPDATE NEEZ_USER
+		SET
+		USER_PASSWORD = #{pwd}
+		WHERE USER_EMAIL = #{email}
+	</update>
+	
 	<!-- 마스터 닉네임값 가져오기 -->
 	<select id="master" parameterType="string" resultType="_int">
 		SELECT COUNT(MASTER_NICKNAME)
@@ -230,7 +251,7 @@
 		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateSch" parameterType="UserMasterSchool">
+	<update id="MasterUpdateSch" parameterType="UserMasterSchool">
 		UPDATE SCHOOL
 		SET MASTER_HIGH = #{sHigh},
 			MASTER_UNIV = #{sUniv},
@@ -244,7 +265,7 @@
 		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateQfa" parameterType="UserMasterQualifcation">
+	<update id="MasterUpdateQfa" parameterType="UserMasterQualifcation">
 		UPDATE QUALIFICATION
 		SET MASTER_QUALIFICATION1 = #{q1},
 			MASTER_QUALIFICATION1_PIC_ORI = #{q1PicOri},
@@ -264,7 +285,7 @@
 		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateSns" parameterType="UserMasterSns">
+	<update id="MasterUpdateSns" parameterType="UserMasterSns">
 		UPDATE SNS
 		SET MASTER_INSTAGRAM = #{snsInsta},
 			MASTER_TWITTER = #{snsTwit},

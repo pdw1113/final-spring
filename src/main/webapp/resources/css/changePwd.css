@@ -49,8 +49,12 @@ border-radius: 7px 7px 7px 7px;
 color: white;
 background-color: #fabe00;
 font-family: jua;
+border: 0px;
 outline: none;
 cursor: pointer;
+}
+.login_button_changePwd:hover{
+opacity: 0.6;
 }
 /* 비밀번호 일치 여부 */
 .form_changePwd div.alert-danger_changePwd{ /* 비밀번호 재확인 불일치 */

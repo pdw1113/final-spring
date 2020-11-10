@@ -1,11 +1,13 @@
 package com.fp.neezit.product.model.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -48,5 +50,26 @@ public interface ProductService {
 	public UserMasterSns getProductSnsDetail(String email);
 
 	public int wishInsert(HashMap<String, String> map);
+	
+	/**
+	 * 댓글 등록 메소드
+	 * @param r
+	 * @return
+	 */
+	public int insertReply(Reply r);
+
+	/**
+	 * 댓글 목록 메소드
+	 * @param pNo
+	 * @return
+	 */
+	public ArrayList<Reply> selectReplyList(int pNo);
+
+	/**
+	 * 
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateMasterStar(int pNo);
 
 }

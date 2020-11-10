@@ -14,6 +14,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.UserMasterQualifcation" alias="UserMasterQualifcation"/>
       <typeAlias type="com.fp.neezit.product.model.vo.Product" alias="Product"/>
       <typeAlias type="com.fp.neezit.product.model.vo.WishList" alias="Wish"/>
+      <typeAlias type="com.fp.neezit.product.model.vo.Reply" alias="Reply"/>
    </typeAliases>
    
    <!-- 
