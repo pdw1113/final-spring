@@ -16,6 +16,17 @@
 		<result property="mEndTime" column="MASTER_ENDTIME" />
 		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
+	
+	<resultMap type="UserMasterSns" id="snsResultSet">
+		<result property="email" column="USER_EMAIL" />
+		<result property="snsInsta" column="MASTER_INSTAGRAM" />
+		<result property="snsTwit" column="MASTER_TWITTER" />
+		<result property="snsBlog" column="MASTER_BLOG" />
+		<result property="snsGit" column="MASTER_GIT" />
+		<result property="snsYou1" column="MASTER_YOTUBUE1" />
+		<result property="snsYou2" column="MASTER_YOTUBUE2" />
+		<result property="snsYou3" column="MASTER_YOTUBUE3" />
+	</resultMap>
 
 	<resultMap type="Product" id="productResultSet">
 		<id property="no" column="PRODUCT_NO" />
@@ -32,18 +43,19 @@
 		<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
 		<result property="count" column="PRODCUT_COUNT" />
 	</resultMap>
-
-	<resultMap type="UserMasterSns" id="snsResultSet">
-		<result property="email" column="USER_EMAIL" />
-		<result property="snsInsta" column="MASTER_INSTAGRAM" />
-		<result property="snsTwit" column="MASTER_TWITTER" />
-		<result property="snsBlog" column="MASTER_BLOG" />
-		<result property="snsGit" column="MASTER_GIT" />
-		<result property="snsYou1" column="MASTER_YOTUBUE1" />
-		<result property="snsYou2" column="MASTER_YOTUBUE2" />
-		<result property="snsYou3" column="MASTER_YOTUBUE3" />
+	
+	<resultMap type="Reply" id="replyResultSet">
+		<id property="rNo" column="REPLY_NO" />
+		<result property="pNo" column="PRODUCT_NO" />
+		<result property="rContent" column="REPLY_CONTENT" />
+		<result property="rStar" column="REPLY_STAR" />
+		<result property="rName" column="USER_NAME" />
+		<result property="rCreateDate" column="REPLY_CREATE_DATE" />
+		<result property="rModifyDate" column="REPLY_MODIFY_DATE" />
+		<result property="refRno" column="REF_REPLY_NO" />
+		<result property="rLevel" column="REPLY_LEVEL" />
 	</resultMap>
-
+	
 	<select id="category"
 		resultType="com.fp.neezit.product.model.vo.ProductCategory">
 		select
@@ -118,11 +130,25 @@
 		WHERE MASTER_NICKNAME = #{nickName}
 	</select>
 
+	<!-- 상품 정보 가져오기 - 3 -->
 	<select id="getProductSnsDetail" parameterType="string"
 		resultMap="snsResultSet">
 		SELECT * FROM SNS
 		WHERE USER_EMAIL = #{email}
 	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(#{pNo},SEQ_RID.NEXTVAL,#{rContent},#{rStar},#{rName},DEFAULT,DEFAULT,#{refRno},#{rLevel})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+		SELECT *
+		FROM REPLY
+		WHERE PRODUCT_NO = #{pNo}
+		ORDER BY REPLY_NO DESC
+	</select>
 
 </mapper>
-

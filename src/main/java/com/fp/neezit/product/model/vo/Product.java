@@ -9,7 +9,7 @@ public class Product {
 	private String title;       // 글제목
 	private String pic; 		// 사진
 	private String renamePic;	// 사진 저장 파일명
-	private String cateone;
+	private String cateone;		// 1분류 카테고리
 	private String category;    // 카테고리
 	private int price;          // 가격
 	private String career;      // 경력

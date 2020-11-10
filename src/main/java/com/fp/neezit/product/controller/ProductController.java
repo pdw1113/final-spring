@@ -1,10 +1,13 @@
 package com.fp.neezit.product.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import net.sf.json.JSONArray;
 
@@ -228,17 +234,33 @@ public class ProductController {
 	 * @param r
 	 * @return
 	 */
-//	@ResponseBody
-//	@RequestMapping(value="addReply.do")
-//	public String addReply(Reply r) {
-////		int result = pService.insertReply(r);
-//		
-//		if(result > 0) {
-//			return "success";
-//		}else {
-//			return "fail";
-//		}
-//	}
+	@ResponseBody
+	@RequestMapping(value="addReply.do")
+	public String addReply(Reply r) {
+		int result = pService.insertReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 8. 댓글 리스트 조회
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
+	@RequestMapping(value="rList.do", produces="application/json; charset=UTF-8")
+	public void getReplyList(HttpServletResponse response, int pNo) throws JsonIOException, IOException {
+		ArrayList<Reply> rList = pService.selectReplyList(pNo);
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(rList,response.getWriter());
+	}
+	
+	
    
    
    

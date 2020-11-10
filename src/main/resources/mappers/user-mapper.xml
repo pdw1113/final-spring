@@ -196,19 +196,19 @@
 	</select>
 	
 	<!-- 능력자 관리 -->
-	<select id="MasterSchool" parameterType="UserSchool" resultMap="userMasterSchoolResultSet">
+	<select id="MasterSchool" parameterType="UserMasterSchool" resultMap="userMasterSchoolResultSet">
 		SELECT *
 		FROM SCHOOL
 		WHERE USER_EMAIL = #{email}
 	</select>
 	
-	<select id="MasterQualifcation" parameterType="UserQualifcation" resultMap="userMasterQualifcationResultSet">
+	<select id="MasterQualifcation" parameterType="UserMasterQualifcation" resultMap="userMasterQualifcationResultSet">
 		SELECT *
 		FROM QUALIFICATION
 		WHERE USER_EMAIL = #{email}
 	</select>
 	
-	<select id="MasterSNS" parameterType="UserSNS" resultMap="userMasterSnsResultSet">
+	<select id="MasterSNS" parameterType="UserMasterSns" resultMap="userMasterSnsResultSet">
 		SELECT *
 		FROM SNS
 		WHERE USER_EMAIL = #{email}
@@ -230,7 +230,7 @@
 		WHERE USER_EMAIL = #{USER_EMAIL}
 	</update>
 	
-		<update id="MasterUpdateSch" parameterType="UserSchool">
+	<update id="MasterUpdateSch" parameterType="UserMasterSchool">
 		UPDATE SCHOOL
 		SET MASTER_HIGH = #{MASTER_HIGH},
 			MASTER_UNIV = #{MASTER_UNIV},
@@ -244,7 +244,7 @@
 		WHERE USER_EMAIL = #{USER_EMAIL}
 	</update>
 	
-		<update id="MasterUpdateQfa" parameterType="UserQualifcation">
+	<update id="MasterUpdateQfa" parameterType="UserMasterQualifcation">
 		UPDATE QUALIFICATION
 		SET MASTER_QUALIFICATION1 = #{MASTER_QUALIFICATION1},
 			MASTER_QUALIFICATION1_PIC_ORI = #{MASTER_QUALIFICATION1_PIC_ORI},
@@ -264,7 +264,7 @@
 		WHERE USER_EMAIL = #{USER_EMAIL}
 	</update>
 	
-		<update id="MasterUpdateSns" parameterType="UserSNS">
+	<update id="MasterUpdateSns" parameterType="UserMasterSns">
 		UPDATE SNS
 		SET MASTER_INSTAGRAM = #{MASTER_INSTAGRAM},
 			MASTER_TWITTER = #{MASTER_TWITTER},
