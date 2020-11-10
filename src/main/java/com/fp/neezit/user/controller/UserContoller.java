@@ -3,16 +3,11 @@ package com.fp.neezit.user.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
-import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +24,11 @@ import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
-import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.Dice;
-import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
 
@@ -503,8 +497,6 @@ public class UserContoller {
 			}
 		}
 		
-	   	// 로그인 세션 정보
-	    User u = (User)session.getAttribute("loginUser");
 		int result = uService.insertMaster(msu);
 		System.out.println("insert : " + msu);
 		int schoolresult = uService.insertMasterSchool(msc);
@@ -754,8 +746,7 @@ public class UserContoller {
 				mqf.setQ5PicRe(renameFileName9);
 			}
 		}
-	   	// 로그인 세션 정보
-	    User u = (User)session.getAttribute("loginUser");
+
 		int result = uService.updatetMaster(msu);
 		System.out.println("update : " + msu);
 		System.out.println("update : " + result);

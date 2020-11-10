@@ -53,7 +53,7 @@
                <hr>
                <script>
                   (function(){
-                  	// Controller에서 받아온 능력자 카테고리
+                     // Controller에서 받아온 능력자 카테고리
                       let category = '${categoryList}';
                       
                       // 문자열을 ,구분자로 잘라내어 배열에 담는다.
@@ -61,7 +61,7 @@
                       
                       // for문으로 select option에 추가한다.
                       for(a in arr){
-                      	$("#my-cate").append("<option>" + arr[a] + "</option>");
+                         $("#my-cate").append("<option>" + arr[a] + "</option>");
                       }
                   })();
                </script>
@@ -79,12 +79,12 @@
                </li>
                <!-- 학력 -->
                <li>
-               	  <c:if test="${!empty SchoolList.sHigh || !empty SchoolList.sUniv || !empty SchoolList.sUnivDept ||
-               	  				!empty SchoolList.sUniv2 || !empty SchoolList.sUniv2Dept}">	
+                    <c:if test="${!empty SchoolList.sHigh || !empty SchoolList.sUniv || !empty SchoolList.sUnivDept ||
+                                !empty SchoolList.sUniv2 || !empty SchoolList.sUniv2Dept}">   
                   <div class="edu-ability" title="학력">
                   </c:if>
-               	  <c:if test="${empty SchoolList.sHigh && empty SchoolList.sUniv && empty SchoolList.sUnivDept &&
-               	  				empty SchoolList.sUniv2 && empty SchoolList.sUniv2Dept}">	
+                    <c:if test="${empty SchoolList.sHigh && empty SchoolList.sUniv && empty SchoolList.sUnivDept &&
+                                empty SchoolList.sUniv2 && empty SchoolList.sUniv2Dept}">   
                   <div class="edu-ability" title="등록된 학력이 없습니다.">
                   </c:if>
                      <c:if test="${!empty SchoolList.sHigh}">
@@ -125,15 +125,15 @@
                </li>
                <!-- 자격증 -->
                <li>
-               	  <c:if test="${empty QualifcationList.q1 && empty QualifcationList.q2 && empty QualifcationList.q3 && 
-               	  				empty QualifcationList.q4 && empty QualifcationList.q5}">
+                    <c:if test="${empty QualifcationList.q1 && empty QualifcationList.q2 && empty QualifcationList.q3 && 
+                                empty QualifcationList.q4 && empty QualifcationList.q5}">
                   <div class="edu-ability" title="등록된 자격증이 없습니다.">
                   </c:if>
                   <c:if test="${!empty QualifcationList.q1 || !empty QualifcationList.q2 || !empty QualifcationList.q3 || 
-               	  				!empty QualifcationList.q4 || !empty QualifcationList.q5}">
+                                !empty QualifcationList.q4 || !empty QualifcationList.q5}">
                   <div class="edu-ability" title="자격증">
                   </c:if>
-                  	 <c:if test="${!empty QualifcationList.q1}">
+                      <c:if test="${!empty QualifcationList.q1}">
                      <div>
                         <input class="input_master" type="text"
                            placeholder="${QualifcationList.q1}">

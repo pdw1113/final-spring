@@ -22,8 +22,8 @@
 
 </head>
 <body>
-	
-	<%@ include file="../common/header.jsp" %>
+   
+   <%@ include file="../common/header.jsp" %>
 
     <form action="signUpMasterUpdate.do" method="POST" enctype="multipart/form-data" name="master">
     <input type="hidden" value="${ loginUser.email }" name="email"/>
@@ -134,31 +134,31 @@
                 return true;
             }
             
-             	 // 별명 중복체크 AJAX
+                 // 별명 중복체크 AJAX
                 $(function(){
-       	         $("#dupl_check").on("click",function(){
-       	        	// #nickname의 값
-       	         	let nickname = $('#nickname').val();     	   
-       	         	$.ajax({
-       	         		url:"nickCheck.do",
-       	         		data:{nickname:nickname},
-       	         		type:"post",
-       	         		success:function(data){
-       	         			// 중복되지 않았을 때
-       	         			if(data == "ok" && regExp() != false){
-       	                        $('.green').show();
-       	                        $('.red').hide();
-       	         			// 중복됐을 때
-       	         			}else{
-       	                        $('.green').hide();
-       	                        $('.red').show();
-       	         			}
-       	         		},
-       	         		error:function(jqxhr, textStatus, errorThrown){
-       	         			console.log("ajax 처리 실패");
-       	         		}
-       	         	});
-       	         });
+                   $("#dupl_check").on("click",function(){
+                     // #nickname의 값
+                      let nickname = $('#nickname').val();           
+                      $.ajax({
+                         url:"nickCheck.do",
+                         data:{nickname:nickname},
+                         type:"post",
+                         success:function(data){
+                            // 중복되지 않았을 때
+                            if(data == "ok" && regExp() != false){
+                                  $('.green').show();
+                                  $('.red').hide();
+                            // 중복됐을 때
+                            }else{
+                                  $('.green').hide();
+                                  $('.red').show();
+                            }
+                         },
+                         error:function(jqxhr, textStatus, errorThrown){
+                            console.log("ajax 처리 실패");
+                         }
+                      });
+                   });
                 });
             </script>
             
@@ -218,7 +218,7 @@
                             </span>
                             <span class="d-btn-container">
                                 <img src="resources/img/rollback.png" class="lr-btn-img-size" id="delete-all">
-                          	 </span>
+                              </span>
                           </div>
                         <select size="8" class="font_jua select-sgm" id="my-cate">
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
@@ -438,7 +438,7 @@
                 
 
                 (function(){
-                	// Controller에서 받아온 능력자 카테고리
+                   // Controller에서 받아온 능력자 카테고리
                     let category = '${categoryList}';
                     
                     // 문자열을 ,구분자로 잘라내어 배열에 담는다.
@@ -446,7 +446,7 @@
                     
                     // for문으로 select option에 추가한다.
                     for(a in arr){
-                    	$("#my-cate").append("<option>" + arr[a] + "</option>");
+                       $("#my-cate").append("<option>" + arr[a] + "</option>");
                     }
                 })();
 
@@ -586,7 +586,7 @@
                 </div>
             </li>
 
-			<script>
+         <script>
                 let ok = function(obj){
                     $(obj).next().css("display","inline");
                 };
@@ -656,7 +656,7 @@
             </script>
 
             <hr>
-			 <!-- 작업 가능 시간 -->
+          <!-- 작업 가능 시간 -->
             <li>
                 <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
@@ -719,8 +719,8 @@
     
     
     <%@ include file="../common/footer.jsp" %>
-  	
-   	<script>
+     
+      <script>
     /*day check*/
     (function(){
         let workday= '${ masterList.mWorkDay }';
@@ -758,13 +758,13 @@
          
   
     })();
-   	
-   	
-   	
-   	let popupX = (document.body.offsetWidth/2) - (500/2);
+      
+      
+      
+      let popupX = (document.body.offsetWidth/2) - (500/2);
     //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
-   	let popupY = (window.screen.height/2)-(300/2);
+      let popupY = (window.screen.height/2)-(300/2);
     //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 
 
@@ -780,7 +780,7 @@
         }else{
            return false;
         }
-   }
+   	}
     
 
     function validate(){ 
@@ -833,13 +833,13 @@
   
       <script>
       $(function(){
-    	   $('#cancel').on('click', function(){
-    		 if(confirm("정말로 취소하시겠습니까?") == false) {
-    	            return false;
-    	        }else{
-    	        	location.href='index.do';
-    	        }
-    	   });
+          $('#cancel').on('click', function(){
+           if(confirm("정말로 취소하시겠습니까?") == false) {
+                   return false;
+               }else{
+                  location.href='index.do';
+               }
+          });
       });
  
       
