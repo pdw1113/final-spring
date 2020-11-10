@@ -339,7 +339,7 @@ display: block;
 margin: 0 0 10px 0;
 }
 /* 충전하기 버튼 */
-.pBtn_mypay{
+.pBtn_mypay{ 
 border:none;
 outline:none;
 display: flex;
