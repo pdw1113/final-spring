@@ -75,80 +75,84 @@ public class UserSignUpController {
 			
 		// 이메일 중복 X
 		}else {
-			// 인증번호 난수(랜덤 숫자)
-	        Random r = new Random();
-	        
-	        // 이메일로 받는 인증코드 부분 (난수) (0 ~ 4589361) + 49311;
-	        int diceInt = r.nextInt(4589362) + 49311; 
-	        
-	        // String으로 바꿔준다.
-	        String dice = Integer.toString(diceInt);
-	        
-	        diceObj.setDice(dice);
-	        
-	        // 보내는 사람 Email
-	        String setfrom = "cjsehdals0430@gmail.com";
-	        
-	        // 받는 사람 Email
-	        String tomail = email;
-	        
-	        // 제목
-	        String title = "회원가입 인증 이메일 입니다.";
-	        
-	        // 내용
-	        String content =
-	        
-	        System.getProperty("line.separator") + // 현재 OS에 맞는 개행 문자를 사용할 수 있다.
-	        
-	        System.getProperty("line.separator") +
-	                
-	        "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다" +
-	        
-	        System.getProperty("line.separator") +
-	        
-	        System.getProperty("line.separator") +
-	
-	        "인증번호는 " + dice + " 입니다. " +
-	        
-	        System.getProperty("line.separator") +
-	        
-	        System.getProperty("line.separator") +
-	        
-	        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다.";
-	        
-	        try {
-	        	// 이메일 메세지 보낼 수 있는 객체 라이브러리
-	            MimeMessage message = mailSender.createMimeMessage();
-	            
-	            // MimeMessage를 도와주는 객체 라이브러리
-	            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-	
-	            // MimeMessageHelper 양식
-	            messageHelper.setFrom(setfrom);  // 보내는 사람 E-mail
-	            messageHelper.setTo(tomail);     // 받는 사람    E-mail
-	            messageHelper.setSubject(title); // 메일 제목   (생략 가능)
-	            messageHelper.setText(content);  // 메일 내용
-	            
-	            // 인증번호 출력용
-	            System.out.println("랜덤 생성된 인증번호 :" + dice);
-	
-	            // 사진 파일 전송 
-	//            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
-	//            messageHelper.addInline("g.gif", file);
-	            
-	            // MimeMessage 전송
-	            mailSender.send(message);
-	            
-	            return "ok";
-	            
-	        } catch (Exception e) {
-	        	
-	            System.out.println(e);
-	            return "fail";
-	        }
+			String t = "회원가입 인증 이메일 입니다.";
+			return sendEmail(email,t);
 		}
     }
 
+    
+    public String sendEmail(String email,String t) {
+    	// 인증번호 난수(랜덤 숫자)
+        Random r = new Random();
+        
+        // 이메일로 받는 인증코드 부분 (난수) (0 ~ 4589361) + 49311;
+        int diceInt = r.nextInt(4589362) + 49311; 
+        
+        // String으로 바꿔준다.
+        String dice = Integer.toString(diceInt);
+        
+        diceObj.setDice(dice);
+        
+        // 보내는 사람 Email
+        String setfrom = "cjsehdals0430@gmail.com";
+        
+        // 받는 사람 Email
+        String tomail = email;
+        
+        // 제목
+        String title = t;
+        
+        // 내용
+        String content =
+        
+        System.getProperty("line.separator") + // 현재 OS에 맞는 개행 문자를 사용할 수 있다.
+        
+        System.getProperty("line.separator") +
+                
+        "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다" +
+        
+        System.getProperty("line.separator") +
+        
+        System.getProperty("line.separator") +
+
+        "인증번호는 " + dice + " 입니다. " +
+        
+        System.getProperty("line.separator") +
+        
+        System.getProperty("line.separator") +
+        
+        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다.";
+        
+        try {
+        	// 이메일 메세지 보낼 수 있는 객체 라이브러리
+            MimeMessage message = mailSender.createMimeMessage();
+            
+            // MimeMessage를 도와주는 객체 라이브러리
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+            // MimeMessageHelper 양식
+            messageHelper.setFrom(setfrom);  // 보내는 사람 E-mail
+            messageHelper.setTo(tomail);     // 받는 사람    E-mail
+            messageHelper.setSubject(title); // 메일 제목   (생략 가능)
+            messageHelper.setText(content);  // 메일 내용
+            
+            // 인증번호 출력용
+            System.out.println("랜덤 생성된 인증번호 :" + dice);
+
+            // 사진 파일 전송 
+//            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\drnew\\Pictures\\g.gif"));
+//            messageHelper.addInline("g.gif", file);
+            
+            // MimeMessage 전송
+            mailSender.send(message);
+            
+            return "ok";
+        	} catch (Exception e) {
+        	
+            System.out.println(e);
+            return "fail";
+        }
+    }
     /**
      * 2─1. EMAIL 인증번호 비교 메소드 
      * @param model

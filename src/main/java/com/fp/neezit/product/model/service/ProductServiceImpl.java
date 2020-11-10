@@ -1,5 +1,6 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.product.model.dao.ProductDao;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -51,6 +54,36 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> myProductList(UserMaster master) {
 		return pDao.myProductList(master);
+	}
+
+	@Override
+	public Product getProductDetail(int no) {
+		return pDao.getProductDetail(no);
+	}
+
+	@Override
+	public UserMaster getProductDetail(String nickName) {
+		return pDao.getProductDetail(nickName);
+	}
+
+	@Override
+	public UserMasterSns getProductSnsDetail(String email) {
+		return pDao.getProductSnsDetail(email);
+	}
+
+	@Override
+	public int insertReply(Reply r) {
+		return pDao.insertReply(r);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReplyList(int pNo) {
+		return pDao.selectReplyList(pNo);
+	}
+
+	@Override
+	public int updateMasterStar(int pNo) {
+		return pDao.updateMasterStar(pNo);
 	}
 
 }

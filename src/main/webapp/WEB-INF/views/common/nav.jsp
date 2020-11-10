@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="resources/css/nav.css">
    </head>
    <body>
-      <!-- Nav 영역 -->
+<!-- Nav 영역 -->
       <div class="wrapper_Nav">
          <nav class="wrapper_NavIcon">
             <li>
@@ -52,50 +52,26 @@
             </li>
             <li>
                <a href="productList.do?navNo=70">
-                  <img class="nav_img shop_icon" src="resources/img/shop_icon.png"><br>
-                  <p>쇼핑몰</p>
-               </a>
-            </li>
-            <li>
-               <a href="productList.do?navNo=80">
-                  <img class="nav_img devlop_icon" src="resources/img/development.png"><br>
-                  <p>프로그램개발</p>
-               </a>
-            </li>
-            <li>
-               <a href="productList.do?navNo=90">
                   <img class="nav_img game_icon" src="resources/img/game.png"><br>
                   <p>게임</p>
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=100">
+               <a href="productList.do?navNo=80">
                   <img class="nav_img analysis_icon" src="resources/img/analysis.png"><br>
                   <p>데이터분석</p>
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=110">
+               <a href="productList.do?navNo=90">
                   <img class="nav_img security_icon" src="resources/img/security.png"><br>
                   <p>보안</p>
                </a>
             </li>
             <li>
-               <a href="productList.do?navNo=120">
-                  <img class="nav_img quality_icon" src="resources/img/QA2_black.png"><br>
-                  <p>품질보증</p>
-               </a>
-            </li>
-            <li>
-               <a href="productList.do?navNo=130">
-                  <img class="nav_img chatbot_icon" src="resources/img/PngItem_5002858.png"><br>
-                  <p>챗봇</p>
-               </a>
-            </li>
-            <li>
                <a href="productList.do?navNo=140">
                   <img class="nav_img etc_icon" src="resources/img/etc.png"><br>
-                  <p>기타</p>
+                  <p>전체</p>
                </a>
             </li>
          </nav>
