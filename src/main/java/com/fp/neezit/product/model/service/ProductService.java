@@ -1,10 +1,12 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -47,6 +49,8 @@ public interface ProductService {
 	
 	public UserMasterSns getProductSnsDetail(String email);
 
+	public int wishInsert(HashMap<String, String> map);
+	
 	/**
 	 * 댓글 등록 메소드
 	 * @param r

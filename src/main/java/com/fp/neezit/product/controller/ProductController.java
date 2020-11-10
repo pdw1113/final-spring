@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.neezit.product.model.service.ProductService;
@@ -31,10 +33,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 import net.sf.json.JSONArray;
-
+@SessionAttributes("product") 
 @Controller
 public class ProductController {
-   
+
    @Autowired
    ProductService pService;
 
@@ -213,8 +215,7 @@ public class ProductController {
 	  
 	  // 상품 정보 가져오기 2
 	  UserMaster m = pService.getProductDetail(p.getNickName());
-	  System.out.println(m);
-	  
+
 	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
 	  
 	  
@@ -228,6 +229,30 @@ public class ProductController {
 	  
 	  return "common/errorPage";
    }
+   
+	/**
+	 * 08. 찜목록 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishInsert.do")
+	public String wishInsert(String email, String no ,HttpSession session){
+		// 2개의 객체를 insert 하기위해 HashMap
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("no", no);
+		int result = pService.wishInsert(map);
+		System.out.println(result);
+		
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
    
 	/**
 	 * 7. 댓글 등록 메소드

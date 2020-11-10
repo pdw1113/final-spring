@@ -303,6 +303,10 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
+	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
+=======
 	
 	<script>
 	    // 댓글창 enter 키 이벤트
@@ -432,16 +436,7 @@
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
 						}
-					}else{ // 댓글이 없을 경우
-						alert("A");
-						/* $tr = $("<tr>");
-						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-						
-						$tr.append($rContent);
-						$tableBody.append($tr);
-						 */
 					}
-					 
 				},error:function(request,status,errorData){
 					console.log(request.status + ":" + errorData);
 				}
@@ -483,6 +478,7 @@
 	    
 	</script>
 
+>>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
 	<script>
 		// 찜하기
 		function heart(){
@@ -490,7 +486,27 @@
 			if($heart.hasClass("far")){
 				$heart.removeClass("far");
 				$heart.addClass("fas");		
-				alert("찜 되었습니다.");		
+ 				let email = $(".wishEmail").val();
+				let no = $(".wishProduct").val();
+				   var data = {
+						   email : email,
+						     no : no
+						     };
+				$.ajax({
+				    url : "wishInsert.do",
+				    type : "post",
+				    data : data,
+				    success : function(result){
+				    	if(result == "ok"){
+				    		alert("찜 성공");
+				    	}
+				    },
+				    error : function(result){
+				    	if(result == "fail"){
+				    		alert("찜 실패");
+				    	}
+				    }
+				   });
 			}else{
 				$heart.removeClass("fas");
 				$heart.addClass("far");	
