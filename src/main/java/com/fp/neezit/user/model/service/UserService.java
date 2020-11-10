@@ -65,7 +65,7 @@ public interface UserService {
 	int updateMasterSns(UserMasterSns msn);
 
 	int updateMasterQfc(UserMasterQualifcation mqf);
-
+	
 	List<Product> wishList(User u);
 
 }

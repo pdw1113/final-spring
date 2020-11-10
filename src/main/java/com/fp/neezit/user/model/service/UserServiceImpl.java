@@ -159,10 +159,9 @@ public class UserServiceImpl implements UserService{
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return uDao.updateMasterQfc(mqf);
 	}
-
-	@Override
-	public List<Product> wishList(User u) {
-		return uDao.wishList(u);
-	}
-
+	
+    @Override
+    public List<Product> wishList(User u) {
+       return uDao.wishList(u);
+    }
 }

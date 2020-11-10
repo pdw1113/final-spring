@@ -770,6 +770,7 @@ public class UserContoller {
 		}
 
 	}
+	
 	/**
 	 * 15.찜등록 리스트
 	 * 
