@@ -53,7 +53,7 @@
 						<em class="master_nickname">${ master.mNickname }</em> <span
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
-						</i> <i class="grade_total"> 5.0 <sapn>(10)</sapn>
+						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(10)</sapn>
 						</i>
 						</span>
 					</div>
@@ -112,7 +112,7 @@
 				<div class="p_col_right">
 					<div class="sns_flex_container">
 						<div class="sns_img_container">
-							<a href="${ sns.snsGit }"> <img src="resources/img/git.png">
+							<a href=""> <img src="resources/img/git.png">
 							</a>
 						</div>
 						<div class="sns_img_container">
@@ -130,12 +130,6 @@
 							</a>
 						</div>
 					</div>
-
-					<script>
-          	let aa = $(".sns_img_container a").attr("href");
-          	console.log(aa);
-          
-          </script>
 
 					<hr class="hr_sns">
 
@@ -192,6 +186,7 @@
 				</div>
 			</section>
 			<!-- // 환불규정 -->
+		
 
 			<section class="idx sec_common p2p_class_cmt" id="review">
 				<div class="p_col_left">
@@ -204,7 +199,9 @@
 						</ul>
 					</div>
 					<div class="inputReview">
-						<textarea placeholder="상품을 구매한 회원만 댓글을 작성 할 수 있습니다." rows="3"></textarea>
+						<textarea placeholder="상품을 구매한 회원만 댓글을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
+						<input type="hidden" value="0" id="firstno"/>
+						<input type="hidden" value="1" id="firstlevel"/>
 						<button id="cmt_btn">
 							댓글<br>작성
 						</button>
@@ -228,21 +225,6 @@
 								</div>
 							</li>
 							<hr>
-							<li class="list">
-								<div class="tutee_info">
-									<span class="img"> <img src="resources/img/동민_PIC.jpg">
-									</span>
-									<div class="tutee">
-										<span class="name">천동민</span>
-										<div class="date">
-											<p>2020-11-05 22:35:49</p>
-										</div>
-									</div>
-								</div>
-								<div class="cmt">
-									<p class="hide">오늘 강의들었는데 너무 좋았어요</p>
-								</div>
-							</li>
 						</ul>
 					</div>
 					<!--// 댓글영역 -->
@@ -250,7 +232,6 @@
 			</section>
 		</div>
 		<!-- // 왼쪽 영역 -->
-
 
 		<!-- 오른쪽 가격 영역 -->
 		<div class="sticky_area" id="sticky">
@@ -268,7 +249,7 @@
 				<ul class="p_flex job_where">
 					<li>자택(온라인)</li>
 					<li>출장</li>
-					<li>09:00 ~ 10:00</li>
+					<li class="dayOn">asd</li>
 				</ul>
 				<hr>
 				<ul class="p_flex">
@@ -290,8 +271,8 @@
 					<li>일간</li>
 				</ul>
 				<ul class="btn_area btn_m">
-					<li class="wish"><a href="#" onclick="alert('로그인이 필요합니다')">
-							<i class="far fa-heart"></i>
+					<li class="wish"><a href="#" onclick="heart();">
+							<i class="fa-heart far"></i>
 					</a></li>
 					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
 							바로 구매하기 </a></li>
@@ -318,10 +299,260 @@
 					class="fa-star far"></i>
 			</div>
 			<div>
-				<button class="star_btn">별점 등록</button>
+				<button class="star_btn" id="addReply">별점 등록</button>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+	    // 댓글창 enter 키 이벤트
+	    $(document).on('keydown', '#rContent', function(e){
+	        if(e.keyCode == 13 && !e.shiftKey) {
+	            e.preventDefault(); // 엔터키가 입력되는 것을 막아준다.
+	            $(".modal_container").css("display", "block"); // 모달팝업 열기
+	        }
+	    });
+	
+		// 댓글 등록 AJAX
+		$(function(){
+			
+			// 댓글 조회 ajax
+			getReplyList();
+			
+			// 사용자 댓글 등록 ajax
+			$("#addReply").on("click",function(){
+				
+				var pNo = "${ product.no }";	// 상품 번호
+				var rContent = $("#rContent").val(); // 댓글 내용
+				var rStar = $(".modal_star").find(".fas").length; // 꽉찬 별 갯수당 숫자로 치환
+				var rName = "${ sessionScope.loginUser.name }"; // 댓글 작성자
+				var refRno = $("#firstno").val(); // 댓글 참조 번호
+				var rLevel = $("#firstlevel").val(); // 댓글 레벨
+				
+	 			$.ajax({
+					url:"addReply.do",
+					data:{
+						pNo:pNo,
+						rContent:rContent,
+						rStar:rStar,
+						rName:rName,
+						refRno:refRno,
+						rLevel:rLevel
+					},
+					type:"post",
+					success:function(data){
+						if(data == "success"){
+							getReplyList();
+							
+							$("#rContent").val(""); // 댓글 초기화
+							$(".modal_container").css("display", "none"); // 모달 팝업 닫기
+						    $(".modal_star i").addClass('far');	// 별 바꾸기
+						    $(".modal_star i").removeClass('fas'); // 별 비우기
+						}
+					},error:function(request,status,errorData){
+						console.log(request.status + ":" + errorData);
+					}
+				});
+			});
+		});
+		
+		// 댓글 목록 AJAX
+		function getReplyList(){
+			
+			var pNo = "${ product.no }";
+			
+			$.ajax({
+				url:"rList.do",
+				data:{pNo:pNo},
+				dataType:"json",
+				success:function(data){
+					
+					console.log(data);
+ 					$cmtWrap = $(".cmt_wrap");
+					$cmtWrap.html("");
+ 					
+					
+					var $li; // 1단계
+					
+					var $divInfo; // 2단계
+					
+					var $divCmt; // 2-1단계
+					
+					var $span; // 3단계
+					var $divTutee; // 3단계
+					
+					var $pCon; // 3-1단계
+					
+					var $img;	// 4-1 단계
+					
+					var $spanName; // 4-2단계
+					var $divDate; // 4-2단계
+					
+					var $pDate; // 5단계
+					var $hr; // 구분선
+					
+					if(data.length > 0){ // 댓글이 있을 경우
+						for(var i in data){
+							
+							$li = $("<li class='list'>"); // 1단계
+							
+							$divInfo = $("<div class='tutee_info'>"); // 2단계
+							
+							$divCmt = $("<div class='cmt'>"); // 2-1단계
+							
+							$span = $("<span class='img'>"); // 3단계
+							$divTutee = $("<div class='tutee'>"); // 3단계
+							
+							$pCon = $("<p class='hide'>").text(data[i].rContent); // 3-1단계
+							
+							$img = $("<img src='resources/img/동민_PIC.jpg'>"); // 4-1 단계
+							
+							$spanName = $("<span class='name'>").text(data[i].rName); //4-2단계
+							$divDate  = $("<div class='date'>"); // 4-2단계
+							
+							$pDate = $("<p>").text(data[i].rCreateDate); // 5단계
+							
+							$hr = $("<hr>"); // 구분선
+							
+							$divDate.append($pDate); // 5단계 추가
+
+							$span.append($img);	// 4-1 단계 추가
+							
+							$divTutee.append($spanName); // 4-2단계 추가
+							$divTutee.append($divDate);	// 4-2단계 추가
+							
+							$divInfo.append($span); // 3단계 추가
+							$divInfo.append($divTutee); // 3단계 추가
+							
+							$divCmt.append($pCon); // 3-1단계 추가 추가
+							
+							$li.append($divInfo); // 2단계 추가
+							$li.append($divCmt); // 2-1단계 추가
+							
+							$cmtWrap.append($li); // ul태그에 1단계 추가
+							$cmtWrap.append($hr); // 구분선 추가!!
+						}
+					}else{ // 댓글이 없을 경우
+						alert("A");
+						/* $tr = $("<tr>");
+						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+						
+						$tr.append($rContent);
+						$tableBody.append($tr);
+						 */
+					}
+					 
+				},error:function(request,status,errorData){
+					console.log(request.status + ":" + errorData);
+				}
+			});
+		}
+	
+	    // 별찍기
+	    $(".modal_star i").click(function(){
+	      // 빈 별일 때
+	      if($(this).hasClass('far')){
+	        // 자신과 뒤의 형제 빈 별 지우고
+	        $(this).removeClass('far').prevAll('i').removeClass('far');
+	        // 자신과 뒤의 형제 꽉찬 별 그리기.
+	        $(this).addClass('fas').prevAll('i').addClass('fas');
+	      }
+	      // 꽉찬 별일 때
+	      else{
+	        // 자신 앞의 형제 꽉찬 별 지우고 빈 별 그리기.
+	        $(this).nextAll('i').removeClass('fas').addClass('far');
+	      }
+	    })
+
+	    // 댓글 작성 클릭 시 별점 모달 팝업 
+	    $("#cmt_btn").click(function () {
+	      $(".modal_container").css("display", "block");
+	    });
+	    // 모달 팝업 배경 클릭 시 닫기
+	    $(".modal_container").click(function (e) {
+	      // 모달 닫고
+	      $(".modal_container").css("display", "none");
+	      // 찍은 별 초기화
+	      $(".modal_star i").addClass('far');
+	      $(".modal_star i").removeClass('fas');
+	    });
+	    //  모달 팝업 클릭 시 부모 요소 이벤트 버블링 차단
+	    $(".cmt_modal").click(function (e) {
+	      e.stopPropagation();
+	    });
+	    
+	</script>
+
+	<script>
+		// 찜하기
+		function heart(){
+			let $heart = $(".fa-heart");
+			if($heart.hasClass("far")){
+				$heart.removeClass("far");
+				$heart.addClass("fas");		
+				alert("찜 되었습니다.");		
+			}else{
+				$heart.removeClass("fas");
+				$heart.addClass("far");	
+				alert("찜해제 되었습니다.");
+			}
+		}
+	
+		// 별 넣기
+		let star = "${master.mStar}";
+		$("#starPoint").html(star.substring(0,3));
+		
+		// 시간 CSS 변화
+		let starttime = "${master.mStartTime}";
+		let endtime = "${master.mEndTime}";
+		$(".job_where li:last-child").html(starttime + " ~ " + endtime);
+		
+		// 자택 / 출징 CSS 변화
+		let goho = "${master.mWorkStyle}";
+		let gohoDay = goho.split(",");
+		let goholist = $(".job_where li");
+		for(var i = 0; i < 2; i++){
+			for(var j = 0; j < 2; j++){
+ 				if(goholist[j].innerText.match(goho[i]) != null){
+					goholist[j].classList.add('dayOn');
+				}
+			}
+		}
+		
+		// 요일 유무에 따른 CSS 변화
+		let recDay = "${master.mWorkDay}";
+		let arrDay = recDay.split(",");
+		let daylist = $(".day_list li");
+		for(var i = 0; i < arrDay.length; i++ ){
+			for(var j = 0; j < daylist.length; j++ ){
+				if(arrDay[i] === daylist[j].innerText){
+					daylist[j].classList.add('dayOn');
+				}
+			}
+		}
+	
+		// youtube 유무에 따른 css 변화
+		let youLink = $(".youtube_show");
+		for(var i = 0; i < youLink.length; i++){
+			if(youLink[i].getAttribute("value") == "https://"){
+				youLink[i].parentNode.removeChild(youLink[i]);
+			}
+		}
+	
+		// sns 클릭 및 유무에 따른 css 변경
+       	let snsLink = $(".sns_img_container a");
+       	for(var i = 0; i < snsLink.length; i++){
+       		if(snsLink[i].getAttribute("href") == ""){
+       			snsLink[i].parentNode.classList.add('snsNone');
+       			snsLink[i].removeAttribute("href");
+       			snsLink[i].onclick = function(){
+       				alert("능력자가 등록하지 않았어요ㅠㅠ");
+       			}
+       		}
+       	}
+       	
+      </script>
+
 	<script>
   		// tag 추가
 		let list = "${ product.category }";
@@ -345,41 +576,6 @@
       }
       a--;
       $(this).next().html(a);
-    });
-  </script>
-
-	<script>
-    // 별찍기
-    $(".modal_star i").click(function(){
-      // 빈 별일 때
-      if($(this).hasClass('far')){
-        // 자신과 뒤의 형제 빈 별 지우고
-        $(this).removeClass('far').prevAll('i').removeClass('far');
-        // 자신과 뒤의 형제 꽉찬 별 그리기.
-        $(this).addClass('fas').prevAll('i').addClass('fas');
-      }
-      // 꽉찬 별일 때
-      else{
-        // 자신 앞의 형제 꽉찬 별 지우고 빈 별 그리기.
-        $(this).nextAll('i').removeClass('fas').addClass('far');
-      }
-    })
-
-    // 댓글 작성 클릭 시 별점 모달 팝업 
-    $("#cmt_btn").click(function () {
-      $(".modal_container").css("display", "block");
-    });
-    // 모달 팝업 배경 클릭 시 닫기
-    $(".modal_container").click(function (e) {
-      // 모달 닫고
-      $(".modal_container").css("display", "none");
-      // 찍은 별 초기화
-      $(".modal_star i").addClass('far');
-      $(".modal_star i").removeClass('fas');
-    });
-    //  모달 팝업 클릭 시 부모 요소 이벤트 버블링 차단
-    $(".cmt_modal").click(function (e) {
-      e.stopPropagation();
     });
   </script>
 

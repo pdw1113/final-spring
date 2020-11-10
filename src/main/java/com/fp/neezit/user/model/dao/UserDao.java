@@ -83,5 +83,37 @@ public class UserDao {
 	public int changePw(HashMap<String, String> map) {
 		return sqlSession.update("userMapper.changePw",map);
 	}
+	
+	public int master(User u) {
+		return sqlSession.selectOne("userMapper.master",u);
+	}
+
+	public UserMasterSchool getMasterSch(User u) {
+		return sqlSession.selectOne("userMapper.MasterSchool",u);
+	}
+
+	public UserMasterQualifcation getMasterQfa(User u) {
+		return sqlSession.selectOne("userMapper.MasterQualifcation",u);
+	}
+
+	public UserMasterSns getMasterSns(User u) {
+		return sqlSession.selectOne("userMapper.MasterSNS",u);
+	}
+
+	public int updatetMaster(UserMaster msu) {
+		return sqlSession.update("userMapper.MasterUpdate",msu);
+	}
+
+	public int updateMasterSchool(UserMasterSchool msc) {
+		return sqlSession.update("userMapper.MasterUpdateSch",msc);
+	}
+
+	public int updateMasterSns(UserMasterSns msn) {
+		return sqlSession.update("userMapper.MasterUpdateSns",msn);
+	}
+
+	public int updateMasterQfc(UserMasterQualifcation mqf) {
+		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
+	}
 
 }

@@ -208,6 +208,7 @@
                             <option>넥사크로</option>
                             <option>기타등등</option> -->
                         </select>
+                        <div class="l-btn-div">
                             <span class="l-btn-container">
                                 <img src="resources/img/left_button_sgm.png" class="lr-btn-img-size" id="minus-category">
                             </span>
@@ -216,7 +217,8 @@
                             </span>
                             <span class="d-btn-container">
                                 <img src="resources/img/rollback.png" class="lr-btn-img-size" id="delete-all">
-                            </span>
+                          	 </span>
+                          </div>
                         <select size="8" class="font_jua select-sgm" id="my-cate">
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
                             <option disabled>-------------------------------------------</option>
@@ -288,8 +290,8 @@
                    /* check1 = $(this).text();  */ 
                    check1 = $(this).val(); 
                    
-              cate2Select.append("<option disabled value=''>2 분류</option>");
-              cate2Select.append("<option disabled>----------</option>");
+              cate2Select.append("<option disabled value='' id='text-align'>2 분류</option>");
+              cate2Select.append("<option disabled>-----------------------</option>");
               
               console.log(check1);
               
@@ -333,8 +335,8 @@
                console.log(check2);
               
               var selectVal = $(this).val();  
-              cate3Select.append("<option disabled value=''>3 분류</option>");
-              cate3Select.append("<option disabled>----------</option>");
+              cate3Select.append("<option disabled value='' id='text-align'>3 분류</option>");
+              cate3Select.append("<option disabled>-----------------------</option>");
               
               for(var i = 0; i < cate3Arr.length; i++) {
                if(selectVal == cate3Arr[i].cateCodeRef) {
@@ -689,10 +691,10 @@
   	
    	<script>
    	
-   	var popupX = (document.body.offsetWidth/2) - (500/2);
+   	let popupX = (document.body.offsetWidth/2) - (500/2);
     //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
-    var popupY = (window.screen.height/2)-(300/2);
+   	let popupY = (window.screen.height/2)-(300/2);
     //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 
 

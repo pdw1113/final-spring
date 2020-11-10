@@ -1,5 +1,6 @@
 package com.fp.neezit.product.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -57,6 +59,14 @@ public class ProductDao{
 
 	public UserMasterSns getProductSnsDetail(String email) {
 		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
+	}
+
+	public int insertReply(Reply r) {
+		return sqlSession.insert("productMapper.insertReply",r);
+	}
+
+	public ArrayList<Reply> selectReplyList(int pNo) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList", pNo);
 	}
 	
 }
