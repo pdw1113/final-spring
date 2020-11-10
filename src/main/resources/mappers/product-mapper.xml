@@ -89,6 +89,13 @@
 		start with CATECODEREF = #{navNo}
 		connect by prior CATECODE = CATECODEREF
 	</select>
+	
+	<select id="getProductList" parameterType="_int" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+		WHERE CATECODE = #{navNo}
+	</select>
 
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="Product">
@@ -176,5 +183,11 @@
 		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
 	</insert>
 	
+	<!-- 댓글 등록자 수 조회 -->
+	<select id="getReplyCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM REPLY
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE MASTER_NICKNAME = #{nickName}
+	</select>
 
 </mapper>

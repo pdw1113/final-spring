@@ -339,7 +339,9 @@ display: block;
 margin: 0 0 10px 0;
 }
 /* 충전하기 버튼 */
-.pBtn_mypay{
+.pBtn_mypay{ 
+border:none;
+outline:none;
 display: flex;
 width: 100%;
 height: 80px;
@@ -350,16 +352,10 @@ overflow: hidden;
 cursor: pointer;
 justify-content: center;
 align-items: center;
-}
-.pBtn_mypay > a {
-text-decoration: none;
+font-family:  jua;
 font-size: 25px;
-font-weight: normal;
-font-family: jua;
-pointer-events: none;
-cursor: pointer;
-color: #272d32;
 }
+
 /* 반응형~ */
 @media (max-width: 1360px) {
 /* 사이드 여백 */

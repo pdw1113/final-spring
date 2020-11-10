@@ -53,7 +53,7 @@
 						<em class="master_nickname">${ master.mNickname }</em> <span
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
-						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(10)</sapn>
+						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(${replyCount})</sapn>
 						</i>
 						</span>
 					</div>
@@ -303,11 +303,9 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
-=======
-	
+
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
@@ -436,16 +434,7 @@
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
 						}
-					}else{ // 댓글이 없을 경우
-						alert("A");
-						/* $tr = $("<tr>");
-						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-						
-						$tr.append($rContent);
-						$tableBody.append($tr);
-						 */
 					}
-					 
 				},error:function(request,status,errorData){
 					console.log(request.status + ":" + errorData);
 				}
@@ -487,7 +476,6 @@
 	    
 	</script>
 
->>>>>>> branch 'master' of https://github.com/pdw1113/final-spring.git
 	<script>
 		// 찜하기
 		function heart(){

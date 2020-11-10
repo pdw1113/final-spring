@@ -78,5 +78,13 @@ public class ProductDao{
 	public int updateMasterStar(int pNo) {
 		return sqlSession.update("productMapper.updateMasterStar", pNo);
 	}
+
+	public int getReplyCount(String nickName) {
+		return sqlSession.selectOne("productMapper.getReplyCount", nickName);
+	}
+
+	public List<Product> productList(int navNo) {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductList", navNo);
+	}
 	
 }

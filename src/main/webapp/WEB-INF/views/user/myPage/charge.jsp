@@ -124,9 +124,7 @@
                               </div>
                            </div>
                            <!-- 충전하기 버튼 -->
-                            <div class="pBtn_mypay">
-                              <button class="login_button_form">충전하기</button>
-                           </div>
+                              <button class="pBtn_mypay" onclick="return chargebtn();">충전하기</button>
                         </div>
                      </div>
                   </div>
@@ -201,13 +199,14 @@
          });
          
          // 충전하기 눌렀을 때 약관의 필수에 체크 안되어있으면 alert!!!
-         $('#submit_myModifyPwd').click(function(){
+         function chargebtn() {
              if($('#orderAgree').is(":checked")==true && $('#policyAgree').is(":checked")==true ){
-                 alert("충전되었습니다.");
+                 return true;
              }else{
                  alert("필수 약관을 체크 해주세요.");
+                 return false;
              }
-         });
+         }
          
          
       </script>
