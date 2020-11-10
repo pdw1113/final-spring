@@ -1,8 +1,6 @@
 package com.fp.neezit.user.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
@@ -40,12 +40,15 @@ import net.sf.json.JSONArray;
  *  scope는 request이다.
  */
 
-@SessionAttributes("loginUser") // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
+@SessionAttributes({"loginUser","master2"}) // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
 @Controller
 public class UserContoller {
 
 	@Autowired
 	private UserService uService;
+	
+	@Autowired
+	private ProductService pService;
 
 	@Autowired
 	private UserMasterPic uPic;
@@ -133,15 +136,20 @@ public class UserContoller {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String userLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
 
 		User loginUser = uService.loginUser(u);
+		int master = uService.master(u);
+
 		// 입력 비밀번호 , 복호화 비밀번호
 		if (loginUser != null && bcryptPasswordEncoder.matches(u.getPwd(), loginUser.getPwd())) {
 			// model은 request영역이다. 그것을 상단의 @SessionAttributes가 session영역으로 바꿔준다.
 			// request → session
 			model.addAttribute("loginUser", loginUser);
+			if(master == 1) {
+				model.addAttribute("master2", master);
+			}
 			return "redirect:index.do";
 		} else {
 			model.addAttribute("msg", "1");
@@ -335,7 +343,7 @@ public class UserContoller {
 	 */
 	@RequestMapping(value = "signUpMaster.do", method = RequestMethod.POST)
 	public String signUpMaster(UserMaster msu, UserMasterSchool msc, UserMasterSns msn, UserMasterQualifcation mqf,
-			Model model, HttpServletRequest request,
+			Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes,
 			@RequestParam(name = "_mProPicOri", required = false) MultipartFile file1,
 			@RequestParam(name = "_mIdPicOri", required = false) MultipartFile file2,
 			@RequestParam(name = "_sUnivPicOri", required = false) MultipartFile file3,
@@ -439,17 +447,16 @@ public class UserContoller {
 				mqf.setQ5PicOri(renameFileName9);
 			}
 		}
-
+		
+	   	// 로그인 세션 정보
+	    User u = (User)session.getAttribute("loginUser");
 		int result = uService.insertMaster(msu);
 		int schoolresult = uService.insertMasterSchool(msc);
 		int snsresult = uService.insertMasterSns(msn);
 		int qfcresult = uService.insertMasterQfc(mqf);
 		if (result > 0) {
-			model.addAttribute(result);
-			model.addAttribute(schoolresult);
-			model.addAttribute(snsresult);
-			model.addAttribute(qfcresult);
-			return "redirect:index.do";
+			redirectAttributes.addAttribute("count", 1);
+			return "redirect:index2.do";
 		} else {
 			model.addAttribute("msg", "능력자등록실패!");
 			return "common/errorPage";
@@ -475,6 +482,188 @@ public class UserContoller {
 		} else {
 			return "ok";
 		}
+	}
+	
+	/**
+	 * 13.능력자 관리 리스트  (  )
+	 * 
+	 * @param msu
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "signUpMasterManage.do", method =  {RequestMethod.GET, RequestMethod.POST})
+	public String userLogin(UserMaster msu, UserMasterQualifcation mqf, UserMasterSchool msc,
+							UserMasterSns msn,HttpSession session,Model model) { // view에 전달하는 데이터를 Model에 담는다.
+		
+	   	// 로그인 세션 정보
+	    User u = (User)session.getAttribute("loginUser");
+		UserMaster master = pService.getMaster(u);
+		UserMasterSchool masterSch = uService.getMasterSch(u);
+		UserMasterQualifcation masterQfa = uService.getMasterQfa(u);
+		UserMasterSns masterSns = uService.getMasterSns(u);
+		List<String> category = pService.masterCategory(master);
+	    String string = category.toString();
+	    String real = string.substring(1,string.length()-1);
+			model.addAttribute("masterList", master);
+			model.addAttribute("SchoolList", masterSch);
+			model.addAttribute("QualifcationList", masterQfa);
+			model.addAttribute("SnsList", masterSns);
+			model.addAttribute("categoryList", real);
+			return "user/signUpMasterManage";
+	}
+	
+	/**
+	 * 14.능력자 수정 뷰 
+	 * 
+	 * @param msu
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "signUpMasterUpdateView.do", method = RequestMethod.POST)
+	public String signUpMasterUpdateView(HttpSession session,Model model) {
+	    User u = (User)session.getAttribute("loginUser");
+		UserMaster master = pService.getMaster(u);
+		UserMasterSchool masterSch = uService.getMasterSch(u);
+		UserMasterQualifcation masterQfa = uService.getMasterQfa(u);
+		UserMasterSns masterSns = uService.getMasterSns(u);
+		List<String> category2 = pService.masterCategory(master);
+	    String string = category2.toString();
+	    String real = string.substring(1,string.length()-1);
+		// 상품 카테고리 3분류
+		List<ProductCategory> category = null;
+		category = uService.category();
+			model.addAttribute("category", JSONArray.fromObject(category));
+			model.addAttribute("masterList", master);
+			model.addAttribute("SchoolList", masterSch);
+			model.addAttribute("QualifcationList", masterQfa);
+			model.addAttribute("SnsList", masterSns);
+			model.addAttribute("categoryList", real);
+		return "user/siguUPMasterUpdate";
+	}
+	
+	/**
+	 * 14.능력자 수정 
+	 * 
+	 * @param msu
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "signUpMasterUpdate.do", method = RequestMethod.POST)
+	public String signUpMasterUpdate(UserMaster msu, UserMasterSchool msc, UserMasterSns msn, UserMasterQualifcation mqf,
+			Model model, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "_mProPicOri", required = false) MultipartFile file1,
+			@RequestParam(name = "_mIdPicOri", required = false) MultipartFile file2,
+			@RequestParam(name = "_sUnivPicOri", required = false) MultipartFile file3,
+			@RequestParam(name = "_sUniv2PicOri", required = false) MultipartFile file4,
+			@RequestParam(name = "_q1PicOri", required = false) MultipartFile file5,
+			@RequestParam(name = "_q2PicOri", required = false) MultipartFile file6,
+			@RequestParam(name = "_q3PicOri", required = false) MultipartFile file7,
+			@RequestParam(name = "_q4PicOri", required = false) MultipartFile file8,
+			@RequestParam(name = "_q5PicOri", required = false) MultipartFile file9) {
+		// @RequestParam어노테이션을 이용한 업로드 파일 접근
+		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
+		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
+
+if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
+			
+			// 서버에 업로드 해야한다.
+			String renameFileName1 = uPic.saveFile1(file1, request);
+			String renameFileName2 = uPic.saveFile2(file2, request);
+			 
+			if (renameFileName1 != null && renameFileName2 != null) { // 파일이 잘 저장된 경우
+				msu.setmProPicOri(file1.getOriginalFilename()); // 파일명만 DB에저장
+				msu.setmProPicRe(renameFileName1);
+
+				msu.setmIdPicOri(file2.getOriginalFilename());
+				msu.setmIdPicRe(renameFileName2);
+
+			}
+			System.out.println("닉네임 가져오니 ? : " + msu);
+		}
+
+		if (!file3.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName3 = uPic.saveFile3(file3, request);
+
+			if (renameFileName3 != null) { // 파일이 잘 저장된 경우
+				msc.setsUnivPicOri(file3.getOriginalFilename()); // 파일명만 DB에저장
+				msc.setsUnivPicRe(renameFileName3);
+			}
+		}
+
+		if (!file4.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName4 = uPic.saveFile4(file4, request);
+
+			if (renameFileName4 != null) { // 파일이 잘 저장된 경우
+				msc.setsUniv2PicOri(file4.getOriginalFilename()); // 파일명만 DB에저장
+				msc.setsUniv2PicRe(renameFileName4);
+			}
+		}
+
+		if (!file5.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName5 = uPic.saveFile5(file5, request);
+
+			if (renameFileName5 != null) { // 파일이 잘 저장된 경우
+				mqf.setQ1PicOri(file5.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ1PicRe(renameFileName5);
+			}
+		}
+
+		if (!file6.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName6 = uPic.saveFile6(file6, request);
+
+			if (renameFileName6 != null) { // 파일이 잘 저장된 경우
+				mqf.setQ2PicOri(file6.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ2PicRe(renameFileName6);
+
+			}
+		}
+		
+		if (!file7.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName7 = uPic.saveFile7(file7, request);
+
+			if (renameFileName7 != null) { // 파일이 잘 저장된 경우
+				mqf.setQ3PicOri(file7.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ3PicOri(renameFileName7);
+			}
+		}
+
+		if (!file8.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName8 = uPic.saveFile8(file8, request);
+
+			if (renameFileName8 != null) { // 파일이 잘 저장된 경우
+				mqf.setQ4PicOri(file8.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ4PicOri(renameFileName8);
+			}
+		}
+
+		if (!file9.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName9 = uPic.saveFile9(file9, request);
+
+			if (renameFileName9 != null) { // 파일이 잘 저장된 경우
+				mqf.setQ5PicOri(file9.getOriginalFilename()); // 파일명만 DB에저장
+				mqf.setQ5PicOri(renameFileName9);
+			}
+		}
+	   	// 로그인 세션 정보
+	    User u = (User)session.getAttribute("loginUser");
+		int result = uService.updatetMaster(msu);
+		int schoolresult = uService.updateMasterSchool(msc);
+		int snsresult = uService.updateMasterSns(msn);
+		int qfcresult = uService.updateMasterQfc(mqf);
+		if (result > 0) {
+			return "redirect:index.do";
+		} else {
+			model.addAttribute("msg", "능력자등록실패!");
+			return "common/errorPage";
+		}
+
 	}
 
 }
