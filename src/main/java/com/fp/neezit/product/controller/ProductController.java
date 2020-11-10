@@ -125,7 +125,7 @@ public class ProductController {
 			   return "user/product/productDetail";
 		  }
 	   }
-	
+   
    /**
 	 * 4. 파일이 저장될 경로를 설정 메소드 
 	 * @param file

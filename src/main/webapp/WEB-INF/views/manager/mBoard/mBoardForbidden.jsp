@@ -77,7 +77,7 @@
                            <button type="button" class="insertButton" value="" onclick="insert1()">추가 입력
                            확인</button>
                            <button type="button" class="clearButton" onclick="clear1()">clear</button>
-                           <button type="button" class="finalButton">추가 최종 저장</button>
+                           <button type="button" class="finalButton" onclick="addWords()">추가 최종 저장</button>
                         </div>
                      </div>
                   </div>
@@ -116,7 +116,7 @@
                            <button type="button" class="deleteButton" value="" onclick="delete1()">삭제 입력
                            확인</button>
                            <button type="button" class="clearButton" onclick="clear2()">clear</button>
-                           <button type="button" class="finalButton1">삭제 최종 저장</button>
+                           <button type="button" class="finalButton1" onclick="deleteWords()">삭제 최종 저장</button>
                         </div>
                      </div>
                   </div>
@@ -134,6 +134,7 @@
                                  검색 결과
                               </th>
                            </tr>
+                           
                            <tr>
                               <td>
                                  1
@@ -148,14 +149,15 @@
                               <td>
                               </td>
                            </tr>
+                           
                         </Table>
                      </div>
                      <div class="searchArea">
                         <div class="searchArea1">
                            <p class="bold sb">검색창</p>
                            <br>
-                           <input type="text" class="searchInput"><button type="button"
-                              class="searchButton">검색</button>
+                           <input type="text" class="searchInput" id=""><button type="button"
+                              class="searchButton" onclick="searchWords()">검색</button>
                            <!-- <div class="searchForm1"></div> -->
                         </div>
                         <div class="searchArea2">
@@ -211,7 +213,7 @@
                 input1[i] = document.getElementById("iText" + (i + 1)).value;
                 // console.log(input1[i]);
                 // console.log(input1);
-                var combineText1 = input1.join(",  ");
+                var combineText1 = input1.join(",");
             }
             document.getElementById("result1").value = combineText1;
         }
@@ -221,7 +223,7 @@
             for (var i = 0; i < count2; i++) {
                 input2[i] = document.getElementById("dText" + (i + 1)).value;
                 console.log(input2[i]);
-                var combineText2 = input2.join(",  ");
+                var combineText2 = input2.join(",");
             }
             document.getElementById("result2").value = combineText2;
         }
@@ -311,6 +313,102 @@
         }
 
     </script> 
+    <script>
+    function addWords(){
+   	 // WORD
+   	 
+   	 	let words1 = [];
+        let words = $("#result1").val();
+   	 	words1 = words.split(",");
+   	 	let check1 = 0;
+
+  	/* 	alert(words1[0]);
+   	 	alert(words1[1]); */
+
+		for(var i=0;i<words1.length;i++){ 
+        // WORD 전송 AJAX
+        $.ajax({
+	         url:"addWords.do",
+	         data:{words:words1[i]},
+	         type:"post",
+	         success:function(data){
+		       	 // 성공했을 때
+		         if(data === "ok"){
+		        	
+		        	 check1++;
+		        	 if(words1.length == check1){
+		         	 	alert("금칙어가 추가 되었습니다.");
+		        	 };
+
+		         }else{
+		        
+		         	 	alert("금칙어 추가를 실패하였습니다.");
+
+		         }
+	         },
+	         error:function(jqxhr, textStatus, errorThrown){
+		         console.log("ajax 처리 실패");
+		         $("#result1").focus();
+		         }
+	         });
+    	 }; 
+    };
+    
+    function deleteWords(){
+     	 // WORD
+     	 
+     	 	let words2 = [];
+          	let dwords = $("#result2").val();
+     	 	words2 = dwords.split(",");
+     	 	let check2 = 0;
+
+
+
+  		for(var i=0;i<words2.length;i++){ 
+          // WORD 전송 AJAX
+          $.ajax({
+  	         url:"deleteWords.do",
+  	         data:{dwords:words2[i]},
+  	         type:"post",
+  	         success:function(data){
+  		       	 // 성공했을 때
+  		         if(data === "ok"){
+  		        	
+  		        	 check2++;
+  		        	 if(words2.length == check2){
+  		         	 	alert("금칙어가 삭제 되었습니다.");
+  		        	 };
+
+  		         }else{
+  		        
+  		         	 	alert("없는 단어입니다.");
+
+  		         }
+  	         },
+  	         error:function(jqxhr, textStatus, errorThrown){
+  		         console.log("ajax 처리 실패");
+  		         $("#result2").focus();
+  		         }
+  	         });
+      	 }; 
+      };
+      
+
+    </script>
+    <script>
+    
+    
+    function searchWords(){
+    	 // WORD
+
+     let search = $("#searchInput").val();
+
+     location.href="<%=request.getContextPath()%>/SearchSearchServlet.se?con="+$('#strkey').val()+"&keyword="+$('#keyword').val();
+
+
+    </script>
+    
+    
                   
 </body>
 

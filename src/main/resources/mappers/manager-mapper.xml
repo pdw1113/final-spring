@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "managerMapper" >
+
+ 
+ 	<resultMap type="Forbidden" id="forbiddenResultSet">
+		<result property="fword" column="FORBIDDEN_WORD"/>
+		<result property="fdate" column="FORBIDDEN_DATE"/>
+	</resultMap>
+	
+	<!-- 금칙어 추가 -->
+	<insert id="insertWords" parameterType="Forbidden"> 
+		INSERT INTO FORBIDDEN 
+		VALUES(#{fword},default)
+	</insert>	
+	
+	<!-- 금칙어 삭제 -->
+	<delete id="deleteWords" parameterType="Forbidden"> 
+		DELETE FROM FORBIDDEN 
+		WHERE FORBIDDEN_WORD = #{fword}
+	</delete>	
+	
+	<!-- 금칙어 검색 -->
+	<select id="searchWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN 
+		WHERE FORBIDDEN_WORD like '%' ||  #{fword} || '%'
+	</select>
+	
+	
+	
+	
+ 
+</mapper>
+

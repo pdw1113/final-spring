@@ -73,9 +73,19 @@
 	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
 	               </a>
 	            </div>
+	            
+	            
+	            
+	            
+	            
 	         	<span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
 	         </div>
          </c:if>
+         		<div class="login_box_Mainhead">
+	               <a href="mBoardForbidden.do">
+	                  <div class="head_login_Mainhead w_100p">금칙어</div>
+	               </a>
+	            </div>
       </div>
       
       <script>
