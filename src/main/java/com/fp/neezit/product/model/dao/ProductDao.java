@@ -1,5 +1,6 @@
 package com.fp.neezit.product.model.dao;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -59,6 +61,10 @@ public class ProductDao{
 
 	public UserMasterSns getProductSnsDetail(String email) {
 		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
+	}
+
+	public int wishInsert(HashMap<String, String> map) {
+		return sqlSession.insert("productMapper.insertWish",map);
 	}
 
 	public int insertReply(Reply r) {
