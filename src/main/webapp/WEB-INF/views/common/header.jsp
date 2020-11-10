@@ -38,11 +38,6 @@
 	                     <div class="head_login_Mainhead w_100p">회원가입</div>
 	                  </a>
 	               </div>
-	               <div class="login_box_Mainhead">
-	                  <a href="test.do">
-	                     <div class="head_login_Mainhead w_100p">능력자관리</div>
-	                  </a>
-	               </div>
 	         </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
@@ -68,14 +63,27 @@
                       </a>
                    </span>
 	            </div>
+	            <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
 	            <div class="login_box_Mainhead">
-	               <a href="signUpMasterCategory.do">
+	               <a href="signUpMasterManage.do">
 	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
 	               </a>
 	            </div>
+				</c:if>
+				</c:if>
+				
+
+				<c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
+	            <div class="login_box_Mainhead">
+	               <a href="signUpMasterCategory.do">
+	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
+	               </a>
+	            </div>
+	            </c:if>
+	            <c:if test="${ !empty sessionScope.loginUser }">
 	         	<span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
+	         	</c:if>
 	         </div>
-         </c:if>
       </div>
       
       <script>

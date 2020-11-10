@@ -104,6 +104,49 @@ public class UserServiceImpl implements UserService{
 		return uDao.nickCheck(nickname);
 	}
 
-	
+	@Override
+	public int master(User u) {
+		return uDao.master(u);
+	}
+
+	@Override
+	public UserMasterSchool getMasterSch(User u) {
+		// TODO Auto-generated method stub
+		return uDao.getMasterSch(u);
+	}
+
+	@Override
+	public UserMasterQualifcation getMasterQfa(User u) {
+		// TODO Auto-generated method stub
+		return uDao.getMasterQfa(u);
+	}
+
+	@Override
+	public UserMasterSns getMasterSns(User u) {
+		// TODO Auto-generated method stub
+		return uDao.getMasterSns(u);
+	}
+
+	@Override
+	public int updatetMaster(UserMaster msu) {
+		return uDao.updatetMaster(msu);
+	}
+
+	@Override
+	public int updateMasterSchool(UserMasterSchool msc) {
+		return uDao.updateMasterSchool(msc);
+	}
+
+	@Override
+	public int updateMasterSns(UserMasterSns msn) {
+		return uDao.updateMasterSns(msn);
+	}
+
+	@Override
+	public int updateMasterQfc(UserMasterQualifcation mqf) {
+		return uDao.updateMasterQfc(mqf);
+	}
+
+
 
 }

@@ -17,6 +17,61 @@
 		<result property="marketingE" column="USER_MARKETING_E"/>
 	</resultMap>
 	
+	<resultMap type="UserMaster" id="userMasterResultSet">
+		<id property="MASTER_NICKNAME" column="MASTER_NICKNAME"/>
+		<result property="USER_EMAIL" column="USER_EMAIL"/>
+		<result property="MASTER_RANKNAME" column="MASTER_RANKNAME"/>
+		<result property="MASTER_PROFILE_PIC" column="MASTER_PROFILE_PIC"/>
+		<result property="MASTER_CATEGORY" column="MASTER_CATEGORY"/>
+		<result property="MASTER_ID_PIC" column="MASTER_ID_PIC"/>
+		<result property="MASTER_WORKDAY" column="MASTER_WORKDAY"/>
+		<result property="MASTER_WORKSTYLE" column="MASTER_WORKSTYLE"/>
+		<result property="MASTER_STARTTIME" column="MASTER_STARTTIME"/>
+		<result property="MASTER_ENDTIME" column="MASTER_ENDTIME"/>
+	</resultMap>
+	
+	<resultMap type="UserSchool" id="userMasterSchoolResultSet">
+		<result property="USER_EMAIL" column="USER_EMAIL"/>
+		<result property="MASTER_HIGH" column="MASTER_HIGH"/>
+		<result property="MASTER_UNIV" column="MASTER_UNIV"/>
+		<result property="MASTER_UNIV_DEPT" column="MASTER_UNIV_DEPT"/>
+		<result property="MASTER_UNIV_PIC_ORI" column="MASTER_UNIV_PIC_ORI"/>
+		<result property="MASTER_UNIV_PIC_RE" column="MASTER_UNIV_PIC_RE"/>
+		<result property="MASTER_UNIV2" column="MASTER_UNIV2"/>
+		<result property="MASTER_UNIV2_DEPT" column="MASTER_UNIV2_DEPT"/>
+		<result property="MASTER_UNIV2_PIC_ORI" column="MASTER_UNIV2_PIC_ORI"/>
+		<result property="MASTER_UNIV2_PIC_RE" column="MASTER_UNIV2_PIC_RE"/>
+	</resultMap>
+	
+	<resultMap type="UserQualifcation" id="userMasterQualifcationResultSet">
+		<result property="USER_EMAIL" column="USER_EMAIL"/>
+		<result property="MASTER_QUALIFICATION1" column="MASTER_QUALIFICATION1"/>
+		<result property="MASTER_QUALIFICATION1_PIC_ORI" column="MASTER_QUALIFICATION1_PIC_ORI"/>
+		<result property="MASTER_QUALIFICATION1_PIC_RE" column="MASTER_QUALIFICATION1_PIC_RE"/>
+		<result property="MASTER_QUALIFICATION2" column="MASTER_QUALIFICATION2"/>
+		<result property="MASTER_QUALIFICATION2_PIC_ORI" column="MASTER_QUALIFICATION2_PIC_ORI"/>
+		<result property="MASTER_QUALIFICATION2_PIC_RE" column="MASTER_QUALIFICATION2_PIC_RE"/>
+		<result property="MASTER_QUALIFICATION3" column="MASTER_QUALIFICATION3"/>
+		<result property="MASTER_QUALIFICATION3_PIC_ORI" column="MASTER_QUALIFICATION3_PIC_ORI"/>
+		<result property="MASTER_QUALIFICATION3_PIC_RE" column="MASTER_QUALIFICATION3_PIC_RE"/>
+		<result property="MASTER_QUALIFICATION4" column="MASTER_QUALIFICATION4"/>
+		<result property="MASTER_QUALIFICATION4_PIC_ORI" column="MASTER_QUALIFICATION4_PIC_ORI"/>
+		<result property="MASTER_QUALIFICATION4_PIC_RE" column="MASTER_QUALIFICATION4_PIC_RE"/>
+		<result property="MASTER_QUALIFICATION5" column="MASTER_QUALIFICATION5"/>
+		<result property="MASTER_QUALIFICATION5_PIC_ORI" column="MASTER_QUALIFICATION5_PIC_ORI"/>
+		<result property="MASTER_QUALIFICATION5_PIC_RE" column="MASTER_QUALIFICATION5_PIC_RE"/>
+	</resultMap>
+	
+	<resultMap type="UserSNS" id="userMasterSnsResultSet">
+		<result property="USER_EMAIL" column="USER_EMAIL"/>
+		<result property="MASTER_INSTAGRAM" column="MASTER_INSTAGRAM"/>
+		<result property="MASTER_TWITTER" column="MASTER_TWITTER"/>
+		<result property="MASTER_BLOG" column="MASTER_BLOG"/>
+		<result property="MASTER_GIT" column="MASTER_GIT"/>
+		<result property="MASTER_YOTUBUE1" column="MASTER_YOTUBUE1"/>
+		<result property="MASTER_YOTUBUE2" column="MASTER_YOTUBUE2"/>
+		<result property="MASTER_YOTUBUE3" column="MASTER_YOTUBUE3"/>
+	</resultMap> 
 	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User" resultMap="userResultSet">
@@ -119,4 +174,94 @@
 		INSERT INTO REASON
 		VALUES(#{email}, #{reason})
 	</insert>
+	
+	<!-- 마스터 닉네임값 가져오기 -->
+	<select id="master" parameterType="string" resultType="_int">
+		SELECT COUNT(MASTER_NICKNAME)
+		FROM NEEZ_USER NU
+		JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+		WHERE NU.USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 능력자 관리 -->
+	<select id="MasterSchool" parameterType="UserSchool" resultMap="userMasterSchoolResultSet">
+		SELECT *
+		FROM SCHOOL
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<select id="MasterQualifcation" parameterType="UserQualifcation" resultMap="userMasterQualifcationResultSet">
+		SELECT *
+		FROM QUALIFICATION
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<select id="MasterSNS" parameterType="UserSNS" resultMap="userMasterSnsResultSet">
+		SELECT *
+		FROM SNS
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 능력자수정 -->
+	<update id="MasterUpdate" parameterType="UserMaster">
+		UPDATE NEEZ_MASTER
+		SET MASTER_NICKNAME = #{MASTER_NICKNAME},
+			MASTER_PROFILE_PIC_ORI = #{MASTER_PROFILE_PIC_ORI},
+			MASTER_PROFILE_PIC_RE = #{MASTER_PROFILE_PIC_RE},
+			MASTER_CATEGORY = #{MASTER_CATEGORY},
+			MASTER_ID_PIC_ORI = #{MASTER_ID_PIC_ORI},
+			MASTER_ID_PIC_RE = #{MASTER_ID_PIC_RE},
+			MASTER_WORKDAY = #{MASTER_WORKDAY},
+			MASTER_WORKSTYLE = #{MASTER_WORKSTYLE},
+			MASTER_STARTTIME = #{MASTER_STARTTIME},
+			MASTER_ENDTIME = #{MASTER_ENDTIME}
+		WHERE USER_EMAIL = #{USER_EMAIL}
+	</update>
+	
+		<update id="MasterUpdateSch" parameterType="UserSchool">
+		UPDATE SCHOOL
+		SET MASTER_HIGH = #{MASTER_HIGH},
+			MASTER_UNIV = #{MASTER_UNIV},
+			MASTER_UNIV_DEPT = #{MASTER_UNIV_DEPT},
+			MASTER_UNIV_PIC_ORI = #{MASTER_UNIV_PIC_ORI},
+			MASTER_UNIV_PIC_RE = #{MASTER_UNIV_PIC_RE},
+			MASTER_UNIV2 = #{MASTER_UNIV2},
+			MASTER_UNIV2_DEPT = #{MASTER_UNIV2_DEPT},
+			MASTER_UNIV2_PIC_ORI = #{MASTER_UNIV2_PIC_ORI},
+			MASTER_UNIV2_PIC_RE = #{MASTER_UNIV2_PIC_RE}
+		WHERE USER_EMAIL = #{USER_EMAIL}
+	</update>
+	
+		<update id="MasterUpdateQfa" parameterType="UserQualifcation">
+		UPDATE QUALIFICATION
+		SET MASTER_QUALIFICATION1 = #{MASTER_QUALIFICATION1},
+			MASTER_QUALIFICATION1_PIC_ORI = #{MASTER_QUALIFICATION1_PIC_ORI},
+			MASTER_QUALIFICATION1_PIC_RE = #{MASTER_QUALIFICATION1_PIC_RE},
+			MASTER_QUALIFICATION2 = #{MASTER_QUALIFICATION2},
+			MASTER_QUALIFICATION2_PIC_ORI = #{MASTER_QUALIFICATION2_PIC_ORI},
+			MASTER_QUALIFICATION2_PIC_RE = #{MASTER_QUALIFICATION2_PIC_RE},
+			MASTER_QUALIFICATION3 = #{MASTER_QUALIFICATION3},
+			MASTER_QUALIFICATION3_PIC_ORI = #{MASTER_QUALIFICATION3_PIC_ORI},
+			MASTER_QUALIFICATION3_PIC_RE = #{MASTER_QUALIFICATION3_PIC_RE},
+			MASTER_QUALIFICATION4 = #{MASTER_QUALIFICATION4},
+			MASTER_QUALIFICATION4_PIC_ORI = #{MASTER_QUALIFICATION4_PIC_ORI},
+			MASTER_QUALIFICATION4_PIC_RE = #{MASTER_QUALIFICATION4_PIC_RE},
+			MASTER_QUALIFICATION5 = #{MASTER_QUALIFICATION5},
+			MASTER_QUALIFICATION5_PIC_ORI = #{MASTER_QUALIFICATION5_PIC_ORI},
+			MASTER_QUALIFICATION5_PIC_RE = #{MASTER_QUALIFICATION5_PIC_RE}
+		WHERE USER_EMAIL = #{USER_EMAIL}
+	</update>
+	
+		<update id="MasterUpdateSns" parameterType="UserSNS">
+		UPDATE SNS
+		SET MASTER_INSTAGRAM = #{MASTER_INSTAGRAM},
+			MASTER_TWITTER = #{MASTER_TWITTER},
+			MASTER_BLOG = #{MASTER_BLOG},
+			MASTER_GIT = #{MASTER_GIT},
+			MASTER_YOTUBUE1 = #{MASTER_YOTUBUE1},
+			MASTER_YOTUBUE2 = #{MASTER_YOTUBUE2},
+			MASTER_YOTUBUE3 = #{MASTER_YOTUBUE3}
+		WHERE USER_EMAIL = #{USER_EMAIL}
+	</update>
+	
 </mapper>
