@@ -80,6 +80,10 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.nickCheck",nickname);
 	}
 
+	public int changePw(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.changePw",map);
+	}
+	
 	public int master(User u) {
 		return sqlSession.selectOne("userMapper.master",u);
 	}
@@ -111,6 +115,5 @@ public class UserDao {
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
 	}
-
 
 }

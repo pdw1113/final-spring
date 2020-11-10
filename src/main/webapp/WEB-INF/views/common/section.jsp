@@ -791,7 +791,7 @@
       </div>
       <script>
       $(function(){
-    	  $('.bx-next').css('right','5%');
+    	  $('.bx-next').css('right','10%');
     	  
     	  var main_contents_css = { 
     	            'margin-right': '60px', 

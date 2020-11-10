@@ -42,6 +42,8 @@ public interface UserService {
 
 	int nickCheck(String nickname);
 
+	int changePw(HashMap<String, String> map);
+
 	int master(User u);
 
 	UserMasterSchool getMasterSch(User u);
@@ -57,6 +59,5 @@ public interface UserService {
 	int updateMasterSns(UserMasterSns msn);
 
 	int updateMasterQfc(UserMasterQualifcation mqf);
-
 
 }

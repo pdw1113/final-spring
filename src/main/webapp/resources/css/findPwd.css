@@ -21,7 +21,7 @@ filter: drop-shadow(-4px 5px 3px #808080);
 padding-bottom: 15px;
 }
 /* 로그인, 비밀번호 입력창 */
-.e-mail_find_pw{
+.e-mail_find_pw, .signup_in{
 border: 3px solid #fabe00;
 border-radius: 7px 7px 7px 7px;
 height: 30px;
@@ -30,22 +30,24 @@ font-size: 20px;
 margin-bottom: 15px;
 }
 input.e-mail_find_pw:focus { outline:none; }
-/* ID찾기, PWD찾기, 로그인 버튼 DIV (버튼아님 버튼 프레임임) */
+/* 인증번호 발송 button */
 .button_find_pw{
-padding-top: 5px;
-padding-left:20px;
 height: 50px;
-padding-bottom: 10px;
+padding: 5px 0 10px 25px;
 }
-/* ID찾기 PWD찾기 로그인 버튼 */
+.emailSend_find_pw:hover{
+	opacity: 0.6;
+}
+/* 인증번호 발송 div */
 .emailSend_find_pw{
 float:left;
-width: 550px;
+width: 560px;
 height: 40px;
 text-align: center;
 line-height: 45px;
 margin-left: 5px;
 font-size: 25px;
+border: 0px;
 border-radius: 7px 7px 7px 7px;
 color: white;
 background-color: #fabe00;
@@ -110,4 +112,39 @@ cursor: pointer;
 }
 .x_find_pw{
 font-size: 30px;
+}
+/* 시간제한 */
+.timelimit_signup{
+font-size: 25px;
+font-family: jua;
+color:#fabe00;
+}
+/* 인증번호 입력란 */
+.short_input{
+width:240px; 
+float: left; 
+margin-left: 30px; 
+}
+/* 시간제한 확인버튼 */
+.cfBtn{
+float:left;
+width: 60px;
+height: 40px;
+text-align: center;
+line-height: 45px;
+margin-left: 10px;
+border-radius: 15px;
+font-size: 25px;
+border-radius: 7px 7px 7px 7px;
+color: white;
+background-color: #e2e2e2;
+font-family: jua;
+outline: 0;
+border: none;
+pointer-events:none;"
+}
+
+.cfBtn:hover{
+cursor: pointer;
+opacity: 0.6;
 }

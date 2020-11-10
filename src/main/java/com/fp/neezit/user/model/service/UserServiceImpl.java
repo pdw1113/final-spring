@@ -105,6 +105,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public int changePw(HashMap<String, String> map) {
+		return uDao.changePw(map);
+	}
+
+
 	public int master(User u) {
 		return uDao.master(u);
 	}
@@ -146,7 +151,6 @@ public class UserServiceImpl implements UserService{
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return uDao.updateMasterQfc(mqf);
 	}
-
 
 
 }
