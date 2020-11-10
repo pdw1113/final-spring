@@ -3,16 +3,11 @@ package com.fp.neezit.user.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
-import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +24,11 @@ import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
-import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.Dice;
-import com.fp.neezit.user.model.vo.User;
 
 import net.sf.json.JSONArray;
 
@@ -504,8 +498,6 @@ public class UserContoller {
 			}
 		}
 		
-	   	// 로그인 세션 정보
-	    User u = (User)session.getAttribute("loginUser");
 		int result = uService.insertMaster(msu);
 		int schoolresult = uService.insertMasterSchool(msc);
 		int snsresult = uService.insertMasterSns(msn);
@@ -667,7 +659,7 @@ public class UserContoller {
 		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
 		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
 
-if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
+		if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
 			
 			// 서버에 업로드 해야한다.
 			String renameFileName1 = uPic.saveFile1(file1, request);
@@ -754,8 +746,7 @@ if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equa
 				mqf.setQ5PicOri(renameFileName9);
 			}
 		}
-	   	// 로그인 세션 정보
-	    User u = (User)session.getAttribute("loginUser");
+
 		int result = uService.updatetMaster(msu);
 		int schoolresult = uService.updateMasterSchool(msc);
 		int snsresult = uService.updateMasterSns(msn);

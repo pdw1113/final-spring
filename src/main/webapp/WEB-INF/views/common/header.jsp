@@ -27,33 +27,33 @@
          </div>
          
          <c:if test="${ empty sessionScope.loginUser }">
-	         <div>
-	               <div class="login_box_Mainhead">
-	                  <a href="loginPage.do">
-	                     <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그인</div>
-	                  </a>
-	               </div>
-	               <div class="login_box_Mainhead">
-	                  <a href="signUp.do">
-	                     <div class="head_login_Mainhead w_100p">회원가입</div>
-	                  </a>
-	               </div>
-	         </div>
+            <div>
+                  <div class="login_box_Mainhead">
+                     <a href="loginPage.do">
+                        <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그인</div>
+                     </a>
+                  </div>
+                  <div class="login_box_Mainhead">
+                     <a href="signUp.do">
+                        <div class="head_login_Mainhead w_100p">회원가입</div>
+                     </a>
+                  </div>
+            </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
-         	 <div>
-	            <div class="login_box_Mainhead">
-	               <a href="logout.do">
-	                  <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
-	               </a>
-	            </div>
-	            <div class="login_box_Mainhead">
-	               <a href="profile.do">
-	                  <div class="head_login_Mainhead w_100p">마이페이지</div>
-	               </a>
-	            </div>
-	            <div class="login_box_Mainhead">
-	               <span class="accordion_header">
+             <div>
+               <div class="login_box_Mainhead">
+                  <a href="logout.do">
+                     <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <a href="profile.do">
+                     <div class="head_login_Mainhead w_100p">마이페이지</div>
+                  </a>
+               </div>
+               <div class="login_box_Mainhead">
+                  <span class="accordion_header">
                       <div class="head_login_Mainhead w_100p" id="product">상품관리</div>
                       <a href="productInsertPage.do">
                         <div class="down_p1">상품등록</div>
@@ -62,38 +62,38 @@
                         <div class="down_p2">상품목록</div>
                       </a>
                    </span>
-	            </div>
-	            <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
-	            <div class="login_box_Mainhead">
-	               <a href="signUpMasterManage.do">
-	                  <div class="head_login_Mainhead w_100p">능력자관리</div>
-	               </a>
-	            </div>
-				</c:if>
-				</c:if>
-				
+               </div>
+               <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
+               <div class="login_box_Mainhead">
+                  <a href="signUpMasterManage.do">
+                     <div class="head_login_Mainhead w_100p">능력자관리</div>
+                  </a>
+               </div>
+            </c:if>
+            </c:if>
+            
 
-				<c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
-	            <div class="login_box_Mainhead">
-	               <a href="signUpMasterCategory.do">
-	                  <div class="head_login_Mainhead w_100p">능력자등록</div>
-	               </a>
-	            </div>
-	            </c:if>
-	            <c:if test="${ !empty sessionScope.loginUser }">
-	         	<span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
-	         	</c:if>
-	         </div>
+            <c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
+               <div class="login_box_Mainhead">
+                  <a href="signUpMasterCategory.do">
+                     <div class="head_login_Mainhead w_100p">능력자등록</div>
+                  </a>
+               </div>
+               </c:if>
+               <c:if test="${ !empty sessionScope.loginUser }">
+               <span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
+               </c:if>
+            </div>
       </div>
       
       <script>
-	       $("#product").click(function(){
-	          $(this).next().children(".down_p1").slideToggle(300);
-	          $(this).next().next().children(".down_p2").slideToggle(300);
-	       });
-   	  </script>
+          $("#product").click(function(){
+             $(this).next().children(".down_p1").slideToggle(300);
+             $(this).next().next().children(".down_p2").slideToggle(300);
+          });
+        </script>
       
-	  <script>
+     <script>
          $(document).ready(function () {
              if (name == "admin") {
                  $("#manager_page").empty();
