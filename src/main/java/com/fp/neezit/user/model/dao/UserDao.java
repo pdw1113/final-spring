@@ -9,12 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
-import com.fp.neezit.product.model.vo.WishList;
+import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
-import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.User;
 
 @Repository("uDao")
 public class UserDao {
@@ -124,9 +123,9 @@ public class UserDao {
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
 	}
-
-	public List<Product> wishList(User u) {
-		return sqlSession.selectList("userMapper.WishList",u);
-	}
+	
+    public List<Product> wishList(User u) {
+       return sqlSession.selectList("userMapper.WishList",u);
+    }
 
 }
