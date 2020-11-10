@@ -81,4 +81,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.selectReplyList(pNo);
 	}
 
+	@Override
+	public int updateMasterStar(int pNo) {
+		return pDao.updateMasterStar(pNo);
+	}
+
 }
