@@ -13,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 import net.sf.json.JSONArray;
 
@@ -72,11 +75,9 @@ public class ProductController {
 	      
 	      // 능력자 정보
 	      UserMaster master = pService.getMaster(u);
-	      System.out.println(master);
 	      
 	      // 능력자 카테고리 정보
 	      List<String> category = pService.masterCategory(master);
-	      System.out.println(category);
 	      
 	      // List를 String으로 치환
 	      String string = category.toString();
@@ -86,7 +87,7 @@ public class ProductController {
 	      
 	      model.addAttribute("category", real);
 	      
-	      model.addAttribute("master",master);
+	      model.addAttribute("master", master);
 	      
 	      return "user/product/productInsert";
    }
@@ -103,10 +104,11 @@ public class ProductController {
    @RequestMapping(value = "pInsert.do")
 	  public String insertProduct(Model model,Product product, HttpServletRequest request,
 		   	 @RequestParam(name="upload", required=false) MultipartFile file) {
+	   
 		  // @RequestParam어노테이션을 이용한 업로드 파일 접근
 		  // form의 enctype이 multipart/form-data로 작성되어있어야하고, method=POST이어야한다.
 	      // MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
-			  
+		  
 		  // 상품이미지 등록
 		  if(!file.getOriginalFilename().equals("")) {
 			  // 서버에 업로드 해야한다.
@@ -120,9 +122,9 @@ public class ProductController {
 	   	  int result = pService.insertProduct(product);
 		 
 		  if(result==1) {
-			   return "user/product/productDetail";
+			   return "redirect:myProductList.do";
 		  }else {
-			   return "user/product/productDetail";
+			   return "redirect:index.do";
 		  }
 	   }
 	
@@ -189,6 +191,56 @@ public class ProductController {
       
       return "user/product/myProductList";
    }
+   
+   /**
+    * 6. 상품 상세 메소드
+    * @param product
+ 	* @param model
+ 	* @param session
+ 	* @return
+ 	*/
+   @RequestMapping("myProductDetail.do")
+   public String myProductDetail(int no, Model model) {
+	  
+	  // 상품 정보 가져오기
+	  Product p = pService.getProductDetail(no);
+	  
+	  // 상품 정보 가져오기 2
+	  UserMaster m = pService.getProductDetail(p.getNickName());
+	  System.out.println(m);
+	  
+	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+	  
+	  
+	  
+	  if(p != null && m != null) {
+		  model.addAttribute("product", p);
+		  model.addAttribute("master", m);
+		  model.addAttribute("sns", sns);
+		  return "user/product/productDetail";
+	  }
+	  
+	  return "common/errorPage";
+   }
+   
+	/**
+	 * 7. 댓글 등록 메소드
+	 * @param r
+	 * @return
+	 */
+//	@ResponseBody
+//	@RequestMapping(value="addReply.do")
+//	public String addReply(Reply r) {
+////		int result = pService.insertReply(r);
+//		
+//		if(result > 0) {
+//			return "success";
+//		}else {
+//			return "fail";
+//		}
+//	}
+   
+   
    
    
 }

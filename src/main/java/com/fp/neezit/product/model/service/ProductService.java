@@ -6,6 +6,7 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 public interface ProductService {
 
@@ -36,6 +37,12 @@ public interface ProductService {
 	 * @param master
 	 * @return
 	 */
-	public List<Product> myProductList(UserMaster master); 
+	public List<Product> myProductList(UserMaster master);
+
+	public Product getProductDetail(int no);
+
+	public UserMaster getProductDetail(String nickName);
+	
+	public UserMasterSns getProductSnsDetail(String email);
 
 }

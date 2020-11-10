@@ -26,14 +26,14 @@
 	<%@ include file="../common/header.jsp" %>
 
     <form action="signUpMaster.do" method="POST" enctype="multipart/form-data" name="master">
-    <input type="hidden" value="${ loginUser.email }" name="USER_EMAIL"/>
+    <input type="hidden" value="${ loginUser.email }" name="email"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">능력자 등록</div>
             <span>
                 <div class="img-container-sgm border-radius-100">
                     <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="M_PROFILE_PIC_ORI" hidden>
+                    <input type="file" id="profile_file" name="_mProPicOri" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -102,7 +102,7 @@
             <li>
                 <div class="sub-title-sgm">별명 등록</div>
                 <div>
-                    <input class="input_master" type="text" name="MASTER_NICKNAME" id="nickname" placeholder="한글 2글자 이상 작성">
+                    <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
                     <span class="hide-span-sgm green">사용가능</span>
                     <span class="hide-span-sgm red">사용불가</span>
@@ -223,7 +223,7 @@
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
                             <option disabled>-------------------------------------------</option>
                         </select>
-                        <input type="hidden" id="array2" name="MASTER_CATEGORY"/>
+                        <input type="hidden" id="array2" name="mCategory"/>
                     </div>
                 </div>
             </li>
@@ -444,7 +444,7 @@
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
                         <img src="resources/img/profile.png" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" name="M_ID_PIC_ORI">
+                        <input type="file" id="idCard_file" name="_mIdPicOri">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -501,21 +501,21 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="고등학교" name="MASTER_HIGH">
+                        <input class="input_master width_500" type="text" placeholder="고등학교" name="sHigh">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학교" name="MASTER_UNIV">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV_DEPT">
+                        <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" name="M_UNIV_PIC_ORI" hidden onchange="ok(this);">
+                        <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학원" name="MASTER_UNIV2">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV2_DEPT">
+                        <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file"  name="M_UNIV2_PIC_ORI" hidden onchange="ok(this);">
+                        <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
@@ -525,33 +525,33 @@
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION1">
+                        <input class="input_master" type="text" placeholder="자격증" name="q1">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION1_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION2">
+                        <input class="input_master" type="text" placeholder="자격증" name="q2">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION2_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION3">
+                        <input class="input_master" type="text" placeholder="자격증" name="q3">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION3_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION4">
+                        <input class="input_master" type="text" placeholder="자격증" name="q4">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION4_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION5">
+                        <input class="input_master" type="text" placeholder="자격증" name="q5">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION5_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
                     </div>
 
@@ -570,34 +570,34 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="인스타그램" name=MASTER_INSTAGRAM>
+                        <input class="input_master_2" type="text" placeholder="인스타그램" name=snsInsta>
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="트위터" name="MASTER_TWITTER">
+                        <input class="input_master_2" type="text" placeholder="트위터" name="snsTwit">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="블로그" name="MASTER_BLOG">
+                        <input class="input_master_2" type="text" placeholder="블로그" name="snsBlog">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="GIT" name="MASTER_GIT">
+                        <input class="input_master_2" type="text" placeholder="GIT" name="snsGit">
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
                         <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE1">
+                        name="snsYou1">
                         <div>
                         </div>
                     </div>
                     <div>
                         <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE2">
+                        name="snsYou2">
                         <div>
                         </div>
                     </div>
                     <div>
                         <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE3">
+                        name="snsYou3">
                         <div>
                         </div>
                     </div>
@@ -667,9 +667,9 @@
                     <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
                 <div>
-                    <input class="input_master_3" type="time" name="MASTER_STARTTIME" id="">
+                    <input class="input_master_3" type="time" name="mStartTime">
                     &nbsp;~&nbsp;
-                    <input class="input_master_3" type="time" name="MASTER_ENDTIME" id="">
+                    <input class="input_master_3" type="time" name="mEndTime">
                 </div>
             </li>
 
@@ -682,8 +682,8 @@
             </li>
         </ul>
     </div>
-    <input type="hidden" id="array" name="MASTER_WORKDAY"/>
-    <input type="hidden" id="array1" name="MASTER_WORKSTYLE"/>
+    <input type="hidden" id="array" name="mWorkDay"/>
+    <input type="hidden" id="array1" name="mWorkStyle"/>
     </form>
     
     
@@ -715,50 +715,49 @@
 
     function validate(){ 
 
-         if(!document.master.M_PROFILE_PIC_ORI.value){
+         if(!document.master._mProPicOri.value){
              alert("사진을 넣어주세요"); 
                return false;
       }
    
-        if(!document.master.MASTER_NICKNAME.value){
+        if(!document.master.mNickname.value){
                 alert("별명을 입력해주세요"); 
-                document.master.MASTER_NICKNAME.focus();
+                document.master.mNickname.focus();
                   return false;
           }
         
-        if(!document.master.MASTER_CATEGORY.value){
+        if(!document.master.mCategory.value){
                 alert("카테고리 등록을 해주세요"); 
                   return false;
          }
         
-        if(!document.master.M_ID_PIC_ORI.value){
+        if(!document.master._mIdPicOri.value){
                 alert("신분증 등록을 해주세요"); 
                   return false;
          } 
         
-        if(!document.master.MASTER_WORKDAY.value){
+        if(!document.master.mWorkDay.value){
                 alert("선호하는 업무 요일을 선택해주세요"); 
                   return false;
          }
         
-        if(!document.master.MASTER_WORKSTYLE.value){
+        if(!document.master.mWorkStyle.value){
                 alert("선호하는 업무 방식을 선택해주세요"); 
                   return false;
          }
         
-        if(!document.master.MASTER_STARTTIME.value){
+        if(!document.master.mStartTime.value){
                 alert("시작 시간을 선택해주세요"); 
                   return false;
          }
         
-        if(!document.master.MASTER_ENDTIME.value){
+        if(!document.master.mEndTime.value){
                 alert("끝나는 시간을 선택해주세요"); 
                   return false;
          }
         success();
         document.forms[0].submit();
      }
-
      </script> 
   
       <script>

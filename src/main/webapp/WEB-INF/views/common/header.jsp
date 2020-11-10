@@ -48,7 +48,7 @@
 	               </a>
 	            </div>
 	            <div class="login_box_Mainhead">
-	               <a href="mNoticeMail.do">
+	               <a href="profile.do">
 	                  <div class="head_login_Mainhead w_100p">마이페이지</div>
 	               </a>
 	            </div>

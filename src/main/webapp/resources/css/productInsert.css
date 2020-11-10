@@ -5,7 +5,7 @@ padding:0;
 width:100%;
 }
 /*인풋 창 검은줄 없애기*/
-input:focus { outline:none; }
+input:focus { outline:none; } 
 /*"시간 상품등록" 텍스트*/
 .tit_sect_addproduct{
 margin: 35px 0 25px 0;
@@ -178,30 +178,35 @@ background-color: #fabe00;
 font-family: jua;
 margin-left: 625px;
 cursor:pointer;
+border-style: none;
+}
+.header div.head_login_Mainhead{
+	width:86px;
 }
 .header div.login_box_Mainhead{
-margin-top: 1.7rem;
+margin-top: 1.6rem;
 /* line-height: 3rem;
 margin-right: 0.3rem;
 transition-duration:0s; */
 }  
 .header div.login_box_Mainhead .head_login_Mainhead{
 height: 3.6rem;
-transition-duration:0s;
-width:auto;
-padding-left: 10px;
-padding-right:10px;
 }
 
 .header div.down_p1, div.down_p2{
 height: 3.6rem;
 transition-duration:0s;
-width:91px;
+width:106px;
 padding-left: 10px;
 padding-right:10px;
 }
+
 .header div.down_p1{
    top:57px;
+}
+
+.header div.w_100p{
+	width:106px;
 }
 
 .header div.down_p2{
@@ -215,6 +220,7 @@ height:25px;
 .header div.down_p1:after, div.down_p2:after{
    right:9px;
 }
+
 
 .m-r-27{
    margin-right:27px;
@@ -234,3 +240,37 @@ height:25px;
 #success{
     display: inline-block;
 }
+
+
+.cate_add_btn{
+   height: 36px;
+   border: 1px solid #a3a0a0;
+   font-size: 16px;
+   width: 50px;
+}
+
+/* 추가 */
+.m-l-add{
+   margin-left:105px;
+}
+.m-l-30{
+   margin-left:30px;	
+}
+.m-l-add span{
+   color: rgb(250,190,0);
+   font-style: italic;
+   font-weight: bold;
+}
+
+.m-l-add span:after{
+   content: ' · ';
+}
+
+.m-l-add span:before{
+   content: '#';
+}
+
+.m-l-add span:last-child:after{
+   content: none;
+}
+/* *** */

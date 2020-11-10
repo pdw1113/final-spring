@@ -10,6 +10,7 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterSns;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -51,6 +52,21 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> myProductList(UserMaster master) {
 		return pDao.myProductList(master);
+	}
+
+	@Override
+	public Product getProductDetail(int no) {
+		return pDao.getProductDetail(no);
+	}
+
+	@Override
+	public UserMaster getProductDetail(String nickName) {
+		return pDao.getProductDetail(nickName);
+	}
+
+	@Override
+	public UserMasterSns getProductSnsDetail(String email) {
+		return pDao.getProductSnsDetail(email);
 	}
 
 }

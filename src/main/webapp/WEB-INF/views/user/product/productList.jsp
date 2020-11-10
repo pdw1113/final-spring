@@ -16,13 +16,6 @@
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
       <!--제이쿼리CDN-->
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-      <!--부트스트랩CDN-->
-      <!-- 합쳐지고 최소화된 최신 CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-      <!-- 부가적인 테마 -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-      <!-- 합쳐지고 최소화된 최신 자바스크립트 -->    
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/productList.css">
 
    </head>
@@ -32,53 +25,35 @@
    	  </div>
       <div class="List-NavBox">
          <div class="List-NavBoxFont">
-            <h2 class="font_hanSans">홈&nbsp;&nbsp; > &nbsp;&nbsp;<span id="category1"></span></h2>
+            <h3>홈&nbsp;&nbsp; > &nbsp;&nbsp;<span id="category1"></span></h3>
          </div>
-         <table class="table table-bordered table-condensed" >
+         <table class="table_plist">
          
          <!--<c:set var="cd" value="JSON.parse('${categoryList}')"/>-->
          
-        <c:forEach var="c" items="${ categoryList2 }" varStatus="status2">
+       <c:forEach var="c" items="${ categoryList2 }" varStatus="status2">
+			<tr>
+				<td class="List-NavTableTd">
+					<p class="font_noto List-NavPtag">
+						<c:if test="${c.level == 1}">
+		               		${ c.cateName }
+		              </c:if>
+					</p>
+				</td>
+				<td id="testTable">
+					<c:forEach var="c" items="${ categoryList }" varStatus="status1">
+							<c:if
+								test="${status2.current.cateCode == status1.current.cateCodeRef}">
+								<button class="font_noto List-Button">${ status1.current.cateName }</button>
+							</c:if>
+					</c:forEach>
+					<p class="font_noto List-NavPtag"></p>
+				</td>
+			</tr>
+		</c:forEach> 
             <tr>
-       		
-               <td class="active List-NavTableTd" >
-	                 <p class="font_hanSans List-NavPtag" >
-			               <c:if test="${c.level == 1}">
-			               		${ c.cateName }
-			              </c:if>
-	                  </p>
-               </td>
-
-               <td id="testTable">
-	               <c:forEach var="c" items="${ categoryList }" varStatus="status1">
-		                <c:if test="${status2.current.cateCode == status1.current.cateCodeRef}" >
-		             		 <button class="font_jua List-Button" > ${ status1.current.cateName }</button> 
-		               </c:if>
-               	</c:forEach> 
-                  <p class="font_hanSans List-NavPtag"></p> 
-               </td>
-               
-       
-               </td>
-            </tr>
-    	  </c:forEach> 
-           <!--  <tr>
-               <td class="active">
-                  <p class="font_hanSans List-NavPtag">DBMS</p>
-               </td>
-               <td>
-                  <button class="font_jua List-Button">Access</button>
-                  <button class="font_jua List-Button">MariaDB</button>
-                  <button class="font_jua List-Button">MongoDB</button>
-                  <button class="font_jua List-Button">MSSQL</button>
-                  <button class="font_jua List-Button">MySQL</button>
-                  <button class="font_jua List-Button">Oracle</button>
-                  <button class="font_jua List-Button">PostgreSQL</button>
-               </td>
-            </tr> -->
-            <tr>
-               <td class="active row Cancle-Container">
-                  <p class="font_jua List-NavPtag">선택한필터</p>
+               <td class="row Cancle-Container List-NavTableTd">
+                  <span class="font_noto List-NavPtag">선택한필터</span>
                   <button class="font_jua List-NavButton">초기화</button>
                </td>
                <td class="last-nav-td">
@@ -86,37 +61,34 @@
             </tr>
          </table>
          <div class="checkbox">
-            <label class="font_jua Lsit-checkbox-size">
-            <input type="checkbox" value="" >
-            접속중
-            </label>
+            <label class="font-noto Lsit-checkbox-size">
+            <input type="checkbox" value="" > 접속중  </label>
+            <select class="selectbox">
+            	<option>최신순</option>
+				<option>가격순</option>
+				<option>인기순</option>
+			</select>
          </div>
          <!--부트스트랩 dropdown button-->
-         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="mystatus">
-            선택 <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" id="mytype">
-               <li><a href="#">가격순</a></li>
-               <li><a href="#">인기순</a></li>
-            </ul>
+         <div>
+			
          </div>
       </div>
       <!--리스트 섹션-->
       <div class="Lsit-Saction">
-         <div class="row">
-            <div class="col-xs-4">
-               <a href="productDetail.do" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/1.png" class="list_contents_img_index">
-                  </div>
+            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -124,27 +96,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/2.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+	           <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -152,27 +124,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/3.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -180,27 +152,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/1.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+	           <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -208,27 +180,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/2.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -236,27 +208,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/3.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -264,27 +236,27 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/1.png" class="list_contents_img_index">
-                  </div>
+	           </div>
+	            <div class="productOne">
+	              <a href="productDetail.do" class="thumbnail">
+	                 <div class="list_img_div">
+	                    <img src="resources/img/1.png" class="list_contents_img_index">
+	                 </div>
+	              </a>
                   <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
+                     <p class="font_noto list_explain_index">
                         자바 뉴비들 드루와
                      </p>
                      <div>
                         <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <span class="font_noto">조정호</span>
                         <span class="list_star_container_index">
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
@@ -292,176 +264,26 @@
                         <img src="resources/img/star.png">
                         <img src="resources/img/star.png">
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_noto">(5.0)</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
+                        <span class="font_noto">213명선택</span>
                         <img src="resources/img/buy.png" class="list_choice_img_index">
                         </span>
                      </div>
                   </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/2.png" class="list_contents_img_index">
-                  </div>
-                  <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/3.png" class="list_contents_img_index">
-                  </div>
-                  <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/1.png" class="list_contents_img_index">
-                  </div>
-                  <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/2.png" class="list_contents_img_index">
-                  </div>
-                  <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <div class="col-xs-4">
-               <a href="#" class="thumbnail">
-                  <div class="list_img_div">
-                     <img src="resources/img/3.png" class="list_contents_img_index">
-                  </div>
-                  <div class="list_contents_marign">
-                     <p class="font_jua list_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="list_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="list_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="list_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </a>
-            </div>
-         </div>
-         <div>
-            <ul class="pagination">
-               <li>
-                  <a href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  </a>
-               </li>
-               <li><a href="#">1</a></li>
-               <li><a href="#">2</a></li>
-               <li><a href="#">3</a></li>
-               <li><a href="#">4</a></li>
-               <li><a href="#">5</a></li>
-               <li>
-                  <a href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  </a>
-               </li>
-            </ul>
-         </div>
-      </div>
+	           </div>
+		 	</div>
+		<!-- Paging -->
+		<div class="pagination">
+		  <a href="#">&laquo;</a>
+		  <a class="page_product">1</a>
+		  <a href="#" class="page_product">2</a>
+		  <a href="#" class="page_product">3</a>
+		  <a href="#" class="page_product">4</a>
+		  <a href="#" class="page_product">5</a>
+		  <a href="#" class="page_product">6</a>
+		  <a href="#" class="page_product">&raquo;</a>
+		</div>
       
       <%@ include file="../../common/footer.jsp" %>
       
@@ -482,7 +304,7 @@
             /*카테고리 클릭시 필터로 넘어가는 기능 (미완성)*/
             var btn = this.outerHTML;
          
-            if(this.className == "font_jua List-Button yellowButton"){
+            if(this.className == "font_noto List-Button yellowButton"){
                $('.last-nav-td').append(btn); /*버튼클릭시 필터란에 선택한 버튼 추가*/
             };
          });
@@ -518,19 +340,13 @@
          $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
          });
          
-         /*썸네일 이미지 heigh값이 부트스트랩 때문에 auto로 고정되어서 200px로 수정*/
-         $('.list_img_div').css('height','20rem')
-         
          /*초기화 클릭시 버튼색 없어짐*/
          $('.List-NavButton').on('click',function(){
             $('.last-nav-td').children().remove(); /*td에있는 버튼들 제거*/
-            $('.List-Button').attr('class','font_jua List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
+            $('.List-Button').attr('class','font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
          })
          });
          
-         /*썸네일 간격및 크기조정*/
-         $('.col-xs-4 ').css('width', '40rem').css('margin-right','2.1rem').css('margin-left','2.1rem');
-
          </script>
       <script>
          // 컨트롤러에서 데이터 받기
@@ -621,7 +437,14 @@
          
          
          	$('form').css('display','inline-block');
-         
+         	
+         	
+         	// 페이지 클릭시 active 클래스 추가 및 제거 되는 스크립트
+           $('.pagination a').click(function(){
+        	   $('.pagination a').removeClass('active');
+        	   $(this).addClass('active');
+           });
+           
       </script>
    </body>
 </html>

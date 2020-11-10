@@ -5,103 +5,101 @@
 	<!-- parameterType : #{id}로 들어가는 매개변수의 타입 -->
 
 	<resultMap type="User" id="userResultSet">
-		<id property="email" column="USER_EMAIL"/>
-		<result property="pwd" column="USER_PASSWORD"/>
-		<result property="name" column="USER_NAME"/>
+		<id property="email" column="USER_EMAIL" />
+		<result property="pwd" column="USER_PASSWORD" />
+		<result property="name" column="USER_NAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="phone" column="USER_PHONE" />
+		<result property="enrollDate" column="USER_ENROLLDATE" />
+		<result property="updateDate" column="USER_UPDATEDATE" />
+		<result property="status" column="USER_STATUS" />
+		<result property="marketingT" column="USER_MARKETING_T" />
+		<result property="marketingE" column="USER_MARKETING_E" />
+	</resultMap>
+	
+	<resultMap type="UserMasterSchool" id="userMasterSchoolResultSet">
 		<result property="email" column="USER_EMAIL"/>
-		<result property="phone" column="USER_PHONE"/>
-		<result property="enrollDate" column="USER_ENROLLDATE"/>
-		<result property="updateDate" column="USER_UPDATEDATE"/>
-		<result property="status" column="USER_STATUS"/>
-		<result property="marketingT" column="USER_MARKETING_T"/>
-		<result property="marketingE" column="USER_MARKETING_E"/>
+		<result property="sHigh" column="MASTER_HIGH"/>
+		<result property="sUniv" column="MASTER_UNIV"/>
+		<result property="sUnivDept" column="MASTER_UNIV_DEPT"/>
+		<result property="sUnivPicOri" column="MASTER_UNIV_PIC_ORI"/>
+		<result property="sUnivPicRe" column="MASTER_UNIV_PIC_RE"/>
+		<result property="sUniv2" column="MASTER_UNIV2"/>
+		<result property="sUniv2Dept" column="MASTER_UNIV2_DEPT"/>
+		<result property="sUniv2PicOri" column="MASTER_UNIV2_PIC_ORI"/>
+		<result property="sUniv2PicRe" column="MASTER_UNIV2_PIC_RE"/>
+	</resultMap>
+	
+	<resultMap type="UserMasterQualifcation" id="userMasterQualifcationResultSet">
+		<result property="email" column="USER_EMAIL"/>
+		<result property="q1" column="MASTER_QUALIFICATION1"/>
+		<result property="q1PicOri" column="MASTER_QUALIFICATION1_PIC_ORI"/>
+		<result property="q1PicRe" column="MASTER_QUALIFICATION1_PIC_RE"/>
+		<result property="q2" column="MASTER_QUALIFICATION2"/>
+		<result property="q2PicOri" column="MASTER_QUALIFICATION2_PIC_ORI"/>
+		<result property="q2PicRe" column="MASTER_QUALIFICATION2_PIC_RE"/>
+		<result property="q3" column="MASTER_QUALIFICATION3"/>
+		<result property="q3PicOri" column="MASTER_QUALIFICATION3_PIC_ORI"/>
+		<result property="q3PicRe" column="MASTER_QUALIFICATION3_PIC_RE"/>
+		<result property="q4" column="MASTER_QUALIFICATION4"/>
+		<result property="q4PicOri" column="MASTER_QUALIFICATION4_PIC_ORI"/>
+		<result property="q4PicRe" column="MASTER_QUALIFICATION4_PIC_RE"/>
+		<result property="q5" column="MASTER_QUALIFICATION5"/>
+		<result property="q5PicOri" column="MASTER_QUALIFICATION5_PIC_ORI"/>
+		<result property="q5PicRe" column="MASTER_QUALIFICATION5_PIC_RE"/>
+	</resultMap>
+	
+	<resultMap type="UserMasterSns" id="userMasterSnsResultSet">
+		<result property="email" column="USER_EMAIL"/>
+		<result property="snsInsta" column="MASTER_INSTAGRAM"/>
+		<result property="snsTwit" column="MASTER_TWITTER"/>
+		<result property="snsBlog" column="MASTER_BLOG"/>
+		<result property="snsGit" column="MASTER_GIT"/>
+		<result property="snsYou1" column="MASTER_YOTUBUE1"/>
+		<result property="snsYou2" column="MASTER_YOTUBUE2"/>
+		<result property="snsYou3" column="MASTER_YOTUBUE3"/>
 	</resultMap>
 	
 	<resultMap type="UserMaster" id="userMasterResultSet">
-		<id property="MASTER_NICKNAME" column="MASTER_NICKNAME"/>
-		<result property="USER_EMAIL" column="USER_EMAIL"/>
-		<result property="MASTER_RANKNAME" column="MASTER_RANKNAME"/>
-		<result property="MASTER_PROFILE_PIC" column="MASTER_PROFILE_PIC"/>
-		<result property="MASTER_CATEGORY" column="MASTER_CATEGORY"/>
-		<result property="MASTER_ID_PIC" column="MASTER_ID_PIC"/>
-		<result property="MASTER_WORKDAY" column="MASTER_WORKDAY"/>
-		<result property="MASTER_WORKSTYLE" column="MASTER_WORKSTYLE"/>
-		<result property="MASTER_STARTTIME" column="MASTER_STARTTIME"/>
-		<result property="MASTER_ENDTIME" column="MASTER_ENDTIME"/>
+		<id property="mNickname" column="MASTER_NICKNAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
+		<result property="mCategory" column="MASTER_CATEGORY" />
+		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
+		<result property="mWorkDay" column="MASTER_WORKDAY" />
+		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
+		<result property="mStartTime" column="MASTER_STARTTIME" />
+		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
-	
-	<resultMap type="UserSchool" id="userMasterSchoolResultSet">
-		<result property="USER_EMAIL" column="USER_EMAIL"/>
-		<result property="MASTER_HIGH" column="MASTER_HIGH"/>
-		<result property="MASTER_UNIV" column="MASTER_UNIV"/>
-		<result property="MASTER_UNIV_DEPT" column="MASTER_UNIV_DEPT"/>
-		<result property="MASTER_UNIV_PIC_ORI" column="MASTER_UNIV_PIC_ORI"/>
-		<result property="MASTER_UNIV_PIC_RE" column="MASTER_UNIV_PIC_RE"/>
-		<result property="MASTER_UNIV2" column="MASTER_UNIV2"/>
-		<result property="MASTER_UNIV2_DEPT" column="MASTER_UNIV2_DEPT"/>
-		<result property="MASTER_UNIV2_PIC_ORI" column="MASTER_UNIV2_PIC_ORI"/>
-		<result property="MASTER_UNIV2_PIC_RE" column="MASTER_UNIV2_PIC_RE"/>
-	</resultMap>
-	
-	<resultMap type="UserQualifcation" id="userMasterQualifcationResultSet">
-		<result property="USER_EMAIL" column="USER_EMAIL"/>
-		<result property="MASTER_QUALIFICATION1" column="MASTER_QUALIFICATION1"/>
-		<result property="MASTER_QUALIFICATION1_PIC_ORI" column="MASTER_QUALIFICATION1_PIC_ORI"/>
-		<result property="MASTER_QUALIFICATION1_PIC_RE" column="MASTER_QUALIFICATION1_PIC_RE"/>
-		<result property="MASTER_QUALIFICATION2" column="MASTER_QUALIFICATION2"/>
-		<result property="MASTER_QUALIFICATION2_PIC_ORI" column="MASTER_QUALIFICATION2_PIC_ORI"/>
-		<result property="MASTER_QUALIFICATION2_PIC_RE" column="MASTER_QUALIFICATION2_PIC_RE"/>
-		<result property="MASTER_QUALIFICATION3" column="MASTER_QUALIFICATION3"/>
-		<result property="MASTER_QUALIFICATION3_PIC_ORI" column="MASTER_QUALIFICATION3_PIC_ORI"/>
-		<result property="MASTER_QUALIFICATION3_PIC_RE" column="MASTER_QUALIFICATION3_PIC_RE"/>
-		<result property="MASTER_QUALIFICATION4" column="MASTER_QUALIFICATION4"/>
-		<result property="MASTER_QUALIFICATION4_PIC_ORI" column="MASTER_QUALIFICATION4_PIC_ORI"/>
-		<result property="MASTER_QUALIFICATION4_PIC_RE" column="MASTER_QUALIFICATION4_PIC_RE"/>
-		<result property="MASTER_QUALIFICATION5" column="MASTER_QUALIFICATION5"/>
-		<result property="MASTER_QUALIFICATION5_PIC_ORI" column="MASTER_QUALIFICATION5_PIC_ORI"/>
-		<result property="MASTER_QUALIFICATION5_PIC_RE" column="MASTER_QUALIFICATION5_PIC_RE"/>
-	</resultMap>
-	
-	<resultMap type="UserSNS" id="userMasterSnsResultSet">
-		<result property="USER_EMAIL" column="USER_EMAIL"/>
-		<result property="MASTER_INSTAGRAM" column="MASTER_INSTAGRAM"/>
-		<result property="MASTER_TWITTER" column="MASTER_TWITTER"/>
-		<result property="MASTER_BLOG" column="MASTER_BLOG"/>
-		<result property="MASTER_GIT" column="MASTER_GIT"/>
-		<result property="MASTER_YOTUBUE1" column="MASTER_YOTUBUE1"/>
-		<result property="MASTER_YOTUBUE2" column="MASTER_YOTUBUE2"/>
-		<result property="MASTER_YOTUBUE3" column="MASTER_YOTUBUE3"/>
-	</resultMap> 
-	
 	<!-- 로그인 -->
-	<select id="loginUser" parameterType="User" resultMap="userResultSet">
+	<select id="loginUser" parameterType="User"
+		resultMap="userResultSet">
 		<!-- 암호화 전 -->
-		<!-- SELECT *
-		FROM NEEZ_USER
-		WHERE USER_EMAIL = #{email}
-		AND USER_PASSWORD = #{pwd}
-		AND USER_STATUS = 'N'-->
-		
-		<!--  암호화 후 -->
+		<!-- SELECT * FROM NEEZ_USER WHERE USER_EMAIL = #{email} AND USER_PASSWORD 
+			= #{pwd} AND USER_STATUS = 'N' -->
+
+		<!-- 암호화 후 -->
 		SELECT *
 		FROM NEEZ_USER
 		WHERE USER_EMAIL = #{email}
 		AND USER_STATUS = 'N'
 	</select>
-	
+
 	<!-- 회원가입 -->
-	<insert id="insertUser" parameterType="User"> 
+	<insert id="insertUser" parameterType="User">
 		INSERT INTO NEEZ_USER
 		VALUES(#{name},#{phone},#{email},#{pwd},default,default,default,default,default)
 	</insert>
-	
+
 	<!-- 휴대폰번호 중복 체크 -->
 	<select id="phoneCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
 		WHERE USER_PHONE = #{phone}
 	</select>
-	
+
 	<!-- 이메일 중복 체크 -->
 	<select id="emailCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
@@ -112,63 +110,77 @@
 	<!-- 휴대폰번호 변경 -->
 	<update id="modifyPhone" parameterType="User">
 		UPDATE NEEZ_USER
-	 	SET USER_PHONE = #{phone}
-	 	WHERE USER_EMAIL = #{email}
+		SET USER_PHONE = #{phone}
+		WHERE USER_EMAIL = #{email}
 	</update>
-  
-  	<!-- 능력자 등록 -->
-	<insert id="insertMaster"> 
-		INSERT INTO NEEZ_MASTER (USER_EMAIL, MASTER_RANKNAME, MASTER_PROFILE_PIC_ORI, MASTER_PROFILE_PIC_RE, MASTER_NICKNAME, MASTER_CATEGORY, MASTER_ID_PIC_ORI, MASTER_ID_PIC_RE, MASTER_WORKDAY, MASTER_WORKSTYLE, MASTER_STARTTIME, MASTER_ENDTIME)
-		VALUES(#{USER_EMAIL},default,#{MASTER_PROFILE_PIC_ORI},#{MASTER_PROFILE_PIC_RE},#{MASTER_NICKNAME},#{MASTER_CATEGORY},#{MASTER_ID_PIC_ORI},#{MASTER_ID_PIC_RE},#{MASTER_WORKDAY},#{MASTER_WORKSTYLE},#{MASTER_STARTTIME},#{MASTER_ENDTIME})
+
+	<!-- 능력자 등록 -->
+	<insert id="insertMaster" parameterType="UserMaster">
+		INSERT INTO NEEZ_MASTER
+		VALUES(#{email},default,#{mProPicOri},#{mProPicRe},#{mNickname},#{mCategory},#{mIdPicOri},#{mIdPicRe},#{mWorkDay},#{mWorkStyle},#{mStartTime},#{mEndTime},DEFAULT)
 	</insert>
-	
-	 <!-- 능력자 학력 등록 -->
-	<insert id="insertMasterSchool"> 
-		INSERT INTO SCHOOL (USER_EMAIL, MASTER_HIGH, MASTER_UNIV, MASTER_UNIV_DEPT, MASTER_UNIV_PIC_ORI, MASTER_UNIV_PIC_RE, MASTER_UNIV2, MASTER_UNIV2_DEPT, MASTER_UNIV2_PIC_ORI, MASTER_UNIV2_PIC_RE)
-		VALUES(#{USER_EMAIL},#{MASTER_HIGH},#{MASTER_UNIV},#{MASTER_UNIV_DEPT},#{MASTER_UNIV_PIC_ORI},#{MASTER_UNIV_PIC_RE},#{MASTER_UNIV2},#{MASTER_UNIV2_DEPT},#{MASTER_UNIV2_PIC_ORI},#{MASTER_UNIV2_PIC_RE})
+
+	<!-- 능력자 학력 등록 -->
+	<insert id="insertMasterSchool">
+		INSERT INTO SCHOOL (USER_EMAIL, MASTER_HIGH, MASTER_UNIV, MASTER_UNIV_DEPT,
+		MASTER_UNIV_PIC_ORI, MASTER_UNIV_PIC_RE, MASTER_UNIV2,
+		MASTER_UNIV2_DEPT, MASTER_UNIV2_PIC_ORI, MASTER_UNIV2_PIC_RE)
+		VALUES(#{email},#{sHigh},#{sUniv},#{sUnivDept},#{sUnivPicOri},#{sUnivPicRe},#{sUniv2},#{sUniv2Dept},#{sUniv2PicOri},#{sUniv2PicRe})
 	</insert>
-	
-	 <!-- 능력자 sns 등록 -->
-	<insert id="insertMasterSns"> 
-		INSERT INTO SNS (USER_EMAIL, MASTER_INSTAGRAM, MASTER_TWITTER, MASTER_BLOG, MASTER_GIT, MASTER_YOTUBUE1, MASTER_YOTUBUE2, MASTER_YOTUBUE3)
-		VALUES(#{USER_EMAIL},#{MASTER_INSTAGRAM},#{MASTER_TWITTER},#{MASTER_BLOG},#{MASTER_GIT},#{MASTER_YOTUBUE1},#{MASTER_YOTUBUE2},#{MASTER_YOTUBUE3})
+
+	<!-- 능력자 sns 등록 -->
+	<insert id="insertMasterSns">
+		INSERT INTO SNS (USER_EMAIL, MASTER_INSTAGRAM, MASTER_TWITTER, MASTER_BLOG,
+		MASTER_GIT, MASTER_YOTUBUE1, MASTER_YOTUBUE2, MASTER_YOTUBUE3)
+		VALUES(#{email},#{snsInsta},#{snsTwit},#{snsBlog},#{snsGit},#{snsYou1},#{snsYou2},#{snsYou3})
 	</insert>
-	
-	 <!-- 능력자 자격증 등록 -->
-	<insert id="insertMasterQfc"> 
-		INSERT INTO QUALIFICATION (USER_EMAIL, MASTER_QUALIFICATION1, MASTER_QUALIFICATION1_PIC_ORI, MASTER_QUALIFICATION1_PIC_RE, MASTER_QUALIFICATION2, MASTER_QUALIFICATION2_PIC_ORI, MASTER_QUALIFICATION2_PIC_RE, MASTER_QUALIFICATION3, MASTER_QUALIFICATION3_PIC_ORI,  MASTER_QUALIFICATION3_PIC_RE, MASTER_QUALIFICATION4, MASTER_QUALIFICATION4_PIC_ORI, MASTER_QUALIFICATION4_PIC_RE, MASTER_QUALIFICATION5, MASTER_QUALIFICATION5_PIC_ORI,  MASTER_QUALIFICATION5_PIC_RE)
-		VALUES(#{USER_EMAIL},#{MASTER_QUALIFICATION1},#{MASTER_QUALIFICATION1_PIC_ORI},#{MASTER_QUALIFICATION1_PIC_RE},#{MASTER_QUALIFICATION2},#{MASTER_QUALIFICATION2_PIC_ORI},#{MASTER_QUALIFICATION2_PIC_RE},#{MASTER_QUALIFICATION3},#{MASTER_QUALIFICATION3_PIC_ORI},#{MASTER_QUALIFICATION3_PIC_RE},#{MASTER_QUALIFICATION4},#{MASTER_QUALIFICATION4_PIC_ORI},#{MASTER_QUALIFICATION4_PIC_RE},#{MASTER_QUALIFICATION5},#{MASTER_QUALIFICATION5_PIC_ORI},#{MASTER_QUALIFICATION5_PIC_RE})
+
+	<!-- 능력자 자격증 등록 -->
+	<insert id="insertMasterQfc">
+		INSERT INTO QUALIFICATION (USER_EMAIL, MASTER_QUALIFICATION1,
+		MASTER_QUALIFICATION1_PIC_ORI, MASTER_QUALIFICATION1_PIC_RE,
+		MASTER_QUALIFICATION2, MASTER_QUALIFICATION2_PIC_ORI,
+		MASTER_QUALIFICATION2_PIC_RE, MASTER_QUALIFICATION3,
+		MASTER_QUALIFICATION3_PIC_ORI, MASTER_QUALIFICATION3_PIC_RE,
+		MASTER_QUALIFICATION4, MASTER_QUALIFICATION4_PIC_ORI,
+		MASTER_QUALIFICATION4_PIC_RE, MASTER_QUALIFICATION5,
+		MASTER_QUALIFICATION5_PIC_ORI, MASTER_QUALIFICATION5_PIC_RE)
+		VALUES(#{email},#{q1},#{q1PicOri},#{q1PicRe},#{q2},#{q2PicOri},#{q2PicRe},#{q3},#{q3PicOri},#{q3PicRe},#{q4},#{q4PicOri},#{q4PicRe},#{q5},#{q5PicOri},#{q5PicRe})
 	</insert>
-	
+
 	<!-- 별명 중복 체크 -->
 	<select id="nickCheck" parameterType="string" resultType="_int">
-		SELECT COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM NEEZ_MASTER
 		WHERE MASTER_NICKNAME = #{nickname}
 	</select>
-	
+
 	<!-- 마케팅 수신동의 변경 -->
 	<update id="marketing" parameterType="User">
 		UPDATE NEEZ_USER
-		SET USER_MARKETING_T = #{marketingT},
-			USER_MARKETING_E = #{marketingE}
+		SET
+		USER_MARKETING_T = #{marketingT},
+		USER_MARKETING_E = #{marketingE}
 		WHERE USER_EMAIL = #{email}
 	</update>
-	
+
 	<!-- 비밀번호 변경 -->
-  	<update id="modifyPwd" parameterType="User">
+	<update id="modifyPwd" parameterType="User">
 		UPDATE NEEZ_USER
-		SET USER_PASSWORD = #{pwd}
+		SET
+		USER_PASSWORD = #{pwd}
 		WHERE USER_EMAIL = #{email}
 	</update>
-	
+
 	<!-- 유저삭제 -->
 	<update id="userDelete" parameterType="User">
 		UPDATE NEEZ_USER
-		SET USER_STATUS='Y'
+		SET
+		USER_STATUS='Y'
 		WHERE USER_EMAIL=#{email}
 	</update>
-	
+
 	<!-- 탈퇴사유 -->
 	<insert id="reason" parameterType="hashmap">
 		INSERT INTO REASON

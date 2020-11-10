@@ -21,7 +21,7 @@
    </head>
    <body>
       <div class="header">
-         <%@ include file="../../common/header.jsp" %>
+         <%@ include file="../common/mheader.jsp" %>
       </div>
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
