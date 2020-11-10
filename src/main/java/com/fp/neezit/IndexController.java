@@ -46,7 +46,8 @@ public class IndexController {
 		}
 		return "index";
 	}
-	
+
+	// session master3을 종료시켜주기 위함.
 	@RequestMapping("logout2.do")
 	public String logout(SessionStatus status) {
 

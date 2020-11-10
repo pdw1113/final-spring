@@ -436,16 +436,7 @@
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
 						}
-					}else{ // 댓글이 없을 경우
-						alert("A");
-						/* $tr = $("<tr>");
-						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-						
-						$tr.append($rContent);
-						$tableBody.append($tr);
-						 */
 					}
-					 
 				},error:function(request,status,errorData){
 					console.log(request.status + ":" + errorData);
 				}
