@@ -20,6 +20,36 @@
             <div class="layoutSubbox_mywish">
                <div class="tit2_mywish">나의 관심상품</div>
                <!-- 상품 목록 리스트 start!! -->
+               <c:forEach var="p" items="${ product }">
+                 <div class="pOrderSearch_mywish">
+                  <div class="pLeft_mywish">
+                     <div class="Lsit-Saction_mywish">
+                        <div class="mywish_img_div">
+                           <img src="resources/pUploadFiles/${p.renamePic }" class="mywish_img_index">
+                        </div>
+                     </div>
+                     <div class="pWrap_mywish">
+                        <div class="pTitle_mywish">${p.title}</div>
+                        <div class="pName_mywish">
+                    ${p.nickName}   
+                           <!-- 별점 -->
+                           <div class="rating_mywish" data-rate="3">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <span>(32)</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="pRight_mywish">
+                     <div class="wishCancle_mywish"><button class="btn-default_mywish">찜 해제</button></div>
+                     <div class="price_mywish">￦${p.price}</div>
+                  </div>
+               </div>
+               </c:forEach>
                <!-- 상품 1 -->
                <div class="pOrderSearch_mywish">
                   <div class="pLeft_mywish">
