@@ -175,5 +175,6 @@
 		INSERT INTO WISH_LIST VALUES
 		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
 	</insert>
+	
 
 </mapper>

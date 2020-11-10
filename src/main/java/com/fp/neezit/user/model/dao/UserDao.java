@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -121,6 +123,10 @@ public class UserDao {
 
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
+	}
+
+	public List<Product> wishList(User u) {
+		return sqlSession.selectList("userMapper.WishList",u);
 	}
 
 }
