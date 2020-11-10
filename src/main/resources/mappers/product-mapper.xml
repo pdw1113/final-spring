@@ -14,6 +14,7 @@
 		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
 		<result property="mStartTime" column="MASTER_STARTTIME" />
 		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
 
 	<resultMap type="Product" id="productResultSet">
@@ -74,7 +75,7 @@
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="Product">
 		INSERT INTO PRODUCT VALUES
-		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},#{category},#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},#{cateone},#{category},#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 
 	<!-- 능력자 정보 가져오기 -->

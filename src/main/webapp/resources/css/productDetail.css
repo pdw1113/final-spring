@@ -138,12 +138,12 @@
       display: inline-block;
       width: 14px;
       height: 14px;
-      vertical-align: middle;
     }
 
     .star_img img {
       width: 100%;
       height: 100%;
+      vertical-align: middle;
     }
 
     .grade_total {
@@ -466,8 +466,8 @@
       box-shadow: 0 0 5px 2px rgb(0, 0, 0, 0.2);
     }
 
-    .dayOpacity{
-      opacity: 1;
+    .dayOn{
+      opacity: 1 !important;
     }
 
     /* 자택, 출장 */
