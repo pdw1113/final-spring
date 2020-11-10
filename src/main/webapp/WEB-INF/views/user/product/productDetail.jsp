@@ -53,7 +53,7 @@
 						<em class="master_nickname">${ master.mNickname }</em> <span
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
-						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(10)</sapn>
+						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(${replyCount})</sapn>
 						</i>
 						</span>
 					</div>
