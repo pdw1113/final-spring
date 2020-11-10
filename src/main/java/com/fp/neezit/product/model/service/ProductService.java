@@ -1,9 +1,11 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -44,5 +46,7 @@ public interface ProductService {
 	public UserMaster getProductDetail(String nickName);
 	
 	public UserMasterSns getProductSnsDetail(String email);
+
+	public int wishInsert(HashMap<String, String> map);
 
 }

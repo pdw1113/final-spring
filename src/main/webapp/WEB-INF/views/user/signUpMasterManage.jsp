@@ -79,7 +79,14 @@
                </li>
                <!-- 학력 -->
                <li>
+               	  <c:if test="${!empty SchoolList.sHigh || !empty SchoolList.sUniv || !empty SchoolList.sUnivDept ||
+               	  				!empty SchoolList.sUniv2 || !empty SchoolList.sUniv2Dept}">	
                   <div class="edu-ability" title="학력">
+                  </c:if>
+               	  <c:if test="${empty SchoolList.sHigh && empty SchoolList.sUniv && empty SchoolList.sUnivDept &&
+               	  				empty SchoolList.sUniv2 && empty SchoolList.sUniv2Dept}">	
+                  <div class="edu-ability" title="등록된 학력이 없습니다.">
+                  </c:if>
                      <c:if test="${!empty SchoolList.sHigh}">
                      <div>
                         <input class="input_master width_600" type="text"
@@ -118,7 +125,14 @@
                </li>
                <!-- 자격증 -->
                <li>
+               	  <c:if test="${empty QualifcationList.q1 && empty QualifcationList.q2 && empty QualifcationList.q3 && 
+               	  				empty QualifcationList.q4 && empty QualifcationList.q5}">
+                  <div class="edu-ability" title="등록된 자격증이 없습니다.">
+                  </c:if>
+                  <c:if test="${!empty QualifcationList.q1 || !empty QualifcationList.q2 || !empty QualifcationList.q3 || 
+               	  				!empty QualifcationList.q4 || !empty QualifcationList.q5}">
                   <div class="edu-ability" title="자격증">
+                  </c:if>
                   	 <c:if test="${!empty QualifcationList.q1}">
                      <div>
                         <input class="input_master" type="text"
@@ -184,40 +198,59 @@
                <hr>
                <!-- 소셜 미디어 -->
                <li>
+               <c:if test="${!empty SnsList.snsInsta || !empty SnsList.snsTwit || !empty SnsList.snsBlog || !empty SnsList.snsGit}">
                   <div class="social-media" title="소셜미디어">
+                </c:if>
+               <c:if test="${empty SnsList.snsInsta && empty SnsList.snsTwit && empty SnsList.snsBlog && empty SnsList.snsGit}">
+                  <div class="social-media" title="등록된 소셜미디어가 없습니다.">
+                </c:if>
+                  <c:if test="${!empty SnsList.snsInsta}">
                      <div class="instagram">
                         <input class="input_master_2" type="text"
                            placeholder="${SnsList.snsInsta}">
                      </div>
+                   </c:if>
+                   <c:if test="${!empty SnsList.snsTwit}">
                      <div class="twitter">
                         <input class="input_master_2" type="text"
                            placeholder="${SnsList.snsTwit}">
                      </div>
+                     </c:if>
+                     <c:if test="${!empty SnsList.snsBlog}">
                      <div class="blog">
                         <input class="input_master_2" type="text"
                            placeholder="${SnsList.snsBlog}">
                      </div>
+                     </c:if>
+                     <c:if test="${!empty SnsList.snsGit}">
                      <div class="git">
                         <input class="input_master_2" type="text"
                            placeholder="${SnsList.snsGit}">
                      </div>
+                     </c:if>
                   </div>
                   <div class="video-link" title="영상링크">
+                  <c:if test="${!empty SnsList.snsYou1}">
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
                            value="${SnsList.snsYou1}">
                         <div></div>
                      </div>
+                     </c:if>
+                     <c:if test="${!empty SnsList.snsYou2}">
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
                            value="${SnsList.snsYou2}">
                         <div></div>
                      </div>
+                     </c:if>
+                     <c:if test="${!empty SnsList.snsYou3}">
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
                            value="${SnsList.snsYou3}">
                         <div></div>
                      </div>
+                     </c:if>
                   </div>
                </li>
                <script>

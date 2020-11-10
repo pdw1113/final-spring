@@ -316,7 +316,8 @@
 			</div>
 		</div>
 	</div>
-
+	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
+	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
 	<script>
 		// 찜하기
 		function heart(){
@@ -324,7 +325,27 @@
 			if($heart.hasClass("far")){
 				$heart.removeClass("far");
 				$heart.addClass("fas");		
-				alert("찜 되었습니다.");		
+ 				let email = $(".wishEmail").val();
+				let no = $(".wishProduct").val();
+				   var data = {
+						   email : email,
+						     no : no
+						     };
+				$.ajax({
+				    url : "wishInsert.do",
+				    type : "post",
+				    data : data,
+				    success : function(result){
+				    	if(result == "ok"){
+				    		alert("찜 성공");
+				    	}
+				    },
+				    error : function(result){
+				    	if(result == "fail"){
+				    		alert("찜 실패");
+				    	}
+				    }
+				   });
 			}else{
 				$heart.removeClass("fas");
 				$heart.addClass("far");	

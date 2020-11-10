@@ -43,6 +43,12 @@
 		<result property="snsYou2" column="MASTER_YOTUBUE2" />
 		<result property="snsYou3" column="MASTER_YOTUBUE3" />
 	</resultMap>
+	
+	<resultMap type="Wish" id="wishResultSet">
+		<id property="wNo" column="WISH_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="no" column="PRODUCT_NO" />
+	</resultMap>
 
 	<select id="category"
 		resultType="com.fp.neezit.product.model.vo.ProductCategory">
@@ -123,6 +129,12 @@
 		SELECT * FROM SNS
 		WHERE USER_EMAIL = #{email}
 	</select>
+
+	<!-- 찜 등록 -->
+	<insert id="insertWish" parameterType="hashmap">
+		INSERT INTO WISH_LIST VALUES
+		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
+	</insert>
 
 </mapper>
 

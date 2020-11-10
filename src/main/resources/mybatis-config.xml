@@ -13,6 +13,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.UserMasterSns" alias="UserMasterSns"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserMasterQualifcation" alias="UserMasterQualifcation"/>
       <typeAlias type="com.fp.neezit.product.model.vo.Product" alias="Product"/>
+      <typeAlias type="com.fp.neezit.product.model.vo.WishList" alias="Wish"/>
    </typeAliases>
    
    <!-- 
