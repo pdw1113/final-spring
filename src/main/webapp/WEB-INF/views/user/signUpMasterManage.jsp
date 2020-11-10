@@ -40,7 +40,7 @@
             <li>
                 <div class="sub-title-sgm">별명</div>
                 <div>
-                    <input class="input_master" type="text" value="천동벌거숭이" readonly>
+                    <input class="input_master" type="text" value="${master.MASTER_NICKNAME}" readonly>
                 </div>
             </li>
             
@@ -52,11 +52,11 @@
                 <div>
                     <div>
                         <select size="8" class="font_jua select-sgm" id="my-cate">
-                            <option disabled>java</option>
+<!--                             <option disabled>java</option>
                             <option disabled>Spring</option>
                             <option disabled>Ajax</option>
                             <option disabled>JQuery</option>
-                            <option disabled>javascript</option>
+                            <option disabled>javascript</option> -->
                         </select>
                     </div>
                 </div>
@@ -80,15 +80,15 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="논산정보산업고등학교">
+                        <input class="input_master width_500" type="text" value="${master1.MASTER_HIGH}">
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="미시간주립대학교">
-                        <input class="input_master width_242" type="text" placeholder="컴퓨터공학과">
+                        <input class="input_master width_242" type="text" value="${master1.MASTER_UNIV}">
+                        <input class="input_master width_242" type="text" value="${master1.MASTER_UNIV_DEPT}">
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="카이스트대학원">
-                        <input class="input_master width_242" type="text" placeholder="천동민분석학">
+                        <input class="input_master width_242" type="text" value="${master1.MASTER_UNIV2}">
+                        <input class="input_master width_242" type="text" value="${master1.MASTER_UNIV2_DEPT}">
                     </div>
                 </div>
             </li>
@@ -97,19 +97,19 @@
             <li>
                 <div class="edu-ability" title="자격증">
                     <div>
-                        <input class="input_master" type="text" placeholder="정보처리기사">
+                        <input class="input_master" type="text" value="${master1.MASTER_QUALIFICATION1}">
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="TOEIC990">
+                        <input class="input_master" type="text" value="${master1.MASTER_QUALIFICATION2}">
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="JLPT N1">
+                        <input class="input_master" type="text" value="${master1.MASTER_QUALIFICATION3}">
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="컴퓨터활용능력1급">
+                        <input class="input_master" type="text" value="${master1.MASTER_QUALIFICATION4}">
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="태권도 4단">
+                        <input class="input_master" type="text" value="${master1.MASTER_QUALIFICATION5}">
                     </div>
                 </div>
             </li>
@@ -119,31 +119,31 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="https://www.instagram.com/abscbnnews/">
+                        <input class="input_master_2" type="text" value="${master1.MASTER_INSTAGRAM}">
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="https://twitter.com/java">
+                        <input class="input_master_2" type="text" value="${master1.MASTER_TWITTER}">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="https://jeongmatt.blogspot.com/">
+                        <input class="input_master_2" type="text" value="${master1.MASTER_BLOG}">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="https://github.com/pdw1113/final-spring"> 
+                        <input class="input_master_2" type="text" value="${master1.MASTER_GIT}"> 
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
-                        <input class="input_master_2 youtube_show" type="text" value="https://www.youtube.com/watch?v=9-VLWHAWAmE">
+                        <input class="input_master_2 youtube_show" type="text" value="${master1.MASTER_YOTUBUE1}">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2 youtube_show" type="text" value="https://www.youtube.com/watch?v=JDpIMnKtHXw">
+                        <input class="input_master_2 youtube_show" type="text" value="${master1.MASTER_YOTUBUE2}">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2 youtube_show" type="text" value="https://www.youtube.com/watch?v=7y7g5j2Z9NM">
+                        <input class="input_master_2 youtube_show" type="text" value="${master1.MASTER_YOTUBUE3}">
                         <div>
                         </div>
                     </div>
@@ -190,50 +190,74 @@
             <li>
                 <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
+      				<div>
+                        <input class="input_master_2" type="text" value="${master1.MASTER_WORKDAY}"> 
+                    </div>
+                    <div>
+                        <input class="input_master_2" type="text" value="${master1.MASTER_WORKSTYLE}"> 
+                    </div>
+                    <div>
+                        <input class="input_master_2" type="text" value="${master1.MASTER_STARTTIME}"> 
+                    </div>
+                    <div>
+                        <input class="input_master_2" type="text" value="${master1.MASTER_ENDTIME}"> 
+                    </div>
+                    
+                </div>
+                
+            </li>
+            
+            
+             <!-- 작업 가능 시간 -->
+            <li>
+                <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
+                <div class="margin-first-sgm">
                     <div class="radio-wrap">
-                        <input type="checkbox" id="monday" value="월"/>
-                        <label class="font_jua" for="monday">월</label>
+                        <input type="checkbox" id="monday" value="월" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="monday">월</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="tuesday" value="화"/>
-                        <label class="font_jua" for="tuesday">화</label>
+                        <input type="checkbox" id="tuesday" value="화" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="tuesday">화</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="wednesday" value="수"/>
-                        <label class="font_jua" for="wednesday">수</label>
+                        <input type="checkbox" id="wednesday" value="수" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="wednesday">수</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="thursday" value="목"/>
-                        <label class="font_jua" for="thursday">목</label>
+                        <input type="checkbox" id="thursday" value="목" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="thursday">목</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="friday" value="금"/>
-                        <label class="font_jua" for="friday">금</label>
+                        <input type="checkbox" id="friday" value="금" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="friday">금</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="saturday" value="토"/>
-                        <label class="font_jua" for="saturday">토</label>
+                        <input type="checkbox" id="saturday" value="토" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="saturday">토</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="sunday" value="일"/>
-                        <label class="font_jua" for="sunday">일</label>
+                        <input type="checkbox" id="sunday" value="일" class="checkSelect" name="work-day"/>
+                        <label class="font_jua day11" for="sunday">일</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="home" name="a" value="자택"/>
+                        <input type="checkbox" name="work-style" id="home" name="a" value="자택" class="checkSelect1 "/>
                         <label class="font_jua home_choose" for="home">자택</label>
                     </div>
                     <div class="radio-wrap">
-                        <input type="checkbox" id="work" value="출근"/>
+                        <input type="checkbox" name="work-style" id="work" value="출근" class="checkSelect1"/>
                         <label class="font_jua home_choose" for="work">출근</label>
                     </div>
                     <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
-                <div>
-                    <input class="input_master_3" type="time" name="" id="">
+      <!--           <div>
+                    <input class="input_master_3" type="time" name="MASTER_STARTTIME" id="">
                     &nbsp;~&nbsp;
-                    <input class="input_master_3" type="time" name="" id="">
-                </div>
+                    <input class="input_master_3" type="time" name="MASTER_ENDTIME" id="">
+                </div> -->
             </li>
+            
+          
 
             <hr>
 
@@ -244,5 +268,72 @@
         </ul>
     </div>
     </form>
+    
+      <script>
+            (function(){
+                let workday= '${ master1.MASTER_WORKDAY }';
+                let arr1 = workday.split(",");
+                let arr2 = $("input[name=work-day]");
+
+                
+                
+                for(var i=0; i<arr2.length; i++){
+
+                	for(var j=0; j<arr1.length; j++){
+                	
+						if(   arr1[j] == $("input[name=work-day]")[i].attributes[2].value  ){
+		    
+		                	document.getElementsByClassName('checkSelect')[i].checked = true;
+ 	
+		                };
+                	};		
+
+                };
+                
+                
+                /*work-style check*/
+                let workstyle= '${ master1.MASTER_WORKSTYLE }';
+                let arr3 = workstyle.split(",");
+                let arr4 = $("input[name=work-style]");
+                
+                alert($("input[name=work-style]")[1].attributes[3].value );
+                
+                console.log(arr4);
+                
+                for(var i=0; i<arr4.length; i++){
+                    
+                    for(var j=0; j<arr3.length; j++){
+                    
+                   if(   arr3[j] == $("input[name=work-style]")[i].attributes[3].value  ){
+                         
+                          document.getElementsByClassName('checkSelect1')[i].checked = true;
+             
+                       };
+                    };      
+             
+                 };
+
+                
+                
+                
+
+            })();
+            
+            </script>
+    
+    <script>
+		(function(){
+			// Controller에서 받아온 능력자 카테고리
+		    let category = '${category}';
+		    
+		    // 문자열을 ,구분자로 잘라내어 배열에 담는다.
+		    let arr = category.split(", ");
+		    
+		    // for문으로 select option에 추가한다.
+		    for(a in arr){
+		    	$("#my-cate").append("<option>" + arr[a] + "</option>");
+		    }
+		})();
+	</script>
 </body>
 </html>
