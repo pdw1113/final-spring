@@ -238,8 +238,11 @@ public class ProductController {
 	@RequestMapping(value="addReply.do")
 	public String addReply(Reply r) {
 		int result = pService.insertReply(r);
+		System.out.println(r.getpNo());
 		
 		if(result > 0) {
+			int starResult = pService.updateStar(r.getpNo());
+			
 			return "success";
 		}else {
 			return "fail";
