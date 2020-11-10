@@ -187,6 +187,19 @@
 		VALUES(#{email}, #{reason})
 	</insert>
 	
+	<!-- 보유 니즈머니 -->
+	<select id="userCash" parameterType="string" resultType="_int">
+		SELECT USER_CASH 
+		FROM CASH
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 카카오페이 니즈머니 충전 -->
+	<update id="neezcharge" parameterType="hashmap">
+		UPDATE CASH SET USER_CASH =
+		USER_CASH + #{money} WHERE USER_EMAIL=#{email}
+	</update>
+	
 	<!-- 비밀번호 찾기 재설정 -->
 	<update id="changePw" parameterType="hashmap">
 		UPDATE NEEZ_USER

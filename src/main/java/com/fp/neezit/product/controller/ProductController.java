@@ -266,9 +266,5 @@ public class ProductController {
 		gson.toJson(rList,response.getWriter());
 	}
 	
-	
-   
-   
-   
    
 }

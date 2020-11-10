@@ -105,6 +105,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public int userCash(String email) {
+		return uDao.userCash(email);
+	}
+
+	@Override
+	public int neezcharge(HashMap<String, String> map) {
+		return uDao.neezcharge(map);
+	}
+
 	public int changePw(HashMap<String, String> map) {
 		return uDao.changePw(map);
 	}
@@ -151,6 +160,5 @@ public class UserServiceImpl implements UserService{
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return uDao.updateMasterQfc(mqf);
 	}
-
 
 }
