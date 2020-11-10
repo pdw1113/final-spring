@@ -119,4 +119,17 @@
 		INSERT INTO REASON
 		VALUES(#{email}, #{reason})
 	</insert>
+	
+	<!-- 보유 니즈머니 -->
+	<select id="userCash" parameterType="string" resultType="_int">
+		SELECT USER_CASH 
+		FROM CASH
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<update id="neezcharge" parameterType="hashmap">
+		UPDATE CASH SET USER_CASH =
+		USER_CASH + #{money} WHERE USER_EMAIL=#{email}
+	</update>
+	
 </mapper>

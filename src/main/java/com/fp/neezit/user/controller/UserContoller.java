@@ -75,7 +75,14 @@ public class UserContoller {
 	}
 
 	@RequestMapping("wallet.do")
-	public String wallet() {
+	public String wallet(HttpSession session,Model model) {
+		User u = (User) session.getAttribute("loginUser");
+		
+		// 보유 니즈머니 가져오기
+		int cash = uService.userCash(u.getEmail());
+		
+		model.addAttribute("cash",cash);
+		
 		return "user/myPage/wallet";
 	}
 
@@ -90,7 +97,14 @@ public class UserContoller {
 	}
 
 	@RequestMapping("charge.do")
-	public String charge() {
+	public String charge(HttpSession session,Model model) {
+		User u = (User) session.getAttribute("loginUser");
+		
+		// 보유 니즈머니 가져오기
+		int cash = uService.userCash(u.getEmail());
+		
+		model.addAttribute("cash",cash);
+		
 		return "user/myPage/charge";
 	}
 
@@ -471,5 +485,35 @@ public class UserContoller {
 			return "ok";
 		}
 	}
+	
+	
+	@RequestMapping(value = "kakaopay.do", method = RequestMethod.POST)
+	public String userLogin(String total_pay, Model model) { // view에 전달하는 데이터를 Model에 담는다.
+		model.addAttribute("total_pay", total_pay); 
+		return "common/kakaopay";
+	}
+	
+	
+	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) public
+	    String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	  
+		User u = (User) session.getAttribute("loginUser");
+		  
+		String email = u.getEmail();
+		 
+		HashMap<String, String> map = new HashMap<String, String>();
+		  
+		map.put("email", email);
+		map.put("money",money);
+		 
+		int result = uService.neezcharge(map);
+		 
+		if(result==1) {
+			return "redirect:wallet.do";
+		}else {
+			System.out.println("결제오류");
+			return "redirect:index.do";
+		}
+	 }
 
 }

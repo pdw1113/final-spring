@@ -104,6 +104,16 @@ public class UserServiceImpl implements UserService{
 		return uDao.nickCheck(nickname);
 	}
 
+	@Override
+	public int userCash(String email) {
+		return uDao.userCash(email);
+	}
+
+	@Override
+	public int neezcharge(HashMap<String, String> map) {
+		return uDao.neezcharge(map);
+	}
+
 	
 
 }

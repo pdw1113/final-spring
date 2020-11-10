@@ -80,4 +80,12 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.nickCheck",nickname);
 	}
 
+	public int userCash(String email) {
+		return sqlSession.selectOne("userMapper.userCash",email);
+	}
+
+	public int neezcharge(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.neezcharge",map);
+	}
+
 }
