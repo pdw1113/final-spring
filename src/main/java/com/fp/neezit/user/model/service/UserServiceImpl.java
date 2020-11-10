@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.dao.UserDao;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
@@ -160,5 +161,10 @@ public class UserServiceImpl implements UserService{
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return uDao.updateMasterQfc(mqf);
 	}
+	
+    @Override
+    public List<Product> wishList(User u) {
+       return uDao.wishList(u);
+    }
 
 }
