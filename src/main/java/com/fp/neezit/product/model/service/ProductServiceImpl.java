@@ -92,4 +92,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.updateMasterStar(pNo);
 	}
 
+	@Override
+	public int getReplyCount(String nickName) {
+		return pDao.getReplyCount(nickName);
+	}
+
 }

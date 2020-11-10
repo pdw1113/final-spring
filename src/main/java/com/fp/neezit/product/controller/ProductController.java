@@ -218,12 +218,13 @@ public class ProductController {
 
 	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
 	  
-	  
+	  int replyCount = pService.getReplyCount(p.getNickName());
 	  
 	  if(p != null && m != null) {
 		  model.addAttribute("product", p);
 		  model.addAttribute("master", m);
 		  model.addAttribute("sns", sns);
+		  model.addAttribute("replyCount", replyCount);
 		  return "user/product/productDetail";
 	  }
 	  
