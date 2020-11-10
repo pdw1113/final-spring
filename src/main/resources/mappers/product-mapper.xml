@@ -175,5 +175,12 @@
 		INSERT INTO WISH_LIST VALUES
 		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
 	</insert>
+	
+	<!-- 댓글 등록자 수 조회 -->
+	<select id="getReplyCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM REPLY
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE MASTER_NICKNAME = #{nickName}
+	</select>
 
 </mapper>

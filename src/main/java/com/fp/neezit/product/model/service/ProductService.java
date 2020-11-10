@@ -66,10 +66,17 @@ public interface ProductService {
 	public ArrayList<Reply> selectReplyList(int pNo);
 
 	/**
-	 * 
+	 * 능력자 별점 업데이트
 	 * @param getpNo
 	 * @return
 	 */
 	public int updateMasterStar(int pNo);
+
+	/**
+	 * 능력자의 구매자 수
+	 * @param nickName
+	 * @return
+	 */
+	public int getReplyCount(String nickName);
 
 }
