@@ -232,30 +232,6 @@ public class ProductController {
    }
    
 	/**
-	 * 08. 찜목록 AJAX
-	 * 
-	 * @param 
-	 * @return
-	 * @throws 
-	 */
-	@ResponseBody // AJAX
-	@RequestMapping("wishInsert.do")
-	public String wishInsert(String email, String no ,HttpSession session){
-		// 2개의 객체를 insert 하기위해 HashMap
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", email);
-		map.put("no", no);
-		int result = pService.wishInsert(map);
-		System.out.println(result);
-		
-		if (result > 0) { 
-			return "ok";
-		} else {
-			return "fail";
-		}
-	}
-   
-	/**
 	 * 7. 댓글 등록 메소드
 	 * @param r
 	 * @return
@@ -292,5 +268,29 @@ public class ProductController {
 		gson.toJson(rList,response.getWriter());
 	}
 	
+	/**
+	 * 08. 찜목록 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishInsert.do")
+	public String wishInsert(String email, String no ,HttpSession session){
+		// 2개의 객체를 insert 하기위해 HashMap
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("no", no);
+		int result = pService.wishInsert(map);
+		System.out.println(result);
+		
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+
    
 }

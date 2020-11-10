@@ -87,4 +87,8 @@ public class ProductDao{
 		return (ArrayList)sqlSession.selectList("productMapper.getProductList", navNo);
 	}
 	
+    public List<Product> wishList(User u) {
+	      return sqlSession.selectList("userMapper.WishList",u);
+	}
+	
 }

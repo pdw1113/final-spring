@@ -103,5 +103,7 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> productList(int navNo) {
 		return pDao.productList(navNo);
 	}
+	
+
 
 }

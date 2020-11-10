@@ -3,7 +3,9 @@ package com.fp.neezit.user.model.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -63,5 +65,7 @@ public interface UserService {
 	int updateMasterSns(UserMasterSns msn);
 
 	int updateMasterQfc(UserMasterQualifcation mqf);
+	
+	List<Product> wishList(User u);
 
 }
