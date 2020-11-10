@@ -23,7 +23,7 @@
             <div class="font_jua title-sgm">프로필 사진</div>
             <span>
                <div class="img-container-sgm border-radius-100">
-                  <img src="resources/masterImg/${masterList.MASTER_PROFILE_PIC_RE}"
+                  <img src="resources/masterImg/${masterList.mProPicRe}"
                      class="mImg img-style-size" id="profile_img">
                </div>
             </span>
@@ -36,7 +36,7 @@
                   <div class="sub-title-sgm">별명</div>
                   <div>
                      <input class="input_master" type="text"
-                        value="${masterList.MASTER_NICKNAME}" readonly>
+                        value="${masterList.mNickname}" readonly>
                   </div>
                </li>
                <hr>
@@ -71,7 +71,7 @@
                   <div class="text-align-center-sgm minus-margin-sgm">
                      <div class="font_jua">신분증</div>
                      <div class="img-container-sgm-2">
-                        <img src="resources/masterImg/${masterList.MASTER_ID_PIC_RE}"
+                        <img src="resources/masterImg/${masterList.mIdPicRe}"
                            class="mImg img-style-size2" id="idCard_img"
                            onclick="picUpload(this);">
                      </div>
@@ -80,38 +80,38 @@
                <!-- 학력 -->
                <li>
                   <div class="edu-ability" title="학력">
-                     <c:if test="${!empty SchoolList.MASTER_HIGH}">
+                     <c:if test="${!empty SchoolList.sHigh}">
                      <div>
                         <input class="input_master width_600" type="text"
-                           placeholder="${SchoolList.MASTER_HIGH}">
+                           placeholder="${SchoolList.sHigh}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty SchoolList.MASTER_UNIV || SchoolList.MASTER_UNIV_DEPT}">
+                     <c:if test="${!empty SchoolList.sUniv || SchoolList.sUnivDept}">
                      <div>
                         <input class="input_master width_242" type="text"
-                           placeholder="${SchoolList.MASTER_UNIV}">                
+                           placeholder="${SchoolList.sUniv}">                
                          <input class="input_master width_242" type="text"
-                           placeholder="${SchoolList.MASTER_UNIV_DEPT}">
+                           placeholder="${SchoolList.sUnivDept}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty SchoolList.MASTER_UNIV2 || SchoolList.MASTER_UNIV2_DEPT}">
+                     <c:if test="${!empty SchoolList.sUniv2 || SchoolList.sUniv2Dept}">
                      <div>
                         <input class="input_master width_242" type="text"
-                           placeholder="${SchoolList.MASTER_UNIV2}"> <input
+                           placeholder="${SchoolList.sUniv2}"> <input
                            class="input_master width_242" type="text"
-                           placeholder="${SchoolList.MASTER_UNIV2_DEPT}">
+                           placeholder="${SchoolList.sUniv2Dept}">
                      </div>
                      </c:if>
                   </div>
-                  <c:if test="${!empty SchoolList.MASTER_UNIV_PIC_RE }">
+                  <c:if test="${!empty SchoolList.sUnivPicRe }">
                      <div class="img-container-sgm">
-                        <img src="resources/masterImg/${SchoolList.MASTER_UNIV_PIC_RE}"
+                        <img src="resources/masterImg/${SchoolList.sUnivPicRe}"
                            class="mImg img-style-size2" id="idCard_img">
                      </div>
                   </c:if>
-                  <c:if test="${!empty SchoolList.MASTER_UNIV2_PIC_RE}">
+                  <c:if test="${!empty SchoolList.sUniv2PicRe}">
                      <div class="img-container-sgm">
-                        <img src="resources/masterImg/${SchoolList.MASTER_UNIV2_PIC_RE}"
+                        <img src="resources/masterImg/${SchoolList.sUniv2PicRe}"
                            class="mImg img-style-size2" id="idCard_img">
                      </div>
                   </c:if>
@@ -119,63 +119,63 @@
                <!-- 자격증 -->
                <li>
                   <div class="edu-ability" title="자격증">
-                  	 <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION1}">
+                  	 <c:if test="${!empty QualifcationList.q1}">
                      <div>
                         <input class="input_master" type="text"
-                           placeholder="${QualifcationList.MASTER_QUALIFICATION1}">
+                           placeholder="${QualifcationList.q1}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION1_PIC_RE}">
+                     <c:if test="${!empty QualifcationList.q1PicRe}">
                         <div class="img-container-sgm">
-                           <img src="resources/masterImg/${QualifcationList.MASTER_QUALIFICATION1_PIC_RE}"
+                           <img src="resources/masterImg/${QualifcationList.q1PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
                         </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION2}">
+                     <c:if test="${!empty QualifcationList.q2}">
                      <div>
                         <input class="input_master" type="text"
-                           placeholder="${QualifcationList.MASTER_QUALIFICATION2}">
+                           placeholder="${QualifcationList.q2}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION2_PIC_RE}">
+                     <c:if test="${!empty QualifcationList.q2PicRe}">
                         <div class="img-container-sgm">
-                           <img src="resources/masterImg/${QualifcationList.MASTER_QUALIFICATION2_PIC_RE}"
+                           <img src="resources/masterImg/${QualifcationList.q2PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
                         </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION3}">
+                     <c:if test="${!empty QualifcationList.q3}">
                      <div>
                         <input class="input_master" type="text"
-                           placeholder="${QualifcationList.MASTER_QUALIFICATION3}">
+                           placeholder="${QualifcationList.q3}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION3_PIC_RE}">
+                     <c:if test="${!empty QualifcationList.q3PicRe}">
                         <div class="img-container-sgm">
-                           <img src="resources/masterImg/${QualifcationList.MASTER_QUALIFICATION3_PIC_RE}"
+                           <img src="resources/masterImg/${QualifcationList.q3PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
                         </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION4}">
+                     <c:if test="${!empty QualifcationList.q4}">
                      <div>
                         <input class="input_master" type="text"
-                           placeholder="${QualifcationList.MASTER_QUALIFICATION4}">
+                           placeholder="${QualifcationList.q4}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION4_PIC_RE}">
+                     <c:if test="${!empty QualifcationList.q4PicRe}">
                         <div class="img-container-sgm">
-                           <img src="resources/masterImg/${QualifcationList.MASTER_QUALIFICATION4_PIC_RE}"
+                           <img src="resources/masterImg/${QualifcationList.q4PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
                         </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION5}">
+                     <c:if test="${!empty QualifcationList.q5}">
                      <div>
                         <input class="input_master" type="text"
-                           placeholder="${QualifcationList.MASTER_QUALIFICATION5}">
+                           placeholder="${QualifcationList.q5}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.MASTER_QUALIFICATION5_PIC_RE}">
+                     <c:if test="${!empty QualifcationList.q5PicRe}">
                         <div class="img-container-sgm">
-                           <img src="resources/masterImg/${QualifcationList.MASTER_QUALIFICATION5_PIC_RE}"
+                           <img src="resources/masterImg/${QualifcationList.q5PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
                         </div>
                      </c:if>
@@ -187,35 +187,35 @@
                   <div class="social-media" title="소셜미디어">
                      <div class="instagram">
                         <input class="input_master_2" type="text"
-                           placeholder="${SnsList.MASTER_INSTAGRAM}">
+                           placeholder="${SnsList.snsInsta}">
                      </div>
                      <div class="twitter">
                         <input class="input_master_2" type="text"
-                           placeholder="${SnsList.MASTER_TWITTER}">
+                           placeholder="${SnsList.snsTwit}">
                      </div>
                      <div class="blog">
                         <input class="input_master_2" type="text"
-                           placeholder="${SnsList.MASTER_BLOG}">
+                           placeholder="${SnsList.snsBlog}">
                      </div>
                      <div class="git">
                         <input class="input_master_2" type="text"
-                           placeholder="${SnsList.MASTER_GIT}">
+                           placeholder="${SnsList.snsGit}">
                      </div>
                   </div>
                   <div class="video-link" title="영상링크">
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
-                           value="${SnsList.MASTER_YOTUBUE1}">
+                           value="${SnsList.snsYou1}">
                         <div></div>
                      </div>
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
-                           value="${SnsList.MASTER_YOTUBUE2}">
+                           value="${SnsList.snsYou2}">
                         <div></div>
                      </div>
                      <div>
                         <input class="input_master_2 youtube_show" type="text"
-                           value="${SnsList.MASTER_YOTUBUE3}">
+                           value="${SnsList.snsYou3}">
                         <div></div>
                      </div>
                   </div>
@@ -298,9 +298,9 @@
                   </div>
                   <div>
                      <input class="input_master_3" type="time" name="" id=""
-                        value="${masterList.MASTER_STARTTIME }"> &nbsp;~&nbsp; <input
+                        value="${masterList.mStartTime }"> &nbsp;~&nbsp; <input
                         class="input_master_3" type="time" name="" id=""
-                        value="${ masterList.MASTER_ENDTIME }">
+                        value="${ masterList.mEndTime }">
                   </div>
                </li>
                <hr>
@@ -312,7 +312,7 @@
       <script>
          /*day check*/
            (function(){
-               let workday= '${ masterList.MASTER_WORKDAY }';
+               let workday= '${ masterList.mWorkDay}';
                let arr1 = workday.split(",");
                let arr2 = $("input[name=work-day]");
            
@@ -330,7 +330,7 @@
                };
                
                /*work-style check*/
-               let workstyle= '${ masterList.MASTER_WORKSTYLE }';
+               let workstyle= '${ masterList.mWorkStyle}';
                let arr3 = workstyle.split(",");
                let arr4 = $("input[name=work-style]");
                for(var i=0; i<arr4.length; i++){

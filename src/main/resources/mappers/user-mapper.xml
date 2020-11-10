@@ -196,19 +196,19 @@
 	</select>
 	
 	<!-- 능력자 관리 -->
-	<select id="MasterSchool" parameterType="UserSchool" resultMap="userMasterSchoolResultSet">
+	<select id="MasterSchool" parameterType="UserMasterSchool" resultMap="userMasterSchoolResultSet">
 		SELECT *
 		FROM SCHOOL
 		WHERE USER_EMAIL = #{email}
 	</select>
 	
-	<select id="MasterQualifcation" parameterType="UserQualifcation" resultMap="userMasterQualifcationResultSet">
+	<select id="MasterQualifcation" parameterType="UserMasterQualifcation" resultMap="userMasterQualifcationResultSet">
 		SELECT *
 		FROM QUALIFICATION
 		WHERE USER_EMAIL = #{email}
 	</select>
 	
-	<select id="MasterSNS" parameterType="UserSNS" resultMap="userMasterSnsResultSet">
+	<select id="MasterSNS" parameterType="UserMasterSns" resultMap="userMasterSnsResultSet">
 		SELECT *
 		FROM SNS
 		WHERE USER_EMAIL = #{email}
@@ -217,63 +217,63 @@
 	<!-- 능력자수정 -->
 	<update id="MasterUpdate" parameterType="UserMaster">
 		UPDATE NEEZ_MASTER
-		SET MASTER_NICKNAME = #{MASTER_NICKNAME},
-			MASTER_PROFILE_PIC_ORI = #{MASTER_PROFILE_PIC_ORI},
-			MASTER_PROFILE_PIC_RE = #{MASTER_PROFILE_PIC_RE},
-			MASTER_CATEGORY = #{MASTER_CATEGORY},
-			MASTER_ID_PIC_ORI = #{MASTER_ID_PIC_ORI},
-			MASTER_ID_PIC_RE = #{MASTER_ID_PIC_RE},
-			MASTER_WORKDAY = #{MASTER_WORKDAY},
-			MASTER_WORKSTYLE = #{MASTER_WORKSTYLE},
-			MASTER_STARTTIME = #{MASTER_STARTTIME},
-			MASTER_ENDTIME = #{MASTER_ENDTIME}
-		WHERE USER_EMAIL = #{USER_EMAIL}
+		SET MASTER_NICKNAME = #{mNickname},
+			MASTER_PROFILE_PIC_ORI = #{mProPicOri},
+			MASTER_PROFILE_PIC_RE = #{mProPicRe},
+			MASTER_CATEGORY = #{mCategory},
+			MASTER_ID_PIC_ORI = #{mIdPicOri},
+			MASTER_ID_PIC_RE = #{mIdPicRe},
+			MASTER_WORKDAY = #{mWorkDay},
+			MASTER_WORKSTYLE = #{mWorkStyle},
+			MASTER_STARTTIME = #{mStartTime},
+			MASTER_ENDTIME = #{mEndTime}
+		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateSch" parameterType="UserSchool">
+		<update id="MasterUpdateSch" parameterType="UserMasterSchool">
 		UPDATE SCHOOL
-		SET MASTER_HIGH = #{MASTER_HIGH},
-			MASTER_UNIV = #{MASTER_UNIV},
-			MASTER_UNIV_DEPT = #{MASTER_UNIV_DEPT},
-			MASTER_UNIV_PIC_ORI = #{MASTER_UNIV_PIC_ORI},
-			MASTER_UNIV_PIC_RE = #{MASTER_UNIV_PIC_RE},
-			MASTER_UNIV2 = #{MASTER_UNIV2},
-			MASTER_UNIV2_DEPT = #{MASTER_UNIV2_DEPT},
-			MASTER_UNIV2_PIC_ORI = #{MASTER_UNIV2_PIC_ORI},
-			MASTER_UNIV2_PIC_RE = #{MASTER_UNIV2_PIC_RE}
-		WHERE USER_EMAIL = #{USER_EMAIL}
+		SET MASTER_HIGH = #{sHigh},
+			MASTER_UNIV = #{sUniv},
+			MASTER_UNIV_DEPT = #{sUnivDept},
+			MASTER_UNIV_PIC_ORI = #{sUnivPicOri},
+			MASTER_UNIV_PIC_RE = #{sUnivPicRe},
+			MASTER_UNIV2 = #{sUniv2},
+			MASTER_UNIV2_DEPT = #{sUniv2Dept},
+			MASTER_UNIV2_PIC_ORI = #{sUniv2PicOri},
+			MASTER_UNIV2_PIC_RE = #{sUniv2PicRe}
+		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateQfa" parameterType="UserQualifcation">
+		<update id="MasterUpdateQfa" parameterType="UserMasterQualifcation">
 		UPDATE QUALIFICATION
-		SET MASTER_QUALIFICATION1 = #{MASTER_QUALIFICATION1},
-			MASTER_QUALIFICATION1_PIC_ORI = #{MASTER_QUALIFICATION1_PIC_ORI},
-			MASTER_QUALIFICATION1_PIC_RE = #{MASTER_QUALIFICATION1_PIC_RE},
-			MASTER_QUALIFICATION2 = #{MASTER_QUALIFICATION2},
-			MASTER_QUALIFICATION2_PIC_ORI = #{MASTER_QUALIFICATION2_PIC_ORI},
-			MASTER_QUALIFICATION2_PIC_RE = #{MASTER_QUALIFICATION2_PIC_RE},
-			MASTER_QUALIFICATION3 = #{MASTER_QUALIFICATION3},
-			MASTER_QUALIFICATION3_PIC_ORI = #{MASTER_QUALIFICATION3_PIC_ORI},
-			MASTER_QUALIFICATION3_PIC_RE = #{MASTER_QUALIFICATION3_PIC_RE},
-			MASTER_QUALIFICATION4 = #{MASTER_QUALIFICATION4},
-			MASTER_QUALIFICATION4_PIC_ORI = #{MASTER_QUALIFICATION4_PIC_ORI},
-			MASTER_QUALIFICATION4_PIC_RE = #{MASTER_QUALIFICATION4_PIC_RE},
-			MASTER_QUALIFICATION5 = #{MASTER_QUALIFICATION5},
-			MASTER_QUALIFICATION5_PIC_ORI = #{MASTER_QUALIFICATION5_PIC_ORI},
-			MASTER_QUALIFICATION5_PIC_RE = #{MASTER_QUALIFICATION5_PIC_RE}
-		WHERE USER_EMAIL = #{USER_EMAIL}
+		SET MASTER_QUALIFICATION1 = #{q1},
+			MASTER_QUALIFICATION1_PIC_ORI = #{q1PicOri},
+			MASTER_QUALIFICATION1_PIC_RE = #{q1PicRe},
+			MASTER_QUALIFICATION2 = #{q2},
+			MASTER_QUALIFICATION2_PIC_ORI = #{q2PicOri},
+			MASTER_QUALIFICATION2_PIC_RE = #{q2PicRe},
+			MASTER_QUALIFICATION3 = #{q3},
+			MASTER_QUALIFICATION3_PIC_ORI = #{q3PicOri},
+			MASTER_QUALIFICATION3_PIC_RE = #{q3PicRe},
+			MASTER_QUALIFICATION4 = #{q4},
+			MASTER_QUALIFICATION4_PIC_ORI = #{q4PicOri},
+			MASTER_QUALIFICATION4_PIC_RE = #{q4PicRe},
+			MASTER_QUALIFICATION5 = #{q5},
+			MASTER_QUALIFICATION5_PIC_ORI = #{q5PicOri},
+			MASTER_QUALIFICATION5_PIC_RE = #{q5PicRe}
+		WHERE USER_EMAIL = #{email}
 	</update>
 	
-		<update id="MasterUpdateSns" parameterType="UserSNS">
+		<update id="MasterUpdateSns" parameterType="UserMasterSns">
 		UPDATE SNS
-		SET MASTER_INSTAGRAM = #{MASTER_INSTAGRAM},
-			MASTER_TWITTER = #{MASTER_TWITTER},
-			MASTER_BLOG = #{MASTER_BLOG},
-			MASTER_GIT = #{MASTER_GIT},
-			MASTER_YOTUBUE1 = #{MASTER_YOTUBUE1},
-			MASTER_YOTUBUE2 = #{MASTER_YOTUBUE2},
-			MASTER_YOTUBUE3 = #{MASTER_YOTUBUE3}
-		WHERE USER_EMAIL = #{USER_EMAIL}
+		SET MASTER_INSTAGRAM = #{snsInsta},
+			MASTER_TWITTER = #{snsTwit},
+			MASTER_BLOG = #{snsBlog},
+			MASTER_GIT = #{snsGit},
+			MASTER_YOTUBUE1 = #{snsYou1},
+			MASTER_YOTUBUE2 = #{snsYou2},
+			MASTER_YOTUBUE3 = #{snsYou3}
+		WHERE USER_EMAIL = #{email}
 	</update>
 	
 </mapper>
