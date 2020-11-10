@@ -43,21 +43,19 @@
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
                 })
+                
                 //성공시 표시할 메세지와 성공 페이지 이동
               	msg = '\n결제가 완료되었습니다.'
                 msg += '\n결제 금액 : ' + rsp.paid_amount;
-                        
                 alert(msg);
-                
                 $('.login_button_form').trigger("click");
                    
-                
             } else {
-                msg = '결제에 실패하였습니다.';
+                msg = '결제에 실패하였습니다.\n';
                 msg += '에러내용 : ' + rsp.error_msg;
-                //실패시 이동할 페이지
-                location.href="<%=request.getContextPath()%>/order/payFail";
                 alert(msg);
+                //실패시 이동할 페이지
+                location.href="index.do";
             }
         });
         
