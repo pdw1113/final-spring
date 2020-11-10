@@ -26,14 +26,14 @@
 	<%@ include file="../common/header.jsp" %>
 
     <form action="signUpMasterUpdate.do" method="POST" enctype="multipart/form-data" name="master">
-    <input type="hidden" value="${ loginUser.email }" name="USER_EMAIL"/>
+    <input type="hidden" value="${ loginUser.email }" name="email"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">능력자 </div>
             <span>
                 <div class="img-container-sgm border-radius-100">
-                    <img src="resources/masterImg/${masterList.MASTER_PROFILE_PIC_RE}" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="M_PROFILE_PIC_ORI" class="pick" hidden>
+                    <img src="resources/masterImg/${masterList.mProPicRe}" class="img-style-size" id="profile_img" onclick="picUpload(this);">
+                    <input type="file" id="profile_file" name="_mProPicOri" class="pick" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -102,8 +102,8 @@
             <li>
                 <div class="sub-title-sgm">별명 등록</div>
                 <div>
-                    <input class="input_master" type="text" name="MASTER_NICKNAME" id="nickname" placeholder="한글 2글자 이상 작성"
-                    value="${masterList.MASTER_NICKNAME}">
+                    <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성"
+                    value="${masterList.mNickname}">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
                     <span class="hide-span-sgm green">사용가능</span>
                     <span class="hide-span-sgm red">사용불가</span>
@@ -224,7 +224,7 @@
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
                             <option disabled>-------------------------------------------</option>
                         </select>
-                        <input type="hidden" id="array2" name="MASTER_CATEGORY"/>
+                        <input type="hidden" id="array2" name="mCategory"/>
                     </div>
                 </div>
             </li>
@@ -459,8 +459,8 @@
                 <div class="text-align-center-sgm minus-margin-sgm">
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
-                        <img src="resources/masterImg/${masterList.MASTER_ID_PIC_RE}" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" name="M_ID_PIC_ORI" class="pick">
+                        <img src="resources/masterImg/${masterList.mIdPicRe}" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
+                        <input type="file" id="idCard_file" name="_mIdPicOri" class="pick">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -519,26 +519,26 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="고등학교" name="MASTER_HIGH"
-                        value="${SchoolList.MASTER_HIGH}">
+                        <input class="input_master width_500" type="text" placeholder="고등학교" name="sHigh"
+                        value="${SchoolList.sHigh}">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학교" name="MASTER_UNIV"
-                         value="${SchoolList.MASTER_UNIV}">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV_DEPT"
-                         value="${SchoolList.MASTER_UNIV_DEPT}">
+                        <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv"
+                         value="${SchoolList.sUniv}">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept"
+                         value="${SchoolList.sUnivDept}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" name="M_UNIV_PIC_ORI" hidden onchange="ok(this);">
+                        <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학원" name="MASTER_UNIV2"
-                        value="${SchoolList.MASTER_UNIV2}">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="MASTER_UNIV2_DEPT"
-                        value="${SchoolList.MASTER_UNIV2_DEPT}">
+                        <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2"
+                        value="${SchoolList.sUniv2}">
+                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept"
+                        value="${SchoolList.sUniv2Dept}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file"  name="M_UNIV2_PIC_ORI" hidden onchange="ok(this);">
+                        <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
@@ -548,38 +548,38 @@
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION1"
-                         value="${QualifcationList.MASTER_QUALIFICATION1}">
+                        <input class="input_master" type="text" placeholder="자격증" name="q1"
+                         value="${QualifcationList.q1}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION1_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION2"
-                        value="${QualifcationList.MASTER_QUALIFICATION2}">
+                        <input class="input_master" type="text" placeholder="자격증" name="q2"
+                        value="${QualifcationList.q2}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION2_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION3"
-                        value="${QualifcationList.MASTER_QUALIFICATION3}">
+                        <input class="input_master" type="text" placeholder="자격증" name="q3"
+                        value="${QualifcationList.q3}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION3_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION4"
-                        value="${QualifcationList.MASTER_QUALIFICATION4}">
+                        <input class="input_master" type="text" placeholder="자격증" name="q4"
+                        value="${QualifcationList.q4}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION4_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="MASTER_QUALIFICATION5"
-                        value="${QualifcationList.MASTER_QUALIFICATION5}">
+                        <input class="input_master" type="text" placeholder="자격증" name="q5"
+                        value="${QualifcationList.q5}">
                         <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="M_QUALIFICATION5_PIC_ORI">
+                        <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
                     </div>
 
@@ -598,38 +598,38 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="인스타그램" name=MASTER_INSTAGRAM
-                        value="${SnsList.MASTER_INSTAGRAM }">
+                        <input class="input_master_2" type="text" placeholder="인스타그램" name="snsInsta"
+                        value="${SnsList.snsInsta }">
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="트위터" name="MASTER_TWITTER"
-                        value="${SnsList.MASTER_TWITTER}">
+                        <input class="input_master_2" type="text" placeholder="트위터" name="snsTwit"
+                        value="${SnsList.snsTwit}">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="블로그" name="MASTER_BLOG"
-                        value="${SnsList.MASTER_BLOG}">
+                        <input class="input_master_2" type="text" placeholder="블로그" name="snsBlog"
+                        value="${SnsList.snsBlog}">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="GIT" name="MASTER_GIT"
-                         value="${SnsList.MASTER_GIT}">
+                        <input class="input_master_2" type="text" placeholder="GIT" name="snsGit"
+                         value="${SnsList.snsGit}">
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
                         <input class="input_master_2" type="text"  onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE1" value="${SnsList.MASTER_YOTUBUE1}">
+                        name="snsYou1" value="${SnsList.snsYou1}">
                         <div>
                         </div>
                     </div>
                     <div>
                         <input class="input_master_2" type="text"  onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE2" value="${SnsList.MASTER_YOTUBUE2}">
+                        name="snsYou2" value="${SnsList.snsYou2}">
                         <div>
                         </div>
                     </div>
                     <div>
                         <input class="input_master_2" type="text"  onfocusout="youtube(this);"
-                        name="MASTER_YOTUBUE3" value="${SnsList.MASTER_YOTUBUE3}">
+                        name="snsYou3" value="${SnsList.snsYou3}">
                         <div>
                         </div>
                     </div>
@@ -699,9 +699,9 @@
                     <span class="dupl_choose">*(중복선택가능)</span>
                 </div>
                 <div>
-                    <input class="input_master_3" type="time" name="MASTER_STARTTIME" id="" value="${masterList.MASTER_STARTTIME }">
+                    <input class="input_master_3" type="time" name="mStartTime" id="" value="${masterList.mStartTime }">
                     &nbsp;~&nbsp;
-                    <input class="input_master_3" type="time" name="MASTER_ENDTIME" id="" value="${masterList.MASTER_ENDTIME }">
+                    <input class="input_master_3" type="time" name="mEndTime" id="" value="${masterList.mEndTime }">
                 </div>
             </li>
 
@@ -709,12 +709,12 @@
 
             <!-- 저장 / 취소 버튼 -->
             <li class="margin-top-sgm">
-                <span class="btn_sgm"  onclick="return vali()">저장</span>
+                <span class="btn_sgm"  onclick="document.forms[0].submit()">저장</span>
             </li>
         </ul>
     </div>
-    <input type="hidden" id="array" name="MASTER_WORKDAY"/>
-    <input type="hidden" id="array1" name="MASTER_WORKSTYLE"/>
+    <input type="hidden" id="array" name="mWorkDay"/>
+    <input type="hidden" id="array1" name="mWorkStyle"/>
     </form>
     
     
@@ -723,7 +723,7 @@
    	<script>
     /*day check*/
     (function(){
-        let workday= '${ masterList.MASTER_WORKDAY }';
+        let workday= '${ masterList.mWorkDay }';
         let arr1 = workday.split(",");
         let arr2 = $("input[name=work-day]");
     
@@ -741,7 +741,7 @@
         };
         
         /*work-style check*/
-        let workstyle= '${ masterList.MASTER_WORKSTYLE }';
+        let workstyle= '${ masterList.mWorkStyle }';
         let arr3 = workstyle.split(",");
         let arr4 = $("input[name=work-style]");
         for(var i=0; i<arr4.length; i++){
