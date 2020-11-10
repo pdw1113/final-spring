@@ -187,7 +187,7 @@ public class UserContoller {
 
 		status.setComplete();
 
-		return "redirect:index.do";
+		return "redirect:logout2.do";
 	}
 
 	/**

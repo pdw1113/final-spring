@@ -72,7 +72,6 @@
             </c:if>
             </c:if>
             
-
             <c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
                <div class="login_box_Mainhead">
                   <a href="signUpMasterCategory.do">
@@ -87,6 +86,9 @@
       </div>
       
       <script>
+      	console.log("master2 : " + "${sessionScope.master2}");
+      	console.log("master3 : " + "${sessionScope.master3}");
+      
           $("#product").click(function(){
              $(this).next().children(".down_p1").slideToggle(300);
              $(this).next().next().children(".down_p2").slideToggle(300);
