@@ -100,8 +100,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> productList(int navNo) {
-		return pDao.productList(navNo);
+	public List<Product> productList(HashMap<String, String> map) {
+		return pDao.productList(map);
 	}
 
 	@Override

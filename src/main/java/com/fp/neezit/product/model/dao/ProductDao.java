@@ -84,8 +84,8 @@ public class ProductDao{
 		return sqlSession.selectOne("productMapper.getReplyCount", nickName);
 	}
 
-	public List<Product> productList(int navNo) {
-		return (ArrayList)sqlSession.selectList("productMapper.getProductList", navNo);
+	public List<Product> productList(HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductList", map);
 	}
 	
     public List<Product> wishList(User u) {
