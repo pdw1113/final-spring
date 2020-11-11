@@ -81,7 +81,7 @@
       	<result property="pic" column="PRODUCT_PIC" />
       	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
       	<result property="category" column="PRODUCT_CATEGORY" />
-      	<result property="price" column="PRODCUT_PRICE" />
+      	<result property="price" column="PRODUCT_PRICE" />
       	<result property="career" column="PRODUCT_CAREER" />
       	<result property="portfolio" column="PRODUCT_PORTFOLIO" />
       	<result property="introduce" column="PRODUCT_INTRODUCE" />

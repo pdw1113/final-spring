@@ -79,10 +79,10 @@ public interface ProductService {
 
 	/**
 	 * Nav.jsp 상품 목록 대분류로 가져오기
-	 * @param navNo
+	 * @param map
 	 * @return
 	 */
-	public List<Product> productList(int navNo);
+	public List<Product> productList(HashMap<String, String> map);
 
 	/**
 	 * 상품 별 구매자 수 업데이트
