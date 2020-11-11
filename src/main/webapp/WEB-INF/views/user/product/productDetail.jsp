@@ -248,7 +248,7 @@
 				</ul>
 				<ul class="p_flex job_where">
 					<li>자택(온라인)</li>
-					<li>출장</li>
+					<li>출근</li>
 					<li class="dayOn">asd</li>
 				</ul>
 				<hr>
@@ -548,11 +548,11 @@
 		
 		// 자택 / 출징 CSS 변화
 		let goho = "${master.mWorkStyle}";
-		let gohoDay = goho.split(",");
+		let gohoDay = goho.split(","); 
 		let goholist = $(".job_where li");
 		for(var i = 0; i < 2; i++){
 			for(var j = 0; j < 2; j++){
- 				if(goholist[j].innerText.match(goho[i]) != null){
+ 				if(goholist[j].innerText.match(gohoDay[i]) != null){
 					goholist[j].classList.add('dayOn');
 				}
 			}
