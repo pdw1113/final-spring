@@ -90,5 +90,13 @@ public class ProductDao{
     public List<Product> wishList(User u) {
 	      return sqlSession.selectList("userMapper.WishList",u);
 	}
+
+	public int updateBuyCount(int getpNo) {
+		return sqlSession.update("productMapper.updateBuyCount", getpNo);
+	}
+
+	public int updateProductStar(int getpNo) {
+		return sqlSession.update("productMapper.updateProductStar", getpNo);
+	}
 	
 }

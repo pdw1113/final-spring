@@ -194,3 +194,12 @@ justify-content: center;
 
 /*썸네일 간격및 크기조정*/
 .productOne{    text-decoration: none; margin: 0px 3.6rem 5rem 3.6rem;}
+
+.fa-star{
+  color:rgb(250,190,0);
+  margin-left : -6px;
+}
+
+.off{
+  display:none;
+}

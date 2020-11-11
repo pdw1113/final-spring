@@ -195,7 +195,7 @@
 				<div class="p_col_right">
 					<div class="review_sum">
 						<ul class="review_list">
-							<li>평균 별점<span class="avg">5.0</span></li>
+							<li>현재 상품 평균 <i class="fas fa-star"></i>&nbsp;<span class="avg">${ product.star }</span></li>
 						</ul>
 					</div>
 					<div class="inputReview">

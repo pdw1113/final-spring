@@ -87,7 +87,8 @@
       	<result property="introduce" column="PRODUCT_INTRODUCE" />
       	<result property="createDate" column="PRODUCT_CREATE_DATE" />
       	<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
-      	<result property="count" column="PRODCUT_COUNT" />
+      	<result property="count" column="PRODUCT_COUNT" />
+      	<result property="star" column="PRODUCT_STAR" />
    	</resultMap>
 	
 	<resultMap type="Wish" id="wishResultSet">

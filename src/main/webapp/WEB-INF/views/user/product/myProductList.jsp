@@ -47,9 +47,9 @@
 	                <img src="resources/img/star.png">
 	                <img src="resources/img/star.png">
 	              </span>
-	              <span class="font_jua">(5.0)</span>
+	              <span class="font_jua">(${ product.star })</span>
 	              <span>
-	                <span class="font_jua">213명선택</span>
+	                <span class="font_jua">${ product.count }명선택</span>
 	                <img src="resources/img/buy.png" class="main_choice_img_index">
 	              </span>
 	            </div>
