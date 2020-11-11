@@ -160,8 +160,5 @@ public class UserServiceImpl implements UserService{
 		return uDao.updateMasterQfc(mqf);
 	}
 	
-    @Override
-    public List<Product> wishList(User u) {
-       return uDao.wishList(u);
-    }
+
 }
