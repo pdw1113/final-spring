@@ -215,5 +215,33 @@
 		JOIN PRODUCT USING(PRODUCT_NO)
 		WHERE MASTER_NICKNAME = #{nickName}
 	</select>
+	
+	<!-- 찜 리스트 -->
+	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
+		SELECT P.PRODUCT_TITLE, P.PRODUCT_RENAMEPIC, P.PRODCUT_PRICE , P.MASTER_NICKNAME, P.PRODUCT_NO
+		FROM PRODUCT P
+		JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
+		WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 찜 해제 -->
+	<delete id="WishDelete" parameterType="hashmap">
+		DELETE FROM WISH_LIST WHERE PRODUCT_NO = #{no} AND USER_EMAIL = #{email}
+	</delete>
+	
+	<!-- 찜목록 중복값 조회 -->
+	<select id="WishDuplicate" parameterType="hashmap" resultType="_int">
+        SELECT COUNT(*)
+        FROM WISH_LIST W
+		JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<select id="WishDetail" parameterType="hashmap" resultMap="wishResultSet">
+        SELECT *
+		FROM WISH_LIST W
+        JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+	</select>
 
 </mapper>

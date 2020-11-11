@@ -48,8 +48,6 @@ public interface ProductService {
 	public UserMaster getProductDetail(String nickName);
 	
 	public UserMasterSns getProductSnsDetail(String email);
-
-	public int wishInsert(HashMap<String, String> map);
 	
 	/**
 	 * 댓글 등록 메소드
@@ -100,6 +98,36 @@ public interface ProductService {
 	 */
 	public int updateProductStar(int getpNo);
 	
+	/*
+	 * 찜등록
+	 * @param map
+	 * @return
+	 * */
+	public int wishInsert(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 해제
+	 * @param map
+	 * @return
+	 */
+	public int wishDelete(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 리스트
+	 * @param u
+	 * @return
+	 */
+	public List<Product> wishList(User u);
+
+	/**
+	 * 찜목록 중복값확인
+	 * @param map2
+	 * @return
+	 */
+	public int wishDuplicate(HashMap<String, String> map2);
+
+	public WishList getWishListDetail(HashMap<String, String> map);
 	
 
+   
 }

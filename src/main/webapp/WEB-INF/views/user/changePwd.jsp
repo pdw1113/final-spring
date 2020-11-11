@@ -36,9 +36,56 @@
       </form>
       
       <br><br><br>
-      
       <script>
-   // 유효성 검사
+	      // var pwd1 = 변경할 비밀번호
+	      // var pwd2 = 변경할 비밀번호 재확인
+
+	      var pwd1;
+	      var pwd2;
+	      
+	      // 비밀번호 재확인 일치 여부
+	      $(document).ready(function () {
+	      $('#alert-success_changePwd').hide();
+          $('#alert-danger_changePwd').hide();
+      
+          // inform_myModifyPwd div에서 del키나 백스페이스를 누르고 떼어냈을 시 체크,
+          $('.form_changePwd').keyup(function(event) {
+              if (event.keyCode === 8 || event.keyCode === 46) {
+                  if ($("#pwd1_changePwd").val() != $("#pwd2_changePwd").val()) {
+                      notsame();
+                  }
+              }
+          });
+      
+          //  keyup() - 키보드에서 손을 떼어냈을때 실행됨
+          $(".input_changePwd").keyup(function (event) {
+              
+              // var user_pw == "DB에서 가져온 기존 비밀번호"
+              pwd1 = $("#pwd1_changePwd").val();
+              pwd2 = $("#pwd2_changePwd").val();
+              if (pwd1 != '' && pwd2 != '') {
+                  if (pwd1 == pwd2) {
+                      same();
+                  } else if (pwd1 != pwd2) {
+                      notsame();
+                  }
+              }
+          });
+          
+          /* pwd1 != pwd2 */
+          function notsame() {
+              $("#alert-success_changePwd").hide();
+              $("#alert-danger_changePwd").show();
+          }
+          /* pwd1 == pwd2 */
+          function same(){
+              $("#alert-success_changePwd").show();
+              $("#alert-danger_changePwd").hide();
+          }
+	      });
+      </script>
+      <script>
+   	  // 유효성 검사
       function chkPW(){
 	     // 비밀번호
       	 var pw1 = $("#pwd1_changePwd").val();
@@ -60,86 +107,32 @@
       	  alert("비밀번호는 공백 없이 입력해주세요.");
       	  return false;
       	 }else if(num < 0 || eng < 0 || spe < 0 || num2 < 0 || eng2 < 0 || spe2 < 0){
-      	  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+      	  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
       	  return false;
       	 }else if(pw1 != pw2){
-            alert("비밀번호 확인!");
-            return false;
+          alert("비밀번호가 일치하지 않습니다.");
+          return false;
       	 }else {
-      	  	return true;
+   	  	  return true;
       	 }
       }
-      </script>
-      <script>
-	      // var pwd1 = 변경할 비밀번호
-	      // var pwd2 = 변경할 비밀번호 재확인
-	      /*
-	         var checked = pwd1,pwd2 일치 여부
-	         1) checked = 0 이면 불일치
-	         2) checked = 1 이면 일치
-	      */ 
-	      var pwd1;
-	      var pwd2;
-	      var checked = 0;
-	      
-	      
-	      // 비밀번호 재확인 일치 여부
-	      $(document).ready(function () {
-	      $('#alert-success_changePwd').hide();
-          $('#alert-danger_changePwd').hide();
-      
-          // inform_myModifyPwd div에서 del키나 백스페이스를 누르고 떼어냈을 시 체크,
-          $('.form_changePwd').keyup(function (event) {
-              if (event.keyCode === 8 || event.keyCode === 46) {
-                  if ($("#pwd1_changePwd").val() != $("#pwd2_changePwd").val()) {
-                      notsame();
-                  }
-              }
-          });
-      
-          //  keyup() - 키보드에서 손을 떼어냈을때 실행됨
-          $(".input_changePwd").keyup(function (event) {
-              
-              // var user_pw == "DB에서 가져온 기존 비밀번호"
-              pwd1 = $("#pwd1_changePwd").val();
-              pwd2 = $("#pwd2_changePwd").val();
-      
-              if (pwd1 != '' && pwd2 != '') {
-                  if (pwd1 == pwd2) {
-                      same();
-                  } else if (pwd1 != pwd2) {
-                      notsame();
-                  }
-              }
-          });
-          
-          /* pwd1 != pwd2 */
-          function notsame() {
-              $("#alert-success_changePwd").hide();
-              $("#alert-danger_changePwd").show();
-              checked = 0;
-          }
-          /* pwd1 == pwd2 */
-          function same(){
-              $("#alert-success_changePwd").show();
-              $("#alert-danger_changePwd").hide();
-               checked = 1;
-          }
-	    	var sw = ${sw};
-	    	console.log(sw);
-      		if(sw==1){
-      			alert("비밀번호 변경 완료");
-      			sw=null;
-      			window.location.replace('index.do');
-      		}else{
-      			alert("비밀번호 변경 실패");
-      			sw=null;
-      			location.href='changePwd.do?email='+"${email}";
-      		}
-	     
-	          
-	      });
-         
+
+	  var sw = ${sw};
+   	  if(sw != null){
+   		swCheck();
+   	  }
+   	  function swCheck(){
+      /* 컨트롤러에서 성공 여부에 따라 sw을 가져와 alert를 띠워준다. */
+		if(sw==1){
+			alert("비밀번호 변경 완료");
+			sw=null;
+			window.location.replace('index.do');
+		}else{
+			alert("비밀번호 변경 실패");
+			sw=null;
+			location.href='changePwd.do?email='+"${email}";
+		}
+   	  }
       </script>
       <%@ include file="../common/footer.jsp" %>
    </body>

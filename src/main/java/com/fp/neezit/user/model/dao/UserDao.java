@@ -123,9 +123,5 @@ public class UserDao {
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
 	}
-	
-    public List<Product> wishList(User u) {
-       return sqlSession.selectList("userMapper.WishList",u);
-    }
 
 }

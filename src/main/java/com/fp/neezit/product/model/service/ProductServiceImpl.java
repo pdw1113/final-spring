@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +114,25 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.updateProductStar(getpNo);
 	}
 	
+    @Override
+    public List<Product> wishList(User u) {
+       return pDao.wishList(u);
+    }
 
+	@Override
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return pDao.wishDuplicate(map2);
+	}
+
+
+	@Override
+	public WishList getWishListDetail(HashMap<String, String> map) {
+		return pDao.getWishListDetail(map);
+	}
+
+	@Override
+	public int wishDelete(HashMap<String, String> map) {
+		return pDao.wishDelete(map);
+	}
 
 }

@@ -91,12 +91,6 @@
       	<result property="star" column="PRODUCT_STAR" />
    	</resultMap>
 	
-	<resultMap type="Wish" id="wishResultSet">
-		<id property="wNo" column="WISH_NUM" />
-		<result property="email" column="USER_EMAIL" />
-		<result property="no" column="PRODUCT_NO" />
-	</resultMap>
-	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">
@@ -320,13 +314,5 @@
 			MASTER_YOTUBUE3 = #{snsYou3}
 		WHERE USER_EMAIL = #{email}
 	</update>
-	
-	<!-- 찜 리스트 -->
-	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
-			SELECT P.PRODUCT_TITLE, P.PRODUCT_RENAMEPIC, P.PRODCUT_PRICE , P.MASTER_NICKNAME
-			FROM PRODUCT P
-			JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
-			WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
-	</select>
 	
 </mapper>
