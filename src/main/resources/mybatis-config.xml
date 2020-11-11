@@ -13,6 +13,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.UserMasterSns" alias="UserMasterSns"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserMasterQualifcation" alias="UserMasterQualifcation"/>
       <typeAlias type="com.fp.neezit.product.model.vo.Product" alias="Product"/>
+      <typeAlias type="com.fp.neezit.manager.model.vo.Forbidden" alias="Forbidden"/>
       <typeAlias type="com.fp.neezit.product.model.vo.WishList" alias="Wish"/>
       <typeAlias type="com.fp.neezit.product.model.vo.Reply" alias="Reply"/>
    </typeAliases>
@@ -25,6 +26,8 @@
    <mappers>
       <mapper resource="mappers/user-mapper.xml"/>
       <mapper resource="mappers/product-mapper.xml"/>
+      <mapper resource="mappers/manager-mapper.xml"/> 
+      
    </mappers>
 
 
