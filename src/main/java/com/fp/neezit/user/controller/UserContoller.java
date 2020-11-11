@@ -350,12 +350,10 @@ public class UserContoller {
 		
 		if (result == 1) {
 			model.addAttribute("sw",1);
-			return "user/changePwd";
 		} else {
 			model.addAttribute("sw",2);
-			return "index";
 		}
-		
+		return "user/changePwd";
 	}
 	
 	/**

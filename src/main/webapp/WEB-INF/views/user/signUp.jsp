@@ -37,7 +37,7 @@
             <!-- 인증메일 발송 -->
             <div class="buttons_signup">
                <span>
-               <button class="signup_button_signup" type="button" onclick="emailNum();">인증번호 발송</button>
+               <button class="signup_button_signup sendmail_signup" type="button" onclick="emailNum();">인증번호 발송</button>
                </span>
             </div>
             
@@ -75,12 +75,17 @@
             </div>
          </a>
       </div>
-      </a>
       <%@ include file="../common/footer.jsp" %>
+      
+      <script>
+	      $(document).ready(function(){
+	    	  $(".timelimit_signup").hide();
+	      });
+      </script>
       
       <!-- AJAX 이메일 인증 -->
       <script>
-      
+      	var sw = 0;
          // 이메일 인증번호 전송
          function emailNum(){
         	 // EMAIL
@@ -99,9 +104,8 @@
 			         if(data === "ok"){
 			         	 $(".loading-container").remove();
 			         	 alert("메일이 발송되었습니다. 인증번호를 입력해 주세요.");
-						 $("#email").attr("readonly",true);
-						 $("#email").css("background-color","rgb(225,225,225)");
 						 $("#ranNum").focus();
+						 $(".timelimit_signup").show();
 						 // 제한시간 함수
 						 timelimit();
 				     // 이메일 중복 될 때
@@ -137,9 +141,24 @@
 			         // 번호 비교 성공 시
 			         if(data === "ok"){
 			         	alert("번호가 인증되었습니다.");
-			         	clearInterval(countdown);
 			       	 	$("#ranNum").attr("readonly",true);
 						$("#ranNum").css("background-color","rgb(225,225,225)");
+						$("#email").attr("readonly",true);
+						$("#email").css("background-color","rgb(225,225,225)");
+						$(".cfBtn").attr('disabled', true);
+						$(".cfBtn").css({
+							cursor : "default",
+							background : "rgb(225,225,225)",
+							opacity: "1"
+						});
+						$(".sendmail_signup").attr('disabled', true);
+						$(".sendmail_signup").css({
+							cursor: "default",
+							background : "rgb(225,225,225)",
+							opacity: "1"
+						});
+						
+						sw=1;
 					 // 번호 비교 실패 시
 			         }else{
 			         	alert("이메일 인증에 실패하였습니다.");
@@ -152,6 +171,7 @@
 		         }
 	         });
          }
+        
          
          // 회원가입 버튼 종합 검사
          function validate(){
@@ -175,7 +195,6 @@
 			         type:"post",
 			         success:function(data){
 				         if(data == "ok"){
-				        	 
 				         }else{
 				         	alert("이메일 인증을 완료해주세요.");
 				         	check = false;
@@ -233,9 +252,9 @@
       <script>
         // 유효성검사
         function regExp(){
-           var vName    = document.getElementById('name');
-           var vPhone   = document.getElementById('phone');
-           var vEmail   = document.getElementById('email');
+           var vName  = document.getElementById('name');
+           var vPhone = document.getElementById('phone');
+           var vEmail = document.getElementById('email');
 
            /* 이름 검사 : 2글자 이상, 한글*/
            if(!chk(/^[가-힣]{2,}$/,vName,"이름은 한글로 2글자 이상을 넣으세요!")){
@@ -329,7 +348,7 @@
     	    // 0초면 초기화 후 작동되는 조건문
     	    if (count == 0) {
     	      // 초기화
-    	      clearInterval(countdown);
+    	  	  clearInterval(timelimit);
     	      // 버튼 디자인 변경
     	      $(".timelimit_signup").empty();
     	      $(".timelimit_signup").prepend("제한시간 만료");
@@ -344,6 +363,12 @@
 	         			alert("인증번호가 만료되었습니다. 새로고침 후 다시 시도해주세요.");
 	         		}
 	         	});
+    	    }else if(sw==1){
+    	    	$(".timelimit_signup").empty();
+    	    	$(".timelimit_signup").prepend("인증이 완료되었습니다.");
+    	    	$(".timelimit_signup").css('color','green');
+    	    	clearInterval(timelimit);
+    	    	return false;
     	    }
     	    // 1초마다 1초씩 감소
     	    count--; //카운트 감소
