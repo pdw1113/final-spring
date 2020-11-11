@@ -331,9 +331,9 @@
                   </div>
                   <div>
                      <input class="input_master_3" type="time" name="" id=""
-                        value="${masterList.mStartTime }"> &nbsp;~&nbsp; <input
+                        value="${masterList.mStartTime }" disabled> &nbsp;~&nbsp; <input
                         class="input_master_3" type="time" name="" id=""
-                        value="${ masterList.mEndTime }">
+                        value="${ masterList.mEndTime }" disabled>
                   </div>
                </li>
                <hr>

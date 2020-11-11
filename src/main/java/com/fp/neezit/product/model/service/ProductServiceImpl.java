@@ -103,7 +103,27 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> productList(int navNo) {
 		return pDao.productList(navNo);
 	}
-	
 
+	
+    @Override
+    public List<Product> wishList(User u) {
+       return pDao.wishList(u);
+    }
+
+	@Override
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return pDao.wishDuplicate(map2);
+	}
+
+
+	@Override
+	public WishList getWishListDetail(HashMap<String, String> map) {
+		return pDao.getWishListDetail(map);
+	}
+
+	@Override
+	public int wishDelete(HashMap<String, String> map) {
+		return pDao.wishDelete(map);
+	}
 
 }

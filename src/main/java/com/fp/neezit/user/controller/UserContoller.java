@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
-import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
@@ -769,29 +768,6 @@ public class UserContoller {
 			return "common/errorPage";
 		}
 
-	}
-	
-	/**
-	 * 15.찜등록 리스트
-	 * 
-	 * @param u
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("wishList.do")
-	public String wishList(HttpSession session,Model model) {
-		// email값 session.getAttribute 가져오기
-		User u = (User) session.getAttribute("loginUser");
-		
-		// 상품정보 담을 리스트객체
-		List<Product>product = null;
-		
-		// DB에서 넘어온 값들을 담아준다.
-		product = uService.wishList(u);
-		
-		// model객체에 키,벨류 값으로 넣어주고 wishList.jsp로 리턴시켜준다.
-		model.addAttribute("product",product);
-		return "user/myPage/wishList";
 	}
 
 	@RequestMapping("buyList.do")

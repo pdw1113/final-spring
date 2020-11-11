@@ -74,27 +74,6 @@
 		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
 	
-   	<resultMap type="Product" id="productResultSet">
-      	<id property="no" column="PRODUCT_NO" />
-      	<result property="nickName" column="MASTER_NICKNAME" />
-      	<result property="title" column="PRODUCT_TITLE" />
-      	<result property="pic" column="PRODUCT_PIC" />
-      	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
-      	<result property="category" column="PRODUCT_CATEGORY" />
-      	<result property="price" column="PRODCUT_PRICE" />
-      	<result property="career" column="PRODUCT_CAREER" />
-      	<result property="portfolio" column="PRODUCT_PORTFOLIO" />
-      	<result property="introduce" column="PRODUCT_INTRODUCE" />
-      	<result property="createDate" column="PRODUCT_CREATE_DATE" />
-      	<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
-      	<result property="count" column="PRODCUT_COUNT" />
-   	</resultMap>
-	
-	<resultMap type="Wish" id="wishResultSet">
-		<id property="wNo" column="WISH_NUM" />
-		<result property="email" column="USER_EMAIL" />
-		<result property="no" column="PRODUCT_NO" />
-	</resultMap>
 	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
@@ -319,13 +298,5 @@
 			MASTER_YOTUBUE3 = #{snsYou3}
 		WHERE USER_EMAIL = #{email}
 	</update>
-	
-	<!-- 찜 리스트 -->
-	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
-			SELECT P.PRODUCT_TITLE, P.PRODUCT_RENAMEPIC, P.PRODCUT_PRICE , P.MASTER_NICKNAME
-			FROM PRODUCT P
-			JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
-			WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
-	</select>
 	
 </mapper>
