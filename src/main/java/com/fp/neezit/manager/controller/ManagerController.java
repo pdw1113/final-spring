@@ -1,12 +1,18 @@
 package com.fp.neezit.manager.controller;
 
+import java.sql.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
 
 @Controller
@@ -132,12 +138,16 @@ public class ManagerController {
 	
 	
 	@RequestMapping("searchWords.do")
-	public String searchWords(String search) {
+	public String searchWords(Model model, String search, Date date) {
 	
 	
-		
-		
-		
+		System.out.println(search);
+		System.out.println(date);
+		List<Forbidden> forbiddenList = mService.searchWords(search);
+		List<Forbidden> forbiddenList1 = mService.dateWords(date);
+		model.addAttribute("forbiddenList", forbiddenList);
+		model.addAttribute("forbiddenList", forbiddenList1);
+		System.out.println(forbiddenList);
 		
 		 return "manager/mBoard/mBoardForbidden"; 
 	}

@@ -23,12 +23,100 @@
 	<!-- 금칙어 검색 -->
 	<select id="searchWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
 		SELECT * FROM FORBIDDEN 
-		WHERE FORBIDDEN_WORD like '%' ||  #{fword} || '%'
+		WHERE FORBIDDEN_WORD LIKE '%' ||  #{fword} || '%'
 	</select>
 	
+	<!-- 금칙어 날짜 검색 -->
+	<select id="dateWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN 
+		WHERE FORBIDDEN_DATE BETWEEN #{fdate} AND #{fdate}
+	</select>
 	
+
+	<!-- ㄱ 초성 -->	
+	<select id="searchGa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(1) and NCHR(45207)
+	</select>	
+		
+	<!-- ㄴ 초성 -->	
+	<select id="searchNa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(45208) and NCHR(45795)
+	</select>
 	
+	<!-- ㄷ 초성 -->	
+	<select id="searchDa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(45796) and NCHR(46971)
+	</select>
 	
- 
+	<!-- ㄹ 초성 -->	
+	<select id="searchLa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(46972) and NCHR(47559)
+	</select>
+	
+	<!-- ㅁ 초성 -->	
+	<select id="searchMa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(47560) and NCHR(48147)
+	</select>
+	
+	<!-- ㅂ 초성 -->	
+	<select id="searchBa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(48148) and NCHR(49323)
+	</select>
+	
+	<!-- ㅅ 초성 -->	
+	<select id="searchSa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(49324) and NCHR(50499)
+	</select>
+	
+	<!-- ㅇ 초성 -->	
+	<select id="searchAa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(50500) and NCHR(51087)
+	</select>
+	
+	<!-- ㅈ 초성 -->	
+	<select id="searchJa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(51088) and NCHR(52263)
+	</select>
+	
+	<!-- ㅊ 초성 -->	
+	<select id="searchCha" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(52264) and NCHR(52851)
+	</select>
+	
+	<!-- ㅋ 초성 -->	
+	<select id="searchKa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(52852) and NCHR(53439)
+	</select>
+	
+	<!-- ㅌ 초성 -->	
+	<select id="searchTa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(53440) and NCHR(54027)
+	</select>
+	
+	<!-- ㅍ 초성 -->	
+	<select id="searchPa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(54028) and NCHR(54615)
+	</select>
+	
+	<!-- ㅎ 초성 -->	
+	<select id="searchHa" parameterType="Forbidden" resultMap="forbiddenResultSet">
+		SELECT * FROM FORBIDDEN  
+		WHERE FORBIDDEN_WORD BETWEEN NCHR(54616) and NCHR(55203)
+	</select>
+	
+
 </mapper>
 

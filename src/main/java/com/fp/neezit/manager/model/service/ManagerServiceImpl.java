@@ -1,5 +1,8 @@
 package com.fp.neezit.manager.model.service;
 
+import java.sql.Date;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,15 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.deleteWords(dwords);
 	}
 
-	
+	@Override
+	public List<Forbidden> searchWords(String search) {
+		return mDao.searchWords(search);
+	}
+
+	@Override
+	public List<Forbidden> dateWords(Date date) {
+		return mDao.dateWords(date);
+	}
+
 
 }

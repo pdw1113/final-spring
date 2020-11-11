@@ -6,7 +6,7 @@ public class Forbidden {
 
 		String fword;
 		Date fdate;
-		
+		 
 		public Forbidden() {
 			super();
 		}
