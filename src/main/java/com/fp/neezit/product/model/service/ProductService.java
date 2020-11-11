@@ -1,10 +1,12 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -46,7 +48,7 @@ public interface ProductService {
 	public UserMaster getProductDetail(String nickName);
 	
 	public UserMasterSns getProductSnsDetail(String email);
-
+	
 	/**
 	 * 댓글 등록 메소드
 	 * @param r
@@ -61,4 +63,57 @@ public interface ProductService {
 	 */
 	public ArrayList<Reply> selectReplyList(int pNo);
 
+	/**
+	 * 능력자 별점 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateMasterStar(int pNo);
+
+	/**
+	 * 능력자의 구매자 수
+	 * @param nickName
+	 * @return
+	 */
+	public int getReplyCount(String nickName);
+
+	/**
+	 * Nav.jsp 상품 목록 대분류로 가져오기
+	 * @param navNo
+	 * @return
+	 */
+	public List<Product> productList(int navNo);
+
+	/**
+	 * 찜등록
+	 * @param map
+	 * @return
+	 * */
+	public int wishInsert(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 해제
+	 * @param map
+	 * @return
+	 */
+	public int wishDelete(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 리스트
+	 * @param u
+	 * @return
+	 */
+	public List<Product> wishList(User u);
+
+	/**
+	 * 찜목록 중복값확인
+	 * @param map2
+	 * @return
+	 */
+	public int wishDuplicate(HashMap<String, String> map2);
+
+	public WishList getWishListDetail(HashMap<String, String> map);
+	
+
+   
 }

@@ -1,7 +1,10 @@
 package com.fp.neezit.product.model.service;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.product.model.dao.ProductDao;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -72,6 +76,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public int wishInsert(HashMap<String, String> map) {
+		return pDao.wishInsert(map);
+	}
+
 	public int insertReply(Reply r) {
 		return pDao.insertReply(r);
 	}
@@ -79,6 +87,43 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<Reply> selectReplyList(int pNo) {
 		return pDao.selectReplyList(pNo);
+	}
+
+	@Override
+	public int updateMasterStar(int pNo) {
+		return pDao.updateMasterStar(pNo);
+	}
+
+	@Override
+	public int getReplyCount(String nickName) {
+		return pDao.getReplyCount(nickName);
+	}
+
+	@Override
+	public List<Product> productList(int navNo) {
+		return pDao.productList(navNo);
+	}
+
+	
+    @Override
+    public List<Product> wishList(User u) {
+       return pDao.wishList(u);
+    }
+
+	@Override
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return pDao.wishDuplicate(map2);
+	}
+
+
+	@Override
+	public WishList getWishListDetail(HashMap<String, String> map) {
+		return pDao.getWishListDetail(map);
+	}
+
+	@Override
+	public int wishDelete(HashMap<String, String> map) {
+		return pDao.wishDelete(map);
 	}
 
 }

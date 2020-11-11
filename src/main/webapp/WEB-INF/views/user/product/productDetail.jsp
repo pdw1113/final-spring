@@ -53,7 +53,7 @@
 						<em class="master_nickname">${ master.mNickname }</em> <span
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
-						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(10)</sapn>
+						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(${replyCount})</sapn>
 						</i>
 						</span>
 					</div>
@@ -272,7 +272,12 @@
 				</ul>
 				<ul class="btn_area btn_m">
 					<li class="wish"><a href="#" onclick="heart();">
+						<c:if test="${wishList.no != product.no }">
 							<i class="fa-heart far"></i>
+						</c:if>	
+						<c:if test="${wishList.no == product.no }">
+							<i class="fa-heart fas"></i>
+						</c:if>	
 					</a></li>
 					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
 							바로 구매하기 </a></li>
@@ -303,7 +308,9 @@
 			</div>
 		</div>
 	</div>
-	
+	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
+	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
+	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
@@ -432,16 +439,7 @@
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
 						}
-					}else{ // 댓글이 없을 경우
-						alert("A");
-						/* $tr = $("<tr>");
-						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-						
-						$tr.append($rContent);
-						$tableBody.append($tr);
-						 */
 					}
-					 
 				},error:function(request,status,errorData){
 					console.log(request.status + ":" + errorData);
 				}
@@ -485,18 +483,59 @@
 
 	<script>
 		// 찜하기
+		let wNum = $('.wishList').val();      // ${wishList.no} 벨류값
+		let pNum = $('.wishProduct').val();   // ${product.no} 벨류값
+		if(wNum != pNum){      // insert값이 없으면 heart()실행 (찜등록하기위함)
 		function heart(){
-			let $heart = $(".fa-heart");
-			if($heart.hasClass("far")){
-				$heart.removeClass("far");
-				$heart.addClass("fas");		
-				alert("찜 되었습니다.");		
-			}else{
-				$heart.removeClass("fas");
-				$heart.addClass("far");	
-				alert("찜해제 되었습니다.");
-			}
+ 				let email = $(".wishEmail").val();
+				let no = $(".wishProduct").val();
+				
+				   var data = {
+						   email : email,
+						     no : no
+						     };
+				   
+				$.ajax({
+				    url : "wishInsert.do",
+				    type : "post",
+				    data : data,
+				    success : function(result){
+				    	if(result == "ok"){
+				    		alert("찜 성공");
+				    		location.reload();
+				    	}
+				    },
+				    error : function(result){
+				    	if(result == "fail"){
+				    		alert("이미 찜등록한 상품입니다.");
+				    	}
+				    }
+				   });
 		}
+		}
+		
+		if(wNum == pNum){  		// insert값이 있으면 heart()실행 (찜해제하기위함)
+			function heart(){
+				  let result = confirm('찜해제 하시겠습니까?');       // 확인창
+				  let pNo = $('.wishProduct').val(); 			// pNo 벨류값
+				  
+				  if(result){
+					$.ajax({
+						url:"wishDelete.do",
+						data:{no: pNo},
+						type:"post",
+						success:function(data){
+							if(data == "ok"){
+								alert('찜해제 완료');
+								location.reload();				// 삭제된걸 보여주기위해 새로고침을 해준다.
+							}
+						},error:function(request,status,errorData){
+							console.log(request.status + ":" + errorData);
+						}
+					})
+				  }
+			}
+			}
 	
 		// 별 넣기
 		let star = "${master.mStar}";

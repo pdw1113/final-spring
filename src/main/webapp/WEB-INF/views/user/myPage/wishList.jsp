@@ -20,18 +20,18 @@
             <div class="layoutSubbox_mywish">
                <div class="tit2_mywish">나의 관심상품</div>
                <!-- 상품 목록 리스트 start!! -->
-               <!-- 상품 1 -->
-               <div class="pOrderSearch_mywish">
+               <c:forEach var="p" items="${ product }">
+                 <div class="pOrderSearch_mywish">
                   <div class="pLeft_mywish">
                      <div class="Lsit-Saction_mywish">
                         <div class="mywish_img_div">
-                           <img src="resources/img/2.png" class="mywish_img_index">
+                           <img src="resources/pUploadFiles/${p.renamePic }" class="mywish_img_index">
                         </div>
                      </div>
                      <div class="pWrap_mywish">
-                        <div class="pTitle_mywish">CSS 디자인? 민주에게~</div>
+                        <div class="pTitle_mywish">${p.title}</div>
                         <div class="pName_mywish">
-                           서민주
+                    ${p.nickName}   
                            <!-- 별점 -->
                            <div class="rating_mywish" data-rate="3">
                               <i class="fas fa-star"></i>
@@ -45,44 +45,40 @@
                      </div>
                   </div>
                   <div class="pRight_mywish">
-                     <div class="wishCancle_mywish"><button class="btn-default_mywish">찜 해제</button></div>
-                     <div class="price_mywish">￦30,076</div>
+                   	 <input type="hidden" value="${ p.no }" name="no" class="pNo"/>	
+                     <div class="wishCancle_mywish"><button class="btn-default_mywish" value="${ p.no }">찜 해제</button></div>
+                     <div class="price_mywish">￦${p.price}</div>
                   </div>
                </div>
-               <!-- 상품 2 -->
-               <div class="pOrderSearch_mywish">
-                  <div class="pLeft_mywish">
-                     <div class="Lsit-Saction_mywish">
-                        <div class="mywish_img_div">
-                           <img src="resources/img/2.png" class="mywish_img_index">
-                        </div>
-                     </div>
-                     <div class="pWrap_mywish">
-                        <div class="pTitle_mywish">Java를 잡아봐~</div>
-                        <div class="pName_mywish">
-                           천동민
-                           <!-- data-rate를 통해 스크립트로 별 색칠되게 구현 예정(혜란)-->
-                           <div class="rating_mywish" data-rate="3">
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <span>(50)</span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- 찜 해제 버튼 + 가격 -->
-                  <div class="pRight_mywish">
-                     <div class="wishCancle_mywish"><button class="btn-default_mywish">찜 해제</button></div>
-                     <div class="price_mywish">￦50.000</div>
-                  </div>
-               </div>
+               </c:forEach>
                <!-- 상품 목록 리스트 end!! -->
             </div>
          </div>
       </div>
+      <script>
+      $('.btn-default_mywish').click(function(){
+		  let result = confirm('찜해제 하시겠습니까?');       // 확인창
+		  let pNo = $(this).val(); 					// pNo 벨류값
+		  if(result){
+			$.ajax({
+				url:"wishDelete.do",
+				data:{
+					no: pNo
+				},
+				type:"post",
+				success:function(data){
+					if(data == "ok"){
+						alert('찜해제 완료');
+						location.reload();				// 삭제된걸 보여주기위해 새로고침을 해준다.
+					}
+				},error:function(request,status,errorData){
+					console.log(request.status + ":" + errorData);
+				}
+			})
+		  }
+      });
+
+      </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>
    </body>

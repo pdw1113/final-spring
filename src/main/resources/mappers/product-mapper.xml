@@ -56,6 +56,12 @@
 		<result property="rLevel" column="REPLY_LEVEL" />
 	</resultMap>
 	
+	<resultMap type="Wish" id="wishResultSet">
+		<id property="wNo" column="WISH_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="no" column="PRODUCT_NO" />
+	</resultMap>
+
 	<select id="category"
 		resultType="com.fp.neezit.product.model.vo.ProductCategory">
 		select
@@ -82,6 +88,13 @@
 		WHERE LEVEL = 1
 		start with CATECODEREF = #{navNo}
 		connect by prior CATECODE = CATECODEREF
+	</select>
+	
+	<select id="getProductList" parameterType="_int" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+		WHERE CATECODE = #{navNo}
 	</select>
 
 	<!-- 상품 등록 -->
@@ -149,6 +162,60 @@
 		FROM REPLY
 		WHERE PRODUCT_NO = #{pNo}
 		ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 능력자 별점 업데이트 -->
+	<update id="updateMasterStar" parameterType="_int">
+		UPDATE neez_master 
+		SET master_Star = 
+		(
+		SELECT ROUND(AVG(r.REPLY_STAR),1) STAR_AVG
+		FROM REPLY r
+		JOIN PRODUCT p on(p.PRODUCT_NO = r.product_no)
+		WHERE p.MASTER_NICKNAME = (SELECT MASTER_NICKNAME FROM PRODUCT WHERE PRODUCT_NO = #{pNo})
+		)
+		WHERE MASTER_NICKNAME = (SELECT MASTER_NICKNAME FROM PRODUCT WHERE PRODUCT_NO = #{pNo})
+	</update>
+
+	<!-- 찜 등록 -->
+	<insert id="insertWish" parameterType="hashmap">
+		INSERT INTO WISH_LIST VALUES
+		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
+	</insert>
+	
+	<!-- 댓글 등록자 수 조회 -->
+	<select id="getReplyCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM REPLY
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE MASTER_NICKNAME = #{nickName}
+	</select>
+	
+	<!-- 찜 리스트 -->
+	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
+		SELECT P.PRODUCT_TITLE, P.PRODUCT_RENAMEPIC, P.PRODCUT_PRICE , P.MASTER_NICKNAME, P.PRODUCT_NO
+		FROM PRODUCT P
+		JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
+		WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 찜 해제 -->
+	<delete id="WishDelete" parameterType="hashmap">
+		DELETE FROM WISH_LIST WHERE PRODUCT_NO = #{no} AND USER_EMAIL = #{email}
+	</delete>
+	
+	<!-- 찜목록 중복값 조회 -->
+	<select id="WishDuplicate" parameterType="hashmap" resultType="_int">
+        SELECT COUNT(*)
+        FROM WISH_LIST W
+		JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<select id="WishDetail" parameterType="hashmap" resultMap="wishResultSet">
+        SELECT *
+		FROM WISH_LIST W
+        JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
 	</select>
 
 </mapper>

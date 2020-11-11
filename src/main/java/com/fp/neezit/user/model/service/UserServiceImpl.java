@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.dao.UserDao;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
@@ -105,6 +107,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public int userCash(String email) {
+		return uDao.userCash(email);
+	}
+
+	@Override
+	public int neezcharge(HashMap<String, String> map) {
+		return uDao.neezcharge(map);
+	}
+
 	public int changePw(HashMap<String, String> map) {
 		return uDao.changePw(map);
 	}
@@ -116,19 +127,16 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserMasterSchool getMasterSch(User u) {
-		// TODO Auto-generated method stub
 		return uDao.getMasterSch(u);
 	}
 
 	@Override
 	public UserMasterQualifcation getMasterQfa(User u) {
-		// TODO Auto-generated method stub
 		return uDao.getMasterQfa(u);
 	}
 
 	@Override
 	public UserMasterSns getMasterSns(User u) {
-		// TODO Auto-generated method stub
 		return uDao.getMasterSns(u);
 	}
 
@@ -151,6 +159,6 @@ public class UserServiceImpl implements UserService{
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return uDao.updateMasterQfc(mqf);
 	}
-
+	
 
 }

@@ -88,9 +88,11 @@ right: 10%;
 }
 .bx-controls-direction .bx-prev:before{
 content: "\e93d"; font-family: "xeicon"; /*검사창에서 xi-angle-left-thin:before 를보면 content: "\e93d" 를 가지고 있으므로 적용 시켜준다*/
+margin-left : 110px;
 }
 .bx-controls-direction .bx-next:before{
 content: "\e940"; font-family: "xeicon"; /*검사창에서 xi-angle-left-thin:before 를보면 content: "\e93d" 를 가지고 있으므로 적용 시켜준다*/
+margin-right : 110px;
 }
 /*페이징*/
 .bx-pager{position: absolute; left: 0; bottom: 92; width: 100%; text-align: center;}

@@ -7,12 +7,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
-import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.User;
 
 @Repository("uDao")
 public class UserDao {
@@ -80,6 +81,13 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.nickCheck",nickname);
 	}
 
+	public int userCash(String email) {
+		return sqlSession.selectOne("userMapper.userCash",email);
+	}
+
+	public int neezcharge(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.neezcharge",map);
+	}
 	public int changePw(HashMap<String, String> map) {
 		return sqlSession.update("userMapper.changePw",map);
 	}

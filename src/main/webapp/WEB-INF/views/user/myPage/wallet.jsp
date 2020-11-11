@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/css/wallet.css">
+   <link rel="stylesheet" type="text/css" href="resources/css/wallet.css">
 </head>
 
 <body>
@@ -24,11 +24,11 @@
                     <div class="cashInfo_myPage_money">
                         <ul>
                             <li class="info_myPage_money">
-                                <p>문혜란 회원님의 <span>보유니즈머니 정보</span></p>
+                                <p>${loginUser.name} 회원님의 <span>보유니즈머니 정보</span></p>
                             </li>
                             <li>
                                 <div class="stit_myPage_money">보유니즈머니</div>
-                                <div class="won_myPage_money">0<span>원</span></div>
+                                <div class="won_myPage_money">${cash}<span>원</span></div>
                                 <a href="charge.do" class="chargeBtn_myPage_money"><span>충전하기</span></a>
                             </li>
                         </ul>
@@ -65,7 +65,7 @@
                     
                     <div class="cashRequest_myPage_money">
                         <div class="cTit_myPage_money">출금 가능 니즈머니</div>
-                        <div class="cashWon_myPage_money">0<span>원</span></div>
+                        <div class="cashWon_myPage_money">${cash}<span>원</span></div>
                         <!-- 출금하기 버튼은 0원 초과되면 생기게 구현할 예정 -->
                         <button class="requestBtn_myPage_money" id="cancelReason_wallet"><span>출금하기</span></button>
                     </div>
@@ -76,48 +76,48 @@
                         <!-- Modal content -->
                         <div class="modal_content_money">
                             <div class="modal_header_wallet">
-	                            <div class="close_wallet" onclick="close_Wallet();">
-			                   		<i class="fas fa-times x_wallet"></i>
-			                	</div>
+                               <div class="close_wallet" onclick="close_Wallet();">
+                                  <i class="fas fa-times x_wallet"></i>
+                            </div>
                                 <div><h2>보유머니 출금 요청</h2></div>
-	                            <ul>
-									<li>
-										<select class="bankCode_wallet">
-											<option value="">은행 선택</option>
-	                                        <option value="001">산업</option>
-	                                        <option value="002">기업</option>
-	                                        <option value="003">국민</option>
-	                                        <option value="004">수협</option>
-	                                        <option value="005">농협</option>
-	                                        <option value="006">우리</option>
-	                                        <option value="007">SC</option>
-	                                        <option value="008">씨티</option>
-	                                        <option value="009">대구</option>
-	                                        <option value="010">부산</option>
-	                                        <option value="011">광주</option>
-	                                        <option value="012">제주</option>
-	                                        <option value="013">전북</option>
-	                                        <option value="014">경남</option>
-	                                        <option value="015">새마을금고</option>
-	                                        <option value="016">신협</option>
-	                                        <option value="017">상호저축</option>
-	                                        <option value="018">HSBC</option>
-	                                        <option value="019">도이치</option>
-	                                        <option value="020">우체국</option>
-	                                        <option value="021">KEB하나</option>
-	                                        <option value="022">신한</option>
-	                                        <option value="023">케이뱅크</option>
-	                                        <option value="024">카카오뱅크</option>
-	            						</select>
-									</li>
-									<li><input type="text" name="bankuser" class="bankuser_wallet" id="bankuser" value="" placeholder="예금주명 입력"></li>
-									<li><input type="text" name="bankno" class="bankno_wallet" id="bankno" value="" placeholder="’-’ 없이 계좌번호 입력"></li>
-									<li><input type="text" name="price" class="price_wallet" id="price" value="" placeholder="출금 머니 금액을 입력해 주십시오."></li>
-								</ul>
-								
+                               <ul>
+                           <li>
+                              <select class="bankCode_wallet">
+                                 <option value="">은행 선택</option>
+                                           <option value="001">산업</option>
+                                           <option value="002">기업</option>
+                                           <option value="003">국민</option>
+                                           <option value="004">수협</option>
+                                           <option value="005">농협</option>
+                                           <option value="006">우리</option>
+                                           <option value="007">SC</option>
+                                           <option value="008">씨티</option>
+                                           <option value="009">대구</option>
+                                           <option value="010">부산</option>
+                                           <option value="011">광주</option>
+                                           <option value="012">제주</option>
+                                           <option value="013">전북</option>
+                                           <option value="014">경남</option>
+                                           <option value="015">새마을금고</option>
+                                           <option value="016">신협</option>
+                                           <option value="017">상호저축</option>
+                                           <option value="018">HSBC</option>
+                                           <option value="019">도이치</option>
+                                           <option value="020">우체국</option>
+                                           <option value="021">KEB하나</option>
+                                           <option value="022">신한</option>
+                                           <option value="023">케이뱅크</option>
+                                           <option value="024">카카오뱅크</option>
+                                 </select>
+                           </li>
+                           <li><input type="text" name="bankuser" class="bankuser_wallet" id="bankuser" value="" placeholder="예금주명 입력"></li>
+                           <li><input type="text" name="bankno" class="bankno_wallet" id="bankno" value="" placeholder="’-’ 없이 계좌번호 입력"></li>
+                           <li><input type="text" name="price" class="price_wallet" id="price" value="" placeholder="출금 머니 금액을 입력해 주십시오."></li>
+                        </ul>
+                        
                             </div>
                             <div class="bankSend_wallet">
-                            	<button class="bankBtn_wallet" id="bankSendBtn_wallet">계좌 확인</button>
+                               <button class="bankBtn_wallet" id="bankSendBtn_wallet">계좌 확인</button>
                             </div>
                         </div>
                     </div>
@@ -136,24 +136,24 @@
         </div>
        </div>
         <!-- //mypage -->
-    	<script type="text/javascript">
-	        $('#cancelReason_wallet').click(function(){
-	            $('#myModal_wallet').show();
-	        })
-	        
-	        //팝업 Close 기능
-	        function close_Wallet(flag) {
-	             $('#myModal_wallet').hide();
-	        };
-	        
-	        //계좌 확인 버튼 데이터 찍어보기
-	        $('#bankSendBtn_wallet').click(function(){
-	        	var bankCode = $('.bankCode_wallet option:selected').val();
-	        	var bankUser = $('#bankuser').val();
-	        	var bankNo = $('#bankno').val();
-	        	var price = $('#price').val();
-	        	alert("은행코드"+bankCode+"예금주:"+bankUser+"계좌번호"+bankNo+"금액"+price);
-	        });
+       <script type="text/javascript">
+           $('#cancelReason_wallet').click(function(){
+               $('#myModal_wallet').show();
+           })
+           
+           //팝업 Close 기능
+           function close_Wallet(flag) {
+                $('#myModal_wallet').hide();
+           };
+           
+           //계좌 확인 버튼 데이터 찍어보기
+           $('#bankSendBtn_wallet').click(function(){
+              var bankCode = $('.bankCode_wallet option:selected').val();
+              var bankUser = $('#bankuser').val();
+              var bankNo = $('#bankno').val();
+              var price = $('#price').val();
+              alert("은행코드"+bankCode+"예금주:"+bankUser+"계좌번호"+bankNo+"금액"+price);
+           });
       </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>

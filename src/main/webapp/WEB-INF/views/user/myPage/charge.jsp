@@ -14,10 +14,11 @@
       </style>
    </head>
    <body>
-   	  <!-- header 영역 -->
+      <!-- header 영역 -->
       <%@ include file="../../common/header.jsp" %>
       <!-- nav 영역 -->
       <%@ include file="../myPage/common/nav.jsp" %>
+      <form action="kakaopay.do" method="post">
       <div class="content_mypay">
          <div class="order_mypay">
             <div class="layoutSubbox_mypay">
@@ -66,7 +67,7 @@
                               <ul>
                                  <li>
                                     <div class="tit_mypay">보유머니</div>
-                                    <span>0<u>원</u></span>
+                                    <span>${cash}<u>원</u></span>
                                  </li>
                               </ul>
                            </div>
@@ -79,6 +80,7 @@
                                  <li>
                                     <div class="tit_mypay">총 결제금액</div>
                                     <span class="total_mypay">10000<u>원</u></span>
+                                    <input type="text" style="visibility: hidden;" name="total_pay" value="10000" id="money_mypay"/>
                                  </li>
                               </ul>
                            </div>
@@ -122,9 +124,7 @@
                               </div>
                            </div>
                            <!-- 충전하기 버튼 -->
-                           <div class="pBtn_mypay" id="submit_myModifyPwd">
-                              <a href="#">충전하기 </a>
-                           </div>
+                              <button class="pBtn_mypay" onclick="return chargebtn();">충전하기</button>
                         </div>
                      </div>
                   </div>
@@ -134,6 +134,7 @@
             </div>
          </div>
       </div>
+      </form>
       <script>
          // 머니 충전 
          $('#btn_minus_mypay').click(function () {
@@ -160,6 +161,7 @@
              /* 왼쪽 lsection의 증가 */
              $('#count_cash_mypay').empty();
              $('#count_cash_mypay').append(html2);
+             $('#money_mypay').attr("value",sum);
              /* 오른쪽 rsection의 증가 */
              /* 충전머니 */
              $('#charge_cash_mypay').empty();
@@ -197,17 +199,18 @@
          });
          
          // 충전하기 눌렀을 때 약관의 필수에 체크 안되어있으면 alert!!!
-         $('#submit_myModifyPwd').click(function(){
+         function chargebtn() {
              if($('#orderAgree').is(":checked")==true && $('#policyAgree').is(":checked")==true ){
-                 alert("충전되었습니다.");
+                 return true;
              }else{
                  alert("필수 약관을 체크 해주세요.");
+                 return false;
              }
-         });
+         }
          
          
       </script>
       <!-- footer 영역 -->
-      <%@ include file="../../common/footer.jsp" %>
+      <%@ include file="../../common/footer.jsp" %> 
    </body>
 </html>

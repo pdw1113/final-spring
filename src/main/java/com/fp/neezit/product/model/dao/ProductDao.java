@@ -1,5 +1,6 @@
 package com.fp.neezit.product.model.dao;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+
 import com.fp.neezit.product.model.vo.Reply;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -61,12 +64,44 @@ public class ProductDao{
 		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
 	}
 
+	public int wishInsert(HashMap<String, String> map) {
+		return sqlSession.insert("productMapper.insertWish",map);
+	}
+
 	public int insertReply(Reply r) {
 		return sqlSession.insert("productMapper.insertReply",r);
 	}
 
 	public ArrayList<Reply> selectReplyList(int pNo) {
 		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList", pNo);
+	}
+
+	public int updateMasterStar(int pNo) {
+		return sqlSession.update("productMapper.updateMasterStar", pNo);
+	}
+
+	public int getReplyCount(String nickName) {
+		return sqlSession.selectOne("productMapper.getReplyCount", nickName);
+	}
+
+	public List<Product> productList(int navNo) {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductList", navNo);
+	}
+	
+    public List<Product> wishList(User u) {
+	      return sqlSession.selectList("productMapper.WishList",u);
+	}
+
+	public int wishDelete(HashMap<String, String> map) {
+		return sqlSession.delete("productMapper.WishDelete",map);
+	}
+
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return sqlSession.selectOne("productMapper.WishDuplicate",map2);
+	}
+
+	public WishList getWishListDetail(HashMap<String, String> map) {
+		return sqlSession.selectOne("productMapper.WishDetail",map);
 	}
 	
 }
