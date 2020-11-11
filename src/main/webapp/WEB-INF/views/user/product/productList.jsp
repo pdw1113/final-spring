@@ -93,7 +93,10 @@
 		<c:forEach var="product" items="${ productList }" varStatus="status">
 			<div class="productOne">
 				<input type="hidden" class="pCategory" value="${ product.category }">
-				<a href="productDetail.do" class="thumbnail">
+				<c:url var="ProductDetail" value="productDetail.do">
+					<c:param name="no" value="${ product.no }"/>
+				</c:url>
+				<a href="${ProductDetail}" class="thumbnail">
 					<div class="list_img_div">
 						<img src="resources/pUploadFiles/${ product.renamePic }" class="list_contents_img_index">
 					</div>
