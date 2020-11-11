@@ -115,4 +115,5 @@ public interface ProductService {
 	public WishList getWishListDetail(HashMap<String, String> map);
 	
 
+   
 }
