@@ -62,7 +62,7 @@ public class ProductController {
       List<ProductCategory> category = pService.categoryList(navNo);
       List<ProductCategory> category2 = pService.categoryList2(navNo);
       List<Product> productList = pService.productList(navNo);
-    		  
+        
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
       model.addAttribute("productList", productList);
@@ -250,13 +250,17 @@ public class ProductController {
 	@RequestMapping(value="addReply.do")
 	public String addReply(Reply r) {
 		int result = pService.insertReply(r);
-		System.out.println(r.getpNo());
 		
 		if(result == 1) {
 			
+			// 능력자 별점 업데이트
 			int starResult = pService.updateMasterStar(r.getpNo());
+			// 상품 구매자 수 업데이트
+			int buyCount = pService.updateBuyCount(r.getpNo());
+			// 상품 별점 업데이트
+			int productStar = pService.updateProductStar(r.getpNo());
 			
-			if(starResult == 1) return "success";
+			if(starResult == 1 && buyCount == 1) return "success";
 			else return "fail";
 			
 		}else {

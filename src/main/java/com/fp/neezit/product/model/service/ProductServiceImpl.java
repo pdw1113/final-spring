@@ -104,6 +104,15 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.productList(navNo);
 	}
 
+	@Override
+	public int updateBuyCount(int getpNo) {
+		return pDao.updateBuyCount(getpNo);
+	}
+
+	@Override
+	public int updateProductStar(int getpNo) {
+		return pDao.updateProductStar(getpNo);
+	}
 	
     @Override
     public List<Product> wishList(User u) {

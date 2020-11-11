@@ -103,5 +103,13 @@ public class ProductDao{
 	public WishList getWishListDetail(HashMap<String, String> map) {
 		return sqlSession.selectOne("productMapper.WishDetail",map);
 	}
+
+	public int updateBuyCount(int getpNo) {
+		return sqlSession.update("productMapper.updateBuyCount", getpNo);
+	}
+
+	public int updateProductStar(int getpNo) {
+		return sqlSession.update("productMapper.updateProductStar", getpNo);
+	}
 	
 }

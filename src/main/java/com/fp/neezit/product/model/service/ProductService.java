@@ -85,6 +85,20 @@ public interface ProductService {
 	public List<Product> productList(int navNo);
 
 	/**
+	 * 상품 별 구매자 수 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateBuyCount(int getpNo);
+
+	/**
+	 * 상품 별 별점 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateProductStar(int getpNo);
+	
+	/*
 	 * 찜등록
 	 * @param map
 	 * @return
