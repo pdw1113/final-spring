@@ -29,7 +29,7 @@
     <input type="hidden" value="${ loginUser.email }" name="email"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
-            <div class="font_jua title-sgm">능력자 등록</div>
+            <div class="font_jua title-sgm">* 능력자 등록</div>
             <span>
                 <div class="img-container-sgm border-radius-100">
                     <img src="resources/img/no-image.png" class="img-style-size" id="profile_img" onclick="picUpload(this);">
@@ -42,6 +42,8 @@
                     * 정면 얼굴사진을 업로드 해주시기 바랍니다.
                     <br>
                     * 최대 용량은 5MB까지 입니다.
+                    <br>
+                    * (*)는 필수 항목입니다.
                 </div>
             </span>
         </div>
@@ -100,7 +102,7 @@
             <ul>
             <!-- 별명 등록 -->
             <li>
-                <div class="sub-title-sgm">별명 등록</div>
+                <div class="sub-title-sgm">* 별명 등록</div>
                 <div>
                     <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
@@ -169,7 +171,7 @@
             <hr>
             <!-- 카테고리 등록 -->
             <li>
-                <div class="sub-title-sgm">카테고리 등록</div>
+                <div class="sub-title-sgm">* 카테고리 등록</div>
                 <div>
                     <div>
                         <select size="8" class="category1 font_jua select-sgm">
@@ -444,7 +446,7 @@
             <li>
                 <div class="sub-title-sgm">능력 인증</div>
                 <div class="text-align-center-sgm minus-margin-sgm">
-                    <div class="font_jua">신분증</div>
+                    <div class="font_jua">* 신분증</div>
                     <div class="img-container-sgm-2">
                         <img src="resources/img/profile.png" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
                         <input type="file" id="idCard_file" name="_mIdPicOri">
@@ -629,7 +631,7 @@
             <hr>
 			 <!-- 작업 가능 시간 -->
             <li>
-                <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
+                <div class="sub-title-sgm">* 선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
                     <div class="radio-wrap">
                         <input type="checkbox" id="monday" value="월" class="checkSelect"/>
@@ -659,6 +661,8 @@
                         <input type="checkbox" id="sunday" value="일" class="checkSelect"/>
                         <label class="font_jua day11" for="sunday">일</label>
                     </div>
+                    <span class="dupl_choose">*(중복선택가능)</span>
+                    <br>
                     <div class="radio-wrap">
                         <input type="checkbox" id="home" name="a" value="자택" class="checkSelect1 "/>
                         <label class="font_jua home_choose" for="home">자택</label>
@@ -668,6 +672,7 @@
                         <label class="font_jua home_choose" for="work">출근</label>
                     </div>
                     <span class="dupl_choose">*(중복선택가능)</span>
+                    <br>
                 </div>
                 <div>
                     <input class="input_master_3" type="time" name="mStartTime">
@@ -829,10 +834,6 @@
       $("#array1").val(send_array1);
     });   
     
-    
-    
-    
-      
    </script>    
     
 </body>
