@@ -56,7 +56,14 @@
 	                                <tr>
 	                                <td>${w.wdate}</td>
 	                                <td><span class="plus_money">${w.whistory}</span></td>
-	                                <td><span class="day_money">${w.wmoney}</span></td>
+	                              	<c:choose>
+	                                	<c:when test="${w.whistory eq '니즈머니 출금'}">
+	                                		<td><span class="day_money" style="color: red;">-${w.wmoney}</span></td>
+	                                	</c:when>
+	                                	<c:otherwise>
+	                                		<td><span class="day_money" >${w.wmoney}</span></td>
+	                                	</c:otherwise>
+	                                </c:choose>
 	                                <td>${w.wmethod}</td>
 	                                </tr>
 	                            </c:forEach>
@@ -65,8 +72,16 @@
                               <c:forEach var="w"  items="${uw}">
 	                                <tr>
 	                                <td>${w.wdate}</td>
-	                                <td><span class="plus_money">${w.whistory}</span></td>
-	                                <td><span class="day_money">${w.wmoney}</span></td>
+	                                <c:choose>
+	                                	<c:when test="${w.whistory eq '니즈머니 출금'}">
+	                                		<td><span class="plus_money" style="color: red;">${w.whistory}</span></td>
+	                                		<td><span class="day_money" style="color: red;">-${w.wmoney}</span></td>
+	                                	</c:when>
+	                                	<c:otherwise>
+	                                		<td><span class="plus_money">${w.whistory}</span></td>
+	                                		<td><span class="day_money" >${w.wmoney}</span></td>
+	                                	</c:otherwise>
+	                                </c:choose>
 	                                <td>${w.wmethod}</td>
 	                                </tr>
                              	</c:forEach>
