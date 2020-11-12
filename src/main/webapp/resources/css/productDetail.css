@@ -584,7 +584,8 @@
       width: 88%;
       padding: 10px;
       border: none;
-      border-radius: 6px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
     }
 
     .inputReview textarea:focus {
