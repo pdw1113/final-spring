@@ -27,6 +27,9 @@
 
     <form action="signUpMasterUpdate.do" method="POST" enctype="multipart/form-data" name="master">
     <input type="hidden" value="${ loginUser.email }" name="email"/>
+    <input type="hidden" value="${ masterList.mCategory }" name="_mCategory"/>
+    <input type="hidden" value="${ masterList.mWorkDay }" name="_mWorkDay"/>
+    <input type="hidden" value="${ masterList.mWorkStyle }" name="_mWorkStyle"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">능력자 </div>

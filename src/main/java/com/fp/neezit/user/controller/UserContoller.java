@@ -661,7 +661,10 @@ public class UserContoller {
 			@RequestParam(name = "_q4PicOri", required = false) MultipartFile file8,
 			@RequestParam(name = "_q5PicOri", required = false) MultipartFile file9,
 			@RequestParam(name = "_mProPicRe", required = false) String pic1,
-			@RequestParam(name = "_mIdPicRe", required = false) String pic2) {
+			@RequestParam(name = "_mIdPicRe", required = false) String pic2,
+			@RequestParam(name = "_mCategory", required = false) String mCat,
+			@RequestParam(name = "_mWorkDay", required = false) String mDa,
+			@RequestParam(name = "_mWorkStyle", required = false) String mWs) {
 		// @RequestParam어노테이션을 이용한 업로드 파일 접근
 		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
 		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
@@ -683,14 +686,6 @@ public class UserContoller {
 
 		}
 		
-		// 널값들어갈시 기존 PicRe네임값 가져오기 
-		if (msu.getmProPicOri() == null && msu.getmIdPicOri() == null) {
-				msu.setmProPicRe(pic1);
-				msu.setmIdPicRe(pic2);
-				}
-
-			
-
 		if (!file3.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName3 = uPic.saveFile3(file3, request);
@@ -762,6 +757,14 @@ public class UserContoller {
 			}
 		}
 
+		// 널값 처리
+		// 널값들어갈시 기존 PicRe네임값 가져오기 
+		if (msu.getmProPicOri() == null && msu.getmIdPicOri() == null) {
+				msu.setmProPicRe(pic1);
+				msu.setmIdPicRe(pic2);
+			}
+
+		
 		int result = uService.updatetMaster(msu);
 		System.out.println("update : " + msu);
 		System.out.println("update : " + result);
