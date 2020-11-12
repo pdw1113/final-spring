@@ -16,7 +16,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- JUA 폰트-->
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 </head>
 
@@ -28,7 +28,8 @@
 				<p class="text">
 					자신의 재능을 시간 단위로 판매하는 내용이 아닌 홍보성 글이나 무성의한 글은 검수과정에서 승인 거절될 수 있습니다.<br>
 					직거래를 유도하는 계좌이체 혹은 외부결제를 요구하지 마세요.<br> 연락처, 이메일 등 개인정보가 포함된 글은
-					관리자에서 임의로 삭제될 수 있습니다.
+					관리자에서 임의로 삭제될 수 있습니다.<br>
+					* 모든 항목은 필수 항목입니다.
 				</p>
 			</div>
 			<div class="product_input_addproduct">
@@ -69,7 +70,7 @@
 				<!-- 제목 -->
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">상품명 (한 줄 제목)</span> 
-					<input type="text" placeholder="제목 입력" class="input_text_addproduct" name="title">
+					<input type="text" placeholder="제목 입력" class="input_text_addproduct" name="title" id="title">
 				</div>
 				<!-- 카테고리 -->
 				<div class="status_div_addproduct">
@@ -95,13 +96,13 @@
 	            
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">기본금액</span> 
-					<input type="number" class="input_money_addproduct" name="price"><span
+					<input type="number" class="input_money_addproduct" name="price" id="price"><span
 						class="won_addproduct">원</span>
 				</div>
 				<!-- 경력 -->
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">경력</span>
-					<select class="category_select_addproduct m-l-122" name="career">
+					<select class="category_select_addproduct m-l-122" name="career" id="career">
 						<option value="">선택</option>
 						<option value="00">1년 미만</option>
 						<option value="01">1년</option>
@@ -122,7 +123,7 @@
 				<div class="status_div_addproduct">
 					<div class="input_title_addproduct m-b-10">포트폴리오(상품관련)</div>
 					<div class="portfolio_addproduct">
-						<textarea id="summernote_portfolio" name="portfolio"></textarea>
+						<textarea id="summernote_portfolio" name="portfolio" ></textarea>
 					</div>
 				</div>
 				<!-- 자기소개 및 상품 소개 -->
@@ -155,7 +156,6 @@
 					$("#oneCate").append("<option>" + allCate[i] + "</option>");
 				}
 			}
-			
 		})();
 		
 		// option태그는 onclick, onselect등 먹히질 않으니 
@@ -186,11 +186,51 @@
 		
 		// 유효성 검사
 		function validate(){
-			if($("#cateone").val().match("대분류")){
-				alert("대분류를 선택해 주세요.");
-				return false;
-			}
+			
+			// 이미지 등록
+		    if(!document.getElementById("upload").value){
+		        alert("사진을 넣어주세요");
+		        return false;
+	      	}
+	      	
+	      	if(!document.getElementById("title").value){
+	      		alert("상품명을 넣어주세요");
+	      		document.getElementById("title").focus();
+		        return false;
+	      	}
+			
+			if($('#hiddenInput').val()==""){
+                alert("카테고리를 추가해주세요"); 
+                document.getElementById("hiddenInput").focus();
+                return false;
+          	}
+
+			if(!document.getElementById("price").value){
+                alert("기본금액을 입력해주세요"); 
+                document.getElementById("price").focus();
+                return false;
+          	}
+			
+			if(!document.getElementById("career").value){
+                alert("경력을 선택해주세요"); 
+                document.getElementById("career").focus();
+                  return false;
+          	}
+          	
+          	if(!document.getElementById("summernote_portfolio").value){
+                alert("포트폴리오를 입력해주세요"); 
+                $("#summernote_portfolio").focus();
+                return false;
+          	}
+          	
+          	if(!document.getElementById("summernote_Introduce").value){
+                alert("상품소개를 입력해주세요"); 
+                document.getElementById("summernote_Introduce").focus();
+                  return false;
+          	}
+			
 			return true;
+			
 		}
 	</script>
 	
@@ -241,7 +281,7 @@
      </script>
 
 
-<!-- 썸머노트 -->
+
 <script>
       var upload = document.querySelector('#upload');
       
@@ -260,7 +300,7 @@
          }
       })()
       
-      upload.addEventListener('change',function (e) {
+      	upload.addEventListener('change',function (e) {
          var get_file = e.target.files;
       
          if(get_file){
@@ -274,7 +314,8 @@
       function fileupload(){
          $('#upload').click();
       }
-      
+         
+      <!-- 썸머노트 -->
       $(document).ready(function() {
          		//여기 아래 부분
          		$('#summernote_portfolio').summernote({

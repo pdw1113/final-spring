@@ -1,7 +1,9 @@
 package com.fp.neezit.user.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWallet;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 
 @Service("uService")
@@ -160,5 +164,36 @@ public class UserServiceImpl implements UserService{
 		return uDao.updateMasterQfc(mqf);
 	}
 	
+
+	@Override
+	public int chargePaylist(HashMap<String, String> map) {
+		return uDao.chargePaylist(map);
+	}
+
+	@Override
+	public int withdraw(HashMap<String, String> map) {
+		return uDao.withdraw(map);
+	}
+
+	@Override
+	public int withdrawlist(HashMap<String, String> map) {
+		return uDao.withdrawlist(map);
+	}
+
+	@Override
+	public ArrayList<UserWallet> getUserWallet(String email) {
+		return uDao.getUserWallet(email);
+	}
+
+
+	@Override
+	public int getWalletCount(HashMap<String, String> map) {
+		return uDao.getWalletCount(map);
+	}
+
+	@Override
+	public ArrayList<UserWallet> getUserWalletList(PageInfo pi, HashMap<String, String> map) {
+		return uDao.getUserWalletList(pi,map);
+	}
 
 }
