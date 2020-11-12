@@ -43,8 +43,34 @@ public class ProductController {
    ProductService pService;
 
    @RequestMapping("productDetail.do")
-   public String productDetail() {
-      return "user/product/productDetail";
+   public String productDetail(int no, Model model,HttpSession session) {
+		  // 상품 정보 가져오기
+		  Product p = pService.getProductDetail(no);
+		  
+		  // 상품 정보 가져오기 2
+		  UserMaster m = pService.getProductDetail(p.getNickName());
+
+		  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+		  
+		  // 찜 정보 가져오기
+	      User u = (User)session.getAttribute("loginUser");    	  // 로그인 세션 정보
+	      String str = Integer.toString(p.getNo());				  // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
+	      HashMap<String, String> map = new HashMap<String, String>(); 	// HashMap 선언
+		  map.put("email", u.getEmail()); 	
+		  map.put("no", str);
+		  WishList wl = pService.getWishListDetail(map);
+		  int replyCount = pService.getReplyCount(p.getNickName());
+		  
+		  if(p != null && m != null) {
+			  model.addAttribute("product", p);
+			  model.addAttribute("master", m);
+			  model.addAttribute("sns", sns);
+			  model.addAttribute("replyCount", replyCount);
+			  model.addAttribute("wishList", wl);
+			  return "user/product/productDetail";
+		  }
+		  
+		  return "common/errorPage";
    }
    
    @RequestMapping("productListSearch.do")
@@ -58,14 +84,28 @@ public class ProductController {
  	* @return
  	*/
    @RequestMapping(value = "productList.do", method = RequestMethod.GET)
-   public String productList(Model model, int navNo){
+   public String productList(Model model, int navNo, String what){
       List<ProductCategory> category = pService.categoryList(navNo);
       List<ProductCategory> category2 = pService.categoryList2(navNo);
-      List<Product> productList = pService.productList(navNo);
+
+      if(what == "최신순") {
+    	  what = null;
+      }
+      
+      System.out.println(what);
+      
+      String no = Integer.toString(navNo);
+      HashMap<String, String> map = new HashMap<String, String>();
+
+      map.put("no", no);
+      map.put("what", what);
+      
+      List<Product> productList = pService.productList(map);
         
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
       model.addAttribute("productList", productList);
+      model.addAttribute("what", what);
    
       return "user/product/productList";
    }
@@ -214,11 +254,14 @@ public class ProductController {
 	  
 	  // 상품 정보 가져오기
 	  Product p = pService.getProductDetail(no);
+	  System.out.println(p);
 	  
 	  // 상품 정보 가져오기 2
 	  UserMaster m = pService.getProductDetail(p.getNickName());
-
+	  System.out.println(m);
+	  
 	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+	  System.out.println(sns);
 	  
 	  // 찜 정보 가져오기
       User u = (User)session.getAttribute("loginUser");    	  // 로그인 세션 정보
