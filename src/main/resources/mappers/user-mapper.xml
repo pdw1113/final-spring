@@ -258,10 +258,20 @@
 	<update id="MasterUpdate" parameterType="UserMaster">
 		UPDATE NEEZ_MASTER
 		SET MASTER_NICKNAME = #{mNickname},
+			<if test="mProPicOri eq null">
+			MASTER_PROFILE_PIC_ORI = 'not null',
+			</if>
+			<if test="mProPicOri neq null">
 			MASTER_PROFILE_PIC_ORI = #{mProPicOri},
+			</if>
 			MASTER_PROFILE_PIC_RE = #{mProPicRe},
 			MASTER_CATEGORY = #{mCategory},
+			<if test="mIdPicOri eq null">
+			MASTER_ID_PIC_ORI = 'not null',
+			</if>
+			<if test="mIdPicOri neq null">
 			MASTER_ID_PIC_ORI = #{mIdPicOri},
+			</if>
 			MASTER_ID_PIC_RE = #{mIdPicRe},
 			MASTER_WORKDAY = #{mWorkDay},
 			MASTER_WORKSTYLE = #{mWorkStyle},
