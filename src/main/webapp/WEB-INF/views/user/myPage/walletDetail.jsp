@@ -33,9 +33,9 @@
                      </div>
                      <!-- 달력 -->
                      <div class="date_wdetail">
-                        <input type="date" name="preday" class="datepre_wdetail">
+                        <input type="date" name="preday" class="datepre_wdetail" value="">
                          <div class="space_wdetail">~</div>
-                        <input type="date" name="postday" class="datepost_wdetail">
+                        <input type="date" name="postday" class="datepost_wdetail" value="">
                      </div>
                      <!-- 검색 오늘 / 1주일 / 1개월 / 6개월 선택시 자동으로 datePicker에 입력되게 구현 필요 -->
                      <div class="period_wdetail">
@@ -70,16 +70,31 @@
                        </tr>
                    </thead>
                    <tbody>
+                     <c:if test="${empty uw}">
+                   <tr>
+                           <td colspan="5" style="width: 1500px;">결제 내역이 없습니다.</td>
+                   </tr>
+                   </c:if>
+                   
+                   <c:if test="${!empty uw}">
                     <c:forEach var="w" items="${uw}">
                        <tr>
                            <td id="short_wdetail">${w.wnum}</td>
                            <td>${w.wdate}</td>
                            <td id="long_mybuylist">${w.whistory}</td>
-                           <td>${w.wmoney}</td>
-                           <td>${w.wmethod}</td>
+                           <c:choose>
+	                             <c:when test="${w.whistory eq '니즈머니 출금'}">
+	                                <td style="color:red">-${w.wmoney}</td>
+	                             </c:when>
+	                             <c:otherwise>
+                           			<td>${w.wmoney}</td>
+	                             </c:otherwise>
+	                       </c:choose>
+                           <td>${w.wmethod}</td>             
                        </tr>
                    </c:forEach>
-                   
+               
+                 
                 <tr align="center" height="20" >
 			<td colspan="5" class="pagination">
 			
@@ -132,6 +147,7 @@
 				</c:if>
 			</td>
 		</tr>
+		    </c:if>
                    </tbody>
                </table>
             </div>
@@ -164,16 +180,25 @@
          });
         
          function buttonclick(){
-        	 if($("#buttonday").val()==""){
-        		 if($(".datepre_wdetail").val()>$('.datepost_wdetail').val() || $(".datepre_wdetail").val()=="" || $('.datepost_wdetail').val()==""){
-            		 alert("날짜 정보가 잘못 되었습니다.")
-            		 return false;
-            	 }else{
-            		return true
-            	 }
-        	 }else{
-        		return true
-        	 }
+        		if($(".bdbox_wdetail").val()!=null&&$("#buttonday").val()==""&&$('.datepre_wdetail').val()==""&&$('.datepost_wdetail').val()==""){
+        			return true;
+        	 	}else if($("#buttonday").val()!=""){
+        	 		return false;
+        	 	}
+        		
+    			if($(".bdbox_wdetail").val()!=null&&$(".datepre_wdetail").val()==""){
+   				 alert("날짜 정보가 잘못 되었습니다.")
+           		 return false;
+   				}
+        		
+        		if($("#buttonday").val()==""){
+	        		if($(".datepre_wdetail").val()>$('.datepost_wdetail').val() || $(".datepre_wdetail").val()=="" || $('.datepost_wdetail').val()==""){
+	        	 		 alert("날짜 정보가 잘못 되었습니다.")
+	            		 return false;
+	        	 	}
+        		}else{
+        			return true;
+        		}
          }
       </script>
       <!-- footer 영역 -->
