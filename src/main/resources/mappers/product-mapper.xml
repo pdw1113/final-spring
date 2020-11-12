@@ -175,6 +175,13 @@
 		ORDER BY REPLY_NO DESC
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<update id="modifyComment" parameterType="hashmap">
+		UPDATE REPLY
+		SET REPLY_CONTENT = #{review}
+		WHERE REPLY_NO = #{no}
+	</update>
+	
 	<!-- 댓글 등록 시 능력자 별점 업데이트 -->
 	<update id="updateMasterStar" parameterType="_int">
 		UPDATE neez_master 

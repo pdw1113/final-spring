@@ -111,5 +111,9 @@ public class ProductDao{
 	public int updateProductStar(int getpNo) {
 		return sqlSession.update("productMapper.updateProductStar", getpNo);
 	}
+
+	public int modifyComment(HashMap<String, String> map) {
+		return sqlSession.update("productMapper.modifyComment", map);
+	}
 	
 }

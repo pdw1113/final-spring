@@ -127,6 +127,13 @@ public interface ProductService {
 	public int wishDuplicate(HashMap<String, String> map2);
 
 	public WishList getWishListDetail(HashMap<String, String> map);
+
+	/**
+	 * 댓글 수정 메소드
+	 * @param map
+	 * @return
+	 */
+	public int modifyComment(HashMap<String, String> map);
 	
 
    
