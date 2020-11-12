@@ -81,3 +81,11 @@
 
           object-fit: cover; 
         }
+        
+        .fa-star{
+  color:rgb(250,190,0);
+}
+
+.fa-star-half-alt{
+  color:rgb(250,190,0);
+}
