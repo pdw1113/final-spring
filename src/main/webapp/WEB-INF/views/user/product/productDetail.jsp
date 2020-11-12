@@ -214,10 +214,10 @@
 									<span class="img"> <img src="resources/img/동민_PIC.jpg">
 									</span>
 									<div class="tutee">
-										<span class="name">천동민</span>
-										<div class="date">
-											<p>2020-11-05 22:35:49</p>
-										</div>
+									<!-- 댓글 리스트 -->
+									</div>
+									<div>
+										aa
 									</div>
 								</div>
 								<div class="cmt">
@@ -311,6 +311,49 @@
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
 	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
+	
+	<script>
+		// 댓글 수정 버튼 클릭 시
+		$(document).on("click","#modify",function(){
+			// 댓글의 부모
+			let $comment = $(this).parent().parent().siblings(".cmt");
+			// 댓글 내용
+			let comment = $comment.children().text();
+			// 댓글 숨기기
+			$comment.children().hide();
+			// 입력칸 추가하기
+			$comment.append("<input class='modifyInput' type='text' >");
+			$(".modifyInput").val(comment);
+			// id값 바꿔주고 확인 버튼으로 바꾸기
+			$(this).attr("id","modifyConfirm").html("확인");
+		});
+		
+		// 확인 버튼 클릭 시
+  		$(document).on("click","#modifyConfirm",function(){
+  			// 댓글 입력값 가져오기
+  			let review = $(".modifyInput").val();
+  			// 댓글 번호 가져오기
+			let no = $(this).parent().parent().siblings(".cmt").attr("id");
+			$.ajax({
+				url:"modifyComment.do",
+				data:{
+					no:no,
+					review:review
+				},
+				type:"post",
+				success:function(data){
+					if(data == "ok"){
+						$("#modifyConfirm").attr("id","modify").html("수정");
+						$(".hide").show();
+						$(".modifyInput").remove();
+						getReplyList();
+					}
+				},error:function(request,status,errorData){
+				}
+			});	
+		}); 
+	</script>
+	
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
@@ -374,7 +417,6 @@
 				dataType:"json",
 				success:function(data){
 					
-					console.log(data);
  					$cmtWrap = $(".cmt_wrap");
 					$cmtWrap.html("");
  					
@@ -398,6 +440,8 @@
 					var $pDate; // 5단계
 					var $hr; // 구분선
 					
+					var $btn;
+					
 					if(data.length > 0){ // 댓글이 있을 경우
 						for(var i in data){
 							
@@ -405,7 +449,7 @@
 							
 							$divInfo = $("<div class='tutee_info'>"); // 2단계
 							
-							$divCmt = $("<div class='cmt'>"); // 2-1단계
+							$divCmt = $("<div class='cmt'>").attr("id",data[i].rNo); // 2-1단계
 							
 							$span = $("<span class='img'>"); // 3단계
 							$divTutee = $("<div class='tutee'>"); // 3단계
@@ -420,6 +464,9 @@
 							$pDate = $("<p>").text(data[i].rCreateDate); // 5단계
 							
 							$hr = $("<hr>"); // 구분선
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$btn = $("<button class='modify' id='modify'>수정</button>");
+							}
 							
 							$divDate.append($pDate); // 5단계 추가
 
@@ -427,6 +474,9 @@
 							
 							$divTutee.append($spanName); // 4-2단계 추가
 							$divTutee.append($divDate);	// 4-2단계 추가
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$divTutee.append($btn);
+							}
 							
 							$divInfo.append($span); // 3단계 추가
 							$divInfo.append($divTutee); // 3단계 추가
@@ -535,7 +585,7 @@
 					})
 				  }
 			}
-			}
+		}
 	
 		// 별 넣기
 		let star = "${master.mStar}";

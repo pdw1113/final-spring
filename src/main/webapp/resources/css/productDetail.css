@@ -269,6 +269,8 @@
     .p2p_class_cmt .cmt_wrap li {
       display: block;
       padding-top: 13px;
+      height:100px;
+      overflow: hidden;
     }
 
     .p2p_class_cmt .cmt_wrap li .tutee_info {
@@ -690,3 +692,20 @@
       color:rgb(250,190,0)
     }
     
+    .modify{
+    position:absolute;
+    top:2px;
+    right:0;
+    outline: none;
+    background-color:#fff;
+    border-radius:10px;
+    border: 2px solid rgb(250,190,0);
+    }
+    
+    .modify:hover{
+    cursor:pointer;
+    }
+    
+    .modifyInput{
+    width:500px;
+    }
