@@ -13,7 +13,7 @@
    <body>
       <%@ include file="../common/header.jsp" %>
       <!-- 가장 바깥에 있는 로그인 창 틀 -->
-      <form action="changePw.do" method="post" onsubmit="return chkPW();">
+      <form action="changePw.do" method="post">
       <div class="form_changePwd">
          <!-- 로그인 이미지 -->
          <img  class="logo_changePwd" src="./resources/img/Login_logo.png">
@@ -28,7 +28,7 @@
          <div class="alert-danger_changePwd" id="alert-danger_changePwd">※ 비밀번호가 맞지 않습니다.</div>
          <!-- Button to Open the Modal -->
          <div class="button_changePwd">
-            <button class="login_button_changePwd">
+            <button class="login_button_changePwd" onclick="return chkPW();">
                	비밀번호 변경
             </button>
          </div>
@@ -60,7 +60,6 @@
           //  keyup() - 키보드에서 손을 떼어냈을때 실행됨
           $(".input_changePwd").keyup(function (event) {
               
-              // var user_pw == "DB에서 가져온 기존 비밀번호"
               pwd1 = $("#pwd1_changePwd").val();
               pwd2 = $("#pwd2_changePwd").val();
               if (pwd1 != '' && pwd2 != '') {
@@ -83,40 +82,41 @@
               $("#alert-danger_changePwd").hide();
           }
 	      });
+	      
+	   // 유효성 검사
+	      function chkPW(){
+		     // 비밀번호
+	      	 var pw1 = $("#pwd1_changePwd").val();
+			 // 비밀번호 재입력
+	      	 var pw2 = $("#pwd2_changePwd").val();
+	      	 
+	      	 var num = pw1.search(/[0-9]/g);
+	      	 var eng = pw1.search(/[a-z]/ig);
+	      	 var spe = pw1.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+	      	 
+	      	 var num2 = pw2.search(/[0-9]/g);
+	      	 var eng2 = pw2.search(/[a-z]/ig);
+	      	 var spe2 = pw2.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	      	 if(pw1.length < 8 || pw1.length > 20 || pw2.length < 8 || pw2.length > 20){
+	      	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
+	      	  return false;
+	      	 }else if(pw1.search(/\s/) != -1 || pw2.search(/\s/) != -1){
+	      	  alert("비밀번호는 공백 없이 입력해주세요.");
+	      	  return false;
+	      	 }else if(num < 0 || eng < 0 || spe < 0 || num2 < 0 || eng2 < 0 || spe2 < 0){
+	      	  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+	      	  return false;
+	      	 }else if(pw1 != pw2){
+	          alert("비밀번호가 일치하지 않습니다.");
+	          return false;
+	      	 }else {
+	   	  	  return true;
+	      	 }
+	      }
       </script>
+      
       <script>
-   	  // 유효성 검사
-      function chkPW(){
-	     // 비밀번호
-      	 var pw1 = $("#pwd1_changePwd").val();
-		 // 비밀번호 재입력
-      	 var pw2 = $("#pwd2_changePwd").val();
-      	 
-      	 var num = pw1.search(/[0-9]/g);
-      	 var eng = pw1.search(/[a-z]/ig);
-      	 var spe = pw1.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-      	 
-      	 var num2 = pw2.search(/[0-9]/g);
-      	 var eng2 = pw2.search(/[a-z]/ig);
-      	 var spe2 = pw2.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-      	 if(pw1.length < 8 || pw1.length > 20 || pw2.length < 8 || pw2.length > 20){
-      	  alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
-      	  return false;
-      	 }else if(pw1.search(/\s/) != -1 || pw2.search(/\s/) != -1){
-      	  alert("비밀번호는 공백 없이 입력해주세요.");
-      	  return false;
-      	 }else if(num < 0 || eng < 0 || spe < 0 || num2 < 0 || eng2 < 0 || spe2 < 0){
-      	  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
-      	  return false;
-      	 }else if(pw1 != pw2){
-          alert("비밀번호가 일치하지 않습니다.");
-          return false;
-      	 }else {
-   	  	  return true;
-      	 }
-      }
-
 	  var sw = ${sw};
    	  if(sw != null){
    		swCheck();
