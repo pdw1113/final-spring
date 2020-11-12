@@ -63,7 +63,7 @@
 	                                	<c:otherwise>
 	                                		<td><span class="day_money" >${w.wmoney}</span></td>
 	                                	</c:otherwise>
-	                                </c:choose>
+	                                </c:choose> 
 	                                <td>${w.wmethod}</td>
 	                                </tr>
 	                            </c:forEach>
