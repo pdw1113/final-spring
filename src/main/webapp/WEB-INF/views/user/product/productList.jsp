@@ -83,7 +83,6 @@
 				</c:if>	
 			</select>
          </div>
-         <!--부트스트랩 dropdown button-->
          <div>
 			
          </div>

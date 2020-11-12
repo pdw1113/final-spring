@@ -185,3 +185,8 @@ body,
             color: rgb(250,190,0);
          }
          /* ************** ************* ************** */
+         
+         
+/* 스크롤 바 없애기 */
+body{-ms-overflow-style:none; }
+body::-webkit-scrollbar { display:none; }
