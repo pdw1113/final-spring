@@ -35,13 +35,14 @@
 		<result property="pic" column="PRODUCT_PIC" />
 		<result property="renamePic" column="PRODUCT_RENAMEPIC" />
 		<result property="category" column="PRODUCT_CATEGORY" />
-		<result property="price" column="PRODCUT_PRICE" />
+		<result property="price" column="PRODUCT_PRICE" />
 		<result property="career" column="PRODUCT_CAREER" />
 		<result property="portfolio" column="PRODUCT_PORTFOLIO" />
 		<result property="introduce" column="PRODUCT_INTRODUCE" />
 		<result property="createDate" column="PRODUCT_CREATE_DATE" />
 		<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
-		<result property="count" column="PRODCUT_COUNT" />
+		<result property="count" column="PRODUCT_COUNT" />
+		<result property="star" column="PRODUCT_STAR" />
 	</resultMap>
 	
 	<resultMap type="Reply" id="replyResultSet">
@@ -62,45 +63,54 @@
 		<result property="no" column="PRODUCT_NO" />
 	</resultMap>
 
-	<select id="category"
-		resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		select
-		LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-		start with CATECODEREF is null
-		connect by prior CATECODE = CATECODEREF
-	</select>
-
-	<select id="categoryList"
-		resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		select
-		LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-		start with CATECODE = #{navNo}
-		connect by prior CATECODE = CATECODEREF
-	</select>
-
-	<select id="categoryList2"
-		resultType="com.fp.neezit.product.model.vo.ProductCategory">
-		select
-		LEVEL, CATENAME, CATECODE, CATECODEREF
-		from GOODS_CATEGORY
-		WHERE LEVEL = 1
-		start with CATECODEREF = #{navNo}
-		connect by prior CATECODE = CATECODEREF
-	</select>
+	<!-- 상품 리스트 관련 -->
+		<select id="category"
+			resultType="com.fp.neezit.product.model.vo.ProductCategory">
+			select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+			from GOODS_CATEGORY
+			start with CATECODEREF is null
+			connect by prior CATECODE = CATECODEREF
+		</select>
 	
-	<select id="getProductList" parameterType="_int" resultMap="productResultSet">
-		SELECT *
-		FROM PRODUCT
-		JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
-		WHERE CATECODE = #{navNo}
-	</select>
+		<select id="categoryList"
+			resultType="com.fp.neezit.product.model.vo.ProductCategory">
+			select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+			from GOODS_CATEGORY
+			start with CATECODE = #{navNo}
+			connect by prior CATECODE = CATECODEREF
+		</select>
+	
+		<select id="categoryList2"
+			resultType="com.fp.neezit.product.model.vo.ProductCategory">
+			select
+			LEVEL, CATENAME, CATECODE, CATECODEREF
+			from GOODS_CATEGORY
+			WHERE LEVEL = 1
+			start with CATECODEREF = #{navNo}
+			connect by prior CATECODE = CATECODEREF
+		</select>
+		
+		<!-- 상품 목록 불러오기 -->
+		<select id="getProductList" parameterType="hashmap" resultMap="productResultSet">
+			SELECT *
+			FROM PRODUCT
+			JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+			WHERE CATECODE = #{no}
+			<if test="what eq '인기순'.toString()">
+				ORDER BY PRODUCT_COUNT DESC
+			</if>
+			<if test="what eq '가격순'.toString()">
+				ORDER BY PRODUCT_PRICE
+			</if>
+		</select>
+	<!-- END 상품 리스트 관련 END -->
 
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="Product">
 		INSERT INTO PRODUCT VALUES
-		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},#{cateone},#{category},#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT)
+		(#{nickName},SEQ_PRODUCT_NO.NEXTVAL,#{title},#{pic},#{renamePic},#{cateone},#{category},#{price},#{career},#{portfolio},#{introduce},DEFAULT,DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 
 	<!-- 능력자 정보 가져오기 -->
@@ -164,7 +174,7 @@
 		ORDER BY REPLY_NO DESC
 	</select>
 	
-	<!-- 능력자 별점 업데이트 -->
+	<!-- 댓글 등록 시 능력자 별점 업데이트 -->
 	<update id="updateMasterStar" parameterType="_int">
 		UPDATE neez_master 
 		SET master_Star = 
@@ -176,6 +186,29 @@
 		)
 		WHERE MASTER_NICKNAME = (SELECT MASTER_NICKNAME FROM PRODUCT WHERE PRODUCT_NO = #{pNo})
 	</update>
+	
+	<!-- 댓글 등록 시 구매자 수 업데이트 -->
+	<update id="updateBuyCount" parameterType="_int">
+		UPDATE PRODUCT 
+		SET PRODUCT_COUNT = 
+		(
+		SELECT COUNT(*) FROM REPLY
+        WHERE PRODUCT_NO = #{getpNo}
+		)
+		WHERE PRODUCT_NO = #{getpNo}
+	</update>
+	
+	<!-- 댓글 등록 시 해당 상품 별점 업데이트 -->
+	<update id="updateProductStar" parameterType="_int">
+		UPDATE PRODUCT 
+		SET PRODUCT_STAR = 
+		(
+		SELECT ROUND(AVG(REPLY_STAR),1) FROM REPLY
+	    WHERE PRODUCT_NO = #{getpNo}
+		)
+		WHERE PRODUCT_NO = #{getpNo}
+	</update>
+
 
 	<!-- 찜 등록 -->
 	<insert id="insertWish" parameterType="hashmap">
@@ -188,6 +221,34 @@
 		SELECT COUNT(*) FROM REPLY
 		JOIN PRODUCT USING(PRODUCT_NO)
 		WHERE MASTER_NICKNAME = #{nickName}
+	</select>
+	
+	<!-- 찜 리스트 -->
+	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
+		SELECT P.PRODUCT_TITLE, P.PRODUCT_RENAMEPIC, P.PRODUCT_PRICE , P.MASTER_NICKNAME, P.PRODUCT_NO
+		FROM PRODUCT P
+		JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
+		WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 찜 해제 -->
+	<delete id="WishDelete" parameterType="hashmap">
+		DELETE FROM WISH_LIST WHERE PRODUCT_NO = #{no} AND USER_EMAIL = #{email}
+	</delete>
+	
+	<!-- 찜목록 중복값 조회 -->
+	<select id="WishDuplicate" parameterType="hashmap" resultType="_int">
+        SELECT COUNT(*)
+        FROM WISH_LIST W
+		JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<select id="WishDetail" parameterType="hashmap" resultMap="wishResultSet">
+        SELECT *
+		FROM WISH_LIST W
+        JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
 	</select>
 
 </mapper>

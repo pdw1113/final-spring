@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
-import com.fp.neezit.user.model.vo.UserMasterQualifcation;
-import com.fp.neezit.user.model.vo.UserMasterSchool;
-import com.fp.neezit.user.model.vo.UserMaster;
-import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.UserWallet;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWallet;
 
 @Repository("uDao")
 public class UserDao {

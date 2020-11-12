@@ -195,7 +195,7 @@
 				<div class="p_col_right">
 					<div class="review_sum">
 						<ul class="review_list">
-							<li>평균 별점<span class="avg">5.0</span></li>
+							<li>현재 상품 평균 <i class="fas fa-star"></i>&nbsp;<span class="avg">${ product.star }</span></li>
 						</ul>
 					</div>
 					<div class="inputReview">
@@ -248,7 +248,7 @@
 				</ul>
 				<ul class="p_flex job_where">
 					<li>자택(온라인)</li>
-					<li>출장</li>
+					<li>출근</li>
 					<li class="dayOn">asd</li>
 				</ul>
 				<hr>
@@ -272,7 +272,12 @@
 				</ul>
 				<ul class="btn_area btn_m">
 					<li class="wish"><a href="#" onclick="heart();">
+						<c:if test="${wishList.no != product.no }">
 							<i class="fa-heart far"></i>
+						</c:if>	
+						<c:if test="${wishList.no == product.no }">
+							<i class="fa-heart fas"></i>
+						</c:if>	
 					</a></li>
 					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
 							바로 구매하기 </a></li>
@@ -305,7 +310,7 @@
 	</div>
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
-
+	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
@@ -478,17 +483,18 @@
 
 	<script>
 		// 찜하기
+		let wNum = $('.wishList').val();      // ${wishList.no} 벨류값
+		let pNum = $('.wishProduct').val();   // ${product.no} 벨류값
+		if(wNum != pNum){      // insert값이 없으면 heart()실행 (찜등록하기위함)
 		function heart(){
-			let $heart = $(".fa-heart");
-			if($heart.hasClass("far")){
-				$heart.removeClass("far");
-				$heart.addClass("fas");		
  				let email = $(".wishEmail").val();
 				let no = $(".wishProduct").val();
+				
 				   var data = {
 						   email : email,
 						     no : no
 						     };
+				   
 				$.ajax({
 				    url : "wishInsert.do",
 				    type : "post",
@@ -496,20 +502,40 @@
 				    success : function(result){
 				    	if(result == "ok"){
 				    		alert("찜 성공");
+				    		location.reload();
 				    	}
 				    },
 				    error : function(result){
 				    	if(result == "fail"){
-				    		alert("찜 실패");
+				    		alert("이미 찜등록한 상품입니다.");
 				    	}
 				    }
 				   });
-			}else{
-				$heart.removeClass("fas");
-				$heart.addClass("far");	
-				alert("찜해제 되었습니다.");
-			}
 		}
+		}
+		
+		if(wNum == pNum){  		// insert값이 있으면 heart()실행 (찜해제하기위함)
+			function heart(){
+				  let result = confirm('찜해제 하시겠습니까?');       // 확인창
+				  let pNo = $('.wishProduct').val(); 			// pNo 벨류값
+				  
+				  if(result){
+					$.ajax({
+						url:"wishDelete.do",
+						data:{no: pNo},
+						type:"post",
+						success:function(data){
+							if(data == "ok"){
+								alert('찜해제 완료');
+								location.reload();				// 삭제된걸 보여주기위해 새로고침을 해준다.
+							}
+						},error:function(request,status,errorData){
+							console.log(request.status + ":" + errorData);
+						}
+					})
+				  }
+			}
+			}
 	
 		// 별 넣기
 		let star = "${master.mStar}";
@@ -522,11 +548,11 @@
 		
 		// 자택 / 출징 CSS 변화
 		let goho = "${master.mWorkStyle}";
-		let gohoDay = goho.split(",");
+		let gohoDay = goho.split(","); 
 		let goholist = $(".job_where li");
 		for(var i = 0; i < 2; i++){
 			for(var j = 0; j < 2; j++){
- 				if(goholist[j].innerText.match(goho[i]) != null){
+ 				if(goholist[j].innerText.match(gohoDay[i]) != null){
 					goholist[j].classList.add('dayOn');
 				}
 			}

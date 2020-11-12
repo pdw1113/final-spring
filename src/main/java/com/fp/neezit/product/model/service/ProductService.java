@@ -48,8 +48,6 @@ public interface ProductService {
 	public UserMaster getProductDetail(String nickName);
 	
 	public UserMasterSns getProductSnsDetail(String email);
-
-	public int wishInsert(HashMap<String, String> map);
 	
 	/**
 	 * 댓글 등록 메소드
@@ -81,9 +79,55 @@ public interface ProductService {
 
 	/**
 	 * Nav.jsp 상품 목록 대분류로 가져오기
-	 * @param navNo
+	 * @param map
 	 * @return
 	 */
-	public List<Product> productList(int navNo);
+	public List<Product> productList(HashMap<String, String> map);
 
+	/**
+	 * 상품 별 구매자 수 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateBuyCount(int getpNo);
+
+	/**
+	 * 상품 별 별점 업데이트
+	 * @param getpNo
+	 * @return
+	 */
+	public int updateProductStar(int getpNo);
+	
+	/*
+	 * 찜등록
+	 * @param map
+	 * @return
+	 * */
+	public int wishInsert(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 해제
+	 * @param map
+	 * @return
+	 */
+	public int wishDelete(HashMap<String, String> map);
+	
+	/**
+	 * 찜목록 리스트
+	 * @param u
+	 * @return
+	 */
+	public List<Product> wishList(User u);
+
+	/**
+	 * 찜목록 중복값확인
+	 * @param map2
+	 * @return
+	 */
+	public int wishDuplicate(HashMap<String, String> map2);
+
+	public WishList getWishListDetail(HashMap<String, String> map);
+	
+
+   
 }

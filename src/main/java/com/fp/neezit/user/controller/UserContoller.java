@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fp.neezit.product.model.service.ProductService;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
@@ -103,15 +104,6 @@ public class UserContoller {
 		return "user/myPage/wallet";
 	}
 
-	@RequestMapping("wishList.do")
-	public String wishList() {
-		return "user/myPage/wishList";
-	}
-
-	@RequestMapping("buyList.do")
-	public String buyList() {
-		return "user/myPage/buyList";
-	}
 
 	@RequestMapping("charge.do")
 	public String charge(HttpSession session,Model model) {
@@ -405,12 +397,10 @@ public class UserContoller {
 		
 		if (result == 1) {
 			model.addAttribute("sw",1);
-			return "user/changePwd";
 		} else {
 			model.addAttribute("sw",2);
-			return "index";
 		}
-		
+		return "user/changePwd";
 	}
 	
 	/**
@@ -827,8 +817,6 @@ public class UserContoller {
 		}
 	}
 	
-	
-	
 	/**
 	 * ??.출금
 	 * @param model
@@ -858,6 +846,10 @@ public class UserContoller {
 		System.out.println("결제오류");
 		return "redirect:index.do";
 	}
- }
-	
+  }
+
+	@RequestMapping("buyList.do")
+	public String buyList() {
+		return "user/myPage/buyList";
+	}
 }

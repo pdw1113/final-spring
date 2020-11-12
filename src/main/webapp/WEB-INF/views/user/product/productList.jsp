@@ -17,6 +17,8 @@
       <!--제이쿼리CDN-->
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/productList.css">
+	  <!-- 폰트 어썸 -->
+	  <script src="https://kit.fontawesome.com/fef720d792.js" crossorigin="anonymous"></script>
 
    </head>
    <body>
@@ -64,9 +66,21 @@
             <label class="font-noto Lsit-checkbox-size">
             <input type="checkbox" value="" > 접속중  </label>
             <select class="selectbox">
-            	<option>최신순</option>
-				<option>가격순</option>
-				<option>인기순</option>
+            	<c:if test="${ what == null || what == '최신순'}">
+	            	<option>최신순</option>
+					<option>가격순</option>
+					<option>인기순</option>
+				</c:if>
+            	<c:if test="${ what == '가격순'}">
+					<option>가격순</option>
+	            	<option>최신순</option>
+					<option>인기순</option>
+				</c:if>
+            	<c:if test="${ what == '인기순'}">
+					<option>인기순</option>
+	            	<option>최신순</option>
+					<option>가격순</option>
+				</c:if>	
 			</select>
          </div>
          <!--부트스트랩 dropdown button-->
@@ -78,7 +92,11 @@
 	<div class="Lsit-Saction">
 		<c:forEach var="product" items="${ productList }" varStatus="status">
 			<div class="productOne">
-				<a href="productDetail.do" class="thumbnail">
+				<input type="hidden" class="pCategory" value="${ product.category }">
+				<c:url var="ProductDetail" value="productDetail.do">
+					<c:param name="no" value="${ product.no }"/>
+				</c:url>
+				<a href="${ProductDetail}" class="thumbnail">
 					<div class="list_img_div">
 						<img src="resources/pUploadFiles/${ product.renamePic }" class="list_contents_img_index">
 					</div>
@@ -89,15 +107,15 @@
 						<img src="resources/img/lv1.png" class="list_rank_index"> 
 						<span class="font_noto">${ product.nickName }</span> 
 						<span class="list_star_container_index"> 
-							<img src="resources/img/star.png"> 
-							<img src="resources/img/star.png"> 
-							<img src="resources/img/star.png"> 
-							<img src="resources/img/star.png"> 
-							<img src="resources/img/star.png">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
 						</span> 
-						<span class="font_noto">(5.0)</span> 
+						<span class="font_noto">(${ product.star })</span> 
 						<span> 
-							<span class="font_noto">213명선택</span> 
+							<span class="font_noto">${ product.count }명선택</span> 
 							<img src="resources/img/buy.png" class="list_choice_img_index">
 						</span>
 					</div>
@@ -118,106 +136,152 @@
 		</div>
       
       <%@ include file="../../common/footer.jsp" %>
-      
-      <script>
-							$(function() {
-								/*마우스클릭시 버튼 색상변경*/
-								$('.List-Button')
-										.click(
-												function() {
-													$(this).toggleClass(
-															'yellowButton');
 
-													let ClickWord = $(this)
-															.html();
+	<script>
+	
+		console.log("${productList}");
+		// 최신순, 인기순, 가격순
+		let tempvar = ${categoryList}[0].cateCode;
+		
+		$(".selectbox").change(function(){
+			let temp = $(".selectbox option:selected").val();
+			window.location.href = "productList.do?navNo=" + tempvar + "&what=" + temp;
+		});
+		
+		/***** 카테고리 *****/
+		let filter = function(){
+			// 선택한 카테고리가 있을때만 실행
+			if($(".last-nav-td").children().length != 0){
+				
+				let choiceCate = []; // 선택한 카테고리 배열
+				let cate; 			 // 상품 카테고리 배열
+		
+				let result = 0; 	 // 결과값
+									
+				// 클릭한 카테고리를 배열로 만들기
+				$(".last-nav-td").children().each(function(index,item){
+					
+					// 클릭한 3분류 카테고리와
+					let singleCategory = item.innerHTML;
+					choiceCate.push(singleCategory);
+				});
+				
+				// 상품 하나의 카테고리를 배열로 만들기
+				$(".pCategory").each(function(index,item){
+					
+					// product가 갖고 있는 카테고리
+					cate = item.value.split(",");
+					
+					// 상품 카테고리 배열 <=> 선택한 카테고리 배열 비교
+					for(var i = 0; i < choiceCate.length; i++){
+						console.log("선택한 카테고리 : " + choiceCate[i]);
+						for(var j = 0; j < cate.length; j++){
+							console.log(i + "번 상품의 " + j + "번째 카테고리" + cate[j]);
+							if(cate[j] == choiceCate[i]){
+								result++;
+							}
+						}
+					}
+					
+					console.log(result);
+					
+					// 선택한 카테고리의 갯수와 result를 비교, 같으면 전체 카테고리가 전부 포함되어 있는 것이므로 off 클래스 제거
+					if(result == $(".last-nav-td").children().length){
+						$(this).parent().removeClass('off');
+					}
+					// 같지 않다면 카테고리가 1개라도 부족하므로 off 클래스 추가
+					else{
+						$(this).parent().addClass('off');
+					}
+					
+					// 결과값 초기화
+					result = 0;
+				});
+			}				
+			// 선택한 필터가 아무것도 없을 때 off를 지워서 전체가 보일 수 있도록 한다.
+			else{
+				$(".pCategory").parent().removeClass('off');
+			}
+		}
+		/***** 카테고리 *****/
+		
+	
+	
+		$(function() {
+			/*마우스클릭시 버튼 색상변경*/
+			$('.List-Button').click(function() {
+				$(this).toggleClass('yellowButton');
 
-													$('.last-nav-td button')
-															.filter(
-																	function() {
-																		if ($(
-																				this)
-																				.html() === ClickWord) {
-																			$(
-																					this)
-																					.remove();
-																		}
-																	});
+				let ClickWord = $(this).html();
+				
+				/* 제거 메소드 */
+				$('.last-nav-td button').filter(function() {
+					if ($(this).html() === ClickWord) {
+						$(this).remove();
+					}
+				});
+				
+				/*카테고리 클릭시 필터로 넘어가는 기능 (미완성)*/
+				var btn = this.outerHTML;
+				
+				/* 추가 메소드 */
+				if (this.className == "font_noto List-Button yellowButton") {
+					$('.last-nav-td').append(btn); 
+				}
+				
+				filter();
+			});
 
-													/*카테고리 클릭시 필터로 넘어가는 기능 (미완성)*/
-													var btn = this.outerHTML;
+			/* ★★★ 상뉴가 만든 코드 ★★★★ */
 
-													if (this.className == "font_noto List-Button yellowButton") {
-														$('.last-nav-td')
-																.append(btn); /*버튼클릭시 필터란에 선택한 버튼 추가*/
-													}
-													;
-												});
+			/* 클릭 시 동적으로 추가 된 요소 제거*/
+			/* 
+			   왜 $('.last-nav-td button').click(function(){})이 작동되지 않을까??
+			   
+			   이유 : https://jeongmatt.blogspot.com/2020/10/append-appendto-script-javascriptjquery.html
+			
+			 */
+			$(document).on("click", ".last-nav-td button", function() {
 
-								/* ★★★ 상뉴가 만든 코드 ★★★★ */
+				$(this).remove();
 
-								/* 클릭 시 동적으로 추가 된 요소 제거*/
-								/* 
-								   왜 $('.last-nav-td button').click(function(){})이 작동되지 않을까??
-								   
-								   이유 : https://jeongmatt.blogspot.com/2020/10/append-appendto-script-javascriptjquery.html
-								
-								 */
-								$(document)
-										.on(
-												"click",
-												".last-nav-td button",
-												function() {
+				let ClickWord = $(this).html();
 
-													$(this).remove();
+				$('.List-Button').filter(function() {
+					if ($(this).html() === ClickWord) {
+						$(this).toggleClass('yellowButton');
+					}
+				});
+				
+				filter();
 
-													let ClickWord = $(this)
-															.html();
+			});
 
-													$('.List-Button')
-															.filter(
-																	function() {
-																		if ($(
-																				this)
-																				.html() === ClickWord) {
-																			$(
-																					this)
-																					.toggleClass(
-																							'yellowButton');
-																		}
-																	});
+			/* ★★★ 상뉴가 만든 코드 ★★★★ */
 
-												});
-
-								/* ★★★ 상뉴가 만든 코드 ★★★★ */
-
-								/*드롭다운시 텍스트 변경*/
-								$('.dropdown-menu li a')
-										.click(
-												function() {
-													var selText = $(this)
-															.text();
-													$(this)
-															.parents(
-																	'.btn-group')
-															.find(
-																	'.dropdown-toggle')
-															.html(
-																	selText
-																			+ ' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
-												});
-
-								/*초기화 클릭시 버튼색 없어짐*/
-								$('.List-NavButton').on(
-										'click',
-										function() {
-											$('.last-nav-td').children()
-													.remove(); /*td에있는 버튼들 제거*/
-											$('.List-Button').attr('class',
-													'font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
-										})
+			/*드롭다운시 텍스트 변경*/
+			$('.dropdown-menu li a')
+					.click(
+							function() {
+								var selText = $(this).text();
+								$(this)
+										.parents('.btn-group')
+										.find('.dropdown-toggle')
+										.html(
+												selText
+														+ ' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
 							});
-						</script>
-      <script>
+
+			/*초기화 클릭시 버튼색 없어짐*/
+			$('.List-NavButton').on('click', function() {
+				$('.last-nav-td').children().remove(); /*td에있는 버튼들 제거*/
+				$('.List-Button').attr('class', 'font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
+				
+				filter();
+			})
+		});
+	</script>
+	<script>
          // 컨트롤러에서 데이터 받기
          var jsonData = JSON.parse('${categoryList}');
          
@@ -310,5 +374,5 @@
            });
            
       </script>
-   </body>
+</body>
 </html>

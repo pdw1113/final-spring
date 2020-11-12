@@ -83,6 +83,23 @@
 		<result property="wmethod" column="USER_PAY_METHOD"/>
 	</resultMap>
 	
+   	<resultMap type="Product" id="productResultSet">
+      	<id property="no" column="PRODUCT_NO" />
+      	<result property="nickName" column="MASTER_NICKNAME" />
+      	<result property="title" column="PRODUCT_TITLE" />
+      	<result property="pic" column="PRODUCT_PIC" />
+      	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
+      	<result property="category" column="PRODUCT_CATEGORY" />
+      	<result property="price" column="PRODUCT_PRICE" />
+      	<result property="career" column="PRODUCT_CAREER" />
+      	<result property="portfolio" column="PRODUCT_PORTFOLIO" />
+      	<result property="introduce" column="PRODUCT_INTRODUCE" />
+      	<result property="createDate" column="PRODUCT_CREATE_DATE" />
+      	<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
+      	<result property="count" column="PRODUCT_COUNT" />
+      	<result property="star" column="PRODUCT_STAR" />
+   	</resultMap>
+	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">

@@ -17,7 +17,8 @@ public class Product {
 	private String introduce;   // 자기소개
 	private Date createDate;    // 생성날짜
 	private Date modifyDate;    // 수정날짜
-	private int count ;         // 조회수
+	private int count;          // 구매자수
+	private double star;			// 상품 별점
 
 	public Product() {
 		super();
@@ -25,7 +26,8 @@ public class Product {
 	}
 
 	public Product(String nickName, int no, String title, String pic, String renamePic, String cateone, String category,
-			int price, String career, String portfolio, String introduce, Date createDate, Date modifyDate, int count) {
+			int price, String career, String portfolio, String introduce, Date createDate, Date modifyDate, int count,
+			double star) {
 		super();
 		this.nickName = nickName;
 		this.no = no;
@@ -41,6 +43,7 @@ public class Product {
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
 		this.count = count;
+		this.star = star;
 	}
 
 	public String getNickName() {
@@ -155,11 +158,19 @@ public class Product {
 		this.count = count;
 	}
 
+	public double getStar() {
+		return star;
+	}
+
+	public void setStar(double star) {
+		this.star = star;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [nickName=" + nickName + ", no=" + no + ", title=" + title + ", pic=" + pic + ", renamePic="
 				+ renamePic + ", cateone=" + cateone + ", category=" + category + ", price=" + price + ", career="
 				+ career + ", portfolio=" + portfolio + ", introduce=" + introduce + ", createDate=" + createDate
-				+ ", modifyDate=" + modifyDate + ", count=" + count + "]";
+				+ ", modifyDate=" + modifyDate + ", count=" + count + ", star=" + star + "]";
 	}
 }

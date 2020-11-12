@@ -77,7 +77,7 @@
                            <button type="button" class="insertButton" value="" onclick="insert1()">추가 입력
                            확인</button>
                            <button type="button" class="clearButton" onclick="clear1()">clear</button>
-                           <button type="button" class="finalButton">추가 최종 저장</button>
+                           <button type="button" class="finalButton" onclick="addWords()">추가 최종 저장</button>
                         </div>
                      </div>
                   </div>
@@ -116,7 +116,7 @@
                            <button type="button" class="deleteButton" value="" onclick="delete1()">삭제 입력
                            확인</button>
                            <button type="button" class="clearButton" onclick="clear2()">clear</button>
-                           <button type="button" class="finalButton1">삭제 최종 저장</button>
+                           <button type="button" class="finalButton1" onclick="deleteWords()">삭제 최종 저장</button>
                         </div>
                      </div>
                   </div>
@@ -130,59 +130,76 @@
                               <th class="thWidth pofi">
                                  No.
                               </th>
-                              <th class="pofi">
-                                 검색 결과
+                              <th class="thWidth pofi">
+                                 단어
+                              </th>
+                              <th class="thWidth pofi">
+                              	날짜
                               </th>
                            </tr>
+                           
+							<c:if test="${ empty forbiddenList }">
+	                   			<tr>
+	                              <td colspan="3">
+	                                  검색창에 단어를 입력해주세요.
+	                              </td>
+	                           </tr>
+							</c:if>  
+                           
+                   <c:forEach var="manager" items="${ forbiddenList }" varStatus="status">
+
                            <tr>
-                              <td>
-                                 1
+                              <td class="thWidth">
+                          	 	${status.count} 
                               </td>
-                              <td>
+                              <td class="thWidth">
+                              ${ manager.fword }
+                              </td>
+                              <td class="thWidth">
+                               ${ manager.fdate }
                               </td>
                            </tr>
-                           <tr>
-                              <td>
-                                 2
-                              </td>
-                              <td>
-                              </td>
-                           </tr>
+                         </c:forEach> 
+                           
+                           
                         </Table>
                      </div>
                      <div class="searchArea">
                         <div class="searchArea1">
                            <p class="bold sb">검색창</p>
                            <br>
-                           <input type="text" class="searchInput"><button type="button"
-                              class="searchButton">검색</button>
+                           <input type="text" class="searchInput" id="searchInput" ><button type="button"
+                              class="searchButton"  onclick="searchWords()">검색</button>
                            <!-- <div class="searchForm1"></div> -->
                         </div>
                         <div class="searchArea2">
                            <p class="bold sb">등록일 조회</p>
                            <div class="container col-xs-7 dateWidth">
-                              <input type="date" class="form-control input-md">
+                              <input type="date" class="form-control input-md" id="date1">
                               <span class="date-span">~</span>
-                              <input type="date" class="form-control input-md">
+                              <input type="date" class="form-control input-md" id="date2">
+                              
                            </div>
+                           <button type="button"
+                              class="searchButton"  onclick="searchDate();">검색</button>
                         </div>
                         <div class="searchArea3">
                            <p class="bold sb">초성 검색</p>
                            <br>
-                           <button type="button" class="chosung c1">ㄱ</button>
-                           <button type="button" class="chosung c2">ㄴ</button>
-                           <button type="button" class="chosung c3">ㄷ</button>
-                           <button type="button" class="chosung c4">ㄹ</button>
-                           <button type="button" class="chosung">ㅁ</button>
-                           <button type="button" class="chosung">ㅂ</button>
-                           <button type="button" class="chosung">ㅅ</button>
-                           <button type="button" class="chosung">ㅇ</button>
-                           <button type="button" class="chosung">ㅈ</button>
-                           <button type="button" class="chosung">ㅊ</button>
-                           <button type="button" class="chosung">ㅋ</button>
-                           <button type="button" class="chosung">ㅌ</button>
-                           <button type="button" class="chosung">ㅍ</button>
-                           <button type="button" class="chosung">ㅎ</button>
+                           <button type="button" class="chosung c1" value="1a" id="Ga" onclick="search1();">ㄱ</button>
+                           <button type="button" class="chosung c2" value="1b" id="Na" onclick="search2();">ㄴ</button>
+                           <button type="button" class="chosung c3" value="1c" id="Da" onclick="search3();">ㄷ</button>
+                           <button type="button" class="chosung c4" value="1d" id="La" onclick="search4();">ㄹ</button>
+                           <button type="button" class="chosung" value="1e" id="Ma" onclick="search5();">ㅁ</button>
+                           <button type="button" class="chosung" value="1f" id="Ba" onclick="search6();">ㅂ</button>
+                           <button type="button" class="chosung" value="1g" id="Sa" onclick="search7();">ㅅ</button>
+                           <button type="button" class="chosung" value="1h" id="Aa" onclick="search8();" >ㅇ</button>
+                           <button type="button" class="chosung" value="1i" id="Ja" onclick="search9();">ㅈ</button>
+                           <button type="button" class="chosung" value="1j" id="Cha" onclick="search10();">ㅊ</button>
+                           <button type="button" class="chosung" value="1k" id="Ka" onclick="search11();">ㅋ</button>
+                           <button type="button" class="chosung" value="1l" id="Ta" onclick="search12();">ㅌ</button>
+                           <button type="button" class="chosung" value="1m" id="Pa" onclick="search13();">ㅍ</button>
+                           <button type="button" class="chosung" value="1n" id="Ha" onclick="search14();">ㅎ</button>
                         </div>
                      </div>
                   </div>
@@ -211,7 +228,15 @@
                 input1[i] = document.getElementById("iText" + (i + 1)).value;
                 // console.log(input1[i]);
                 // console.log(input1);
-                var combineText1 = input1.join(",  ");
+
+                // 공백 시 , 안들어가게 하는 정규식
+                var t1 =$('#iText' + (i + 1) + '').val();
+
+		   		if(t1.replace(/\s|  /gi, "").length != 0){
+		   			var combineText1 = input1.join(",");
+		   		}
+		   		
+
             }
             document.getElementById("result1").value = combineText1;
         }
@@ -221,7 +246,15 @@
             for (var i = 0; i < count2; i++) {
                 input2[i] = document.getElementById("dText" + (i + 1)).value;
                 console.log(input2[i]);
-                var combineText2 = input2.join(",  ");
+                
+                
+                // 공백 시 , 안들어가게 하는 정규식
+                var t2 =$('#iText' + (i + 1) + '').val();
+
+		   		if(t2.replace(/\s|  /gi, "").length != 0){
+		   			var combineText2 = input2.join(",");
+		   		}
+    
             }
             document.getElementById("result2").value = combineText2;
         }
@@ -239,9 +272,11 @@
 
             for (var i = 0; i < count1; i++) {
                 insertRow_Key.innerHTML = "<input type='text' class='insertText' id=" + "iText" + (i + 1) + ">";
+               $('#iText' + (i + 1) + '').focus();
+       
             }
         }
-
+        
         function rowDelete1() {
             if (count1 < 2) {
                 alert("지울 수 없습니다.");
@@ -267,6 +302,7 @@
 
             for (var i = 0; i < count2; i++) {
                 dinsertRow_Key.innerHTML = "<input type='text' class='deleteText' id=" + "dText" + (i + 1) + ">";
+                $('#dText' + (i + 1) + '').focus();
             }
         }
 
@@ -282,12 +318,17 @@
 
         $(document).on("keydown", "input[class=insertText]", function (key) {
             if (key.keyCode == 13) {
+            	
+            	
                 rowAdd1().click();
+                
+                
+                
             }
 
-            $(".insertText").keyup(function () {
+            /* $(".insertText").keyup(function () {
                 $("#result1").text($(".insertText").val());
-            });
+            }); */
 
         });
 
@@ -296,9 +337,9 @@
                 rowAdd2().click();
             }
 
-            $(".deleteText").keyup(function () {
+       /*      $(".deleteText").keyup(function () {
                 $("#result2").text($(".deleteText").val());
-            });
+            }); */
         });
 
 
@@ -309,9 +350,193 @@
         function clear2() {
             document.getElementById("result2").value = '';
         }
+        
+        
+       function searchDate(){
 
-    </script> 
-                  
+           date1 = $("#date1").val();
+           let date2 = $("#date2").val();
+           alert(date1);
+           
+          /*  let date3 = date1 + date2; */
+      	 	
+      	 $.ajax({
+            url:"searchWords.do",
+            data:{date1:date1},
+            type:"post",
+            success:function(data){
+   	       	 // 성공했을 때
+   	         if(data === "ok"){
+
+
+   	         	 	alert("검색 성공하였습니다.");
+
+   	         }else{
+   	         	 	alert("검색 실패하였습니다.");
+   	         }
+            },
+            error:function(jqxhr, textStatus, errorThrown){
+   	         console.log("ajax 처리 실패");
+
+   	         }
+         });
+     }; 
+ 
+    function addWords(){
+   	 // WORD
+   	 	let words1 = [];
+        let words = $("#result1").val();
+   	 	words1 = words.split(",");
+   	 	let check1 = 0;
+
+		for(var i=0;i<words1.length;i++){ 
+        // WORD 전송 AJAX
+        $.ajax({
+	         url:"addWords.do",
+	         data:{words:words1[i]},
+	         type:"post",
+	         success:function(data){
+		       	 // 성공했을 때
+		         if(data === "ok"){
+		        	 check1++;
+		        	 if(words1.length == check1){
+		         	 	alert("금칙어가 추가 되었습니다.");
+		        	 };
+		         }else{
+		         	 	alert("금칙어 추가를 실패하였습니다.");
+		         }
+	         },
+	         error:function(jqxhr, textStatus, errorThrown){
+		         console.log("ajax 처리 실패");
+		         $("#result1").focus();
+		         }
+	         });
+    	 }; 
+    };
+    
+    function deleteWords(){
+     	 // WORD
+     	 	let words2 = [];
+          	let dwords = $("#result2").val();
+     	 	words2 = dwords.split(",");
+     	 	let check2 = 0;
+     	 	
+  		for(var i=0;i<words2.length;i++){ 
+          // WORD 전송 AJAX
+          $.ajax({
+  	         url:"deleteWords.do",
+  	         data:{dwords:words2[i]},
+  	         type:"post",
+  	         success:function(data){
+  		       	 // 성공했을 때
+  		         if(data === "ok"){
+  		        	
+  		        	 check2++;
+  		        	 if(words2.length == check2){
+  		         	 	alert("금칙어가 삭제 되었습니다.");
+  		        	 };
+  		         }else{  
+  		         	 	alert("없는 단어입니다.");
+  		         }
+  	         },
+  	         error:function(jqxhr, textStatus, errorThrown){
+  		         console.log("ajax 처리 실패");
+  		         $("#result2").focus();
+  		         }
+  	         });
+      	 }; 
+      };
+      
+	// 검색
+    function searchWords(){
+     	let search = $("#searchInput").val();
+		location.href="searchWords.do?search="+search+"";
+    }
+	// ㄱ
+    function search1(){
+    	let searchGa = $("#Ga").val();
+    	location.href="searchWords.do?search="+searchGa+"";
+    }
+ 	// ㄴ
+    function search2(){
+    	let searchNa = $("#Na").val();
+    	location.href="searchWords.do?search="+searchNa+"";
+    }
+ 	// ㄷ  
+    function search3(){
+    	let searchDa = $("#Da").val();
+    	location.href="searchWords.do?search="+searchDa+"";
+    }
+ 	// ㄹ
+    function search4(){
+    	let searchLa = $("#La").val();
+    	location.href="searchWords.do?search="+searchLa+"";
+    }
+ 	// ㅁ
+    function search5(){
+    	let searchMa = $("#Ma").val();
+    	location.href="searchWords.do?search="+searchMa+"";
+    }
+ 	// ㅂ
+    function search6(){
+    	let searchBa = $("#Ba").val();
+    	location.href="searchWords.do?search="+searchBa+"";
+    }
+ 	// ㅅ
+    function search7(){
+    	let searchSa = $("#Sa").val();
+    	location.href="searchWords.do?search="+searchSa+"";
+    }
+ 	// ㅇ
+    function search8(){
+    	let searchAa = $("#Aa").val();
+    	location.href="searchWords.do?search="+searchAa+"";
+    }
+ 	// ㅈ
+    function search9(){
+    	let searchJa = $("#Ja").val();
+    	location.href="searchWords.do?search="+searchJa+"";
+    }
+ 	// ㅊ
+    function search10(){
+    	let searchCha = $("#Cha").val();
+    	location.href="searchWords.do?search="+searchCha+"";
+    }
+ 	// ㅋ
+    function search11(){
+    	let searchKa = $("#Ka").val();
+    	location.href="searchWords.do?search="+searchKa+"";
+    }
+ 	// ㅌ
+    function search12(){
+    	let searchTa = $("#Ta").val();
+    	location.href="searchWords.do?search="+searchTa+"";
+    }
+ 	// ㅍ
+    function search13(){
+    	let searchPa = $("#Pa").val();
+    	location.href="searchWords.do?search="+searchPa+"";
+    }
+ 	// ㅎ
+    function search14(){
+    	let searchHa = $("#Ha").val();
+    	location.href="searchWords.do?search="+searchHa+"";
+    }
+
+	// 엔터 키 입력 가능 기능, 공백 입력 불가능 기능
+    $(document).on("keydown", "input[class=searchInput]", function (key) {
+        if (key.keyCode == 13) {
+	        var text =$("#searchInput").val();
+
+		   		if(text.replace(/\s|  /gi, "").length == 0){
+		   			alert("내용을 입력해주세요.");
+		   			$("#searchInput").focus();
+		   			return false;
+		   		}
+        		searchWords().click();
+        }
+    });
+
+    </script>            
 </body>
-
 </html>

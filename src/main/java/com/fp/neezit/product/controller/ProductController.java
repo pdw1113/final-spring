@@ -25,12 +25,14 @@ import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.Reply;
+import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.sun.org.apache.xml.internal.utils.IntVector;
 
 import net.sf.json.JSONArray;
 @SessionAttributes("product") 
@@ -41,8 +43,34 @@ public class ProductController {
    ProductService pService;
 
    @RequestMapping("productDetail.do")
-   public String productDetail() {
-      return "user/product/productDetail";
+   public String productDetail(int no, Model model,HttpSession session) {
+		  // 상품 정보 가져오기
+		  Product p = pService.getProductDetail(no);
+		  
+		  // 상품 정보 가져오기 2
+		  UserMaster m = pService.getProductDetail(p.getNickName());
+
+		  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+		  
+		  // 찜 정보 가져오기
+	      User u = (User)session.getAttribute("loginUser");    	  // 로그인 세션 정보
+	      String str = Integer.toString(p.getNo());				  // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
+	      HashMap<String, String> map = new HashMap<String, String>(); 	// HashMap 선언
+		  map.put("email", u.getEmail()); 	
+		  map.put("no", str);
+		  WishList wl = pService.getWishListDetail(map);
+		  int replyCount = pService.getReplyCount(p.getNickName());
+		  
+		  if(p != null && m != null) {
+			  model.addAttribute("product", p);
+			  model.addAttribute("master", m);
+			  model.addAttribute("sns", sns);
+			  model.addAttribute("replyCount", replyCount);
+			  model.addAttribute("wishList", wl);
+			  return "user/product/productDetail";
+		  }
+		  
+		  return "common/errorPage";
    }
    
    @RequestMapping("productListSearch.do")
@@ -56,14 +84,28 @@ public class ProductController {
  	* @return
  	*/
    @RequestMapping(value = "productList.do", method = RequestMethod.GET)
-   public String productList(Model model, int navNo){
+   public String productList(Model model, int navNo, String what){
       List<ProductCategory> category = pService.categoryList(navNo);
       List<ProductCategory> category2 = pService.categoryList2(navNo);
-      List<Product> productList = pService.productList(navNo);
-    		  
+
+      if(what == "최신순") {
+    	  what = null;
+      }
+      
+      System.out.println(what);
+      
+      String no = Integer.toString(navNo);
+      HashMap<String, String> map = new HashMap<String, String>();
+
+      map.put("no", no);
+      map.put("what", what);
+      
+      List<Product> productList = pService.productList(map);
+        
       model.addAttribute("categoryList", JSONArray.fromObject(category));
       model.addAttribute("categoryList2", JSONArray.fromObject(category2));
       model.addAttribute("productList", productList);
+      model.addAttribute("what", what);
    
       return "user/product/productList";
    }
@@ -135,7 +177,7 @@ public class ProductController {
 			   return "redirect:index.do";
 		  }
 	   }
-	
+   
    /**
 	 * 4. 파일이 저장될 경로를 설정 메소드 
 	 * @param file
@@ -208,16 +250,26 @@ public class ProductController {
  	* @return
  	*/
    @RequestMapping("myProductDetail.do")
-   public String myProductDetail(int no, Model model) {
+   public String myProductDetail(int no, Model model,HttpSession session) {
 	  
 	  // 상품 정보 가져오기
 	  Product p = pService.getProductDetail(no);
+	  System.out.println(p);
 	  
 	  // 상품 정보 가져오기 2
 	  UserMaster m = pService.getProductDetail(p.getNickName());
-
-	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+	  System.out.println(m);
 	  
+	  UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+	  System.out.println(sns);
+	  
+	  // 찜 정보 가져오기
+      User u = (User)session.getAttribute("loginUser");    	  // 로그인 세션 정보
+      String str = Integer.toString(p.getNo());
+      HashMap<String, String> map = new HashMap<String, String>(); 	// HashMap 선언
+	  map.put("email", u.getEmail()); 	
+	  map.put("no", str);
+	  WishList wl = pService.getWishListDetail(map);
 	  int replyCount = pService.getReplyCount(p.getNickName());
 	  
 	  if(p != null && m != null) {
@@ -225,35 +277,12 @@ public class ProductController {
 		  model.addAttribute("master", m);
 		  model.addAttribute("sns", sns);
 		  model.addAttribute("replyCount", replyCount);
+		  model.addAttribute("wishList", wl);
 		  return "user/product/productDetail";
 	  }
 	  
 	  return "common/errorPage";
    }
-   
-	/**
-	 * 08. 찜목록 AJAX
-	 * 
-	 * @param 
-	 * @return
-	 * @throws 
-	 */
-	@ResponseBody // AJAX
-	@RequestMapping("wishInsert.do")
-	public String wishInsert(String email, String no ,HttpSession session){
-		// 2개의 객체를 insert 하기위해 HashMap
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", email);
-		map.put("no", no);
-		int result = pService.wishInsert(map);
-		System.out.println(result);
-		
-		if (result > 0) { 
-			return "ok";
-		} else {
-			return "fail";
-		}
-	}
    
 	/**
 	 * 7. 댓글 등록 메소드
@@ -264,13 +293,17 @@ public class ProductController {
 	@RequestMapping(value="addReply.do")
 	public String addReply(Reply r) {
 		int result = pService.insertReply(r);
-		System.out.println(r.getpNo());
 		
 		if(result == 1) {
 			
+			// 능력자 별점 업데이트
 			int starResult = pService.updateMasterStar(r.getpNo());
+			// 상품 구매자 수 업데이트
+			int buyCount = pService.updateBuyCount(r.getpNo());
+			// 상품 별점 업데이트
+			int productStar = pService.updateProductStar(r.getpNo());
 			
-			if(starResult == 1) return "success";
+			if(starResult == 1 && buyCount == 1) return "success";
 			else return "fail";
 			
 		}else {
@@ -292,5 +325,92 @@ public class ProductController {
 		gson.toJson(rList,response.getWriter());
 	}
 	
-   
+	/**
+	 * 08. 찜등록 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishInsert.do")
+	public String wishInsert(String email, int no ,HttpSession session){
+		// 2개의 객체를 insert 하기위해 HashMap 사용
+		String str = Integer.toString(no);  	// int로 들어온 객체를 스트링으로 변환시켜준다. (email이 스트링이기때문에 같이 HashMap 사용하기위해)
+		HashMap<String, String> map = new HashMap<String, String>(); 	// HashMap 선언
+		map.put("email", email); 	
+		map.put("no", str);
+	
+		
+		// 중복값 확인
+		HashMap<String, String> map2 = new HashMap<String, String>(); 	// HashMap 선언
+		map2.put("email", email); 	
+		map2.put("no", str);
+
+		int duplicate = pService.wishDuplicate(map2); 	// duplicate 라는변수에  selectone으로 결과값(true이면 1 false면 0) 을받는다.
+
+		int result = 0;		// result 값 초기화
+		if(duplicate == 0) { 	// 중복값이 없으면 insert 실행시켜준다.
+			result = pService.wishInsert(map); 	//result 변수에 insert 메소드 결과값 받아준다.
+		}
+		
+		if (result > 0) { 	// insert가 성공시(result == 1) 성공적으로 return 시켜준다. 
+			return "ok";
+		} else {
+			return "fail";
+		}
+		
+
+	}
+	
+	/**
+	 * 09. 찜해제 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishDelete.do")
+	public String wishDelete(int no ,HttpSession session){
+
+		  Product p = pService.getProductDetail(no);
+	      User u = (User)session.getAttribute("loginUser");    	  // 로그인 세션 정보
+	      String str = Integer.toString(p.getNo());
+	      
+	      HashMap<String, String> map = new HashMap<String, String>(); 	// HashMap 선언
+		  map.put("email", u.getEmail()); 	
+		  map.put("no", str);
+		  
+		int result = pService.wishDelete(map);
+		 
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+
+	/**
+	 * 10.찜목록 리스트
+	 * 
+	 * @param u
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("wishList.do")
+	public String wishList(HttpSession session,Model model) {
+		// email값 session.getAttribute 가져오기
+		User u = (User) session.getAttribute("loginUser");
+		
+		// 상품정보 담을 리스트객체
+		List<Product>product = null;
+		
+		// DB에서 넘어온 값들을 담아준다.
+		product = pService.wishList(u);
+
+		// model객체에 키,벨류 값으로 넣어주고 wishList.jsp로 리턴시켜준다.
+		model.addAttribute("product",product);
+		return "user/myPage/wishList";
+	}
 }
