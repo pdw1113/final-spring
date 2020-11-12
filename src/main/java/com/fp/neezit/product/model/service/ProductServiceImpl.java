@@ -135,4 +135,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.wishDelete(map);
 	}
 
+	@Override
+	public int modifyComment(HashMap<String, String> map) {
+		return pDao.modifyComment(map);
+	}
+
 }
