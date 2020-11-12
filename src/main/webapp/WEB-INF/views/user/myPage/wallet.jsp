@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,36 +35,46 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="awTit_myPage_money">보유니즈머니 내역</div>
+                    <div class="awTit_myPage_money">니즈머니 결제 내역</div>
                     <a href="walletDetail.do" class="more_myPage_money">더보기</a>
                     <div class="cashTable_myPage_money">
                         <table class="table_myPage_money">
                             <thead class="thead_money">
                                 <tr>
-                                    <th><span>보유니즈머니 내역</span></th>
-                                    <th><span>충전/차감 머니</span></th>
-                                    <th><span>충전/차감 일자</span></th>
-                                    <th><span>상태</span></th>
+                                    <th><span>결제일시</span></th>
+                                    <th><span>결제내역</span></th>
+                                    <th><span>결제금액</span></th>
+                                    <th><span>결제방식</span></th>
                                 </tr>
                             </thead>
                             <!-- 보여지는 리스트 개수는 최신 5~10개로 제한 그 이상은 더보기 버튼으로 확인 -->
                             <tbody>
-                                <tr>
-                                <td>충전머니 예치</td>
-                                <td><span class="plus_money">+ 100,000</span></td>
-                                <td><span class="day_money">2020. 10. 10</span></td>
-                                <td>충전완료</td>
-                                </tr>
-                                <tr>
-                                <td>충전머니 예치</td>
-                                <td><span class="plus_money">+ 1,000,000</span></td>
-                                <td><span class="day_money">2019. 10. 10</span></td>
-                                <td>충전완료</td>
-                                </tr>
+                            	<!-- uw의 크기 에서 for문 돌려서 상위 5개만 뽑기 -->
+                            <c:choose>
+                              <c:when test="${fn:length(uw) > 5}">
+                              <c:forEach var="w" begin="0" end="4" step="1" items="${uw}">
+	                                <tr>
+	                                <td>${w.wdate}</td>
+	                                <td><span class="plus_money">${w.whistory}</span></td>
+	                                <td><span class="day_money">${w.wmoney}</span></td>
+	                                <td>${w.wmethod}</td>
+	                                </tr>
+	                            </c:forEach>
+                              </c:when>                  
+                              <c:otherwise>
+                              <c:forEach var="w"  items="${uw}">
+	                                <tr>
+	                                <td>${w.wdate}</td>
+	                                <td><span class="plus_money">${w.whistory}</span></td>
+	                                <td><span class="day_money">${w.wmoney}</span></td>
+	                                <td>${w.wmethod}</td>
+	                                </tr>
+                             	</c:forEach>
+                              </c:otherwise>
+                            </c:choose>
                             </tbody>
                         </table>
                     </div>
-                    
                     <div class="cashRequest_myPage_money">
                         <div class="cTit_myPage_money">출금 가능 니즈머니</div>
                         <div class="cashWon_myPage_money">${cash}<span>원</span></div>
@@ -70,7 +82,7 @@
                         <button class="requestBtn_myPage_money" id="cancelReason_wallet"><span>출금하기</span></button>
                     </div>
                     
-
+				 <form action="withdraw.do" method="post">
                     <!-- The Modal -->
                     <div id="myModal_wallet" class="modal_money">
                         <!-- Modal content -->
@@ -80,7 +92,7 @@
                                   <i class="fas fa-times x_wallet"></i>
                             </div>
                                 <div><h2>보유머니 출금 요청</h2></div>
-                               <ul>
+                               <ul class="modal_wallet">
                            <li>
                               <select class="bankCode_wallet">
                                  <option value="">은행 선택</option>
@@ -117,10 +129,11 @@
                         
                             </div>
                             <div class="bankSend_wallet">
-                               <button class="bankBtn_wallet" id="bankSendBtn_wallet">계좌 확인</button>
+                               <button class="bankBtn_wallet" onclick="return btnclick();">출금</button>
                             </div>
                         </div>
                     </div>
+                    </form>
                     <!--End Modal-->
                     <div class="cashRtxt_myPage_money">
                         <ul>
@@ -154,6 +167,21 @@
               var price = $('#price').val();
               alert("은행코드"+bankCode+"예금주:"+bankUser+"계좌번호"+bankNo+"금액"+price);
            });
+           
+           function btnclick(){
+        	   var num1 = ${cash};
+        	   var num2 = $('#price').val();
+        	   if(num1<num2){
+        		   alert("출금금액이 보유금액을 초과했습니다.");
+        		   return false;
+        	   }else{
+        		   if(confirm("출금금액 : " +num2+ "\n출금하시겠습니까?")){
+        			 return true;
+        		   }else{
+        			   return false;
+        		   }
+        	   }
+           }
       </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>

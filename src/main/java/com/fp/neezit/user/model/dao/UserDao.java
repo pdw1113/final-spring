@@ -1,19 +1,22 @@
 package com.fp.neezit.user.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWallet;
 
 @Repository("uDao")
 public class UserDao {
@@ -88,6 +91,7 @@ public class UserDao {
 	public int neezcharge(HashMap<String, String> map) {
 		return sqlSession.update("userMapper.neezcharge",map);
 	}
+	
 	public int changePw(HashMap<String, String> map) {
 		return sqlSession.update("userMapper.changePw",map);
 	}
@@ -122,6 +126,34 @@ public class UserDao {
 
 	public int updateMasterQfc(UserMasterQualifcation mqf) {
 		return sqlSession.update("userMapper.MasterUpdateQfa",mqf);
+	}
+
+	public int chargePaylist(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.chargePaylist",map);
+	}
+
+	public int withdraw(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.withdraw",map);
+	}
+
+	public int withdrawlist(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.withdrawlist",map);
+	}
+
+	public int getWalletCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("userMapper.getWalletCount",map);
+	}
+
+	public ArrayList<UserWallet> getUserWallet(String email) {
+		return (ArrayList)sqlSession.selectList("userMapper.getUserWallet",email);
+	}
+
+	public ArrayList<UserWallet> getUserWalletList(PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("userMapper.getUserWalletList",map,rowBounds);
 	}
 
 }
