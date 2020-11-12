@@ -159,6 +159,7 @@ font-family: sans-serif;
 padding: 10px;
 vertical-align: middle;
 text-align: center;
+display:table-cell;
 }
 /* no row width resize */
 table.detail_wdetail #short_wdetail{
@@ -196,6 +197,26 @@ outline: none;
    line-height: 38px;
    text-align: center;
 }
+
+.pagination{    
+display: flex;
+justify-content: center;
+}
+
+.pagination a{
+  color: black;
+  border-radius: 10px;
+  justify-content: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+/* Style the active/current link */
+.pagination a.active {background-color: #FABE00; color: white;}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
 /* 반응형~ */
 @media (max-width: 1360px) {
 /* 사이드 여백 */
@@ -203,4 +224,5 @@ outline: none;
 width: auto;
 margin: 0 20px;
 }
+
 }

@@ -119,7 +119,7 @@ public class UserContoller {
 
 	@RequestMapping("walletDetail.do")
 	public String walletDetail(HttpSession session,Model model,String buttonday,String preday,
-			String postday,@RequestParam(value="currentPage"
+			String postday,String search_way,@RequestParam(value="currentPage"
 			, required=false, defaultValue="1")int currentPage) {
 		// currentPage(현재페이지) 는 값이 null일 경우 기본값은 1
 		
@@ -141,6 +141,7 @@ public class UserContoller {
 		  
 		  map.put("postday",postday);
 		 
+		  map.put("search_way",search_way);
 		
 		 int listCount = uService.getWalletCount(map); 
 		
@@ -156,6 +157,7 @@ public class UserContoller {
 		model.addAttribute("buttonday",buttonday);
 		model.addAttribute("preday",preday);
 		model.addAttribute("postday",postday);
+		model.addAttribute("search_way",search_way);
 		
 		return "user/myPage/walletDetail";
 	}

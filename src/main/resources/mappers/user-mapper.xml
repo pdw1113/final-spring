@@ -351,15 +351,18 @@
 	<!-- 결제리스트 리스트 카운트 -->
 	<select id="getWalletCount" parameterType="hashmap" resultType="_int">
 		SELECT COUNT (*) FROM PAYLIST 
-		
-		
-		<if test="buttonday eq ''.toString() and preday eq ''.toString()">
 		WHERE USER_EMAIL=#{email}
+ 		
+ 		<if test="search_way eq '%충전'.toString()">
+ 			AND USER_PAY_HISTORY LIKE '%충전'
+ 		</if>
+ 		
+ 		<if test="search_way eq '%출금'.toString()">
+ 			AND USER_PAY_HISTORY LIKE '%출금'
  		</if>
  		
  		<!-- 오늘 -->
  		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
 			AND USER_PAY_DATE 
 			BETWEEN TO_CHAR(SYSDATE)
 			AND TO_DATE(SYSDATE)+0.99999
@@ -367,7 +370,6 @@
  		
  		<!-- 1개월 -->
  		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
 			AND USER_PAY_DATE 
 			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
 			AND TO_DATE(SYSDATE)+0.99999
@@ -375,7 +377,6 @@
  		
  		<!-- 6개월 -->
  		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
 			AND USER_PAY_DATE 
 			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
 			AND TO_DATE(SYSDATE)+0.99999
@@ -383,7 +384,6 @@
  		
  		<!-- 임의 지정 -->
  		<if test="buttonday eq ''.toString() and !preday.equals('')">
-			WHERE USER_EMAIL=#{email}
 			AND USER_PAY_DATE 
 			BETWEEN TO_CHAR(#{preday})
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
@@ -393,13 +393,22 @@
 	<!-- 결제 리스트(더보기) -->
 	<select id="getUserWalletList" parameterType="hashmap" resultMap="userWalletResultSet">
 			SELECT * FROM PAYLIST
+			WHERE USER_EMAIL=#{email} 
+			
+		<if test="search_way eq '%충전'.toString()">
+ 			AND USER_PAY_HISTORY LIKE '%충전'
+ 		</if>
+ 		
+ 		<if test="search_way eq '%출금'.toString()">
+ 			AND USER_PAY_HISTORY LIKE '%출금'
+ 		</if>
+ 		
 		<if test="buttonday eq ''.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email} ORDER BY USER_PAY_NUM DESC
+			ORDER BY USER_PAY_NUM DESC
  		</if>
  		
  		<!-- 오늘 -->
  		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
             AND USER_PAY_DATE BETWEEN TO_CHAR(SYSDATE)
 			AND TO_DATE(SYSDATE)+0.99999
 			ORDER BY USER_PAY_NUM DESC
@@ -407,7 +416,6 @@
  		
  		<!-- 1개월 -->
  		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
             AND USER_PAY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
 			AND TO_DATE(SYSDATE)+0.99999
 			ORDER BY USER_PAY_NUM DESC
@@ -415,7 +423,6 @@
  		
  		<!-- 6개월 -->
  		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
-			WHERE USER_EMAIL=#{email}
             AND USER_PAY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
 			AND TO_DATE(SYSDATE)+0.99999
 			ORDER BY USER_PAY_NUM DESC
@@ -423,8 +430,7 @@
  		
  		<!-- 임의 지정 -->
  		<if test="buttonday eq ''.toString() and !preday.equals('')">
-			WHERE USER_EMAIL=#{email} AND
-			USER_PAY_DATE BETWEEN TO_CHAR(#{preday})
+			AND USER_PAY_DATE BETWEEN TO_CHAR(#{preday})
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
 			ORDER BY USER_PAY_NUM DESC
  		</if>

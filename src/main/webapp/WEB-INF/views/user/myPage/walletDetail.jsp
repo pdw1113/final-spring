@@ -26,9 +26,9 @@
                  <div class="sbox_wdetail">
                      <div class="select_wdetail">
                          <select class="bdbox_wdetail" name="search_way">
-                             <option value="0" >전체</option>
-                             <option value="1">충전</option>
-                             <option value="2">출금</option>
+                             <option value="">전체</option>
+                             <option value="%충전">충전</option>
+                             <option value="%출금">출금</option>
                          </select>
                      </div>
                      <!-- 달력 -->
@@ -80,12 +80,12 @@
                        </tr>
                    </c:forEach>
                    
-                <tr align="center" height="20">
-			<td colspan="6">
+                <tr align="center" height="20" >
+			<td colspan="5" class="pagination">
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage eq 1 }">
-					[이전] &nbsp;
+					<a style="cursor:default;">«</a>
 				</c:if>
 				<c:if test="${ pi.currentPage ne 1 }">
 					<c:url var="before" value="walletDetail.do">
@@ -93,14 +93,15 @@
 						<c:param name="buttonday" value="${buttonday}"/>
 						<c:param name="preday" value="${preday}"/>
 						<c:param name="postday" value="${postday}"/>
+						<c:param name="search_way" value="${search_way}"/>
 					</c:url>
-					<a href="${ before }">[이전]</a> &nbsp;
+					<a href="${ before }">«</a>
 				</c:if>
 				
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:if test="${ p eq pi.currentPage }">
-						<font color="red" size="4"><b>[${ p }]</b></font>
+						<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
@@ -109,14 +110,15 @@
 							<c:param name="buttonday" value="${buttonday}"/>
 							<c:param name="preday" value="${preday}"/>
 							<c:param name="postday" value="${postday}"/>
+							<c:param name="search_way" value="${search_way}"/>
 						</c:url>
-						<a href="${ WalletPagination }">${ p }</a> &nbsp;
+						<a href="${ WalletPagination }">${ p }</a>
 					</c:if>
 				</c:forEach>
 				
 				<!-- [다음] -->
 				<c:if test="${ pi.currentPage eq pi.maxPage }">
-					[다음]
+					<a style="cursor:default;">»</a>
 				</c:if>
 				<c:if test="${ pi.currentPage ne pi.maxPage }">
 					<c:url var="after" value="walletDetail.do">
@@ -124,8 +126,9 @@
 							<c:param name="buttonday" value="${buttonday}"/>
 							<c:param name="preday" value="${preday}"/>
 							<c:param name="postday" value="${postday}"/>
+							<c:param name="search_way" value="${search_way}"/>
 					</c:url> 
-					<a href="${ after }">[다음]</a>
+					<a href="${ after }" >»</a>
 				</c:if>
 			</td>
 		</tr>
