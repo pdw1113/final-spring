@@ -33,7 +33,7 @@
 				<li><a href="javascript:;">상품소개</a></li>
 				<li><a href="javascript:;">SNS & 유튜브</a></li>
 				<li><a href="javascript:;">환불규정</a></li>
-				<li><a href="javascript:;">상품 구매자 리얼 댓글</a></li>
+				<li><a href="javascript:;">내돈내산 상품평</a></li>
 			</ul>
 		</div>
 		<!-- ************************************* -->
@@ -190,7 +190,7 @@
 
 			<section class="idx sec_common p2p_class_cmt" id="review">
 				<div class="p_col_left">
-					<p class="col_title">상품 구매자 리얼 댓글</p>
+					<p class="col_title">내돈내산 상품평</p>
 				</div>
 				<div class="p_col_right">
 					<div class="review_sum">
@@ -199,11 +199,11 @@
 						</ul>
 					</div>
 					<div class="inputReview">
-						<textarea placeholder="상품을 구매한 회원만 댓글을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
+						<textarea placeholder="상품을 구매한 회원만 상품평을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
 						<input type="hidden" value="0" id="firstno"/>
 						<input type="hidden" value="1" id="firstlevel"/>
 						<button id="cmt_btn">
-							댓글<br>작성
+							상품평<br>작성
 						</button>
 					</div>
 					<!-- 댓글 영역 -->
@@ -343,9 +343,13 @@
 				type:"post",
 				success:function(data){
 					if(data == "ok"){
+						// 수정버튼으로 돌려놓고
 						$("#modifyConfirm").attr("id","modify").html("수정");
+						// 댓글 숨긴거 다시 보이게 하고
 						$(".hide").show();
+						// input 창 지우고
 						$(".modifyInput").remove();
+						// 댓글 리로드 하기
 						getReplyList();
 					}
 				},error:function(request,status,errorData){
@@ -372,6 +376,10 @@
 			// 사용자 댓글 등록 ajax
 			$("#addReply").on("click",function(){
 				
+				if($("#rContent").val() == ""){
+					alert("댓글을 입력 해 주세요");
+					return;
+				}
 				var pNo = "${ product.no }";	// 상품 번호
 				var rContent = $("#rContent").val(); // 댓글 내용
 				var rStar = $(".modal_star").find(".fas").length; // 꽉찬 별 갯수당 숫자로 치환
@@ -514,6 +522,10 @@
 
 	    // 댓글 작성 클릭 시 별점 모달 팝업 
 	    $("#cmt_btn").click(function () {
+			if($("#rContent").val() == ""){
+				alert("상품평을 입력 해 주세요");
+				return;
+			}
 	      $(".modal_container").css("display", "block");
 	    });
 	    // 모달 팝업 배경 클릭 시 닫기
