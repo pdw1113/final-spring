@@ -32,8 +32,9 @@
             <div class="font_jua title-sgm">능력자 </div>
             <span>
                 <div class="img-container-sgm border-radius-100">
+                	<input type="hidden" value="${masterList.mProPicRe}" name="_mProPicRe"/>
                     <img src="resources/masterImg/${masterList.mProPicRe}" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="_mProPicOri" class="pick" hidden>
+                    <input type="file" id="profile_file" name="_mProPicOri" class="pick" value="${masterList.mProPicOri}" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -459,7 +460,8 @@
                 <div class="text-align-center-sgm minus-margin-sgm">
                     <div class="font_jua">신분증</div>
                     <div class="img-container-sgm-2">
-                        <img src="resources/masterImg/${masterList.mIdPicRe}" class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
+                  		<input type="hidden" value="${masterList.mIdPicRe}" name="_mIdPicRe"/>
+                        <img src="resources/masterImg/${masterList.mIdPicRe}"  class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
                         <input type="file" id="idCard_file" name="_mIdPicOri" class="pick">
                     </div>
                     <div class="img-container-info-2">

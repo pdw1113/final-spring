@@ -207,11 +207,14 @@ justify-content: center;
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 
-.fa-star{
-  color:rgb(250,190,0);
-  margin-left : -6px;
-}
-
 .off{
   display:none;
+}
+
+.fa-star{
+  color:rgb(250,190,0);
+}
+
+.fa-star-half-alt{
+  color:rgb(250,190,0);
 }
