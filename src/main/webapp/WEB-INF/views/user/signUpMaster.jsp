@@ -104,8 +104,7 @@
                 <div>
                     <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
-                    <span class="hide-span-sgm green">사용가능</span>
-                    <span class="hide-span-sgm red">사용불가</span>
+                    <span class="hide-span-sgm"></span>
                 </div>
             </li>
             <script>        
@@ -145,12 +144,16 @@
        	         		success:function(data){
        	         			// 중복되지 않았을 때
        	         			if(data == "ok" && regExp() != false){
-       	                        $('.green').show();
-       	                        $('.red').hide();
+       	         				$('.hide-span-sgm').removeClass("red");
+       	         				$('.hide-span-sgm').addClass("green");
+       	                        $('.hide-span-sgm').text('사용가능');
+       	                     	$('.hide-span-sgm').show();
        	         			// 중복됐을 때
        	         			}else{
-       	                        $('.green').hide();
-       	                        $('.red').show();
+       	         				$('.hide-span-sgm').removeClass("green");
+       	         				$('.hide-span-sgm').addClass("red");
+       	                        $('.hide-span-sgm').text('사용불가');
+       	                     	$('.hide-span-sgm').show();
        	         			}
        	         		},
        	         		error:function(jqxhr, textStatus, errorThrown){
@@ -691,6 +694,7 @@
   	
    	<script>
    	
+   	
    	let popupX = (document.body.offsetWidth/2) - (500/2);
     //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
@@ -703,6 +707,19 @@
         window.open('popUp.do', 'popup-test', 'status=no,toolbar=no,scrollbars=no, width=500, height=300, left='+ popupX + ', top='+ popupY);
     }
        
+    function act(){
+    	//var isChild = $("#dupl_check").children().is($(".green"));
+    	//var isChild = $(".green").val();
+      	  if($('.hide-span-sgm').text() == '사용가능'){
+      		return true;
+      	  }else{
+      		alert('중복되거나 형식에맞지않는 아이디입니다!');
+      		document.master.mNickname.focus();
+      		  return false;
+      	  };
+	
+    }
+    
     function vali() {
    
         if(validate()){
@@ -755,8 +772,10 @@
                 alert("끝나는 시간을 선택해주세요"); 
                   return false;
          }
-        success();
-        document.forms[0].submit();
+        if(act() == true){
+        	success();
+        	document.forms[0].submit();
+        }
      }
      </script> 
   
