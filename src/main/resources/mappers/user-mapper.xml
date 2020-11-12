@@ -73,6 +73,16 @@
 		<result property="mEndTime" column="MASTER_ENDTIME" />
 		<result property="mStar" column="MASTER_STAR" />
 	</resultMap>
+	
+	<resultMap type="UserWallet" id="userWalletResultSet">
+		<result property="wemail" column="USER_EMAIL"/>
+		<result property="wnum" column="USER_PAY_NUM"/>
+		<result property="wdate" column="USER_PAY_DATE"/>
+		<result property="whistory" column="USER_PAY_HISTORY"/>
+		<result property="wmoney" column="USER_PAY_MONEY"/>
+		<result property="wmethod" column="USER_PAY_METHOD"/>
+	</resultMap>
+	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">
@@ -296,5 +306,111 @@
 			MASTER_YOTUBUE3 = #{snsYou3}
 		WHERE USER_EMAIL = #{email}
 	</update>
+	
+	<!-- 유저 결제리스트 조회(보유니즈머니 페이지) -->
+	<select id="getUserWallet" parameterType="string" resultMap="userWalletResultSet" >
+		SELECT * FROM PAYLIST
+		WHERE USER_EMAIL=#{email} ORDER BY USER_PAY_NUM DESC
+	</select>
+	
+	<!-- 카카오페이 충전시 결제리스트 삽입-->
+	<insert id="chargePaylist" parameterType="hashmap">
+		INSERT INTO PAYLIST 
+		VALUES(#{email},USER_PAY_NUM.nextval,default,'니즈머니 충전',#{money},'카카오페이')
+	</insert>
+	
+	<!-- 출금 -->
+	<update id="withdraw" parameterType="hashmap">
+		UPDATE CASH SET USER_CASH =
+		USER_CASH - #{price} WHERE USER_EMAIL=#{email}
+	</update>
+	
+	<!-- 출금시 결제리스트 삽입 -->
+	<insert id="withdrawlist" parameterType="hashmap">
+		INSERT INTO PAYLIST 
+		VALUES(#{email},USER_PAY_NUM.nextval,default,'니즈머니 출금',#{price},'계좌이체')
+	</insert>
+	
+	<!-- 결제리스트 리스트 카운트 -->
+	<select id="getWalletCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) FROM PAYLIST 
+		
+		
+		<if test="buttonday eq ''.toString() and preday eq ''.toString()">
+		WHERE USER_EMAIL=#{email}
+ 		</if>
+ 		
+ 		<!-- 오늘 -->
+ 		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+			AND USER_PAY_DATE 
+			BETWEEN TO_CHAR(SYSDATE)
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 1개월 -->
+ 		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+			AND USER_PAY_DATE 
+			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 6개월 -->
+ 		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+			AND USER_PAY_DATE 
+			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 임의 지정 -->
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			WHERE USER_EMAIL=#{email}
+			AND USER_PAY_DATE 
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+	</select>
+	
+	<!-- 결제 리스트(더보기) -->
+	<select id="getUserWalletList" parameterType="hashmap" resultMap="userWalletResultSet">
+			SELECT * FROM PAYLIST
+		<if test="buttonday eq ''.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email} ORDER BY USER_PAY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 오늘 -->
+ 		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+            AND USER_PAY_DATE BETWEEN TO_CHAR(SYSDATE)
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_PAY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 1개월 -->
+ 		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+            AND USER_PAY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_PAY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 6개월 -->
+ 		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
+			WHERE USER_EMAIL=#{email}
+            AND USER_PAY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_PAY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 임의 지정 -->
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			WHERE USER_EMAIL=#{email} AND
+			USER_PAY_DATE BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+			ORDER BY USER_PAY_NUM DESC
+ 		</if>
+	</select>
 	
 </mapper>

@@ -1,13 +1,17 @@
 package com.fp.neezit.user.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWallet;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 
 public interface UserService {
@@ -64,4 +68,15 @@ public interface UserService {
 
 	int updateMasterQfc(UserMasterQualifcation mqf);
 
+	int chargePaylist(HashMap<String, String> map);
+
+	int withdraw(HashMap<String, String> map);
+
+	int withdrawlist(HashMap<String, String> map);
+
+	int getWalletCount(HashMap<String, String> map);
+
+	ArrayList<UserWallet> getUserWallet(String email);
+
+	ArrayList<UserWallet> getUserWalletList(PageInfo pi, HashMap<String, String> map);
 }
