@@ -13,17 +13,14 @@ width:100%;
 z-index: 222;
 }
 .a_mynav{
-	color: black;
-	text-decoration:none;
+   color: black;
+   text-decoration:none;
 }
 .a_mynav:link{
-	color: black;
-}
-.a_mynav:visited{
-	color: black;
+   color: black;
 }
 .a_mynav:hover{
-	color: orange;
+   color: orange;
 }
 
 /* 주메뉴 */
