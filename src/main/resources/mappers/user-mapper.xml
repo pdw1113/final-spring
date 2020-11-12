@@ -80,6 +80,7 @@
       	<result property="title" column="PRODUCT_TITLE" />
       	<result property="pic" column="PRODUCT_PIC" />
       	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
+      	<result property="cateone" column="PRODUCT_CATEONE" />
       	<result property="category" column="PRODUCT_CATEGORY" />
       	<result property="price" column="PRODUCT_PRICE" />
       	<result property="career" column="PRODUCT_CAREER" />
