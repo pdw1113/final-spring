@@ -200,8 +200,8 @@
 					</div>
 					<div class="inputReview">
 						<textarea placeholder="상품을 구매한 회원만 상품평을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
-						<input type="hidden" value="0" id="firstno"/>
-						<input type="hidden" value="1" id="firstlevel"/>
+						<input type="hidden" value="0" id="firstno"/><!-- 나중 대댓글을 위한 -->
+						<input type="hidden" value="1" id="firstlevel"/><!-- 나중 대댓글을 위한 -->
 						<button id="cmt_btn">
 							상품평<br>작성
 						</button>
@@ -413,12 +413,12 @@
 				});
 			});
 		});
-		
+
+		var commentCount;
 		// 댓글 목록 AJAX
 		function getReplyList(){
 			
 			var pNo = "${ product.no }";
-			
 			$.ajax({
 				url:"rList.do",
 				data:{pNo:pNo},
@@ -496,6 +496,12 @@
 							
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
+							
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$("#rContent").attr("placeholder","이미 상품평을 작성하였습니다.");
+								$("#rContent").attr("readonly",true);
+								$("#rContent").css("background","rgb(220,220,220,0.5)");
+							}
 						}
 					}
 				},error:function(request,status,errorData){
@@ -739,6 +745,8 @@
       }
     })();
   </script>
+
+
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>
