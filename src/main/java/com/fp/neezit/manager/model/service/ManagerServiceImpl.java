@@ -1,6 +1,7 @@
 package com.fp.neezit.manager.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.manager.model.dao.ManagerDao;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.user.model.dao.UserDao;
+import com.fp.neezit.user.model.vo.User;
 
 
 @Service("mService")
@@ -40,6 +42,11 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public List<Forbidden> dateWords(Date date) {
 		return mDao.dateWords(date);
+	}
+
+	@Override
+	public ArrayList<User> getUser() {
+		return mDao.getUser();
 	}
 
 

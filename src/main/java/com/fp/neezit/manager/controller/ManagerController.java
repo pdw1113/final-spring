@@ -1,9 +1,15 @@
 package com.fp.neezit.manager.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +20,7 @@ import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.User;
 
 @Controller
 public class ManagerController {
@@ -21,6 +28,10 @@ public class ManagerController {
 	@Autowired
 	private ManagerService mService;
 	
+	// 이메일 전송 인터페이스
+    @Inject			  // 생성한 클래스 없이 바로 객체를 주입시킨다.
+    JavaMailSender mailSender;
+    
 	@RequestMapping("supportnav.do")
 	public String supportnav() {
 		return "support/common/nav";
@@ -42,7 +53,10 @@ public class ManagerController {
 	}
 	
 	@RequestMapping("mNoticeMail.do")
-	public String mNoticeMail() {
+	public String mNoticeMail(Model model) {
+		ArrayList<User> user = mService.getUser();
+		
+		model.addAttribute("user",user);
 		return "manager/mNotice/mNoticeMail";
 	}
 	
@@ -109,8 +123,6 @@ public class ManagerController {
 			System.out.println("실패");
 			return "fail";
 		}
-		
-
 	}
 	
 	@ResponseBody // AJAX
@@ -131,11 +143,7 @@ public class ManagerController {
 			System.out.println("실패");
 			return "fail";
 		}
-		
-
 	}
-	
-	
 	
 	@RequestMapping("searchWords.do")
 	public String searchWords(Model model, String search, Date date) {
@@ -153,12 +161,45 @@ public class ManagerController {
 	}
 	
 	
+	// 메일 정보 받고 메일jsp로 보내주는 기능
+	@RequestMapping("sendemail.do")
+	public String sendemail(Model model, String mEmail, String mTitle, String mContent) {
+		
+		String[] mEmailarr =mEmail.split(",");
+		
+		for(int i=0; i<mEmailarr.length; i++) {
+			sendmail(mEmailarr[i],mTitle,mContent);
+		}
+		
+		model.addAttribute("sw",1);
+		return "manager/mNotice/mNoticeMail";
+	}
 	
-	
-	
-	
-	
-	
-	
+	// 메일 보내주는 기능
+	public String sendmail(String email,String title,String content) {
+		
+		String setfrom = "cjsehdals0430@gmail.com";
+		
+		try {
+			// 이메일 메세지 보낼 수 있는 객체 라이브러리
+            MimeMessage message = mailSender.createMimeMessage();
+            
+         // MimeMessage를 도와주는 객체 라이브러리
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+            
+            // MimeMessageHelper 양식
+            messageHelper.setFrom(setfrom);  // 보내는 사람 E-mail
+            messageHelper.setTo(email);     // 받는 사람    E-mail
+            messageHelper.setSubject(title); // 메일 제목   (생략 가능)
+            messageHelper.setText(content,true);  // 메일 내용
+            
+         // MimeMessage 전송
+            mailSender.send(message);
+            
+		}catch (Exception e) {
+            return "메일보내기 실패!";
+        }
+		return "메일 보내기 성공!";
+	}
 	
 }
