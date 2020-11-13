@@ -198,6 +198,11 @@
 	      		document.getElementById("title").focus();
 		        return false;
 	      	}
+	      	
+	      	if($("#cateone").val().match("대분류")){
+				alert("대분류를 선택해 주세요.");
+				return false;
+			}
 			
 			if($('#hiddenInput').val()==""){
                 alert("카테고리를 추가해주세요"); 

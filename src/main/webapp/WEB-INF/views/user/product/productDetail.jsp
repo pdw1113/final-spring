@@ -33,7 +33,7 @@
 				<li><a href="javascript:;">상품소개</a></li>
 				<li><a href="javascript:;">SNS & 유튜브</a></li>
 				<li><a href="javascript:;">환불규정</a></li>
-				<li><a href="javascript:;">상품 구매자 리얼 댓글</a></li>
+				<li><a href="javascript:;">내돈내산 상품평</a></li>
 			</ul>
 		</div>
 		<!-- ************************************* -->
@@ -190,7 +190,7 @@
 
 			<section class="idx sec_common p2p_class_cmt" id="review">
 				<div class="p_col_left">
-					<p class="col_title">상품 구매자 리얼 댓글</p>
+					<p class="col_title">내돈내산 상품평</p>
 				</div>
 				<div class="p_col_right">
 					<div class="review_sum">
@@ -199,11 +199,11 @@
 						</ul>
 					</div>
 					<div class="inputReview">
-						<textarea placeholder="상품을 구매한 회원만 댓글을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
-						<input type="hidden" value="0" id="firstno"/>
-						<input type="hidden" value="1" id="firstlevel"/>
+						<textarea placeholder="상품을 구매한 회원만 상품평을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
+						<input type="hidden" value="0" id="firstno"/><!-- 나중 대댓글을 위한 -->
+						<input type="hidden" value="1" id="firstlevel"/><!-- 나중 대댓글을 위한 -->
 						<button id="cmt_btn">
-							댓글<br>작성
+							상품평<br>작성
 						</button>
 					</div>
 					<!-- 댓글 영역 -->
@@ -214,10 +214,10 @@
 									<span class="img"> <img src="resources/img/동민_PIC.jpg">
 									</span>
 									<div class="tutee">
-										<span class="name">천동민</span>
-										<div class="date">
-											<p>2020-11-05 22:35:49</p>
-										</div>
+									<!-- 댓글 리스트 -->
+									</div>
+									<div>
+										aa
 									</div>
 								</div>
 								<div class="cmt">
@@ -254,19 +254,19 @@
 				<hr>
 				<ul class="p_flex">
 					<li>시간당 요금</li>
-					<li><span>${ product.price }&nbsp;원</span></li>
+					<li><span id="money">${ product.price }</span>&nbsp;원</li>
 				</ul>
 				<ul class="p_flex">
 					<li>구매 시간</li>
 					<li class="number_change"><i
-						class="fas fa-angle-left detail_btn"></i> <span>1</span> <i
+						class="fas fa-angle-left detail_btn"></i> <span id="time">1</span> <i
 						class="fas fa-angle-right detail_btn"></i></li>
 					<li>시간</li>
 				</ul>
 				<ul class="p_flex">
 					<li>구매 기간</li>
 					<li class="number_change"><i
-						class="fas fa-angle-left detail_btn"></i> <span>1</span> <i
+						class="fas fa-angle-left detail_btn"></i> <span id="day">1</span> <i
 						class="fas fa-angle-right detail_btn"></i></li>
 					<li>일간</li>
 				</ul>
@@ -279,7 +279,7 @@
 							<i class="fa-heart fas"></i>
 						</c:if>	
 					</a></li>
-					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
+					<li class="apply"><a href="why.do" onclick="return buyOne();">
 							바로 구매하기 </a></li>
 				</ul>
 				<ul class="btn_area">
@@ -294,7 +294,7 @@
 	<!-- 전체를 감싸고 있는 div -->
 
 	<!-- 댓글 별점 모달 -->
-	<div class="modal_container">
+	<div class="modal_container" id="cmtModal">
 		<div class="cmt_modal">
 			<div class="modal_title">별점주기</div>
 			<div class="modal_star">
@@ -308,15 +308,161 @@
 			</div>
 		</div>
 	</div>
+	
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
 	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
+	
+	<!-- 상품 구매 모달 -->
+	<div class="modal_container" id="buyModal">
+		<div class="buy_modal">
+			<div class="buy_top">
+			상품 구매 및 결제
+			</div>
+			<div class="buy_middle">
+				<div class="span_con">
+				시간당 요금 : <span id="buy_money"></span> 원
+				</div>
+				<div class="span_con">
+				구매 시간 : <span id="buy_time"></span> 시간
+				</div>
+				<div class="span_con">
+				구매 기간 : <span id="buy_day"></span> 일
+				</div>
+				<div class="span_con">
+				총 금액 : <span id="buy_sum"></span> 원
+				</div>
+				<div class="span_con">
+				보유 니즈머니 : <span id="buy_my"></span> 원 <span id="mStatus"></span>
+				</div>
+			</div>
+			<div class="buy_bottom">
+			<button type="button" onclick="buyConfirm();">구매 확정</button>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+ 		function buyConfirm(){
+ 			let proM = $("#buy_sum").html();
+ 			let myM = $("#buy_my").html();
+ 			
+			if(parseInt(proM) > parseInt(myM)){
+				alert("보유 니즈머니가 부족합니다. 충전페이지로 넘어갑니다.");
+				window.location.href = "charge.do";
+			}else{
+				let title = "${product.title}";
+				let email = "${sessionScope.loginUser.email}";
+				let master = "${master.mNickname}";
+				let money = proM;
+				
+				$.ajax({
+					url:"buyProduct.do",
+					data:{
+						title:title,
+						email:email,
+						master:master,
+						money:money
+					},
+					type:"post",
+					success:function(data){
+						if(data == "ok"){
+						      $(".modal_container").css("display", "none");
+						}
+					},error:function(request,status,errorData){
+					}
+				});	
+				alert("구매가 완료되었습니다. 능력자와 채팅을 시작해보세요!");
+			}
+		}
+		
+		// 구매 모달 팝업 열기
+		function buyOne(){
+			// 비회원 일 때
+			if("${sessionScope.loginUser.name}" == ""){
+				alert('로그인이 필요합니다');
+				return false;
+			}else{
+				$("#buyModal").css("display", "block");
+				// 정보값 불러오기
+				let money = $("#money").html();
+				let time = $("#time").html();
+				let day = $("#day").html();
+				
+				$("#buy_money").html(money);
+				$("#buy_time").html(time);
+				$("#buy_day").html(day);
+				$("#buy_sum").html(money * day * time);
+				$("#buy_my").html("${cash}");
+				
+	 			let proM = $("#buy_sum").html();
+	 			let myM = $("#buy_my").html();
+	 			
+	 			if(parseInt(proM) > parseInt(myM)){
+	 				$("#buy_my").css("color","red");
+	 				$("#mStatus").html("잔액이 부족합니다!");
+	 				$("#mStatus").css("color","red");
+				}else{
+	 				$("#buy_my").css("color","blue");
+				}
+				return false;
+			}
+		}
+	</script>
+	
+	
+	<script>
+		// 댓글 수정 버튼 클릭 시
+		$(document).on("click","#modify",function(){
+			// 댓글의 부모
+			let $comment = $(this).parent().parent().siblings(".cmt");
+			// 댓글 내용
+			let comment = $comment.children().text();
+			// 댓글 숨기기
+			$comment.children().hide();
+			// 입력칸 추가하기
+			$comment.append("<input class='modifyInput' type='text' >");
+			$(".modifyInput").val(comment);
+			// id값 바꿔주고 확인 버튼으로 바꾸기
+			$(this).attr("id","modifyConfirm").html("확인");
+		});
+		
+		// 확인 버튼 클릭 시
+  		$(document).on("click","#modifyConfirm",function(){
+  			// 댓글 입력값 가져오기
+  			let review = $(".modifyInput").val();
+  			// 댓글 번호 가져오기
+			let no = $(this).parent().parent().siblings(".cmt").attr("id");
+			$.ajax({
+				url:"modifyComment.do",
+				data:{
+					no:no,
+					review:review
+				},
+				type:"post",
+				success:function(data){
+					if(data == "ok"){
+						// 수정버튼으로 돌려놓고
+						$("#modifyConfirm").attr("id","modify").html("수정");
+						// 댓글 숨긴거 다시 보이게 하고
+						$(".hide").show();
+						// input 창 지우고
+						$(".modifyInput").remove();
+						// 댓글 리로드 하기
+						getReplyList();
+					}
+				},error:function(request,status,errorData){
+				}
+			});	
+		}); 
+	</script>
+	
 	<script>
 	    // 댓글창 enter 키 이벤트
 	    $(document).on('keydown', '#rContent', function(e){
 	        if(e.keyCode == 13 && !e.shiftKey) {
 	            e.preventDefault(); // 엔터키가 입력되는 것을 막아준다.
-	            $(".modal_container").css("display", "block"); // 모달팝업 열기
+	            $("#cmtModal").css("display", "block"); // 모달팝업 열기
 	        }
 	    });
 	
@@ -329,6 +475,10 @@
 			// 사용자 댓글 등록 ajax
 			$("#addReply").on("click",function(){
 				
+				if($("#rContent").val() == ""){
+					alert("댓글을 입력 해 주세요");
+					return;
+				}
 				var pNo = "${ product.no }";	// 상품 번호
 				var rContent = $("#rContent").val(); // 댓글 내용
 				var rStar = $(".modal_star").find(".fas").length; // 꽉찬 별 갯수당 숫자로 치환
@@ -352,7 +502,7 @@
 							getReplyList();
 							
 							$("#rContent").val(""); // 댓글 초기화
-							$(".modal_container").css("display", "none"); // 모달 팝업 닫기
+							$("#cmtModal").css("display", "none"); // 모달 팝업 닫기
 						    $(".modal_star i").addClass('far');	// 별 바꾸기
 						    $(".modal_star i").removeClass('fas'); // 별 비우기
 						}
@@ -362,19 +512,18 @@
 				});
 			});
 		});
-		
+
+		var commentCount;
 		// 댓글 목록 AJAX
 		function getReplyList(){
 			
 			var pNo = "${ product.no }";
-			
 			$.ajax({
 				url:"rList.do",
 				data:{pNo:pNo},
 				dataType:"json",
 				success:function(data){
 					
-					console.log(data);
  					$cmtWrap = $(".cmt_wrap");
 					$cmtWrap.html("");
  					
@@ -398,6 +547,8 @@
 					var $pDate; // 5단계
 					var $hr; // 구분선
 					
+					var $btn;
+					
 					if(data.length > 0){ // 댓글이 있을 경우
 						for(var i in data){
 							
@@ -405,7 +556,7 @@
 							
 							$divInfo = $("<div class='tutee_info'>"); // 2단계
 							
-							$divCmt = $("<div class='cmt'>"); // 2-1단계
+							$divCmt = $("<div class='cmt'>").attr("id",data[i].rNo); // 2-1단계
 							
 							$span = $("<span class='img'>"); // 3단계
 							$divTutee = $("<div class='tutee'>"); // 3단계
@@ -420,6 +571,9 @@
 							$pDate = $("<p>").text(data[i].rCreateDate); // 5단계
 							
 							$hr = $("<hr>"); // 구분선
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$btn = $("<button class='modify' id='modify'>수정</button>");
+							}
 							
 							$divDate.append($pDate); // 5단계 추가
 
@@ -427,6 +581,9 @@
 							
 							$divTutee.append($spanName); // 4-2단계 추가
 							$divTutee.append($divDate);	// 4-2단계 추가
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$divTutee.append($btn);
+							}
 							
 							$divInfo.append($span); // 3단계 추가
 							$divInfo.append($divTutee); // 3단계 추가
@@ -438,6 +595,12 @@
 							
 							$cmtWrap.append($li); // ul태그에 1단계 추가
 							$cmtWrap.append($hr); // 구분선 추가!!
+							
+							if("${sessionScope.loginUser.name}" == data[i].rName){
+								$("#rContent").attr("placeholder","이미 상품평을 작성하였습니다.");
+								$("#rContent").attr("readonly",true);
+								$("#rContent").css("background","rgb(220,220,220,0.5)");
+							}
 						}
 					}
 				},error:function(request,status,errorData){
@@ -464,6 +627,10 @@
 
 	    // 댓글 작성 클릭 시 별점 모달 팝업 
 	    $("#cmt_btn").click(function () {
+			if($("#rContent").val() == ""){
+				alert("상품평을 입력 해 주세요");
+				return;
+			}
 	      $(".modal_container").css("display", "block");
 	    });
 	    // 모달 팝업 배경 클릭 시 닫기
@@ -476,6 +643,9 @@
 	    });
 	    //  모달 팝업 클릭 시 부모 요소 이벤트 버블링 차단
 	    $(".cmt_modal").click(function (e) {
+	      e.stopPropagation();
+	    });
+	    $(".buy_modal").click(function (e) {
 	      e.stopPropagation();
 	    });
 	    
@@ -535,7 +705,7 @@
 					})
 				  }
 			}
-			}
+		}
 	
 		// 별 넣기
 		let star = "${master.mStar}";
@@ -677,6 +847,8 @@
       }
     })();
   </script>
+
+
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

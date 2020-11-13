@@ -1,6 +1,7 @@
 package com.fp.neezit.manager.model.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.user.model.vo.User;
 
 @Repository("mDao")
 public class ManagerDao {
@@ -78,6 +80,10 @@ public class ManagerDao {
 
 	public List<Forbidden> dateWords(Date date) {
 		return sqlSession.selectList("managerMapper.dateWords",date);
+	}
+
+	public ArrayList<User> getUser() {
+		return (ArrayList)sqlSession.selectList("managerMapper.getUser");
 	}
 	
 }

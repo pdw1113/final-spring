@@ -15,6 +15,7 @@ import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 
@@ -133,6 +134,16 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int wishDelete(HashMap<String, String> map) {
 		return pDao.wishDelete(map);
+	}
+
+	@Override
+	public int modifyComment(HashMap<String, String> map) {
+		return pDao.modifyComment(map);
+	}
+
+	@Override
+	public int buyProduct(UserBuyList buylist) {
+		return pDao.buyProduct(buylist);
 	}
 
 }

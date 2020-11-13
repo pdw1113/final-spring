@@ -8,6 +8,19 @@
 		<result property="fdate" column="FORBIDDEN_DATE"/>
 	</resultMap>
 	
+	<resultMap type="User" id="userResultSet">
+		<id property="email" column="USER_EMAIL" />
+		<result property="pwd" column="USER_PASSWORD" />
+		<result property="name" column="USER_NAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="phone" column="USER_PHONE" />
+		<result property="enrollDate" column="USER_ENROLLDATE" />
+		<result property="updateDate" column="USER_UPDATEDATE" />
+		<result property="status" column="USER_STATUS" />
+		<result property="marketingT" column="USER_MARKETING_T" />
+		<result property="marketingE" column="USER_MARKETING_E" />
+	</resultMap>
+	
 	<!-- 금칙어 추가 -->
 	<insert id="insertWords" parameterType="Forbidden"> 
 		INSERT INTO FORBIDDEN 
@@ -117,6 +130,10 @@
 		WHERE FORBIDDEN_WORD BETWEEN NCHR(54616) and NCHR(55203)
 	</select>
 	
+	<!-- 유저 리스트 갖고오기 -->
+	<select id="getUser" resultMap="userResultSet">
+		SELECT * FROM NEEZ_USER
+	</select>
 
 </mapper>
 

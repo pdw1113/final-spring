@@ -14,6 +14,7 @@ import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 
@@ -110,6 +111,14 @@ public class ProductDao{
 
 	public int updateProductStar(int getpNo) {
 		return sqlSession.update("productMapper.updateProductStar", getpNo);
+	}
+
+	public int modifyComment(HashMap<String, String> map) {
+		return sqlSession.update("productMapper.modifyComment", map);
+	}
+
+	public int buyProduct(UserBuyList buylist) {
+		return sqlSession.insert("productMapper.buyProduct", buylist);
 	}
 	
 }
