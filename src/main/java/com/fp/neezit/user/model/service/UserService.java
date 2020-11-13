@@ -82,4 +82,6 @@ public interface UserService {
 	ArrayList<UserWallet> getUserWallet(String email);
 
 	ArrayList<UserWallet> getUserWalletList(PageInfo pi, HashMap<String, String> map);
+
+	int nickCheck2(HashMap<String, String> map);
 }

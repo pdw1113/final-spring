@@ -27,12 +27,19 @@
 
     <form action="signUpMasterUpdate.do" method="POST" enctype="multipart/form-data" name="master">
     <input type="hidden" value="${ loginUser.email }" name="email"/>
-    <input type="hidden" value="${ masterList.mCategory }" name="_mCategory"/>
+    <%-- <input type="hidden" value="${ masterList.mCategory }" name="_mCategory"/> --%>
     <input type="hidden" value="${ masterList.mWorkDay }" name="_mWorkDay"/>
     <input type="hidden" value="${ masterList.mWorkStyle }" name="_mWorkStyle"/>
+    <input type="hidden" value="${SchoolList.sUnivPicRe}" name="_sUnivPicRe"/>
+    <input type="hidden" value="${SchoolList.sUnivPicRe}" name="_sUniv2PicRe"/>
+    <input type="hidden" value="${QualifcationList.q1PicRe}" name="_q1PicRe"/>
+    <input type="hidden" value="${QualifcationList.q1PicRe}" name="_q2PicRe"/>
+    <input type="hidden" value="${QualifcationList.q1PicRe}" name="_q3PicRe"/>
+    <input type="hidden" value="${QualifcationList.q1PicRe}" name="_q4PicRe"/>
+    <input type="hidden" value="${QualifcationList.q1PicRe}" name="_q5PicRe"/>
         <!-- 능력자 사진 등록 -->
         <div class="text-align-center-sgm">
-            <div class="font_jua title-sgm">능력자 </div>
+            <div class="font_jua title-sgm">*능력자 수정</div>
             <span>
                 <div class="img-container-sgm border-radius-100">
                 	<input type="hidden" value="${masterList.mProPicRe}" name="_mProPicRe"/>
@@ -46,6 +53,8 @@
                     * 정면 얼굴사진을 업로드 해주시기 바랍니다.
                     <br>
                     * 최대 용량은 5MB까지 입니다.
+                    <br>
+                    * (*)는 필수 항목입니다.
                 </div>
             </span>
         </div>
@@ -104,13 +113,12 @@
             <ul>
             <!-- 별명 등록 -->
             <li>
-                <div class="sub-title-sgm">별명 등록</div>
+                <div class="sub-title-sgm">*별명 등록</div>
                 <div>
                     <input class="input_master" type="text" name="mNickname" id="nickname" placeholder="한글 2글자 이상 작성"
                     value="${masterList.mNickname}">
                     <span class="btn_sgm font_jua" id="dupl_check">중복확인</span>
-                    <span class="hide-span-sgm green">사용가능</span>
-                    <span class="hide-span-sgm red">사용불가</span>
+					<span class="hide-span-sgm"></span>
                 </div>
             </li>
             <script>        
@@ -138,32 +146,38 @@
                 return true;
             }
             
-                 // 별명 중복체크 AJAX
-                $(function(){
-                   $("#dupl_check").on("click",function(){
-                     // #nickname의 값
-                      let nickname = $('#nickname').val();           
-                      $.ajax({
-                         url:"nickCheck.do",
-                         data:{nickname:nickname},
-                         type:"post",
-                         success:function(data){
-                            // 중복되지 않았을 때
-                            if(data == "ok" && regExp() != false){
-                                  $('.green').show();
-                                  $('.red').hide();
-                            // 중복됐을 때
-                            }else{
-                                  $('.green').hide();
-                                  $('.red').show();
-                            }
-                         },
-                         error:function(jqxhr, textStatus, errorThrown){
-                            console.log("ajax 처리 실패");
-                         }
-                      });
-                   });
-                });
+        	 // 별명 중복체크 AJAX
+            $(function(){
+   	         $("#dupl_check").on("click",function(){
+   	        	// #nickname의 값
+   	         	let nickname2 = $('#nickname').val();     	   
+   	         	let email2 = $("input[name=email]").val();     	   
+   	         	$.ajax({
+   	         		url:"nickCheckUp.do",
+   	         		data:{nickname2:nickname2,
+   	         			  email2:email2},
+   	         		type:"post",
+   	         		success:function(data){
+   	         			// 중복되지 않았을 때
+   	         			if(data == "ok" && regExp() != false){
+   	         				$('.hide-span-sgm').removeClass("red");
+   	         				$('.hide-span-sgm').addClass("green");
+   	                        $('.hide-span-sgm').text('사용가능');
+   	                     	$('.hide-span-sgm').show();
+   	         			// 중복됐을 때
+   	         			}else{
+   	         				$('.hide-span-sgm').removeClass("green");
+   	         				$('.hide-span-sgm').addClass("red");
+   	                        $('.hide-span-sgm').text('사용불가');
+   	                     	$('.hide-span-sgm').show();
+   	         			}
+   	         		},
+   	         		error:function(jqxhr, textStatus, errorThrown){
+   	         			console.log("ajax 처리 실패");
+   	         		}
+   	         	});
+   	         });
+            });
             </script>
             
 
@@ -171,7 +185,7 @@
             <hr>
             <!-- 카테고리 등록 -->
             <li>
-                <div class="sub-title-sgm">카테고리 등록</div>
+                <div class="sub-title-sgm">*카테고리 등록</div>
                 <div>
                     <div>
                         <select size="8" class="category1 font_jua select-sgm">
@@ -216,7 +230,7 @@
                         <div class="l-btn-div">
                             <span class="l-btn-container">
                                 <img src="resources/img/left_button_sgm.png" class="lr-btn-img-size" id="minus-category">
-                            </span>
+                            </span> 
                             <span class="r-btn-container">
                                 <img src="resources/img/right_button_sgm.png" class="lr-btn-img-size" id="plus-category">
                             </span>
@@ -224,7 +238,7 @@
                                 <img src="resources/img/rollback.png" class="lr-btn-img-size" id="delete-all">
                               </span>
                           </div>
-                        <select size="8" class="font_jua select-sgm" id="my-cate">
+                        <select size="8" class="font_jua select-sgm" id="my-cate" name="s3">
                             <option disabled class="text-align-center-sgm">나의 카테고리</option>
                             <option disabled>-------------------------------------------</option>
                         </select>
@@ -428,7 +442,7 @@
                    $('#my-cate option:selected').remove();
                    $("#array2").val(masterId);
                     
-                });
+                }); 
 
                 // 전체 삭제
                 $('#delete-all').click(function(){
@@ -441,27 +455,27 @@
                 });  
                 
 
-                (function(){
+                (function(){    				 
                    // Controller에서 받아온 능력자 카테고리
                     let category = '${categoryList}';
                     
                     // 문자열을 ,구분자로 잘라내어 배열에 담는다.
-                    let arr = category.split(", ");
-                    
+                    let arr = category.split(",");
+                     
                     // for문으로 select option에 추가한다.
                     for(a in arr){
-                       $("#my-cate").append("<option>" + arr[a] + "</option>");
+                       $("#my-cate").append("<option class='test' name='_mCategory'>" + arr[a] + "</option>");
                     }
                 })();
-
+                
             </script>
             <hr>
-
+			<input id="fake" type="hidden" value="${ masterList.mCategory}" name="_mCategory2"/> 
             <!-- 능력 인증 -->
             <li>
                 <div class="sub-title-sgm">능력 인증</div>
                 <div class="text-align-center-sgm minus-margin-sgm">
-                    <div class="font_jua">신분증</div>
+                    <div class="font_jua">*신분증</div>
                     <div class="img-container-sgm-2">
                   		<input type="hidden" value="${masterList.mIdPicRe}" name="_mIdPicRe"/>
                         <img src="resources/masterImg/${masterList.mIdPicRe}"  class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
@@ -531,67 +545,218 @@
                     <div>
                         <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv"
                          value="${SchoolList.sUniv}">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept"
+                        <input class="input_master width_242" type="text" placeholder="학과(대학교 입력필수)" name="sUnivDept"
                          value="${SchoolList.sUnivDept}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
-                        <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
+                        <span class="btn_sgm font_jua" id="btn-sUniv" onclick="picUpload(this);">업로드</span>          
+                        <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);" >
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2"
                         value="${SchoolList.sUniv2}">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept"
+                        <input class="input_master width_242" type="text" placeholder="학과(대학원 입력필수)" name="sUniv2Dept"
                         value="${SchoolList.sUniv2Dept}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv2" onclick="picUpload(this);">업로드</span>
                         <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
             </li>
+			<script>
+				$(function(){
+					// 처음 대학교 벨류 없을시 학과 텍스트 disabled
+					let sUnivLength = $('input[name=sUniv]').val().length; 
+					if(sUnivLength == 0){
+						$('input[name=sUnivDept]').attr('disabled',true);
+					}else{
+						$('input[name=sUnivDept]').attr('disabled',false);
+					}
+					
+					// 키입력시 학과 text disabled풀림
+					$('input[name=sUniv]').on('keyup',function(){
+						let inputLength = $(this).val().length; // sUniv의 벨류 길이값
+						if(inputLength == 0){
+							$('input[name=sUnivDept]').attr('disabled',true);
+						}else{
+							$('input[name=sUnivDept]').attr('disabled',false);
+						}
+					});
+					
+					// 처음 대학원 벨류 없을시 학과 텍스트 disabled
+					let sUnivLength2 = $('input[name=sUniv2]').val().length; 
+					if(sUnivLength2 == 0){
+						$('input[name=sUniv2Dept]').attr('disabled',true);
+					}else{
+						$('input[name=sUniv2Dept]').attr('disabled',false);
+					}
+					
+					// 키입력시 학과 text disabled풀림
+					$('input[name=sUniv2]').on('keyup',function(){
+						let inputLength = $(this).val().length; // sUniv2의 벨류 길이값
+						if(inputLength == 0){
+							$('input[name=sUniv2Dept]').attr('disabled',true);
+						}else{
+							$('input[name=sUniv2Dept]').attr('disabled',false);
+						}
+					});
+					
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val1 = '${SchoolList.sUniv}';
+					let val2 = '${SchoolList.sUnivDept}';
+					if(val1 != "" && val2 != ""){
+						$('#btn-sUniv').css('visibility','visible');
+					}
+					
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=sUniv]').val().length; // sUniv의 벨류 길이값
+						let inputLength2 = $('input[name=sUnivDept]').val().length; // sUnivDept의 벨류 길이값
+ 						if(inputLength2 > 0 && inputLength > 0){
+							$('#btn-sUniv').css('visibility','visible');  // 길이가 0보다 클시 보이게
+						}else{
+							$('#btn-sUniv').css('visibility','hidden');   // 길이가 0보다 작을시 안보이게
+						} 
+					});
+					
+					let val3 = '${SchoolList.sUniv2}';
+					let val4 = '${SchoolList.sUniv2Dept}';
+					if(val3 != "" && val4 != ""){
+						$('#btn-sUniv2').css('visibility','visible');
+					}
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=sUniv2]').val().length; // sUniv의 벨류 길이값
+						let inputLength2 = $('input[name=sUniv2Dept]').val().length; // sUnivDept의 벨류 길이값
+ 						if(inputLength2 > 0 && inputLength > 0){
+							$('#btn-sUniv2').css('visibility','visible');  // 길이가 0보다 클시 보이게
+						}else{
+							$('#btn-sUniv2').css('visibility','hidden');   // 길이가 0보다 작을시 안보이게
+						} 
+					});
+				});
 
+
+			</script>
             <!-- 자격증 -->
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q1"
                          value="${QualifcationList.q1}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv3" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q2"
                         value="${QualifcationList.q2}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv4" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q3"
                         value="${QualifcationList.q3}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv5" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q4"
                         value="${QualifcationList.q4}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv6" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q5"
                         value="${QualifcationList.q5}">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv7" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
                     </div>
 
                 </div>
             </li>
+			<script>
+				$(function(){
 
-         <script>
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val1 = '${QualifcationList.q1}';
+					if(val1 != "" ){
+						$('#btn-sUniv3').css('visibility','visible');
+					}
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q1]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv3').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv3').css('visibility','hidden');   
+						} 
+					});
+					
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val2 = '${QualifcationList.q2}';
+					if(val2 != "" ){
+						$('#btn-sUniv4').css('visibility','visible');
+					}
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q2]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv4').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv4').css('visibility','hidden');   
+						} 
+					});
+					
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val3 = '${QualifcationList.q3}';
+					if(val3 != "" ){
+						$('#btn-sUniv5').css('visibility','visible');
+					}
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q3]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv5').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv5').css('visibility','hidden');   
+						} 
+					});
+					
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val4 = '${QualifcationList.q4}';
+					if(val4 != "" ){
+						$('#btn-sUniv6').css('visibility','visible');
+					}
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q4]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv6').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv6').css('visibility','hidden');   
+						} 
+					});
+					
+					// 넘어온 벨류값 있으면 버튼 보이게
+					let val5 = '${QualifcationList.q5}';
+					if(val5 != "" ){
+						$('#btn-sUniv7').css('visibility','visible');
+					}
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q5]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv7').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv7').css('visibility','hidden');   
+						} 
+					});					
+				});
+			</script>
+         	<script>
                 let ok = function(obj){
                     $(obj).next().css("display","inline");
                 };
@@ -663,7 +828,7 @@
             <hr>
           <!-- 작업 가능 시간 -->
             <li>
-                <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
+                <div class="sub-title-sgm">*선호하는 업무 시간 / 방식</div>
                 <div class="margin-first-sgm">
                     <div class="radio-wrap">
                         <input type="checkbox" id="monday" value="월" class="checkSelect" name="work-day"/>
@@ -693,6 +858,8 @@
                         <input type="checkbox" id="sunday" value="일" class="checkSelect" name="work-day"/>
                         <label class="font_jua day11" for="sunday">일</label>
                     </div>
+                    <span class="dupl_choose">*(중복선택가능)</span>
+                    <br>
                     <div class="radio-wrap">
                         <input type="checkbox" id="home" name="work-style" value="자택" class="checkSelect1 "/>
                         <label class="font_jua home_choose" for="home">자택</label>
@@ -714,7 +881,8 @@
 
             <!-- 저장 / 취소 버튼 -->
             <li class="margin-top-sgm">
-                <span class="btn_sgm"  onclick="document.forms[0].submit()">저장</span>
+                <span class="btn_sgm"  onclick="validate();">저장</span>
+                <span class="btn_sgm_2" id="cancel">취소</span>
             </li>
         </ul>
     </div>
@@ -764,75 +932,117 @@
   
     })();
       
-      
-      
-      let popupX = (document.body.offsetWidth/2) - (500/2);
-    //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-      let popupY = (window.screen.height/2)-(300/2);
-    //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-
-
-
-    function success() {
-        window.open('popUp.do', 'popup-test', 'status=no,toolbar=no,scrollbars=no, width=500, height=300, left='+ popupX + ', top='+ popupY);
-    }
-       
-    function vali() {
    
-        if(validate()){
-           return true;
-        }else{
-           return false;
-        }
-   	}
     
+    function act(){
 
+      	  if($('.hide-span-sgm').text() == '사용가능'){
+      		return true;
+      	  }else{
+      		alert('중복되거나 형식에맞지않는 아이디입니다!(중복확인 필수)');
+      		document.master.mNickname.focus();
+      		  return false;
+      	  };
+	
+    }
+    
     function validate(){ 
-
-        if(!document.master.M_PROFILE_PIC_ORI.value){
-             alert("사진을 넣어주세요"); 
-               return false;
-        } 
    
-        if(!document.master.MASTER_NICKNAME.value){
-                alert("별명을 입력해주세요"); 
-                document.master.MASTER_NICKNAME.focus();
-                  return false;
-         }
+        if(!document.master.mNickname.value){
+            alert("별명을 입력해주세요"); 
+            document.master.mNickname.focus();
+              return false;
+      	}
         
-         if(!document.master.MASTER_CATEGORY.value){
+         
+          if($('#my-cate').children().length < 3){
                 alert("카테고리 등록을 해주세요"); 
                   return false;
-         } 
-        
-         if(!document.master.M_ID_PIC_ORI.value){
-                alert("신분증 등록을 해주세요"); 
-                  return false;
          }  
-        
-         if(!document.master.MASTER_WORKDAY.value){
-                alert("선호하는 업무 요일을 선택해주세요"); 
-                  return false;
-         } 
-        
-         if(!document.master.MASTER_WORKSTYLE.value){
-                alert("선호하는 업무 방식을 선택해주세요"); 
-                  return false;
+         
+         if($('input[name=sUniv]').val().length == 0 && $('input[name=sUnivDept]').val().length > 0){
+             alert("대학교를 입력해주세요"); 
+             document.master.sUniv.focus();
+             return false;
          }
-        
-        if(!document.master.MASTER_STARTTIME.value){
-                alert("시작 시간을 선택해주세요"); 
-                  return false;
-         } 
-        
-        if(!document.master.MASTER_ENDTIME.value){
-                alert("끝나는 시간을 선택해주세요"); 
-                  return false;
+         
+         if($('input[name=sUniv]').val().length > 0 && $('input[name=sUnivDept]').val().length == 0){
+             alert("대학교 학과 입력해주세요"); 
+             document.master.sUniv.focus();
+             return false;
          }
-        success();
-        document.forms[0].submit();
-     }
+         
+         if($('input[name=sUniv]').val().length > 0 && $('input[name=sUnivDept]').val().length > 0 && $('input[name=_sUnivPicOri]').val() == false){
+             alert("대학교 사진 등록해주세요"); 
+             document.master.sUniv.focus();
+             return false;
+         }
+         
+         if($('input[name=sUniv2]').val().length == 0 && $('input[name=sUniv2Dept]').val().length > 0){
+             alert("대학원를 입력해주세요"); 
+             document.master.sUniv2.focus();
+             return false;
+         }
+         
+         if($('input[name=sUniv2]').val().length > 0 && $('input[name=sUniv2Dept]').val().length == 0){
+             alert("대학원 학과 입력해주세요"); 
+             document.master.sUniv2.focus();
+             return false;
+         }
+         
+         if($('input[name=sUniv2]').val().length > 0 && $('input[name=sUniv2Dept]').val().length > 0 && $('input[name=_sUniv2PicOri]').val() == false){
+             alert("대학원 사진 등록해주세요"); 
+             document.master.sUniv2.focus();
+             return false;
+         }
+         
+         if($('input[name=q1]').val().length > 0 && $('input[name=_q1PicOri]').val() == false){
+             alert("자격증 사진 등록해주세요"); 
+             document.master.q1.focus();
+             return false;
+         }
+         
+         if($('input[name=q2]').val().length > 0 && $('input[name=_q2PicOri]').val() == false){
+             alert("자격증 사진 등록해주세요"); 
+             document.master.q2.focus();
+             return false;
+         }
+         
+         if($('input[name=q3]').val().length > 0 && $('input[name=_q3PicOri]').val() == false){
+             alert("자격증 사진 등록해주세요"); 
+             document.master.q3.focus();
+             return false;
+         }
+         
+         if($('input[name=q4]').val().length > 0 && $('input[name=_q4PicOri]').val() == false){
+             alert("자격증 사진 등록해주세요"); 
+             document.master.q4.focus();
+             return false;
+         }
+         
+         if($('input[name=q5]').val().length > 0 && $('input[name=_q5PicOri]').val() == false){
+             alert("자격증 사진 등록해주세요"); 
+             document.master.q5.focus();
+             return false;
+         }
+         
+         if($('.checkSelect').is(":checked") == false){
+             alert("선호하는 업무 요일을 선택해주세요"); 
+               return false;
+     	 }
+         
+         if($('.checkSelect1').is(":checked") == false){
+             alert("선호하는 업무 방식을 선택해주세요"); 
+               return false;
+      	 } 
+         
+         if(act() == true){
+        	 alert('수정완료!');
+         	document.forms[0].submit();
+         }
+      }
+
+     
 
      </script> 
   
@@ -891,6 +1101,27 @@
     
       
    </script>    
+   
+   <script>
+   $(function(){
+
+ 
+      let fake = $('#fake').val(); // 변수 밸류를 받아왔다
+      console.log(fake);
+   
+
+      
+   	  let fakeArr = [];
+   	  fakeArr = fake.split(","); // fake변수를 쪼개서 배열을 만들었다
+   
+      masterId = masterId.concat(fakeArr); // 진짜와 배열을 합쳤다
+ 
+      $("#array2").val(masterId.sort()); // sort 오름차순정렬
+   
+
+   
+   });
+   </script>
     
 </body>
 </html>
