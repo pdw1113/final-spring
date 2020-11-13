@@ -100,7 +100,7 @@
 			}else if($(".input_title_Mail").val()==""){
 				alert("제목을 입력해주세요.");
 				return false;
-			}else if($("#summernote_Mail").val()==""){
+			}else if($("#summernote_Mail").val()==""){ 
 				alert("내용을 입력해주세요.");
 				return false;
 			}else{
