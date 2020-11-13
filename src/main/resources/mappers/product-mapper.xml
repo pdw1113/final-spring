@@ -63,6 +63,16 @@
 		<result property="email" column="USER_EMAIL" />
 		<result property="no" column="PRODUCT_NO" />
 	</resultMap>
+	
+	<resultMap type="UserBuyList" id="UserBuyListResultSet">
+		<id property="num" column="USER_BUY_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="date" column="USER_BUY_DATE" />
+		<result property="master" column="USER_BUY_MASTER" />
+		<result property="title" column="USER_BUY_TITLE" />
+		<result property="money" column="USER_BUY_MONEY" />
+		<result property="refund" column="USER_BUY_REFUND" />
+	</resultMap>
 
 	<!-- 상품 리스트 관련 -->
 		<select id="category"
@@ -258,5 +268,10 @@
         JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
         WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
 	</select>
+	
+	<insert id="buyProduct" parameterType="UserBuyList">
+		INSERT INTO BUYLIST
+		VALUES(#{email},USER_BUY_NUM.NEXTVAL,DEFAULT,#{master},#{title},#{money},DEFAULT)
+	</insert>
 
 </mapper>
