@@ -183,6 +183,14 @@
 		FROM NEEZ_MASTER
 		WHERE MASTER_NICKNAME = #{nickname}
 	</select>
+	
+	<!-- 별명 중복 체크(update) -->
+	<select id="nickCheckUp" parameterType="string" resultType="_int">
+		SELECT
+		COUNT(*)
+		FROM NEEZ_MASTER
+		WHERE USER_EMAIL != #{email2} AND MASTER_NICKNAME = #{nickname2}
+	</select>
 
 	<!-- 마케팅 수신동의 변경 -->
 	<update id="marketing" parameterType="User">

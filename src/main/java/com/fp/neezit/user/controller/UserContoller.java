@@ -1,10 +1,8 @@
- package com.fp.neezit.user.controller;
+package com.fp.neezit.user.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,14 +25,11 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
-import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMasterSns;
-import com.fp.neezit.user.model.vo.UserWallet;
-import com.fp.neezit.user.model.vo.WalletPagination;
 
 import net.sf.json.JSONArray;
 
@@ -95,10 +90,6 @@ public class UserContoller {
 		// 보유 니즈머니 가져오기
 		int cash = uService.userCash(u.getEmail());
 		
-		ArrayList<UserWallet> uw = uService.getUserWallet(u.getEmail());
-		
-		model.addAttribute("uw",uw);
-		
 		model.addAttribute("cash",cash);
 		
 		return "user/myPage/wallet";
@@ -118,47 +109,7 @@ public class UserContoller {
 	}
 
 	@RequestMapping("walletDetail.do")
-	public String walletDetail(HttpSession session,Model model,String buttonday,String preday,
-			String postday,String search_way,@RequestParam(value="currentPage"
-			, required=false, defaultValue="1")int currentPage) {
-		// currentPage(현재페이지) 는 값이 null일 경우 기본값은 1
-		
-		if(buttonday==null&&preday==null&&postday==null) {
-			buttonday="";
-			preday="";
-			postday="";
-		}
-		
-		 User u = (User) session.getAttribute("loginUser");
-		
-		  HashMap<String, String> map = new HashMap<String, String>();
-		  
-		  map.put("email", u.getEmail());
-		  
-		  map.put("buttonday",buttonday);
-		  
-		  map.put("preday",preday);
-		  
-		  map.put("postday",postday);
-		 
-		  map.put("search_way",search_way);
-		
-		 int listCount = uService.getWalletCount(map); 
-		
-		//페이지수 계산 해주는 객체
-		PageInfo pi = WalletPagination.getPageInfo(currentPage, listCount);	
-		
-		//유저 월렛 정보 가지고 오기
-		ArrayList<UserWallet> uw = uService.getUserWalletList(pi,map);
-		
-		model.addAttribute("uw",uw);
-		model.addAttribute("pi",pi);
-		model.addAttribute("email",u.getEmail());
-		model.addAttribute("buttonday",buttonday);
-		model.addAttribute("preday",preday);
-		model.addAttribute("postday",postday);
-		model.addAttribute("search_way",search_way);
-		
+	public String walletDetail() {
 		return "user/myPage/walletDetail";
 	}
 	
@@ -448,6 +399,8 @@ public class UserContoller {
 		// @RequestParam어노테이션을 이용한 업로드 파일 접근
 		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
 		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
+		
+		// 프로필 및 신분증
 		if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
 			
 			// 서버에 업로드 해야한다.
@@ -464,6 +417,7 @@ public class UserContoller {
 			}
 		}
 
+		// 대학교
 		if (!file3.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName3 = uPic.saveFile3(file3, request);
@@ -474,6 +428,7 @@ public class UserContoller {
 			}
 		}
 
+		// 대학원
 		if (!file4.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName4 = uPic.saveFile4(file4, request);
@@ -483,7 +438,8 @@ public class UserContoller {
 				msc.setsUniv2PicRe(renameFileName4);
 			}
 		}
-
+		
+		// 자격증 1
 		if (!file5.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName5 = uPic.saveFile5(file5, request);
@@ -493,7 +449,8 @@ public class UserContoller {
 				mqf.setQ1PicRe(renameFileName5);
 			}
 		}
-
+		
+		// 자격증 2
 		if (!file6.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName6 = uPic.saveFile6(file6, request);
@@ -505,6 +462,7 @@ public class UserContoller {
 			}
 		}
 		
+		// 자격증 3
 		if (!file7.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName7 = uPic.saveFile7(file7, request);
@@ -514,7 +472,8 @@ public class UserContoller {
 				mqf.setQ3PicRe(renameFileName7);
 			}
 		}
-
+		
+		// 자격증 5
 		if (!file8.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName8 = uPic.saveFile8(file8, request);
@@ -524,7 +483,8 @@ public class UserContoller {
 				mqf.setQ4PicRe(renameFileName8);
 			}
 		}
-
+		
+		// 자격증 6
 		if (!file9.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName9 = uPic.saveFile9(file9, request);
@@ -570,6 +530,29 @@ public class UserContoller {
 		}
 	}
 	
+	/**
+	 * 13. 닉네임 중복체크 AJAX(업데이트)
+	 * 
+	 * @param nickName
+	 * @return
+	 * @throws IOException
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("nickCheckUp.do")
+	public String nickCheck2(String nickname2, String email2){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email2", email2);
+		map.put("nickname2", nickname2);
+		int result = uService.nickCheck2(map);
+
+		if (result > 0) { // 중복 존재
+			return "fail";
+		} else {
+			return "ok";
+		}
+	}
+	
 	
 	/**
 	 * ??. 카카오페이 사이트 접근
@@ -594,7 +577,7 @@ public class UserContoller {
 	 * @return
 	 */
 	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) 
-		public String neezcharge(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+		public String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
 	  
 		User u = (User) session.getAttribute("loginUser");
 		  
@@ -605,12 +588,9 @@ public class UserContoller {
 		map.put("email", email);
 		map.put("money",money);
 		 
-		int result1 = uService.neezcharge(map);
-		
-		int result2 = uService.chargePaylist(map);
-		
-		
-		if(result1==1&&result2==1) {
+		int result = uService.neezcharge(map);
+		 
+		if(result==1) {
 			return "redirect:wallet.do";
 		}else {
 			System.out.println("결제오류");
@@ -694,6 +674,19 @@ public class UserContoller {
 	}
 	
 	/**
+	 * 14. 카데고리 초기화
+	 * @param 
+	 * @return
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("deleteAll.do")
+	public String emailCheck(Model model, String mCat) {
+		mCat = "";
+		
+		return mCat;
+	}
+	
+	/**
 	 * 14.능력자 수정 
 	 * 
 	 * @param msu
@@ -713,36 +706,53 @@ public class UserContoller {
 			@RequestParam(name = "_q4PicOri", required = false) MultipartFile file8,
 			@RequestParam(name = "_q5PicOri", required = false) MultipartFile file9,
 			@RequestParam(name = "_mProPicRe", required = false) String pic1,
-			@RequestParam(name = "_mIdPicRe", required = false) String pic2) {
+			@RequestParam(name = "_mIdPicRe", required = false) String pic2,
+			@RequestParam(name = "_sUnivPicRe", required = false) String pic3,
+			@RequestParam(name = "_sUniv2PicRe", required = false) String pic4,
+			@RequestParam(name = "_q1PicRe", required = false) String pic5,
+			@RequestParam(name = "_q2PicRe", required = false) String pic6,
+			@RequestParam(name = "_q3PicRe", required = false) String pic7,
+			@RequestParam(name = "_q4PicRe", required = false) String pic8,
+			@RequestParam(name = "_q5PicRe", required = false) String pic9,
+			@RequestParam(name = "_mWorkDay", required = false) String mDa,
+			@RequestParam(name = "_mWorkStyle", required = false) String mWs) {
 		// @RequestParam어노테이션을 이용한 업로드 파일 접근
 		// form의 enctype이 multipart/form-data로 작성해되어있어야하고, method=post이어야한다.
 		// MultipartResolver가 multipartFile객체를 컨트롤러로 전달할 수 있다.
-		System.out.println("msu :" + msu);
-		if (!file1.getOriginalFilename().equals("") && !file2.getOriginalFilename().equals("")) {
-			
+		
+		// 프로필
+		if (!file1.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName1 = uPic.saveFile1(file1, request);
-			String renameFileName2 = uPic.saveFile2(file2, request);
-			 
-			if (renameFileName1 != null && renameFileName2 != null) { // 파일이 잘 저장된 경우
+
+			if (renameFileName1 != null) { // 파일이 잘 저장된 경우
 				msu.setmProPicOri(file1.getOriginalFilename()); // 파일명만 DB에저장
 				msu.setmProPicRe(renameFileName1);
-
-				msu.setmIdPicOri(file2.getOriginalFilename());
-				msu.setmIdPicRe(renameFileName2);
-
 			}
-
 		}
 		
-		// 널값들어갈시 기존 PicRe네임값 가져오기 
-		if (msu.getmProPicOri() == null && msu.getmIdPicOri() == null) {
-				msu.setmProPicRe(pic1);
-				msu.setmIdPicRe(pic2);
-				}
+		// 널값 넣을시 기존 프로필사진 등록
+		if(msu.getmProPicOri() == null) {
+			msu.setmProPicRe(pic1);
+		}
+		
+		// 신분증
+		if (!file2.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName2 = uPic.saveFile2(file2, request);
 
-			
+			if (renameFileName2 != null) { // 파일이 잘 저장된 경우
+				msu.setmIdPicOri(file2.getOriginalFilename()); // 파일명만 DB에저장
+				msu.setmIdPicRe(renameFileName2);
+			}
+		}
+		
+		// 널값 넣을시 기존 신분증사진 등록
+		if(msu.getmIdPicOri() == null) {
+			msu.setmIdPicRe(pic2);
+		}
 
+		// 대학교
 		if (!file3.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName3 = uPic.saveFile3(file3, request);
@@ -752,7 +762,13 @@ public class UserContoller {
 				msc.setsUnivPicRe(renameFileName3);
 			}
 		}
-
+		
+		// 널값 넣을시 기존 대학교 사진 등록
+		if(msc.getsUnivPicOri() == null) {
+			msc.setsUnivPicRe(pic3);
+		}
+		
+		// 대학원
 		if (!file4.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName4 = uPic.saveFile4(file4, request);
@@ -762,7 +778,13 @@ public class UserContoller {
 				msc.setsUniv2PicRe(renameFileName4);
 			}
 		}
-
+		
+		// 널값 넣을시 기존 대학원 사진 등록
+		if(msc.getsUniv2PicOri() == null) {
+			msc.setsUniv2PicRe(pic4);
+		}
+		
+		// 자격증 1
 		if (!file5.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName5 = uPic.saveFile5(file5, request);
@@ -772,7 +794,13 @@ public class UserContoller {
 				mqf.setQ1PicRe(renameFileName5);
 			}
 		}
-
+		
+		// 널값 넣을시 기존 자격증1 사진 등록
+		if(mqf.getQ1PicRe() == null) {
+			mqf.setQ1PicRe(pic5);
+		}
+		
+		// 자격증 2
 		if (!file6.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName6 = uPic.saveFile6(file6, request);
@@ -784,6 +812,13 @@ public class UserContoller {
 			}
 		}
 		
+		// 널값 넣을시 기존 자격증2 사진 등록
+		if(mqf.getQ2PicRe() == null) {
+			mqf.setQ2PicRe(pic6);
+		}
+		
+		
+		// 자격증 3
 		if (!file7.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName7 = uPic.saveFile7(file7, request);
@@ -793,7 +828,13 @@ public class UserContoller {
 				mqf.setQ3PicRe(renameFileName7);
 			}
 		}
+		
+		// 널값 넣을시 기존 자격증3 사진 등록
+		if(mqf.getQ3PicRe() == null) {
+			mqf.setQ3PicRe(pic7);
+		}
 
+		// 자격증 4
 		if (!file8.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName8 = uPic.saveFile8(file8, request);
@@ -803,7 +844,14 @@ public class UserContoller {
 				mqf.setQ4PicRe(renameFileName8);
 			}
 		}
+		
+		// 널값 넣을시 기존 자격증4 사진 등록
+		if(mqf.getQ4PicRe() == null) {
+			mqf.setQ4PicRe(pic8);
+		}
 
+
+		// 자격증 5
 		if (!file9.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName9 = uPic.saveFile9(file9, request);
@@ -813,10 +861,25 @@ public class UserContoller {
 				mqf.setQ5PicRe(renameFileName9);
 			}
 		}
+		
+		// 널값 넣을시 기존 자격증5사진 등록
+		if(mqf.getQ5PicRe() == null) {
+			mqf.setQ5PicRe(pic9);
+		}
+		
 
+	
+		// 널값 넣을시 기존 workDay 등록
+		if(msu.getmWorkDay().equals("")) {
+			msu.setmWorkDay(mDa);
+		}
+
+		// 널값 넣을시 기존 workStyle 등록
+		if(msu.getmWorkStyle().equals("")) {
+			msu.setmWorkStyle(mWs);
+		}
+		
 		int result = uService.updatetMaster(msu);
-		System.out.println("update : " + msu);
-		System.out.println("update : " + result);
 		int schoolresult = uService.updateMasterSchool(msc);
 		int snsresult = uService.updateMasterSns(msn);
 		int qfcresult = uService.updateMasterQfc(mqf);
@@ -826,39 +889,10 @@ public class UserContoller {
 			model.addAttribute("msg", "능력자등록실패!");
 			return "common/errorPage";
 		}
-	}
-	
-	/**
-	 * ??.출금
-	 * @param model
-	 * @param price
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "withdraw.do", method = RequestMethod.POST) 
-	public String withdraw(Model model, String price,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
-	
-	User u = (User) session.getAttribute("loginUser");
-	
-	HashMap<String, String> map = new HashMap<String, String>();
-	
-	map.put("email", u.getEmail());
-	
-	map.put("price",price);
-	
-	int result1 = uService.withdraw(map);
-	
-    int result2 = uService.withdrawlist(map); 
-	
-	
-	if (result1 == 1&&result2==1) {
-		return "redirect:wallet.do";
-	}else {
-		System.out.println("결제오류");
-		return "redirect:index.do";
-	}
-  }
 
+	}
+	
+	
 	@RequestMapping("buyList.do")
 	public String buyList() {
 		return "user/myPage/buyList";

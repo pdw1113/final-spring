@@ -25,11 +25,16 @@
         </div>
         <hr>
         <div class="footer">
-            <input type="button" value="확인하러가기" class="fButton">
+            <input type="button" value="확인하러가기" class="fButton" onclick="go()">
             <input type="button" value="창 닫기" class="fButton" onclick="window.close()">
         </div>
 
     </div>
+    <script>
+    	function go(){
+    		 window.open('signUpMasterManage.do');
+    	}
+    </script>
 </body>
 
 </html>

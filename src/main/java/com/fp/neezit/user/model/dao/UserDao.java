@@ -156,4 +156,8 @@ public class UserDao {
 		return (ArrayList)sqlSession.selectList("userMapper.getUserWalletList",map,rowBounds);
 	}
 
+	public int nickCheck2(HashMap<String, String> map) {
+		return sqlSession.selectOne("userMapper.nickCheckUp",map);
+	}
+
 }

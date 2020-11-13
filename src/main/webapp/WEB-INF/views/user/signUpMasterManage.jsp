@@ -85,7 +85,7 @@
                   </c:if>
                     <c:if test="${empty SchoolList.sHigh && empty SchoolList.sUniv && empty SchoolList.sUnivDept &&
                                 empty SchoolList.sUniv2 && empty SchoolList.sUniv2Dept}">   
-                  <div class="edu-ability" title="등록된 학력이 없습니다.">
+                  <div class="edu-ability" id="noneSch" title="등록된 학력이 없습니다.">
                   </c:if>
                      <c:if test="${!empty SchoolList.sHigh}">
                      <div>
@@ -110,13 +110,13 @@
                      </div>
                      </c:if>
                   </div>
-                  <c:if test="${!empty SchoolList.sUnivPicRe }">
+                  <c:if test="${!empty SchoolList.sUniv}">
                      <div class="img-container-sgm">
                         <img src="resources/masterImg/${SchoolList.sUnivPicRe}"
                            class="mImg img-style-size2" id="idCard_img">
                      </div>
                   </c:if>
-                  <c:if test="${!empty SchoolList.sUniv2PicRe}">
+                  <c:if test="${!empty SchoolList.sUniv2}">
                      <div class="img-container-sgm">
                         <img src="resources/masterImg/${SchoolList.sUniv2PicRe}"
                            class="mImg img-style-size2" id="idCard_img">
@@ -127,7 +127,7 @@
                <li>
                     <c:if test="${empty QualifcationList.q1 && empty QualifcationList.q2 && empty QualifcationList.q3 && 
                                 empty QualifcationList.q4 && empty QualifcationList.q5}">
-                  <div class="edu-ability" title="등록된 자격증이 없습니다.">
+                  <div class="edu-ability" id="noneQfa" title="등록된 자격증이 없습니다.">
                   </c:if>
                   <c:if test="${!empty QualifcationList.q1 || !empty QualifcationList.q2 || !empty QualifcationList.q3 || 
                                 !empty QualifcationList.q4 || !empty QualifcationList.q5}">
@@ -139,7 +139,7 @@
                            placeholder="${QualifcationList.q1}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.q1PicRe}">
+                     <c:if test="${!empty QualifcationList.q1}">
                         <div class="img-container-sgm">
                            <img src="resources/masterImg/${QualifcationList.q1PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
@@ -151,7 +151,7 @@
                            placeholder="${QualifcationList.q2}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.q2PicRe}">
+                     <c:if test="${!empty QualifcationList.q2}">
                         <div class="img-container-sgm">
                            <img src="resources/masterImg/${QualifcationList.q2PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
@@ -163,7 +163,7 @@
                            placeholder="${QualifcationList.q3}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.q3PicRe}">
+                     <c:if test="${!empty QualifcationList.q3}">
                         <div class="img-container-sgm">
                            <img src="resources/masterImg/${QualifcationList.q3PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
@@ -175,7 +175,7 @@
                            placeholder="${QualifcationList.q4}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.q4PicRe}">
+                     <c:if test="${!empty QualifcationList.q4}">
                         <div class="img-container-sgm">
                            <img src="resources/masterImg/${QualifcationList.q4PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
@@ -187,7 +187,7 @@
                            placeholder="${QualifcationList.q5}">
                      </div>
                      </c:if>
-                     <c:if test="${!empty QualifcationList.q5PicRe}">
+                     <c:if test="${!empty QualifcationList.q5}">
                         <div class="img-container-sgm">
                            <img src="resources/masterImg/${QualifcationList.q5PicRe}"
                               class="mImg img-style-size2" id="idCard_img">
@@ -202,7 +202,7 @@
                   <div class="social-media" title="소셜미디어">
                 </c:if>
                <c:if test="${empty SnsList.snsInsta && empty SnsList.snsTwit && empty SnsList.snsBlog && empty SnsList.snsGit}">
-                  <div class="social-media" title="등록된 소셜미디어가 없습니다.">
+                  <div class="social-media" id="noneSocia" title="등록된 소셜미디어가 없습니다.">
                 </c:if>
                   <c:if test="${!empty SnsList.snsInsta}">
                      <div class="instagram">
@@ -231,22 +231,22 @@
                   </div>
                   <div class="video-link" title="영상링크">
                   <c:if test="${!empty SnsList.snsYou1}">
-                     <div>
+                     <div id="you1">
                         <input class="input_master_2 youtube_show" type="text"
                            value="${SnsList.snsYou1}">
                         <div></div>
                      </div>
                      </c:if>
                      <c:if test="${!empty SnsList.snsYou2}">
-                     <div>
+                     <div id="you2">
                         <input class="input_master_2 youtube_show" type="text"
                            value="${SnsList.snsYou2}">
                         <div></div>
                      </div>
                      </c:if>
                      <c:if test="${!empty SnsList.snsYou3}">
-                     <div>
-                        <input class="input_master_2 youtube_show" type="text"
+                     <div id="you3">
+                        <input class="input_master_2 youtube_show"  type="text"
                            value="${SnsList.snsYou3}">
                         <div></div>
                      </div>
@@ -254,6 +254,30 @@
                   </div>
                </li>
                <script>
+               	  // 유튜브 text 길이가 9글자 미만일경우(https:// 일경우) 안보이게 설정
+               	  let you = '${SnsList.snsYou1}';  
+               	  let lenght = you.length;    
+               	  if(lenght < 9){
+               		  $('#you1').css('display','none');
+               	  }
+					
+               	  let you2 = '${SnsList.snsYou2}';  
+               	  let lenght2 = you2.length;    
+               	  if(lenght2 < 9){
+               		  $('#you2').css('display','none');
+               	  }
+               	  
+               	  let you3 = '${SnsList.snsYou3}';  
+               	  let lenght3 = you3.length;    
+               	  if(lenght3 < 9){
+               		  $('#you3').css('display','none');
+               	  }
+               	  
+               	  // 영상링크가 안보일시 "등록된 영상링크가 없습니다." 로 텍스트 변경
+               	  if(lenght < 9 && lenght2 < 9 && lenght3 < 9){
+               		  $('.video-link').attr('title','등록된 영상링크가 없습니다.');
+               	  }
+               
                   let youtube = function(input){
                       var videoId = $(input).val();
                       console.log(videoId);
@@ -319,6 +343,8 @@
                         <input type="checkbox" id="sunday" value="일" class="checkSelect" name="work-day" disabled/>
                         <label class="font_jua day11" for="sunday">일</label>
                      </div>
+					<span class="dupl_choose">*(중복선택가능)</span>
+                    <br>
                      <div class="radio-wrap">
                         <input type="checkbox" id="home" name="work-style" value="자택" class="checkSelect1 " disabled/>
                         <label class="font_jua home_choose" for="home">자택</label>

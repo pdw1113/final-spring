@@ -119,6 +119,7 @@ content: attr(title);
 position: relative;
 left: -270px;
 font-size: 1rem;
+display: contents;
 }
 /* 능력인증 → 자격증 before 가상요소 */
 .certify-ability:before{
@@ -126,6 +127,7 @@ content: attr(title);
 position: relative;
 left: -232px;
 font-size: 1rem;
+display: contents;
 }
 /* 능력인증 → 소셜미디어 before 가상요소 */
 .social-media:before{
@@ -133,6 +135,7 @@ content: attr(title);
 position: relative;
 left: -253px;
 font-size: 1rem;
+display: contents;
 }
 /* 능력인증 → 영상링크 before 가상요소 */ 
 .video-link:before{
@@ -140,6 +143,7 @@ content: attr(title);
 position: relative;
 left: -259px;
 font-size: 1rem;
+display: contents;
 }
 /* 라디오 버튼 디자인 */
 div.radio-wrap {
@@ -389,4 +393,7 @@ text-align: center;
 position: relative;
 margin-top: 100px;
 margin-bottom: -40px;
+}
+#btn-sUniv,#btn-sUniv2,#btn-sUniv3,#btn-sUniv4,#btn-sUniv5,#btn-sUniv6,#btn-sUniv7{
+visibility:hidden
 }

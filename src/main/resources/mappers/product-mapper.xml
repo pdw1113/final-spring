@@ -132,16 +132,17 @@
 	</select>
 
 	<!-- 능력자 카테고리 가져오기 -->
-	<select id="masterCategory" parameterType="UserMaster"
-		resultType="string">
-		SELECT CATENAME FROM GOODS_CATEGORY
-		WHERE CATECODE IN
-		(SELECT REGEXP_SUBSTR(#{mCategory},'[^,]+', 1, LEVEL) CATECODE
-		FROM DUAL
-		CONNECT BY REGEXP_SUBSTR(#{mCategory}, '[^,]+', 1,
-		LEVEL) IS NOT NULL)
-	</select>
-
+    <select id="masterCategory" parameterType="UserMaster"
+      resultType="string">
+       SELECT CATENAME FROM GOODS_CATEGORY
+       WHERE CATECODE IN
+       (SELECT REGEXP_SUBSTR(#{mCategory},'[^,]+', 1, LEVEL) CATECODE
+       FROM DUAL
+       CONNECT BY REGEXP_SUBSTR(#{mCategory}, '[^,]+', 1,
+       LEVEL) IS NOT NULL)
+       ORDER BY CATECODE
+    </select>
+    
 	<!-- 나의 상품 목록 가져오기 -->
 	<select id="myProductList" parameterType="UserMaster"
 		resultMap="productResultSet">

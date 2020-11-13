@@ -196,4 +196,9 @@ public class UserServiceImpl implements UserService{
 		return uDao.getUserWalletList(pi,map);
 	}
 
+	@Override
+	public int nickCheck2(HashMap<String, String> map) {
+		return uDao.nickCheck2(map);
+	}
+
 }

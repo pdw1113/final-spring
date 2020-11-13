@@ -511,58 +511,179 @@
                     </div>
                     <div>
                         <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUnivDept">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <input class="input_master width_242" type="text" placeholder="학과(대학교 입력필수)" name="sUnivDept">
+                        <span class="btn_sgm font_jua" id="btn-sUniv" onclick="picUpload(this);">업로드</span>
                         <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2">
-                        <input class="input_master width_242" type="text" placeholder="학과" name="sUniv2Dept">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <input class="input_master width_242" type="text" placeholder="학과(대학원 입력필수)" name="sUniv2Dept">
+                        <span class="btn_sgm font_jua" id="btn-sUniv2"  onclick="picUpload(this);">업로드</span>
                         <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
             </li>
+            <script>
+				$(function(){
+					// 처음 대학교 벨류 없을시 학과 텍스트 disabled
+					let sUnivLength = $('input[name=sUniv]').val().length; 
+					if(sUnivLength == 0){
+						$('input[name=sUnivDept]').attr('disabled',true);
+					}else{
+						$('input[name=sUnivDept]').attr('disabled',false);
+					}
+
+					// 키입력시 학과 text disabled풀림
+					$('input[name=sUniv]').on('keyup',function(){
+						let inputLength = $(this).val().length; // sUniv의 벨류 길이값
+						if(inputLength == 0){
+							$('input[name=sUnivDept]').attr('disabled',true);
+						}else{
+							$('input[name=sUnivDept]').attr('disabled',false);
+						}
+					});
+					// 처음 대학원 벨류 없을시 학과 텍스트 disabled
+					let sUnivLength2 = $('input[name=sUniv2]').val().length; 
+					if(sUnivLength2 == 0){
+						$('input[name=sUniv2Dept]').attr('disabled',true);
+					}else{
+						$('input[name=sUniv2Dept]').attr('disabled',false);
+					}
+					
+					// 키입력시 학과 text disabled풀림
+					$('input[name=sUniv2]').on('keyup',function(){
+						let inputLength = $(this).val().length; // sUniv2의 벨류 길이값
+						if(inputLength == 0){
+							$('input[name=sUniv2Dept]').attr('disabled',true);
+						}else{
+							$('input[name=sUniv2Dept]').attr('disabled',false);
+						}
+					});
+					
+
+					
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=sUniv]').val().length; // sUniv의 벨류 길이값
+						let inputLength2 = $('input[name=sUnivDept]').val().length; // sUnivDept의 벨류 길이값
+ 						if(inputLength2 > 0 && inputLength > 0){
+							$('#btn-sUniv').css('visibility','visible');  // 길이가 0보다 클시 보이게
+						}else{
+							$('#btn-sUniv').css('visibility','hidden');   // 길이가 0보다 작을시 안보이게
+						} 
+					});
+					
+
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=sUniv2]').val().length; // sUniv의 벨류 길이값
+						let inputLength2 = $('input[name=sUniv2Dept]').val().length; // sUnivDept의 벨류 길이값
+ 						if(inputLength2 > 0 && inputLength > 0){
+							$('#btn-sUniv2').css('visibility','visible');  // 길이가 0보다 클시 보이게
+						}else{
+							$('#btn-sUniv2').css('visibility','hidden');   // 길이가 0보다 작을시 안보이게
+						} 
+					});
+				});
+
+
+			</script>
 
             <!-- 자격증 -->
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q1">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv3" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q2">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv4" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q3">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv5" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q4">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua" id="btn-sUniv6" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" placeholder="자격증" name="q5">
-                        <span class="btn_sgm font_jua" onclick="picUpload(this);">업로드</span>
+                        <span class="btn_sgm font_jua"id="btn-sUniv7"  onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
                     </div>
 
                 </div>
             </li>
+			<script>
+				$(function(){
 
+
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q1]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv3').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv3').css('visibility','hidden');   
+						} 
+					});
+					
+
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q2]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv4').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv4').css('visibility','hidden');   
+						} 
+					});
+					
+
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q3]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv5').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv5').css('visibility','hidden');   
+						} 
+					});
+
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q4]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv6').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv6').css('visibility','hidden');   
+						} 
+					});
+					
+
+					// 키입력 안할시 업로드버튼 안보이게
+					$(this).on('keyup',function(){
+						let inputLength = $('input[name=q5]').val().length; 
+ 						if(inputLength > 0){
+							$('#btn-sUniv7').css('visibility','visible'); 
+						}else{
+							$('#btn-sUniv7').css('visibility','hidden');   
+						} 
+					});					
+				});
+			</script>
 			<script>
                 let ok = function(obj){
                     $(obj).next().css("display","inline");
@@ -713,8 +834,6 @@
     }
        
     function act(){
-    	//var isChild = $("#dupl_check").children().is($(".green"));
-    	//var isChild = $(".green").val();
       	  if($('.hide-span-sgm').text() == '사용가능'){
       		return true;
       	  }else{
@@ -752,6 +871,72 @@
                 alert("카테고리 등록을 해주세요"); 
                   return false;
          }
+        
+        if($('input[name=sUniv]').val().length == 0 && $('input[name=sUnivDept]').val().length > 0){
+            alert("대학교를 입력해주세요"); 
+            document.master.sUniv.focus();
+            return false;
+        }
+        
+        if($('input[name=sUniv]').val().length > 0 && $('input[name=sUnivDept]').val().length == 0){
+            alert("대학교 학과 입력해주세요"); 
+            document.master.sUniv.focus();
+            return false;
+        }
+        
+        if($('input[name=sUniv]').val().length > 0 && $('input[name=sUnivDept]').val().length > 0 && $('input[name=_sUnivPicOri]').val() == false){
+            alert("대학교 사진 등록해주세요"); 
+            document.master.sUniv.focus();
+            return false;
+        }
+        
+        if($('input[name=sUniv2]').val().length == 0 && $('input[name=sUniv2Dept]').val().length > 0){
+            alert("대학원를 입력해주세요"); 
+            document.master.sUniv2.focus();
+            return false;
+        }
+        
+        if($('input[name=sUniv2]').val().length > 0 && $('input[name=sUniv2Dept]').val().length == 0){
+            alert("대학원 학과 입력해주세요"); 
+            document.master.sUniv2.focus();
+            return false;
+        }
+        
+        if($('input[name=sUniv2]').val().length > 0 && $('input[name=sUniv2Dept]').val().length > 0 && $('input[name=_sUniv2PicOri]').val() == false){
+            alert("대학원 사진 등록해주세요"); 
+            document.master.sUniv2.focus();
+            return false;
+        }
+        
+        if($('input[name=q1]').val().length > 0 && $('input[name=_q1PicOri]').val() == false){
+            alert("자격증 사진 등록해주세요"); 
+            document.master.q1.focus();
+            return false;
+        }
+        
+        if($('input[name=q2]').val().length > 0 && $('input[name=_q2PicOri]').val() == false){
+            alert("자격증 사진 등록해주세요"); 
+            document.master.q2.focus();
+            return false;
+        }
+        
+        if($('input[name=q3]').val().length > 0 && $('input[name=_q3PicOri]').val() == false){
+            alert("자격증 사진 등록해주세요"); 
+            document.master.q3.focus();
+            return false;
+        }
+        
+        if($('input[name=q4]').val().length > 0 && $('input[name=_q4PicOri]').val() == false){
+            alert("자격증 사진 등록해주세요"); 
+            document.master.q4.focus();
+            return false;
+        }
+        
+        if($('input[name=q5]').val().length > 0 && $('input[name=_q5PicOri]').val() == false){
+            alert("자격증 사진 등록해주세요"); 
+            document.master.q5.focus();
+            return false;
+        }
         
         if(!document.master._mIdPicOri.value){
                 alert("신분증 등록을 해주세요"); 
