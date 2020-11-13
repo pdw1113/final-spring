@@ -17,6 +17,7 @@
       <typeAlias type="com.fp.neezit.product.model.vo.WishList" alias="Wish"/>
       <typeAlias type="com.fp.neezit.product.model.vo.Reply" alias="Reply"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserWallet" alias="UserWallet"/>
+      <typeAlias type="com.fp.neezit.user.model.vo.UserBuyList" alias="UserBuyList"/>
    </typeAliases>
    
    <!-- 

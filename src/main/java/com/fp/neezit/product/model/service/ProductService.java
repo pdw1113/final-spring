@@ -9,6 +9,7 @@ import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 
@@ -134,6 +135,13 @@ public interface ProductService {
 	 * @return
 	 */
 	public int modifyComment(HashMap<String, String> map);
+
+	/**
+	 * 상품 구매 메소드
+	 * @param buylist
+	 * @return
+	 */
+	public int buyProduct(UserBuyList buylist);
 	
 
    
