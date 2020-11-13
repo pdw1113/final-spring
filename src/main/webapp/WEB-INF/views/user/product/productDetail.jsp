@@ -254,19 +254,19 @@
 				<hr>
 				<ul class="p_flex">
 					<li>시간당 요금</li>
-					<li><span>${ product.price }&nbsp;원</span></li>
+					<li><span id="money">${ product.price }</span>&nbsp;원</li>
 				</ul>
 				<ul class="p_flex">
 					<li>구매 시간</li>
 					<li class="number_change"><i
-						class="fas fa-angle-left detail_btn"></i> <span>1</span> <i
+						class="fas fa-angle-left detail_btn"></i> <span id="time">1</span> <i
 						class="fas fa-angle-right detail_btn"></i></li>
 					<li>시간</li>
 				</ul>
 				<ul class="p_flex">
 					<li>구매 기간</li>
 					<li class="number_change"><i
-						class="fas fa-angle-left detail_btn"></i> <span>1</span> <i
+						class="fas fa-angle-left detail_btn"></i> <span id="day">1</span> <i
 						class="fas fa-angle-right detail_btn"></i></li>
 					<li>일간</li>
 				</ul>
@@ -279,7 +279,7 @@
 							<i class="fa-heart fas"></i>
 						</c:if>	
 					</a></li>
-					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
+					<li class="apply"><a href="why.do" onclick="return buyOne();">
 							바로 구매하기 </a></li>
 				</ul>
 				<ul class="btn_area">
@@ -294,7 +294,7 @@
 	<!-- 전체를 감싸고 있는 div -->
 
 	<!-- 댓글 별점 모달 -->
-	<div class="modal_container">
+	<div class="modal_container" id="cmtModal">
 		<div class="cmt_modal">
 			<div class="modal_title">별점주기</div>
 			<div class="modal_star">
@@ -308,9 +308,108 @@
 			</div>
 		</div>
 	</div>
+	
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
 	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
+	
+	<!-- 상품 구매 모달 -->
+	<div class="modal_container" id="buyModal">
+		<div class="buy_modal">
+			<div class="buy_top">
+			상품 구매 및 결제
+			</div>
+			<div class="buy_middle">
+				<div class="span_con">
+				시간당 요금 : <span id="buy_money"></span> 원
+				</div>
+				<div class="span_con">
+				구매 시간 : <span id="buy_time"></span> 시간
+				</div>
+				<div class="span_con">
+				구매 기간 : <span id="buy_day"></span> 일
+				</div>
+				<div class="span_con">
+				총 금액 : <span id="buy_sum"></span> 원
+				</div>
+				<div class="span_con">
+				보유 니즈머니 : <span id="buy_my"></span> 원 <span id="mStatus"></span>
+				</div>
+			</div>
+			<div class="buy_bottom">
+			<button type="button" onclick="buyConfirm();">구매 확정</button>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+ 		function buyConfirm(){
+ 			let proM = $("#buy_sum").html();
+ 			let myM = $("#buy_my").html();
+ 			
+			if(parseInt(proM) > parseInt(myM)){
+				alert("보유 니즈머니가 부족합니다. 충전페이지로 넘어갑니다.");
+				window.location.href = "charge.do";
+			}else{
+				let title = "${product.title}";
+				let email = "${sessionScope.loginUser.email}";
+				let master = "${master.mNickname}";
+				let money = proM;
+				
+				$.ajax({
+					url:"buyProduct.do",
+					data:{
+						title:title,
+						email:email,
+						master:master,
+						money:money
+					},
+					type:"post",
+					success:function(data){
+						if(data == "ok"){
+						      $(".modal_container").css("display", "none");
+						}
+					},error:function(request,status,errorData){
+					}
+				});	
+				alert("구매가 완료되었습니다. 능력자와 채팅을 시작해보세요!");
+			}
+		}
+		
+		// 구매 모달 팝업 열기
+		function buyOne(){
+			// 비회원 일 때
+			if("${sessionScope.loginUser.name}" == ""){
+				alert('로그인이 필요합니다');
+				return false;
+			}else{
+				$("#buyModal").css("display", "block");
+				// 정보값 불러오기
+				let money = $("#money").html();
+				let time = $("#time").html();
+				let day = $("#day").html();
+				
+				$("#buy_money").html(money);
+				$("#buy_time").html(time);
+				$("#buy_day").html(day);
+				$("#buy_sum").html(money * day * time);
+				$("#buy_my").html("${cash}");
+				
+	 			let proM = $("#buy_sum").html();
+	 			let myM = $("#buy_my").html();
+	 			
+	 			if(parseInt(proM) > parseInt(myM)){
+	 				$("#buy_my").css("color","red");
+	 				$("#mStatus").html("잔액이 부족합니다!");
+	 				$("#mStatus").css("color","red");
+				}else{
+	 				$("#buy_my").css("color","blue");
+				}
+				return false;
+			}
+		}
+	</script>
+	
 	
 	<script>
 		// 댓글 수정 버튼 클릭 시
@@ -363,7 +462,7 @@
 	    $(document).on('keydown', '#rContent', function(e){
 	        if(e.keyCode == 13 && !e.shiftKey) {
 	            e.preventDefault(); // 엔터키가 입력되는 것을 막아준다.
-	            $(".modal_container").css("display", "block"); // 모달팝업 열기
+	            $("#cmtModal").css("display", "block"); // 모달팝업 열기
 	        }
 	    });
 	
@@ -403,7 +502,7 @@
 							getReplyList();
 							
 							$("#rContent").val(""); // 댓글 초기화
-							$(".modal_container").css("display", "none"); // 모달 팝업 닫기
+							$("#cmtModal").css("display", "none"); // 모달 팝업 닫기
 						    $(".modal_star i").addClass('far');	// 별 바꾸기
 						    $(".modal_star i").removeClass('fas'); // 별 비우기
 						}
@@ -544,6 +643,9 @@
 	    });
 	    //  모달 팝업 클릭 시 부모 요소 이벤트 버블링 차단
 	    $(".cmt_modal").click(function (e) {
+	      e.stopPropagation();
+	    });
+	    $(".buy_modal").click(function (e) {
 	      e.stopPropagation();
 	    });
 	    

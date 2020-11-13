@@ -639,6 +639,59 @@
       height: 150px;
       margin-top: -75px;
     }
+    
+    .buy_modal{
+      border: 10px solid rgb(250, 190, 0);
+      position: fixed;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
+      /* 모달 가운데 오게 하기 */
+      left: 50%;
+      top: 35%;
+      width: 450px;
+      margin-left: -225px;
+      height: 370px;
+      margin-top: -185px;
+    }
+    
+    .buy_top{
+      text-align: center;
+      height:40px;
+      border-bottom:10px solid rgb(250,190,0);
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    .buy_middle{
+    border:1px solid black;
+      height:270px;
+    }
+    .buy_bottom{
+      border-top:10px solid rgb(250,190,0);
+      height:40px;
+      text-align: center;
+    }
+    
+    .buy_bottom button{
+    	width:100%;
+    	font-size: 1.8rem;
+    	outline: none;
+    	background-color: white;
+    	font-weight: bold;
+    	border: none;
+    	transition: all 1s;
+    }
+    
+    .buy_bottom button:hover{
+		cursor: pointer;
+		color:red;
+		font-weight: bolder;
+    }
+    
+    .span_con{
+      font-size: 1rem;
+      height:20%;
+    }
 
     .modal_container {
       display: none;
