@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -180,10 +180,11 @@
          });
         
          function buttonclick(){
+        	 	console.log($("#buttonday").val());
         		if($(".bdbox_wdetail").val()!=null&&$("#buttonday").val()==""&&$('.datepre_wdetail').val()==""&&$('.datepost_wdetail').val()==""){
         			return true;
         	 	}else if($("#buttonday").val()!=""){
-        	 		return false;
+        	 		return true;
         	 	}
         		
     			if($(".bdbox_wdetail").val()!=null&&$(".datepre_wdetail").val()==""){

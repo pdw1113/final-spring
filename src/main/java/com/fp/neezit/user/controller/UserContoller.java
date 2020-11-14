@@ -1,6 +1,7 @@
 package com.fp.neezit.user.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,11 +26,14 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.pic.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWallet;
 
 import net.sf.json.JSONArray;
 
@@ -84,16 +88,20 @@ public class UserContoller {
 	}
 
 	@RequestMapping("wallet.do")
-	public String wallet(HttpSession session,Model model) {
-		User u = (User) session.getAttribute("loginUser");
-		
-		// 보유 니즈머니 가져오기
-		int cash = uService.userCash(u.getEmail());
-		
-		model.addAttribute("cash",cash);
-		
-		return "user/myPage/wallet";
-	}
+	   public String wallet(HttpSession session,Model model) {
+	      User u = (User) session.getAttribute("loginUser");
+	      
+	      // 보유 니즈머니 가져오기
+	      int cash = uService.userCash(u.getEmail());
+	      
+	      ArrayList<UserWallet> uw = uService.getUserWallet(u.getEmail());
+	      
+	      model.addAttribute("uw",uw);
+	      
+	      model.addAttribute("cash",cash);
+	      
+	      return "user/myPage/wallet";
+	   }
 
 
 	@RequestMapping("charge.do")
@@ -109,7 +117,47 @@ public class UserContoller {
 	}
 
 	@RequestMapping("walletDetail.do")
-	public String walletDetail() {
+	public String walletDetail(HttpSession session,Model model,String buttonday,String preday,
+			String postday,String search_way,@RequestParam(value="currentPage"
+			, required=false, defaultValue="1")int currentPage) {
+		// currentPage(현재페이지) 는 값이 null일 경우 기본값은 1
+		
+		if(buttonday==null&&preday==null&&postday==null) {
+			buttonday="";
+			preday="";
+			postday="";
+		}
+		
+		 User u = (User) session.getAttribute("loginUser");
+		
+		  HashMap<String, String> map = new HashMap<String, String>();
+		  
+		  map.put("email", u.getEmail());
+		  
+		  map.put("buttonday",buttonday);
+		  
+		  map.put("preday",preday);
+		  
+		  map.put("postday",postday);
+		 
+		  map.put("search_way",search_way);
+		
+		 int listCount = uService.getWalletCount(map); 
+		
+		//페이지수 계산 해주는 객체
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
+		
+		//유저 월렛 정보 가지고 오기
+		ArrayList<UserWallet> uw = uService.getUserWalletList(pi,map);
+		
+		model.addAttribute("uw",uw);
+		model.addAttribute("pi",pi);
+		model.addAttribute("email",u.getEmail());
+		model.addAttribute("buttonday",buttonday);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("search_way",search_way);
+		
 		return "user/myPage/walletDetail";
 	}
 	
@@ -577,7 +625,7 @@ public class UserContoller {
 	 * @return
 	 */
 	@RequestMapping(value = "neezcharge.do", method = RequestMethod.POST) 
-		public String wallet(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+		public String neezcharge(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
 	  
 		User u = (User) session.getAttribute("loginUser");
 		  
@@ -588,9 +636,12 @@ public class UserContoller {
 		map.put("email", email);
 		map.put("money",money);
 		 
-		int result = uService.neezcharge(map);
-		 
-		if(result==1) {
+		int result1 = uService.neezcharge(map);
+		
+		int result2 = uService.chargePaylist(map);
+		
+		
+		if(result1==1&&result2==1) {
 			return "redirect:wallet.do";
 		}else {
 			System.out.println("결제오류");
@@ -685,6 +736,37 @@ public class UserContoller {
 		
 		return mCat;
 	}
+	
+	/**
+	 * ??.출금
+	 * @param model
+	 * @param price
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "withdraw.do", method = RequestMethod.POST) 
+	public String withdraw(Model model, String price,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	
+	User u = (User) session.getAttribute("loginUser");
+	
+	HashMap<String, String> map = new HashMap<String, String>();
+	
+	map.put("email", u.getEmail());
+	
+	map.put("price",price);
+	
+	int result1 = uService.withdraw(map);
+	
+    int result2 = uService.withdrawlist(map); 
+	
+	
+	if (result1 == 1&&result2==1) {
+		return "redirect:wallet.do";
+	}else {
+		System.out.println("결제오류");
+		return "redirect:index.do";
+	}
+  }
 	
 	/**
 	 * 14.능력자 수정 
