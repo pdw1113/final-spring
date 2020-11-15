@@ -1,6 +1,6 @@
 package com.fp.neezit.user.model.vo;
 
-public class WalletPagination {
+public class Pagination {
 	
 	// PageInfo 객체를 리턴하는 static 메소드 추가
 		public static PageInfo getPageInfo(int currentPage, int listCount) {
