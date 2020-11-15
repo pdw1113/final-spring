@@ -407,7 +407,7 @@ public class ProductController {
 		map.put("email", u.getEmail());    
 		map.put("no", str);
 
-		int result = uService.userCash(u.getEmail());
+		int result = pService.wishDelete(map);
 
 		if (result > 0) { 
 			return "ok";
