@@ -38,7 +38,7 @@ import com.google.gson.JsonIOException;
 import net.sf.json.JSONArray;
 @SessionAttributes("product") 
 @Controller
-public class ProductController {
+public class ProductController { 
 
 	@Autowired
 	ProductService pService;
