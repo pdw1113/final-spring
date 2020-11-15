@@ -374,7 +374,7 @@ public class ProductController {
 	 */
 	@ResponseBody // AJAX
 	@RequestMapping("wishInsert.do")
-	public String wishInsert(String email, int no ,HttpSession session){
+	public String wishInsert(String email, int no ,String pName, HttpSession session){
 		// 2개의 객체를 insert 하기위해 HashMap 사용
 		String str = Integer.toString(no);     // int로 들어온 객체를 스트링으로 변환시켜준다. (email이 스트링이기때문에 같이 HashMap 사용하기위해)
 		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
@@ -389,8 +389,15 @@ public class ProductController {
 
 		int duplicate = pService.wishDuplicate(map2);    // duplicate 라는변수에  selectone으로 결과값(true이면 1 false면 0) 을받는다.
 
+		
+		// 자기상품 자기가 찜 불가능하게하는 메소드
+		HashMap<String, String> map3 = new HashMap<String, String>();    // HashMap 선언
+		map3.put("pName", pName);    
+		map3.put("email", email);
+		
+		int ProductName = pService.wishProductName(map3); // 자기상품 자기가 찜 불가하기위한 객체(카운트값으로 받아온다)
 		int result = 0;      // result 값 초기화
-		if(duplicate == 0) {    // 중복값이 없으면 insert 실행시켜준다.
+		if(duplicate == 0 && ProductName == 0) {    // 중복값이 없으면 insert 실행시켜준다.
 			result = pService.wishInsert(map);    //result 변수에 insert 메소드 결과값 받아준다.
 		}
 

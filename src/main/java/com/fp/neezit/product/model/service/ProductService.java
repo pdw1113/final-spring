@@ -142,6 +142,8 @@ public interface ProductService {
 	 * @return
 	 */
 	public int buyProduct(UserBuyList buylist);
+
+	public int wishProductName(HashMap<String, String> map3);
 	
 
    
