@@ -762,4 +762,9 @@
     
     .modifyInput{
     width:500px;
+     border: 2px solid rgb(250, 190, 0);
+    border-left-width:0;
+    border-right-width:0;
+    border-top-width:0;
+    padding-bottom: 8px;
     }

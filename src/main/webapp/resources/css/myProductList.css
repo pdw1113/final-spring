@@ -89,3 +89,37 @@
 .fa-star-half-alt{
   color:rgb(250,190,0);
 }
+
+.btn_sgm{
+height: 1.2em;
+text-align: center;
+margin-left: 10px;
+font-size: 0.75rem;
+border-radius: 7px;
+border: 3px solid black;
+color: white;
+background-color: black;
+padding: 0.2em 0;
+box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
+}
+
+.btn_sgm_2{
+height: 1.2em;
+text-align: center;
+margin-left: 10px;
+font-size: 0.75rem;
+border-radius: 7px;
+background-color: red; 
+color: white; 
+border: 3px solid red;
+padding: 0.2em 0;
+box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
+}
+.btn_sgm:hover{
+cursor: pointer;
+opacity: 0.6;
+}
+.btn_sgm_2:hover{
+cursor: pointer;
+opacity: 0.6;
+}
