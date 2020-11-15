@@ -77,6 +77,12 @@
             </c:if>
             </c:if>
             
+            <div class="login_box_Mainhead">
+               <a href="chat.do">
+                  <div class="head_login_Mainhead">임시 채팅방</div>
+               </a>
+            </div>
+            
             <c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
                <div class="login_box_Mainhead">
                   <a href="signUpMasterCategory.do">

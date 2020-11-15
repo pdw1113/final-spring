@@ -516,13 +516,13 @@
 		var commentCount;
 		// 댓글 목록 AJAX
 		function getReplyList(){
-			
 			var pNo = "${ product.no }";
 			$.ajax({
 				url:"rList.do",
 				data:{pNo:pNo},
 				dataType:"json",
 				success:function(data){
+					console.log(data);
 					
  					$cmtWrap = $(".cmt_wrap");
 					$cmtWrap.html("");
