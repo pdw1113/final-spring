@@ -631,12 +631,13 @@
 				alert("상품평을 입력 해 주세요");
 				return;
 			}
-	      $(".modal_container").css("display", "block");
+			confirm("상품평은 등록 후 삭제가 불가능합니다. 정말 등록하시겠습니까?");
+	      $("#cmtModal").css("display", "block");
 	    });
 	    // 모달 팝업 배경 클릭 시 닫기
-	    $(".modal_container").click(function (e) {
+	    $("#cmtModal").click(function (e) {
 	      // 모달 닫고
-	      $(".modal_container").css("display", "none");
+	      $("#cmtModal").css("display", "none");
 	      // 찍은 별 초기화
 	      $(".modal_star i").addClass('far');
 	      $(".modal_star i").removeClass('fas');
