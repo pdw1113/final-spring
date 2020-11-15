@@ -120,5 +120,9 @@ public class ProductDao{
 	public int buyProduct(UserBuyList buylist) {
 		return sqlSession.insert("productMapper.buyProduct", buylist);
 	}
+
+	public int wishProductName(HashMap<String, String> map3) {
+		return sqlSession.selectOne("productMapper.productName",map3);
+	}
 	
 }

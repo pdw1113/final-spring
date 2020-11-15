@@ -146,4 +146,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.buyProduct(buylist);
 	}
 
+	@Override
+	public int wishProductName(HashMap<String, String> map3) {
+		return pDao.wishProductName(map3);
+	}
+
 }

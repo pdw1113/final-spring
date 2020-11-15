@@ -312,6 +312,7 @@
 	<input type="hidden" value="${ loginUser.email }" name="email" class="wishEmail"/>
 	<input type="hidden" value="${ product.no }" name="no" class="wishProduct"/>
 	<input type="hidden" value="${ wishList.no }" name="wNo" class="wishList"/>
+	<input type="hidden" value="${ product.nickName }" name="pName" class="ProudctName"/>
 	
 	<!-- 상품 구매 모달 -->
 	<div class="modal_container" id="buyModal">
@@ -660,10 +661,12 @@
 		function heart(){
  				let email = $(".wishEmail").val();
 				let no = $(".wishProduct").val();
-				
+				let pName = $('.ProudctName').val(); 
+
 				   var data = {
 						   email : email,
-						     no : no
+						     no : no,
+						   pName : pName
 						     };
 				   
 				$.ajax({
@@ -674,6 +677,8 @@
 				    	if(result == "ok"){
 				    		alert("찜 성공");
 				    		location.reload();
+				    	}else{
+				    		alert("자기상품 찜등록 불가.");
 				    	}
 				    },
 				    error : function(result){
