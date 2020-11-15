@@ -46,37 +46,6 @@ public class ProductController {
 	@Autowired
 	UserService uService;
 
-	@RequestMapping("productDetail.do")
-	public String productDetail(int no, Model model,HttpSession session) {
-		// 상품 정보 가져오기
-		Product p = pService.getProductDetail(no);
-
-		// 상품 정보 가져오기 2
-		UserMaster m = pService.getProductDetail(p.getNickName());
-
-		UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
-
-		// 찜 정보 가져오기
-		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
-		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
-		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
-		map.put("email", u.getEmail());    
-		map.put("no", str);
-		WishList wl = pService.getWishListDetail(map);
-		int replyCount = pService.getReplyCount(p.getNickName());
-
-		if(p != null && m != null) {
-			model.addAttribute("product", p);
-			model.addAttribute("master", m);
-			model.addAttribute("sns", sns);
-			model.addAttribute("replyCount", replyCount);
-			model.addAttribute("wishList", wl);
-			return "user/product/productDetail";
-		}
-
-		return "common/errorPage";
-	}
-
 	@RequestMapping("productListSearch.do")
 	public String productListSearch() {
 		return "user/product/productListSearch"; 
@@ -246,7 +215,7 @@ public class ProductController {
 	}
 
 	/**
-	 * 6. 상품 상세 메소드
+	 * 6. 상품 목록 ─ 상품 상세 메소드
 	 * @param product
 	 * @param model
 	 * @param session
@@ -283,6 +252,45 @@ public class ProductController {
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
 			model.addAttribute("cash", cash);
+			return "user/product/productDetail";
+		}
+
+		return "common/errorPage";
+	}
+	
+	/**
+	 * 6─1. 리스트 상품 상세
+	 * 
+	 * @param no
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("productDetail.do")
+	public String productDetail(int no, Model model,HttpSession session) {
+		// 상품 정보 가져오기
+		Product p = pService.getProductDetail(no);
+
+		// 상품 정보 가져오기 2
+		UserMaster m = pService.getProductDetail(p.getNickName());
+
+		UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
+
+		// 찜 정보 가져오기
+		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
+		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
+		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
+		map.put("email", u.getEmail());    
+		map.put("no", str);
+		WishList wl = pService.getWishListDetail(map);
+		int replyCount = pService.getReplyCount(p.getNickName());
+
+		if(p != null && m != null) {
+			model.addAttribute("product", p);
+			model.addAttribute("master", m);
+			model.addAttribute("sns", sns);
+			model.addAttribute("replyCount", replyCount);
+			model.addAttribute("wishList", wl);
 			return "user/product/productDetail";
 		}
 
@@ -330,6 +338,13 @@ public class ProductController {
 		gson.toJson(rList,response.getWriter());
 	}
 
+	/**
+	 * 9. 댓글 수정
+	 * 
+	 * @param review
+	 * @param no
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("modifyComment.do")
 	public String modifyComment(String review, int no){
@@ -351,7 +366,7 @@ public class ProductController {
 	}
 
 	/**
-	 * 08. 찜등록 AJAX
+	 * 10. 찜등록 AJAX
 	 * 
 	 * @param 
 	 * @return
@@ -389,7 +404,7 @@ public class ProductController {
 	}
 
 	/**
-	 * 09. 찜해제 AJAX
+	 * 11. 찜해제 AJAX
 	 * 
 	 * @param 
 	 * @return
@@ -417,7 +432,7 @@ public class ProductController {
 	}
 
 	/**
-	 * 10.찜목록 리스트
+	 * 12.찜목록 리스트
 	 * 
 	 * @param u
 	 * @param model
@@ -439,6 +454,13 @@ public class ProductController {
 		return "user/myPage/wishList";
 	}
 	
+	
+	/**
+	 * 13. 상품 구매 메소드 AJAX
+	 * 
+	 * @param buylist
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("buyProduct.do")
 	public String wishDelete(UserBuyList buylist){
@@ -451,8 +473,4 @@ public class ProductController {
 			return "fail";
 		}
 	}
-	
-	
-	
-	
 }

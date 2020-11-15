@@ -1,4 +1,4 @@
-package com.fp.neezit.user.common.pic;
+package com.fp.neezit.user.common;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
