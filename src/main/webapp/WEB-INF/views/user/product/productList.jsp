@@ -19,6 +19,8 @@
 	  <link rel="stylesheet" type="text/css" href="resources/css/productList.css">
 	  <!-- 폰트 어썸 -->
 	  <script src="https://kit.fontawesome.com/fef720d792.js" crossorigin="anonymous"></script>
+	  
+	  <link rel="stylesheet" type="text/css" href="resources/css/loading2.css">
 
    </head>
    <body>
@@ -105,8 +107,7 @@
 					<div>
 						<img src="resources/img/lv1.png" class="list_rank_index"> 
 						<span class="font_noto">${ product.nickName }</span> 
-						<span class="list_star_container_index">
-						</span> 
+						<span class="list_star_container_index"></span> 
 						<span class="font_noto starNum">(${ product.star })</span> 
 						<span> 
 							<span class="font_noto">${ product.count }명선택</span> 
@@ -117,79 +118,205 @@
 			</div>
         </c:forEach>
 	</div>
-	<!-- Paging -->
-		<div class="pagination">
-		  <a href="#">&laquo;</a>
-		  <a class="page_product">1</a>
-		  <a href="#" class="page_product">2</a>
-		  <a href="#" class="page_product">3</a>
-		  <a href="#" class="page_product">4</a>
-		  <a href="#" class="page_product">5</a>
-		  <a href="#" class="page_product">6</a>
-		  <a href="#" class="page_product">&raquo;</a>
-		</div>
+	
+    <%@ include file="../../common/footer.jsp" %>	
       
-      <%@ include file="../../common/footer.jsp" %>
- 		<script>
-        // appned 할 곳
-        let starAppend = document.getElementsByClassName('list_star_container_index');
-        // 상품의 갯수만큼 for문
-        let pCount = $('.productOne').length;
-        // 숫자의 배열
-        let sNumber = [];
+	<script>
+	
+		// 무한 스크롤
+	    var $doc=$(document);	
+	    var $win=$(window);
 
-        for (var i = 0; i < pCount; i++) {
-                        // 숫자로 변환이 꼭 필요하다
-            sNumber[i] = Number(document.getElementsByClassName('starNum')[i].innerText.substring(1,4)); // 각각의 별점 숫자들
-            
-            let star = starAppend[i]; // append 할 곳
-            
-                // 정수가 아닌 소숫점일 때,
-                if(!Number.isInteger(sNumber[i])){
+	    let startPage = 10;
+	    let endPage = 18;
+	    let addStar = 0;
+	    let what = null;
+	    
+		$(".selectbox").change(function(){
+			what = $(".selectbox option:selected").val();
+		});
+	    
+	    $(window).scroll(function(){ 
+	        if ($doc.height()-$win.height()-$(this).scrollTop() == 0) {
+	        	let whatTemp = what;
+	    	    let navNo = ${categoryList}[0].cateCode;
+	    	    
+	    		$.ajax({
+	    			url:"infinityScroll.do",
+	    			data:{
+	    				navNo:navNo,
+	    				startPage : startPage,
+	    				endPage : endPage,
+	    				what:whatTemp
+	    			},
+	    			dataType:"json",
+	    			success:function(data){
+	    				
+	    				$cmtWrap = $(".Lsit-Saction");
+	    				
+	    				var $divF; // 1단계
+						
+						var $inputS; // 2단계
+						var $aS; // 2-1단계
+						var $divS; // 2-2단계
+						
+						var $divImg; // 3단계
+						var $pT; // 3-1단계
+						var $divT;	// 3-2 단계
+						
+						var $imgP; // 4단계
+						var $imgR; // 4-1단계
+						var $spanN; // 4-2단계
+						var $spanS; // 4-3단계
+						var $spanSN; // 4-4단계
+						var $spanF; // 4-5단계
+						
+						var $spanC; // 5단계
+						var $imgbuy; // 5단계
+						
+	    				console.log(data);
 
-                    // ex) 3.5일 때     3.5-1 = 2.5 총 3번(0,1,2) 꽉찬별찍고 
-                    for (var j = 0; j < sNumber[i]-1; j++) {
-                        var iii = document.createElement("i");
-                        iii.className = "fas fa-star"; // 꽉찬별
-                        star.appendChild(iii);
-                    }
-
-                    // 반별찍고   2 < 3.5 => 반별 하나 찍고
-                    for (var l = j; l < sNumber[i]; l++) {
-                        var lll = document.createElement("i");
-                        lll.className = "fas fa-star-half-alt"; // 반별
-                        star.appendChild(lll);
-                    }
-                    // 5 - 3.5 - 1 => 0.5 빈별 찍고
-                    for (var k = 0; k < 5 - sNumber[i] - 1; k++) {
-                        var jjj = document.createElement("i");
-                        jjj.className = "far fa-star"; // 빈별
-                        star.appendChild(jjj);
-                    }
-            
-                }else{
-
-                    for (var j = 0; j < sNumber[i]; j++) {
-                        var iii = document.createElement("i");
-                        iii.className = "fas fa-star";
-                        star.appendChild(iii);
-                    }
-
-                    for (var k = 0; k < 5 - sNumber[i]; k++) {
-                        var jjj = document.createElement("i");
-                        jjj.className = "far fa-star";
-                        star.appendChild(jjj);
-                    }
-
-
-                }
-        }
-        
+	    				if(data.length > 0){ // 게시글이 있을 경우
+	    					for(var i in data){
+	    			        	
+	    						$divF = $("<div class='productOne'>").addClass("product" + addStar); // 1단계
+	    						
+	    						$inputS = $("<input type='hidden' class='pCategory'>").attr("value",data[i].category); // 2단계 hidden category
+	    						$aS = $("<a class='thumbnail'>").attr("href", "productDetail.do?no=" + data[i].no); // 2-1단계 a 태그
+	    						$divS = $("<div class='list_contents_marign'>"); // 2-2단계 div
+	    						
+	    						$divImg = $("<div class='list_img_div'>"); // 3단계 img container
+	    						$pT = $("<p class='font_noto list_explain_index'>").html(data[i].title); // 3-1단계 p태그 제목
+	    						$divT = $("<div>"); // 3-2단계 div 여러가지
+	    						
+	    						$imgP = $("<img class='list_contents_img_index'>").attr("src","resources/pUploadFiles/" + data[i].renamePic ); // 4단계 상품 사진
+	    						
+	    						$imgR = $("<img class='list_rank_index'>").attr("src","resources/img/lv1.png"); // 4단계 계급사진
+	    						$spanN = $("<span class='font_noto'>").html(data[i].nickName); // 4단계 닉네임
+	    						$spanS = $("<span class='list_star_container_index'>").addClass("list_star" + addStar); // 4단계 별 컨테이너
+	    						$spanSN = $("<span class='font_noto starNum'>").html("(" + parseFloat(data[i].star).toFixed(1) + ")").addClass("starclass" + addStar); // 4단계 별점
+	    						$spanF = $("<span>");	// 4단계 span 태그
+	    						
+	    						$spanC = $("<span class='font_noto'>").html(data[i].count + "명선택"); // 5단계 몇명 선택
+	    						$imgbuy = $("<img src='resources/img/buy.png' class='list_choice_img_index'>"); // 선택 이미지
+	    						
+	    						// ---------------------------------------------------
+	    						
+	    						$spanF.append($spanC); // 5단계 추가
+	    						$spanF.append($imgbuy); // 5단계 추가
+	    						
+	    						$divT.append($imgR); // 4단계 추가
+	    						$divT.append("&nbsp;");
+	    						$divT.append($spanN); // 4단계 추가
+	    						$divT.append("&nbsp;");
+	    						$divT.append($spanS); // 4단계 추가
+	    						$divT.append("&nbsp;");
+	    						$divT.append($spanSN); // 4단계 추가
+	    						$divT.append("&nbsp;");
+	    						$divT.append($spanF); // 4단계 추가
+	    						
+	    						$divImg.append($imgP); // 4단계 추가
+	    						
+	    						$aS.append($divImg); // 3단계 추가
+	    						$divS.append($pT); // 3단계 추가
+	    						$divS.append($divT); // 3단계 추가
+	    						
+	    						$divF.append($inputS); // 2단계 추가
+	    						$divF.append($aS); // 2단계 추가
+	    						$divF.append($divS); // 2단계 추가
+	    						
+	    						$cmtWrap.append($divF);
+	    						
+	    						console.log(typeof data[i].star);
+	    						
+	    			        }
+	    				
+	    				}
+	    				
+	    				// 시작 페이지 ROWNUM + 9
+ 		                startPage = startPage + 9;
+	    				// 끝 페이지  ROWNUM + 9
+ 		                endPage  = endPage + 9; 
+	    				// 별 계산해주는 함수
+ 		                addedStar("list_star" + addStar, ".product" + addStar, "starclass" + addStar);
+	    				// 로딩 될 때마다 불러오는 클래스 값 변경해주기.
+		                addStar++;
+	    				
+		                filter();
+ 		                
+	    			},error:function(request,status,errorData){
+	    				console.log(request.status + ":" + errorData);
+	    			}
+	    		});
+	        }
+	    });
     </script>
+    
+    <script>
+		
+    	// 처음 9개 별 찍어주기
+    	addedStar('list_star_container_index', '.productOne', 'starNum');
+		
+    	// 매개변수를 통해 별 그려주는 함수
+    	// addedStar(추가해줄 클래스명, 추가 해야 할 갯수, 숫자값 클래스);
+        function addedStar(appendPlace, productNum, starPoint){
+        	
+        	// appned 할 곳
+            let starAppend = document.getElementsByClassName(appendPlace);
+            // 상품의 갯수만큼 for문
+            let pCount = $(productNum).length;
+            // 숫자의 배열
+            let sNumber = [];
 
+            for (var i = 0; i < pCount; i++) {
+            	
+            	// 숫자로 변환해주기
+                sNumber[i] = Number(document.getElementsByClassName(starPoint)[i].innerText.substring(1,4));
+                
+                // append 할 곳
+                let star = starAppend[i]; 
+                
+                    // 정수가 아닌 소숫점일 때,
+                    if(!Number.isInteger(sNumber[i])){
 
+                        // ex) 3.5일 때     3.5-1 = 2.5 총 3번(0,1,2) 꽉찬별찍고 
+                        for (var j = 0; j < sNumber[i]-1; j++) {
+                            var iii = document.createElement("i");
+                            iii.className = "fas fa-star"; // 꽉찬별
+                            star.appendChild(iii);
+                        }
 
+                        // 반별찍고   2 < 3.5 => 반별 하나 찍고
+                        for (var l = j; l < sNumber[i]; l++) {
+                            var lll = document.createElement("i");
+                            lll.className = "fas fa-star-half-alt"; // 반별
+                            star.appendChild(lll);
+                        }
+                        // 5 - 3.5 - 1 => 0.5 빈별 찍고
+                        for (var k = 0; k < 5 - sNumber[i] - 1; k++) {
+                            var jjj = document.createElement("i");
+                            jjj.className = "far fa-star"; // 빈별
+                            star.appendChild(jjj);
+                        }
+                
+                    }else{
 
+                        for (var j = 0; j < sNumber[i]; j++) {
+                            var iii = document.createElement("i");
+                            iii.className = "fas fa-star";
+                            star.appendChild(iii);
+                        }
+
+                        for (var k = 0; k < 5 - sNumber[i]; k++) {
+                            var jjj = document.createElement("i");
+                            jjj.className = "far fa-star";
+                            star.appendChild(jjj);
+                        }
+                    }
+            }
+        }
+    </script>
+    
 	<script>
 		// 최신순, 인기순, 가격순
 		let tempvar = ${categoryList}[0].cateCode;
@@ -233,8 +360,6 @@
 							}
 						}
 					}
-					
-					console.log(result);
 					
 					// 선택한 카테고리의 갯수와 result를 비교, 같으면 전체 카테고리가 전부 포함되어 있는 것이므로 off 클래스 제거
 					if(result == $(".last-nav-td").children().length){
@@ -388,13 +513,6 @@
 			 }
 			 
 			 var cate2Select = JSON.parse('${ categoryList }');
-			 
-			 /*
-			 for(var i = 0; i < cate2Arr.length; i++) {
-			   cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
-			        + cate2Arr[i].cateName + "</option>");
-			 }
-			 */
 			 
 			 cate2Select.children().remove();
 			
