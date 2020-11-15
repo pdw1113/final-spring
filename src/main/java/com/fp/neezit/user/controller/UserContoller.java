@@ -892,7 +892,6 @@ public class UserContoller {
 
 	}
 	
-	
 	@RequestMapping("buyList.do")
 	public String buyList() {
 		return "user/myPage/buyList";
