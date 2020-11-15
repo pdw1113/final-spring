@@ -64,11 +64,18 @@ public class ProductController {
 		if(what == "최신순") {
 			what = null;
 		}
-
-		System.out.println(what);
+		
+		System.out.println("정렬 순서 : " + what);
 
 		String no = Integer.toString(navNo);
+		String start = "1";
+		String end = "9";
+		
 		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("no", no);
+		map.put("start", start);
+		map.put("end", end);
 
 		map.put("no", no);
 		map.put("what", what);
@@ -81,6 +88,38 @@ public class ProductController {
 		model.addAttribute("what", what);
 
 		return "user/product/productList";
+	}
+	
+	/**
+	 * 1─1. 리스트 무한 스크롤
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
+	@RequestMapping(value="infinityScroll.do", produces="application/json; charset=UTF-8")
+	public void infinityScroll(HttpServletResponse response, int navNo, int startPage, int endPage, String what) throws JsonIOException, IOException {
+		System.out.println("1분류 : " + navNo);
+		System.out.println("시작페이지 : " + startPage);
+		System.out.println("끝 페이지 : " + endPage);
+		System.out.println("정렬 순서 : " + what);
+		
+		String no = Integer.toString(navNo);
+		String start = Integer.toString(startPage);
+		String end = Integer.toString(endPage);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("no", no);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("what", what);
+		
+		List<Product> scrollList = pService.productList(map);
+		
+		response.setContentType("application/json; charset=utf-8");
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(scrollList,response.getWriter());
 	}
 
 	/**

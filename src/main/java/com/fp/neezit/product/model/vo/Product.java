@@ -18,7 +18,7 @@ public class Product {
 	private Date createDate;    // 생성날짜
 	private Date modifyDate;    // 수정날짜
 	private int count;          // 구매자수
-	private double star;			// 상품 별점
+	private double star;		// 상품 별점
 
 	public Product() {
 		super();
