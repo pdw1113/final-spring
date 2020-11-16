@@ -62,7 +62,7 @@ public class ProductController {
 		List<ProductCategory> category2 = pService.categoryList2(navNo);
 
 		if(what == "최신순") {
-			what = null;
+			what = "";
 		}
 		
 		System.out.println("정렬 순서 : " + what);
@@ -101,6 +101,7 @@ public class ProductController {
 		System.out.println("시작페이지 : " + startPage);
 		System.out.println("끝 페이지 : " + endPage);
 		System.out.println("정렬 순서 : " + what);
+		System.out.println("----------------");
 		
 		String no = Integer.toString(navNo);
 		String start = Integer.toString(startPage);

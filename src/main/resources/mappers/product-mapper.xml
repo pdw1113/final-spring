@@ -92,7 +92,7 @@
 			start with CATECODE = #{navNo}
 			connect by prior CATECODE = CATECODEREF
 		</select>
-	
+		
 		<select id="categoryList2"
 			resultType="com.fp.neezit.product.model.vo.ProductCategory">
 			select
@@ -105,19 +105,25 @@
 		
 		<!-- 상품 목록 불러오기 -->
 		<select id="getProductList" parameterType="hashmap" resultMap="productResultSet">
-            SELECT *
-			FROM
-            (select rownum as rownumber, p.* from PRODUCT p
-            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
-			WHERE CATECODE = 10
-            ) a
-			WHERE a.rownumber <![CDATA[ >= ]]> #{start} AND a.rownumber <![CDATA[ <= ]]> #{end}
-			<if test="what eq '인기순'.toString()">
-				ORDER BY PRODUCT_COUNT DESC
-			</if>
-			<if test="what eq '가격순'.toString()">
-				ORDER BY PRODUCT_PRICE
-			</if>
+            SELECT * FROM
+            (select ROWNUM as rownumber, a.* from 
+	            (SELECT p.* from PRODUCT p
+	            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+				WHERE CATECODE = #{no}
+				<choose>
+					<when test="what eq '인기순'.toString()">
+						ORDER BY PRODUCT_COUNT DESC
+					</when>
+					<when test="what eq '가격순'.toString()">
+						ORDER BY PRODUCT_PRICE
+					</when>
+					<otherwise>
+						ORDER BY PRODUCT_CREATE_DATE DESC
+					</otherwise>
+				</choose>
+				) a
+			) b
+			WHERE b.rownumber <![CDATA[ >= ]]> #{start} AND b.rownumber <![CDATA[ <= ]]> #{end}
 		</select>
 	<!-- END 상품 리스트 관련 END -->
 
