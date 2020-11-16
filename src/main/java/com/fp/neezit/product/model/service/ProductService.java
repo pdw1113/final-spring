@@ -136,13 +136,13 @@ public interface ProductService {
 	 */
 	public int modifyComment(HashMap<String, String> map);
 
-	/**
-	 * 상품 구매 메소드
-	 * @param buylist
-	 * @return
-	 */
-	public int buyProduct(UserBuyList buylist);
 
 	public int wishProductName(HashMap<String, String> map3);
+
+	public Product getProductUpdate(HashMap<Object, Object> map);
+
+	public int Productupdate(Product product);
+
+	public int productDelete(int no);
 	
 }

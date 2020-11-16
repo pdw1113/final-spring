@@ -30,8 +30,13 @@
         <c:forEach var="product" items="${ myProductList }" varStatus="status">
 	        <li class="main_contents_index">
 	          <div>
-	          	
+	          	<c:url var="productUpdate" value="productUpdate.do">
+					<c:param name="no" value="${ product.no }"/>
+				</c:url>
 				<c:url var="myProductDetail" value="myProductDetail.do">
+					<c:param name="no" value="${ product.no }"/>
+				</c:url>
+				<c:url var="productDelete" value="productDelete.do">
 					<c:param name="no" value="${ product.no }"/>
 				</c:url>
 	            <a href="${ myProductDetail }">
@@ -52,9 +57,12 @@
 	              </span>
 	            </div>
 	          </div>
+	          <div>
+	        	<a class="btn_sgm" href="${ productUpdate }">수정</a>
+                <a class="btn_sgm_2" href="${productDelete}" id="cancel">삭제</a>
+              </div>
 	        </li>
         </c:forEach>
-
       </ul>
     </div>
   </div>
@@ -62,8 +70,19 @@
 <%@ include file="../../common/footer.jsp" %>
 </div>
 </body>
-
+		
  		<script>
+  		// 상품 삭제 확인창
+		$('.btn_sgm_2').on('click',function(){
+			let co = confirm('정말로 삭제하시겠습니까?');
+			if(co){
+				return true;
+			}else{
+				return false;
+			}
+		}); 
+ 		
+ 		
         // appned 할 곳
         let starAppend = document.getElementsByClassName('main_star_container_index');
         // 상품의 갯수만큼 for문
