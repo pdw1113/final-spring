@@ -507,23 +507,4 @@ public class ProductController {
 		return "user/myPage/wishList";
 	}
 	
-	/**
-	 * 13. 상품 구매 메소드 AJAX
-	 * 
-	 * @param buylist
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("buyProduct.do")
-	public String wishDelete(UserBuyList buylist){
-		
-		int result = pService.buyProduct(buylist);
-
-		if (result == 1) { 
-			return "ok";
-		} else {
-			return "fail";
-		}
-	}
-	
 }
