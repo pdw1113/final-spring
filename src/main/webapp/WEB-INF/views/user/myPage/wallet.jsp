@@ -138,8 +138,8 @@
                                  </select>
                            </li>
                            <li><input type="text" name="bankuser" class="bankuser_wallet" id="bankuser" value="" placeholder="예금주명 입력"></li>
-                           <li><input type="text" name="bankno" class="bankno_wallet" id="bankno" value="" placeholder="’-’ 없이 계좌번호 입력"></li>
-                           <li><input type="text" name="price" class="price_wallet" id="price" value="" placeholder="출금 머니 금액을 입력해 주십시오."></li>
+                           <li><input type="number" name="bankno" class="bankno_wallet" id="bankno" value="" placeholder="’-’ 없이 계좌번호 입력"></li>
+                           <li><input type="number" name="money" class="price_wallet" id="money" value="" placeholder="출금 머니 금액을 입력해 주십시오."></li>
                         </ul>
                         
                             </div>
@@ -174,20 +174,15 @@
                 $('#myModal_wallet').hide();
            };
            
-           //계좌 확인 버튼 데이터 찍어보기
-           $('#bankSendBtn_wallet').click(function(){
-              var bankCode = $('.bankCode_wallet option:selected').val();
-              var bankUser = $('#bankuser').val();
-              var bankNo = $('#bankno').val();
-              var price = $('#price').val();
-              alert("은행코드"+bankCode+"예금주:"+bankUser+"계좌번호"+bankNo+"금액"+price);
-           });
            
            function btnclick(){
         	   var num1 = ${cash};
-        	   var num2 = $('#price').val();
+        	   var num2 = $('#money').val();
         	   if(num1<num2){
         		   alert("출금금액이 보유금액을 초과했습니다.");
+        		   return false;
+        	   }else if(num2==""||num2==null){
+        		   alert("출금금액을 입력하세요.");
         		   return false;
         	   }else{
         		   if(confirm("출금금액 : " +num2+ "\n출금하시겠습니까?")){

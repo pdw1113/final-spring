@@ -116,7 +116,6 @@ public class ProductDao{
 	public int modifyComment(HashMap<String, String> map) {
 		return sqlSession.update("productMapper.modifyComment", map);
 	}
-
 	public int buyProduct(UserBuyList buylist) {
 		return sqlSession.insert("productMapper.buyProduct", buylist);
 	}
@@ -124,5 +123,4 @@ public class ProductDao{
 	public int wishProductName(HashMap<String, String> map3) {
 		return sqlSession.selectOne("productMapper.productName",map3);
 	}
-	
 }

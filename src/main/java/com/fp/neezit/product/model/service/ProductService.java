@@ -145,6 +145,4 @@ public interface ProductService {
 
 	public int wishProductName(HashMap<String, String> map3);
 	
-
-   
 }

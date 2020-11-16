@@ -500,7 +500,6 @@ public class ProductController {
 		return "user/myPage/wishList";
 	}
 	
-	
 	/**
 	 * 13. 상품 구매 메소드 AJAX
 	 * 
@@ -519,6 +518,5 @@ public class ProductController {
 			return "fail";
 		}
 	}
-	
 	
 }
