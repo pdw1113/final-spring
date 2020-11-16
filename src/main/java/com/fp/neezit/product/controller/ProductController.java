@@ -584,10 +584,12 @@ public class ProductController {
 		}
 
 		int result = pService.Productupdate(product);
+		
+		int no = product.getNo();
 
 		if (result > 0) {
 			model.addAttribute("master", master);
-			return "user/product/productDetail";
+			return "redirect:myProductDetail.do?no=" + no;
 		} else {
 			model.addAttribute("msg", "상품수정 실패!");
 			return "common/errorPage";
