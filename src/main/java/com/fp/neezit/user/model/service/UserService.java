@@ -15,6 +15,7 @@ import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 
 public interface UserService {
 	
@@ -84,4 +85,12 @@ public interface UserService {
 	ArrayList<UserWallet> getUserWalletList(PageInfo pi, HashMap<String, String> map);
 
 	int nickCheck2(HashMap<String, String> map);
+
+	int buyProduct(UserBuyList buylist);
+
+	ArrayList<UserBuyList> getUserBuyList(PageInfo pi, HashMap<String, String> map);
+
+	int getBuyListCount(HashMap<String, String> map);
+
+	int buyProductMoney(Map<String, String> map);
 }

@@ -10,7 +10,7 @@ public class UserBuyList {
 	private String master;	// 구매한 상품의 능력자 이름 
 	private String title;	// 구매한 상품의 제목
 	private int money;		// 구매한 상품의 가격
-	private String refund;	// 환불 N이면 안한 것, Y이면 한 것.
+	private String refund;	// 환불 N이면 안한 것, Y이면 한 것. Z면 환불대기
 	
 	public UserBuyList() {
 		super();

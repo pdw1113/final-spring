@@ -270,9 +270,4 @@
         WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
 	</select>
 	
-	<insert id="buyProduct" parameterType="UserBuyList">
-		INSERT INTO BUYLIST
-		VALUES(#{email},USER_BUY_NUM.NEXTVAL,DEFAULT,#{master},#{title},#{money},DEFAULT)
-	</insert>
-
 </mapper>

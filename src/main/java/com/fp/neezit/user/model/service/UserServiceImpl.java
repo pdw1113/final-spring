@@ -20,6 +20,7 @@ import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 
 @Service("uService")
 public class UserServiceImpl implements UserService{
@@ -199,6 +200,26 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int nickCheck2(HashMap<String, String> map) {
 		return uDao.nickCheck2(map);
+	}
+
+	@Override
+	public int buyProduct(UserBuyList buylist) {
+		return uDao.buyProduct(buylist);
+	}
+
+	@Override
+	public int getBuyListCount(HashMap<String, String> map) {
+		return uDao.getBuyListCount(map);
+	}
+
+	@Override
+	public ArrayList<UserBuyList> getUserBuyList(PageInfo pi, HashMap<String, String> map) {
+		return uDao.getUserBuyList(pi,map);
+	}
+
+	@Override
+	public int buyProductMoney(Map<String, String> map) {
+		return uDao.buyProductMoney(map);
 	}
 
 }

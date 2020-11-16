@@ -116,9 +116,5 @@ public class ProductDao{
 	public int modifyComment(HashMap<String, String> map) {
 		return sqlSession.update("productMapper.modifyComment", map);
 	}
-
-	public int buyProduct(UserBuyList buylist) {
-		return sqlSession.insert("productMapper.buyProduct", buylist);
-	}
 	
 }

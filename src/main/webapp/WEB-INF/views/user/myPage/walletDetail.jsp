@@ -70,10 +70,10 @@
                        </tr>
                    </thead>
                    <tbody>
-                     <c:if test="${empty uw}">
-                   <tr>
-                           <td colspan="5" style="width: 1500px;">결제 내역이 없습니다.</td>
-                   </tr>
+                   <c:if test="${empty uw}">
+                   		<tr>
+                           		<td colspan="5" style="width: 1500px;">결제 내역이 없습니다.</td>
+                   		</tr>
                    </c:if>
                    
                    <c:if test="${!empty uw}">
@@ -114,7 +114,7 @@
 				</c:if>
 				
 				<!-- 페이지 -->
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 					<c:if test="${ p eq pi.currentPage }">
 						<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
 					</c:if>
@@ -157,9 +157,8 @@
       <script>
          $('.choice_wdetail').click(function(){
         	 
-        	 $('.datepre_wdetail').val("");
-        	 $('.datepost_wdetail').val("");
-        	 
+        	  $('.datepre_wdetail, .datepost_wdetail').val("");
+        	  
         	 if($(this).text()=='오늘'){
         		 $("#buttonday").val("1");
         	 }else if($(this).text()=='1개월'){
@@ -169,9 +168,7 @@
         	 }
         	 
              $('.choice_wdetail').css('background-color',"#ddd");
-             $('.datepre_wdetail, .datepost_wdetail').val("");
              $(this).css('background','rgb(250,190,0)');
-             
          });
          
          $('.datepre_wdetail, .datepost_wdetail').click(function(){

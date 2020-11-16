@@ -101,6 +101,16 @@
       	<result property="star" column="PRODUCT_STAR" />
    	</resultMap>
 	
+	<resultMap type="UserBuyList" id="UserBuyListResultSet">
+		<id property="num" column="USER_BUY_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="date" column="USER_BUY_DATE" />
+		<result property="master" column="USER_BUY_MASTER" />
+		<result property="title" column="USER_BUY_TITLE" />
+		<result property="money" column="USER_BUY_MONEY" />
+		<result property="refund" column="USER_BUY_REFUND" />
+	</resultMap>
+	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">
@@ -361,7 +371,7 @@
 	<!-- 출금 -->
 	<update id="withdraw" parameterType="hashmap">
 		UPDATE CASH SET USER_CASH =
-		USER_CASH - #{price} WHERE USER_EMAIL=#{email}
+		USER_CASH - #{money} WHERE USER_EMAIL=#{email}
 	</update>
 	
 	<!-- 출금시 결제리스트 삽입 -->
@@ -370,7 +380,7 @@
         VALUES(#{email},
         (SELECT NVL(MAX(USER_PAY_NUM),0)+1 
         		FROM PAYLIST WHERE USER_EMAIL=#{email}),
-		DEFAULT,'니즈머니 출금',#{price},'계좌이체')
+		DEFAULT,'니즈머니 출금',#{money},'계좌이체')
 	</insert>
 	
 	<!-- 결제리스트 리스트 카운트 -->
@@ -461,4 +471,97 @@
  		</if>
 	</select>
 	
+	<insert id="buyProduct" parameterType="UserBuyList">
+		INSERT INTO BUYLIST
+		VALUES(#{email},
+        (SELECT NVL(MAX(USER_BUY_NUM),0)+1 
+        		FROM BUYLIST WHERE USER_EMAIL=#{email}),
+        DEFAULT,#{master},#{title},#{money},DEFAULT)
+	</insert>
+	
+	<select id="getUserBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
+			SELECT * FROM BUYLIST
+			WHERE USER_EMAIL=#{email} 
+			
+		<if test="search_way eq '%Z'.toString()">
+ 			AND USER_BUY_REFUND LIKE '%Z'
+ 		</if>
+ 		
+ 		<if test="search_way eq '%Y'.toString()">
+ 			AND USER_BUY_REFUND LIKE '%Y'
+ 		</if>
+ 		
+		<if test="buttonday eq ''.toString() and preday eq ''.toString()">
+			ORDER BY USER_BUY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 오늘 -->
+ 		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
+            AND USER_BUY_DATE BETWEEN TO_CHAR(SYSDATE)
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_BUY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 1개월 -->
+ 		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
+            AND USER_BUY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_BUY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 6개월 -->
+ 		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
+            AND USER_BUY_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
+			AND TO_DATE(SYSDATE)+0.99999
+			ORDER BY USER_BUY_NUM DESC
+ 		</if>
+ 		
+ 		<!-- 임의 지정 -->
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			AND USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+			ORDER BY USER_BUY_NUM DESC
+ 		</if>
+	</select>
+	
+	<select id="getBuyListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) FROM BUYLIST 
+		WHERE USER_EMAIL=#{email}
+ 		
+ 		<if test="search_way eq '%Z'.toString()">
+ 			AND USER_BUY_REFUND LIKE '%Z'
+ 		</if>
+ 		
+ 		<if test="search_way eq '%Y'.toString()">
+ 			AND USER_BUY_REFUND LIKE '%Y'
+ 		</if>
+ 		
+ 		<!-- 오늘 -->
+ 		<if test="buttonday eq '1'.toString() and preday eq ''.toString()">
+			AND USER_BUY_DATE 
+			BETWEEN TO_CHAR(SYSDATE)
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 1개월 -->
+ 		<if test="buttonday eq '2'.toString() and preday eq ''.toString()">
+			AND USER_BUY_DATE 
+			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2))
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 6개월 -->
+ 		<if test="buttonday eq '3'.toString() and preday eq ''.toString()">
+			AND USER_BUY_DATE 
+			BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7))
+			AND TO_DATE(SYSDATE)+0.99999
+ 		</if>
+ 		
+ 		<!-- 임의 지정 -->
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			AND USER_BUY_DATE 
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+	</select>
 </mapper>

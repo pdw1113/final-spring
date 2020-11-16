@@ -2,6 +2,7 @@ package com.fp.neezit.user.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserWallet;
 
 @Controller
@@ -43,7 +45,6 @@ public class UserMyPageController {
 		
 		// 보유 니즈머니 가져오기
 		int cash = uService.userCash(u.getEmail());
-		System.out.println(cash);
 
 		ArrayList<UserWallet> uw = uService.getUserWallet(u.getEmail());
 
@@ -187,7 +188,7 @@ public class UserMyPageController {
 	 * @return
 	 */
 	@RequestMapping(value = "withdraw.do", method = RequestMethod.POST) 
-	public String withdraw(Model model, String price,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	public String withdraw(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
 	
 	User u = (User) session.getAttribute("loginUser");
 	
@@ -195,7 +196,7 @@ public class UserMyPageController {
 	
 	map.put("email", u.getEmail());
 	
-	map.put("price",price);
+	map.put("money",money);
 	
 	int result1 = uService.withdraw(map);
 	
@@ -354,5 +355,86 @@ public class UserMyPageController {
 			model.addAttribute("sw", 3);
 			return "user/myPage/deleteUser";
 		}
+	}
+	
+	/**
+	 * 13. 상품 구매 메소드 AJAX
+	 * 
+	 * @param buylist
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("buyProduct.do")
+	public String wishDelete(UserBuyList buylist,String email,String money){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("email", email);
+		map.put("money", money);
+		
+		int result1 = uService.buyProduct(buylist);
+		
+		int result2 = uService.withdraw(map);
+		
+		if (result1 == 1 && result2==1) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 
+	 * 14. 구매목록 리스트 
+	 * 
+	 * @param session
+	 * @param model
+	 * @param buttonday
+	 * @param preday
+	 * @param postday
+	 * @param search_way
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("buyList.do")
+	public String buyList(HttpSession session,Model model,String buttonday,String preday,
+			String postday,String search_way,@RequestParam(value="currentPage"
+			, required=false, defaultValue="1")int currentPage) {
+		
+		if(buttonday==null&&preday==null&&postday==null) {
+			buttonday="";
+			preday="";
+			postday="";
+		}
+		
+		User u = (User) session.getAttribute("loginUser");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("email", u.getEmail());
+
+		map.put("buttonday",buttonday);
+
+		map.put("preday",preday);
+
+		map.put("postday",postday);
+
+		map.put("search_way",search_way);
+		
+		int listCount = uService.getBuyListCount(map); 
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
+		
+		ArrayList<UserBuyList> ub = uService.getUserBuyList(pi,map);
+		
+		model.addAttribute("ub",ub);
+		model.addAttribute("pi",pi);
+		model.addAttribute("email",u.getEmail());
+		model.addAttribute("buttonday",buttonday);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("search_way",search_way);
+		
+		return "user/myPage/buyList";
 	}
 }

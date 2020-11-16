@@ -141,9 +141,4 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.modifyComment(map);
 	}
 
-	@Override
-	public int buyProduct(UserBuyList buylist) {
-		return pDao.buyProduct(buylist);
-	}
-
 }
