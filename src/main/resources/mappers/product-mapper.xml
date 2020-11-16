@@ -109,7 +109,7 @@
 			FROM
             (select rownum as rownumber, p.* from PRODUCT p
             JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
-			WHERE CATECODE = 10
+			WHERE CATECODE = ${no}
             ) a
 			WHERE a.rownumber <![CDATA[ >= ]]> #{start} AND a.rownumber <![CDATA[ <= ]]> #{end}
 			<if test="what eq '인기순'.toString()">

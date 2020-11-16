@@ -365,7 +365,7 @@ public class UserMyPageController {
 	 */
 	@ResponseBody
 	@RequestMapping("buyProduct.do")
-	public String wishDelete(UserBuyList buylist,String email,String money){
+	public String buyProduct(UserBuyList buylist,String email,String money){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
