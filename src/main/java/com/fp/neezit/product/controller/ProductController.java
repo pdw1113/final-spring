@@ -315,11 +315,18 @@ public class ProductController {
 
 		UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
 
+		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
+		
+		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
+		
 		// 찜 정보 가져오기
 		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
-		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
-		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
-		map.put("email", u.getEmail());    
+		if(u != null) { // 로그인
+			map.put("email", u.getEmail()); 
+		}else {
+			map.put("email", ""); 
+		}
+		
 		map.put("no", str);
 		WishList wl = pService.getWishListDetail(map);
 		int replyCount = pService.getReplyCount(p.getNickName());

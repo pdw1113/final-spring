@@ -270,7 +270,10 @@
         SELECT *
 		FROM WISH_LIST W
         JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
-        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+        WHERE W.PRODUCT_NO = #{no} 
+        <if test="!email.equals('')">
+        AND W.USER_EMAIL = #{email}
+        </if>
 	</select>
 	
 	<insert id="buyProduct" parameterType="UserBuyList">
