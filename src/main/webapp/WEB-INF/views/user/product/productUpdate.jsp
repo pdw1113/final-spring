@@ -22,7 +22,7 @@
 
 <body>
 	<div class="frame_addproduct">
-		<form action="pInsert.do" role="form" method="post" autocomplete="off" id="success" enctype="multipart/form-data" >
+		<form action="pUpdate.do" role="form" method="post" autocomplete="off" id="success" enctype="multipart/form-data" >
 			<div class="warring_text_addproduct">
 				<h2 class="tit_sect_addproduct">시간 상품등록</h2>
 				<p class="text">
@@ -44,7 +44,8 @@
 						onclick="fileupload();">
 						<img src="resources/img/btn_portrait_edit.png">
 					</button>
-					<img class="img_addproduct" src="resources/img/not_image.png">
+					<img class="img_addproduct" src="resources/pUploadFiles/${ product.renamePic }">
+					<input type="hidden" name="pPic" value="${ product.renamePic }"/>
 				</div>
 				<!-- 닉네임 성별 나이 -->
 				<div class="person_status_addproduct">
@@ -70,7 +71,8 @@
 				<!-- 제목 -->
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">상품명 (한 줄 제목)</span> 
-					<input type="text" placeholder="제목 입력" class="input_text_addproduct" name="title" id="title">
+					<input type="text" placeholder="제목 입력" class="input_text_addproduct" name="title" id="title"
+					value="${product.title}">
 				</div>
 				<!-- 카테고리 -->
 				<div class="status_div_addproduct">
@@ -93,11 +95,11 @@
 	            </div>
 	            
 	            <!-- 등록한 카테고리 -->
-	            <input type="hidden" class="input_text_addproduct" name="category" id="hiddenInput">
+	            <input type="hidden" value="${product.category}" class="input_text_addproduct" name="category" id="hiddenInput">
 	            
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">기본금액</span> 
-					<input type="number" class="input_money_addproduct" name="price" id="price"><span
+					<input type="number" class="input_money_addproduct" name="price" id="price" value="${product.price}"><span
 						class="won_addproduct">원</span>
 				</div>
 				<!-- 경력 -->
@@ -124,7 +126,7 @@
 				<div class="status_div_addproduct">
 					<div class="input_title_addproduct m-b-10">포트폴리오(상품관련)</div>
 					<div class="portfolio_addproduct">
-						<textarea id="summernote_portfolio" name="portfolio" ></textarea>
+						<textarea id="summernote_portfolio" name="portfolio"></textarea>
 					</div>
 				</div>
 				<!-- 자기소개 및 상품 소개 -->
@@ -137,9 +139,10 @@
 			</div>
 			<!-- 대분류 카테고리 -->
 			<input type="hidden" name="cateone" value="" id="cateone">
+			<input type="hidden" name="caree" value="${prodcut.career}" id="caree">
 			<!--등록 완료 -->
 			<div class="finish_button_div_addproduct">
-				<button class="finish_button_addproduct" onclick="return validate();">등록완료</button>
+				<button class="finish_button_addproduct" onclick="return validate();">수정완료</button>
 			</div>
 		</form>
 	</div>
@@ -147,6 +150,24 @@
 	</body>
 	
 	<script>
+
+		(function(){
+			 // 뷰에 있던 경력가져오기 
+			 let career = "${product.career}";
+			 $('#career').val(career).prop("selected", true);			 
+			
+			 // 카테고리 배열로 담아서 넣기(추가됨)
+             let cate = "${product.category}";
+             let arr = cate.split(",");
+			 console.log(arr);
+             for(a in arr){
+                 $("#added").append("<span>" + arr[a] + "</span>");
+              }
+
+		})();
+		
+		
+		
 		// 대분류 가져오기
 		(function(){
 			let $mycate = '${category}';
@@ -155,17 +176,22 @@
 			for(var i = 0; i < allCate.length; i++){
 				if($mycate.match(allCate[i]) != null){
 					$("#oneCate").append("<option>" + allCate[i] + "</option>");
+					
 				}
 			}
+			
+			// 뷰에 있던 대분류 값 넣기
+			 let cateone = "${product.cateone}"
+			 $('#oneCate').val(cateone).prop("selected", true);  
 		})();
 		
 		// option태그는 onclick, onselect등 먹히질 않으니 
 		// select태그에 onchange메소드를 걸어준다.
-		$("#oneCate").change(function(){
+ 		$("#oneCate").change(function(){
 			let oneSelected = $('#oneCate option:selected').val();
 			$("#cateone").val(oneSelected);
 			console.log($("#cateone").val());
-		});
+		}); 
 		
 		(function(){
 			// Controller에서 받아온 능력자 카테고리
@@ -188,22 +214,16 @@
 		// 유효성 검사
 		function validate(){
 			
-			// 이미지 등록
-		    if(!document.getElementById("upload").value){
-		        alert("사진을 넣어주세요");
-		        return false;
-	      	}
-	      	
-	      	if(!document.getElementById("title").value){
+ 	      	if(!document.getElementById("title").value){
 	      		alert("상품명을 넣어주세요");
 	      		document.getElementById("title").focus();
 		        return false;
-	      	}
+	      	} 
 	      	
 	      	if($("#cateone").val().match("대분류")){
 				alert("대분류를 선택해 주세요.");
 				return false;
-			}
+			} 
 			
 			if($('#hiddenInput').val()==""){
                 alert("카테고리를 추가해주세요"); 
@@ -211,19 +231,19 @@
                 return false;
           	}
 
-			if(!document.getElementById("price").value){
+ 			if(!document.getElementById("price").value){
                 alert("기본금액을 입력해주세요"); 
                 document.getElementById("price").focus();
                 return false;
           	}
-			
+			 
 			if(!document.getElementById("career").value){
                 alert("경력을 선택해주세요"); 
                 document.getElementById("career").focus();
                   return false;
           	}
           	
-          	if(!document.getElementById("summernote_portfolio").value){
+           	if(!document.getElementById("summernote_portfolio").value){
                 alert("포트폴리오를 입력해주세요"); 
                 $("#summernote_portfolio").focus();
                 return false;
@@ -233,14 +253,14 @@
                 alert("상품소개를 입력해주세요"); 
                 document.getElementById("summernote_Introduce").focus();
                   return false;
-          	}
+          	} 
 			
 			return true;
 			
 		}
 	</script>
 	
-     <script>
+ <script>
        
         // 나의 카테고리로 삭제하는 함수
         const subCategory = function(){
@@ -280,6 +300,7 @@
                  $("#added").append("<span>" + choice + "</span>");
                  
              }
+             
              
              // Controller 전달용 
              let obj2 = $('#added span');
@@ -361,6 +382,9 @@
              			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
          	          
          		});
+      		  // Summernote에 글 내용 추가하는 코드
+      		  $("#summernote_portfolio").summernote('code',  '${product.portfolio}');
+      		
       
                  $('#summernote_Introduce').summernote({
          			  toolbar: [
@@ -375,7 +399,7 @@
              			    ['insert',['picture','link','video']],
              			    ['view', ['fullscreen', 'help']]
              			  ],
-         			  height: 200,                 // 에디터 높이
+         			  height: 300,                 // 에디터 높이
          			  minHeight: null,             // 최소 높이
          			  maxHeight: null,             // 최대 높이
          			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
@@ -385,6 +409,8 @@
              			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
          	          
          		});
+       		  // Summernote에 글 내용 추가하는 코드
+       		  $("#summernote_Introduce").summernote('code',  '${product.introduce}');
          	});
    </script>
 </html>

@@ -198,6 +198,7 @@
 							<li>현재 상품 평균 <i class="fas fa-star"></i>&nbsp;<span class="avg">${ product.star }</span></li>
 						</ul>
 					</div>
+					<c:if test="${ !empty sessionScope.loginUser }">
 					<div class="inputReview">
 						<textarea placeholder="상품을 구매한 회원만 상품평을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
 						<input type="hidden" value="0" id="firstno"/><!-- 나중 대댓글을 위한 -->
@@ -206,6 +207,7 @@
 							상품평<br>작성
 						</button>
 					</div>
+					</c:if>
 					<!-- 댓글 영역 -->
 					<div id="innerReviewDiv">
 						<ul class="cmt_wrap">
@@ -256,6 +258,39 @@
 					<li>시간당 요금</li>
 					<li><span id="money">${ product.price }</span>&nbsp;원</li>
 				</ul>
+				<c:if test="${ empty sessionScope.loginUser }">
+            	<ul class="p_flex">
+					<li>구매 시간</li>
+					<li class="number_change"><i
+						class="fas fa-angle-left detail_btn"></i> <span id="time">1</span> <i
+						class="fas fa-angle-right detail_btn"></i></li>
+					<li>시간</li>
+				</ul>
+				<ul class="p_flex">
+					<li>구매 기간</li>
+					<li class="number_change"><i
+						class="fas fa-angle-left detail_btn"></i> <span id="day">1</span> <i
+						class="fas fa-angle-right detail_btn"></i></li>
+					<li>일간</li>
+				</ul>
+				<ul class="btn_area btn_m">
+					<li class="wish"><a href="#" onclick="alert('로그인이 필요합니다');">
+						<c:if test="${wishList.no != product.no }">
+							<i class="fa-heart far"></i>
+						</c:if>	
+						<c:if test="${wishList.no == product.no }">
+							<i class="fa-heart fas"></i>
+						</c:if>	
+					</a></li>
+					<li class="apply"><a href="#" onclick="alert('로그인이 필요합니다');">
+							바로 구매하기 </a></li>
+				</ul>
+				<ul class="btn_area">
+					<li class="apply-2"><a href="#" onclick="alert('로그인이 필요합니다');">
+							채팅하기 </a></li>
+				</ul>
+         		</c:if>
+         		<c:if test="${ !empty sessionScope.loginUser }">
 				<ul class="p_flex">
 					<li>구매 시간</li>
 					<li class="number_change"><i
@@ -286,6 +321,7 @@
 					<li class="apply-2"><a href="#" onclick="alert('로그인이 필요합니다');">
 							채팅하기 </a></li>
 				</ul>
+				</c:if>
 			</div>
 		</div>
 		<!-- // 오른쪽 가격 영역 -->
@@ -304,7 +340,12 @@
 					class="fa-star far"></i>
 			</div>
 			<div>
+				<c:if test="${ !empty sessionScope.loginUser }">
 				<button class="star_btn" id="addReply">별점 등록</button>
+				</c:if>
+				<c:if test="${ empty sessionScope.loginUser }">
+				<button class="star_btn" id="addReply" onclick="alert('로그인이 필요합니다');">별점 등록</button>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -374,6 +415,7 @@
 					}
 				});	
 				alert("구매가 완료되었습니다. 능력자와 채팅을 시작해보세요!");
+				location.reload();
 			}
 		}
 		

@@ -46,9 +46,4 @@ public class UserPageController {
 	public String popUp() {
 		return "user/popUp";
 	}
-	
-	@RequestMapping("buyList.do")
-	public String buyList() {
-		return "user/myPage/buyList";
-	}
 }

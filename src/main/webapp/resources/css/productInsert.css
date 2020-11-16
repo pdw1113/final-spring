@@ -241,14 +241,6 @@ height:25px;
     display: inline-block;
 }
 
-
-.cate_add_btn{
-   height: 36px;
-   border: 1px solid #a3a0a0;
-   font-size: 16px;
-   width: 50px;
-}
-
 /* 추가 */
 .m-l-add{
    margin-left:105px;
@@ -272,5 +264,11 @@ height:25px;
 
 .m-l-add span:last-child:after{
    content: none;
+}
+.cate_add_btn, .cate_sub_btn{
+   height: 36px;
+   border: 1px solid #a3a0a0;
+   font-size: 16px;
+   width: 50px;
 }
 /* *** */

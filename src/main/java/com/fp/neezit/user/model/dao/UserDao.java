@@ -3,6 +3,7 @@ package com.fp.neezit.user.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
 import com.fp.neezit.user.model.vo.UserMasterSchool;
@@ -158,6 +160,26 @@ public class UserDao {
 
 	public int nickCheck2(HashMap<String, String> map) {
 		return sqlSession.selectOne("userMapper.nickCheckUp",map);
+	}
+
+	public int buyProduct(UserBuyList buylist) {
+		return sqlSession.insert("userMapper.buyProduct", buylist);
+	}
+
+	public ArrayList<UserBuyList> getUserBuyList(PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("userMapper.getUserBuyList",map,rowBounds);
+	}
+
+	public int getBuyListCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("userMapper.getBuyListCount",map);
+	}
+
+	public int buyProductMoney(Map<String, String> map) {
+		return sqlSession.update("userMapper.buyProductMoney",map);
 	}
 
 }

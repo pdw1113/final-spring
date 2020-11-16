@@ -140,15 +140,25 @@ public class ProductServiceImpl implements ProductService{
 	public int modifyComment(HashMap<String, String> map) {
 		return pDao.modifyComment(map);
 	}
-
-	@Override
-	public int buyProduct(UserBuyList buylist) {
-		return pDao.buyProduct(buylist);
-	}
-
+	
 	@Override
 	public int wishProductName(HashMap<String, String> map3) {
 		return pDao.wishProductName(map3);
+	}
+
+	@Override
+	public Product getProductUpdate(HashMap<Object, Object> map) {
+		return pDao.getProductUpdate(map);
+	}
+
+	@Override
+	public int Productupdate(Product product) {
+		return pDao.Productupdate(product);
+	}
+
+	@Override
+	public int productDelete(int no) {
+		return pDao.productDelete(no);
 	}
 
 }

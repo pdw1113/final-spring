@@ -182,7 +182,7 @@ public class ProductController {
 		}
 
 		int result = pService.insertProduct(product);
-
+		
 		if(result==1) {
 			return "redirect:myProductList.do";
 		}else {
@@ -263,7 +263,7 @@ public class ProductController {
 	 */
 	@RequestMapping("myProductDetail.do")
 	public String myProductDetail(int no, Model model,HttpSession session) {
-
+ 
 		// 상품 정보 가져오기
 		Product p = pService.getProductDetail(no);
 
@@ -316,11 +316,18 @@ public class ProductController {
 
 		UserMasterSns sns = pService.getProductSnsDetail(m.getEmail());
 
+		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
+		
+		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
+		
 		// 찜 정보 가져오기
 		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
-		String str = Integer.toString(p.getNo());              // map에 담기위해 문자열로 변환(email이 String이기 때문에 일치시키기 위함)
-		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
-		map.put("email", u.getEmail());    
+		if(u != null) { // 로그인
+			map.put("email", u.getEmail()); 
+		}else {
+			map.put("email", ""); 
+		}
+		
 		map.put("no", str);
 		WishList wl = pService.getWishListDetail(map);
 		int replyCount = pService.getReplyCount(p.getNickName());
@@ -500,26 +507,111 @@ public class ProductController {
 		model.addAttribute("product",product);
 		return "user/myPage/wishList";
 	}
-	
-	
+
 	/**
-	 * 13. 상품 구매 메소드 AJAX
-	 * 
-	 * @param buylist
+	 * 14. 상품 수정 뷰
+	 * @param no
+	 * @param pic
+	 * @param model
+	 * @param session
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping("buyProduct.do")
-	public String wishDelete(UserBuyList buylist){
+	@RequestMapping("productUpdate.do")
+	public String productUpdate(int no,String pic,Model model,HttpSession session ) {
 		
-		int result = pService.buyProduct(buylist);
+		// 로그인 세션 정보
+		User u = (User)session.getAttribute("loginUser");
 
-		if (result == 1) { 
-			return "ok";
-		} else {
-			return "fail";
+
+
+		Product p = pService.getProductDetail(no);
+		
+		// 상품 정보 가져오기 2
+		UserMaster m = pService.getProductDetail(p.getNickName());
+		
+		// 능력자 정보
+		UserMaster master = pService.getMaster(u);
+
+		// 능력자 카테고리 정보
+		List<String> category = pService.masterCategory(master);
+
+		// List를 String으로 치환
+		String string = category.toString();
+		// "[", "]" 잘라내기.
+		String real = string.substring(1,string.length()-1);
+		
+		if(p != null) {
+			model.addAttribute("product", p);
+			model.addAttribute("category", real);
+			model.addAttribute("master", master);
+			return "user/product/productUpdate";
 		}
+
+		return "common/errorPage";
 	}
 	
 	
+	/**
+	 * 15. 상품 수정
+	 * @param model
+	 * @param product
+	 * @param request
+	 * @param session
+	 * @param file
+	 * @param pPic
+	 * @return
+	 */
+	@RequestMapping("pUpdate.do")
+	public String pUpdate(Model model,Product product, HttpServletRequest request,HttpSession session,
+			@RequestParam(name="upload", required=false) MultipartFile file,
+			@RequestParam(name="pPic", required=false) String pPic) {
+		// 로그인 세션 정보
+		User u = (User)session.getAttribute("loginUser");
+
+		// 능력자 정보
+		UserMaster master = pService.getMaster(u);
+		
+		if(!file.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renamePic = saveFile(file,request);
+			if(renamePic != null) { // 파일이 잘 저장된 경우
+				product.setPic(file.getOriginalFilename());   // 원본의 파일명만 DB에저장            
+				product.setRenamePic(renamePic);
+			}
+		}
+		// 널값 넣을시 기존 프로필사진 등록
+		if(product.getPic() == null) {
+			product.setRenamePic(pPic);
+		}
+
+		int result = pService.Productupdate(product);
+		
+		int no = product.getNo();
+
+		if (result > 0) {
+			model.addAttribute("master", master);
+			return "redirect:myProductDetail.do?no=" + no;
+		} else {
+			model.addAttribute("msg", "상품수정 실패!");
+			return "common/errorPage";
+		}
+
+	}
+	
+	/**
+	 * 16. 상품 삭제
+	 * @param no
+	 * @return
+	 */
+	@RequestMapping("productDelete.do")
+	public String productDelete(int no) {
+		
+		int result = pService.productDelete(no);		
+		
+		if(result > 0) {
+		return "redirect:myProductList.do";
+		}else {
+			return "common/errorPage";
+		}
+	}
 }

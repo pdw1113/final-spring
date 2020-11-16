@@ -276,18 +276,47 @@
         SELECT *
 		FROM WISH_LIST W
         JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
-        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+        WHERE W.PRODUCT_NO = #{no} 
+        <if test="!email.equals('')">
+        AND W.USER_EMAIL = #{email}
+        </if>
 	</select>
-	
-	<insert id="buyProduct" parameterType="UserBuyList">
-		INSERT INTO BUYLIST
-		VALUES(#{email},USER_BUY_NUM.NEXTVAL,DEFAULT,#{master},#{title},#{money},DEFAULT)
-	</insert>
 
+	<!-- 찜 닉네임 중복값 가져오기  --> 
 	<select id="productName" parameterType="hashmap" resultType="_int">
 		SELECT COUNT(*)
 		FROM PRODUCT P
 		JOIN NEEZ_MASTER M ON (P.MASTER_NICKNAME = M.MASTER_NICKNAME)
 		WHERE P.MASTER_NICKNAME = #{pName} AND M.USER_EMAIL = #{email}
 	</select>
+	
+	<!-- 상품수정 뷰화면  --> 
+	<select id="ProductUpdateView" parameterType="hashmap" resultMap="productResultSet">
+		SELECT * FROM PRODUCT
+		WHERE PRODUCT_NO = #{pNo} and MASTER_NICKNAME = #{nickName}
+	</select>
+	
+	<!-- 상품 수정하기  --> 
+	<update id="ProductUpdate" parameterType="Product">
+		UPDATE PRODUCT 
+		SET PRODUCT_TITLE = #{title},
+			<if test="pic eq null">
+			PRODUCT_PIC = 'not null',
+			</if>
+			<if test="pic neq null">
+			PRODUCT_PIC = #{pic},
+			</if>
+			PRODUCT_RENAMEPIC= #{renamePic},
+			PRODUCT_CATEONE= #{cateone},
+			PRODUCT_CATEGORY= #{category},
+	        PRODUCT_PRICE= #{price},
+	        PRODUCT_CAREER= #{career},
+	        PRODUCT_PORTFOLIO= #{portfolio},
+	        PRODUCT_INTRODUCE= #{introduce}
+	    WHERE PRODUCT_NO = #{no}
+	</update>
+	
+	<delete id="ProductDelete" parameterType="int">
+		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{no}
+	</delete>
 </mapper>

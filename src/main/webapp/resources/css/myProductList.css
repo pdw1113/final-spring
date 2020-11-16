@@ -101,6 +101,7 @@ color: white;
 background-color: black;
 padding: 0.2em 0;
 box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
+text-decoration:none;
 }
 
 .btn_sgm_2{
@@ -114,6 +115,7 @@ color: white;
 border: 3px solid red;
 padding: 0.2em 0;
 box-shadow: 0 0 2px 2px rgb(0,0,0,0.2);
+text-decoration:none;
 }
 .btn_sgm:hover{
 cursor: pointer;
