@@ -151,4 +151,19 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.wishProductName(map3);
 	}
 
+	@Override
+	public Product getProductUpdate(HashMap<Object, Object> map) {
+		return pDao.getProductUpdate(map);
+	}
+
+	@Override
+	public int Productupdate(Product product) {
+		return pDao.Productupdate(product);
+	}
+
+	@Override
+	public int productDelete(int no) {
+		return pDao.productDelete(no);
+	}
+
 }

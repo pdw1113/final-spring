@@ -144,6 +144,12 @@ public interface ProductService {
 	public int buyProduct(UserBuyList buylist);
 
 	public int wishProductName(HashMap<String, String> map3);
+
+	public Product getProductUpdate(HashMap<Object, Object> map);
+
+	public int Productupdate(Product product);
+
+	public int productDelete(int no);
 	
 
    

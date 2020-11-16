@@ -124,5 +124,17 @@ public class ProductDao{
 	public int wishProductName(HashMap<String, String> map3) {
 		return sqlSession.selectOne("productMapper.productName",map3);
 	}
+
+	public Product getProductUpdate(HashMap<Object, Object> map) {
+		return sqlSession.selectOne("productMapper.ProductUpdateView",map);
+	}
+
+	public int Productupdate(Product product) {
+		return sqlSession.update("productMapper.ProductUpdate",product);
+	}
+
+	public int productDelete(int no) {
+		return sqlSession.delete("productMapper.ProductDelete",no);
+	}
 	
 }
