@@ -118,9 +118,7 @@
 			</div>
         </c:forEach>
 	</div>
-	
     <%@ include file="../../common/footer.jsp" %>	
-      
 	<script>
 	
 		// 무한 스크롤
@@ -130,16 +128,12 @@
 	    let startPage = 10;
 	    let endPage = 18;
 	    let addStar = 0;
-	    let what = null;
-	    
-		$(".selectbox").change(function(){
-			what = $(".selectbox option:selected").val();
-		});
 	    
 	    $(window).scroll(function(){ 
 	        if ($doc.height()-$win.height()-$(this).scrollTop() == 0) {
-	        	let whatTemp = what;
+	        	
 	    	    let navNo = ${categoryList}[0].cateCode;
+				let whatTemp = $(".selectbox option:selected").val();
 	    	    
 	    		$.ajax({
 	    			url:"infinityScroll.do",
@@ -175,7 +169,7 @@
 						var $imgbuy; // 5단계
 						
 	    				console.log(data);
-
+						
 	    				if(data.length > 0){ // 게시글이 있을 경우
 	    					for(var i in data){
 	    			        	
@@ -226,9 +220,6 @@
 	    						$divF.append($divS); // 2단계 추가
 	    						
 	    						$cmtWrap.append($divF);
-	    						
-	    						console.log(typeof data[i].star);
-	    						
 	    			        }
 	    				
 	    				}
@@ -381,8 +372,6 @@
 		}
 		/***** 카테고리 *****/
 		
-	
-	
 		$(function() {
 			/*마우스클릭시 버튼 색상변경*/
 			$('.List-Button').click(function() {

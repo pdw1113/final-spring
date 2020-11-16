@@ -76,6 +76,7 @@ background-color: red;
 /* 리스트 영역 */
 .Lsit-Saction{
 margin: 0 auto;
+margin-bottom: 300px !important;
 width: 1306px;
 display: grid; /* 그리드 레이아웃*/
 grid-template-columns: 435.333px 435.333px 435.333px;
@@ -217,4 +218,9 @@ justify-content: center;
 
 .fa-star-half-alt{
   color:rgb(250,190,0);
+}
+
+.include_footer{
+	margin-top: 100px;
+	}	
 }
