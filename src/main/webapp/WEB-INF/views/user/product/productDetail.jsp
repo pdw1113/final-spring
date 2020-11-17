@@ -606,7 +606,7 @@
 							
 							$pCon = $("<p class='hide'>").text(data[i].rContent); // 3-1단계
 							
-							$img = $("<img src='resources/img/동민_PIC.jpg'>"); // 4-1 단계
+							$img = $("<img>").attr("src",data[i].rPic); // 4-1 단계
 							
 							$spanName = $("<span class='name'>").text(data[i].rName); //4-2단계
 							$divDate  = $("<div class='date'>"); // 4-2단계
