@@ -354,7 +354,7 @@ public class ProductController {
 	public String addReply(Reply r,Model model,HttpSession session) {
 		User u = (User)session.getAttribute("loginUser");
 		// 능력자 프로필 이미지 가져오기
-		UserMaster um = pService.getMaster(u);
+		UserMaster um = pService.getMaster(u); 
 		if(um!=null) { // 능력자 프로필 이미지 저장
 			r.setrPic("resources/masterImg/" + um.getmProPicRe());
 		}else {			// 사용자 프로필 이미지 저장
