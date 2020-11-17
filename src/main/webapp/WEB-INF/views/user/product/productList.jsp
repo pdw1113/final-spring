@@ -119,6 +119,7 @@
         </c:forEach>
 	</div>
     <%@ include file="../../common/footer.jsp" %>	
+    
 	<script>
 	
 		// 무한 스크롤
@@ -317,7 +318,7 @@
 			window.location.href = "productList.do?navNo=" + tempvar + "&what=" + temp;
 		});
 		
-		/***** 카테고리 *****/
+		/***** 카테고리 필터 적용 *****/
 		let filter = function(){
 			// 선택한 카테고리가 있을때만 실행
 			if($(".last-nav-td").children().length != 0){
@@ -370,8 +371,9 @@
 				$(".pCategory").parent().removeClass('off');
 			}
 		}
-		/***** 카테고리 *****/
+		/***** 카테고리 필터 적용 *****/
 		
+		/* 카테고리 필터 CSS */
 		$(function() {
 			/*마우스클릭시 버튼 색상변경*/
 			$('.List-Button').click(function() {
@@ -396,16 +398,8 @@
 				
 				filter();
 			});
-
-			/* ★★★ 상뉴가 만든 코드 ★★★★ */
-
-			/* 클릭 시 동적으로 추가 된 요소 제거*/
-			/* 
-			   왜 $('.last-nav-td button').click(function(){})이 작동되지 않을까??
-			   
-			   이유 : https://jeongmatt.blogspot.com/2020/10/append-appendto-script-javascriptjquery.html
 			
-			 */
+			/* 클릭 시 동적으로 추가 된 요소 제거*/
 			$(document).on("click", ".last-nav-td button", function() {
 
 				$(this).remove();
@@ -421,33 +415,20 @@
 				filter();
 
 			});
-
-			/* ★★★ 상뉴가 만든 코드 ★★★★ */
-
-			/*드롭다운시 텍스트 변경*/
-			$('.dropdown-menu li a')
-					.click(
-							function() {
-								var selText = $(this).text();
-								$(this)
-										.parents('.btn-group')
-										.find('.dropdown-toggle')
-										.html(
-												selText
-														+ ' <span class="caret"></span>');/*btn-group 에있는 dropdown-toggle찾아서 변경 */
-							});
-
+			
 			/*초기화 클릭시 버튼색 없어짐*/
 			$('.List-NavButton').on('click', function() {
 				$('.last-nav-td').children().remove(); /*td에있는 버튼들 제거*/
 				$('.List-Button').attr('class', 'font_noto List-Button'); /*버튼 속성에 초기 버튼 css클래스 적용*/
 				
 				filter();
-			})
+			});
+			
 		});
 	</script>
+	
 	<script>
-         // 컨트롤러에서 데이터 받기
+		 /* 2분류 3분류 카테고리 뿌려주기 */	
          var jsonData = JSON.parse('${categoryList}');
          
          var cate1Arr = new Array();
