@@ -49,6 +49,7 @@
 	<resultMap type="Reply" id="replyResultSet">
 		<id property="rNo" column="REPLY_NO" />
 		<result property="pNo" column="PRODUCT_NO" />
+		<result property="rPic" column="REPLY_PIC" />
 		<result property="rContent" column="REPLY_CONTENT" />
 		<result property="rStar" column="REPLY_STAR" />
 		<result property="rName" column="USER_NAME" />
@@ -184,7 +185,7 @@
 	<!-- 댓글 등록 -->
 	<insert id="insertReply" parameterType="Reply">
 		INSERT INTO REPLY
-		VALUES(#{pNo},SEQ_RID.NEXTVAL,#{rContent},#{rStar},#{rName},DEFAULT,DEFAULT,#{refRno},#{rLevel})
+		VALUES(#{pNo},SEQ_RID.NEXTVAL,#{rPic},#{rContent},#{rStar},#{rName},DEFAULT,DEFAULT,#{refRno},#{rLevel})
 	</insert>
 	
 	<!-- 댓글 목록 -->
