@@ -21,6 +21,25 @@
 		<result property="marketingE" column="USER_MARKETING_E" />
 	</resultMap>
 	
+	<resultMap type="UserMaster" id="userMasterResultSet">
+		<id property="mNickname" column="MASTER_NICKNAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
+		<result property="mCategory" column="MASTER_CATEGORY" />
+		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
+		<result property="mWorkDay" column="MASTER_WORKDAY" />
+		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
+		<result property="mStartTime" column="MASTER_STARTTIME" />
+		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
+	</resultMap>
+	
+	<resultMap type="UserBean" id="UserBeanMap">
+		<collection property="user" resultMap="userResultSet" />
+		<collection property="userMaster" resultMap="userMasterResultSet" />
+	</resultMap>
+	
 	<!-- 금칙어 추가 -->
 	<insert id="insertWords" parameterType="Forbidden"> 
 		INSERT INTO FORBIDDEN 
@@ -134,6 +153,47 @@
 	<select id="getUser" resultMap="userResultSet">
 		SELECT * FROM NEEZ_USER
 	</select>
+	
+	 <select id="getUserListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+	</select> 
+	
+	<!-- 능력자 정보 가져오기 -->
+	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
+		SELECT *
+		FROM NEEZ_MASTER
+	</select>
 
+	<select id="getUserList" resultMap="UserBeanMap">
+		SELECT * FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+		WHERE NU.USER_EMAIL IS NOT NULL		
+		
+		<if test="search_way eq '%이메일'.toString()">
+ 			AND NU.USER_EMAIL LIKE #{email}
+ 		</if>
+ 		
+ 		<if test="search_way eq '%등급'.toString()">
+ 			AND NM.MASTER_RANKNAME LIKE #{mRankname}
+ 		</if>
+ 		
+ 		<if test="search_way eq '%이름'.toString()">
+ 			AND NU.USER_NAME LIKE LIKE #{name}
+ 		</if>
+		
+		<if test="search_way eq '%닉네임'.toString()">
+ 			AND NM.MASTER_NICKNAME LIKE LIKE #{mNickname}
+ 		</if>
+ 		
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			AND NU.USER_ENROLLDATE
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+		
+	</select>
+
+	
 </mapper>
 
