@@ -454,15 +454,11 @@ public class UserMyPageController {
 	public String buyConfirm(String email,String pNo){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
-		System.out.println("buylist = " + email);
-		System.out.println("pno = " + pNo);
 		map.put("email", email);
 		map.put("pNo", pNo);
 		
 		// 상품구매 이력이 있는지 확인
 		int result = uService.buyConfirm(map);
-		
-		System.out.println("result = " + result);
 		
 		if (result > 0) { 
 			return "ok";
