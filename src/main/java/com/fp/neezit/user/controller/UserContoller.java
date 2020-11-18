@@ -2,6 +2,7 @@ package com.fp.neezit.user.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Getip;
 import com.fp.neezit.user.model.vo.User;
 
 /*
@@ -47,7 +49,7 @@ public class UserContoller {
 	 * @return
 	 */
 	@RequestMapping(value = "login.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String userLogin(User u, Model model) { // view에 전달하는 데이터를 Model에 담는다.
+	public String userLogin(User u, Model model, HttpServletRequest request) { // view에 전달하는 데이터를 Model에 담는다.
 
 		User loginUser = uService.loginUser(u);
 		int master = uService.master(u);
@@ -60,6 +62,24 @@ public class UserContoller {
 			if(master == 1) {
 				model.addAttribute("master2", master);
 			}
+			
+			//접속한 아이피 구해오기
+			String ip = new Getip().getClientIP(request);
+			
+			HashMap<String,String> map = new HashMap<String, String>();
+			
+			map.put("ip", ip);
+			map.put("email", loginUser.getEmail());
+			map.put("name", loginUser.getName());
+			if(master == 1) {
+				String rankname = uService.getMasterRank(loginUser.getEmail());
+				map.put("rankname", rankname);
+			}else {
+				map.put("rankname", "사용자");
+			}
+			
+			int  ipresult = uService.insertIP(map);
+			
 			return "redirect:index.do";
 		} else {
 			model.addAttribute("msg", "1");

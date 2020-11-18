@@ -2,6 +2,7 @@ package com.fp.neezit.manager.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.manager.model.dao.ManagerDao;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.user.model.dao.UserDao;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserAccess;
 
 
 @Service("mService")
@@ -49,5 +52,14 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.getUser();
 	}
 
+	@Override
+	public ArrayList<UserAccess> getUserAccess(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getUserAccess(pi,map);
+	}
+
+	@Override
+	public int getUserAccessCount(HashMap<String, String> map) {
+		return mDao.getUserAccessCount(map);
+	}
 
 }

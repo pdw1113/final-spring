@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
@@ -181,5 +182,32 @@ public class UserDao {
 	public int buyProductMoney(Map<String, String> map) {
 		return sqlSession.update("userMapper.buyProductMoney",map);
 	}
+	
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return sqlSession.selectOne("userMapper.WishDuplicate",map2);
+	}
+	
+	public int wishProductName(HashMap<String, String> map3) {
+		return sqlSession.selectOne("userMapper.productName",map3);
+	}
 
+	public int wishInsert(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.insertWish",map);
+	}
+	
+	public int wishDelete(HashMap<String, String> map) {
+		return sqlSession.delete("userMapper.WishDelete",map);
+	}
+	
+    public List<Product> wishList(User u) {
+	      return sqlSession.selectList("userMapper.WishList",u);
+	}
+
+	public String getMasterRank(String email) {
+		return sqlSession.selectOne("userMapper.getMasterRank",email);
+	}
+
+	public int insertIp(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.insertIp",map);
+	}
 }

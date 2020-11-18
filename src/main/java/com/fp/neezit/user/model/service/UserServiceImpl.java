@@ -221,5 +221,39 @@ public class UserServiceImpl implements UserService{
 	public int buyProductMoney(Map<String, String> map) {
 		return uDao.buyProductMoney(map);
 	}
+	
+	@Override
+	public int wishDuplicate(HashMap<String, String> map2) {
+		return uDao.wishDuplicate(map2);
+	}
+	
+	@Override
+	public int wishProductName(HashMap<String, String> map3) {
+		return uDao.wishProductName(map3);
+	}
+	
+	@Override
+	public int wishInsert(HashMap<String, String> map) {
+		return uDao.wishInsert(map);
+	}
+	
+	@Override
+	public int wishDelete(HashMap<String, String> map) {
+		return uDao.wishDelete(map);
+	}
+	
+	 @Override
+	    public List<Product> wishList(User u) {
+	       return uDao.wishList(u);
+	    }
 
+	@Override
+	public String getMasterRank(String email) {
+		return uDao.getMasterRank(email);
+	}
+
+	@Override
+	public int insertIP(HashMap<String, String> map) {
+		return uDao.insertIp(map);
+	}
 }

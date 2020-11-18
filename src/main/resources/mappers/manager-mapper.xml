@@ -20,6 +20,15 @@
 		<result property="marketingT" column="USER_MARKETING_T" />
 		<result property="marketingE" column="USER_MARKETING_E" />
 	</resultMap>
+			
+		<resultMap type="UserAccess" id="userAccessResultSet">
+		<id property="uAccessnum" column="USER_ACCESS_NUM"/>
+		<result property="uEmail" column="USER_EMAIL"/>
+		<result property="uName" column="USER_NAME"/>
+		<result property="uRankName" column="MASTER_RANKNAME"/>
+		<result property="uIp" column="USER_IP" />
+		<result property="uAccessDate" column="ACCESS_DATE"/>
+	</resultMap>
 	
 	<!-- 금칙어 추가 -->
 	<insert id="insertWords" parameterType="Forbidden"> 
@@ -135,5 +144,150 @@
 		SELECT * FROM NEEZ_USER
 	</select>
 
+	<!-- 유저 접속기록 갖고오기 -->
+	<select id="getUserAccess" parameterType="hashmap" resultMap="userAccessResultSet">
+		SELECT * FROM USER_ACCESS
+		
+	<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+	</if>
+	
+	<if test='search_way.equals("email") and !search_box.equals("")'>
+		WHERE USER_EMAIL LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("rank") and !search_box.equals("")'>
+		WHERE MASTER_RANKNAME LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("name") and !search_box.equals("")'>
+		WHERE USER_NAME LIKE #{search_box}
+	</if>
+	
+	 <if test='!search_box.equals("") and !buttonday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !buttonday.equals("")'>
+		WHERE
+	</if>
+	
+	<if test='!search_box.equals("") and !preday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !preday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='buttonday.equals("1")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("2")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-7,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("3")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-15,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("4")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("5")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-4),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("6")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='!preday.equals("")'>
+		ACCESS_DATE BETWEEN TO_CHAR(#{preday})
+        AND TO_CHAR(#{postday})
+	</if>
+	
+		ORDER BY USER_ACCESS_NUM DESC
+	</select>
+	
+	<!-- 유저 접속기록 카운트 갖고오기 -->
+	<select id="getUserAccessCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) FROM USER_ACCESS
+		
+	<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+	</if>
+	
+	<if test='search_way.equals("email") and !search_box.equals("")'>
+		WHERE USER_EMAIL LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("rank") and !search_box.equals("")'>
+		WHERE MASTER_RANKNAME LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("name") and !search_box.equals("")'>
+		WHERE USER_NAME LIKE #{search_box}
+	</if>
+	
+	 <if test='!search_box.equals("") and !buttonday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !buttonday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='!search_box.equals("") and !preday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !preday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='buttonday.equals("1")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("2")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-7,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("3")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-15,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("4")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("5")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-4),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("6")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='!preday.equals("")'>
+		ACCESS_DATE BETWEEN TO_CHAR(#{preday})
+        AND TO_CHAR(#{postday})
+	</if>
+		ORDER BY USER_ACCESS_NUM DESC
+	</select>
+	
 </mapper>
 
