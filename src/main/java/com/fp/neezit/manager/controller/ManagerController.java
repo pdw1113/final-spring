@@ -111,22 +111,10 @@ public class ManagerController {
 		return "manager/mPolicy/mPolicy";
 	}
 
-	@RequestMapping("mUserList.do")
-	public String mUserList() {
-		return "manager/mUser/mUserList";
-	}
-	
-	/**
-	 * 유저 접속기록 조회
-	 * @param model
-	 * @param currentPage
-	 * @return
+	/*
+	 * @RequestMapping("mUserList.do") public String mUserList() { return
+	 * "manager/mUser/mUserList"; }
 	 */
-//	  @RequestMapping("mUserList.do") 
-//	  public String mUserList() { 
-//		  return "manager/mUser/mUserList"; 
-//	  }
-	 
 
 	@RequestMapping("mUserLog.do")
 	public String mUserLog(HttpSession session,Model model,String buttonday,String preday,
