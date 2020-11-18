@@ -19,6 +19,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.UserWallet" alias="UserWallet"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserBuyList" alias="UserBuyList"/>
       <typeAlias type="com.fp.neezit.user.model.vo.UserAccess"  alias="UserAccess"/>
+      <typeAlias type="com.fp.neezit.manager.model.vo.UserBean" alias="UserBean"/>
    </typeAliases>
    
    <!-- 

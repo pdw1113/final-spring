@@ -27,8 +27,11 @@
             <div class="cate_Managerheader">회원 관리 > <U>회원 리스트</U></div>
             <div class="title_Managerheader">회원 리스트</div>
          </div>
+         
+         <form action="mUserList.do" method="POST">
          <div class="mainsection_mUserList">
             <div class="searchhbox_mUserList">
+            
                <!-- 검색 테이블 -->
                <table class="searchhbox_table_mUserList">
                   <tr>
@@ -36,11 +39,11 @@
                      <td class="searchtable_title_mUserList">검색어</td>
                      <td class="searchtable_content_mUserList">
                         <div class="select_mybuylist">
-                           <select class="bdbox_mUserList">
-                              <option value="">아이디</option>
-                              <option value="">등급</option>
-                              <option value="">이름</option>
-                              <option value="">닉네임</option>
+                           <select class="bdbox_mUserList" name="search_way">
+                              <option value="%이메일">이메일</option>
+                              <option value="%등급">등급</option>
+                              <option value="%이름">이름</option>
+                              <option value="%닉네임">닉네임</option>
                            </select>
                            <input type="text" class="searchtext_mUserList"></input>
                         </div>
@@ -67,7 +70,7 @@
                      <td class="searchtable_title_mUserList">회원가입일</td>
                      <td>
                         <div class="input_date_mUserList">
-                           <input type="date" class="dateform_mUserList"> ~ <input type="date" class="dateform_mUserList">
+                           <input type="date" name="preday" class="datepre_wdetail"> ~ <input type="date" name="postday" class="datepost_wdetail">
                         </div>
                      </td>
                   </tr>
@@ -93,8 +96,10 @@
                   </tr>
                </table>
             </div>
+            <input type="text" style="visibility: hidden;" name="buttonday" value="" id="buttonday"/>
+                     
             <div class="Admin_grant_Managerheader ">
-               <button class="seaerch_button_PersnalAccess">검색</button>
+               <button class="seaerch_button_PersnalAccess" onclick="return buttonclick();">검색</button>
                <button class="manager_button_PersnalAccess">관리자 권한 부여</button>
             </div>
             <!-- 검색결과 -->
@@ -102,36 +107,139 @@
                <table class="type07">
                   <caption class="caption_mUserList"> 검색
                      <span class="caption_text_mUserList">1</span>건 / 전체 <span class="caption_text_mUserList">
-                     1</span>명
+                     ${ pi.listCount }</span>명
                   </caption>
                   <thead>
                      <tr>
                         <th scope="cols">체크</th>
                         <th scope="cols">번호</th>
                         <th scope="cols">구분</th>
-                        <th scope="cols">아이디/닉네임</th>
+                        <th scope="cols">이메일</th>
+                        <th scope="cols">닉네임</th>
                         <th scope="cols">이름</th>
                         <th scope="cols">등급</th>
                         <th scope="cols">회원가입일</th>
-                        <th scope="cols">최종로그인</th>
+                        <th scope="cols">최종로그인(여긴 풀 하고 작업해야할 듯)</th>
                      </tr>
                   </thead>
                   <tbody>
-                     <tr>
-                        <td id="shot_table_mUserList"><input type="checkbox" value="1"></td>
-                        <td id="shot_table_mUserList">1</td>
-                        <td id="midle_table_mUserList">일반회원</td>
-                        <td id="long_table_mUserList"><span class="id_text_mUserList">test_id_2</span> / <span
-                           class="nickname_text_mUserList">지존파워동민</span></td>
-                        <td id="midle_table_mUserList">천동민</td>
-                        <td id="midle_table_mUserList">은손</td>
-                        <td>10-09-01</td>
-                        <td>20-10-20</td>
-                     </tr>
+                   <c:set var="num" value="${pi.listCount - ((pi.currentPage-1) * 5) }"/>
+                      <c:forEach var="UserList" items="${ ul }" varStatus="status">
+	                     <tr>
+	                        <td id="shot_table_mUserList"><input type="checkbox" value="1"></td>
+	                        <td id="shot_table_mUserList">${ num }</td>
+	                        <td id="midle_table_mUserList">
+	                        	<c:if test="${ empty UserList.userMaster.mNickname}">일반회원</c:if>
+								<c:if test="${ !empty UserList.userMaster.mNickname}">능력자</c:if>
+								<c:if test="${ UserList.user.status == 'Y'}">탈퇴회원</c:if>
+	                        </td>
+	                        <td id="long_table_mUserList">${ UserList.user.email }</td>
+	                        <td id="long_table_mUserList">${ UserList.userMaster.mNickname }</td>
+	                        <td id="midle_table_mUserList">${ UserList.user.name }</td>
+	                        <td id="midle_table_mUserList"> ${ UserList.userMaster.mRankname }</td>
+	                        <td>${ UserList.user.enrollDate }</td>
+	                        <td>20-10-20</td>
+	                     </tr>
+	                     <c:set var="num" value="${ num-1 }"></c:set>
+	                  </c:forEach> 
+	                </table>  
+	                  
+	                  
+	                  
+	      <table class="center">           
+	                  
+     <tr align="center" height="20">
+		<td colspan="5" class="pagination">
+			
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage eq 1 }">
+					<a style="cursor:default;">«</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne 1 }">
+					<c:url var="before" value="mUserList.do">
+						<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+						<c:param name="buttonday" value="${buttonday}"/>
+						<c:param name="preday" value="${preday}"/>
+						<c:param name="postday" value="${postday}"/>
+						<c:param name="search_way" value="${search_way}"/>
+					</c:url>
+					<a href="${ before }">«</a>
+				</c:if>
+				
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+					<c:if test="${ p eq pi.currentPage }">
+						<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="mUserList" value="mUserList.do">
+							<c:param name="currentPage" value="${ p }"/>
+							<c:param name="buttonday" value="${buttonday}"/>
+							<c:param name="preday" value="${preday}"/>
+							<c:param name="postday" value="${postday}"/>
+							<c:param name="search_way" value="${search_way}"/>
+						</c:url>
+						<a href="${ mUserList }">${ p }</a>
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage eq pi.maxPage }">
+					<a style="cursor:default;">»</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne pi.maxPage }">
+					<c:url var="after" value="mUserList.do">
+						<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:param name="buttonday" value="${buttonday}"/>
+							<c:param name="preday" value="${preday}"/>
+							<c:param name="postday" value="${postday}"/>
+							<c:param name="search_way" value="${search_way}"/>
+					</c:url> 
+					<a href="${ after }" >»</a>
+				</c:if>
+			</td>
+		</tr>
+		</table> 
+		
                   </tbody>
-               </table>
+           <!--     </table> -->
             </div>
          </div>
+         </form>
       </div>
+      
+       <script>
+
+         $('.datepre_wdetail, .datepost_wdetail').click(function(){
+        	 $('.choice_wdetail').css('background-color',"#ddd");
+        	 $("#buttonday").val("");
+         });
+        
+         function buttonclick(){
+        	 	console.log($("#buttonday").val());
+        		if($(".bdbox_mUserList").val()!=null&&$("#buttonday").val()==""&&$('.datepre_wdetail').val()==""&&$('.datepost_wdetail').val()==""){
+        			return true;
+        	 	}else if($("#buttonday").val()!=""){
+        	 		return true;
+        	 	}
+        		
+    			if($(".bdbox_mUserList").val()!=null&&$(".datepre_wdetail").val()==""){
+   				 alert("날짜 정보가 잘못 되었습니다.")
+           		 return false;
+   				}
+        		
+        		if($("#buttonday").val()==""){
+	        		if($(".datepre_wdetail").val()>$('.datepost_wdetail').val() || $(".datepre_wdetail").val()=="" || $('.datepost_wdetail').val()==""){
+	        	 		 alert("날짜 정보가 잘못 되었습니다.")
+	            		 return false;
+	        	 	}
+        		}else{
+        			return true;
+        		}
+         }
+      </script>
+      
+      
    </body>
 </html>

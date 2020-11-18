@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserAccess;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 @Repository("mDao")
 public class ManagerDao {
@@ -100,6 +102,21 @@ public class ManagerDao {
 
 	public int getUserAccessCount(HashMap<String, String> map) {
 		return sqlSession.selectOne("managerMapper.getUserAccessCount",map);
+	}
+	public int getUserListCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("managerMapper.getUserListCount",map);
+	}
+
+	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.getUserList",map,rowBounds);
+	}
+
+	public UserMaster getMaster() {
+		return sqlSession.selectOne("managerMapper.getMaster");
 	}
 	
 }

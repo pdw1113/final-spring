@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserAccess;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 public interface ManagerService {
 
@@ -22,6 +24,13 @@ public interface ManagerService {
 	List<Forbidden> dateWords(Date date);
 
 	ArrayList<User> getUser();
+
+	int getUserListCount(HashMap<String, String> map);
+
+	ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map);
+
+	UserMaster getMaster();
+	
 
 	ArrayList<UserAccess> getUserAccess(PageInfo pi, HashMap<String, String> map);
 
