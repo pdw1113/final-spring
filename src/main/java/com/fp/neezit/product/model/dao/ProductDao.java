@@ -65,10 +65,6 @@ public class ProductDao{
 		return sqlSession.selectOne("productMapper.getProductSnsDetail", email);
 	}
 
-	public int wishInsert(HashMap<String, String> map) {
-		return sqlSession.insert("productMapper.insertWish",map);
-	}
-
 	public int insertReply(Reply r) {
 		return sqlSession.insert("productMapper.insertReply",r);
 	}
@@ -89,18 +85,6 @@ public class ProductDao{
 		return (ArrayList)sqlSession.selectList("productMapper.getProductList", map);
 	}
 	
-    public List<Product> wishList(User u) {
-	      return sqlSession.selectList("productMapper.WishList",u);
-	}
-
-	public int wishDelete(HashMap<String, String> map) {
-		return sqlSession.delete("productMapper.WishDelete",map);
-	}
-
-	public int wishDuplicate(HashMap<String, String> map2) {
-		return sqlSession.selectOne("productMapper.WishDuplicate",map2);
-	}
-
 	public WishList getWishListDetail(HashMap<String, String> map) {
 		return sqlSession.selectOne("productMapper.WishDetail",map);
 	}
@@ -117,9 +101,6 @@ public class ProductDao{
 		return sqlSession.update("productMapper.modifyComment", map);
 	}
 	
-	public int wishProductName(HashMap<String, String> map3) {
-		return sqlSession.selectOne("productMapper.productName",map3);
-	}
 	public Product getProductUpdate(HashMap<Object, Object> map) {
 		return sqlSession.selectOne("productMapper.ProductUpdateView",map);
 	}

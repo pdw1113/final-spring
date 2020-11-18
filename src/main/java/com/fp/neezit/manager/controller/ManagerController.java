@@ -2,10 +2,12 @@ package com.fp.neezit.manager.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +22,10 @@ import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserAccess;
 
 @Controller
 public class ManagerController {
@@ -100,9 +105,70 @@ public class ManagerController {
 		return "manager/mUser/mUserList";
 	}
 	
+	/**
+	 * 유저 접속기록 조회
+	 * @param model
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("mUserLog.do")
-	public String mUserLog() {
-		return "manager/mUser/mUserLog";
+	public String mUserLog(HttpSession session,Model model,String buttonday,String preday,
+			String postday,String search_way,String search_box,
+			@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+		 
+		if(buttonday==null&&preday==null&&postday==null&&search_box==null&&search_way==null) {
+			buttonday="";
+			preday="";
+			postday="";
+			search_box="";
+			search_way="";
+		}
+		
+		if(preday!=null&&postday!=null) {
+			preday = preday.replace("-", ".");
+			postday = postday.replace("-", ".");
+			
+			//+1을 안해주면 당일날짜가 아니라 그 전 날짜까지만 나옴
+			postday = postday+"+0.99999";
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("buttonday",buttonday);
+
+		map.put("preday",preday);
+
+		map.put("postday",postday);
+
+		map.put("search_way",search_way);
+		
+		search_box = "%"+search_box+"%";
+		
+		map.put("search_box",search_box);
+		
+		int listCount = mService.getUserAccessCount(map);
+		
+	     PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			  
+		 ArrayList<UserAccess> ua = mService.getUserAccess(pi,map);
+			 
+		 model.addAttribute("ua",ua); 
+		 
+		 model.addAttribute("pi",pi);
+		 
+		 model.addAttribute("count",listCount);
+		 
+		 model.addAttribute("buttonday",buttonday);
+
+		 model.addAttribute("preday",preday);
+
+		 model.addAttribute("postday",postday);
+
+		 model.addAttribute("search_way",search_way);
+		
+		 model.addAttribute("search_box",search_box);
+		
+		 return "manager/mUser/mUserLog";
 	}
 	
 	@ResponseBody // AJAX

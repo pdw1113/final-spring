@@ -564,4 +564,50 @@
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
  		</if>
 	</select>
+	
+		<!-- 찜목록 중복값 조회 -->
+	<select id="WishDuplicate" parameterType="hashmap" resultType="_int">
+        SELECT COUNT(*)
+        FROM WISH_LIST W
+		JOIN PRODUCT P ON (W.PRODUCT_NO = P.PRODUCT_NO)
+        WHERE W.PRODUCT_NO = #{no} AND W.USER_EMAIL = #{email}
+	</select>
+	
+		<!-- 찜 닉네임 중복값 가져오기  --> 
+	<select id="productName" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT P
+		JOIN NEEZ_MASTER M ON (P.MASTER_NICKNAME = M.MASTER_NICKNAME)
+		WHERE P.MASTER_NICKNAME = #{pName} AND M.USER_EMAIL = #{email}
+	</select>
+	
+		<!-- 찜 등록 -->
+	<insert id="insertWish" parameterType="hashmap">
+		INSERT INTO WISH_LIST VALUES
+		(WISH_NUM_NO.NEXTVAL,#{email},#{no})
+	</insert>
+	
+		<!-- 찜 해제 -->
+	<delete id="WishDelete" parameterType="hashmap">
+		DELETE FROM WISH_LIST WHERE PRODUCT_NO = #{no} AND USER_EMAIL = #{email}
+	</delete>
+	
+		<!-- 찜 리스트 -->
+	<select id="WishList"  parameterType="Product" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT P
+		JOIN WISH_LIST W ON (P.PRODUCT_NO = W.PRODUCT_NO)
+		WHERE W.PRODUCT_NO = P.PRODUCT_NO AND W.USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 마스터 랭크 가져오기 -->
+	<select id="getMasterRank" parameterType="String" resultType="String">
+		SELECT MASTER_RANKNAME FROM NEEZ_MASTER 
+		WHERE USER_EMAIL=#{email}
+	</select>
+	
+	<!-- 접속기록 삽입 -->
+	<insert id="insertIp" parameterType="hashmap">
+		INSERT INTO USER_ACCESS VALUES(USER_ACCESS_NUM.NEXTVAL,#{email},#{name},#{rankname},#{ip},DEFAULT)
+	</insert>
 </mapper>

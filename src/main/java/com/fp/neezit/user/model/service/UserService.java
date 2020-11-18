@@ -93,4 +93,18 @@ public interface UserService {
 	int getBuyListCount(HashMap<String, String> map);
 
 	int buyProductMoney(Map<String, String> map);
+	
+	public int wishDuplicate(HashMap<String, String> map2);
+	
+	public int wishProductName(HashMap<String, String> map3);
+
+	public int wishInsert(HashMap<String, String> map);
+	
+	public int wishDelete(HashMap<String, String> map);
+	
+	public List<Product> wishList(User u);
+
+	String getMasterRank(String email);
+
+	int insertIP(HashMap<String, String> map);
 }
