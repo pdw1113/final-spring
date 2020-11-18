@@ -107,4 +107,6 @@ public interface UserService {
 	String getMasterRank(String email);
 
 	int insertIP(HashMap<String, String> map);
+
+	int buyConfirm(HashMap<String, String> map);
 }

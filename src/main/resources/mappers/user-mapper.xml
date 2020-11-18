@@ -104,6 +104,7 @@
 	<resultMap type="UserBuyList" id="UserBuyListResultSet">
 		<id property="num" column="USER_BUY_NUM" />
 		<result property="email" column="USER_EMAIL" />
+		<result property="pNo" column="USER_PNO" />
 		<result property="date" column="USER_BUY_DATE" />
 		<result property="master" column="USER_BUY_MASTER" />
 		<result property="title" column="USER_BUY_TITLE" />
@@ -476,8 +477,12 @@
 		VALUES(#{email},
         (SELECT NVL(MAX(USER_BUY_NUM),0)+1 
         		FROM BUYLIST WHERE USER_EMAIL=#{email}),
-        DEFAULT,#{master},#{title},#{money},DEFAULT)
+        #{pno},DEFAULT,#{master},#{title},#{money},DEFAULT)
 	</insert>
+	
+	<select id="buyConfirm" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*) FROM BUYLIST WHERE USER_EMAIL=#{email} AND USER_PNO=#{pNo}
+	</select>
 	
 	<select id="getUserBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
 			SELECT * FROM BUYLIST
