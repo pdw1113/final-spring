@@ -210,4 +210,8 @@ public class UserDao {
 	public int insertIp(HashMap<String, String> map) {
 		return sqlSession.insert("userMapper.insertIp",map);
 	}
+
+	public int buyConfirm(HashMap<String, String> map) {
+		return sqlSession.selectOne("userMapper.buyConfirm",map);
+	}
 }

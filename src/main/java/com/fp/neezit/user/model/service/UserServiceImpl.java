@@ -256,4 +256,9 @@ public class UserServiceImpl implements UserService{
 	public int insertIP(HashMap<String, String> map) {
 		return uDao.insertIp(map);
 	}
+
+	@Override
+	public int buyConfirm(HashMap<String, String> map) {
+		return uDao.buyConfirm(map);
+	}
 }

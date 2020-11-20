@@ -396,6 +396,7 @@
 				let title = "${product.title}";
 				let email = "${sessionScope.loginUser.email}";
 				let master = "${master.mNickname}";
+				let pno	= "${ product.no }";
 				let money = proM;
 				
 				$.ajax({
@@ -404,6 +405,7 @@
 						title:title,
 						email:email,
 						master:master,
+						pno:pno,
 						money:money
 					},
 					type:"post",
@@ -643,6 +645,9 @@
 								$("#rContent").attr("placeholder","이미 상품평을 작성하였습니다.");
 								$("#rContent").attr("readonly",true);
 								$("#rContent").css("background","rgb(220,220,220,0.5)");
+								$("#cmt_btn").attr("disabled","disabled");
+								$("#cmt_btn").css("background","rgb(220,220,220,0.5)");
+								$("#cmt_btn").css("cursor","default");
 							}
 						}
 					}
@@ -670,12 +675,29 @@
 
 	    // 댓글 작성 클릭 시 별점 모달 팝업 
 	    $("#cmt_btn").click(function () {
-			if($("#rContent").val() == ""){
-				alert("상품평을 입력 해 주세요");
-				return;
-			}
-			confirm("상품평은 등록 후 삭제가 불가능합니다. 정말 등록하시겠습니까?");
-	      $("#cmtModal").css("display", "block");
+	    	let pNo = "${product.no}";
+	    	let email = "${sessionScope.loginUser.email}";
+	    	$.ajax({
+	    		url:"buyConfirm.do",
+	    		data:{ pNo:pNo, email:email },
+	    		type:"post",
+	    		success:function(data){
+	    			if(data == "ok"){
+	    				if($("#rContent").val() == ""){
+	    					alert("상품평을 입력 해 주세요");
+	    					return;
+	    				}
+	    				confirm("상품평은 등록 후 삭제가 불가능합니다. 정말 등록하시겠습니까?");
+	    				// 댓글 작성 클릭 시 별점 모달 팝업 
+	    		      	$("#cmtModal").css("display", "block");
+	    			}else{
+	    				alert("상품을 구매한 회원만 상품평을 작성 할 수 있습니다.");
+	    			}
+    			}, error:function(request,status,errorData){
+				console.log(request.status + ":" + errorData);
+				
+    			}
+	    	});
 	    });
 	    // 모달 팝업 배경 클릭 시 닫기
 	    $("#cmtModal").click(function (e) {

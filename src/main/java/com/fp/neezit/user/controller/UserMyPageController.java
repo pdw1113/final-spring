@@ -444,6 +444,30 @@ public class UserMyPageController {
 	}
 	
 	/**
+	 * 15. 상품 구매 확인 메소드 AJAX
+	 * 
+	 * @param buylist
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("buyConfirm.do")
+	public String buyConfirm(String email,String pNo){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("pNo", pNo);
+		
+		// 상품구매 이력이 있는지 확인
+		int result = uService.buyConfirm(map);
+		
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	/**
 	 * 15. 찜등록 AJAX
 	 * 
 	 * @param 
