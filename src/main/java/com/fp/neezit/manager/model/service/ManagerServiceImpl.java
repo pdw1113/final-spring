@@ -77,5 +77,20 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.getMaster();
 	}
 
+	@Override
+	public int getUserListAllCount() {
+		return mDao.getUserListAllCount();
+	}
+
+	@Override
+	public int checkWords(String word) {
+		return mDao.checkWords(word);
+	}
+
+	@Override
+	public List<Forbidden> fList() {
+		return mDao.fList();
+	}
+
 
 }

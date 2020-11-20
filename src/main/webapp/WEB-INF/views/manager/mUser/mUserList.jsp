@@ -39,13 +39,15 @@
                      <td class="searchtable_title_mUserList">검색어</td>
                      <td class="searchtable_content_mUserList">
                         <div class="select_mybuylist">
+                        
                            <select class="bdbox_mUserList" name="search_way">
-                              <option value="%이메일">이메일</option>
-                              <option value="%등급">등급</option>
-                              <option value="%이름">이름</option>
-                              <option value="%닉네임">닉네임</option>
+                               <option value="email">이메일</option>
+                              <option value="rank">등급</option>
+                              <option value="name">이름</option>
+                              <option value="nickname">닉네임</option>
                            </select>
-                           <input type="text" class="searchtext_mUserList"></input>
+
+                           <input type="text" class="searchtext_mUserList" name="search_box"></input>
                         </div>
                      </td>
                   </tr>
@@ -106,8 +108,8 @@
             <div class="layoutSubbox_mUserList">
                <table class="type07">
                   <caption class="caption_mUserList"> 검색
-                     <span class="caption_text_mUserList">1</span>건 / 전체 <span class="caption_text_mUserList">
-                     ${ pi.listCount }</span>명
+                     <span class="caption_text_mUserList">${ pi.listCount }</span>건 / 전체 <span class="caption_text_mUserList">
+                  ${ listAllCount } </span>명
                   </caption>
                   <thead>
                      <tr>
@@ -119,10 +121,19 @@
                         <th scope="cols">이름</th>
                         <th scope="cols">등급</th>
                         <th scope="cols">회원가입일</th>
-                        <th scope="cols">최종로그인(여긴 풀 하고 작업해야할 듯)</th>
+                        <th scope="cols">최종로그인</th>
                      </tr>
                   </thead>
                   <tbody>
+                  
+                  <c:if test="${empty ul}">
+                   		<tr>
+                           		<td colspan="9" style="width: 1400px;">검색 내역이 없습니다.</td>
+                   		</tr>
+                   </c:if>
+                  
+                  
+                  <c:if test="${!empty ul}">
                    <c:set var="num" value="${pi.listCount - ((pi.currentPage-1) * 5) }"/>
                       <c:forEach var="UserList" items="${ ul }" varStatus="status">
 	                     <tr>
@@ -138,10 +149,11 @@
 	                        <td id="midle_table_mUserList">${ UserList.user.name }</td>
 	                        <td id="midle_table_mUserList"> ${ UserList.userMaster.mRankname }</td>
 	                        <td>${ UserList.user.enrollDate }</td>
-	                        <td>20-10-20</td>
+	                        <td>${ UserList.userAccess.uAccessDate }</td>
 	                     </tr>
 	                     <c:set var="num" value="${ num-1 }"></c:set>
 	                  </c:forEach> 
+	                 </c:if>
 	                </table>  
 	                  
 	                  
@@ -162,6 +174,7 @@
 						<c:param name="preday" value="${preday}"/>
 						<c:param name="postday" value="${postday}"/>
 						<c:param name="search_way" value="${search_way}"/>
+						<c:param name="search_box" value="${search_box}"/>
 					</c:url>
 					<a href="${ before }">«</a>
 				</c:if>
@@ -179,6 +192,7 @@
 							<c:param name="preday" value="${preday}"/>
 							<c:param name="postday" value="${postday}"/>
 							<c:param name="search_way" value="${search_way}"/>
+							<c:param name="search_box" value="${search_box}"/>
 						</c:url>
 						<a href="${ mUserList }">${ p }</a>
 					</c:if>
@@ -195,6 +209,7 @@
 							<c:param name="preday" value="${preday}"/>
 							<c:param name="postday" value="${postday}"/>
 							<c:param name="search_way" value="${search_way}"/>
+							<c:param name="search_box" value="${search_box}"/>
 					</c:url> 
 					<a href="${ after }" >»</a>
 				</c:if>

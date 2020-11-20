@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fp.neezit.manager.model.service.ManagerService;
+import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.UserMasterPic;
@@ -37,7 +39,10 @@ public class UserMasterController {
 	
 	@Autowired
 	private ProductService pService;
-
+	
+	@Autowired
+	ManagerService mService;
+	
 	@Autowired
 	private UserMasterPic uPic;
 	
@@ -50,12 +55,16 @@ public class UserMasterController {
 	 */
 	@RequestMapping(value = "signUpMasterCategory.do", method = RequestMethod.GET)
 	public String signUpMasterCategory(Model model) throws Exception {
+		
+		// 금지어 리스트
+		List<Forbidden> fList = null;
+		fList = mService.fList();
 
 		// 상품 카테고리 3분류
 		List<ProductCategory> category = null;
 		category = uService.category();
 		model.addAttribute("category", JSONArray.fromObject(category));
-
+		model.addAttribute("fList", JSONArray.fromObject(fList));
 		return "user/signUpMaster";
 	}
 	
@@ -275,6 +284,11 @@ public class UserMasterController {
 	 */
 	@RequestMapping(value = "signUpMasterUpdateView.do", method = RequestMethod.POST)
 	public String signUpMasterUpdateView(HttpSession session,Model model) {
+		
+		// 금지어 리스트
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+
 	    User u = (User)session.getAttribute("loginUser");
 		UserMaster master = pService.getMaster(u);
 		UserMasterSchool masterSch = uService.getMasterSch(u);
@@ -292,6 +306,7 @@ public class UserMasterController {
 			model.addAttribute("QualifcationList", masterQfa);
 			model.addAttribute("SnsList", masterSns);
 			model.addAttribute("categoryList", real);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 		return "user/siguUPMasterUpdate";
 	}
 

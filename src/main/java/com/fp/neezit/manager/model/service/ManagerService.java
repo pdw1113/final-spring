@@ -35,4 +35,10 @@ public interface ManagerService {
 	ArrayList<UserAccess> getUserAccess(PageInfo pi, HashMap<String, String> map);
 
 	int getUserAccessCount(HashMap<String, String> map);
+
+	int getUserListAllCount();
+
+	int checkWords(String word);
+
+	List<Forbidden> fList();
 }
