@@ -27,15 +27,21 @@ public class UserList {
     private String mEndTime;     // 몇시까지
     private double mStar;		// 별점
     
+    private int uAccessnum; 		// 고유넘버
+    private String uName;    		// 유저 이름
+    private String uRankName;   // 랭크
+    private String uIp;   			// 아이피
+    private Date uAccessDate;  // 접속날짜
     
-    public UserList() {
+	public UserList() {
 		super();
 	}
 
 	public UserList(String name, String phone, String email, String pwd, Date enrollDate, Date updateDate,
 			String status, String marketingT, String marketingE, String mRankname, String mProPicOri, String mProPicRe,
 			String mNickname, String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle,
-			String mStartTime, String mEndTime, double mStar) {
+			String mStartTime, String mEndTime, double mStar, int uAccessnum, String uName, String uRankName,
+			String uIp, Date uAccessDate) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -58,134 +64,219 @@ public class UserList {
 		this.mStartTime = mStartTime;
 		this.mEndTime = mEndTime;
 		this.mStar = mStar;
+		this.uAccessnum = uAccessnum;
+		this.uName = uName;
+		this.uRankName = uRankName;
+		this.uIp = uIp;
+		this.uAccessDate = uAccessDate;
 	}
-
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPwd() {
 		return pwd;
 	}
+
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
+
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+
 	public Date getUpdateDate() {
 		return updateDate;
 	}
+
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getMarketingT() {
 		return marketingT;
 	}
+
 	public void setMarketingT(String marketingT) {
 		this.marketingT = marketingT;
 	}
+
 	public String getMarketingE() {
 		return marketingE;
 	}
+
 	public void setMarketingE(String marketingE) {
 		this.marketingE = marketingE;
 	}
+
 	public String getmRankname() {
 		return mRankname;
 	}
+
 	public void setmRankname(String mRankname) {
 		this.mRankname = mRankname;
 	}
+
 	public String getmProPicOri() {
 		return mProPicOri;
 	}
+
 	public void setmProPicOri(String mProPicOri) {
 		this.mProPicOri = mProPicOri;
 	}
+
 	public String getmProPicRe() {
 		return mProPicRe;
 	}
+
 	public void setmProPicRe(String mProPicRe) {
 		this.mProPicRe = mProPicRe;
 	}
+
 	public String getmNickname() {
 		return mNickname;
 	}
+
 	public void setmNickname(String mNickname) {
 		this.mNickname = mNickname;
 	}
+
 	public String getmCategory() {
 		return mCategory;
 	}
+
 	public void setmCategory(String mCategory) {
 		this.mCategory = mCategory;
 	}
+
 	public String getmIdPicOri() {
 		return mIdPicOri;
 	}
+
 	public void setmIdPicOri(String mIdPicOri) {
 		this.mIdPicOri = mIdPicOri;
 	}
+
 	public String getmIdPicRe() {
 		return mIdPicRe;
 	}
+
 	public void setmIdPicRe(String mIdPicRe) {
 		this.mIdPicRe = mIdPicRe;
 	}
+
 	public String getmWorkDay() {
 		return mWorkDay;
 	}
+
 	public void setmWorkDay(String mWorkDay) {
 		this.mWorkDay = mWorkDay;
 	}
+
 	public String getmWorkStyle() {
 		return mWorkStyle;
 	}
+
 	public void setmWorkStyle(String mWorkStyle) {
 		this.mWorkStyle = mWorkStyle;
 	}
+
 	public String getmStartTime() {
 		return mStartTime;
 	}
+
 	public void setmStartTime(String mStartTime) {
 		this.mStartTime = mStartTime;
 	}
+
 	public String getmEndTime() {
 		return mEndTime;
 	}
+
 	public void setmEndTime(String mEndTime) {
 		this.mEndTime = mEndTime;
 	}
+
 	public double getmStar() {
 		return mStar;
 	}
+
 	public void setmStar(double mStar) {
 		this.mStar = mStar;
+	}
+
+	public int getuAccessnum() {
+		return uAccessnum;
+	}
+
+	public void setuAccessnum(int uAccessnum) {
+		this.uAccessnum = uAccessnum;
+	}
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public String getuRankName() {
+		return uRankName;
+	}
+
+	public void setuRankName(String uRankName) {
+		this.uRankName = uRankName;
+	}
+
+	public String getuIp() {
+		return uIp;
+	}
+
+	public void setuIp(String uIp) {
+		this.uIp = uIp;
+	}
+
+	public Date getuAccessDate() {
+		return uAccessDate;
+	}
+
+	public void setuAccessDate(Date uAccessDate) {
+		this.uAccessDate = uAccessDate;
 	}
 
 	@Override
@@ -195,8 +286,10 @@ public class UserList {
 				+ ", marketingE=" + marketingE + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri
 				+ ", mProPicRe=" + mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri="
 				+ mIdPicOri + ", mIdPicRe=" + mIdPicRe + ", mWorkDay=" + mWorkDay + ", mWorkStyle=" + mWorkStyle
-				+ ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + ", mStar=" + mStar + "]";
+				+ ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + ", mStar=" + mStar + ", uAccessnum="
+				+ uAccessnum + ", uName=" + uName + ", uRankName=" + uRankName + ", uIp=" + uIp + ", uAccessDate="
+				+ uAccessDate + "]";
 	}
-
+    
 	
 }

@@ -383,7 +383,29 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<script>
+
+	var jsonData = JSON.parse('${fList}');
+	console.log(jsonData);
+    var fListArr = new Array();
+    var fListObj = new Object();
+	var filter = [];
+
+     for(var i = 0; i < jsonData.length; i++) {
+
+    	 fListObj = new Object();  //초기화
+    	 fListObj = jsonData[i].fword;
+    	 /* fListArr.push(fListObj); */
+    	 filter.push(fListObj);
+     }
+		console.log(filter);
+
+
+	var matchcnt = 0;
+
+	</script>
+
 	<script>
  		function buyConfirm(){
  			let proM = $("#buy_sum").html();
@@ -524,12 +546,30 @@
 					alert("댓글을 입력 해 주세요");
 					return;
 				}
+				
+				matchcnt = 0;
+				
 				var pNo = "${ product.no }";	// 상품 번호
 				var rContent = $("#rContent").val(); // 댓글 내용
 				var rStar = $(".modal_star").find(".fas").length; // 꽉찬 별 갯수당 숫자로 치환
 				var rName = "${ sessionScope.loginUser.name }"; // 댓글 작성자
 				var refRno = $("#firstno").val(); // 댓글 참조 번호
 				var rLevel = $("#firstlevel").val(); // 댓글 레벨
+				
+				for(var i in filter){
+					  try{
+						  	var compare = rContent.match( filter[i]);
+						  	console.log( compare.index);
+						  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+						  	matchcnt ++;
+					  		if( matchcnt > 0 ) return;
+					  	} catch( err ) {
+					  		console.log("통과");
+					  	}
+					  };   
+				
+				
+				
 				
 	 			$.ajax({
 					url:"addReply.do",

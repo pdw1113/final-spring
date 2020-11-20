@@ -218,16 +218,35 @@ public class ManagerController {
 
 	@RequestMapping("searchWords.do")
 	public String searchWords(Model model, String search, Date date) {
-
+	
+	
 		System.out.println(search);
 		System.out.println(date);
 		List<Forbidden> forbiddenList = mService.searchWords(search);
-		List<Forbidden> forbiddenList1 = mService.dateWords(date);
+//		List<Forbidden> forbiddenList1 = mService.dateWords(date);
 		model.addAttribute("forbiddenList", forbiddenList);
-		model.addAttribute("forbiddenList", forbiddenList1);
+//		model.addAttribute("forbiddenList", forbiddenList1);
 		System.out.println(forbiddenList);
+		
+		 return "manager/mBoard/mBoardForbidden"; 
+	}
+	
+	@ResponseBody // AJAX
+	@RequestMapping("checkWords.do")
+	public String checkWords(String word) {
+		
+			System.out.println(word);
+		int result = mService.checkWords(word);
 
-		return "manager/mBoard/mBoardForbidden";
+		if (result == 1) {
+					System.out.println("입력 불가");
+					return "fail";
+					
+				} else {
+					System.out.println("입력 가능");
+					return "ok";
+				}
+
 	}
 
 	// 메일 정보 받고 메일jsp로 보내주는 기능
@@ -275,15 +294,17 @@ public class ManagerController {
 	
 	  @RequestMapping("mUserList.do") 
 	  public String mUserList(Model model,String buttonday,String preday, 
-			  String postday,String search_way,
+			  String postday,String search_way, String search_box,
 			  @RequestParam(value="currentPage" , 
 			  required=false, defaultValue="1")int currentPage) { 
 	  
-	  if(buttonday==null&&preday==null&&postday==null){ 
-		  buttonday=""; 
-		  preday="";
-		  postday=""; 
-		  }
+		  if(buttonday==null&&preday==null&&postday==null&&search_box==null&&search_way==null) {
+				buttonday="";
+				preday="";
+				postday="";
+				search_box="";
+				search_way="";
+			}
 
 	  HashMap<String, String> map = new HashMap<String, String>();
 	  
@@ -292,7 +313,12 @@ public class ManagerController {
 	  map.put("postday",postday); 
 	  map.put("search_way",search_way);
 	  
+	  search_box = "%"+search_box+"%";
+		
+	  map.put("search_box",search_box);
+	  
 	  int listCount = mService.getUserListCount(map);
+	  int listAllCount = mService.getUserListAllCount();
 	  
 	  PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 	  
@@ -308,6 +334,8 @@ public class ManagerController {
 	  model.addAttribute("preday",preday); 
 	  model.addAttribute("postday",postday);
 	  model.addAttribute("search_way",search_way);
+	  model.addAttribute("search_box",search_box);
+	  model.addAttribute("listAllCount",listAllCount);
 	  
 	  
 	  return "manager/mUser/mUserList"; }

@@ -50,7 +50,7 @@
                               <th>
                                  추가 키워드
                                  <button type="button" class="plusButton" onclick="rowAdd1()">+</button>
-                                 <button type="button" class="minusButton" onclick="rowDelete1()">-</button>
+                                 <button type="button" class="minusButton" onclick="rowDelete1();">-</button>
                               </th>
                            </tr>
                            <tr>
@@ -113,7 +113,7 @@
                                 </textarea>
                         </div>
                         <div>
-                           <button type="button" class="deleteButton" value="" onclick="delete1()">삭제 입력
+                           <button type="button" class="deleteButton" value="" onclick="delete1();">삭제 입력
                            확인</button>
                            <button type="button" class="clearButton" onclick="clear2()">clear</button>
                            <button type="button" class="finalButton1" onclick="deleteWords()">삭제 최종 저장</button>
@@ -181,7 +181,7 @@
                               
                            </div>
                            <button type="button"
-                              class="searchButton"  onclick="searchDate();">검색</button>
+                              class="searchButton" id="dateSearch" onclick="searchDate();">검색</button>
                         </div>
                         <div class="searchArea3">
                            <p class="bold sb">초성 검색</p>
@@ -228,6 +228,11 @@
                 input1[i] = document.getElementById("iText" + (i + 1)).value;
                 // console.log(input1[i]);
                 // console.log(input1);
+                
+                if(input1[i]==""){
+                	alert("공백이 있습니다. 입력해주세요.")
+                	return false;
+                };
 
                 // 공백 시 , 안들어가게 하는 정규식
                 var t1 =$('#iText' + (i + 1) + '').val();
@@ -247,9 +252,14 @@
                 input2[i] = document.getElementById("dText" + (i + 1)).value;
                 console.log(input2[i]);
                 
+                if(input2[i]==""){
+                	alert("공백이 있습니다. 입력해주세요.")
+                	return false;
+                };
+                
                 
                 // 공백 시 , 안들어가게 하는 정규식
-                var t2 =$('#iText' + (i + 1) + '').val();
+                var t2 =$('#dText' + (i + 1) + '').val();
 
 		   		if(t2.replace(/\s|  /gi, "").length != 0){
 		   			var combineText2 = input2.join(",");
@@ -320,10 +330,38 @@
             if (key.keyCode == 13) {
             	
             	
-                rowAdd1().click();
                 
                 
+            	/* let words1 = []; */
+                let word = $(this).val();
+           	 	/* words1 = words.split(",");
+           	 	let check1 = 0; */
+            	
+           		/* for(var i=0;i<words1.length;i++){  */
+           			
+             	$.ajax({
+             		url:"checkWords.do",
+             		data:{word:word},
+             		type:"get",
+             		success:function(data){
+             			// 중복되지 않았을 때
+             			if(data == "ok"){
+             				/* alert(word); */
+             				rowAdd1().click();
+             			// 중복됐을 때
+             			}else{
+                        /* 	alert(word); */
+             				alert("동일 단어가 있습니다. 다시 입력해주세요.");
+             				
+             				
+             			}
+             		},
+             		error:function(jqxhr, textStatus, errorThrown){
+             			console.log("ajax 처리 실패");
+             		}
+             	});
                 
+             	
             }
 
             /* $(".insertText").keyup(function () {
@@ -420,6 +458,7 @@
           	let dwords = $("#result2").val();
      	 	words2 = dwords.split(",");
      	 	let check2 = 0;
+     	 	let check3 = 0;
      	 	
   		for(var i=0;i<words2.length;i++){ 
           // WORD 전송 AJAX
@@ -435,9 +474,25 @@
   		        	 if(words2.length == check2){
   		         	 	alert("금칙어가 삭제 되었습니다.");
   		        	 };
+  		        	 
+  		        	
+  		        	 
+  		        	 
   		         }else{  
-  		         	 	alert("없는 단어입니다.");
+  		         	 	
+  		        	 check3++;
+  		        	// 없는 단어 한번만 출력
+  		        	if( words2.length == check2 + check3){
+  		        	 	alert("없는 단어입니다.");
+  		        	};
+  		        
+  		        	 	
   		         }
+  		    		
+  		    		
+  		       	 
+  		       	 
+  		       	 
   	         },
   	         error:function(jqxhr, textStatus, errorThrown){
   		         console.log("ajax 처리 실패");

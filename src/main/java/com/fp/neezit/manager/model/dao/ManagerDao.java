@@ -118,5 +118,17 @@ public class ManagerDao {
 	public UserMaster getMaster() {
 		return sqlSession.selectOne("managerMapper.getMaster");
 	}
+
+	public int getUserListAllCount() {
+		return sqlSession.selectOne("managerMapper.getUserListAllCount");
+	}
+
+	public int checkWords(String word) {
+		return sqlSession.selectOne("managerMapper.checkWords",word);
+	}
+
+	public List<Forbidden> fList() {
+		return sqlSession.selectList("managerMapper.fList");
+	}
 	
 }
