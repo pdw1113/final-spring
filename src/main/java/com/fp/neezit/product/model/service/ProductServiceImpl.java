@@ -76,11 +76,6 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.getProductSnsDetail(email);
 	}
 
-	@Override
-	public int wishInsert(HashMap<String, String> map) {
-		return pDao.wishInsert(map);
-	}
-
 	public int insertReply(Reply r) {
 		return pDao.insertReply(r);
 	}
@@ -115,25 +110,9 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.updateProductStar(getpNo);
 	}
 	
-    @Override
-    public List<Product> wishList(User u) {
-       return pDao.wishList(u);
-    }
-
-	@Override
-	public int wishDuplicate(HashMap<String, String> map2) {
-		return pDao.wishDuplicate(map2);
-	}
-
-
 	@Override
 	public WishList getWishListDetail(HashMap<String, String> map) {
 		return pDao.getWishListDetail(map);
-	}
-
-	@Override
-	public int wishDelete(HashMap<String, String> map) {
-		return pDao.wishDelete(map);
 	}
 
 	@Override
@@ -141,11 +120,6 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.modifyComment(map);
 	}
 	
-	@Override
-	public int wishProductName(HashMap<String, String> map3) {
-		return pDao.wishProductName(map3);
-	}
-
 	@Override
 	public Product getProductUpdate(HashMap<Object, Object> map) {
 		return pDao.getProductUpdate(map);
@@ -160,5 +134,5 @@ public class ProductServiceImpl implements ProductService{
 	public int productDelete(int no) {
 		return pDao.productDelete(no);
 	}
-
+	
 }

@@ -150,7 +150,26 @@
 	</body>
 	
 	<script>
+	
+	// 금지어 기본 세팅
+	var jsonData = JSON.parse('${fList}');
 
+	var fListArr = new Array();
+	var fListObj = new Object();
+	var filter = [];
+
+	for(var i = 0; i < jsonData.length; i++) {
+
+    	 fListObj = new Object();  //초기화
+    	 fListObj = jsonData[i].fword;
+    	 /* fListArr.push(fListObj); */
+    	 filter.push(fListObj);
+     }
+		console.log(filter);
+
+	var matchcnt = 0;
+
+	
 		(function(){
 			 // 뷰에 있던 경력가져오기 
 			 let career = "${product.career}";
@@ -213,6 +232,21 @@
 		
 		// 유효성 검사
 		function validate(){
+			
+			matchcnt = 0;
+			var rContent = $("#title").val()+$("#summernote_portfolio").val()+$("#summernote_Introduce").val(); 
+
+			for(var i in filter){
+			  try{
+				  	var compare = rContent.match( filter[i]);
+				  	console.log( compare.index);
+				  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+				  	matchcnt ++;
+			  		if( matchcnt > 0 ) return false;
+			  	} catch( err ) {
+			  		console.log("통과");
+			  	}
+			  };   
 			
  	      	if(!document.getElementById("title").value){
 	      		alert("상품명을 넣어주세요");

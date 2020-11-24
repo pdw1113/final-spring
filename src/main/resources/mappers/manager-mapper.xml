@@ -20,6 +20,36 @@
 		<result property="marketingT" column="USER_MARKETING_T" />
 		<result property="marketingE" column="USER_MARKETING_E" />
 	</resultMap>
+
+	<resultMap type="UserMaster" id="userMasterResultSet">
+		<id property="mNickname" column="MASTER_NICKNAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
+		<result property="mCategory" column="MASTER_CATEGORY" />
+		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
+		<result property="mWorkDay" column="MASTER_WORKDAY" />
+		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
+		<result property="mStartTime" column="MASTER_STARTTIME" />
+		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
+	</resultMap>
+	
+	<resultMap type="UserAccess" id="userAccessResultSet">
+		<id property="uAccessnum" column="USER_ACCESS_NUM" /> 
+		<result property="uEmail" column="USER_EMAIL" />
+		<result property="uName" column="USER_NAME" />
+		<result property="uRankName" column="MASTER_RANKNAME" />
+		<result property="uIp" column="USER_IP" />
+		<result property="uAccessDate" column="ACCESS_DATE" />
+	</resultMap>
+
+	<resultMap type="UserBean" id="UserBeanMap">
+		<collection property="user" resultMap="userResultSet" />
+		<collection property="userMaster" resultMap="userMasterResultSet" />
+		<collection property="userAccess" resultMap="userAccessResultSet" />
+	</resultMap>
+	
 	
 	<resultMap type="UserBuyList" id="UserBuyListResultSet">
 		<id property="num" column="USER_BUY_NUM" />
@@ -57,6 +87,13 @@
 	<select id="searchWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
 		SELECT * FROM FORBIDDEN 
 		WHERE FORBIDDEN_WORD LIKE '%' ||  #{fword} || '%'
+	</select>
+	
+	<!-- 금칙어 확인-->
+	<select id="checkWords"  parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM FORBIDDEN 
+		WHERE FORBIDDEN_WORD =  #{fword}
 	</select>
 	
 	<!-- 금칙어 날짜 검색 -->
@@ -154,6 +191,7 @@
 	<select id="getUser" resultMap="userResultSet">
 		SELECT * FROM NEEZ_USER
 	</select>
+
 
 	<!-- 관리자 구매확정 리스트 -->
 	<select id="getManagerBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
@@ -260,5 +298,289 @@
  	  </if>
  	  </if>
 	</select>
+
+	<!-- 능력자 정보 가져오기 -->
+	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
+		SELECT *
+		FROM NEEZ_MASTER
+	</select>
+
+	<!-- 유저 접속기록 갖고오기 -->
+	<select id="getUserAccess" parameterType="hashmap" resultMap="userAccessResultSet">
+		SELECT * FROM USER_ACCESS
+		
+	<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+	</if>
+	
+	<if test='search_way.equals("email") and !search_box.equals("")'>
+		WHERE USER_EMAIL LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("rank") and !search_box.equals("")'>
+		WHERE MASTER_RANKNAME LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("name") and !search_box.equals("")'>
+		WHERE USER_NAME LIKE #{search_box}
+	</if>
+	
+	 <if test='!search_box.equals("") and !buttonday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !buttonday.equals("")'>
+		WHERE
+	</if>
+	
+	<if test='!search_box.equals("") and !preday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !preday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='buttonday.equals("1")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("2")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-7,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("3")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-15,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("4")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("5")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-4),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("6")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='!preday.equals("")'>
+		ACCESS_DATE BETWEEN TO_CHAR(#{preday})
+        AND TO_CHAR(#{postday})
+	</if>
+	
+		ORDER BY USER_ACCESS_NUM DESC
+	</select>
+	
+	<!-- 유저 접속기록 카운트 갖고오기 -->
+	<select id="getUserAccessCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) FROM USER_ACCESS
+		
+	<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+	</if>
+	
+	<if test='search_way.equals("email") and !search_box.equals("")'>
+		WHERE USER_EMAIL LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("rank") and !search_box.equals("")'>
+		WHERE MASTER_RANKNAME LIKE #{search_box}
+	</if>
+	
+	<if test='search_way.equals("name") and !search_box.equals("")'>
+		WHERE USER_NAME LIKE #{search_box}
+	</if>
+	
+	 <if test='!search_box.equals("") and !buttonday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !buttonday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='!search_box.equals("") and !preday.equals("")'>
+		AND
+	</if>
+	
+	 <if test='search_box.equals("") and !preday.equals("")' >
+		WHERE
+	</if>
+	
+	<if test='buttonday.equals("1")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("2")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-7,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("3")'>
+		ACCESS_DATE BETWEEN TO_CHAR(SYSDATE-15,'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("4")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-2),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("5")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-4),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='buttonday.equals("6")'>
+		ACCESS_DATE BETWEEN TO_CHAR(ADD_MONTHS(SYSDATE,-7),'YYYY.MM.DD')
+        AND TO_CHAR(SYSDATE+0.99999,'YYYY.MM.DD')
+	</if>
+	
+	<if test='!preday.equals("")'>
+		ACCESS_DATE BETWEEN TO_CHAR(#{preday})
+        AND TO_CHAR(#{postday})
+	</if>
+		ORDER BY USER_ACCESS_NUM DESC
+	</select>
+	
+	<select id="getUserList" resultMap="UserBeanMap">
+		SELECT * 
+		FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+		
+		<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+		</if>
+
+		<if test='search_way.equals("email") and !search_box.equals("")'>
+ 			WHERE NU.USER_EMAIL LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("rank") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_RANKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("name") and !search_box.equals("")'>
+ 			WHERE NU.USER_NAME LIKE #{search_box}
+ 		</if>
+		
+		<if test='search_way.equals("nickname") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !buttonday.equals("")'>
+			WHERE
+		</if>
+		
+		<if test='!search_box.equals("") and !preday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !preday.equals("")' >
+			WHERE
+		</if>
+	
+
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			NU.USER_ENROLLDATE
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+		
+	</select>
+	
+	<select id="getUserListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) 
+        FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+		
+		<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+		</if>
+
+		<if test='search_way.equals("email") and !search_box.equals("")'>
+ 			WHERE NU.USER_EMAIL LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("rank") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_RANKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("name") and !search_box.equals("")'>
+ 			WHERE NU.USER_NAME LIKE #{search_box}
+ 		</if>
+		
+		<if test='search_way.equals("nickname") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !buttonday.equals("")'>
+			WHERE
+		</if>
+		
+		<if test='!search_box.equals("") and !preday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !preday.equals("")' >
+			WHERE
+		</if>
+	
+
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			NU.USER_ENROLLDATE
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+
+	</select> 
+	
+	<select id="getUserListAllCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) 
+        FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+	</select> 	
+	
+	
+	<!-- 금칙어 리스트 가져오기 -->
+	<select id="fList" resultMap="forbiddenResultSet">
+		SELECT FORBIDDEN_WORD
+		FROM FORBIDDEN 
+	</select>
+
 </mapper>
 

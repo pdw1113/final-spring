@@ -2,6 +2,7 @@ package com.fp.neezit.user.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fp.neezit.product.model.service.ProductService;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
@@ -28,7 +31,9 @@ public class UserMyPageController {
 
 	@Autowired
 	private UserService uService;
-
+	
+	@Autowired
+	ProductService pService;
 	// 암호화 처리
 	@Autowired // spring-security.xml에 등록되어 있음.
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -463,4 +468,121 @@ public class UserMyPageController {
 			return "fail";
 		}
 	}
+	/*
+	 * 15. 상품 구매 확인 메소드 AJAX
+	 * @param buylist
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("buyConfirm.do")
+	public String buyConfirm(String email,String pNo){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("pNo", pNo);
+		
+		// 상품구매 이력이 있는지 확인
+		int result = uService.buyConfirm(map);
+		
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 15. 찜등록 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishInsert.do")
+	public String wishInsert(String email, int no ,String pName, HttpSession session){
+		// 2개의 객체를 insert 하기위해 HashMap 사용
+		String str = Integer.toString(no);     // int로 들어온 객체를 스트링으로 변환시켜준다. (email이 스트링이기때문에 같이 HashMap 사용하기위해)
+		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
+		map.put("email", email);    
+		map.put("no", str);
+
+
+		// 중복값 확인
+		HashMap<String, String> map2 = new HashMap<String, String>();    // HashMap 선언
+		map2.put("email", email);    
+		map2.put("no", str);
+
+		int duplicate = uService.wishDuplicate(map2);    // duplicate 라는변수에  selectone으로 결과값(true이면 1 false면 0) 을받는다.
+
+		
+		// 자기상품 자기가 찜 불가능하게하는 메소드
+		HashMap<String, String> map3 = new HashMap<String, String>();    // HashMap 선언
+		map3.put("pName", pName);    
+		map3.put("email", email);
+		
+		int ProductName = uService.wishProductName(map3); // 자기상품 자기가 찜 불가하기위한 객체(카운트값으로 받아온다)
+		int result = 0;      // result 값 초기화
+		if(duplicate == 0 && ProductName == 0) {    // 중복값이 없으면 insert 실행시켜준다.
+			result = uService.wishInsert(map);    //result 변수에 insert 메소드 결과값 받아준다.
+		}
+
+		if (result > 0) {    // insert가 성공시(result == 1) 성공적으로 return 시켜준다. 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 11. 찜해제 AJAX
+	 * 
+	 * @param 
+	 * @return
+	 * @throws 
+	 */
+	@ResponseBody // AJAX
+	@RequestMapping("wishDelete.do")
+	public String wishDelete(int no ,HttpSession session){
+
+		Product p = pService.getProductDetail(no); //pService 가지고 오기
+		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
+		String str = Integer.toString(p.getNo());
+
+		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
+		map.put("email", u.getEmail());    
+		map.put("no", str);
+
+		int result = uService.wishDelete(map);
+
+		if (result > 0) { 
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	/**
+	 * 12.찜목록 리스트
+	 * 
+	 * @param u
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("wishList.do")
+	public String wishList(HttpSession session,Model model) {
+		// email값 session.getAttribute 가져오기
+		User u = (User) session.getAttribute("loginUser");
+
+		// 상품정보 담을 리스트객체
+		List<Product>product = null;
+
+		// DB에서 넘어온 값들을 담아준다.
+		product = uService.wishList(u);
+
+		// model객체에 키,벨류 값으로 넣어주고 wishList.jsp로 리턴시켜준다.
+		model.addAttribute("product",product);
+		return "user/myPage/wishList";
+	}
+
 }

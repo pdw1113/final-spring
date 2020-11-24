@@ -2,6 +2,9 @@ package com.fp.neezit.user.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class User {
 	
 	private String name;

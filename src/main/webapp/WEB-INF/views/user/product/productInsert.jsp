@@ -188,6 +188,26 @@
 		// 유효성 검사
 		function validate(){
 			
+
+		   matchcnt = 0;
+		   var rContent = $("#title").val()+$("#summernote_portfolio").val()+$("#summernote_Introduce").val(); 
+
+
+
+		   				for(var i in filter){
+
+		   				  try{
+		   					  	var compare = rContent.match( filter[i]);
+		   					  	console.log( compare.index);
+		   					  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+		   					  	matchcnt ++;
+		   				  		if( matchcnt > 0 ) return false;
+		   				  	} catch( err ) {
+		   				  		console.log("통과");
+		   				  	}
+		   				  };   
+		   
+			
 			// 이미지 등록
 		    if(!document.getElementById("upload").value){
 		        alert("사진을 넣어주세요");
@@ -303,6 +323,26 @@
 
 
 <script>
+
+	  var jsonData = JSON.parse('${fList}');
+
+	  var fListArr = new Array();
+	  var fListObj = new Object();
+	  var filter = [];
+		
+	  for(var i = 0; i < jsonData.length; i++) {
+		
+			 fListObj = new Object();  //초기화
+			 fListObj = jsonData[i].fword;
+			 /* fListArr.push(fListObj); */
+			 filter.push(fListObj);
+		 }
+			console.log(filter);
+		
+		
+	  var matchcnt = 0;
+
+
       var upload = document.querySelector('#upload');
       
       /* FileReader 객체 생성 */
@@ -318,7 +358,7 @@
              /* base64 인코딩 된 스트링 데이터 */
              vm.image.src = e.target.result
          }
-      })()
+      })();
       
       	upload.addEventListener('change',function (e) {
          var get_file = e.target.files;
@@ -387,4 +427,5 @@
          		});
          	});
    </script>
+
 </html>

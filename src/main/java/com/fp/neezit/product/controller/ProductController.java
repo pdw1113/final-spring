@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.neezit.manager.model.service.ManagerService;
+import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
@@ -29,7 +31,6 @@ import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
-import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.google.gson.Gson;
@@ -46,6 +47,9 @@ public class ProductController {
 	
 	@Autowired
 	UserService uService;
+	
+	@Autowired
+	ManagerService mService;
 
 	@RequestMapping("productListSearch.do")
 	public String productListSearch() {
@@ -61,7 +65,6 @@ public class ProductController {
 	public String productList(Model model, int navNo, String what){
 		List<ProductCategory> category = pService.categoryList(navNo);
 		List<ProductCategory> category2 = pService.categoryList2(navNo);
-
 		if(what == "최신순") {
 			what = "";
 		}
@@ -134,6 +137,10 @@ public class ProductController {
 	@RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
 	public String getGoodsRegister(Model model,HttpSession session){
 
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+		
 		// 로그인 세션 정보
 		User u = (User)session.getAttribute("loginUser");
 
@@ -150,8 +157,8 @@ public class ProductController {
 		String real = string.substring(1,string.length()-1);
 
 		model.addAttribute("category", real);
-
 		model.addAttribute("master", master);
+		model.addAttribute("fList", JSONArray.fromObject(fList));
 
 		return "user/product/productInsert";
 	}
@@ -264,6 +271,10 @@ public class ProductController {
 	 */
 	@RequestMapping("myProductDetail.do")
 	public String myProductDetail(int no, Model model,HttpSession session) {
+		
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
  
 		// 상품 정보 가져오기
 		Product p = pService.getProductDetail(no);
@@ -293,6 +304,7 @@ public class ProductController {
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
 			model.addAttribute("cash", cash);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productDetail";
 		}
 
@@ -309,6 +321,11 @@ public class ProductController {
 	 */
 	@RequestMapping("productDetail.do")
 	public String productDetail(int no, Model model,HttpSession session) {
+		
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+		
 		// 상품 정보 가져오기
 		Product p = pService.getProductDetail(no);
 
@@ -334,11 +351,13 @@ public class ProductController {
 		int replyCount = pService.getReplyCount(p.getNickName());
 
 		if(p != null && m != null) {
+
 			model.addAttribute("product", p);
 			model.addAttribute("master", m);
 			model.addAttribute("sns", sns);
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productDetail";
 		}
 
@@ -352,9 +371,19 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="addReply.do")
-	public String addReply(Reply r) {
+	public String addReply(Reply r,Model model,HttpSession session) {
+		User u = (User)session.getAttribute("loginUser");
+		// 능력자 프로필 이미지 가져오기
+		UserMaster um = pService.getMaster(u); 
+		if(um!=null) { // 능력자 프로필 이미지 저장
+			r.setrPic("resources/masterImg/" + um.getmProPicRe());
+		}else {			// 사용자 프로필 이미지 저장
+			r.setrPic("resources/img/default_Img.png");
+		}
+		
 		int result = pService.insertReply(r);
 
+		
 		if(result == 1) {
 
 			// 능력자 별점 업데이트
@@ -414,102 +443,6 @@ public class ProductController {
 	}
 
 	/**
-	 * 10. 찜등록 AJAX
-	 * 
-	 * @param 
-	 * @return
-	 * @throws 
-	 */
-	@ResponseBody // AJAX
-	@RequestMapping("wishInsert.do")
-	public String wishInsert(String email, int no ,String pName, HttpSession session){
-		// 2개의 객체를 insert 하기위해 HashMap 사용
-		String str = Integer.toString(no);     // int로 들어온 객체를 스트링으로 변환시켜준다. (email이 스트링이기때문에 같이 HashMap 사용하기위해)
-		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
-		map.put("email", email);    
-		map.put("no", str);
-
-
-		// 중복값 확인
-		HashMap<String, String> map2 = new HashMap<String, String>();    // HashMap 선언
-		map2.put("email", email);    
-		map2.put("no", str);
-
-		int duplicate = pService.wishDuplicate(map2);    // duplicate 라는변수에  selectone으로 결과값(true이면 1 false면 0) 을받는다.
-
-		
-		// 자기상품 자기가 찜 불가능하게하는 메소드
-		HashMap<String, String> map3 = new HashMap<String, String>();    // HashMap 선언
-		map3.put("pName", pName);    
-		map3.put("email", email);
-		
-		int ProductName = pService.wishProductName(map3); // 자기상품 자기가 찜 불가하기위한 객체(카운트값으로 받아온다)
-		int result = 0;      // result 값 초기화
-		if(duplicate == 0 && ProductName == 0) {    // 중복값이 없으면 insert 실행시켜준다.
-			result = pService.wishInsert(map);    //result 변수에 insert 메소드 결과값 받아준다.
-		}
-
-		if (result > 0) {    // insert가 성공시(result == 1) 성공적으로 return 시켜준다. 
-			return "ok";
-		} else {
-			return "fail";
-		}
-
-
-	}
-
-	/**
-	 * 11. 찜해제 AJAX
-	 * 
-	 * @param 
-	 * @return
-	 * @throws 
-	 */
-	@ResponseBody // AJAX
-	@RequestMapping("wishDelete.do")
-	public String wishDelete(int no ,HttpSession session){
-
-		Product p = pService.getProductDetail(no);
-		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
-		String str = Integer.toString(p.getNo());
-
-		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
-		map.put("email", u.getEmail());    
-		map.put("no", str);
-
-		int result = pService.wishDelete(map);
-
-		if (result > 0) { 
-			return "ok";
-		} else {
-			return "fail";
-		}
-	}
-
-	/**
-	 * 12.찜목록 리스트
-	 * 
-	 * @param u
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("wishList.do")
-	public String wishList(HttpSession session,Model model) {
-		// email값 session.getAttribute 가져오기
-		User u = (User) session.getAttribute("loginUser");
-
-		// 상품정보 담을 리스트객체
-		List<Product>product = null;
-
-		// DB에서 넘어온 값들을 담아준다.
-		product = pService.wishList(u);
-
-		// model객체에 키,벨류 값으로 넣어주고 wishList.jsp로 리턴시켜준다.
-		model.addAttribute("product",product);
-		return "user/myPage/wishList";
-	}
-
-	/**
 	 * 14. 상품 수정 뷰
 	 * @param no
 	 * @param pic
@@ -520,10 +453,12 @@ public class ProductController {
 	@RequestMapping("productUpdate.do")
 	public String productUpdate(int no,String pic,Model model,HttpSession session ) {
 		
+		// 금지어 리스트
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+
 		// 로그인 세션 정보
 		User u = (User)session.getAttribute("loginUser");
-
-
 
 		Product p = pService.getProductDetail(no);
 		
@@ -545,6 +480,7 @@ public class ProductController {
 			model.addAttribute("product", p);
 			model.addAttribute("category", real);
 			model.addAttribute("master", master);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productUpdate";
 		}
 

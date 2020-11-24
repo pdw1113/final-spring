@@ -137,8 +137,28 @@
              	 // 별명 중복체크 AJAX
                 $(function(){
        	         $("#dupl_check").on("click",function(){
-       	        	// #nickname의 값
-       	         	let nickname = $('#nickname').val();     	   
+
+       	        	matchcnt = 0;
+       	      		// #nickname의 값
+       	         	nickname = $('#nickname').val(); 
+
+      					for(var i in filter){
+      					  try{
+      						  	var compare = nickname.match( filter[i]);
+      						  	console.log( compare.index);
+      						  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+      						  	matchcnt ++;
+      						  	$('.hide-span-sgm').removeClass("green");
+     	         				$('.hide-span-sgm').addClass("red");
+     	                        $('.hide-span-sgm').text('사용불가');
+     	                     	$('.hide-span-sgm').show();
+      						  	
+      					  		if( matchcnt > 0 ) return false;
+      					  	} catch( err ) {
+      					  		console.log("통과");
+      					  	}
+      					  };      
+
        	         	$.ajax({
        	         		url:"nickCheck.do",
        	         		data:{nickname:nickname},
@@ -506,19 +526,19 @@
             <li>
                 <div class="edu-ability" title="학력">
                     <div>
-                        <input class="input_master width_500" type="text" placeholder="고등학교" name="sHigh">
+                        <input class="input_master width_500" type="text" id="fword1" placeholder="고등학교" name="sHigh">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학교" name="sUniv">
-                        <input class="input_master width_242" type="text" placeholder="학과(대학교 입력필수)" name="sUnivDept">
+                        <input class="input_master width_242" type="text" id="fword2" placeholder="대학교" name="sUniv">
+                        <input class="input_master width_242" type="text" id="fword3" placeholder="학과(대학교 입력필수)" name="sUnivDept">
                         <span class="btn_sgm font_jua" id="btn-sUniv" onclick="picUpload(this);">업로드</span>
                         <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master width_242" type="text" placeholder="대학원" name="sUniv2">
-                        <input class="input_master width_242" type="text" placeholder="학과(대학원 입력필수)" name="sUniv2Dept">
+                        <input class="input_master width_242" type="text" id="fword4" placeholder="대학원" name="sUniv2">
+                        <input class="input_master width_242" type="text" id="fword5" placeholder="학과(대학원 입력필수)" name="sUniv2Dept">
                         <span class="btn_sgm font_jua" id="btn-sUniv2"  onclick="picUpload(this);">업로드</span>
                         <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
@@ -594,31 +614,31 @@
             <li>
                 <div class="certify-ability " title="자격증(최대5개)">
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q1">
+                        <input class="input_master" type="text" id="fword6" placeholder="자격증" name="q1">
                         <span class="btn_sgm font_jua" id="btn-sUniv3" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q2">
+                        <input class="input_master" type="text" id="fword7" placeholder="자격증" name="q2">
                         <span class="btn_sgm font_jua" id="btn-sUniv4" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q3">
+                        <input class="input_master" type="text" id="fword8" placeholder="자격증" name="q3">
                         <span class="btn_sgm font_jua" id="btn-sUniv5" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q4">
+                        <input class="input_master" type="text" id="fword9" placeholder="자격증" name="q4">
                         <span class="btn_sgm font_jua" id="btn-sUniv6" onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
-                        <input class="input_master" type="text" placeholder="자격증" name="q5">
+                        <input class="input_master" type="text" id="fword10" placeholder="자격증" name="q5">
                         <span class="btn_sgm font_jua"id="btn-sUniv7"  onclick="picUpload(this);">업로드</span>
                         <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
@@ -696,33 +716,33 @@
             <li>
                 <div class="social-media" title="소셜미디어">
                     <div class="instagram">
-                        <input class="input_master_2" type="text" placeholder="인스타그램" name=snsInsta>
+                        <input class="input_master_2" type="text" id="fword11" placeholder="인스타그램" name=snsInsta>
                     </div>
                     <div class="twitter">
-                        <input class="input_master_2" type="text" placeholder="트위터" name="snsTwit">
+                        <input class="input_master_2" type="text" id="fword12" placeholder="트위터" name="snsTwit">
                     </div>
                     <div class="blog">
-                        <input class="input_master_2" type="text" placeholder="블로그" name="snsBlog">
+                        <input class="input_master_2" type="text" id="fword13" placeholder="블로그" name="snsBlog">
                     </div>
                     <div class="git">
-                        <input class="input_master_2" type="text" placeholder="GIT" name="snsGit">
+                        <input class="input_master_2" type="text" id="fword14" placeholder="GIT" name="snsGit">
                     </div>
                 </div>
                 <div class="video-link" title="영상링크">
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        <input class="input_master_2" type="text" id="fword15" value="https://" onfocusout="youtube(this);"
                         name="snsYou1">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        <input class="input_master_2" type="text" id="fword16" value="https://" onfocusout="youtube(this);"
                         name="snsYou2">
                         <div>
                         </div>
                     </div>
                     <div>
-                        <input class="input_master_2" type="text" value="https://" onfocusout="youtube(this);"
+                        <input class="input_master_2" type="text" id="fword17" value="https://" onfocusout="youtube(this);"
                         name="snsYou3">
                         <div>
                         </div>
@@ -855,6 +875,29 @@
     
 
     function validate(){ 
+    	
+    	matchcnt = 0;
+    	fContent = "";
+       	for(var i=0; i<17; i++){
+        		fContent += $('#fword'+(i+1)).val() +','; 
+        } 
+       	fContent += $('#nickname').val(); 
+        console.log(fContent);
+       	
+  		for(var i in filter){
+
+  		try{
+  		  	var compare = fContent.match( filter[i]);
+  		  	console.log( compare.index);
+  		  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+  		  	matchcnt ++;
+  		  	
+  		  	if( matchcnt > 0 ) return false;
+  		  } catch( err ) {
+  		  	console.log("통과");
+  		  }
+  		 };   
+        	 
 
          if(!document.master._mProPicOri.value){
              alert("사진을 넣어주세요"); 
@@ -1020,6 +1063,28 @@
     });   
     
    </script>    
+   <script>
+	// 금지어 기본 세팅
+	   var fjsonData = JSON.parse('${fList}');
+
+	   var fListArr = new Array();
+	   var fListObj = new Object();
+	   var filter = [];
+	   var fContent;
+	   let nickname; 
+	   
+       for(var i = 0; i < fjsonData.length; i++) {
+
+       fListObj = new Object();  //초기화
+       fListObj = fjsonData[i].fword;
+       /* fListArr.push(fListObj); */
+       filter.push(fListObj);
+       }
+   		console.log(filter);
+
+	   var matchcnt = 0;
+
+   </script>
     
 </body>
 </html>

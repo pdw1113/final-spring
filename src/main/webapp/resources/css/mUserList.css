@@ -228,7 +228,7 @@ table.type07 td {
 	float: right;
 }
 /* 날짜폼 */
-.dateform_mUserList {
+.datepre_wdetail, .datepost_wdetail {
 	font-size:18px;
 	font-family:sans-serif;
 	height:25px;
@@ -275,4 +275,30 @@ height:25px;
 
 .header div.down_p1:after, div.down_p2:after{
    right:9px;
+}
+.pagination{    
+display: flex;
+justify-content: center;
+}
+
+.pagination a{
+  color: black;
+  border-radius: 10px;
+  justify-content: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+/* Style the active/current link */
+.pagination a.active {background-color: #FABE00; color: white;}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.center{
+	position:relative;
+	top:0px;
+	left:800px;
+	text-align: center;
+	
 }
