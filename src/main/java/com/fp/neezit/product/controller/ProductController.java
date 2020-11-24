@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.neezit.manager.model.service.ManagerService;
+import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
@@ -28,7 +31,6 @@ import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
-import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.google.gson.Gson;
@@ -45,6 +47,9 @@ public class ProductController {
 	
 	@Autowired
 	UserService uService;
+	
+	@Autowired
+	ManagerService mService;
 
 	@RequestMapping("productListSearch.do")
 	public String productListSearch() {
@@ -60,7 +65,6 @@ public class ProductController {
 	public String productList(Model model, int navNo, String what){
 		List<ProductCategory> category = pService.categoryList(navNo);
 		List<ProductCategory> category2 = pService.categoryList2(navNo);
-
 		if(what == "최신순") {
 			what = "";
 		}
@@ -133,6 +137,10 @@ public class ProductController {
 	@RequestMapping(value = "productInsertPage.do" , method = RequestMethod.GET)
 	public String getGoodsRegister(Model model,HttpSession session){
 
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+		
 		// 로그인 세션 정보
 		User u = (User)session.getAttribute("loginUser");
 
@@ -149,8 +157,8 @@ public class ProductController {
 		String real = string.substring(1,string.length()-1);
 
 		model.addAttribute("category", real);
-
 		model.addAttribute("master", master);
+		model.addAttribute("fList", JSONArray.fromObject(fList));
 
 		return "user/product/productInsert";
 	}
@@ -180,7 +188,7 @@ public class ProductController {
 				product.setRenamePic(renamePic);
 			}
 		}
-
+		
 		int result = pService.insertProduct(product);
 		
 		if(result==1) {
@@ -263,6 +271,10 @@ public class ProductController {
 	 */
 	@RequestMapping("myProductDetail.do")
 	public String myProductDetail(int no, Model model,HttpSession session) {
+		
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
  
 		// 상품 정보 가져오기
 		Product p = pService.getProductDetail(no);
@@ -292,6 +304,7 @@ public class ProductController {
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
 			model.addAttribute("cash", cash);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productDetail";
 		}
 
@@ -308,6 +321,11 @@ public class ProductController {
 	 */
 	@RequestMapping("productDetail.do")
 	public String productDetail(int no, Model model,HttpSession session) {
+		
+		// 금지어 세팅
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+		
 		// 상품 정보 가져오기
 		Product p = pService.getProductDetail(no);
 
@@ -333,11 +351,13 @@ public class ProductController {
 		int replyCount = pService.getReplyCount(p.getNickName());
 
 		if(p != null && m != null) {
+
 			model.addAttribute("product", p);
 			model.addAttribute("master", m);
 			model.addAttribute("sns", sns);
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productDetail";
 		}
 
@@ -433,6 +453,10 @@ public class ProductController {
 	@RequestMapping("productUpdate.do")
 	public String productUpdate(int no,String pic,Model model,HttpSession session ) {
 		
+		// 금지어 리스트
+		List<Forbidden> fList = null;
+		fList = mService.fList();
+
 		// 로그인 세션 정보
 		User u = (User)session.getAttribute("loginUser");
 
@@ -456,6 +480,7 @@ public class ProductController {
 			model.addAttribute("product", p);
 			model.addAttribute("category", real);
 			model.addAttribute("master", master);
+			model.addAttribute("fList", JSONArray.fromObject(fList));
 			return "user/product/productUpdate";
 		}
 

@@ -37,64 +37,65 @@
                <table class="table table-condensed table-striped font_jua" id="table04">
                   <thead class="table-thead04">
                      <tr>
-                        <th><input type="checkbox" class="checkbox04" id="checkfirst"> 전체</th>
                         <th class="bottom-td1">번호</th>
                         <th class="bottom-td2">이름</th>
-                        <th class="bottom-td3">아이디/닉네임</th>
+                        <th class="bottom-td3">아이디</th>
                         <th class="bottom-td4">날짜</th>
                         <th class="bottom-td5">출금계좌</th>
-                        <th class="bottom-td6">금액</th>
+                        <th class="bottom-td6">출금금액</th>
                      </tr>
                   </thead>
+                  <c:if test="${!empty ExchangeList}">
+                  <c:forEach var="e" items="${ ExchangeList }">
                   <tr>
-                     <td><input type="checkbox" class="checkbox04"></td>
-                     <td>1</td>
-                     <td>찬동민</td>
-                     <td>천동벌거숭이</td>
-                     <td>2020-10-24</td>
-                     <td>110358784049 신한</td>
-                     <td>380,000</td>
+                     <td>${e.num}</td>
+                     <td>${e.name}</td>
+                     <td>${e.email}</td>
+                     <td>${e.date}</td>
+                     <td>${e.bankno}&nbsp;&nbsp;${e.bank}</td>
+                     <td id="priceRed"><span>${e.money}원</span></td>
                   </tr>
-                  <tr>
-                     <td><input type="checkbox" class="checkbox04"></td>
-                     <td>2</td>
-                     <td>찬동민</td>
-                     <td>천동벌거숭이</td>
-                     <td>2020-10-24</td>
-                     <td>110358784049 신한</td>
-                     <td>380,000</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" class="checkbox04"></td>
-                     <td>3</td>
-                     <td>찬동민</td>
-                     <td>천동벌거숭이</td>
-                     <td>2020-10-24</td>
-                     <td>110358784049 신한</td>
-                     <td>380,000</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" class="checkbox04"></td>
-                     <td>4</td>
-                     <td>찬동민</td>
-                     <td>천동벌거숭이</td>
-                     <td>2020-10-24</td>
-                     <td>110358784049 신한</td>
-                     <td>380,000</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" class="checkbox04"></td>
-                     <td>5</td>
-                     <td>찬동민</td>
-                     <td>천동벌거숭이</td>
-                     <td>2020-10-24</td>
-                     <td>110358784049 신한</td>
-                     <td>380,000</td>
-                  </tr>
+                  </c:forEach>
+        		</c:if>    
                </table>
-               <div class="btn04-div04">
-                  <button type="submit" class="font_jua btn04">전환</button>
-               </div>
+               
+               <div class="pagination" id="pag">		
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage eq 1 }">
+					<a style="cursor:default;">«</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne 1 }">
+					<c:url var="before" value="mPayExchange.do">
+						<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href="${ before }">«</a>
+				</c:if>
+				
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq pi.currentPage }">
+						<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="mPayExchange" value="mPayExchange.do">
+							<c:param name="currentPage" value="${ p }"/>
+						</c:url>
+						<a href="${ mPayExchange }">${ p }</a>
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage eq pi.maxPage }">
+					<a style="cursor:default;">»</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne pi.maxPage }">
+					<c:url var="after" value="mPayExchange.do">
+						<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href="${ after }" >»</a>
+				</c:if>
+				</div> 		   
             </div>
          </div>
       </div>

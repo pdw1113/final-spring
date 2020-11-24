@@ -12,9 +12,13 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.manager.model.dao.ManagerDao;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.user.model.dao.UserDao;
+import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 import com.fp.neezit.user.model.vo.UserAccess;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 
 @Service("mService")
@@ -53,6 +57,40 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
+	public List<UserBuyList> mPayBuyList() {
+		return mDao.mPayBuyList();
+	}
+
+	@Override
+	public List<UserBuyList> getManagerBuyList(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getManagerBuyList(pi,map);
+	}
+	
+	@Override
+	public int getBuyListCount(HashMap<String, String> map) {
+		return mDao.getBuyListCount(map);
+	}
+
+	@Override
+	public List<UserWithdraw> getUserWithdrawList(PageInfo pi) {
+		return mDao.getUserWithdrawList(pi);
+	}
+
+	@Override
+	public int getUserWithdrawLisCount() {
+		return mDao.getUserWithdrawLisCount();
+	}
+
+	@Override
+	public List<UserBuyList> getRefundList(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getRefundList(pi,map);
+	}
+
+	@Override
+	public int getRefundCount(HashMap<String, String> map) {
+		return mDao.getRefundCount(map);
+	}
+
 	public ArrayList<UserAccess> getUserAccess(PageInfo pi, HashMap<String, String> map) {
 		return mDao.getUserAccess(pi,map);
 	}
@@ -60,6 +98,35 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int getUserAccessCount(HashMap<String, String> map) {
 		return mDao.getUserAccessCount(map);
+	}
+
+	public int getUserListCount(HashMap<String, String> map) {
+		return mDao.getUserListCount(map);
+	}
+
+	@Override
+	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getUserList(pi,map);
+	}
+
+	@Override
+	public UserMaster getMaster() {
+		return mDao.getMaster();
+	}
+
+	@Override
+	public int getUserListAllCount() {
+		return mDao.getUserListAllCount();
+	}
+
+	@Override
+	public int checkWords(String word) {
+		return mDao.checkWords(word);
+	}
+
+	@Override
+	public List<Forbidden> fList() {
+		return mDao.fList();
 	}
 
 }

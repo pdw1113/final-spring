@@ -20,14 +20,55 @@
 		<result property="marketingT" column="USER_MARKETING_T" />
 		<result property="marketingE" column="USER_MARKETING_E" />
 	</resultMap>
-			
-		<resultMap type="UserAccess" id="userAccessResultSet">
-		<id property="uAccessnum" column="USER_ACCESS_NUM"/>
-		<result property="uEmail" column="USER_EMAIL"/>
-		<result property="uName" column="USER_NAME"/>
-		<result property="uRankName" column="MASTER_RANKNAME"/>
+
+	<resultMap type="UserMaster" id="userMasterResultSet">
+		<id property="mNickname" column="MASTER_NICKNAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
+		<result property="mCategory" column="MASTER_CATEGORY" />
+		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
+		<result property="mWorkDay" column="MASTER_WORKDAY" />
+		<result property="mWorkStyle" column="MASTER_WORKSTYLE" />
+		<result property="mStartTime" column="MASTER_STARTTIME" />
+		<result property="mEndTime" column="MASTER_ENDTIME" />
+		<result property="mStar" column="MASTER_STAR" />
+	</resultMap>
+	
+	<resultMap type="UserAccess" id="userAccessResultSet">
+		<id property="uAccessnum" column="USER_ACCESS_NUM" /> 
+		<result property="uEmail" column="USER_EMAIL" />
+		<result property="uName" column="USER_NAME" />
+		<result property="uRankName" column="MASTER_RANKNAME" />
 		<result property="uIp" column="USER_IP" />
-		<result property="uAccessDate" column="ACCESS_DATE"/>
+		<result property="uAccessDate" column="ACCESS_DATE" />
+	</resultMap>
+
+	<resultMap type="UserBean" id="UserBeanMap">
+		<collection property="user" resultMap="userResultSet" />
+		<collection property="userMaster" resultMap="userMasterResultSet" />
+		<collection property="userAccess" resultMap="userAccessResultSet" />
+	</resultMap>
+	
+	
+	<resultMap type="UserBuyList" id="UserBuyListResultSet">
+		<id property="num" column="USER_BUY_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="date" column="USER_BUY_DATE" />
+		<result property="master" column="USER_BUY_MASTER" />
+		<result property="title" column="USER_BUY_TITLE" />
+		<result property="money" column="USER_BUY_MONEY" />
+		<result property="refund" column="USER_BUY_REFUND" />
+	</resultMap>
+	
+	<resultMap type="UserWithdraw" id="UserWithdrawResultSet">
+		<id property="num" column="USER_WITHDRAW_NUM" />
+		<result property="date" column="USER_WITHDRAW_DATE" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="name" column="USER_NAME" />
+		<result property="money" column="USER_MONY" />
+		<result property="bankno" column="USER_BANKNO" />
+		<result property="bank" column="USER_BANK" />
 	</resultMap>
 	
 	<!-- 금칙어 추가 -->
@@ -46,6 +87,13 @@
 	<select id="searchWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
 		SELECT * FROM FORBIDDEN 
 		WHERE FORBIDDEN_WORD LIKE '%' ||  #{fword} || '%'
+	</select>
+	
+	<!-- 금칙어 확인-->
+	<select id="checkWords"  parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM FORBIDDEN 
+		WHERE FORBIDDEN_WORD =  #{fword}
 	</select>
 	
 	<!-- 금칙어 날짜 검색 -->
@@ -142,6 +190,119 @@
 	<!-- 유저 리스트 갖고오기 -->
 	<select id="getUser" resultMap="userResultSet">
 		SELECT * FROM NEEZ_USER
+	</select>
+
+
+	<!-- 관리자 구매확정 리스트 -->
+	<select id="getManagerBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
+		SELECT *
+		FROM BUYLIST
+	<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<!-- 관리자 구매확정 리스트 페이징 전용 카운트 -->
+	<select id="getManagerBuyListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*)
+		FROM BUYLIST
+	  <!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<select id="getUserWithdrawList" parameterType="UserWithdraw" resultMap="UserWithdrawResultSet">
+		SELECT *
+		FROM WITHDRAW
+		ORDER BY USER_WITHDRAW_NUM DESC
+	</select>
+	
+	<select id="getUserWithdrawListCount" parameterType="UserWithdraw" resultType="_int">
+		SELECT COUNT(*)
+		FROM WITHDRAW
+		ORDER BY USER_WITHDRAW_NUM DESC
+	</select>
+	
+	<!--  환불확정 리스트 -->
+	<select id="getRefundList" parameterType="hashmap" resultMap="UserBuyListResultSet">
+		SELECT *
+		FROM BUYLIST
+		WHERE USER_BUY_REFUND = 'Y'
+	<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		AND USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<!-- 환불리스트 카운트 -->
+	<select id="getRefundCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM BUYLIST
+		WHERE USER_BUY_REFUND = 'Y'
+		<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		AND USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+
+	<!-- 능력자 정보 가져오기 -->
+	<select id="getMaster" parameterType="User" resultMap="userMasterResultSet">
+		SELECT *
+		FROM NEEZ_MASTER
 	</select>
 
 	<!-- 유저 접속기록 갖고오기 -->
@@ -289,5 +450,137 @@
 		ORDER BY USER_ACCESS_NUM DESC
 	</select>
 	
+	<select id="getUserList" resultMap="UserBeanMap">
+		SELECT * 
+		FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+		
+		<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+		</if>
+
+		<if test='search_way.equals("email") and !search_box.equals("")'>
+ 			WHERE NU.USER_EMAIL LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("rank") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_RANKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("name") and !search_box.equals("")'>
+ 			WHERE NU.USER_NAME LIKE #{search_box}
+ 		</if>
+		
+		<if test='search_way.equals("nickname") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !buttonday.equals("")'>
+			WHERE
+		</if>
+		
+		<if test='!search_box.equals("") and !preday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !preday.equals("")' >
+			WHERE
+		</if>
+	
+
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			NU.USER_ENROLLDATE
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+		
+	</select>
+	
+	<select id="getUserListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) 
+        FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+		
+		<if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'>
+		</if>
+
+		<if test='search_way.equals("email") and !search_box.equals("")'>
+ 			WHERE NU.USER_EMAIL LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("rank") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_RANKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		<if test='search_way.equals("name") and !search_box.equals("")'>
+ 			WHERE NU.USER_NAME LIKE #{search_box}
+ 		</if>
+		
+		<if test='search_way.equals("nickname") and !search_box.equals("")'>
+ 			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
+ 		</if>
+ 		
+ 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !buttonday.equals("")'>
+			WHERE
+		</if>
+		
+		<if test='!search_box.equals("") and !preday.equals("")'>
+			AND
+		</if>
+		
+		 <if test='search_box.equals("") and !preday.equals("")' >
+			WHERE
+		</if>
+	
+
+ 		<if test="buttonday eq ''.toString() and !preday.equals('')">
+			NU.USER_ENROLLDATE
+			BETWEEN TO_CHAR(#{preday})
+			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+ 		</if>
+
+	</select> 
+	
+	<select id="getUserListAllCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*) 
+        FROM NEEZ_USER NU
+		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
+        LEFT JOIN       
+        (
+            SELECT USER_EMAIL, MAX(ACCESS_DATE) AS ACCESS_DATE
+            FROM USER_ACCESS
+            GROUP BY USER_EMAIL
+    	) NEW 
+    	ON NU.USER_EMAIL = NEW.USER_EMAIL
+	</select> 	
+	
+	
+	<!-- 금칙어 리스트 가져오기 -->
+	<select id="fList" resultMap="forbiddenResultSet">
+		SELECT FORBIDDEN_WORD
+		FROM FORBIDDEN 
+	</select>
+
 </mapper>
 

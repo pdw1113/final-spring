@@ -348,7 +348,7 @@ cursor: pointer;
 opacity: 0.4;
 }
 .dateWidth {
-left: 70px;
+left: 60px;
 }
 .noReact{
 width: 1903px;
@@ -379,11 +379,11 @@ padding-left: 10px;
 padding-right:10px;
 }
 .header div.down_p1{
-   top:57px;
+top:57px;
 }
 
 .header div.down_p2{
-   top:117px;
+top:117px;
 }
 
 .header div.down_p1:after, div.down_p2:after,div.down_p1:before, div.down_p2:before{
@@ -391,5 +391,10 @@ height:25px;
 }
 
 .header div.down_p1:after, div.down_p2:after{
-   right:9px;
+right:9px;
+}
+#dateSearch{
+position:relative;
+left:10px;
+top:-1px;
 }

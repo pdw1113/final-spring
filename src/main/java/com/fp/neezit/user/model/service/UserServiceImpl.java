@@ -248,6 +248,15 @@ public class UserServiceImpl implements UserService{
 	    }
 
 	@Override
+	public int withdraw2(HashMap<String, String> map) {
+		return uDao.withdraw2(map);
+	}
+
+	@Override
+	public int refund(String refu) {
+		return uDao.refund(refu);
+	}
+
 	public String getMasterRank(String email) {
 		return uDao.getMasterRank(email);
 	}
@@ -256,4 +265,10 @@ public class UserServiceImpl implements UserService{
 	public int insertIP(HashMap<String, String> map) {
 		return uDao.insertIp(map);
 	}
+
+	@Override
+	public int buyConfirm(HashMap<String, String> map) {
+		return uDao.buyConfirm(map);
+	}
+
 }

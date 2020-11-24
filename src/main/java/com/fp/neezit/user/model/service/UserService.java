@@ -93,7 +93,11 @@ public interface UserService {
 	int getBuyListCount(HashMap<String, String> map);
 
 	int buyProductMoney(Map<String, String> map);
-	
+
+	int withdraw2(HashMap<String, String> map);
+
+	int refund(String refu);
+
 	public int wishDuplicate(HashMap<String, String> map2);
 	
 	public int wishProductName(HashMap<String, String> map3);
@@ -107,4 +111,7 @@ public interface UserService {
 	String getMasterRank(String email);
 
 	int insertIP(HashMap<String, String> map);
+
+	int buyConfirm(HashMap<String, String> map);
+
 }

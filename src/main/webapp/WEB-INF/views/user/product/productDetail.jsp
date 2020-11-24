@@ -383,7 +383,29 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<script>
+
+	var jsonData = JSON.parse('${fList}');
+	console.log(jsonData);
+    var fListArr = new Array();
+    var fListObj = new Object();
+	var filter = [];
+
+     for(var i = 0; i < jsonData.length; i++) {
+
+    	 fListObj = new Object();  //초기화
+    	 fListObj = jsonData[i].fword;
+    	 /* fListArr.push(fListObj); */
+    	 filter.push(fListObj);
+     }
+		console.log(filter);
+
+
+	var matchcnt = 0;
+
+	</script>
+
 	<script>
  		function buyConfirm(){
  			let proM = $("#buy_sum").html();
@@ -396,6 +418,7 @@
 				let title = "${product.title}";
 				let email = "${sessionScope.loginUser.email}";
 				let master = "${master.mNickname}";
+				let pno	= "${ product.no }";
 				let money = proM;
 				
 				$.ajax({
@@ -404,6 +427,7 @@
 						title:title,
 						email:email,
 						master:master,
+						pno:pno,
 						money:money
 					},
 					type:"post",
@@ -522,12 +546,30 @@
 					alert("댓글을 입력 해 주세요");
 					return;
 				}
+				
+				matchcnt = 0;
+				
 				var pNo = "${ product.no }";	// 상품 번호
 				var rContent = $("#rContent").val(); // 댓글 내용
 				var rStar = $(".modal_star").find(".fas").length; // 꽉찬 별 갯수당 숫자로 치환
 				var rName = "${ sessionScope.loginUser.name }"; // 댓글 작성자
 				var refRno = $("#firstno").val(); // 댓글 참조 번호
 				var rLevel = $("#firstlevel").val(); // 댓글 레벨
+				
+				for(var i in filter){
+					  try{
+						  	var compare = rContent.match( filter[i]);
+						  	console.log( compare.index);
+						  	alert(' 금지어가 포함 되어 있습니다. - ' + filter[i]);
+						  	matchcnt ++;
+					  		if( matchcnt > 0 ) return;
+					  	} catch( err ) {
+					  		console.log("통과");
+					  	}
+					  };   
+				
+				
+				
 				
 	 			$.ajax({
 					url:"addReply.do",
@@ -653,6 +695,9 @@
 								$("#rContent").attr("placeholder","이미 상품평을 작성하였습니다.");
 								$("#rContent").attr("readonly",true);
 								$("#rContent").css("background","rgb(220,220,220,0.5)");
+								$("#cmt_btn").attr("disabled","disabled");
+								$("#cmt_btn").css("background","rgb(220,220,220,0.5)");
+								$("#cmt_btn").css("cursor","default");
 							}
 						}
 					}
@@ -680,12 +725,29 @@
 
 	    // 댓글 작성 클릭 시 별점 모달 팝업 
 	    $("#cmt_btn").click(function () {
-			if($("#rContent").val() == ""){
-				alert("상품평을 입력 해 주세요");
-				return;
-			}
-			confirm("상품평은 등록 후 삭제가 불가능합니다. 정말 등록하시겠습니까?");
-	      $("#cmtModal").css("display", "block");
+	    	let pNo = "${product.no}";
+	    	let email = "${sessionScope.loginUser.email}";
+	    	$.ajax({
+	    		url:"buyConfirm.do",
+	    		data:{ pNo:pNo, email:email },
+	    		type:"post",
+	    		success:function(data){
+	    			if(data == "ok"){
+	    				if($("#rContent").val() == ""){
+	    					alert("상품평을 입력 해 주세요");
+	    					return;
+	    				}
+	    				confirm("상품평은 등록 후 삭제가 불가능합니다. 정말 등록하시겠습니까?");
+	    				// 댓글 작성 클릭 시 별점 모달 팝업 
+	    		      	$("#cmtModal").css("display", "block");
+	    			}else{
+	    				alert("상품을 구매한 회원만 상품평을 작성 할 수 있습니다.");
+	    			}
+    			}, error:function(request,status,errorData){
+				console.log(request.status + ":" + errorData);
+				
+    			}
+	    	});
 	    });
 	    // 모달 팝업 배경 클릭 시 닫기
 	    $("#cmtModal").click(function (e) {

@@ -38,7 +38,7 @@
          </li>
          <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">결제</a>
-            <a href="mPayBuyList.do"  class="Admin-Atag">구매확정 리스트</a>
+            <a href="myBuyList.do"  class="Admin-Atag">구매확정 리스트</a>
             <a href="mPayRefundList.do"  class="Admin-Atag">환불 리스트</a>
             <a href="mPayExchange.do"  class="Admin-Atag">출금내역</a>
          </li>

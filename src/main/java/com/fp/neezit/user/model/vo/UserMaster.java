@@ -1,5 +1,8 @@
 package com.fp.neezit.user.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserMaster {
    private String email;       // 유저 이메일
    private String mRankname;    // 마스터 랭크

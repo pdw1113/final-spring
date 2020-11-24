@@ -33,7 +33,7 @@ public class UserContoller {
 
 	@Autowired
 	private UserService uService;
-	
+
 	@Autowired
 	private UserSignUpController usign;
 		

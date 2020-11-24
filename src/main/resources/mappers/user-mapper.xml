@@ -104,6 +104,7 @@
 	<resultMap type="UserBuyList" id="UserBuyListResultSet">
 		<id property="num" column="USER_BUY_NUM" />
 		<result property="email" column="USER_EMAIL" />
+		<result property="pno" column="USER_PNO" />
 		<result property="date" column="USER_BUY_DATE" />
 		<result property="master" column="USER_BUY_MASTER" />
 		<result property="title" column="USER_BUY_TITLE" />
@@ -374,6 +375,11 @@
 		USER_CASH - #{money} WHERE USER_EMAIL=#{email}
 	</update>
 	
+	<!-- 출금 계좌 -->
+	<insert id="withdraw2" parameterType="hashmap">
+		INSERT INTO WITHDRAW VALUES (USER_WITHDRAW_NUM.NEXTVAL,DEFAULT,#{email},#{name}, #{money}, #{bankno}, #{bank})
+	</insert>
+	
 	<!-- 출금시 결제리스트 삽입 -->
 	<insert id="withdrawlist" parameterType="hashmap">		
 		INSERT INTO PAYLIST
@@ -476,8 +482,12 @@
 		VALUES(#{email},
         (SELECT NVL(MAX(USER_BUY_NUM),0)+1 
         		FROM BUYLIST WHERE USER_EMAIL=#{email}),
-        DEFAULT,#{master},#{title},#{money},DEFAULT)
+        #{pno},DEFAULT,#{master},#{title},#{money},DEFAULT)
 	</insert>
+	
+	<select id="buyConfirm" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*) FROM BUYLIST WHERE USER_EMAIL=#{email} AND USER_PNO=#{pNo}
+	</select>
 	
 	<select id="getUserBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
 			SELECT * FROM BUYLIST
@@ -565,6 +575,10 @@
  		</if>
 	</select>
 	
+	<update id="refund" parameterType="string">
+		UPDATE BUYLIST SET  USER_BUY_REFUND = 'Y' WHERE   USER_BUY_NUM = #{refu}
+	</update>
+
 		<!-- 찜목록 중복값 조회 -->
 	<select id="WishDuplicate" parameterType="hashmap" resultType="_int">
         SELECT COUNT(*)
@@ -610,4 +624,5 @@
 	<insert id="insertIp" parameterType="hashmap">
 		INSERT INTO USER_ACCESS VALUES(USER_ACCESS_NUM.NEXTVAL,#{email},#{name},#{rankname},#{ip},DEFAULT)
 	</insert>
+
 </mapper>

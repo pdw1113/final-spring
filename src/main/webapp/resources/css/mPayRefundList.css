@@ -97,7 +97,7 @@ html, body {
 	font-size: x-large;
 	margin: auto 0;
 	letter-spacing: 0.2rem;
-	/*라디오 라벨*/
+	line-height: 2.5;
 }
 
 .radio-lable {
@@ -114,7 +114,7 @@ html, body {
 	letter-spacing: 0.2rem;
 	width: 15rem;
 	display: inline-block;
-	margin-left: -10rem;
+	margin-left: 3rem;
 	font-size: 2rem;
 	height: 3.9rem;
 }
@@ -124,6 +124,7 @@ html, body {
 	display: inline-block;
 	padding-bottom: 1.7rem;
 	padding-top: 1.95rem;
+	margin-top: 16px;
 }
 /*두번째 셀렉트박스*/
 #second-select {
@@ -208,7 +209,7 @@ html, body {
 }
 /*table-input*/
 .table-input {
-	margin-left: 10rem;
+    line-height: 3;
 }
 
 *:focus {
@@ -266,10 +267,7 @@ transition-duration:0s; */
 .header div.down_p1:after, div.down_p2:after {
 	right: 9px;
 }
-/*tr 마우스 포인터*/
-.refundTr {
-	cursor: pointer;
-}
+
 
 #refundPage {
 	display: block;
@@ -279,4 +277,28 @@ transition-duration:0s; */
 #refundPage>li>a {
 	float: none;
 	margin-left: -0.5rem;
+}
+
+#pag{
+	display:block;
+	text-align : center;
+	font-size: 2rem;
+}
+
+#pag > li > a{
+	float : none;
+	margin-left:-5px;
+}
+
+#priceRed{
+	color : red;
+}
+
+#trtr{
+	height: 5rem;
+    font-size: large;
+}
+
+#tdtd{
+	vertical-align: middle;
 }
