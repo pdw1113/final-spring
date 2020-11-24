@@ -585,6 +585,7 @@
 					var $img;	// 4-1 단계
 					
 					var $spanName; // 4-2단계
+				
 					var $divDate; // 4-2단계
 					
 					var $pDate; // 5단계
@@ -592,8 +593,10 @@
 					
 					var $btn;
 					
+					var $spanS;
 					if(data.length > 0){ // 댓글이 있을 경우
 						for(var i in data){
+				
 							
 							$li = $("<li class='list'>"); // 1단계
 							
@@ -609,6 +612,7 @@
 							$img = $("<img>").attr("src",data[i].rPic); // 4-1 단계
 							
 							$spanName = $("<span class='name'>").text(data[i].rName); //4-2단계
+													
 							$divDate  = $("<div class='date'>"); // 4-2단계
 							
 							$pDate = $("<p>").text(data[i].rCreateDate); // 5단계
@@ -623,6 +627,12 @@
 							$span.append($img);	// 4-1 단계 추가
 							
 							$divTutee.append($spanName); // 4-2단계 추가
+							
+							// 댓글 별점 추가
+							for(var num=0; num<data[i].rStar; num++){
+								$divTutee.append("<span><i class='fas fa-star'></span>"); // 4-2단계 추가 */
+							}
+							
 							$divTutee.append($divDate);	// 4-2단계 추가
 							if("${sessionScope.loginUser.name}" == data[i].rName){
 								$divTutee.append($btn);
@@ -694,7 +704,7 @@
 	    });
 	    
 	</script>
-
+	
 	<script>
 		// 찜하기
 		let wNum = $('.wishList').val();      // ${wishList.no} 벨류값
