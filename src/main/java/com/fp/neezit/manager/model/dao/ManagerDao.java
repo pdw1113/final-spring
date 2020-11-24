@@ -14,8 +14,11 @@ import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 import com.fp.neezit.user.model.vo.UserAccess;
 import com.fp.neezit.user.model.vo.UserMaster;
+
 
 @Repository("mDao")
 public class ManagerDao {
@@ -92,6 +95,11 @@ public class ManagerDao {
 		return (ArrayList)sqlSession.selectList("managerMapper.getUser");
 	}
 
+
+	public List<UserBuyList> mPayBuyList() {
+		return (ArrayList)sqlSession.selectList("managerMapper.mPayBuyList");
+	}
+
 	public ArrayList<UserAccess> getUserAccess(PageInfo pi, HashMap<String, String> map) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		
@@ -130,5 +138,40 @@ public class ManagerDao {
 	public List<Forbidden> fList() {
 		return sqlSession.selectList("managerMapper.fList");
 	}
+
+	public List<UserBuyList> getManagerBuyList(PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.getManagerBuyList",map,rowBounds);
+	}
 	
+	public int getBuyListCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("managerMapper.getManagerBuyListCount",map);
+	}
+
+	public List<UserWithdraw> getUserWithdrawList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.getUserWithdrawList",null,rowBounds);
+	}
+
+	public int getUserWithdrawLisCount() {
+		return sqlSession.selectOne("managerMapper.getUserWithdrawListCount");
+	}
+
+	public List<UserBuyList> getRefundList(PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.getRefundList",map,rowBounds);
+	}
+
+	public int getRefundCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("managerMapper.getRefundCount",map);
+	}
 }

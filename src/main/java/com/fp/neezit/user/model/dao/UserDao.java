@@ -191,6 +191,14 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.productName",map3);
 	}
 
+	public int withdraw2(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.withdraw2", map);
+	}
+
+	public int refund(String refu) {
+		return sqlSession.update("userMapper.refund",refu);
+	}
+
 	public int wishInsert(HashMap<String, String> map) {
 		return sqlSession.insert("userMapper.insertWish",map);
 	}
@@ -214,4 +222,5 @@ public class UserDao {
 	public int buyConfirm(HashMap<String, String> map) {
 		return sqlSession.selectOne("userMapper.buyConfirm",map);
 	}
+
 }

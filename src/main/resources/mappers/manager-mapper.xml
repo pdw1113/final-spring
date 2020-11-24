@@ -51,6 +51,26 @@
 	</resultMap>
 	
 	
+	<resultMap type="UserBuyList" id="UserBuyListResultSet">
+		<id property="num" column="USER_BUY_NUM" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="date" column="USER_BUY_DATE" />
+		<result property="master" column="USER_BUY_MASTER" />
+		<result property="title" column="USER_BUY_TITLE" />
+		<result property="money" column="USER_BUY_MONEY" />
+		<result property="refund" column="USER_BUY_REFUND" />
+	</resultMap>
+	
+	<resultMap type="UserWithdraw" id="UserWithdrawResultSet">
+		<id property="num" column="USER_WITHDRAW_NUM" />
+		<result property="date" column="USER_WITHDRAW_DATE" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="name" column="USER_NAME" />
+		<result property="money" column="USER_MONY" />
+		<result property="bankno" column="USER_BANKNO" />
+		<result property="bank" column="USER_BANK" />
+	</resultMap>
+	
 	<!-- 금칙어 추가 -->
 	<insert id="insertWords" parameterType="Forbidden"> 
 		INSERT INTO FORBIDDEN 
@@ -170,6 +190,113 @@
 	<!-- 유저 리스트 갖고오기 -->
 	<select id="getUser" resultMap="userResultSet">
 		SELECT * FROM NEEZ_USER
+	</select>
+
+
+	<!-- 관리자 구매확정 리스트 -->
+	<select id="getManagerBuyList" parameterType="hashmap" resultMap="UserBuyListResultSet">
+		SELECT *
+		FROM BUYLIST
+	<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<!-- 관리자 구매확정 리스트 페이징 전용 카운트 -->
+	<select id="getManagerBuyListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*)
+		FROM BUYLIST
+	  <!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<select id="getUserWithdrawList" parameterType="UserWithdraw" resultMap="UserWithdrawResultSet">
+		SELECT *
+		FROM WITHDRAW
+		ORDER BY USER_WITHDRAW_NUM DESC
+	</select>
+	
+	<select id="getUserWithdrawListCount" parameterType="UserWithdraw" resultType="_int">
+		SELECT COUNT(*)
+		FROM WITHDRAW
+		ORDER BY USER_WITHDRAW_NUM DESC
+	</select>
+	
+	<!--  환불확정 리스트 -->
+	<select id="getRefundList" parameterType="hashmap" resultMap="UserBuyListResultSet">
+		SELECT *
+		FROM BUYLIST
+		WHERE USER_BUY_REFUND = 'Y'
+	<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		AND USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
+	</select>
+	
+	<!-- 환불리스트 카운트 -->
+	<select id="getRefundCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM BUYLIST
+		WHERE USER_BUY_REFUND = 'Y'
+		<!-- 임의 지정 -->
+ 	  <if test="!preday.equals('')">
+		AND USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 2">
+		AND USER_BUY_MASTER = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 3">
+		AND USER_EMAIL = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  <if test="selectBox eq 4">
+		AND USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
+ 	  </if>
 	</select>
 
 	<!-- 능력자 정보 가져오기 -->
@@ -455,7 +582,5 @@
 		FROM FORBIDDEN 
 	</select>
 
-	
-	
 </mapper>
 

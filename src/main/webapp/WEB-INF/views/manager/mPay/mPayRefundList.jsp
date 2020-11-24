@@ -27,6 +27,7 @@
       <div class="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
       </div>
+      <form action="mPayRefundList.do" method="POST">
       <div class="section">
          <div class="mian-header">
             <div class="cate_Managerheader">결제 > <U>환불 리스트</U></div>
@@ -39,35 +40,19 @@
                </div>
                <table class="table table-bordered top-table table-condensed table-hove">
                   <tr>
-                     <td class="first-td">
-                        <p class="font_jua top-table-p" id="top-table-p">등급</p>
-                     </td>
-                     <td>
-                        <div class="radio">
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />전체</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />흙손</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />동손</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />은손</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />금손</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />다이아손</label>
-                           <label class="font_jua radio-lable"><input type="radio" value="radio1" name="grade" />타노스</label>
-                        </div>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="first-td">
-                        <p class="font_jua top-table-p">검색어</p>
+                   <td class="first-td">
+                        <p class="font_jua top-table-p" id="top-table-p">검색</p>
                      </td>
                      <td>
                         <div class="table-input">
                            <select class="form-control input-md font_jua" id="first-select">
-                              <option>주문번호</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                              <option value="1">전체</option>
+                              <option value="2">이름</option>
+                              <option value="3">아이디</option>
+                              <option value="4">주문상품</option>
                            </select>
-                           <input type="text" class="form-control input-md" id="first-input" placeholder="주문번호 전체를 정확히 입력하세요">
+                           <input type="hidden" name="selectBox" value="" class="selectBox"/>
+                           <input type="text" name="searchBox" class="form-control input-md" id="first-input">
                         </div>
                      </td>
                   </tr>
@@ -77,21 +62,14 @@
                      </td>
                      <td>
                         <div class="table-input">
-                           <select class="form-control input-md font_jua" id="second-select">
-                              <option>주문일</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                           </select>
-                           <input type="date" class="form-control input-md font_jua" id="second-input" placeholder="주문번호 전체를 정확히 입력하세요">
+                           <input type="date" name="preday" class="form-control input-md font_jua" id="second-input" placeholder="주문번호 전체를 정확히 입력하세요">
                            <span class="date-span">~</span>
-                           <input type="date" class="form-control input-md font_jua" id="second-input-2" placeholder="주문번호 전체를 정확히 입력하세요">
+                           <input type="date" name="postday" class="form-control input-md font_jua" id="second-input-2" placeholder="주문번호 전체를 정확히 입력하세요">
                         </div>
                      </td>
                   </tr>
                </table>
-               <button type="submit" class="font_jua top-btn">검색</button>
+               <button type="submit" class="font_jua top-btn" onclick="return buttonclick();">검색</button>
             </div>
             <div class="payment-main-bottom">
                <table class="table table-hover table-condensed font_jua botto" id="bottom-tabel">
@@ -99,79 +77,102 @@
                      <tr>
                         <th class="bottom-td1">번호</th>
                         <th class="bottom-td2">주문일시</th>
-                        <th class="bottom-td3">아이디/닉네임</th>
+                        <th class="bottom-td3">아이디</th>
                         <th class="bottom-td4">이름</th>
-                        <th class="bottom-td5">주문번호</th>
                         <th class="bottom-td6">주문상품</th>
-                        <th class="bottom-td7">결제금액</th>
-                        <th class="bottom-td8">결제방식</th>
+                        <th class="bottom-td7">환불금액</th>
                      </tr>
                   </thead>
-                  <tr class="refundTr">
-                     <td class="bottom-td1">1</td>
-                     <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
-                     <td class="bottom-td3"><span>test_id_2</span><br>
-                        <span>지존학살동민</span>
+                  <c:if test="${!empty refundList}">
+                  <c:forEach var="r" items="${ refundList }">
+                  <tr class="refundTr" id="trtr">
+                     <td class="bottom-td1" id="tdtd">${r.num }</td>
+                     <td class="bottom-td2" id="tdtd"><span>${r.date }</span></td>
+                     <td class="bottom-td3" id="tdtd"><span>${r.email }</span><br>
                      </td>
-                     <td class="bottom-td4"><span>천동민</span></td>
-                     <td class="bottom-td5"><a href="#">123123123</a></td>
-                     <td class="bottom-td6"><span>천동민의 Java 특강!!</span></td>
-                     <td class="bottom-td7"><span>384,000원</span></td>
-                     <td class="bottom-td8"><span>카카오뱅크</span></td>
+                     <td class="bottom-td4" id="tdtd"><span>${r.master }</span></td>
+                     <td class="bottom-td6" id="tdtd"><span>${r.title }</span></td>
+                     <td class="bottom-td7" id="tdtd"><span id="priceRed">${r.money }원</span></td>
                   </tr>
-                  <tr class="refundTr">
-                     <td class="bottom-td1">2</td>
-                     <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
-                     <td class="bottom-td3"><span>test_id_2</span><br>
-                        <span>지존학살동민</span>
-                     </td>
-                     <td class="bottom-td4"><span>천동민</span></td>
-                     <td class="bottom-td5"><a href="#">123123123</a></td>
-                     <td class="bottom-td6"><span>천동민의 Java 특강!!</span></td>
-                     <td class="bottom-td7"><span>384,000원</span></td>
-                     <td class="bottom-td8"><span>카카오뱅크</span></td>
-                  </tr>
-                  <tr class="refundTr">
-                     <td class="bottom-td1">3</td>
-                     <td class="bottom-td2"><span>2020-09-26 03:10</span></td>
-                     <td class="bottom-td3"><span>test_id_2</span><br>
-                        <span>지존학살동민</span>
-                     </td>
-                     <td class="bottom-td4"><span>천동민</span></td>
-                     <td class="bottom-td5"><a href="#">123123123</a></td>
-                     <td class="bottom-td6"><span>천동민의 Java 특강!!</span></td>
-                     <td class="bottom-td7"><span>384,000원</span></td>
-                     <td class="bottom-td8"><span>카카오뱅크</span></td>
-                  </tr>
+                  </c:forEach>
+                  </c:if>          
                </table>
-               <nav>
-                  <ul class="pagination" id="refundPage">
-                     <li>
-                        <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        </a>
-                     </li>
-                     <li><a href="#">1</a></li>
-                     <li><a href="#">2</a></li>
-                     <li><a href="#">3</a></li>
-                     <li><a href="#">4</a></li>
-                     <li><a href="#">5</a></li>
-                     <li>
-                        <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        </a>
-                     </li>
-                  </ul>
-               </nav>
+			<div class="pagination" id="pag">
+			
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage eq 1 }">
+					<a style="cursor:default;">«</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne 1 }">
+					<c:url var="before" value="mPayRefundList.do">
+						<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+							<c:param name="preday" value="${preday}"/>
+							<c:param name="postday" value="${postday}"/>
+							<c:param name="selectBox" value="${selectBox}"/>
+							<c:param name="searchBox" value="${searchBox}"/>
+					</c:url>
+					<a href="${ before }">«</a>
+				</c:if>
+				
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq pi.currentPage }">
+						<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
+					</c:if>
+					
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="WalletPagination" value="mPayRefundList.do">
+							<c:param name="currentPage" value="${ p }"/>
+							<c:param name="preday" value="${preday}"/>
+							<c:param name="postday" value="${postday}"/>
+							<c:param name="selectBox" value="${selectBox}"/>
+							<c:param name="searchBox" value="${searchBox}"/>
+						</c:url>
+						<a href="${ WalletPagination }">${ p }</a>
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage eq pi.maxPage }">
+					<a style="cursor:default;">»</a>
+				</c:if>
+				<c:if test="${ pi.currentPage ne pi.maxPage }">
+					<c:url var="after" value="mPayRefundList.do">
+						<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:param name="preday" value="${preday}"/>
+							<c:param name="postday" value="${postday}"/>
+							<c:param name="selectBox" value="${selectBox}"/>
+							<c:param name="searchBox" value="${searchBox}"/>
+					</c:url> 
+					<a href="${ after }" >»</a>
+				</c:if>
+				</div>       
             </div>
          </div>
       </div>
+      </form>
       <script>
-         $(function(){
-         	$('.refundTr').on('click',function(){
-         		location.href = "mPayRefundDetail.do"
-         	});
-         });
+      function buttonclick(){
+     		if($("#second-input").val() > $("#second-input-2").val()){
+  	 		 alert("날짜 정보가 잘못 되었습니다.");
+      		 return false;
+     	 	}else {
+     	 		return true;
+     	 	}
+      }
+      
+
+         $('#first-select').on('click',function(){
+     		if($(this).val() == "2"){
+     			$('.selectBox').val(2);
+     		}else if($(this).val() == "3"){
+     			$('.selectBox').val(3);
+     		}else if($(this).val() == "4"){
+     			$('.selectBox').val(4);
+     		}else if($(this).val() == "1"){
+     			$('.selectBox').val("");
+     		}
+       });
       </script>
    </body>
 </html>

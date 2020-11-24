@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -187,7 +188,7 @@ public class ProductController {
 				product.setRenamePic(renamePic);
 			}
 		}
-
+		
 		int result = pService.insertProduct(product);
 		
 		if(result==1) {

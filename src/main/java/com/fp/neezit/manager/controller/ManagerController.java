@@ -27,7 +27,10 @@ import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 import com.fp.neezit.user.model.vo.UserAccess;
+
 
 @Controller
 public class ManagerController {
@@ -81,6 +84,44 @@ public class ManagerController {
 		return "manager/mNotice/mNoticeTalk";
 	}
 
+	
+	/**
+	 * 관리자 구매확정 리스트
+	 * @param model
+	 * @param session
+	 * @param preday
+	 * @param postday
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("myBuyList.do")
+	public String myBuyList(Model model,HttpSession session,String preday,String postday,String selectBox,String searchBox,
+							@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+
+		if(preday==null&&postday==null) {
+			preday="";
+			postday="";
+		}
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("preday",preday);
+		map.put("postday",postday);
+		map.put("selectBox",selectBox);
+		map.put("searchBox",searchBox);
+		
+		int listCount = mService.getBuyListCount(map); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+		List<UserBuyList> ub = mService.getManagerBuyList(pi,map);
+
+		model.addAttribute("PayList",ub);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("selectBox",selectBox);
+		model.addAttribute("searchBox",searchBox);
+		model.addAttribute("pi",pi);
+		return "manager/mPay/mPayBuyList";
+	}
+	
 	@RequestMapping("mPayBuyDetail.do")
 	public String mPayBuyDetail() {
 		return "manager/mPay/mPayBuyDetail";
@@ -88,21 +129,78 @@ public class ManagerController {
 
 	@RequestMapping("mPayBuyList.do")
 	public String mPayBuyList() {
+
 		return "manager/mPay/mPayBuyList";
 	}
 
+	
+	/**
+	 * 관리자 출금내역
+	 * @param model
+	 * @param session
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("mPayExchange.do")
-	public String mPayExchange() {
+	public String mPayExchange(Model model,HttpSession session,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+
+		int listCount = mService.getUserWithdrawLisCount(); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,10);
+		List<UserWithdraw> uw = mService.getUserWithdrawList(pi);
+		
+		model.addAttribute("ExchangeList",uw);
+		model.addAttribute("pi",pi);
 		return "manager/mPay/mPayExchange";
 	}
+
+	
+	/**
+	 * 관리자 환불리스트
+	 * @param model
+	 * @param session
+	 * @param preday
+	 * @param postday
+	 * @param selectBox
+	 * @param searchBox
+	 * @param currentPage
+	 * @return
+	 */
+
 
 	@RequestMapping("mPayRefundDetail.do")
 	public String mPayRefundDetail() {
 		return "manager/mPay/mPayRefundDetail";
 	}
 
+
 	@RequestMapping("mPayRefundList.do")
-	public String mPayRefundList() {
+	public String mPayRefundList(Model model,HttpSession session,String preday,String postday,String selectBox,String searchBox,
+			@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+			
+
+		if(preday==null&&postday==null) {
+			preday="";
+			postday="";
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("preday",preday);
+		map.put("postday",postday);
+		map.put("selectBox",selectBox);
+		map.put("searchBox",searchBox);
+		
+		int listCount = mService.getRefundCount(map); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+		List<UserBuyList> ub = mService.getRefundList(pi,map);
+		
+		model.addAttribute("refundList",ub);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("selectBox",selectBox);
+		model.addAttribute("searchBox",searchBox);
+		model.addAttribute("pi",pi);
+
 		return "manager/mPay/mPayRefundList";
 	}
 
@@ -153,7 +251,7 @@ public class ManagerController {
 		
 		int listCount = mService.getUserAccessCount(map);
 		
-	     PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+	     PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
 			  
 		 ArrayList<UserAccess> ua = mService.getUserAccess(pi,map);
 			 
@@ -320,7 +418,7 @@ public class ManagerController {
 	  int listCount = mService.getUserListCount(map);
 	  int listAllCount = mService.getUserListAllCount();
 	  
-	  PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+	  PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
 	  
 	  ArrayList<UserList> ul = mService.getUserList(pi,map);
 //	  UserMaster master = mService.getMaster();
@@ -338,7 +436,8 @@ public class ManagerController {
 	  model.addAttribute("listAllCount",listAllCount);
 	  
 	  
-	  return "manager/mUser/mUserList"; }
+	  return "manager/mUser/mUserList"; 
+	  }
 	 
 	 
 

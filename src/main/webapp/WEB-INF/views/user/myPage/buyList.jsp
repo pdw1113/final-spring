@@ -78,6 +78,9 @@
                    
                    <c:if test="${!empty ub}">
                    <c:forEach var="b" items="${ub}">
+					<c:url var="refund" value="refund.do">
+						<c:param name="refu" value="${b.num}"/>
+					</c:url>
                      <tr>
                         <td class="buytd_mybuylist" id="short_mybuylist">${b.num}</td>
                         <td class="buytd_mybuylist">${b.date}</td>
@@ -98,14 +101,14 @@
 	                             <c:otherwise>
 	                             	<td class="buytd_mybuylist">
 	                             		<div class="btnRefund_mybuylist">
-											<button type="button" class="btn_refund_mybuylist">환불</button>
+											<button type="button" class="btn_refund_mybuylist" onclick="location.href='${ refund }';">환불</button>
 										</div>
 	                             	</td>
 	                             </c:otherwise>
 	                       </c:choose>
                      </tr>
                    </c:forEach>
-                   
+                                    
                   <tr align="center" height="20" >
 				<td colspan="6" class="pagination">
 			
@@ -154,6 +157,15 @@
       </div>
       </form>
       <script>
+      $('.btn_refund_mybuylist').click(function(){
+          $('#myModal_wallet').show();
+      })
+      
+      //팝업 Close 기능
+      function close_Wallet(flag) {
+           $('#myModal_wallet').hide();
+      };
+      
          $('.choice_mybuylist').click(function(){
              $('.datepre_mybuylist, .datepost_mybuylist').val("");
              
