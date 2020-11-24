@@ -93,4 +93,8 @@ public interface UserService {
 	int getBuyListCount(HashMap<String, String> map);
 
 	int buyProductMoney(Map<String, String> map);
+
+	int withdraw2(HashMap<String, String> map);
+
+	int refund(String refu);
 }

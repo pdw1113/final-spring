@@ -374,6 +374,11 @@
 		USER_CASH - #{money} WHERE USER_EMAIL=#{email}
 	</update>
 	
+	<!-- 출금 계좌 -->
+	<insert id="withdraw2" parameterType="hashmap">
+		INSERT INTO WITHDRAW VALUES (USER_WITHDRAW_NUM.NEXTVAL,DEFAULT,#{email},#{name}, #{money}, #{bankno}, #{bank})
+	</insert>
+	
 	<!-- 출금시 결제리스트 삽입 -->
 	<insert id="withdrawlist" parameterType="hashmap">		
 		INSERT INTO PAYLIST
@@ -564,4 +569,8 @@
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
  		</if>
 	</select>
+	
+	<update id="refund" parameterType="string">
+		UPDATE BUYLIST SET  USER_BUY_REFUND = 'Y' WHERE   USER_BUY_NUM = #{refu}
+	</update>
 </mapper>

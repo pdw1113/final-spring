@@ -182,4 +182,12 @@ public class UserDao {
 		return sqlSession.update("userMapper.buyProductMoney",map);
 	}
 
+	public int withdraw2(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.withdraw2", map);
+	}
+
+	public int refund(String refu) {
+		return sqlSession.update("userMapper.refund",refu);
+	}
+
 }

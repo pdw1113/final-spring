@@ -2,10 +2,12 @@ package com.fp.neezit.manager.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +22,11 @@ import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 
 @Controller
 public class ManagerController {
@@ -65,28 +71,101 @@ public class ManagerController {
 		return "manager/mNotice/mNoticeTalk";
 	}
 	
-	@RequestMapping("mPayBuyDetail.do")
-	public String mPayBuyDetail() {
-		return "manager/mPay/mPayBuyDetail";
-	}
-	
-	@RequestMapping("mPayBuyList.do")
-	public String mPayBuyList() {
+	/**
+	 * 관리자 구매확정 리스트
+	 * @param model
+	 * @param session
+	 * @param preday
+	 * @param postday
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("myBuyList.do")
+	public String myBuyList(Model model,HttpSession session,String preday,String postday,String selectBox,String searchBox,
+							@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+
+		if(preday==null&&postday==null) {
+			preday="";
+			postday="";
+		}
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("preday",preday);
+		map.put("postday",postday);
+		map.put("selectBox",selectBox);
+		map.put("searchBox",searchBox);
+		
+		int listCount = mService.getBuyListCount(map); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+		List<UserBuyList> ub = mService.getManagerBuyList(pi,map);
+
+		model.addAttribute("PayList",ub);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("selectBox",selectBox);
+		model.addAttribute("searchBox",searchBox);
+		model.addAttribute("pi",pi);
 		return "manager/mPay/mPayBuyList";
 	}
 	
+	/**
+	 * 관리자 출금내역
+	 * @param model
+	 * @param session
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("mPayExchange.do")
-	public String mPayExchange() {
+	public String mPayExchange(Model model,HttpSession session,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+
+		int listCount = mService.getUserWithdrawLisCount(); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,10);
+		List<UserWithdraw> uw = mService.getUserWithdrawList(pi);
+		
+		model.addAttribute("ExchangeList",uw);
+		model.addAttribute("pi",pi);
 		return "manager/mPay/mPayExchange";
 	}
 	
-	@RequestMapping("mPayRefundDetail.do")
-	public String mPayRefundDetail() {
-		return "manager/mPay/mPayRefundDetail";
-	}
-	
+	/**
+	 * 관리자 환불리스트
+	 * @param model
+	 * @param session
+	 * @param preday
+	 * @param postday
+	 * @param selectBox
+	 * @param searchBox
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("mPayRefundList.do")
-	public String mPayRefundList() {
+	public String mPayRefundList(Model model,HttpSession session,String preday,String postday,String selectBox,String searchBox,
+			@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+			
+
+		if(preday==null&&postday==null) {
+			preday="";
+			postday="";
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("preday",preday);
+		map.put("postday",postday);
+		map.put("selectBox",selectBox);
+		map.put("searchBox",searchBox);
+		
+		int listCount = mService.getRefundCount(map); 
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+		List<UserBuyList> ub = mService.getRefundList(pi,map);
+		
+		model.addAttribute("refundList",ub);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+		model.addAttribute("selectBox",selectBox);
+		model.addAttribute("searchBox",searchBox);
+		model.addAttribute("pi",pi);
+
 		return "manager/mPay/mPayRefundList";
 	}
 	

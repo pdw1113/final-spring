@@ -83,7 +83,7 @@ html, body {
 /*상단부분*/
 .main-top04 {
 	width: 160rem;
-	height: 35rem;
+	height: 60rem;
 	margin-left: 2rem;
 	position: relative;
 	overflow: hidden;
@@ -168,4 +168,19 @@ transition-duration:0s; */
 
 .header div.down_p1:after, div.down_p2:after {
 	right: 9px;
+}
+
+#pag{
+	display:block;
+	text-align : center;
+	font-size: 2rem;
+}
+
+#pag > li > a{
+	float : none;
+	margin-left:-5px;
+}
+
+#priceRed{
+	color : red;
 }

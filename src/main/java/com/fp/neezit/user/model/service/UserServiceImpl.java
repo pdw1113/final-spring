@@ -222,4 +222,14 @@ public class UserServiceImpl implements UserService{
 		return uDao.buyProductMoney(map);
 	}
 
+	@Override
+	public int withdraw2(HashMap<String, String> map) {
+		return uDao.withdraw2(map);
+	}
+
+	@Override
+	public int refund(String refu) {
+		return uDao.refund(refu);
+	}
+
 }

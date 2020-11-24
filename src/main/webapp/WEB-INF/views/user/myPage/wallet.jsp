@@ -111,30 +111,30 @@
                            <li>
                               <select class="bankCode_wallet">
                                  <option value="">은행 선택</option>
-                                           <option value="001">산업</option>
-                                           <option value="002">기업</option>
-                                           <option value="003">국민</option>
-                                           <option value="004">수협</option>
-                                           <option value="005">농협</option>
-                                           <option value="006">우리</option>
-                                           <option value="007">SC</option>
-                                           <option value="008">씨티</option>
-                                           <option value="009">대구</option>
-                                           <option value="010">부산</option>
-                                           <option value="011">광주</option>
-                                           <option value="012">제주</option>
-                                           <option value="013">전북</option>
-                                           <option value="014">경남</option>
-                                           <option value="015">새마을금고</option>
-                                           <option value="016">신협</option>
-                                           <option value="017">상호저축</option>
-                                           <option value="018">HSBC</option>
-                                           <option value="019">도이치</option>
-                                           <option value="020">우체국</option>
-                                           <option value="021">KEB하나</option>
-                                           <option value="022">신한</option>
-                                           <option value="023">케이뱅크</option>
-                                           <option value="024">카카오뱅크</option>
+                                           <option value="산업">산업</option>
+                                           <option value="기업">기업</option>
+                                           <option value="국민">국민</option>
+                                           <option value="수협">수협</option>
+                                           <option value="농협">농협</option>
+                                           <option value="우리">우리</option>
+                                           <option value="SC">SC</option>
+                                           <option value="씨티">씨티</option>
+                                           <option value="대구">대구</option>
+                                           <option value="부산">부산</option>
+                                           <option value="광주">광주</option>
+                                           <option value="제주">제주</option>
+                                           <option value="전북">전북</option>
+                                           <option value="경남">경남</option>
+                                           <option value="새마을금고">새마을금고</option>
+                                           <option value="신협">신협</option>
+                                           <option value="상호저축">상호저축</option>
+                                           <option value="HSBC">HSBC</option>
+                                           <option value="도이치">도이치</option>
+                                           <option value="우체국">우체국</option>
+                                           <option value="KEB">KEB하나</option>
+                                           <option value="신한">신한</option>
+                                           <option value="케이뱅크">케이뱅크</option>
+                                           <option value="카카오뱅크">카카오뱅크</option>
                                  </select>
                            </li>
                            <li><input type="text" name="bankuser" class="bankuser_wallet" id="bankuser" value="" placeholder="예금주명 입력"></li>
@@ -143,6 +143,7 @@
                         </ul>
                         
                             </div>
+                            <input type="text" name="bank" class="bank" value=""/>
                             <div class="bankSend_wallet">
                                <button class="bankBtn_wallet" onclick="return btnclick();">출금</button>
                             </div>
@@ -192,6 +193,11 @@
         		   }
         	   }
            }
+           
+           $('.bankCode_wallet').on('click',function(){
+        	   let bankVal =  $('.bankCode_wallet').val();
+        	   $('.bank').val(bankVal);
+           });
       </script>
       <!-- footer 영역 -->
       <%@ include file="../../common/footer.jsp" %>

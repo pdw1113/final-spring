@@ -2,6 +2,7 @@ package com.fp.neezit.manager.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.manager.model.dao.ManagerDao;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.user.model.dao.UserDao;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 
 
 @Service("mService")
@@ -49,5 +53,39 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.getUser();
 	}
 
+	@Override
+	public List<UserBuyList> mPayBuyList() {
+		return mDao.mPayBuyList();
+	}
+
+	@Override
+	public List<UserBuyList> getManagerBuyList(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getManagerBuyList(pi,map);
+	}
+	
+	@Override
+	public int getBuyListCount(HashMap<String, String> map) {
+		return mDao.getBuyListCount(map);
+	}
+
+	@Override
+	public List<UserWithdraw> getUserWithdrawList(PageInfo pi) {
+		return mDao.getUserWithdrawList(pi);
+	}
+
+	@Override
+	public int getUserWithdrawLisCount() {
+		return mDao.getUserWithdrawLisCount();
+	}
+
+	@Override
+	public List<UserBuyList> getRefundList(PageInfo pi, HashMap<String, String> map) {
+		return mDao.getRefundList(pi,map);
+	}
+
+	@Override
+	public int getRefundCount(HashMap<String, String> map) {
+		return mDao.getRefundCount(map);
+	}
 
 }

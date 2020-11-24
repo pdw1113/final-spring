@@ -115,7 +115,7 @@ public class UserMyPageController {
 		int listCount = uService.getWalletCount(map); 
 
 		//페이지수 계산 해주는 객체
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);	
 
 		//유저 월렛 정보 가지고 오기
 		ArrayList<UserWallet> uw = uService.getUserWalletList(pi,map);
@@ -188,7 +188,7 @@ public class UserMyPageController {
 	 * @return
 	 */
 	@RequestMapping(value = "withdraw.do", method = RequestMethod.POST) 
-	public String withdraw(Model model, String money,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
+	public String withdraw(Model model, String money,String bank,String bankno,HttpSession session) { // view에 전달하는 데이터를 Model에 담는다.
 	
 	User u = (User) session.getAttribute("loginUser");
 	
@@ -196,11 +196,19 @@ public class UserMyPageController {
 	
 	map.put("email", u.getEmail());
 	
+	map.put("name", u.getName());
+	
 	map.put("money",money);
+	
+	map.put("bank",bank);
+	
+	map.put("bankno",bankno);
 	
 	int result1 = uService.withdraw(map);
 	
     int result2 = uService.withdrawlist(map); 
+    
+    int result3 = uService.withdraw2(map); 
 	
 	
 	if (result1 == 1&&result2==1) {
@@ -423,7 +431,7 @@ public class UserMyPageController {
 		
 		int listCount = uService.getBuyListCount(map); 
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);	
 		
 		ArrayList<UserBuyList> ub = uService.getUserBuyList(pi,map);
 		
@@ -436,5 +444,23 @@ public class UserMyPageController {
 		model.addAttribute("search_way",search_way);
 		
 		return "user/myPage/buyList";
+	}
+	
+	/**
+	 * 15. 환불 업데이트
+	 * @param buylist
+	 * @param refu
+	 * @return
+	 */
+	@RequestMapping("refund.do")
+	public String refund(UserBuyList buylist,String refu){
+		
+		int result1 = uService.refund(refu);
+		
+		if (result1 > 0) { 
+			return "redirect:buyList.do";
+		} else {
+			return "fail";
+		}
 	}
 }
