@@ -54,7 +54,7 @@
 							class="master_star"> <i class="star_img"> <img
 								src="resources/img/star.png">
 						</i> <i class="grade_total"><span id="starPoint"></span>&nbsp;<sapn>(${replyCount})</sapn>
-						</i>
+						</i> 
 						</span>
 					</div>
 					<div class="iclass1">
