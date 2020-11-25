@@ -21,7 +21,7 @@ public class SupportController {
 		return "support/noticeInsert";
 	}
 	
-	@RequestMapping("noticeList.do")
+	@RequestMapping("noticeList.do") 
 	public String noticeList() {
 		return "support/noticeList";
 	}
