@@ -30,4 +30,14 @@ public class SupportController {
 	public String recruit() {
 		return "support/recruit";
 	}
+	
+	@RequestMapping("provision.do")
+	public String provision() {
+		return "support/provision";
+	}
+	
+	@RequestMapping("privacy.do")
+	public String privacy() {
+		return "support/privacy";
+	}
 }

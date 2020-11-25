@@ -20,14 +20,14 @@
                </tr>
                <tr>
                   <td><a href="introduction.do" class="footerA">회사소개</a></td>
-                  <td><a href="noticeList.do" class="footerA">이용약관</a></td>
-                  <td><a href="#" class="footerA">FAQ</a></td>
+                  <td><a href="provision.do" class="footerA">이용약관</a></td>
+                  <td><a href="noticeList.do" class="footerA">FAQ</a></td>
                   <td>운영시간</td>
                   <td rowspan="2"><a href="#" class="footerA"><img src="resources/img/youtubeimg.jpg" alt="youtube_image" class="footeryoutubeimg"></a></td>
                </tr>
                <tr>
                   <td><a href="recruit.do" class="footerA">채용안내</a></td>
-                  <td><a href="#" class="footerA">개인정보 처리방침</a></td>
+                  <td><a href="privacy.do" class="footerA">개인정보 처리방침</a></td>
                   <td><a href="mStatistics.do" class="footerA">Q&A</a></td>
                   <td>평일 09:00 ~ 18:30</td>
                </tr>
