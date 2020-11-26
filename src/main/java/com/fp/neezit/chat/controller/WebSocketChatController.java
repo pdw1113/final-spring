@@ -1,89 +1,120 @@
 package com.fp.neezit.chat.controller;
-import java.util.ArrayList; 
-import java.util.List; 
-import javax.websocket.OnClose; 
-import javax.websocket.OnError; 
-import javax.websocket.OnMessage; 
-import javax.websocket.OnOpen; 
-import javax.websocket.RemoteEndpoint.Basic; 
-import javax.websocket.Session; 
-import javax.websocket.server.ServerEndpoint; 
-import org.slf4j.Logger; 
-import org.slf4j.LoggerFactory; 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import java.util.HashSet;
+import java.util.Set;
 
-@Controller
-@ServerEndpoint(value="/echo.do")
-public class WebSocketChatController {
-	
-	private static final List<Session> sessionList = new ArrayList<Session>();
-	private static final Logger logger = LoggerFactory.getLogger(WebSocketChatController.class);
-	
-	public WebSocketChatController() {
-		System.out.println("웹소켓(서버) 객체생성"); 
-	} 
-	
-	@RequestMapping("chat.do")
-	public String mUserLog() {
-		return "user/chat";
-	}
-	
-	@OnOpen 
-	public void onOpen(Session session) { 
-		
-		logger.info("Open session id:"+session.getId()); 
-		
-		try { 
-			final Basic basic = session.getBasicRemote(); basic.sendText("대화방에 연결 되었습니다."); 
-		}catch (Exception e) {
-			System.out.println(e.getMessage()); } 
-		sessionList.add(session); } 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler; 
+
+public class WebSocketChatController extends TextWebSocketHandler implements InitializingBean {
 	
 	/* 
-	 * 모든 사용자에게 메시지를 전달한다. 
-	 * @param self
-	 * @param sender 
-	 * @param message 
-	 */ 
-	private void sendAllSessionToMessage(Session self, String sender, String message) { 
-		try { 
-			for(Session session : WebSocketChatController.sessionList) { 
-				if(!self.getId().equals(session.getId())) { 
-					session.getBasicRemote().sendText(sender+" : "+message); 
-				} 
-			} 
-		}catch (Exception e) {
-			System.out.println(e.getMessage()); 
-		} 
-	} 
+	 * HashSet : 
+	 * 1) 중복을 허용하지 않는다.
+	 * 2) 순서를 고려하지 않는다.
+	 */
+	// WebSocketSession의 Set을 하나 만들어준다. WebSocketSession객체에는 session의 [id, uri]가 담겨져있다.
+	private Set<WebSocketSession> sessionSet = new HashSet<WebSocketSession>();
 	
-	/* 
-	 * 내가 입력하는 메세지
-	 * @param message 
-	 * @param session 
-	 */ 
-	@OnMessage public void onMessage(String message,Session session) { 
-		
-		String sender = message.split(",")[1]; 
-		message = message.split(",")[0]; 
-		
-		logger.info("Message From "+sender + ": "+message); 
-		
-		try { 
-			final Basic basic=session.getBasicRemote(); basic.sendText("<나> : "+message); 
-		}catch (Exception e) {
-			System.out.println(e.getMessage()); 
-		} sendAllSessionToMessage(session, sender, message); 
+	private static int i = 0;
+
+	public WebSocketChatController (){
+		super();
 	}
 	
-	@OnError 
-	public void onError(Throwable e,Session session) { 
+	/**
+	 * WebSocket 연결이 열리고 사용이 준비될 때 호출
+	 */
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		super.afterConnectionEstablished(session);
+		sessionSet.add(session);
+		System.out.println("세션 : " + session.getId() + " 입장");
+		i++;
+		System.out.println( i + "명의 웹소켓 연결 성공!");
+		System.out.println(sessionSet);
+	}
+
+	/**
+	 * 클라이언트로부터 메시지가 도착했을 때 호출
+	 */
+	@Override
+	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+		super.handleMessage(session, message);
 		
-	} 
+		// 클라이언트가 전송한 메세지
+		String msg = (String)message.getPayload();
+		
+		// 모든 세션에 뿌려주기
+		for(WebSocketSession s : sessionSet) {
+			s.sendMessage(new TextMessage(msg));
+		}
+		
+		// 메세지 확인
+		System.out.println("클라이언트로부터 전달받은 메세지 : " + msg);
+	}
+
+	/**
+	 * 전송 에러 발생할 때 호출
+	 */
+	@Override
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+		
+	}
+
+	/**
+	 * WebSocketHandler가 부분 메시지를 처리할 때 호출
+	 */
+	@Override
+	public boolean supportsPartialMessages() {
+		return super.supportsPartialMessages();
+	}
+
 	
-	@OnClose public void onClose(Session session) { 
-		logger.info("Session "+session.getId()+" has ended"); 
-		sessionList.remove(session); 
+	public void sendMessage (String message){
+		for (WebSocketSession session: this.sessionSet){
+			if (session.isOpen()){
+				try{
+					session.sendMessage(new TextMessage(message));
+				}catch (Exception ignored){
+				}
+			}
+		}
+	}
+
+	/**
+	 * WebSocket 연결이 닫혔을 때 호출
+	 */
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		super.afterConnectionClosed(session, status);
+		sessionSet.remove(session);
+		System.out.println("세션 : " + session.getId() + " 퇴장");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		
+//		Thread thread = new Thread(){
+//
+//			int i = 0;
+//			
+//			@Override
+//			public void run() {
+//				while (true){
+//					try {
+//						sendMessage ("채팅 지속 시간 :  "+i++);
+//						Thread.sleep(1000);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//						break;
+//					}
+//				}
+//			}
+//		};
+//		thread.start();
 	}
 }

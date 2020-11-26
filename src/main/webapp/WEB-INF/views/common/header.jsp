@@ -43,6 +43,11 @@
                         <div class="head_login_Mainhead" style="margin-right: 0.7rem;">관리자</div>
                      </a>
                   </div>
+                  <div class="login_box_Mainhead">
+                     <a href="chat.do">
+                        <div class="head_login_Mainhead">채팅방</div>
+                     </a>
+                  </div>
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
@@ -69,19 +74,13 @@
                    </span>
                </div>
                <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
-               <div class="login_box_Mainhead">
-                  <a href="signUpMasterManage.do">
-                     <div class="head_login_Mainhead w_100p">능력자관리</div>
-                  </a>
-               </div>
+	               <div class="login_box_Mainhead">
+	                  <a href="signUpMasterManage.do">
+	                     <div class="head_login_Mainhead w_100p">능력자관리</div>
+	                  </a>
+	               </div>
+               </c:if>
             </c:if>
-            </c:if>
-            
-            <div class="login_box_Mainhead">
-               <a href="chat.do">
-                  <div class="head_login_Mainhead">임시 채팅방</div>
-               </a>
-            </div>
             
             <c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
                <div class="login_box_Mainhead">
