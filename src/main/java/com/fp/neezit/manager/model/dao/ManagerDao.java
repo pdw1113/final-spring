@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.manager.model.vo.UserList;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
@@ -173,5 +174,125 @@ public class ManagerDao {
 
 	public int getRefundCount(HashMap<String, String> map) {
 		return sqlSession.selectOne("managerMapper.getRefundCount",map);
+	}
+	
+	/*--------------월 가입자수 통계--------------------------*/
+	public int mUserCount1() {
+		return sqlSession.selectOne("managerMapper.mUserCount1");
+	}
+
+	public int mUserCount2() {
+		return sqlSession.selectOne("managerMapper.mUserCount2");
+	}
+
+	public int mUserCount3() {
+		return sqlSession.selectOne("managerMapper.mUserCount3");
+	}
+
+	public int mUserCount4() {
+		return sqlSession.selectOne("managerMapper.mUserCount4");
+	}
+
+	public int mUserCount5() {
+		return sqlSession.selectOne("managerMapper.mUserCount5");
+	}
+
+	public int mUserCount6() {
+		return sqlSession.selectOne("managerMapper.mUserCount6");
+	}
+
+	public int mUserCount7() {
+		return sqlSession.selectOne("managerMapper.mUserCount7");
+	}
+
+	public int mUserCount8() {
+		return sqlSession.selectOne("managerMapper.mUserCount8");
+	}
+
+	public int mUserCount9() {
+		return sqlSession.selectOne("managerMapper.mUserCount9");
+	}
+
+	public int mUserCount10() {
+		return sqlSession.selectOne("managerMapper.mUserCount10");
+	}
+	
+	public int mUserCount11() {
+		return sqlSession.selectOne("managerMapper.mUserCount11");
+	}
+
+	public int mUserCount12() {
+		return sqlSession.selectOne("managerMapper.mUserCount12");
+	}
+	/*-----------------------------------------------*/
+
+	/*--------------월 방문자수 통계--------------------------*/
+	public int mVisitant1() {
+		return sqlSession.selectOne("managerMapper.mVisitant1");
+	}
+
+	public int mVisitant2() {
+		return sqlSession.selectOne("managerMapper.mVisitant2");
+	}
+
+	public int mVisitant3() {
+		return sqlSession.selectOne("managerMapper.mVisitant3");
+	}
+
+	public int mVisitant4() {
+		return sqlSession.selectOne("managerMapper.mVisitant4");
+	}
+
+	public int mVisitant5() {
+		return sqlSession.selectOne("managerMapper.mVisitant5");
+	}
+
+	public int mVisitant6() {
+		return sqlSession.selectOne("managerMapper.mVisitant6");
+	}
+
+	public int mVisitant7() {
+		return sqlSession.selectOne("managerMapper.mVisitant7");
+	}
+
+	public int mVisitant8() {
+		return sqlSession.selectOne("managerMapper.mVisitant8");
+	}
+
+	public int mVisitant9() {
+		return sqlSession.selectOne("managerMapper.mVisitant9");
+	}
+
+	public int mVisitant10() {
+		return sqlSession.selectOne("managerMapper.mVisitant10");
+	}
+
+	public int mVisitant11() {
+		return sqlSession.selectOne("managerMapper.mVisitant11");
+	}
+
+	public int mVisitant12() {
+		return sqlSession.selectOne("managerMapper.mVisitant12");
+	}
+	/*-----------------------------------------------*/
+
+	public int mUser() {
+		return sqlSession.selectOne("managerMapper.mUser");
+	}
+
+	public int mMaster() {
+		return sqlSession.selectOne("managerMapper.mMaster");
+	}
+
+	public int mBuy() {
+		return sqlSession.selectOne("managerMapper.mBuy");
+	}
+	
+	public List<Product> mStatistics() {
+		return (ArrayList)sqlSession.selectList("managerMapper.mStatistics");
+	}
+	
+	public List<Product> mStatistics2() {
+		return (ArrayList)sqlSession.selectList("managerMapper.mStatistics2");
 	}
 }

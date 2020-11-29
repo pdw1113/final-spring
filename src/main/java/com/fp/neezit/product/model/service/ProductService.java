@@ -113,5 +113,6 @@ public interface ProductService {
 	public int Productupdate(Product product);
 
 	public int productDelete(int no);
+
 	
 }

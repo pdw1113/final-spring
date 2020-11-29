@@ -223,4 +223,9 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.buyConfirm",map);
 	}
 
+	public int pCountUp(String no) {
+		return sqlSession.update("userMapper.pCountUp",no);
+	}
+
+
 }

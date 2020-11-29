@@ -71,6 +71,24 @@
 		<result property="bank" column="USER_BANK" />
 	</resultMap>
 	
+	<resultMap type="Product" id="productResultSet">
+      	<id property="no" column="PRODUCT_NO" />
+      	<result property="nickName" column="MASTER_NICKNAME" />
+      	<result property="title" column="PRODUCT_TITLE" />
+      	<result property="pic" column="PRODUCT_PIC" />
+      	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
+      	<result property="cateone" column="PRODUCT_CATEONE" />
+      	<result property="category" column="PRODUCT_CATEGORY" />
+      	<result property="price" column="PRODUCT_PRICE" />
+      	<result property="career" column="PRODUCT_CAREER" />
+      	<result property="portfolio" column="PRODUCT_PORTFOLIO" />
+      	<result property="introduce" column="PRODUCT_INTRODUCE" />
+      	<result property="createDate" column="PRODUCT_CREATE_DATE" />
+      	<result property="modifyDate" column="PRODUCT_MODIFY_DATE" />
+      	<result property="count" column="PRODUCT_COUNT" />
+      	<result property="star" column="PRODUCT_STAR" />
+   	</resultMap>
+	
 	<!-- 금칙어 추가 -->
 	<insert id="insertWords" parameterType="Forbidden"> 
 		INSERT INTO FORBIDDEN 
@@ -580,6 +598,186 @@
 	<select id="fList" resultMap="forbiddenResultSet">
 		SELECT FORBIDDEN_WORD
 		FROM FORBIDDEN 
+	</select>
+	
+	<!-- 가입자수 통계 -->
+ 	<select id="mUserCount1" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200101') AND USER_ENROLLDATE <= TO_DATE('20200131')]]>
+	</select>
+	
+	<select id="mUserCount2" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200201') AND USER_ENROLLDATE <= TO_DATE('20200228')]]>
+	</select>
+	
+	<select id="mUserCount3" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200301') AND USER_ENROLLDATE <= TO_DATE('20200331')]]>
+	</select>
+	
+	<select id="mUserCount4" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200401') AND USER_ENROLLDATE <= TO_DATE('20200430')]]>
+	</select>
+	
+	<select id="mUserCount5" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200501') AND USER_ENROLLDATE <= TO_DATE('20200531')]]>
+	</select>
+	
+	<select id="mUserCount6" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200601') AND USER_ENROLLDATE <= TO_DATE('20200630')]]>
+	</select>
+	
+	<select id="mUserCount7" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200701') AND USER_ENROLLDATE <= TO_DATE('20200731')]]>
+	</select>
+	
+	<select id="mUserCount8" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200801') AND USER_ENROLLDATE <= TO_DATE('20200831')]]>
+	</select>
+	
+	<select id="mUserCount9" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200901') AND USER_ENROLLDATE <= TO_DATE('20200930')]]>
+	</select>
+	
+	<select id="mUserCount10" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201001') AND USER_ENROLLDATE <= TO_DATE('20201031')]]>
+	</select>
+	
+	<select id="mUserCount11" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201101') AND USER_ENROLLDATE <= TO_DATE('20201130')]]>
+	</select>
+	
+	<select id="mUserCount12" parameterType="User" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201201') AND USER_ENROLLDATE <= TO_DATE('20201231')]]>
+	</select> 
+	<!--  -->
+	
+	<!-- 방문자수 통계 -->
+	<select id="mVisitant1" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.01.01' AND ACCESS_DATE <= '2020.01.31']]>
+	</select> 	
+	
+	<select id="mVisitant2" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.02.01' AND ACCESS_DATE <= '2020.02.28']]>
+	</select> 	
+	
+	<select id="mVisitant3" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.03.01' AND ACCESS_DATE <= '2020.03.31']]>
+	</select> 	
+	
+	<select id="mVisitant4" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.04.01' AND ACCESS_DATE <= '2020.04.30']]>
+	</select> 
+		
+	<select id="mVisitant5" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.05.01' AND ACCESS_DATE <= '2020.05.31']]>
+	</select> 	
+	
+	<select id="mVisitant6" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.06.01' AND ACCESS_DATE <= '2020.06.30']]>
+	</select> 	
+	
+	<select id="mVisitant7" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.07.01' AND ACCESS_DATE <= '2020.07.31']]>
+	</select> 	
+	
+	<select id="mVisitant8" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.08.01' AND ACCESS_DATE <= '2020.08.31']]>
+	</select> 	
+	
+	<select id="mVisitant9" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.09.01' AND ACCESS_DATE <= '2020.09.31']]>
+	</select> 	
+	
+	<select id="mVisitant10" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.10.01' AND ACCESS_DATE <= '2020.10.31']]>
+	</select> 	
+	
+	<select id="mVisitant11" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.11.01' AND ACCESS_DATE <= '2020.11.30']]>
+	</select> 	
+	
+	<select id="mVisitant12" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_ACCESS
+		<![CDATA[WHERE ACCESS_DATE >= '2020.12.01' AND ACCESS_DATE <= '2020.12.31']]>
+	</select> 	
+	<!---->
+	
+	<!-- 유저수 -->
+	<select id="mUser" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_USER
+	</select> 	
+	
+	<!-- 능력자수 -->
+	<select id="mMaster" resultType="_int">
+		SELECT COUNT(*)
+		FROM NEEZ_MASTER
+	</select> 	
+	
+	<!-- 결제수 -->
+	<select id="mBuy" resultType="_int">
+		SELECT COUNT(*)
+		FROM BUYLIST
+	</select> 	
+	
+	<!-- 상품판매 순위  --> 
+	<select id="mStatistics" parameterType="Product" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		ORDER BY PRODUCT_COUNT DESC
+	</select>
+	
+	<!-- 상품별점 순위  --> 
+	<select id="mStatistics2" parameterType="Product" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		ORDER BY PRODUCT_STAR DESC
 	</select>
 
 </mapper>

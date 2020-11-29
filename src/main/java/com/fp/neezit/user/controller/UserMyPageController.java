@@ -378,8 +378,7 @@ public class UserMyPageController {
 	 */
 	@ResponseBody
 	@RequestMapping("buyProduct.do")
-	public String buyProduct(UserBuyList buylist,String email,String money){
-		
+	public String buyProduct(UserBuyList buylist,String email,String money, String pno){
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("email", email);
@@ -388,6 +387,8 @@ public class UserMyPageController {
 		int result1 = uService.buyProduct(buylist);
 		
 		int result2 = uService.withdraw(map);
+		
+		int result3 = uService.pCountUp(pno);
 		
 		if (result1 == 1 && result2==1) { 
 			return "ok";
