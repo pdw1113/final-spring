@@ -12,12 +12,14 @@ public class ChatRoom {
 	private String masterName;	// 능력자 이름
 	private String masterPic;	// 능력자 사진
 	
+	private int unReadCount;	// 안 읽은 메세지 수
+	
 	public ChatRoom() {
 		super();
 	}
 
 	public ChatRoom(String roomId, String userEmail, String userName, String userPic, String masterEmail,
-			String masterName, String masterPic) {
+			String masterName, String masterPic, int unReadCount) {
 		super();
 		this.roomId = roomId;
 		this.userEmail = userEmail;
@@ -26,6 +28,7 @@ public class ChatRoom {
 		this.masterEmail = masterEmail;
 		this.masterName = masterName;
 		this.masterPic = masterPic;
+		this.unReadCount = unReadCount;
 	}
 
 	public String getRoomId() {
@@ -84,10 +87,18 @@ public class ChatRoom {
 		this.masterPic = masterPic;
 	}
 
+	public int getUnReadCount() {
+		return unReadCount;
+	}
+
+	public void setUnReadCount(int unReadCount) {
+		this.unReadCount = unReadCount;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatRoom [roomId=" + roomId + ", userEmail=" + userEmail + ", userName=" + userName + ", userPic="
 				+ userPic + ", masterEmail=" + masterEmail + ", masterName=" + masterName + ", masterPic=" + masterPic
-				+ "]";
+				+ ", unReadCount=" + unReadCount + "]";
 	}
 }

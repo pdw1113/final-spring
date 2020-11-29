@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fp.neezit.chat.model.service.ChatService;
+import com.fp.neezit.chat.model.vo.ChatMessage;
 import com.fp.neezit.chat.model.vo.ChatRoom;
 import com.fp.neezit.product.model.service.ProductService;
-import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,13 +39,20 @@ public class ChatController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="{roomId}.do")
-    public void messageList(@PathVariable String roomId, Model model, HttpServletResponse response) throws JsonIOException, IOException {
+    public void messageList(@PathVariable String roomId, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
 		
-		List<ProductCategory> mList = cService.messageList(roomId);
+		List<ChatMessage> mList = cService.messageList(roomId);
 		response.setContentType("application/json; charset=utf-8");
 
+		// 안읽은 메세지의 숫자 0으로 바뀌기
+		ChatMessage message = new ChatMessage();
+		message.setEmail(userEmail);
+		message.setRoomId(roomId);
+		cService.updateCount(message);
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(mList,response.getWriter());
+		
     }
 	
 	/**
@@ -75,7 +82,7 @@ public class ChatController {
 			int result = cService.createChat(room);
 			if(result == 1) {
 				System.out.println("방 만들었다!!");
-				return "success";
+				return "new";
 			}else {
 				return "fail";
 			}
@@ -83,7 +90,7 @@ public class ChatController {
 		// DB에 방이 있을 때
 		else{
 			System.out.println("방이 있다!!");
-			return "aru";
+			return "exist";
 		}
 	}
 	
@@ -96,12 +103,22 @@ public class ChatController {
 	 * @throws IOException
 	 */
 	@RequestMapping("chatRoomList.do")
-	public void createChat(ChatRoom room, String userEmail, HttpServletResponse response) throws JsonIOException, IOException{
-		List<ProductCategory> cList = cService.chatRoomList(userEmail);
+	public void createChat(ChatRoom room, ChatMessage message, String userEmail, HttpServletResponse response) throws JsonIOException, IOException{
+		List<ChatRoom> cList = cService.chatRoomList(userEmail);
+		
+		for(int i = 0; i < cList.size(); i++) {
+			message.setRoomId(cList.get(i).getRoomId());
+			message.setEmail(userEmail);
+			int count = cService.selectUnReadCount(message);
+			cList.get(i).setUnReadCount(count);
+		}
+		
 		response.setContentType("application/json; charset=utf-8");
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(cList,response.getWriter());
 	}
+	
+	
 	
 }

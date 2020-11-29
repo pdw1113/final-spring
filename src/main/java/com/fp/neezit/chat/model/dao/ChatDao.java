@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.chat.model.vo.ChatMessage;
 import com.fp.neezit.chat.model.vo.ChatRoom;
-import com.fp.neezit.product.model.vo.ProductCategory;
 
 @Repository
 public class ChatDao{	
@@ -24,7 +23,7 @@ public class ChatDao{
 		return sqlSession.insert("chatMapper.insertMessage", chatMessage);
 	}
 	
-	public List<ProductCategory> messageList(String roomId) {
+	public List<ChatMessage> messageList(String roomId) {
 		return sqlSession.selectList("chatMapper.messageList", roomId);
 	}
 
@@ -36,8 +35,16 @@ public class ChatDao{
 		return sqlSession.selectOne("chatMapper.searchChatRoom", room);
 	}
 
-	public List<ProductCategory> chatRoomList(String userEmail) {
+	public List<ChatRoom> chatRoomList(String userEmail) {
 		return sqlSession.selectList("chatMapper.chatRoomList", userEmail);
+	}
+
+	public int selectUnReadCount(ChatMessage message) {
+		return sqlSession.selectOne("chatMapper.selectUnReadCount",message);
+	}
+
+	public int updateCount(ChatMessage message) {
+		return sqlSession.update("chatMapper.updateCount", message);
 	};
 
 }

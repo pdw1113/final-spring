@@ -30,12 +30,14 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	// session, 방 번호가 들어간다.
 	private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
 	
+	private static int i;
 	/**
 	 * websocket 연결 성공 시
 	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println(session.getId() + " 연결 성공");
+		i++;
+		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 	}
 
 	/**
@@ -43,7 +45,8 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println(session.getId() + " 연결 종료");
+		i--;
+		System.out.println(session.getId() + " 연결 종료 => 총 접속 인원 : " + i + "명");
 		// sessionList에 session이 있다면
 		if(sessionList.get(session) != null) {
 			// 해당 session의 방 번호를 가져와서, 방을 찾고, 그 방의 ArrayList<session>에서 해당 session을 지운다.

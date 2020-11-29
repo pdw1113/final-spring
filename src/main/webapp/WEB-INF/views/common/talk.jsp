@@ -22,7 +22,7 @@
 	</div>
 	<!-- 채팅 리스트 / 채팅 방 OPEN / CLOSE -->
 	<script>
-         $(document).on("click", ".chatIcon", function(){            // 채팅 Icon 클릭 시,
+         $(document).on("click", ".chatIcon", function(){            	// 채팅 Icon 클릭 시,
             if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
                 $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
             }else{                                                      // else ) 채팅방이 열려있다면,
@@ -30,21 +30,21 @@
                 websocket.close();
             }
          	
-         	if(!$('.chatListContainer').hasClass('display-none')){	 // 채팅 리스트가 닫혀 있을 때
-                $('.chatListContainer').trigger('cssChanged');			 // 채팅 방 목록을 불러온다.
+         	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
+                $('.chatListContainer').trigger('cssChanged');			// 채팅 방 목록을 불러온다.
          	}
+         	
          });
          
-         $(document).on("click", "img.close", function(){            // X 버튼 클릭 시,
-             $('.chatContainer').toggleClass('display-none');            // 채팅방을 닫는다.
-             websocket.close();
+         $(document).on("click", "img.close", function(){            	// X 버튼 클릭 시,
+             $('.chatContainer').toggleClass('display-none');           // 채팅방을 닫는다.
+             websocket.close();											// socket 연결 종료
          });
          
-         $(document).on("click", "img.down", function(){             // - 버튼 클릭 시,
-             $('.chatContainer').toggleClass('display-none');            // 채팅방을 닫고,
-             $('.chatListContainer').toggleClass('display-none');        // 리스트를 연다.
-             $('.chatListContainer').trigger('cssChanged');				 // 채팅 방 목록을 불러온다.
-             websocket.close();
+         $(document).on("click", "img.down", function(){             	// - 버튼 클릭 시,
+             $('.chatContainer').toggleClass('display-none');           // 채팅방을 닫고,
+             $('.chatListContainer').toggleClass('display-none');       // 리스트를 연다.
+             websocket.close();											// socket 연결 종료
          });
       </script>
 	<!-- 채팅 창 -->
@@ -91,25 +91,25 @@
 			<div style="padding: 10px; margin-left: 4px;">니즈톡 리스트</div>
 		</div>
 		<div class="chatList">
-			<div class="chatList_box" id="test1">
-				<img src="resources/img/cdm5.jpg" class="profile_img">
-				<div>천동민</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>3 </strong>개 있습니다.</span>
-			</div>
+			<!-- 동적 생성 -->
 		</div>
 	</div>
 	
 	<script>
-		$('.chatListContainer').on('cssChanged', function () {
- 			// 채팅 방 목록 가져오기
+		// 총 읽지 않은 갯수
+		let countAll = 0;
+		let ListTimer;
+		
+		function getRoomList(){
+			// 채팅 방 목록 가져오기
  			$.ajax({
     			url:"chatRoomList.do",
     			data:{
     				userEmail:"${loginUser.email}"
     			},
     			dataType:"json",
+    			async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
     			success:function(data){
-    				console.log(data);
     				
  					$chatWrap = $(".chatList");
 					$chatWrap.html("");
@@ -120,6 +120,10 @@
 					var $span;	// 2단계
 					
 					if(data.length > 0){
+						// 읽지 않은 메세지 초기화
+						countAll = 0;
+						
+						// 태그 동적 추가
 						for(var i in data){
 							
 							// 사용자의 입장일 때
@@ -128,7 +132,13 @@
 								
 								$img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
 								$divs = $("<div>").text(data[i].masterName);
-								$span = $("<span class='notRead'>").text("1");
+								
+								// 읽지 않은 메세지가 0이 아닐 때
+								if(data[i].unReadCount != 0){
+									$span = $("<span class='notRead'>").text(data[i].unReadCount);
+								}else{
+									$span = $("<span>");
+								}
 								
 								$div.append($img);
 								$div.append($divs);
@@ -143,7 +153,13 @@
 								
 								$img = $("<img class='profile_img'>").attr("src", "resources/img/" + data[i].userPic);
 								$divs = $("<div>").text(data[i].userName);
-								$span = $("<span class='notRead'>").text("1");
+								
+								// 읽지 않은 메세지가 0이 아닐 때
+								if(data[i].unReadCount != 0){
+									$span = $("<span class='notRead'>").text(data[i].unReadCount);
+								}else{
+									$span = $("<span>");
+								}
 								
 								$div.append($img);
 								$div.append($divs);
@@ -151,10 +167,35 @@
 								
 								$chatWrap.append($div);
 							}
+							
+							// String을 int로 바꿔주고 더해준다.
+							countAll += parseInt(data[i].unReadCount);
 						}
 					}
     			}
     		});
+		}
+		
+		// 채팅방이 열렸을 때 채팅 방 목록 불러오기
+		$('.chatListContainer').on('cssChanged', function () {
+			getRoomList();
+		});
+		
+		// 화면 로딩 된 후
+		$(window).on('load', function(){
+			
+			ListTimer = setInterval(function(){
+				getRoomList();
+				
+				// 읽지 않은 메세지 총 갯수가 0개가 아니면
+				if(countAll != 0){
+					// 채팅 icon 깜빡거리기
+					$('.chatIcon').addClass('iconBlink');
+				}else{
+					// 깜빡거림 없애기
+					$('.chatIcon').removeClass('iconBlink');
+				}
+			},2000);
 		});
 	</script>
 	
@@ -185,15 +226,22 @@
 
         // 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
         function enterRoom(obj){
+        	
+        	// 현재 html에 추가되었던 동적 코드 전부 지우기
         	$('div.chatMiddle:not(.format) ul').html("");
+        	// 방번호
         	roomId = obj.getAttribute("id");
  			// 해당 채팅 방의 메세지 목록 불러오기
   			$.ajax({
     			url:roomId + ".do",
-    			data:{},
+    			data:{
+    				userEmail:"${loginUser.email}"
+    			},
+    			async:false,
     			dataType:"json",
     			success:function(data){
     				for(var i = 0; i < data.length; i++){
+    					// 채팅 목록 동적 추가
     					CheckLR(data[i]);
     				}
     			}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fp.neezit.chat.model.vo.ChatMessage;
 import com.fp.neezit.chat.model.vo.ChatRoom;
-import com.fp.neezit.product.model.vo.ProductCategory;
 
 public interface ChatService {
 
@@ -27,7 +26,7 @@ public interface ChatService {
 	 * @param roomId
 	 * @return
 	 */
-	List<ProductCategory> messageList(String roomId);
+	List<ChatMessage> messageList(String roomId);
 
 	/**
 	 * 채팅 방 DB 저장
@@ -48,6 +47,20 @@ public interface ChatService {
 	 * @param userEmail
 	 * @return
 	 */
-	List<ProductCategory> chatRoomList(String userEmail);
+	List<ChatRoom> chatRoomList(String userEmail);
+
+	/**
+	 * 채팅 읽지 않은 메세지 수 출력
+	 * @param message
+	 * @return
+	 */
+	int selectUnReadCount(ChatMessage message);
+
+	/**
+	 * 읽은 메세지 숫자 0으로 바꾸기
+	 * @param message
+	 * @return
+	 */
+	int updateCount(ChatMessage message);
 
 }

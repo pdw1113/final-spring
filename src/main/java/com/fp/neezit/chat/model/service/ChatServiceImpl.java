@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.fp.neezit.chat.model.dao.ChatDao;
 import com.fp.neezit.chat.model.vo.ChatMessage;
 import com.fp.neezit.chat.model.vo.ChatRoom;
-import com.fp.neezit.product.model.vo.ProductCategory;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -27,7 +26,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ProductCategory> messageList(String roomId) {
+	public List<ChatMessage> messageList(String roomId) {
 		return cDao.messageList(roomId);
 	}
 
@@ -42,8 +41,18 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ProductCategory> chatRoomList(String userEmail) {
+	public List<ChatRoom> chatRoomList(String userEmail) {
 		return cDao.chatRoomList(userEmail);
+	}
+
+	@Override
+	public int selectUnReadCount(ChatMessage message) {
+		return cDao.selectUnReadCount(message);
+	}
+
+	@Override
+	public int updateCount(ChatMessage message) {
+		return cDao.updateCount(message);
 	}
 	
 	
