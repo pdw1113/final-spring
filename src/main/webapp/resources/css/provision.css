@@ -1,0 +1,126 @@
+@charset "UTF-8";
+.content_provision {
+    width: 100%;
+    padding: 57px 0 125px 0;
+}
+.terms_provision {
+    width: 100%;
+    overflow: hidden;
+}
+.content_provision .layoutSubbox_provision {
+    position: relative;
+    width: 1320px;
+    margin: 0 auto;
+}
+.terms_provision .h2_provision {
+	font-family: 'Noto Sans KR', sans-serif;
+    font-size: 34px;
+    color: #272d32;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: -1px;
+    padding: 0 0 56px 0;
+}
+.termsSection_provision {
+    width: 100%;
+    overflow: hidden;
+}
+.terms_provision .h3_provision {
+	font-family: 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    color: #272d32;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    padding: 0 0 30px 0;
+}
+.termsSection_provision .con_provision {
+    padding-bottom: 35px;
+}
+
+.termsSection_provision .con_provision .tit_provision {
+    font-size: 17px;
+    color: #272d32;
+    font-weight: 600;
+    line-height: 1.8;
+    padding-bottom: 35px;
+    letter-spacing: -1px;
+}
+
+.termsSection_provision .con_provision .txt_provision {
+    font-size: 16px;
+    color: #272d32;
+    font-weight: 300;
+    line-height: 1.8;
+    padding-bottom: 35px;
+    letter-spacing: -1px;
+}
+
+.termsSection_provision .con_provision a {
+    font-size: 16px;
+    color: #272d32;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+.termsSection_provision .con_provision .listNumSty1_provision > li {
+    padding-bottom: 35px;
+    font-size: 16px;
+    color: #272d32;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: -1px;
+}
+
+@media (max-width: 1360px){
+    .content_provision .layoutSubbox_provision {
+        width: auto;
+        margin: 0 20px;
+    }
+}
+@media (max-width: 640px){
+   .content_provision {
+        padding: 30px 0 60px 0;
+    }
+    .content_provision .layoutSubbox_provision {
+        margin: 0 12px;
+    }
+    .terms_provision .h2_provision {
+        font-size: 20px;
+        font-weight: 900;
+        padding: 0 0 14px 0;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .terms_provision .h3_provision {
+    	font-family: 'Noto Sans KR', sans-serif;
+        font-size: 17px;
+        padding: 0 0 10px 0;
+        font-weight: 500;
+    }
+    .termsSection_provision .con_provision {
+        padding-bottom: 20px;
+    }
+    .termsSection_provision .con_provision .tit_provision_provision {
+        font-size: 14px;
+        padding-bottom: 10px;
+    }
+    .termsSection_provision .con_provision .txt_provision {
+        font-size: 13px;
+        padding-bottom: 20px;
+    }
+    .termsSection_provision .con_provision a {
+        font-size: 13px;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .termsSection_provision .con_provision .listNumSty1 > li {
+        padding-bottom: 20px;
+        font-size: 13px;
+    }
+}
