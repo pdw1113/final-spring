@@ -121,24 +121,35 @@
       
       <!-- 채팅 IO -->
       <script>
-      	
-         const myName = "상뉴";
-         
+	  // 방 고유 번호
+      var roomId = "123";
+      
          // enter 키 이벤트
          $(document).on('keydown', 'div.chatBottom textarea', function(e){
              if(e.keyCode == 13 && !e.shiftKey) {
                  e.preventDefault(); // 엔터키가 입력되는 것을 막아준다.
                  const message = $(this).val();  // 현재 입력된 메세지를 담는다.
-                 
                  sendMessage(message);
-         
                  // textarea 비우기
                  clearTextarea();
              }
          });
          
-       //웹 소켓 연결해주는 함수 호출
+        // 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
  		document.getElementById("test1").addEventListener("click", function() {
+ 			
+ 			
+ 			// 방으로 입장
+ 			$.ajax({
+    			url:roomId + ".do",
+    			data:{},
+    			dataType:"json",
+    			success:function(data){
+    				console.log(data);
+    			}
+    		});
+ 			
+ 			// 웹소켓 연결
  			connect();
  		});
  		
@@ -153,45 +164,69 @@
  			//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
  			websocket.onopen = onOpen;
  			websocket.onmessage = onMessage;
+ 			websocket.onclose = onClose;
  		}
  		
  		//웹 소켓에 연결되었을 때 호출될 함수
  		function onOpen() {
- 			websocket.send( myName + "님 입장하셨습니다.");
+ 			const data = {
+               	 "roomId" : roomId,
+               	 "name" : "${ loginUser.name }",
+               	 "email" : "${ loginUser.email }",
+                 "message" : "ENTER-CHAT"
+            };
+            let jsonData = JSON.stringify(data);
+ 			websocket.send(jsonData);
+ 		}
+ 		
+ 		function onClose(){
  		}
  		
          // * 1 메시지 보내기
          function sendMessage(message){
 
              const data = {
-                 "senderName" : "상뉴",
+            	 "roomId" : roomId,
+            	 "name" : "${ loginUser.name }",
+            	 "email" : "${ loginUser.email }",
                  "message"   : message 
              };
  			 
              CheckLR(data);
              
- 			 websocket.send(data.message);
+             let jsonData = JSON.stringify(data);
+             
+ 			 websocket.send(jsonData);
          }
-         
+        
+         // * 2 메세지 수신
      	function onMessage(evt) {
+        	 
+        	let receive = evt.data.split(",");
+        	console.log(receive);
      		
             const data = {
-                    "senderName" : "정호",
-                    "message"   : evt.data
+               	 "name" : receive[0],
+               	 "email" : receive[1],
+                 "message" : receive[2]
             };
-    		CheckLR(data);
+     		
+     		if(data.email != "${ loginUser.email }"){
+        		CheckLR(data);
+     		}
     	}
          
          // * 2 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
          function CheckLR(data) {
-             const LR = (data.senderName != myName)? "left" : "right";
+             const LR = (data.email != "${ loginUser.email }") ? "left" : "right";
          
-             appendMessageTag(LR, data.senderName, data.message);
+             appendMessageTag(LR, data.email, data.message, data.name);
          }
          
          // * 3 메세지 태그 appendl
-         function appendMessageTag(LR_className, senderName, message) {
-             const chatLi = createMessageTag(LR_className, senderName, message);
+         function appendMessageTag(LR_className, email, message, name) {
+        	 
+             const chatLi = createMessageTag(LR_className, email, message, name);
          
              $('div.chatMiddle:not(.format) ul').append(chatLi);
          
@@ -200,14 +235,14 @@
          }
          
          // * 4 메세지 태그 생성
-         function createMessageTag(LR_className, senderName, message) {
+         function createMessageTag(LR_className, email, message, name) {
          
              // 형식 가져오기
              let chatLi = $('div.chatMiddle.format ul li').clone();
          
              // 값 채우기
              chatLi.addClass(LR_className); // 클래스 추가 left인지 right인지
-             chatLi.find('.sender span').text(senderName); // 작성자 추가
+             chatLi.find('.sender span').text(name); // 작성자 추가
              chatLi.find('.message span').text(message);   // 메세지 추가
          
              return chatLi;

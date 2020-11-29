@@ -30,7 +30,7 @@
         <websocket:mapping path="/websocket/echo.do" handler="myHandler"/>
     </websocket:handlers>
 
-    <beans:bean id="myHandler" class="com.fp.neezit.chat.controller.WebSocketChatController"/>
+    <beans:bean id="myHandler" class="com.fp.neezit.chat.controller.WebSocketHandler"/>
 	
 	
 	
