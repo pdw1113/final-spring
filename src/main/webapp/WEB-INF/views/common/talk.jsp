@@ -23,29 +23,37 @@
 	<!-- 채팅 리스트 / 채팅 방 OPEN / CLOSE -->
 	<script>
          $(document).on("click", ".chatIcon", function(){            // 채팅 Icon 클릭 시,
-             if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
-                 $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
-             }else{                                                      // else ) 채팅방이 열려있다면,
-                 $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
-             }
+            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
+                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
+            }else{                                                      // else ) 채팅방이 열려있다면,
+                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
+                websocket.close();
+            }
+         	
+         	if(!$('.chatListContainer').hasClass('display-none')){	 // 채팅 리스트가 닫혀 있을 때
+                $('.chatListContainer').trigger('cssChanged');			 // 채팅 방 목록을 불러온다.
+         	}
          });
          
          $(document).on("click", "img.close", function(){            // X 버튼 클릭 시,
              $('.chatContainer').toggleClass('display-none');            // 채팅방을 닫는다.
+             websocket.close();
          });
          
          $(document).on("click", "img.down", function(){             // - 버튼 클릭 시,
              $('.chatContainer').toggleClass('display-none');            // 채팅방을 닫고,
              $('.chatListContainer').toggleClass('display-none');        // 리스트를 연다.
+             $('.chatListContainer').trigger('cssChanged');				 // 채팅 방 목록을 불러온다.
+             websocket.close();
          });
       </script>
 	<!-- 채팅 창 -->
 	<div class="chatContainer display-none">
 		<div class="chatTop">
 			<div class="profile_img_Container floatLeft">
-				<img src="resources/img/cdm5.jpg" class="profile_img">
+				<img class="profile_img" id="setPic"><!-- src 사진 경로 동적 생성 -->
 			</div>
-			<div class="name_container font_noto">천동민</div>
+			<div class="name_container font_noto" id="setName"><!-- 이름 동적 생성 --></div>
 			<div class="floatRight">
 				<img src="resources/img/chat-close.png" class="btnImg close">
 			</div>
@@ -62,6 +70,7 @@
 			<textarea placeholder="메세지를 입력해 주세요."></textarea>
 		</div>
 	</div>
+	
 	<!-- format -->
 	<div class="chatMiddle format">
 		<ul>
@@ -85,41 +94,84 @@
 			<div class="chatList_box" id="test1">
 				<img src="resources/img/cdm5.jpg" class="profile_img">
 				<div>천동민</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>3 </strong>개 있습니다.
-				</span>
-			</div>
-			<div class="chatList_box">
-				<img src="resources/img/유지만_사진.jpg" class="profile_img">
-				<div>유지만</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>1 </strong>개 있습니다.
-				</span>
-			</div>
-			<div class="chatList_box">
-				<img src="resources/img/이승백_사진.jpg" class="profile_img">
-				<div>이승백</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>1 </strong>개 있습니다.
-				</span>
-			</div>
-			<div class="chatList_box">
-				<img src="resources/img/조원영_사진.jpg" class="profile_img">
-				<div>조원영</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>1 </strong>개 있습니다.
-				</span>
-			</div>
-			<div class="chatList_box">
-				<img src="resources/img/조정호_사진.jpg" class="profile_img">
-				<div>조정호</div>
-				<span class="notRead"> 읽지않은 메세지가 <strong>1 </strong>개 있습니다.
-				</span>
+				<span class="notRead"> 읽지않은 메세지가 <strong>3 </strong>개 있습니다.</span>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$('.chatListContainer').on('cssChanged', function () {
+ 			// 채팅 방 목록 가져오기
+ 			$.ajax({
+    			url:"chatRoomList.do",
+    			data:{
+    				userEmail:"${loginUser.email}"
+    			},
+    			dataType:"json",
+    			success:function(data){
+    				console.log(data);
+    				
+ 					$chatWrap = $(".chatList");
+					$chatWrap.html("");
+					
+					var $div; 	// 1단계
+					var $img; 	// 2단계
+					var $divs; 	// 2단계
+					var $span;	// 2단계
+					
+					if(data.length > 0){
+						for(var i in data){
+							
+							// 사용자의 입장일 때
+							if(data[i].userEmail == "${loginUser.email}"){
+								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
+								
+								$img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
+								$divs = $("<div>").text(data[i].masterName);
+								$span = $("<span class='notRead'>").text("1");
+								
+								$div.append($img);
+								$div.append($divs);
+								$div.append($span);
+								
+								$chatWrap.append($div);
+							}
+							
+							// 마스터의 입장일 때
+							else{
+								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
+								
+								$img = $("<img class='profile_img'>").attr("src", "resources/img/" + data[i].userPic);
+								$divs = $("<div>").text(data[i].userName);
+								$span = $("<span class='notRead'>").text("1");
+								
+								$div.append($img);
+								$div.append($divs);
+								$div.append($span);
+								
+								$chatWrap.append($div);
+							}
+						}
+					}
+    			}
+    		});
+		});
+	</script>
+	
+	
+	<!-- 리스트에서 해당목록 클릭 시 해당 채팅방으로 이동 -->
+	<script>
+         $(document).on("click", ".chatList_box",function(){
+         	$(".chatContainer").toggleClass("display-none");
+         	$(this).parent().parent().toggleClass("display-none");
+         	$("#setName").html($(this).children('div').html());
+         	$("#setPic").attr("src",$(this).children('img').attr('src'));
+         });
+    </script>
 
 	<!-- 채팅 IO -->
 	<script>
-		// 방 고유 번호
-    	var roomId = "123";
-      
+		let roomId;
         // enter 키 이벤트
         $(document).on('keydown', 'div.chatBottom textarea', function(e){
              if(e.keyCode == 13 && !e.shiftKey) {
@@ -130,13 +182,13 @@
                  clearTextarea();
              }
         });
-         
+
         // 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
- 		document.getElementById("test1").addEventListener("click", function() {
- 			
- 			
+        function enterRoom(obj){
+        	$('div.chatMiddle:not(.format) ul').html("");
+        	roomId = obj.getAttribute("id");
  			// 해당 채팅 방의 메세지 목록 불러오기
- 			$.ajax({
+  			$.ajax({
     			url:roomId + ".do",
     			data:{},
     			dataType:"json",
@@ -149,8 +201,9 @@
  			
  			// 웹소켓 연결
  			connect();
- 		});
- 		
+        }
+        
+        // 웹소켓
  		var websocket;
  	
  		//입장 버튼을 눌렀을 때 호출되는 함수
@@ -162,7 +215,6 @@
  			//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
  			websocket.onopen = onOpen;
  			websocket.onmessage = onMessage;
- 			websocket.onclose = onClose;
  		}
  		
  		//웹 소켓에 연결되었을 때 호출될 함수
@@ -176,6 +228,7 @@
             let jsonData = JSON.stringify(data);
  			websocket.send(jsonData);
  		}
+ 		
         // * 1 메시지 보내기
         function sendMessage(message){
 
@@ -248,14 +301,5 @@
              return false;
         };
       </script>
-	<!-- 리스트에서 해당목록 클릭 시 해당 채팅방으로 이동 -->
-	<script>
-         $(document).on("click", ".chatList_box",function(){
-             if($(this).children("div").html() === "천동민"){
-                 $(".chatContainer").toggleClass("display-none");
-                 $(this).parent().parent().toggleClass("display-none");
-             }
-         });
-    </script>
 </body>
 </html>

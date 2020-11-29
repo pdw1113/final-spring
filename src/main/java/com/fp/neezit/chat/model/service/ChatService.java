@@ -16,7 +16,7 @@ public interface ChatService {
 	ChatRoom selectChatRoom(String roomId);
 
 	/**
-	 * 채팅 메세지 저장
+	 * 채팅 메세지 DB 저장
 	 * @param chatMessage
 	 * @return 
 	 */
@@ -28,5 +28,26 @@ public interface ChatService {
 	 * @return
 	 */
 	List<ProductCategory> messageList(String roomId);
+
+	/**
+	 * 채팅 방 DB 저장
+	 * @param room
+	 * @return
+	 */
+	int createChat(ChatRoom room);
+
+	/**
+	 * DB에 채팅 방이 있는지 확인
+	 * @param room
+	 * @return
+	 */
+	ChatRoom searchChatRoom(ChatRoom room);
+
+	/**
+	 * 채팅 방 리스트 출력
+	 * @param userEmail
+	 * @return
+	 */
+	List<ProductCategory> chatRoomList(String userEmail);
 
 }

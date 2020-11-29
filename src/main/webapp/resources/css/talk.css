@@ -218,7 +218,7 @@ position: relative;
 position: absolute;
 display: inline-block;
 margin-left: 0.3rem; 
-margin-top: 0.8rem;
+margin-top: 0.6rem;
 }
 /* 온라인 일 때 노란색 점 표시 */
 .chatList_box:before{

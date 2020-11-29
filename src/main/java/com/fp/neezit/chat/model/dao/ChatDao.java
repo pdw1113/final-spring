@@ -16,10 +16,6 @@ public class ChatDao{
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public void createRoom(ChatRoom vo){
-		sqlSession.insert("chatMapper.createRoom", vo);
-	}
-	
 	public ChatRoom selectChatRoom(String roomId) {
 		return sqlSession.selectOne("chatMapper.selectChatRoom", roomId);
 	}
@@ -30,6 +26,18 @@ public class ChatDao{
 	
 	public List<ProductCategory> messageList(String roomId) {
 		return sqlSession.selectList("chatMapper.messageList", roomId);
+	}
+
+	public int createChat(ChatRoom room) {
+		return sqlSession.insert("chatMapper.createChat", room);
+	}
+
+	public ChatRoom searchChatRoom(ChatRoom room) {
+		return sqlSession.selectOne("chatMapper.searchChatRoom", room);
+	}
+
+	public List<ProductCategory> chatRoomList(String userEmail) {
+		return sqlSession.selectList("chatMapper.chatRoomList", userEmail);
 	};
 
 }

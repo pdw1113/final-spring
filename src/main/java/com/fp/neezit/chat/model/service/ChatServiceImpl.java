@@ -24,12 +24,26 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public int insertMessage(ChatMessage chatMessage) {
 		return cDao.insertMessage(chatMessage);
-		
 	}
 
 	@Override
 	public List<ProductCategory> messageList(String roomId) {
 		return cDao.messageList(roomId);
+	}
+
+	@Override
+	public int createChat(ChatRoom room) {
+		return cDao.createChat(room);
+	}
+
+	@Override
+	public ChatRoom searchChatRoom(ChatRoom room) {
+		return cDao.searchChatRoom(room);
+	}
+
+	@Override
+	public List<ProductCategory> chatRoomList(String userEmail) {
+		return cDao.chatRoomList(userEmail);
 	}
 	
 	

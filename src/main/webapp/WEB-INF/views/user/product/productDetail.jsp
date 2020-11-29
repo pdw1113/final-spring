@@ -386,11 +386,28 @@
 	
 	<script>
 		function onChat(){
-            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
-                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
-            }else{                                                      // else ) 채팅방이 열려있다면,
-                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
-            }
+			
+			$.ajax({
+				url:"createChat.do",
+				data:{
+					userName:"${loginUser.name}",
+					userEmail:"${loginUser.email}",
+					masterNickname:"${master.mNickname}"
+				},
+				type:"post",
+				success:function(data){
+		            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
+		                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
+		            }else{                                                      // else ) 채팅방이 열려있다면,
+		                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
+		            }
+		            
+		         	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
+		                $('.chatListContainer').trigger('cssChanged');			// 채팅 방 목록을 불러온다.
+		         	}
+				}
+			});
+			
             return false;
 		}
 	</script>

@@ -5,7 +5,11 @@
 	<resultMap type="ChatRoom" id="chatRoomResultSet">
 		<id property="roomId" column="ROOM_ID" />
 		<result property="userEmail" column="USER_EMAIL" />
+		<result property="userName" column="USER_NAME" />		
+		<result property="userPic" column="USER_PIC" />
 		<result property="masterEmail" column="MASTER_EMAIL" />
+		<result property="masterName" column="MASTER_NAME" />
+		<result property="masterPic" column="MASTER_PIC" />
 	</resultMap>
 
 	<resultMap type="ChatMessage" id="chatMessageResultSet">
@@ -18,13 +22,13 @@
 	</resultMap>
 	
 	<!-- 신규 채팅방일 때 채팅 방 생성 -->
-	<insert id="createRoom" parameterType="ChatRoom">
-		insert into CHATROOM values(SEQ_CHATROOM_ID.NEXTVAL, #{roomId}, #{userEmail}, #{masterEmail})
+	<insert id="createChat" parameterType="ChatRoom">
+		insert into CHATROOM values(SEQ_CHATROOM_ID.NEXTVAL, #{userEmail}, #{userName}, DEFAULT, #{masterEmail}, #{masterName}, #{masterPic})
 	</insert>
 
 	<select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
 		SELECT * FROM CHATROOM 
-		WHERE ROOM_ID = #{roomId}
+		WHERE ROOM_ID = #{roomId} 
 	</select>
 	
 	<insert id="insertMessage" parameterType="ChatMessage">
@@ -34,6 +38,16 @@
 	<select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
 		SELECT * FROM CHATMESSAGE
 		WHERE ROOM_ID = #{rooomId}
+	</select>
+	
+	<select id="searchChatRoom" parameterType="ChatRoom" resultMap="chatRoomResultSet">
+		SELECT * FROM CHATROOM
+		WHERE USER_EMAIL = #{userEmail} AND MASTER_EMAIL = #{masterEmail}
+	</select>
+	
+	<select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
+		SELECT * FROM CHATROOM
+		WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
 	</select>
 	
 	<!-- 
