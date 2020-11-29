@@ -138,7 +138,7 @@
                               </th>
                            </tr>
                            
-							<c:if test="${ empty forbiddenList }">
+							<c:if test="${ empty forbiddenList and empty forbiddenList1 }">
 	                   			<tr>
 	                              <td colspan="3">
 	                                  검색창에 단어를 입력해주세요.
@@ -159,30 +159,101 @@
                                ${ manager.fdate }
                               </td>
                            </tr>
-                         </c:forEach> 
+                  </c:forEach>
+                  <c:forEach var="manager1" items="${ forbiddenList1 }" varStatus="status">
+
+                           <tr>
+                              <td class="thWidth">
+                          	 	${status.count} 
+                              </td>
+                              <td class="thWidth">
+                              ${ manager1.fword }
+                              </td>
+                              <td class="thWidth">
+                               ${ manager1.fdate }
+                              </td>
+                           </tr>
+                  </c:forEach> 
                            
                            
                         </Table>
+
+                <%--  <tr align="center" height="20" >
+						<td colspan="5" class="pagination">
+						
+							<!-- [이전] -->
+							<c:if test="${ pi.currentPage eq 1 }">
+								<a style="cursor:default;">«</a>
+							</c:if>
+							<c:if test="${ pi.currentPage ne 1 }">
+								<c:url var="before" value="walletDetail.do">
+									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+									<c:param name="preday" value="${preday}"/>
+									<c:param name="postday" value="${postday}"/>
+									<c:param name="search_way" value="${search_way}"/>
+								</c:url>
+								<a href="${ before }">«</a>
+							</c:if>
+							
+							<!-- 페이지 -->
+							<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+								<c:if test="${ p eq pi.currentPage }">
+									<a style="background-color: #FABE00; color: white; cursor:default;">${ p }</a>
+								</c:if>
+								
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="WalletPagination" value="walletDetail.do">
+										<c:param name="currentPage" value="${ p }"/>
+										<c:param name="preday" value="${preday}"/>
+										<c:param name="postday" value="${postday}"/>
+										<c:param name="search_way" value="${search_way}"/>
+									</c:url>
+									<a href="${ WalletPagination }">${ p }</a>
+								</c:if>
+							</c:forEach>
+							
+							<!-- [다음] -->
+							<c:if test="${ pi.currentPage eq pi.maxPage }">
+								<a style="cursor:default;">»</a>
+							</c:if>
+							<c:if test="${ pi.currentPage ne pi.maxPage }">
+								<c:url var="after" value="walletDetail.do">
+									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+										<c:param name="preday" value="${preday}"/>
+										<c:param name="postday" value="${postday}"/>
+										<c:param name="search_way" value="${search_way}"/>
+								</c:url> 
+								<a href="${ after }" >»</a>
+							</c:if>
+						</td>
+					</tr> --%>
+  
                      </div>
+
                      <div class="searchArea">
                         <div class="searchArea1">
                            <p class="bold sb">검색창</p>
                            <br>
-                           <input type="text" class="searchInput" id="searchInput" ><button type="button"
+                           <input type="text" class="searchInput" id="searchInput" >
+                           <button type="button"
                               class="searchButton"  onclick="searchWords()">검색</button>
                            <!-- <div class="searchForm1"></div> -->
                         </div>
+                        
                         <div class="searchArea2">
+                        <form action="searchWords1.do" method="POST">
                            <p class="bold sb">등록일 조회</p>
                            <div class="container col-xs-7 dateWidth">
-                              <input type="date" class="form-control input-md" id="date1">
+                              <input type="date" class="form-control input-md datepre_wdetail" name="preday" id="date1">
                               <span class="date-span">~</span>
-                              <input type="date" class="form-control input-md" id="date2">
+                              <input type="date" class="form-control input-md datepost_wdetail" name="postday" id="date2">
                               
                            </div>
-                           <button type="button"
-                              class="searchButton" id="dateSearch" onclick="searchDate();">검색</button>
+                           <button type="submit"
+                              class="searchButton" id="dateSearch" onclick="return searchDate();">검색</button>
+                              </form>
                         </div>
+                        
                         <div class="searchArea3">
                            <p class="bold sb">초성 검색</p>
                            <br>
@@ -347,7 +418,14 @@
              			// 중복되지 않았을 때
              			if(data == "ok"){
              				/* alert(word); */
-             				rowAdd1().click();
+             				insert1().click();
+             				
+             				setTimeout(function() {
+             					rowAdd1().click();
+             					}, 300);
+             				
+             				
+
              			// 중복됐을 때
              			}else{
                         /* 	alert(word); */
@@ -390,35 +468,6 @@
         }
         
         
-       function searchDate(){
-
-           date1 = $("#date1").val();
-           let date2 = $("#date2").val();
-           alert(date1);
-           
-          /*  let date3 = date1 + date2; */
-      	 	
-      	 $.ajax({
-            url:"searchWords.do",
-            data:{date1:date1},
-            type:"post",
-            success:function(data){
-   	       	 // 성공했을 때
-   	         if(data === "ok"){
-
-
-   	         	 	alert("검색 성공하였습니다.");
-
-   	         }else{
-   	         	 	alert("검색 실패하였습니다.");
-   	         }
-            },
-            error:function(jqxhr, textStatus, errorThrown){
-   	         console.log("ajax 처리 실패");
-
-   	         }
-         });
-     }; 
  
     function addWords(){
    	 // WORD
@@ -439,6 +488,11 @@
 		        	 check1++;
 		        	 if(words1.length == check1){
 		         	 	alert("금칙어가 추가 되었습니다.");
+		         	 	
+		         	 	clear1().click();
+		         	 	/* 클리어 시켜주는 이벤트를 넣어야할 듯 */
+		         	 	
+		         	 	
 		        	 };
 		         }else{
 		         	 	alert("금칙어 추가를 실패하였습니다.");
@@ -591,6 +645,25 @@
         		searchWords().click();
         }
     });
+	
+	
+    function searchDate(){
+
+		if($('.datepre_wdetail').val()==""&&$('.datepost_wdetail').val()==""){
+			return true;
+	 	}
+		
+		if($(".datepre_wdetail").val()==""){
+			 alert("날짜 정보가 잘못 되었습니다.")
+	   		 return false;
+		}
+		
+   		if($(".datepre_wdetail").val()>$('.datepost_wdetail').val() || $(".datepre_wdetail").val()=="" || $('.datepost_wdetail').val()==""){
+   	 		 alert("날짜 정보가 잘못 되었습니다.")
+       		 return false;
+   	 	}
+
+ 	}
 
     </script>            
 </body>

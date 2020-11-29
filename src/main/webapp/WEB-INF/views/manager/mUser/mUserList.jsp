@@ -56,13 +56,11 @@
                      <td class="searchtable_title_mUserList">회원구분</td>
                      <td>
                         <span class="checkbox_mUserList">
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList" name="chk_user" type="checkbox"value="1">
                         <span>일반회원</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList" name="chk_user" type="checkbox"value="2">
                         <span>능력자</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
-                        <span>관리자</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList" name="chk_user" type="checkbox"value="3">
                         <span>탈퇴회원</span>
                         </span>
                      </td>
@@ -81,17 +79,17 @@
                      <td class="searchtable_title_mUserList">회원등급</td>
                      <td> 
                         <span class="checkbox_mUserList">
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="흙손">
                         <span>흙손</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="동손">
                         <span>동손</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="은손">
                         <span>은손</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="금손">
                         <span>금손</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="다이아손">
                         <span>다이아손</span>
-                        <input class="checkboxes_mUserList" type="checkbox"value="1">
+                        <input class="checkboxes_mUserList1" type="checkbox" value="타노스">
                         <span>타노스</span>
                         </span>
                      </td>
@@ -102,7 +100,7 @@
                      
             <div class="Admin_grant_Managerheader ">
                <button class="seaerch_button_PersnalAccess" onclick="return buttonclick();">검색</button>
-               <button class="manager_button_PersnalAccess">관리자 권한 부여</button>
+              <!--  <button class="manager_button_PersnalAccess">관리자 권한 부여</button> -->
             </div>
             <!-- 검색결과 -->
             <div class="layoutSubbox_mUserList">
@@ -113,7 +111,7 @@
                   </caption>
                   <thead>
                      <tr>
-                        <th scope="cols">체크</th>
+                      <!--   <th scope="cols">체크</th> -->
                         <th scope="cols">번호</th>
                         <th scope="cols">구분</th>
                         <th scope="cols">이메일</th>
@@ -137,12 +135,12 @@
                    <c:set var="num" value="${pi.listCount - ((pi.currentPage-1) * 5) }"/>
                       <c:forEach var="UserList" items="${ ul }" varStatus="status">
 	                     <tr>
-	                        <td id="shot_table_mUserList"><input type="checkbox" value="1"></td>
+	                      <!--   <td id="shot_table_mUserList"><input type="checkbox" value="1"></td> -->
 	                        <td id="shot_table_mUserList">${ num }</td>
 	                        <td id="midle_table_mUserList">
-	                        	<c:if test="${ empty UserList.userMaster.mNickname}">일반회원</c:if>
-								<c:if test="${ !empty UserList.userMaster.mNickname}">능력자</c:if>
-								<c:if test="${ UserList.user.status == 'Y'}">탈퇴회원</c:if>
+	                        	<c:if test="${ empty UserList.userMaster.mNickname and UserList.user.status == 'N'}">일반회원</c:if>
+								<c:if test="${ !empty UserList.userMaster.mNickname and UserList.user.status == 'N'}">능력자</c:if>
+								<span id="red"><c:if test="${ UserList.user.status == 'Y'}">탈퇴회원</c:if></span>
 	                        </td>
 	                        <td id="long_table_mUserList">${ UserList.user.email }</td>
 	                        <td id="long_table_mUserList">${ UserList.userMaster.mNickname }</td>
@@ -175,6 +173,8 @@
 						<c:param name="postday" value="${postday}"/>
 						<c:param name="search_way" value="${search_way}"/>
 						<c:param name="search_box" value="${search_box}"/>
+						<c:param name="check1" value="${check1}"/>
+						<c:param name="check2" value="${check2}"/>
 					</c:url>
 					<a href="${ before }">«</a>
 				</c:if>
@@ -193,6 +193,8 @@
 							<c:param name="postday" value="${postday}"/>
 							<c:param name="search_way" value="${search_way}"/>
 							<c:param name="search_box" value="${search_box}"/>
+							<c:param name="check1" value="${check1}"/>
+							<c:param name="check2" value="${check2}"/>
 						</c:url>
 						<a href="${ mUserList }">${ p }</a>
 					</c:if>
@@ -210,6 +212,8 @@
 							<c:param name="postday" value="${postday}"/>
 							<c:param name="search_way" value="${search_way}"/>
 							<c:param name="search_box" value="${search_box}"/>
+							<c:param name="check1" value="${check1}"/>
+							<c:param name="check2" value="${check2}"/>
 					</c:url> 
 					<a href="${ after }" >»</a>
 				</c:if>
@@ -221,17 +225,62 @@
            <!--     </table> -->
             </div>
          </div>
+               <input type="hidden" id="check1" name="check1">
+               <input type="hidden" id="check2" name="check2">
          </form>
       </div>
-      
+
        <script>
 
+     
+       
          $('.datepre_wdetail, .datepost_wdetail').click(function(){
         	 $('.choice_wdetail').css('background-color',"#ddd");
         	 $("#buttonday").val("");
          });
         
          function buttonclick(){
+        	 
+        	  var check1 = Array();
+              var check_count1 = 0;
+              var chkbox = $(".checkboxes_mUserList");
+              
+              for(i=0;i<chkbox.length;i++) {
+                  if (chkbox[i].checked == true){
+                	  check1[check_count1] = chkbox[i].value;
+                	  check_count1++;
+                  }
+              }
+              $("#check1").val(check1);
+              
+              var check2 = Array();
+              var check_count2 = 0;
+              var chkbox2 = $(".checkboxes_mUserList1");
+              
+              for(i=0;i<chkbox2.length;i++) {
+                  if (chkbox2[i].checked == true){
+                	  check2[check_count2] = chkbox2[i].value;
+                	  check_count2++;
+                  }
+              }
+              $("#check2").val(check2);
+              
+              
+              
+              
+        	 
+/*  			 var size = document.getElementsByName("chk_user").length;
+			    for(var i = 0; i < size; i++){
+			        if(document.getElementsByName("chk_user")[i].checked == true){
+			            console.log(document.getElementsByName("chk_user")[i].value);
+			            check1[check_count] += document.getElementsByName("chk_user")[i].value;
+			            alert(check1);
+			            check_count++;
+			        }
+			    } */
+			    
+			   
+
         	 	console.log($("#buttonday").val());
         		if($(".bdbox_mUserList").val()!=null&&$("#buttonday").val()==""&&$('.datepre_wdetail').val()==""&&$('.datepost_wdetail').val()==""){
         			return true;
@@ -253,6 +302,8 @@
         			return true;
         		}
          }
+         
+        
       </script>
       
       

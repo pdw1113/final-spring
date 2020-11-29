@@ -315,18 +315,41 @@ public class ManagerController {
 	}
 
 	@RequestMapping("searchWords.do")
-	public String searchWords(Model model, String search, Date date) {
-	
-	
+	public String searchWords(Model model, String search) {
+
 		System.out.println(search);
-		System.out.println(date);
 		List<Forbidden> forbiddenList = mService.searchWords(search);
-//		List<Forbidden> forbiddenList1 = mService.dateWords(date);
+
 		model.addAttribute("forbiddenList", forbiddenList);
-//		model.addAttribute("forbiddenList", forbiddenList1);
+
 		System.out.println(forbiddenList);
 		
 		 return "manager/mBoard/mBoardForbidden"; 
+	}
+	
+	@RequestMapping("searchWords1.do")
+	public String searchWords1(Model model, String preday,
+			String postday) {
+		
+		if(preday==null&&postday==null) {
+			preday="";
+			postday="";
+		}
+
+		System.out.println(preday);
+		System.out.println(postday);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("preday",preday);
+		map.put("postday",postday); 
+
+		List<Forbidden> forbiddenList1 = mService.dateWords(map);
+
+		model.addAttribute("forbiddenList1", forbiddenList1);
+		model.addAttribute("preday",preday);
+		model.addAttribute("postday",postday);
+
+		return "manager/mBoard/mBoardForbidden"; 
 	}
 	
 	@ResponseBody // AJAX
@@ -390,54 +413,73 @@ public class ManagerController {
 
 	
 	
-	  @RequestMapping("mUserList.do") 
-	  public String mUserList(Model model,String buttonday,String preday, 
-			  String postday,String search_way, String search_box,
-			  @RequestParam(value="currentPage" , 
-			  required=false, defaultValue="1")int currentPage) { 
-	  
-		  if(buttonday==null&&preday==null&&postday==null&&search_box==null&&search_way==null) {
-				buttonday="";
-				preday="";
-				postday="";
-				search_box="";
-				search_way="";
-			}
+	 @RequestMapping("mUserList.do") 
+     public String mUserList(Model model,String buttonday,String preday, 
+           String postday,String search_way, String search_box, String check1, String check2,
+           @RequestParam(value="currentPage" , 
+           required=false, defaultValue="1")int currentPage) { 
+     
+        if(buttonday==null&&preday==null&&postday==null&&search_box==null&&search_way==null&&check1==null&&check2==null) {
+            buttonday="";
+            preday="";
+            postday="";
+            search_box="";
+            search_way="";
+            check1="";
+            check2="";
+         }
 
-	  HashMap<String, String> map = new HashMap<String, String>();
-	  
-	  map.put("buttonday",buttonday); 
-	  map.put("preday",preday);
-	  map.put("postday",postday); 
-	  map.put("search_way",search_way);
-	  
-	  search_box = "%"+search_box+"%";
-		
-	  map.put("search_box",search_box);
-	  
-	  int listCount = mService.getUserListCount(map);
-	  int listAllCount = mService.getUserListAllCount();
-	  
-	  PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
-	  
-	  ArrayList<UserList> ul = mService.getUserList(pi,map);
-//	  UserMaster master = mService.getMaster();
-//	  ManagerUserList dao = sqlSession.getMapper(ManagerUserList.class);
-//	  UserBean ul = dao.getUserList();
-	  
-	  model.addAttribute("ul",ul); 
-	  model.addAttribute("pi",pi);
-//	  model.addAttribute("masterList", master);
-	  model.addAttribute("buttonday",buttonday);
-	  model.addAttribute("preday",preday); 
-	  model.addAttribute("postday",postday);
-	  model.addAttribute("search_way",search_way);
-	  model.addAttribute("search_box",search_box);
-	  model.addAttribute("listAllCount",listAllCount);
-	  
-	  
-	  return "manager/mUser/mUserList"; 
-	  }
+        
+
+   //  String[] check11 = check1.split(",");
+     String[] check22 = check2.split(",");
+     
+     HashMap<String, Object> map = new HashMap<String, Object>();
+    
+     
+//     String a = "abc";
+//     Object b = a;
+
+
+     map.put("check1",check1); 
+     map.put("check2",check2); 
+    // map.put("check11",check11);
+     map.put("check22",check22); 
+     map.put("buttonday",buttonday); 
+     map.put("preday",preday);
+     map.put("postday",postday); 
+     map.put("search_way",search_way);
+     
+     //System.out.println(check22);
+     
+     search_box = "%"+search_box+"%";
+      
+     map.put("search_box",search_box);
+     System.out.println(map);
+     int listCount = mService.getUserListCount(map);
+     int listAllCount = mService.getUserListAllCount();
+     
+     PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+     ArrayList<UserList> ul = mService.getUserList(pi,map);
+//     UserMaster master = mService.getMaster();
+//     ManagerUserList dao = sqlSession.getMapper(ManagerUserList.class);
+//     UserBean ul = dao.getUserList();
+     
+     model.addAttribute("ul",ul); 
+     model.addAttribute("pi",pi);
+//     model.addAttribute("masterList", master);
+     model.addAttribute("buttonday",buttonday);
+     model.addAttribute("preday",preday); 
+     model.addAttribute("postday",postday);
+     model.addAttribute("search_way",search_way);
+     model.addAttribute("search_box",search_box);
+     model.addAttribute("check1",check1);
+     model.addAttribute("check2",check2);
+     model.addAttribute("listAllCount",listAllCount);
+
+     
+     return "manager/mUser/mUserList"; 
+     }
 	 
 	 
 

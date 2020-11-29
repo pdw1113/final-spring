@@ -87,8 +87,9 @@ public class ManagerDao {
 
 	}
 
-	public List<Forbidden> dateWords(Date date) {
-		return sqlSession.selectList("managerMapper.dateWords",date);
+	public List<Forbidden> dateWords(HashMap<String, String> map) {
+		System.out.println(map);
+		return sqlSession.selectList("managerMapper.dateWords",map);
 	}
 
 	public ArrayList<User> getUser() {
@@ -111,11 +112,11 @@ public class ManagerDao {
 	public int getUserAccessCount(HashMap<String, String> map) {
 		return sqlSession.selectOne("managerMapper.getUserAccessCount",map);
 	}
-	public int getUserListCount(HashMap<String, String> map) {
+	public int getUserListCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne("managerMapper.getUserListCount",map);
 	}
 
-	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map) {
+	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, Object> map) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
