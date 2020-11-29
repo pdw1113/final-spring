@@ -48,8 +48,8 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public List<Forbidden> dateWords(Date date) {
-		return mDao.dateWords(date);
+	public List<Forbidden> dateWords(HashMap<String, String> map) {
+		return mDao.dateWords(map);
 	}
 
 	@Override
@@ -101,12 +101,12 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.getUserAccessCount(map);
 	}
 
-	public int getUserListCount(HashMap<String, String> map) {
+	public int getUserListCount(HashMap<String, Object> map) {
 		return mDao.getUserListCount(map);
 	}
 
 	@Override
-	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map) {
+	public ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, Object> map) {
 		return mDao.getUserList(pi,map);
 	}
 

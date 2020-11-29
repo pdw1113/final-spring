@@ -299,6 +299,8 @@ justify-content: center;
 	position:relative;
 	top:0px;
 	left:800px;
-	text-align: center;
-	
+	text-align: center;	
+}
+#red{
+	color:red;
 }

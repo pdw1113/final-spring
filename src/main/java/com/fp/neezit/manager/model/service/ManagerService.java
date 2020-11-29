@@ -25,13 +25,13 @@ public interface ManagerService {
 
 	List<Forbidden> searchWords(String search);
 
-	List<Forbidden> dateWords(Date date);
+	List<Forbidden> dateWords(HashMap<String, String> map);
 
 	ArrayList<User> getUser();
 
-	int getUserListCount(HashMap<String, String> map);
+	int getUserListCount(HashMap<String, Object> map);
 
-	ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, String> map);
+	ArrayList<UserList> getUserList(PageInfo pi, HashMap<String, Object> map);
 
 	UserMaster getMaster();
 	

@@ -115,12 +115,12 @@
 	</select>
 	
 	<!-- 금칙어 날짜 검색 -->
-	<select id="dateWords" parameterType="Forbidden" resultMap="forbiddenResultSet">
+	<select id="dateWords" parameterType="hashmap" resultMap="forbiddenResultSet">
 		SELECT * FROM FORBIDDEN 
-		WHERE FORBIDDEN_DATE BETWEEN #{fdate} AND #{fdate}
+		WHERE FORBIDDEN_DATE BETWEEN TO_CHAR(#{preday})
+		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
 	</select>
 	
-
 	<!-- ㄱ 초성 -->	
 	<select id="searchGa" parameterType="Forbidden" resultMap="forbiddenResultSet">
 		SELECT * FROM FORBIDDEN  
@@ -468,7 +468,7 @@
 		ORDER BY USER_ACCESS_NUM DESC
 	</select>
 	
-	<select id="getUserList" resultMap="UserBeanMap">
+	<select id="getUserList" resultMap="UserBeanMap" parameterType="hashmap">
 		SELECT * 
 		FROM NEEZ_USER NU
 		LEFT JOIN NEEZ_MASTER NM ON (NU.USER_EMAIL = NM.USER_EMAIL)
@@ -499,13 +499,13 @@
  			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
  		</if>
  		
- 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+<!--  		 <if test='!search_box.equals("") and !buttonday.equals("")'>
 			AND
 		</if>
 		
 		 <if test='search_box.equals("") and !buttonday.equals("")'>
 			WHERE
-		</if>
+		</if> -->
 		
 		<if test='!search_box.equals("") and !preday.equals("")'>
 			AND
@@ -514,14 +514,55 @@
 		 <if test='search_box.equals("") and !preday.equals("")' >
 			WHERE
 		</if>
-	
 
  		<if test="buttonday eq ''.toString() and !preday.equals('')">
 			NU.USER_ENROLLDATE
 			BETWEEN TO_CHAR(#{preday})
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
  		</if>
+ 		
+		<if test='!check1.equals("")'>
 		
+			<if test='check1.contains("1") and !check1.contains("2") and !check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL AND NU.USER_STATUS = 'N')
+	 		</if>
+	 		
+	 		<if test='check1.contains("2") and !check1.contains("1") and !check1.contains("3") '>
+	 			AND (MASTER_NICKNAME IS NOT NULL AND NU.USER_STATUS = 'N')
+	 		</if>
+	 		
+	 		<if test='check1.contains("3") and !check1.contains("1") and !check1.contains("2")'>
+	 			AND NU.USER_STATUS = 'Y'
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("2") and !check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL OR MASTER_NICKNAME IS NOT NULL) AND NU.USER_STATUS = 'N'
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("3") and !check1.contains("2")'>
+	 			AND (MASTER_NICKNAME IS NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+	 		
+	 		<if test='check1.contains("2") and check1.contains("3") and !check1.contains("1")'>
+	 			AND (MASTER_NICKNAME IS NOT NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("2") and check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL OR MASTER_NICKNAME IS NOT NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+ 		
+ 		</if>
+ 		
+		<!-- <if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'> -->
+		<if test='!check2.equals("")'>
+ 			AND MASTER_RANKNAME IN 
+ 			<foreach collection="check22" item="a" open="(" close=")" separator=",">
+ 				#{a}
+ 			</foreach>
+ 		</if>
+ 		
+ 		
+
 	</select>
 	
 	<select id="getUserListCount" parameterType="hashmap" resultType="_int">
@@ -555,13 +596,13 @@
  			WHERE NM.MASTER_NICKNAME LIKE #{search_box}
  		</if>
  		
- 		 <if test='!search_box.equals("") and !buttonday.equals("")'>
+<!--  		 <if test='!search_box.equals("") and !buttonday.equals("")'>
 			AND
 		</if>
 		
 		 <if test='search_box.equals("") and !buttonday.equals("")'>
 			WHERE
-		</if>
+		</if> -->
 		
 		<if test='!search_box.equals("") and !preday.equals("")'>
 			AND
@@ -570,13 +611,53 @@
 		 <if test='search_box.equals("") and !preday.equals("")' >
 			WHERE
 		</if>
-	
 
  		<if test="buttonday eq ''.toString() and !preday.equals('')">
 			NU.USER_ENROLLDATE
 			BETWEEN TO_CHAR(#{preday})
 			AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
  		</if>
+ 		
+		<if test='!check1.equals("")'>
+		
+			<if test='check1.contains("1") and !check1.contains("2") and !check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL AND NU.USER_STATUS = 'N')
+	 		</if>
+	 		
+	 		<if test='check1.contains("2") and !check1.contains("1") and !check1.contains("3") '>
+	 			AND (MASTER_NICKNAME IS NOT NULL AND NU.USER_STATUS = 'N')
+	 		</if>
+	 		
+	 		<if test='check1.contains("3") and !check1.contains("1") and !check1.contains("2")'>
+	 			AND NU.USER_STATUS = 'Y'
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("2") and !check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL OR MASTER_NICKNAME IS NOT NULL) AND NU.USER_STATUS = 'N'
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("3") and !check1.contains("2")'>
+	 			AND (MASTER_NICKNAME IS NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+	 		
+	 		<if test='check1.contains("2") and check1.contains("3") and !check1.contains("1")'>
+	 			AND (MASTER_NICKNAME IS NOT NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+	 		
+	 		<if test='check1.contains("1") and check1.contains("2") and check1.contains("3")'>
+	 			AND (MASTER_NICKNAME IS NULL OR MASTER_NICKNAME IS NOT NULL OR NU.USER_STATUS = 'Y')
+	 		</if>
+ 		
+ 		</if>
+ 		
+		<!-- <if test='buttonday.equals("") and preday.equals("") and postday.equals("") and search_box.equals("")'> -->
+		<if test='!check2.equals("")'>
+ 			AND MASTER_RANKNAME IN 
+ 			<foreach collection="check22" item="a" open="(" close=")" separator=",">
+ 				#{a}
+ 			</foreach>
+ 		</if>
+ 		
 
 	</select> 
 	
