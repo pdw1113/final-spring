@@ -284,4 +284,5 @@
 	<delete id="ProductDelete" parameterType="int">
 		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{no}
 	</delete>
+	
 </mapper>

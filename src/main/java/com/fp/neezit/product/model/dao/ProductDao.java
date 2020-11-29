@@ -112,4 +112,5 @@ public class ProductDao{
 	public int productDelete(int no) {
 		return sqlSession.delete("productMapper.ProductDelete",no);
 	}
+
 }

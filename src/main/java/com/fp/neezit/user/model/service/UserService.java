@@ -114,4 +114,8 @@ public interface UserService {
 
 	int buyConfirm(HashMap<String, String> map);
 
+	int pCountUp(String no);
+	
+
+
 }

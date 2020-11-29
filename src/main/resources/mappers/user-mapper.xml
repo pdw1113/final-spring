@@ -624,5 +624,10 @@
 	<insert id="insertIp" parameterType="hashmap">
 		INSERT INTO USER_ACCESS VALUES(USER_ACCESS_NUM.NEXTVAL,#{email},#{name},#{rankname},#{ip},DEFAULT)
 	</insert>
+	
+	<!-- 상품구매시 카운트 증가용 -->
+	<update id="pCountUp" parameterType="String">
+		UPDATE PRODUCT SET PRODUCT_COUNT = PRODUCT_COUNT+1 WHERE PRODUCT_NO = #{pno} 
+	</update>
 
 </mapper>

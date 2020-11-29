@@ -63,6 +63,7 @@ public class UserMasterController {
 		// 상품 카테고리 3분류
 		List<ProductCategory> category = null;
 		category = uService.category();
+		System.out.println(category);
 		model.addAttribute("category", JSONArray.fromObject(category));
 		model.addAttribute("fList", JSONArray.fromObject(fList));
 		return "user/signUpMaster";

@@ -13,6 +13,7 @@ import com.fp.neezit.manager.model.dao.ManagerDao;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.user.model.dao.UserDao;
 import com.fp.neezit.manager.model.vo.UserList;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
@@ -127,6 +128,157 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public List<Forbidden> fList() {
 		return mDao.fList();
+	}
+
+	
+	/*--------------월 가입자수 통계--------------------------*/
+
+	@Override
+	public int mUserCount1() {
+		return mDao.mUserCount1();
+	}
+	
+	@Override
+	public int mUserCount2() {
+		return mDao.mUserCount3();
+	}
+	
+	@Override
+	public int mUserCount3() {
+		return mDao.mUserCount2();
+	}
+
+	@Override
+	public int mUserCount4() {
+		return mDao.mUserCount4();
+	}
+
+	@Override
+	public int mUserCount5() {
+		return mDao.mUserCount5();
+	}
+
+	@Override
+	public int mUserCount6() {
+		return mDao.mUserCount6();
+	}
+
+	@Override
+	public int mUserCount7() {
+		return mDao.mUserCount7();
+	}
+
+	@Override
+	public int mUserCount8() {
+		return mDao.mUserCount8();
+	}
+
+	@Override
+	public int mUserCount9() {
+		return mDao.mUserCount9();
+	}
+
+	@Override
+	public int mUserCount10() {
+		return mDao.mUserCount10();
+	}
+	
+	@Override
+	public int mUserCount11() {
+		return mDao.mUserCount11();
+	}
+
+	@Override
+	public int mUserCount12() {
+		return mDao.mUserCount12();
+	}
+	/*-----------------------------------------------*/
+
+	/*방문자수 통계*/
+	@Override
+	public int mVisitant1() {
+		return mDao.mVisitant1();
+	}
+
+	@Override
+	public int mVisitant2() {
+		return mDao.mVisitant2();
+	}
+
+	@Override
+	public int mVisitant3() {
+		return mDao.mVisitant3();
+	}
+
+	@Override
+	public int mVisitant4() {
+		return mDao.mVisitant4();
+	}
+
+	@Override
+	public int mVisitant5() {
+		return mDao.mVisitant5();
+	}
+
+	@Override
+	public int mVisitant6() {
+		return mDao.mVisitant6();
+	}
+
+	@Override
+	public int mVisitant7() {
+		return mDao.mVisitant7();
+	}
+
+	@Override
+	public int mVisitant8() {
+		return mDao.mVisitant8();
+	}
+
+	@Override
+	public int mVisitant9() {
+		return mDao.mVisitant9();
+	}
+
+	@Override
+	public int mVisitant10() {
+		return mDao.mVisitant10();
+	}
+
+	@Override
+	public int mVisitant11() {
+		return mDao.mVisitant11();
+	}
+
+	@Override
+	public int mVisitant12() {
+		return mDao.mVisitant12();
+	}
+	/*-----------------------------------------------*/
+
+	@Override
+	public int mUser() {
+		return mDao.mUser();
+	}
+
+	@Override
+	public int mMaster() {
+		return mDao.mMaster();
+	}
+
+	@Override
+	public int mBuy() {
+		return mDao.mBuy();
+	}
+	
+	@Override
+	public List<Product> mStatistics() {
+		return mDao.mStatistics();
+	}
+	
+	@Override
+	public List<Product> mStatistics2() {
+		return mDao.mStatistics2();
 	}
 
 }

@@ -242,10 +242,10 @@ public class UserServiceImpl implements UserService{
 		return uDao.wishDelete(map);
 	}
 	
-	 @Override
-	    public List<Product> wishList(User u) {
-	       return uDao.wishList(u);
-	    }
+	@Override
+	public List<Product> wishList(User u) {
+	    return uDao.wishList(u);
+	}
 
 	@Override
 	public int withdraw2(HashMap<String, String> map) {
@@ -270,5 +270,11 @@ public class UserServiceImpl implements UserService{
 	public int buyConfirm(HashMap<String, String> map) {
 		return uDao.buyConfirm(map);
 	}
+
+	@Override
+	public int pCountUp(String no) {
+		return uDao.pCountUp(no);
+	}
+
 
 }

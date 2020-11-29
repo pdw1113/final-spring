@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -34,15 +35,15 @@
             
             <ul class="stat-ul">
                <li class="stat-li">
-                  <h2 class="number">1785</h2>
+                  <h2 class="number"></h2>
                   <i>Clients</i>
                </li>
                <li class="stat-li">
-                  <h2 class="number">987</h2>
+                  <h2 class="number"></h2>
                   <i>Gosu</i>
                </li>
                <li class="stat-li">
-                  <h2 class="number">350</h2>
+                  <h2 class="number"></h2>
                   <i>Deal</i>
                </li>
             </ul>
@@ -61,7 +62,7 @@
             </div>
          </div>
          <div class="box22">
-            <div class="box1">능력자 상품 조회수</div>
+            <div class="box1">상품 별점 순위</div>
             <div class="box2">
                <div class="layoutSubbox_MemberManager">
                   <table class="type07">
@@ -73,21 +74,15 @@
                         </tr>
                      </thead>
                      <tbody>
+                     	<c:if test="${!empty product2}">
+                  		<c:forEach var="p" items="${ product2 }" end="3" varStatus="status">
                         <tr>
-                           <td>1</td>
-                           <td>1,000,000</td>
-                           <td>천동민의 JAVA 특강!!</td>
+                           <td>${status.count}</td>
+                           <td>${p.title}</td>
+                           <td>${p.nickName }</td>
                         </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>123,143</td>
-                           <td>정상뉴의 Framework 세계</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>23,143</td>
-                           <td>문혜란의 보안이란 무엇인가?</td>
-                        </tr>
+						</c:forEach>
+						</c:if>
                      </tbody>
                   </table>
                </div>
@@ -106,21 +101,15 @@
                         </tr>
                      </thead>
                      <tbody>
+                    	<c:if test="${!empty product}">
+                  		<c:forEach var="p" items="${ product }" end="3" varStatus="status">
                         <tr>
-                           <td>1</td>
-                           <td>천동민 기모링</td>
-                           <td>미스터 천</td>
+                           <td>${status.count}</td>
+                           <td>${p.title}</td>
+                           <td>${p.nickName }</td>
                         </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>조정호</td>
-                           <td>미스터 조</td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>이호진 고구마</td>
-                           <td>미스터 스윗 포테이토</td>
-                        </tr>
+                        </c:forEach>
+                        </c:if>
                      </tbody>
                   </table>
                </div>
@@ -135,12 +124,13 @@
              timeCounter();
          
              function timeCounter() {
-         
+         		let user = ${user};
+         		
                  id0 = setInterval(count0Fn, 0.0020738853);
          
                  function count0Fn() {
                      count0++;
-                     if (count0 > 1785) {
+                     if (count0 > user) {
                          clearInterval(id0);
                      } else {
                          $(".number").eq(0).text(count0);
@@ -152,7 +142,8 @@
          
                  function count1Fn() {
                      count1++;
-                     if (count1 > 987) {
+                     let master = ${master};
+                     if (count1 > master) {
                          clearInterval(id1);
                      } else {
                          $(".number").eq(1).text(count1);
@@ -163,7 +154,8 @@
          
                  function count2Fn() {
                      count2++;
-                     if (count2 > 350) {
+                     let buy = ${buy};
+                     if (count2 > buy) {
                          clearInterval(id2);
                      } else {
                          $(".number").eq(2).text(count2);

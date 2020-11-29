@@ -23,6 +23,7 @@ import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
 import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.product.model.service.ProductService;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
@@ -57,7 +58,88 @@ public class ManagerController {
 	}
 
 	@RequestMapping("mStatistics.do")
-	public String mStatistics() {
+	public String mStatistics(Model model,HttpSession session) {
+		
+		// 회원수
+		int user = mService.mUser();
+
+		// 능력자 수
+		int master = mService.mMaster();
+		
+		// 결제수
+		int buy = mService.mBuy();
+		
+		// 상품 판매순위
+		List<Product> pd = mService.mStatistics();
+		
+		// 상품 별점순위
+		List<Product> pd2 = mService.mStatistics2();
+		
+		
+		/**************월 가입자수***************/
+		int result1 = mService.mUserCount1();
+		int result2 = mService.mUserCount2();
+		int result3 = mService.mUserCount3();
+		int result4 = mService.mUserCount4();
+		int result5 = mService.mUserCount5();
+		int result6 = mService.mUserCount6();
+		int result7 = mService.mUserCount7();
+		int result8 = mService.mUserCount8();
+		int result9 = mService.mUserCount9();
+		int result10 = mService.mUserCount10();
+		int result11 = mService.mUserCount11();
+		int result12 = mService.mUserCount12();
+		/**************************************/
+		
+		/**************월 방문자수***************/
+		int visitant1 = mService.mVisitant1();
+		int visitant2 = mService.mVisitant2();
+		int visitant3 = mService.mVisitant3();
+		int visitant4 = mService.mVisitant4();
+		int visitant5 = mService.mVisitant5();
+		int visitant6 = mService.mVisitant6();
+		int visitant7 = mService.mVisitant7();
+		int visitant8 = mService.mVisitant8();
+		int visitant9 = mService.mVisitant9();
+		int visitant10 = mService.mVisitant10();
+		int visitant11 = mService.mVisitant11();
+		int visitant12 = mService.mVisitant12();
+		/**************************************/
+		
+
+		model.addAttribute("product", pd);		// 상품 판매순위
+		model.addAttribute("product2", pd2);		// 상품 별점순위
+		
+		model.addAttribute("user", user);		// 유저수 
+		model.addAttribute("master", master);	// 능력자수
+		model.addAttribute("buy", buy);			// 결제수
+		
+		model.addAttribute("visitant1", visitant1);
+		model.addAttribute("visitant2", visitant2);
+		model.addAttribute("visitant3", visitant3);
+		model.addAttribute("visitant4", visitant4);
+		model.addAttribute("visitant5", visitant5);
+		model.addAttribute("visitant6", visitant6);
+		model.addAttribute("visitant7", visitant7);
+		model.addAttribute("visitant8", visitant8);
+		model.addAttribute("visitant9", visitant9);
+		model.addAttribute("visitant10", visitant10);
+		model.addAttribute("visitant11", visitant11);
+		model.addAttribute("visitant12", visitant12);
+		
+		
+		model.addAttribute("result1", result1);
+		model.addAttribute("result2", result2);
+		model.addAttribute("result3", result3);
+		model.addAttribute("result4", result4);
+		model.addAttribute("result5", result5);
+		model.addAttribute("result6", result6);
+		model.addAttribute("result7", result7);
+		model.addAttribute("result8", result8);
+		model.addAttribute("result9", result9);
+		model.addAttribute("result10", result10);
+		model.addAttribute("result11", result11);
+		model.addAttribute("result12", result12);
 		return "manager/mStatistics/mStatistics";
 	}
 
