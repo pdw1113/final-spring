@@ -27,6 +27,15 @@
 		WHERE ROOM_ID = #{roomId}
 	</select>
 	
+	<insert id="insertMessage" parameterType="ChatMessage">
+		INSERT INTO CHATMESSAGE VALUES(#{roomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, DEFAULT)
+	</insert>
+	
+	<select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
+		SELECT * FROM CHATMESSAGE
+		WHERE ROOM_ID = #{rooomId}
+	</select>
+	
 	<!-- 
 <insert id = "insertMessage">
 insert into MESSAGE (message_sender , message_receiver, message_content, 

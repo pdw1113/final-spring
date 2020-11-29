@@ -318,7 +318,7 @@
 							바로 구매하기 </a></li>
 				</ul>
 				<ul class="btn_area">
-					<li class="apply-2"><a href="#" onclick="alert('로그인이 필요합니다');">
+					<li class="apply-2"><a href="#" onclick="return onChat();">
 							채팅하기 </a></li>
 				</ul>
 				</c:if>
@@ -383,6 +383,17 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		function onChat(){
+            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
+                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
+            }else{                                                      // else ) 채팅방이 열려있다면,
+                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
+            }
+            return false;
+		}
+	</script>
 	
 	<script>
  		function buyConfirm(){
@@ -898,5 +909,6 @@
 
 
 	<%@ include file="../../common/footer.jsp"%>
+	<%@ include file="../../common/talk.jsp" %>
 </body>
 </html>

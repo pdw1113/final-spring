@@ -29,6 +29,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	private Map<String, ArrayList<WebSocketSession>> RoomList = new ConcurrentHashMap<String, ArrayList<WebSocketSession>>();
 	// session, 방 번호가 들어간다.
 	private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
+	
 	/**
 	 * websocket 연결 성공 시
 	 */
@@ -96,12 +97,17 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
         // 채팅 메세지 입력 시
         else if(RoomList.get(chatRoom.getRoomId()) != null && !chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
         	
+        	// 메세지에 이름, 이메일, 내용을 담는다.
     		TextMessage textMessage = new TextMessage(chatMessage.getName() + "," + chatMessage.getEmail() + "," + chatMessage.getMessage());
-    		for(WebSocketSession sess : RoomList.get(chatRoom.getRoomId())) {
-    			sess.sendMessage(textMessage);
+    		// DB에 저장한다.
+    		int a = cService.insertMessage(chatMessage);
+    		if(a == 1) {
+        		// 해당 채팅방의 session에 뿌려준다.
+        		for(WebSocketSession sess : RoomList.get(chatRoom.getRoomId())) {
+        			sess.sendMessage(textMessage);
+        		}
+            	System.out.println("메세지 전송");
     		}
-    		System.out.println(RoomList.get(chatRoom.getRoomId()));
-        	System.out.println("메세지 전송");
         }
 	}
 	
