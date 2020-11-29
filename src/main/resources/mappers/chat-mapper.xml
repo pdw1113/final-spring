@@ -32,7 +32,12 @@
 	</select>
 	
 	<insert id="insertMessage" parameterType="ChatMessage">
+		<if test="sessionCount == 1">
 		INSERT INTO CHATMESSAGE VALUES(#{roomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, DEFAULT)
+		</if>
+		<if test="sessionCount == 2">
+		INSERT INTO CHATMESSAGE VALUES(#{roomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, 0)
+		</if>
 	</insert>
 	
 	<select id="messageList" parameterType="string" resultMap="chatMessageResultSet">

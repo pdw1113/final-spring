@@ -102,14 +102,28 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
         	
         	// 메세지에 이름, 이메일, 내용을 담는다.
     		TextMessage textMessage = new TextMessage(chatMessage.getName() + "," + chatMessage.getEmail() + "," + chatMessage.getMessage());
+    		
+    		// 현재 session 수
+			int sessionCount = 0;
+
+    		// 해당 채팅방의 session에 뿌려준다.
+    		for(WebSocketSession sess : RoomList.get(chatRoom.getRoomId())) {
+    			sess.sendMessage(textMessage);
+    			sessionCount++;
+    		}
+    		
+    		// 동적쿼리에서 사용할 sessionCount 저장
+    		// sessionCount == 2 일 때는 unReadCount = 0,
+    		// sessionCount == 1 일 때는 unReadCount = 1
+    		chatMessage.setSessionCount(sessionCount);
+    		
     		// DB에 저장한다.
     		int a = cService.insertMessage(chatMessage);
+    		
     		if(a == 1) {
-        		// 해당 채팅방의 session에 뿌려준다.
-        		for(WebSocketSession sess : RoomList.get(chatRoom.getRoomId())) {
-        			sess.sendMessage(textMessage);
-        		}
-            	System.out.println("메세지 전송");
+            	System.out.println("메세지 전송 및 DB 저장 성공");
+    		}else {
+            	System.out.println("메세지 전송 실패!!! & DB 저장 실패!!");
     		}
         }
 	}

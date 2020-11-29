@@ -4,17 +4,18 @@ public class ChatMessage {
 	
     private String roomId;			// 방 번호
     private String messageId;		// 메세지 번호
-    private String message;	// 메세지 내용
+    private String message;			// 메세지 내용
     private String name;			// 보낸이 이름
     private String email;			// 보낸이 이메일
     private int unReadCount;		// 안 읽은 메세지 수
+    private int sessionCount;		// 현재 세션 수
 	
     public ChatMessage() {
 		super();
 	}
 
-	public ChatMessage(String roomId, String messageId, String message, String name, String email,
-			int unReadCount) {
+	public ChatMessage(String roomId, String messageId, String message, String name, String email, int unReadCount,
+			int sessionCount) {
 		super();
 		this.roomId = roomId;
 		this.messageId = messageId;
@@ -22,6 +23,7 @@ public class ChatMessage {
 		this.name = name;
 		this.email = email;
 		this.unReadCount = unReadCount;
+		this.sessionCount = sessionCount;
 	}
 
 	public String getRoomId() {
@@ -72,9 +74,17 @@ public class ChatMessage {
 		this.unReadCount = unReadCount;
 	}
 
+	public int getSessionCount() {
+		return sessionCount;
+	}
+
+	public void setSessionCount(int sessionCount) {
+		this.sessionCount = sessionCount;
+	}
+
 	@Override
 	public String toString() {
-		return "ChatMessage [roomId=" + roomId + ", messageId=" + messageId + ", message=" + message
-				+ ", name=" + name + ", email=" + email + ", unReadCount=" + unReadCount + "]";
+		return "ChatMessage [roomId=" + roomId + ", messageId=" + messageId + ", message=" + message + ", name=" + name
+				+ ", email=" + email + ", unReadCount=" + unReadCount + ", sessionCount=" + sessionCount + "]";
 	}
 }

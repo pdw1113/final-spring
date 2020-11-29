@@ -199,7 +199,6 @@
 		});
 	</script>
 	
-	
 	<!-- 리스트에서 해당목록 클릭 시 해당 채팅방으로 이동 -->
 	<script>
          $(document).on("click", ".chatList_box",function(){
@@ -298,7 +297,6 @@
      	function onMessage(evt) {
         	 
         	let receive = evt.data.split(",");
-        	console.log(receive);
      		
             const data = {
                	 "name" : receive[0],
