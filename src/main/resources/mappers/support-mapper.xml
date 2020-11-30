@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "supportMapper" >
+
+	<resultMap type="Notice" id="noticeResultSet">
+		<id property="nNum" column="NOTICE_NO" />
+		<result property="nTitle" column="NOTICE_TITLE" />
+		<result property="nContent" column="NOTICE_CONTENT" />
+		<result property="nCdate" column="NOTICE_CREATE_DATE" />
+		<result property="nMdate" column="NOTICE_MODIFY_DATE" />
+		<result property="nCount" column="NOTICE_COUNT" />
+	</resultMap>
+
+
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE VALUES(notice_no.nextval,#{nTitle},#{nContent},default,default,default)
+	</insert>
+
+	<select id="getNoticeCount" parameterType="hashmap" resultType="_int">
+		   SELECT COUNT (*) FROM NOTICE
+		   
+		<if test="search_sel eq 'A'.toString()">
+			WHERE NOTICE_TITLE LIKE #{search_text} OR NOTICE_CONTENT LIKE #{search_text}
+		</if>
+		
+		<if test="search_sel eq 'T'.toString()">
+			WHERE NOTICE_TITLE LIKE #{search_text}
+		</if>
+		
+		<if test="search_sel eq 'C'.toString()">
+			WHERE NOTICE_CONTENT LIKE #{search_text}
+		</if>
+	</select>
+	
+	<select id="getNoticeList" parameterType="hashmap" resultMap="noticeResultSet">
+			SELECT * FROM NOTICE
+			
+		<if test="search_sel eq ''.toString()">
+			ORDER BY NOTICE_NO DESC
+		</if>
+		
+		<if test="search_sel eq 'A'.toString()">
+			WHERE NOTICE_TITLE LIKE #{search_text} OR NOTICE_CONTENT LIKE #{search_text} ORDER BY NOTICE_NO DESC
+		</if>
+		
+		<if test="search_sel eq 'T'.toString()">
+			WHERE NOTICE_TITLE LIKE #{search_text} ORDER BY NOTICE_NO DESC
+		</if>
+		
+		<if test="search_sel eq 'C'.toString()">
+			WHERE NOTICE_CONTENT LIKE #{search_text} ORDER BY NOTICE_NO DESC
+		</if>
+	</select>
+	
+	<select id="getNotice" parameterType="_int" resultMap="noticeResultSet">
+			SELECT * FROM NOTICE WHERE NOTICE_NO=#{getNnum}
+	</select>
+	
+	<update id="nCountup" parameterType="_int">
+			UPDATE NOTICE SET NOTICE_COUNT = NOTICE_COUNT+1 WHERE NOTICE_NO=#{getNnum}
+	</update>
+	
+</mapper>
+

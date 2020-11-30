@@ -30,17 +30,18 @@
       <link rel="stylesheet" type="text/css" href="./resources/css/noticeInsert.css">	
    </head>
    <body >
+        <form action="nInsert.do" method="post">
       <div class="container_noticeInsert">
          <div class="input_div_noticeInsert">
             <div class="input_title_noticeInsert">
-               <input type="text" class="notice_title_text" placeholder="제목을 입력하세요.">
+               <input type="text" class="notice_title_text" placeholder="제목을 입력하세요." name="nTitle">
             </div>
             <div class="input_content_noticeInsert">
-               <textarea id="summernote_notice"></textarea>
+               <textarea id="summernote_notice" name="nContent"></textarea>
             </div>
          </div>
          <div class="button_div_noticeInsert">
-            <button class="input_button_noticeInsert" onclick="input()">등록하기</button>
+            <button class="input_button_noticeInsert">등록하기</button>
             <button class="deny_button_noticeInsert" onclick="location.href='noticeList.do';">취소하기</button>
          </div>
       </div>
@@ -79,5 +80,6 @@
          alert("제목 : " + title + "\n" + "내용 : " + content);
          }
       </script>
+     </form>
    </body>
 </html>
