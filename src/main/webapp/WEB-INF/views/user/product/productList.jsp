@@ -105,7 +105,7 @@
 				<div class="list_contents_marign">
 					<p class="font_noto list_explain_index">${ product.title }</p>
 					<div>
-						<img src="resources/img/lv1.png" class="list_rank_index"> 
+						<img src="resources/img/${ product.mRankPic }" class="list_rank_index"> 
 						<span class="font_noto">${ product.nickName }</span> 
 						<span class="list_star_container_index"></span> 
 						<span class="font_noto starNum">(${ product.star })</span> 

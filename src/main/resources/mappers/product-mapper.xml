@@ -32,6 +32,7 @@
       	<id property="no" column="PRODUCT_NO" />
       	<result property="nickName" column="MASTER_NICKNAME" />
       	<result property="title" column="PRODUCT_TITLE" />
+      	<result property="mRankPic" column="MASTER_RANK_PIC" />
       	<result property="pic" column="PRODUCT_PIC" />
       	<result property="renamePic" column="PRODUCT_RENAMEPIC" />
       	<result property="cateone" column="PRODUCT_CATEONE" />
@@ -108,8 +109,9 @@
 		<select id="getProductList" parameterType="hashmap" resultMap="productResultSet">
             SELECT * FROM
             (select ROWNUM as rownumber, a.* from 
-	            (SELECT p.* from PRODUCT p
-	            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)
+	            (SELECT p.*, S.MASTER_RANK_PIC from PRODUCT p
+	            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)  
+	            JOIN NEEZ_MASTER S ON (p.MASTER_NICKNAME = S.MASTER_NICKNAME)        
 				WHERE CATECODE = #{no}
 				<choose>
 					<when test="what eq '인기순'.toString()">
@@ -156,9 +158,11 @@
 	<!-- 나의 상품 목록 가져오기 -->
 	<select id="myProductList" parameterType="UserMaster"
 		resultMap="productResultSet">
-		SELECT * FROM PRODUCT
-		WHERE MASTER_NICKNAME =
-		#{mNickname}
+
+		SELECT * 
+        FROM PRODUCT a
+        join NEEZ_MASTER b on (a.MASTER_NICKNAME = b.MASTER_NICKNAME)
+		WHERE b.MASTER_NICKNAME = #{mNickname}
 	</select>
 
 	<!-- 상품 정보 가져오기 - 1 -->

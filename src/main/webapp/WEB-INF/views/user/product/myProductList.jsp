@@ -46,7 +46,7 @@
 	              ${ product.title }
 	            </p>
 	            <div>
-	              <img src="resources/img/lv1.png" class="main_rank_index">
+	              <img src="resources/img/${ product.mRankPic }" class="main_rank_index">
 	              <span class="font_jua">${ product.nickName }</span>
 	              <span class="main_star_container_index">
 	              </span>

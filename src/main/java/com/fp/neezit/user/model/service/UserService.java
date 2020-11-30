@@ -115,6 +115,10 @@ public interface UserService {
 	int buyConfirm(HashMap<String, String> map);
 
 	int pCountUp(String no);
+
+	int rankUpdate(HashMap<String, Integer> map2);
+
+	int rank(String nick);
 	
 
 

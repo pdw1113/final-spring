@@ -276,5 +276,15 @@ public class UserServiceImpl implements UserService{
 		return uDao.pCountUp(no);
 	}
 
+	@Override
+	public int rank(String nick) {
+		return uDao.rank(nick);
+	}
+
+	@Override
+	public int rankUpdate(HashMap<String, Integer> map2) {
+		return uDao.rankUpdate(map2);
+	}
+
 
 }

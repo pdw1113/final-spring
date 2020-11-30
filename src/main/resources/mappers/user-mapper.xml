@@ -64,6 +64,7 @@
 		<id property="mNickname" column="MASTER_NICKNAME" />
 		<result property="email" column="USER_EMAIL" />
 		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mRankPic" column="MASTER_RANK_PIC" />
 		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
 		<result property="mCategory" column="MASTER_CATEGORY" />
 		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
@@ -156,7 +157,7 @@
 	<!-- 능력자 등록 -->
 	<insert id="insertMaster" parameterType="UserMaster">
 		INSERT INTO NEEZ_MASTER
-		VALUES(#{email},default,#{mProPicOri},#{mProPicRe},#{mNickname},#{mCategory},#{mIdPicOri},#{mIdPicRe},#{mWorkDay},#{mWorkStyle},#{mStartTime},#{mEndTime},DEFAULT)
+		VALUES(#{email},default,default,#{mProPicOri},#{mProPicRe},#{mNickname},#{mCategory},#{mIdPicOri},#{mIdPicRe},#{mWorkDay},#{mWorkStyle},#{mStartTime},#{mEndTime},DEFAULT)
 	</insert>
 
 	<!-- 능력자 학력 등록 -->
@@ -629,5 +630,53 @@
 	<update id="pCountUp" parameterType="String">
 		UPDATE PRODUCT SET PRODUCT_COUNT = PRODUCT_COUNT+1 WHERE PRODUCT_NO = #{pno} 
 	</update>
+	
+	<!-- 랭크sum 가져오기 -->
+	<select id="rank" parameterType="String" resultType="_int">
+		SELECT SUM(PRODUCT_COUNT)
+		FROM PRODUCT
+		WHERE MASTER_NICKNAME = #{nick}
+	</select>
 
+	<update id="rankUpdate" parameterType="hashmap">
+	<choose>
+	            <when test="rank gte 4 and rank lt 7">
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '동손', MASTER_RANK_PIC = 'lv2.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})
+                </when>
+                
+                <when test="rank gte 7 and rank lt 10">
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '은손',  MASTER_RANK_PIC = 'lv3.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})
+                </when>
+                
+                <when test="rank gte 10 and rank lt 13">
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '금손',  MASTER_RANK_PIC = 'lv4.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})
+                </when>
+                
+                <when test="rank gte 13 and rank lt 16">
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '다이아손',  MASTER_RANK_PIC = 'lv5.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})
+                </when>
+                
+                <when test="rank gte 16">
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '타노스손',  MASTER_RANK_PIC = 'lv6.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})
+                </when>
+                <otherwise>
+                    	UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '흙손', MASTER_RANK_PIC = 'lv1.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                                                                     FROM  product B
+                                                                     WHERE B.PRODUCT_NO = #{a})   
+                </otherwise>
+
+
+	</choose>
+        
+	</update>
 </mapper>

@@ -228,4 +228,13 @@ public class UserDao {
 	}
 
 
+	public int rankUpdate(HashMap<String, Integer> map2) {
+		return sqlSession.update("userMapper.rankUpdate",map2);
+	}
+
+	public int rank(String nick) {
+		return sqlSession.selectOne("userMapper.rank",nick);
+	}
+
+
 }

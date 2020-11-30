@@ -85,6 +85,7 @@ public class ProductController {
 		map.put("what", what);
 
 		List<Product> productList = pService.productList(map);
+		
 
 		model.addAttribute("categoryList", JSONArray.fromObject(category));
 		model.addAttribute("categoryList2", JSONArray.fromObject(category2));
@@ -296,6 +297,9 @@ public class ProductController {
 		
 		// 현재 금액 가져오기
 		int cash = uService.userCash(u.getEmail());
+		
+		String nick = p.getNickName();
+		int rank = uService.rank(nick);
 
 		if(p != null && m != null && sns != null) {
 			model.addAttribute("product", p);
@@ -305,6 +309,7 @@ public class ProductController {
 			model.addAttribute("wishList", wl);
 			model.addAttribute("cash", cash);
 			model.addAttribute("fList", JSONArray.fromObject(fList));
+			model.addAttribute("rank", rank);
 			return "user/product/productDetail";
 		}
 
@@ -349,6 +354,9 @@ public class ProductController {
 		map.put("no", str);
 		WishList wl = pService.getWishListDetail(map);
 		int replyCount = pService.getReplyCount(p.getNickName());
+		
+		String nick = p.getNickName();
+		int rank = uService.rank(nick);
 
 		if(p != null && m != null) {
 
@@ -358,6 +366,7 @@ public class ProductController {
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("wishList", wl);
 			model.addAttribute("fList", JSONArray.fromObject(fList));
+			model.addAttribute("rank", rank);
 			return "user/product/productDetail";
 		}
 

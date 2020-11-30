@@ -418,7 +418,8 @@
 				let title = "${product.title}";
 				let email = "${sessionScope.loginUser.email}";
 				let master = "${master.mNickname}";
-				let pno	= "${ product.no }";
+				let pno	= "${ product.no }";	
+				let rank = "${rank}";
 				let money = proM;
 				
 				$.ajax({
@@ -428,12 +429,13 @@
 						email:email,
 						master:master,
 						pno:pno,
-						money:money
+						money:money,
+						rank:rank
 					},
 					type:"post",
 					success:function(data){
 						if(data == "ok"){
-						      $(".modal_container").css("display", "none");
+						      $(".modal_container").css("display", "none");    	
 						}
 					},error:function(request,status,errorData){
 					}
