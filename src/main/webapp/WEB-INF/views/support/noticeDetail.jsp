@@ -21,30 +21,27 @@
       <div class="notice_container">
          <div class="title_area">
             <h4 class="title_text">
-               개인정보 처리방침 개정안내
+               ${notice.nTitle}
             </h4>
             <span class="title_date">
-            2020-10-25
+            	${notice.nCdate}
             </span>
          </div>
          <div class="content_area">
             <div class="content_view">
-               안녕하세요. <br>
-               취업팀 업무일정 등의 내부 사정으로 취업담임이 변경되어 공지합니다.<br>
-               <br>
-               과정명 : 스마트 콘텐츠 융합 응용SW 엔지니어 양성과정(4)_1회차<br>
-               변경된 취업담임 : 허은정<br>
-               이메일: khjob03@iei.or.kr<br>
-               연락처: 070-4827-1613<br>
-               <br>
-               그럼 10/30(금) 10시 취업특강 때 뵙겠습니다.<br>
-               <br>
-               취업준비를 위한 중요한 특강이니,<br>
-               한 분도 빠짐없이 참석하시기 바랍니다. ^^<br>
+        		${notice.nContent}
             </div>
             <div class="content_btn">
-               <a href="" class="btn_design btn_move">이전</a>
-               <a href="" class="btn_design btn_move">다음</a>
+            
+            <c:url var="noticeDetailback" value="noticeDetail.do">
+				<c:param name="getNnum" value="${notice.nNum-1}" />
+			</c:url>
+			
+			<c:url var="noticeDetailfront" value="noticeDetail.do">
+				<c:param name="getNnum" value="${notice.nNum+1}" />
+			</c:url>
+               <a href="${noticeDetailback}" class="btn_design btn_move">이전</a>
+               <a href="${noticeDetailfront}" class="btn_design btn_move">다음</a>
                <a href="noticeList.do" class="btn_design btn_list">목록</a>
             </div>
          </div>
@@ -52,5 +49,18 @@
       <div>
       	<%@ include file="../common/footer.jsp" %>
       </div>
+    <script>
+    $(document).ready(function(){
+    	var msg = "${msg}";
+			if(msg!=""){
+				alert(msg);
+				if("${num}"==0){
+					location.href="noticeDetail.do?getNnum="+"${num+1}"; 
+				}else{
+					location.href="noticeDetail.do?getNnum="+"${num-1}";
+				}
+			}
+		});
+    </script>
    </body>
 </html>
