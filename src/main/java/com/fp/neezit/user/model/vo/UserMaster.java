@@ -4,8 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMaster {
-   private String email;       // 유저 이메일
+   private String email;        // 유저 이메일
    private String mRankname;    // 마스터 랭크
+   private String mRankPic;		// 마스터 랭크 이미지	
    private String mProPicOri;	// 프로필 오리진 이미지
    private String mProPicRe; 	// 프로필 리네임 이미지
    private String mNickname;    // 닉네임
@@ -23,134 +24,145 @@ public class UserMaster {
       // TODO Auto-generated constructor stub
    }
 
-	public UserMaster(String email, String mRankname, String mProPicOri, String mProPicRe, String mNickname,
-			String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle, String mStartTime,
-			String mEndTime, double mStar) {
-		super();
-		this.email = email;
-		this.mRankname = mRankname;
-		this.mProPicOri = mProPicOri;
-		this.mProPicRe = mProPicRe;
-		this.mNickname = mNickname;
-		this.mCategory = mCategory;
-		this.mIdPicOri = mIdPicOri;
-		this.mIdPicRe = mIdPicRe;
-		this.mWorkDay = mWorkDay;
-		this.mWorkStyle = mWorkStyle;
-		this.mStartTime = mStartTime;
-		this.mEndTime = mEndTime;
-		this.mStar = mStar;
-	}
+public UserMaster(String email, String mRankname, String mRankPic, String mProPicOri, String mProPicRe,
+		String mNickname, String mCategory, String mIdPicOri, String mIdPicRe, String mWorkDay, String mWorkStyle,
+		String mStartTime, String mEndTime, double mStar) {
+	super();
+	this.email = email;
+	this.mRankname = mRankname;
+	this.mRankPic = mRankPic;
+	this.mProPicOri = mProPicOri;
+	this.mProPicRe = mProPicRe;
+	this.mNickname = mNickname;
+	this.mCategory = mCategory;
+	this.mIdPicOri = mIdPicOri;
+	this.mIdPicRe = mIdPicRe;
+	this.mWorkDay = mWorkDay;
+	this.mWorkStyle = mWorkStyle;
+	this.mStartTime = mStartTime;
+	this.mEndTime = mEndTime;
+	this.mStar = mStar;
+}
 
-	public String getEmail() {
-		return email;
-	}
+public String getEmail() {
+	return email;
+}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+public void setEmail(String email) {
+	this.email = email;
+}
 
-	public String getmRankname() {
-		return mRankname;
-	}
+public String getmRankname() {
+	return mRankname;
+}
 
-	public void setmRankname(String mRankname) {
-		this.mRankname = mRankname;
-	}
+public void setmRankname(String mRankname) {
+	this.mRankname = mRankname;
+}
 
-	public String getmProPicOri() {
-		return mProPicOri;
-	}
+public String getmRankPic() {
+	return mRankPic;
+}
 
-	public void setmProPicOri(String mProPicOri) {
-		this.mProPicOri = mProPicOri;
-	}
+public void setmRankPic(String mRankPic) {
+	this.mRankPic = mRankPic;
+}
 
-	public String getmProPicRe() {
-		return mProPicRe;
-	}
+public String getmProPicOri() {
+	return mProPicOri;
+}
 
-	public void setmProPicRe(String mProPicRe) {
-		this.mProPicRe = mProPicRe;
-	}
+public void setmProPicOri(String mProPicOri) {
+	this.mProPicOri = mProPicOri;
+}
 
-	public String getmNickname() {
-		return mNickname;
-	}
+public String getmProPicRe() {
+	return mProPicRe;
+}
 
-	public void setmNickname(String mNickname) {
-		this.mNickname = mNickname;
-	}
+public void setmProPicRe(String mProPicRe) {
+	this.mProPicRe = mProPicRe;
+}
 
-	public String getmCategory() {
-		return mCategory;
-	}
+public String getmNickname() {
+	return mNickname;
+}
 
-	public void setmCategory(String mCategory) {
-		this.mCategory = mCategory;
-	}
+public void setmNickname(String mNickname) {
+	this.mNickname = mNickname;
+}
 
-	public String getmIdPicOri() {
-		return mIdPicOri;
-	}
+public String getmCategory() {
+	return mCategory;
+}
 
-	public void setmIdPicOri(String mIdPicOri) {
-		this.mIdPicOri = mIdPicOri;
-	}
+public void setmCategory(String mCategory) {
+	this.mCategory = mCategory;
+}
 
-	public String getmIdPicRe() {
-		return mIdPicRe;
-	}
+public String getmIdPicOri() {
+	return mIdPicOri;
+}
 
-	public void setmIdPicRe(String mIdPicRe) {
-		this.mIdPicRe = mIdPicRe;
-	}
+public void setmIdPicOri(String mIdPicOri) {
+	this.mIdPicOri = mIdPicOri;
+}
 
-	public String getmWorkDay() {
-		return mWorkDay;
-	}
+public String getmIdPicRe() {
+	return mIdPicRe;
+}
 
-	public void setmWorkDay(String mWorkDay) {
-		this.mWorkDay = mWorkDay;
-	}
+public void setmIdPicRe(String mIdPicRe) {
+	this.mIdPicRe = mIdPicRe;
+}
 
-	public String getmWorkStyle() {
-		return mWorkStyle;
-	}
+public String getmWorkDay() {
+	return mWorkDay;
+}
 
-	public void setmWorkStyle(String mWorkStyle) {
-		this.mWorkStyle = mWorkStyle;
-	}
+public void setmWorkDay(String mWorkDay) {
+	this.mWorkDay = mWorkDay;
+}
 
-	public String getmStartTime() {
-		return mStartTime;
-	}
+public String getmWorkStyle() {
+	return mWorkStyle;
+}
 
-	public void setmStartTime(String mStartTime) {
-		this.mStartTime = mStartTime;
-	}
+public void setmWorkStyle(String mWorkStyle) {
+	this.mWorkStyle = mWorkStyle;
+}
 
-	public String getmEndTime() {
-		return mEndTime;
-	}
+public String getmStartTime() {
+	return mStartTime;
+}
 
-	public void setmEndTime(String mEndTime) {
-		this.mEndTime = mEndTime;
-	}
+public void setmStartTime(String mStartTime) {
+	this.mStartTime = mStartTime;
+}
 
-	public double getmStar() {
-		return mStar;
-	}
+public String getmEndTime() {
+	return mEndTime;
+}
 
-	public void setmStar(double mStar) {
-		this.mStar = mStar;
-	}
+public void setmEndTime(String mEndTime) {
+	this.mEndTime = mEndTime;
+}
 
-	@Override
-	public String toString() {
-		return "UserMaster [email=" + email + ", mRankname=" + mRankname + ", mProPicOri=" + mProPicOri + ", mProPicRe="
-				+ mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory + ", mIdPicOri=" + mIdPicOri
-				+ ", mIdPicRe=" + mIdPicRe + ", mWorkDay=" + mWorkDay + ", mWorkStyle=" + mWorkStyle + ", mStartTime="
-				+ mStartTime + ", mEndTime=" + mEndTime + ", mStar=" + mStar + "]";
-	}
+public double getmStar() {
+	return mStar;
+}
+
+public void setmStar(double mStar) {
+	this.mStar = mStar;
+}
+
+@Override
+public String toString() {
+	return "UserMaster [email=" + email + ", mRankname=" + mRankname + ", mRankPic=" + mRankPic + ", mProPicOri="
+			+ mProPicOri + ", mProPicRe=" + mProPicRe + ", mNickname=" + mNickname + ", mCategory=" + mCategory
+			+ ", mIdPicOri=" + mIdPicOri + ", mIdPicRe=" + mIdPicRe + ", mWorkDay=" + mWorkDay + ", mWorkStyle="
+			+ mWorkStyle + ", mStartTime=" + mStartTime + ", mEndTime=" + mEndTime + ", mStar=" + mStar + "]";
+}
+
+	
 }

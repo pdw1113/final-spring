@@ -24,6 +24,7 @@ import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserWallet;
 
 @Controller
@@ -378,18 +379,24 @@ public class UserMyPageController {
 	 */
 	@ResponseBody
 	@RequestMapping("buyProduct.do")
-	public String buyProduct(UserBuyList buylist,String email,String money, String pno){
+	public String buyProduct(UserBuyList buylist,UserMaster um,String email,String money, String pno,int rank){
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("email", email);
 		map.put("money", money);
 		
+		int a = Integer.parseInt(pno);
+		
+		HashMap<String, Integer> map2 = new HashMap<String, Integer>();
+		map2.put("rank", rank);
+		map2.put("a", a);
+		
+		int rankUpdate = uService.rankUpdate(map2);
+
+		
 		int result1 = uService.buyProduct(buylist);
-		
 		int result2 = uService.withdraw(map);
-		
 		int result3 = uService.pCountUp(pno);
-		
 		if (result1 == 1 && result2==1) { 
 			return "ok";
 		} else {
