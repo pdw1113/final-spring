@@ -396,15 +396,23 @@
 				},
 				type:"post",
 				success:function(data){
-		            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
-		                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
-		            }else{                                                      // else ) 채팅방이 열려있다면,
-		                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
+					// 채팅방이 닫혀있고, 채팅 리스트가 닫혀있다면
+		            if($('.chatContainer').hasClass("display-none") && $('.chatListContainer').hasClass('display-none')){
+		            	// 리스트를 연다
+		                $('.chatListContainer').toggleClass('display-none');
+		             	// 채팅 방 목록을 불러온다.
+		                getRoomList();		
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains("${master.mNickname}")').parent().trigger("click");
 		            }
-		            
-		         	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
-		                $('.chatListContainer').trigger('cssChanged');			// 채팅 방 목록을 불러온다.
-		         	}
+					// 채팅 리스트가 열려 있다면
+		            else if(!$('.chatListContainer').hasClass('display-none')){
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains("${master.mNickname}")').parent().trigger("click");
+		            }
+		            else{
+		            	alert("이미 다른 채팅방이 열려 있습니다.");
+		            }
 				}
 			});
 			

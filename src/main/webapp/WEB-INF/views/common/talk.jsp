@@ -7,12 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <!-- Noto-Sans 폰트-->
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- JUA 폰트-->
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="resources/css/talk.css">
 </head>
 <body>
@@ -31,7 +28,7 @@
             }
          	
          	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
-                $('.chatListContainer').trigger('cssChanged');			// 채팅 방 목록을 불러온다.
+                getRoomList();											// 채팅 방 목록을 불러온다.
          	}
          	
          });
@@ -46,7 +43,7 @@
              $('.chatListContainer').toggleClass('display-none');       // 리스트를 연다.
              websocket.close();											// socket 연결 종료
          });
-      </script>
+    </script>
 	<!-- 채팅 창 -->
 	<div class="chatContainer display-none">
 		<div class="chatTop">
@@ -95,10 +92,10 @@
 		</div>
 	</div>
 	
+	<!-- 채팅 목록 관련 -->
 	<script>
 		// 총 읽지 않은 갯수
 		let countAll = 0;
-		let ListTimer;
 		
 		function getRoomList(){
 			// 채팅 방 목록 가져오기
@@ -131,7 +128,7 @@
 								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
 								
 								$img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
-								$divs = $("<div>").text(data[i].masterName);
+								$divs = $("<div class='userNameId'>").text(data[i].masterName);
 								
 								// 읽지 않은 메세지가 0이 아닐 때
 								if(data[i].unReadCount != 0){
@@ -152,7 +149,7 @@
 								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
 								
 								$img = $("<img class='profile_img'>").attr("src", "resources/img/" + data[i].userPic);
-								$divs = $("<div>").text(data[i].userName);
+								$divs = $("<div class='userNameId'>").text(data[i].userName);
 								
 								// 읽지 않은 메세지가 0이 아닐 때
 								if(data[i].unReadCount != 0){
@@ -176,15 +173,12 @@
     		});
 		}
 		
-		// 채팅방이 열렸을 때 채팅 방 목록 불러오기
-		$('.chatListContainer').on('cssChanged', function () {
-			getRoomList();
-		});
-		
 		// 화면 로딩 된 후
 		$(window).on('load', function(){
 			
-			ListTimer = setInterval(function(){
+			// 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
+			setInterval(function(){
+				// 방 목록 불러오기
 				getRoomList();
 				
 				// 읽지 않은 메세지 총 갯수가 0개가 아니면
@@ -199,17 +193,7 @@
 		});
 	</script>
 	
-	<!-- 리스트에서 해당목록 클릭 시 해당 채팅방으로 이동 -->
-	<script>
-         $(document).on("click", ".chatList_box",function(){
-         	$(".chatContainer").toggleClass("display-none");
-         	$(this).parent().parent().toggleClass("display-none");
-         	$("#setName").html($(this).children('div').html());
-         	$("#setPic").attr("src",$(this).children('img').attr('src'));
-         });
-    </script>
-
-	<!-- 채팅 IO -->
+	<!-- 채팅 방 관련 -->
 	<script>
 		let roomId;
         // enter 키 이벤트
@@ -225,10 +209,9 @@
 
         // 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
         function enterRoom(obj){
-        	
-        	// 현재 html에 추가되었던 동적 코드 전부 지우기
+        	// 현재 html에 추가되었던 동적 태그 전부 지우기
         	$('div.chatMiddle:not(.format) ul').html("");
-        	// 방번호
+        	// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
         	roomId = obj.getAttribute("id");
  			// 해당 채팅 방의 메세지 목록 불러오기
   			$.ajax({
@@ -245,20 +228,32 @@
     				}
     			}
     		});
- 			
  			// 웹소켓 연결
  			connect();
+ 			console.log("enterRoom");
         }
         
+        // 채팅 방 열어주기
+        $(document).on("click", ".chatList_box",function(){
+         	$(".chatContainer").toggleClass("display-none");
+         	$(this).parent().parent().toggleClass("display-none");
+         	// 이름 추가
+         	$("#setName").html($(this).children('div').html());
+         	// 사진 추가
+         	$("#setPic").attr("src",$(this).children('img').attr('src'));
+         	 // 스크롤바 아래 고정
+            $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
+         });
+        
         // 웹소켓
- 		var websocket;
+ 		let websocket;
  	
  		//입장 버튼을 눌렀을 때 호출되는 함수
  		function connect() {
- 			
+ 			// 웹소켓 주소
  			var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/websocket/echo.do";
+ 			// 소켓 객체 생성
  			websocket = new WebSocket(wsUri);
- 	
  			//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
  			websocket.onopen = onOpen;
  			websocket.onmessage = onMessage;
@@ -266,6 +261,7 @@
  		
  		//웹 소켓에 연결되었을 때 호출될 함수
  		function onOpen() {
+ 			// ENTER-CHAT 이라는 메세지를 보내어, Java Map에 session 추가
  			const data = {
                	 "roomId" : roomId,
                	 "name" : "${ loginUser.name }",
@@ -276,21 +272,21 @@
  			websocket.send(jsonData);
  		}
  		
-        // * 1 메시지 보내기
+        // * 1 메시지 전송
         function sendMessage(message){
-
-             const data = {
-            	 "roomId" : roomId,
-            	 "name" : "${ loginUser.name }",
-            	 "email" : "${ loginUser.email }",
-                 "message"   : message 
-             };
+			
+            const data = {
+            	"roomId" : roomId,
+            	"name" : "${ loginUser.name }",
+            	"email" : "${ loginUser.email }",
+                "message"   : message 
+            };
  			 
-             CheckLR(data);
+            CheckLR(data);
              
-             let jsonData = JSON.stringify(data);
+            let jsonData = JSON.stringify(data);
              
- 			 websocket.send(jsonData);
+ 			websocket.send(jsonData);
          }
         
          // * 2 메세지 수신
@@ -309,22 +305,23 @@
      		}
     	}
          
-        // * 2 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
+        // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
         function CheckLR(data) {
-             const LR = (data.email != "${ loginUser.email }") ? "left" : "right";
-         
-             appendMessageTag(LR, data.email, data.message, data.name);
+        	// email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
+        	const LR = (data.email != "${ loginUser.email }") ? "left" : "right";
+         	// 메세지 추가
+            appendMessageTag(LR, data.email, data.message, data.name);
         }
          
-        // * 3 메세지 태그 appendl
+        // * 3 메세지 태그 append
         function appendMessageTag(LR_className, email, message, name) {
         	 
-             const chatLi = createMessageTag(LR_className, email, message, name);
+            const chatLi = createMessageTag(LR_className, email, message, name);
          
-             $('div.chatMiddle:not(.format) ul').append(chatLi);
+            $('div.chatMiddle:not(.format) ul').append(chatLi);
          
-             // 스크롤바 아래 고정
-             $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
+            // 스크롤바 아래 고정
+            $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
         }
          
         // * 4 메세지 태그 생성
@@ -333,10 +330,10 @@
              // 형식 가져오기
              let chatLi = $('div.chatMiddle.format ul li').clone();
          
-             // 값 채우기
-             chatLi.addClass(LR_className); // 클래스 추가 left인지 right인지
-             chatLi.find('.sender span').text(name); // 작성자 추가
-             chatLi.find('.message span').text(message);   // 메세지 추가
+             chatLi.addClass(LR_className); 			 // left : right 클래스 추가
+             // find() : chatLi의 하위 요소 찾기
+             chatLi.find('.sender span').text(name); 	 // 이름 추가
+             chatLi.find('.message span').text(message); // 메세지 추가
          
              return chatLi;
         };
@@ -346,6 +343,6 @@
              $('div.chatBottom textarea').val('');
              return false;
         };
-      </script>
+	</script>
 </body>
 </html>
