@@ -411,7 +411,7 @@
 		                $('.userNameId:contains("${master.mNickname}")').parent().trigger("click");
 		            }
 		            else{
-		            	alert("이미 다른 채팅방이 열려 있습니다.");
+		            	alert("이미 채팅방이 열려 있습니다.");
 		            }
 				}
 			});
