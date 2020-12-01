@@ -1,6 +1,7 @@
 package com.fp.neezit.chat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fp.neezit.chat.model.service.ChatService;
 import com.fp.neezit.chat.model.vo.ChatMessage;
 import com.fp.neezit.chat.model.vo.ChatRoom;
+import com.fp.neezit.chat.model.vo.ChatSession;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.google.gson.Gson;
@@ -29,6 +31,9 @@ public class ChatController {
 	
 	@Autowired
 	ProductService pService;
+	
+	@Autowired
+	private ChatSession cSession;
 	
 	/**
 	 * 해당 채팅방의 채팅 메세지 불러오기
@@ -52,7 +57,6 @@ public class ChatController {
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(mList,response.getWriter());
-		
     }
 	
 	/**
@@ -119,6 +123,15 @@ public class ChatController {
 		gson.toJson(cList,response.getWriter());
 	}
 	
-	
+	@RequestMapping("chatSession.do")
+	public void chatSession( HttpServletResponse response) throws JsonIOException, IOException{
+		
+		ArrayList<String> chatSessionList = cSession.getLoginUser();
+		
+		response.setContentType("application/json; charset=utf-8");
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(chatSessionList,response.getWriter());
+	}
 	
 }

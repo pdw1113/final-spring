@@ -30,7 +30,6 @@
          	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
                 getRoomList();											// 채팅 방 목록을 불러온다.
          	}
-         	
          });
          
          $(document).on("click", "img.close", function(){            	// X 버튼 클릭 시,
@@ -47,7 +46,7 @@
 	<!-- 채팅 창 -->
 	<div class="chatContainer display-none">
 		<div class="chatTop">
-			<div class="profile_img_Container floatLeft">
+			<div class="floatLeft" id="loginOn">
 				<img class="profile_img" id="setPic"><!-- src 사진 경로 동적 생성 -->
 			</div>
 			<div class="name_container font_noto" id="setName"><!-- 이름 동적 생성 --></div>
@@ -108,6 +107,23 @@
     			async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
     			success:function(data){
     				
+    				// 현재 로그인 된 User들
+    				let loginList = "";
+    	  			
+    				// 로그인 된 User들을 가져온다.
+    				$.ajax({
+    	    			url:"chatSession.do",
+    	    			data:{
+    	    			},
+    	    			async:false,
+    	    			dataType:"json",
+    	    			success:function(data){
+    	    				for(var i = 0; i < data.length; i++){
+    	    					loginList += data[i];
+    	    				}
+    	    			}
+    	    		});
+    	  			
  					$chatWrap = $(".chatList");
 					$chatWrap.html("");
 					
@@ -122,48 +138,46 @@
 						
 						// 태그 동적 추가
 						for(var i in data){
-							
-							// 사용자의 입장일 때
+						
+							// 자신이 구매자 입장일 때
 							if(data[i].userEmail == "${loginUser.email}"){
-								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
-								
+								// 현재 판매자가 로그인 상태 일 때
+								if(loginList.indexOf(data[i].masterEmail) != -1){
+									$div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterEmail);
+								}
+								// 현재 판매자가 로그아웃 상태 일 때
+								else{
+									$div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterEmail);
+								}
 								$img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
 								$divs = $("<div class='userNameId'>").text(data[i].masterName);
-								
-								// 읽지 않은 메세지가 0이 아닐 때
-								if(data[i].unReadCount != 0){
-									$span = $("<span class='notRead'>").text(data[i].unReadCount);
-								}else{
-									$span = $("<span>");
-								}
-								
-								$div.append($img);
-								$div.append($divs);
-								$div.append($span);
-								
-								$chatWrap.append($div);
 							}
-							
-							// 마스터의 입장일 때
-							else{
-								$div = $("<div class='chatList_box' onclick='enterRoom(this);'>").attr("id",data[i].roomId); // 1단계
-								
+							// 자신이 판매자 입장일 때
+							else{						
+								// 현재 구매자가 로그인 상태 일 때
+								if(loginList.indexOf(data[i].userEmail) != -1){
+									$div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userEmail);
+								}
+								// 현재 구매자가 로그아웃 상태 일 때
+								else{
+									$div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userEmail);
+								}								
 								$img = $("<img class='profile_img'>").attr("src", "resources/img/" + data[i].userPic);
 								$divs = $("<div class='userNameId'>").text(data[i].userName);
-								
-								// 읽지 않은 메세지가 0이 아닐 때
-								if(data[i].unReadCount != 0){
-									$span = $("<span class='notRead'>").text(data[i].unReadCount);
-								}else{
-									$span = $("<span>");
-								}
-								
-								$div.append($img);
-								$div.append($divs);
-								$div.append($span);
-								
-								$chatWrap.append($div);
 							}
+							
+							// 읽지 않은 메세지가 0이 아닐 때
+							if(data[i].unReadCount != 0){
+								$span = $("<span class='notRead'>").text(data[i].unReadCount);
+							}else{
+								$span = $("<span>");
+							}
+							
+							$div.append($img);
+							$div.append($divs);
+							$div.append($span);
+							
+							$chatWrap.append($div);
 							
 							// String을 int로 바꿔주고 더해준다.
 							countAll += parseInt(data[i].unReadCount);
@@ -234,16 +248,26 @@
         }
         
         // 채팅 방 열어주기
-        $(document).on("click", ".chatList_box",function(){
+        $(document).on("click", ".enterRoomList",function(){
          	$(".chatContainer").toggleClass("display-none");
          	$(this).parent().parent().toggleClass("display-none");
          	// 이름 추가
          	$("#setName").html($(this).children('div').html());
          	// 사진 추가
          	$("#setPic").attr("src",$(this).children('img').attr('src'));
-         	 // 스크롤바 아래 고정
+         	// 스크롤바 아래 고정
             $('div.chatMiddle').scrollTop($('div.chatMiddle').prop('scrollHeight'));
-         });
+         	// 로그인 상태 일 때 
+         	if($(this).hasClass('chatList_box')){
+         		// 점 표시
+				$('#loginOn').addClass('profile_img_Container');
+         	}
+         	// 로그아웃 상태 일 때
+         	else{
+         		// 점 빼기
+         		$('#loginOn').removeClass('profile_img_Container');
+         	}
+        });
         
         // 웹소켓
  		let websocket;

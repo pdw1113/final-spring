@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fp.neezit.chat.model.vo.ChatSession;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.Getip;
 import com.fp.neezit.user.model.vo.User;
@@ -40,6 +41,10 @@ public class UserContoller {
 	// 암호화 처리
 	@Autowired // spring-security.xml에 등록되어 있음.
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+
+	/* 채팅 */
+	@Autowired
+	private ChatSession cSession;
 
 	/**
 	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
@@ -78,7 +83,11 @@ public class UserContoller {
 				map.put("rankname", "사용자");
 			}
 			
-			int  ipresult = uService.insertIP(map);
+			uService.insertIP(map);
+			
+			/* 채팅 */
+			// 현재 로그인 한 User 채팅 Session ArrayList에 추가.
+			cSession.addLoginUser(loginUser.getEmail());
 			
 			return "redirect:index.do";
 		} else {
@@ -94,8 +103,15 @@ public class UserContoller {
 	 * @return
 	 */
 	@RequestMapping("logout.do")
-	public String logout(SessionStatus status) {
-
+	public String logout(SessionStatus status, HttpSession session) {
+		
+		/* 채팅 */
+		User u = (User)session.getAttribute("loginUser");
+		
+		/* 채팅 */
+		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
+		cSession.removeLoginUser(u.getEmail());
+		
 		status.setComplete();
 
 		return "redirect:logout2.do";
