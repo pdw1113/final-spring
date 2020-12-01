@@ -35,8 +35,6 @@ public class ManagerDao {
 		return sqlSession.delete("managerMapper.deleteWords", dwords);
 	}
 	
-	
-
 	public List<Forbidden> searchWords(String search) {
 		
 		switch(search) {

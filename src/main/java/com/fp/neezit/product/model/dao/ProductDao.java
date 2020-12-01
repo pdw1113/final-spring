@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import com.fp.neezit.product.model.vo.ProductCategory;
 
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.product.model.vo.WishList;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -84,7 +86,6 @@ public class ProductDao{
 	public List<Product> productList(HashMap<String, String> map) {
 		return (ArrayList)sqlSession.selectList("productMapper.getProductList", map);
 	}
-	
 	public WishList getWishListDetail(HashMap<String, String> map) {
 		return sqlSession.selectOne("productMapper.WishDetail",map);
 	}
@@ -111,6 +112,19 @@ public class ProductDao{
 
 	public int productDelete(int no) {
 		return sqlSession.delete("productMapper.ProductDelete",no);
+	}
+
+	public List<Product> productListSearch(PageInfo pi,HashMap<String, String> map) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("productMapper.productListSearch", map, rowBounds);
+	}
+
+	public int productListSearchCount(HashMap<String, String> map) {
+		return sqlSession.selectOne("productMapper.productListSearchCount",map);
 	}
 
 }

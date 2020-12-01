@@ -32,6 +32,7 @@ justify-content: flex-start;
 *:focus { outline:none; }
 /*리스트 체크박스 크기조절*/
 .Lsit-checkbox-size{
+float:right;
 zoom: 1.5;
 margin:0;
 }
@@ -41,6 +42,8 @@ margin: 1.2rem 0 3rem 0;
 font-size: 12px;
 display: flex;
 justify-content: space-between;
+position:relative;
+left:1300px;
 }
 .checkbox > input.checkbox_css{
 margin:0;
@@ -98,25 +101,21 @@ font-weight: bold;
 font-size: 15px;
 margin-top: 10px;	
 }
-/*페이지네이션 가운데 정렬*/
 .pagination{    
 display: flex;
 justify-content: center;
 }
 
-/* Pagination links */
-.pagination a {
+.pagination a{
   color: black;
-  float: left;
   border-radius: 10px;
   justify-content: center;
   padding: 8px 16px;
   text-decoration: none;
   transition: background-color .3s;
 }
-
 /* Style the active/current link */
-.pagination a.active {background-color: #FABE00; color: white;}
+.pagination #hi.active {background-color: #FABE00; color: white;}
 
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {background-color: #ddd;}
@@ -199,6 +198,12 @@ border-radius: 10rem;
 font-size: 1.8rem;
 color: #fabe00;
 }
+.center{
+	position:relative;
+	top:0px;
+	left:800px;
+	text-align: center;	
+}
 @keyframes text { /*애니메이션 효과 미디어쿼리랑 사용법은 비슷함*/
 	0%{  /*0% 일때*/
 	color: black;
@@ -212,4 +217,9 @@ color: #fabe00;
 	letter-spacing: 8px;
 	margin-bottom: -40px;
 	}
+}
+.magnifier{
+  width: 36.8px;
+  height: 36.8px;
+  object-fit: cover;	
 }

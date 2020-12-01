@@ -14,6 +14,7 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.product.model.vo.Reply;
+import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -133,6 +134,16 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int productDelete(int no) {
 		return pDao.productDelete(no);
+	}
+
+	@Override
+	public List<Product> productListSearch( PageInfo pi, HashMap<String, String> map) {
+		return pDao.productListSearch(pi,map);
+	}
+
+	@Override
+	public int productListSearchCount( HashMap<String, String> map) {
+		return pDao.productListSearchCount(map);
 	}
 	
 }
