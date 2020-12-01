@@ -1,9 +1,8 @@
-@charset "UTF-8";
+        @charset "UTF-8";
 html,
 body {
 padding: 0;
 margin: 0;
-/*overflow-x:hidden;*/
 }
 /* Nav background */
 .wrapper_Nav {
@@ -13,7 +12,9 @@ background: linear-gradient(rgb(255, 211, 66), rgb(250, 190, 0));
 }
 /* Nav 아이콘 부분 div */
 .wrapper_NavIcon {
-display: block;
+display: flex;
+align-items: center;
+justify-content: center;
 margin: 0 auto;
 text-align: center;
 font-size: 1.5vw;
@@ -26,7 +27,7 @@ padding-top: 10px;
 box-sizing: border-box;
 display: inline-block;
 background: linear-gradient(rgb(255, 211, 66), rgb(250, 190, 0));
-margin: 0 auto;
+margin: 0 14px;
 width: 86px;
 }
 nav ul { 
@@ -38,7 +39,7 @@ height: 35px;
 }
 .nav_icon,
 .nav_font {
-font-size: 30px;
+font-size: 1.5vw;
 }
 /* a 링크 디자인효과 없애기 */
 nav li a {

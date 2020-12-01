@@ -934,6 +934,5 @@
 
 
 	<%@ include file="../../common/footer.jsp"%>
-	<%@ include file="../../common/talk.jsp" %>
 </body>
 </html>
