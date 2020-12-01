@@ -42,6 +42,9 @@ public class IndexController {
 		int master = count;
 		System.err.println("index2 : " + master );
 		if(master == 1) {
+			String mRankPic = "test";
+			System.out.println(mRankPic);
+			model.addAttribute("mRankPic", mRankPic);
 			model.addAttribute("master3", master);
 		}
 		return "index";

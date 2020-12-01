@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.Getip;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 /*
  *    Alt + Shift + J : 메소드에 주석 달기
@@ -27,7 +29,7 @@ import com.fp.neezit.user.model.vo.User;
  *  scope는 request이다.
  */
 
-@SessionAttributes({"loginUser","master2"}) // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
+@SessionAttributes({"loginUser","master2","rankPic","admin"}) // Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하라는 의미의 어노테이션
 @Controller
 public class UserContoller {
 
@@ -51,14 +53,25 @@ public class UserContoller {
 	@RequestMapping(value = "login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String userLogin(User u, Model model, HttpServletRequest request) { // view에 전달하는 데이터를 Model에 담는다.
 
+		System.out.println(u);
 		User loginUser = uService.loginUser(u);
+		UserMaster rankPic = uService.rankPic(u);
+		Admin admin = uService.admin(u);
+		
 		int master = uService.master(u);
+	
 
 		// 입력 비밀번호 , 복호화 비밀번호
 		if (loginUser != null && bcryptPasswordEncoder.matches(u.getPwd(), loginUser.getPwd())) {
 			// model은 request영역이다. 그것을 상단의 @SessionAttributes가 session영역으로 바꿔준다.
 			// request → session
+			System.out.println(loginUser);
 			model.addAttribute("loginUser", loginUser);
+			model.addAttribute("rankPic", rankPic);
+			model.addAttribute("admin", admin);
+			System.out.println("여기 거치는거 맞지?");
+			System.out.println("admin : " + admin);
+			System.out.println("rankPic : " + rankPic);
 			if(master == 1) {
 				model.addAttribute("master2", master);
 			}

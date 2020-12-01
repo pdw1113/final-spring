@@ -18,6 +18,7 @@ import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
+import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
@@ -284,6 +285,20 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int rankUpdate(HashMap<String, Integer> map2) {
 		return uDao.rankUpdate(map2);
+	}
+
+	@Override
+	public UserMaster rankPic(User u) {
+		
+		UserMaster rankPic = uDao.rankPic(u);
+		return rankPic;
+	}
+
+	@Override
+	public Admin admin(User u) {
+		
+		Admin admin = uDao.admin(u);
+		return admin;
 	}
 
 

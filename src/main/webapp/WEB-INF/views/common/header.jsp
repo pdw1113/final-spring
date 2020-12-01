@@ -38,16 +38,8 @@
                         <div class="head_login_Mainhead w_100p">회원가입</div>
                      </a>
                   </div>
-                  <div class="login_box_Mainhead">
-                     <a href="mStatistics.do">
-                        <div class="head_login_Mainhead" style="margin-right: 0.7rem;">관리자</div>
-                     </a>
-                  </div>
-                  <div class="login_box_Mainhead">
-                     <a href="productListSearch.do">
-                        <div class="head_login_Mainhead" style="margin-right: 0.7rem;">검색</div>
-                     </a>
-                  </div>
+
+
                   
                   
             </div>
@@ -65,6 +57,14 @@
                   </a>
                </div>
                <div class="login_box_Mainhead">
+                  <a href="buyList.do">
+                     <div class="head_login_Mainhead w_100p">구매목록</div>
+                  </a>
+               </div>
+               
+               <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
+
+               <div class="login_box_Mainhead">
                   <span class="accordion_header">
                       <div class="head_login_Mainhead w_100p" id="product">상품관리</div>
                       <a href="productInsertPage.do">
@@ -75,7 +75,6 @@
                       </a>
                    </span>
                </div>
-               <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
                <div class="login_box_Mainhead">
                   <a href="signUpMasterManage.do">
                      <div class="head_login_Mainhead w_100p">능력자관리</div>
@@ -84,11 +83,11 @@
             </c:if>
             </c:if>
             
-            <div class="login_box_Mainhead">
+<!--             <div class="login_box_Mainhead">
                <a href="chat.do">
                   <div class="head_login_Mainhead">임시 채팅방</div>
                </a>
-            </div>
+            </div> -->
             
             <c:if test="${ !empty sessionScope.loginUser && empty sessionScope.master2 && empty sessionScope.master3 }">
                <div class="login_box_Mainhead">
@@ -96,10 +95,35 @@
                      <div class="head_login_Mainhead w_100p">능력자등록</div>
                   </a>
                </div>
-               </c:if>
+            </c:if>
+           	<c:if test="${ !empty sessionScope.admin }">
+		         <div class="login_box_Mainhead">
+		               <a href="mStatistics.do">
+		                  <div class="head_login_Mainhead">관리자</div>
+		               </a>
+		         </div>
+	        </c:if>
+            
+            
                <c:if test="${ !empty sessionScope.loginUser }">
                <span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
                </c:if>
+               
+               <c:if test="${ !empty sessionScope.rankPic }">   
+               <div class="login_box_Mainhead">
+                   	<img src="resources/img/${ rankPic.mRankPic }" class="list_rank_index"> 
+               </div>
+			</c:if>
+			
+<%-- 			<c:if test="${ mRankPic eq 'test' }">   
+               <div class="login_box_Mainhead">
+                   	<img src="resources/img/lv1.png" class="list_rank_index"> 
+               </div>
+			</c:if> --%>
+               
+               
+               
+               
             </div>
       </div>
       

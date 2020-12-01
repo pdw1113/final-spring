@@ -190,3 +190,9 @@ body,
 /* 스크롤 바 없애기 */
 body{-ms-overflow-style:none; }
 body::-webkit-scrollbar { display:none; }
+
+/* 손바닥 사진 */
+.list_rank_index{
+width: 1.3rem; 
+object-fit: cover; 
+}
