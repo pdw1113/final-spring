@@ -105,21 +105,21 @@
 	        </c:if>
             
             
-               <c:if test="${ !empty sessionScope.loginUser }">
+            <c:if test="${ !empty sessionScope.loginUser }">
                <span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
-               </c:if>
+            </c:if>
                
-               <c:if test="${ !empty sessionScope.rankPic }">   
+            <c:if test="${ !empty sessionScope.rankPic }">   
                <div class="login_box_Mainhead">
                    	<img src="resources/img/${ rankPic.mRankPic }" class="list_rank_index"> 
                </div>
 			</c:if>
 			
-<%-- 			<c:if test="${ mRankPic eq 'test' }">   
+ 			<c:if test="${ mRankPic eq 'test' }">   
                <div class="login_box_Mainhead">
                    	<img src="resources/img/lv1.png" class="list_rank_index"> 
                </div>
-			</c:if> --%>
+			</c:if> 
                
                
                
