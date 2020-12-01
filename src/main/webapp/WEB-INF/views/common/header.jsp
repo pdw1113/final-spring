@@ -18,8 +18,8 @@
                < <!-- 이거 그냥 텍스트로 쓴거 빨간색 신경 ㄴㄴ -->
             </div>
             <div class="main_searchbox_Mainhead">
-               <input class="main_searchtext_Mainhead" type="text">
-               <a href="#"><img src="resources/img/SearchGlass.png" class="s_img"></a>
+               <input class="main_searchtext_Mainhead" id="text2" type="text">
+               <a href=javascript:enter1();><img src="resources/img/SearchGlass.png" class="s_img"></a>
             </div>
             <div class="main_search_Mainhead">
                >
@@ -43,6 +43,13 @@
                         <div class="head_login_Mainhead" style="margin-right: 0.7rem;">관리자</div>
                      </a>
                   </div>
+                  <div class="login_box_Mainhead">
+                     <a href="productListSearch.do">
+                        <div class="head_login_Mainhead" style="margin-right: 0.7rem;">검색</div>
+                     </a>
+                  </div>
+                  
+                  
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
@@ -122,6 +129,40 @@
              }
              $('body').css("font-family","Apple Color Emoji").css("line-height","1.6");
          });
-      </script>
+     </script>
+     <script>
+
+	   	 $(document).on("keydown", "input[class=main_searchtext_Mainhead]", function (key) { 
+	   	        if (key.keyCode == 13) {	        	
+	   	        	let search = $('.main_searchtext_Mainhead').val();
+	   	        	let temp = "최신순";
+	   	        	
+		        	if(search.replace(/\s|  /gi, "").length == 0){
+			   			alert("내용을 입력해주세요.");
+			   			$('#text2').focus();
+			   			return false;
+			   		}
+	   	        	
+	   	        	window.location.href = "productListSearch.do?search=" + search + "&what=" + temp;   
+
+	   	        	
+	   	        }
+	   	  });
+	   	 
+		 function enter1(){
+			 	let search3 = $('.main_searchtext_Mainhead').val();
+			 	let temp3 = "최신순";
+			 	
+	        	if(search3.replace(/\s|  /gi, "").length == 0){
+		   			alert("내용을 입력해주세요.");
+		   			$('#text2').focus();
+		   			return false;
+		   		}
+			 	
+   	        	window.location.href = "productListSearch.do?search=" + search3 + "&what=" + temp3; 
+		 };
+   	 
+   	</script>
+
    </body>
 </html>

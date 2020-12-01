@@ -30,6 +30,8 @@ import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.Reply;
 import com.fp.neezit.product.model.vo.WishList;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
@@ -50,11 +52,6 @@ public class ProductController {
 	
 	@Autowired
 	ManagerService mService;
-
-	@RequestMapping("productListSearch.do")
-	public String productListSearch() {
-		return "user/product/productListSearch"; 
-	}
 
 	/** 1. 상품 리스트 메소드
 	 * @param model
@@ -560,4 +557,53 @@ public class ProductController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	
+	/**
+	 * @return
+	 */
+	@RequestMapping("productListSearch.do")
+	public String productListSearch(Model model, String search, String what, 
+			@RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+		
+		if(what == "최신순") {
+			what = "";
+		}
+		
+		
+		if(search == null) {
+			search="";
+         }
+		
+		
+		System.out.println("정렬 순서 : " + what);
+		System.out.println("검색 : "+ search);
+		
+	    
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		//search = "%"+search+"%";
+		map.put("search", search);
+		map.put("what", what);
+		System.out.println(map);
+		int listCount = pService.productListSearchCount(map);
+		System.out.println("리스트 카운트 : " + listCount);
+
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,6);
+		System.out.println(pi);
+		List<Product> productList = pService.productListSearch(pi,map);
+		System.out.println(productList);
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("search", search);
+		model.addAttribute("what", what);
+		model.addAttribute("pi",pi);
+		model.addAttribute("listCount",listCount);
+
+		
+		return "user/product/productListSearch"; 
+	}
+	
+	
 }

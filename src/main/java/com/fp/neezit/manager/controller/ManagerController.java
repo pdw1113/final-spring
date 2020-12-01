@@ -509,28 +509,19 @@ public class ManagerController {
             check2="";
          }
 
-        
-
-   //  String[] check11 = check1.split(",");
      String[] check22 = check2.split(",");
      
      HashMap<String, Object> map = new HashMap<String, Object>();
     
-     
-//     String a = "abc";
-//     Object b = a;
 
 
      map.put("check1",check1); 
      map.put("check2",check2); 
-    // map.put("check11",check11);
      map.put("check22",check22); 
      map.put("buttonday",buttonday); 
      map.put("preday",preday);
      map.put("postday",postday); 
      map.put("search_way",search_way);
-     
-     //System.out.println(check22);
      
      search_box = "%"+search_box+"%";
       

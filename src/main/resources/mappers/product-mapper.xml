@@ -289,4 +289,52 @@
 		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{no}
 	</delete>
 	
+	
+	<!-- 검색 리스트 목록 불러오기 -->
+	<select id="productListSearch" parameterType="hashmap" resultMap="productResultSet">
+           SELECT * FROM
+           (select ROWNUM as rownumber, a.* from 
+            (SELECT p.*, S.MASTER_RANK_PIC from PRODUCT p
+            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)  
+            JOIN NEEZ_MASTER S ON (p.MASTER_NICKNAME = S.MASTER_NICKNAME)        
+			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%'
+			<choose>
+				<when test="what eq '인기순'.toString()">
+					ORDER BY PRODUCT_COUNT DESC
+				</when>
+				<when test="what eq '가격순'.toString()">
+					ORDER BY PRODUCT_PRICE
+				</when>
+				<otherwise>
+					ORDER BY PRODUCT_CREATE_DATE DESC
+				</otherwise>
+			</choose>
+			) a
+		) b
+	</select>
+
+	<select id="productListSearchCount" parameterType="hashmap" resultType="_int">
+           SELECT COUNT(*) FROM
+           (select ROWNUM as rownumber, a.* from 
+            (SELECT p.*, S.MASTER_RANK_PIC from PRODUCT p
+            JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)  
+            JOIN NEEZ_MASTER S ON (p.MASTER_NICKNAME = S.MASTER_NICKNAME)        
+			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%'
+			
+			<choose>
+				<when test="what eq '인기순'.toString()">
+					ORDER BY PRODUCT_COUNT DESC
+				</when>
+				<when test="what eq '가격순'.toString()">
+					ORDER BY PRODUCT_PRICE
+				</when>
+				<otherwise>
+					ORDER BY PRODUCT_CREATE_DATE DESC
+				</otherwise>
+			</choose>
+			) a
+		) b
+	</select>
+	
+	
 </mapper>
