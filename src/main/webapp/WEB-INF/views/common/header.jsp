@@ -38,14 +38,17 @@
                         <div class="head_login_Mainhead w_100p">회원가입</div>
                      </a>
                   </div>
-
-
-                  
-                  
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
              <div>
+              <c:if test="${ sessionScope.rankPic.mRankname eq '타노스손' }">   
+               <div class="login_box_Mainhead">
+                  <a href="thanos.do">
+                     <div class="head_login_Mainhead w_100p">타노스</div>
+                  </a>
+               </div>
+               </c:if>
                <div class="login_box_Mainhead">
                   <a href="logout.do">
                      <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>

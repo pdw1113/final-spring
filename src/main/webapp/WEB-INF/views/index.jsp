@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
    <head>
@@ -25,41 +26,30 @@
             	<img class="slide_grade_Nav" src="resources/img/lv6.png">
             	<span class="slide_p">인피니티 능력자들</span>
             </div>
+            
             <div class="slide_box">
                <div class="slide_list clearfix">
+                <c:if test="${!empty thanos }">
+                <c:forEach var="th" items="${ thanos }" varStatus="status2">
                   <div class="slide_content slide01">
                      <p class="type_text1">
-                        디테일부터 바로잡는<br>
-                        일러스트 & 포토샵
+               				${th.content }
                      </p>
-                     <img src="resources/img/main-1.png" class="img_main_st">
+                     <img src="resources/masterImg/${th.thanosPicRe }" class="img_main_st">
                   </div>
-                  <div class="slide_content slide02">
-                     <p class="type_text1">스프링을 정복한 자<br>
-                        스프링 프레임워크, 스프링 부트 등 쌉가능
+                  </c:forEach>
+                  </c:if> 
+                  
+                 <c:if test="${empty thanos }">
+                  <div class="slide_content slide01">
+                     <p class="type_text1">
+               				전문가가 존재하지 않습니다.
                      </p>
-                     <img src="resources/img/main-2.png" class="img_main_st">
                   </div>
-                  <div class="slide_content slide03">
-                     <p class="type_text1">간지가 나는 천동민의<br>
-                        리액트로 다 만들어드려요!
-                     </p>
-                     <img src="resources/img/main-3.png" class="img_main_st">
-                  </div>
-                  <div class="slide_content slide04">
-                     <p class="type_text1">타입스크립트?<br>
-                        나 천동민에겐 껌이지
-                     </p>
-                     <img src="resources/img/main-4.png" class="img_main_st">
-                  </div>
-                  <div class="slide_content slide05">
-                     <p class="type_text1">나처럼 간지나는 웹사이트<br>
-                        천동민이 직접 만들어드립니다 
-                     </p>
-                     <img src="resources/img/main-5.png" class="img_main_st">
-                  </div>
+				</c:if>
                </div>
             </div>
+            
             <div class="slide_btn_box">
                <button type="button" class="slide_btn_prev"> < </button>
                <button type="button" class="slide_btn_next"> > </button>

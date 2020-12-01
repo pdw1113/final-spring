@@ -1,8 +1,12 @@
 package com.fp.neezit;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +20,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 /**
  * Handles requests for the application home page.
@@ -32,8 +38,12 @@ public class IndexController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index() {
+	public String index(User u,Model model,HttpServletRequest request) {
 		
+		
+		List<Thanos> th = uService.thanosList();
+
+		model.addAttribute("thanos", th);
 		return "index";
 	}
 
@@ -43,9 +53,13 @@ public class IndexController {
 		System.err.println("index2 : " + master );
 		if(master == 1) {
 			String mRankPic = "test";
-			System.out.println(mRankPic);
+			String thanosHand = "타노스손";
+			model.addAttribute("thanosHand", thanosHand);
 			model.addAttribute("mRankPic", mRankPic);
 			model.addAttribute("master3", master);
+			
+			List<Thanos> th = uService.thanosList();
+			model.addAttribute("thanos", th);
 		}
 		return "index";
 	}

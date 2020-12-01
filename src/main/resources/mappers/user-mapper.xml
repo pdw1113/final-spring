@@ -117,6 +117,13 @@
 		<result property="email" column="USER_EMAIL" />
 	</resultMap>
 	
+	<resultMap type="Thanos" id="thanosResultSet">
+		<result property="nickname" column="MASTER_NICKNAME"/>
+		<result property="content" column="THANOS_CONTENT"/>
+		<result property="thanosPic" column="THANOS_PIC_ORI"/>
+		<result property="thanosPicRe" column="THANOS_PIC_RE"/>
+	</resultMap>
+
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">
@@ -687,7 +694,7 @@
 	
 	
 	<select id="rankPic" parameterType="UserMaster" resultMap="userMasterResultSet">
-		SELECT MASTER_RANK_PIC
+		SELECT *
 		FROM NEEZ_MASTER
 		WHERE USER_EMAIL = #{email}
 	</select>
@@ -697,6 +704,36 @@
 		FROM NEEZ_ADIMIN
 		WHERE USER_EMAIL = #{email}
 	</select>
-
 	
+	<!-- 타노스 파워노출 삽입 -->
+	<insert id="thanosInsert" parameterType="hashmap">
+		INSERT INTO THANOS VALUES(#{masterName},#{content},#{thanosPic},#{thanosPicRe})
+	</insert>
+
+	<!-- 타노스 파워노출 리스트 -->
+	<select id="thanosList" resultMap="thanosResultSet">
+		<![CDATA[SELECT * 
+		FROM(
+		    SELECT * FROM THANOS
+		    ORDER BY DBMS_RANDOM.RANDOM
+		) WHERE ROWNUM < 6]]>
+	</select>
+	
+
+	<!-- 타노스 파워노출 값확인용 -->
+	<select id="thanosList2" parameterType="String" resultMap="thanosResultSet">
+		SELECT * 
+		FROM THANOS
+		WHERE MASTER_NICKNAME = #{masterName}
+	</select>
+
+	<!-- 타노스 파워노출 수정 -->
+	<update id="thanosUpdate" parameterType="hashmap">
+		UPDATE THANOS SET THANOS_CONTENT = #{content}, THANOS_PIC_ORI = #{thanosPic}, THANOS_PIC_RE = #{thanosPicRe} WHERE MASTER_NICKNAME = #{masterName1} 
+	</update>
+
+	<!-- 타노스 파워노출 삭제 -->
+	<delete id="thanosDelete" parameterType="String">
+		DELETE FROM THANOS WHERE MASTER_NICKNAME = #{masterName1}
+	</delete>
 </mapper>

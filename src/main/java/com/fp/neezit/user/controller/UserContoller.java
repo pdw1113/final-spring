@@ -52,8 +52,6 @@ public class UserContoller {
 	 */
 	@RequestMapping(value = "login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String userLogin(User u, Model model, HttpServletRequest request) { // view에 전달하는 데이터를 Model에 담는다.
-
-		System.out.println(u);
 		User loginUser = uService.loginUser(u);
 		UserMaster rankPic = uService.rankPic(u);
 		Admin admin = uService.admin(u);
@@ -69,9 +67,6 @@ public class UserContoller {
 			model.addAttribute("loginUser", loginUser);
 			model.addAttribute("rankPic", rankPic);
 			model.addAttribute("admin", admin);
-			System.out.println("여기 거치는거 맞지?");
-			System.out.println("admin : " + admin);
-			System.out.println("rankPic : " + rankPic);
 			if(master == 1) {
 				model.addAttribute("master2", master);
 			}

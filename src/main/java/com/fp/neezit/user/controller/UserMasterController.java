@@ -23,6 +23,7 @@ import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.common.UserMasterPic;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterQualifcation;
@@ -515,6 +516,82 @@ public class UserMasterController {
 			return "common/errorPage";
 		}
 
+	}
+	@RequestMapping("thanos.do")
+		public String thanos(HttpSession session,Model model) {
+			
+	    User u = (User)session.getAttribute("loginUser");
+		UserMaster master = pService.getMaster(u);
+		String masterName = master.getmNickname();
+		List<Thanos> th = uService.thanosList2(masterName);
+
+		model.addAttribute("thanos", th);
+		model.addAttribute("master", master);
+			return "user/thanos";
+		}
+	
+	@RequestMapping("thanosInsert.do")
+	public String thanosInsert(String masterName,Thanos th,String content, Model model, HttpServletRequest request, HttpSession session,
+								@RequestParam(name = "upload", required = false) MultipartFile file1) {
+
+		if (!file1.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName = uPic.saveFile1(file1, request);
+
+			if (renameFileName != null) { // 파일이 잘 저장된 경우
+				th.setThanosPic(file1.getOriginalFilename()); // 파일명만 DB에저장
+				th.setThanosPicRe(renameFileName);
+			}
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("masterName", masterName);
+		map.put("content", content);
+		map.put("thanosPic", file1.getOriginalFilename());
+		map.put("thanosPicRe", th.getThanosPicRe());
+		
+		int thanos = uService.thanosInsert(map);
+
+		return "redirect:index.do";
+	}
+	
+	@RequestMapping("thanosUpdate.do")
+	public String thanosUpdate(String masterName,Thanos th,String content, Model model, HttpServletRequest request, HttpSession session,
+								@RequestParam(name = "upload", required = false) MultipartFile file1) {
+
+		if (!file1.getOriginalFilename().equals("")) {
+			// 서버에 업로드 해야한다.
+			String renameFileName = uPic.saveFile1(file1, request);
+
+			if (renameFileName != null) { // 파일이 잘 저장된 경우
+				th.setThanosPic(file1.getOriginalFilename()); // 파일명만 DB에저장
+				th.setThanosPicRe(renameFileName);
+			}
+		}
+	    User u = (User)session.getAttribute("loginUser");
+		UserMaster master = pService.getMaster(u);
+		String masterName1 = master.getmNickname();
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("content", content);
+		map.put("thanosPic", file1.getOriginalFilename());
+		map.put("thanosPicRe", th.getThanosPicRe());
+		map.put("masterName1", masterName1);
+		
+		int thanos = uService.thanosUpdate(map);
+		return "redirect:index.do";
+	}
+	
+	@RequestMapping("thanosDelete.do")
+	public String thanosDelete(Model model,HttpSession session) {
+
+
+	    User u = (User)session.getAttribute("loginUser");
+		UserMaster master = pService.getMaster(u);
+		String masterName1 = master.getmNickname();
+		int thanos = uService.thanosDelete(masterName1);
+
+		return "redirect:index.do";
 	}
 	
 }
