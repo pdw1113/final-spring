@@ -360,10 +360,8 @@ public class ManagerController {
 	@RequestMapping("addWords.do")
 	public String addWords(String words) {
 
-		System.out.println("어떻게 들어오지?" + words);
 		int result = mService.insertWords(words);
 
-		System.out.println("최종 : " + result);
 
 		if (result == 1) {
 

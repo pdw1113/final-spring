@@ -25,6 +25,7 @@
 		<id property="mNickname" column="MASTER_NICKNAME" />
 		<result property="email" column="USER_EMAIL" />
 		<result property="mRankname" column="MASTER_RANKNAME" />
+		<result property="mRankPic" column="MASTER_RANK_PIC" />
 		<result property="mProPicRe" column="MASTER_PROFILE_PIC_RE" />
 		<result property="mCategory" column="MASTER_CATEGORY" />
 		<result property="mIdPicRe" column="MASTER_ID_PIC_RE" />
@@ -219,6 +220,12 @@
  	  <if test="!preday.equals('')">
 		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
 		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 1">
+        AND USER_BUY_MASTER = #{searchBox}
+        OR USER_EMAIL = #{searchBox}
+        OR USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
 	  <if test="selectBox eq 2">
 		AND USER_BUY_MASTER = #{searchBox}
 		ORDER BY USER_BUY_NUM DESC
@@ -242,6 +249,12 @@
  	  <if test="!preday.equals('')">
 		WHERE USER_BUY_DATE BETWEEN TO_CHAR(#{preday})
 		AND TO_DATE(#{postday},'YYYY-MM-DD')+0.99999
+	  <if test="selectBox eq 1">
+        AND USER_BUY_MASTER = #{searchBox}
+        OR USER_EMAIL = #{searchBox}
+        OR USER_BUY_TITLE = #{searchBox}
+		ORDER BY USER_BUY_NUM DESC
+ 	  </if>
 	  <if test="selectBox eq 2">
 		AND USER_BUY_MASTER = #{searchBox}
 		ORDER BY USER_BUY_NUM DESC
@@ -685,73 +698,73 @@
  	<select id="mUserCount1" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200101') AND USER_ENROLLDATE <= TO_DATE('20200131')]]>
+		<![CDATA[WHERE '0101' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0131' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount2" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200201') AND USER_ENROLLDATE <= TO_DATE('20200228')]]>
+		<![CDATA[WHERE '0201' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0229' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount3" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200301') AND USER_ENROLLDATE <= TO_DATE('20200331')]]>
+		<![CDATA[WHERE '0301' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0331' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount4" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200401') AND USER_ENROLLDATE <= TO_DATE('20200430')]]>
+		<![CDATA[WHERE '0401' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0430' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount5" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200501') AND USER_ENROLLDATE <= TO_DATE('20200531')]]>
+		<![CDATA[WHERE '0501' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0531' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount6" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200601') AND USER_ENROLLDATE <= TO_DATE('20200630')]]>
+		<![CDATA[WHERE '0601' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0630' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount7" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200701') AND USER_ENROLLDATE <= TO_DATE('20200731')]]>
+		<![CDATA[WHERE '0701' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0731' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount8" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200801') AND USER_ENROLLDATE <= TO_DATE('20200831')]]>
+		<![CDATA[WHERE '0801' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0831' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount9" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20200901') AND USER_ENROLLDATE <= TO_DATE('20200930')]]>
+		<![CDATA[WHERE '0901' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '0930' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount10" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201001') AND USER_ENROLLDATE <= TO_DATE('20201031')]]>
+		<![CDATA[WHERE '1001' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '1031' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount11" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201101') AND USER_ENROLLDATE <= TO_DATE('20201130')]]>
+		<![CDATA[WHERE '1101' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '1130' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select>
 	
 	<select id="mUserCount12" parameterType="User" resultType="_int">
 		SELECT COUNT(*)
 		FROM NEEZ_USER
-		<![CDATA[WHERE USER_ENROLLDATE >= TO_DATE('20201201') AND USER_ENROLLDATE <= TO_DATE('20201231')]]>
+		<![CDATA[WHERE '1201' <= TO_CHAR(USER_ENROLLDATE,'mmdd') AND '1232' >= TO_CHAR(USER_ENROLLDATE,'mmdd')]]>
 	</select> 
 	<!--  -->
 	
@@ -759,73 +772,73 @@
 	<select id="mVisitant1" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.01.01' AND ACCESS_DATE <= '2020.01.31']]>
+		<![CDATA[WHERE '2020.01.01' <= TO_CHAR(ACCESS_DATE) AND '2020.01.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant2" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.02.01' AND ACCESS_DATE <= '2020.02.28']]>
+		<![CDATA[WHERE '2020.02.01' <= TO_CHAR(ACCESS_DATE) AND '2020.02.30' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant3" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.03.01' AND ACCESS_DATE <= '2020.03.31']]>
+		<![CDATA[WHERE '2020.03.01' <= TO_CHAR(ACCESS_DATE) AND '2020.03.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant4" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.04.01' AND ACCESS_DATE <= '2020.04.30']]>
+		<![CDATA[WHERE '2020.04.01' <= TO_CHAR(ACCESS_DATE) AND '2020.04.31' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 
 		
 	<select id="mVisitant5" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.05.01' AND ACCESS_DATE <= '2020.05.31']]>
+		<![CDATA[WHERE '2020.05.01' <= TO_CHAR(ACCESS_DATE) AND '2020.05.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant6" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.06.01' AND ACCESS_DATE <= '2020.06.30']]>
+		<![CDATA[WHERE '2020.06.01' <= TO_CHAR(ACCESS_DATE) AND '2020.06.31' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant7" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.07.01' AND ACCESS_DATE <= '2020.07.31']]>
+		<![CDATA[WHERE '2020.07.01' <= TO_CHAR(ACCESS_DATE) AND '2020.07.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant8" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.08.01' AND ACCESS_DATE <= '2020.08.31']]>
+		<![CDATA[WHERE '2020.08.01' <= TO_CHAR(ACCESS_DATE) AND '2020.08.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant9" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.09.01' AND ACCESS_DATE <= '2020.09.31']]>
+		<![CDATA[WHERE '2020.09.01' <= TO_CHAR(ACCESS_DATE) AND '2020.09.31' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant10" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.10.01' AND ACCESS_DATE <= '2020.10.31']]>
+		<![CDATA[WHERE '2020.10.01' <= TO_CHAR(ACCESS_DATE) AND '2020.10.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant11" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.11.01' AND ACCESS_DATE <= '2020.11.30']]>
+		<![CDATA[WHERE '2020.11.01' <= TO_CHAR(ACCESS_DATE) AND '2020.11.31' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	
 	<select id="mVisitant12" resultType="_int">
 		SELECT COUNT(*)
 		FROM USER_ACCESS
-		<![CDATA[WHERE ACCESS_DATE >= '2020.12.01' AND ACCESS_DATE <= '2020.12.31']]>
+		<![CDATA[WHERE '2020.12.01' <= TO_CHAR(ACCESS_DATE) AND '2020.12.32' > TO_CHAR(ACCESS_DATE)]]>
 	</select> 	
 	<!---->
 	

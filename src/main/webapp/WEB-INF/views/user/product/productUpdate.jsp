@@ -37,7 +37,7 @@
 			</div>
 			<div class="frame1_addproduct">
 				<!--이미지 파일 업로드-->
-				<input class="input_image_addproducthtml" type='file' id='upload' name='upload' />
+				<input class="input_image_addproducthtml" type='file' accept=".gif, .jpg, .png" id='upload' name='upload' />
 				<!-- 이미지 미리보기 공간 -->
 				<div class="priviewimg_addproduct" id='preview'>
 					<button type="button" class="img_addproduct2"

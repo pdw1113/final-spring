@@ -154,11 +154,14 @@
       <script>
       function buttonclick(){
      		if($("#second-input").val() > $("#second-input-2").val()){
-  	 		 alert("날짜 정보가 잘못 되었습니다.");
-      		 return false;
-     	 	}else {
-     	 		return true;
-     	 	}
+   	 		    alert("날짜 정보가 잘못 되었습니다.");
+       		    return false;
+      		}else if($("#second-input").val() == ""){
+      			alert("날짜를 입력해주세요.");
+      		    return false;
+      	 	}else {
+      	 		return true;
+      	 	}
       }
       
 
@@ -170,7 +173,7 @@
      		}else if($(this).val() == "4"){
      			$('.selectBox').val(4);
      		}else if($(this).val() == "1"){
-     			$('.selectBox').val("");
+     			$('.selectBox').val("1");
      		}
        });
       </script>
