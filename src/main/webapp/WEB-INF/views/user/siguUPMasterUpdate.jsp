@@ -44,7 +44,7 @@
                 <div class="img-container-sgm border-radius-100">
                 	<input type="hidden" value="${masterList.mProPicRe}" name="_mProPicRe"/>
                     <img src="resources/masterImg/${masterList.mProPicRe}" class="img-style-size" id="profile_img" onclick="picUpload(this);">
-                    <input type="file" id="profile_file" name="_mProPicOri" class="pick" value="${masterList.mProPicOri}" hidden>
+                    <input type="file" id="profile_file" name="_mProPicOri" accept=".gif, .jpg, .png" class="pick" value="${masterList.mProPicOri}" hidden>
                 </div>
                 <div class="img-container-info">
                     <br>
@@ -499,7 +499,7 @@
                     <div class="img-container-sgm-2">
                   		<input type="hidden" value="${masterList.mIdPicRe}" name="_mIdPicRe"/>
                         <img src="resources/masterImg/${masterList.mIdPicRe}"  class="img-style-size2" id="idCard_img" onclick="picUpload(this);">
-                        <input type="file" id="idCard_file" name="_mIdPicOri" class="pick">
+                        <input type="file" id="idCard_file" name="_mIdPicOri" accept=".gif, .jpg, .png" class="pick">
                     </div>
                     <div class="img-container-info-2">
                         <br>
@@ -568,7 +568,7 @@
                         <input class="input_master width_242" type="text" id="fword3" placeholder="학과(대학교 입력필수)" name="sUnivDept"
                          value="${SchoolList.sUnivDept}">
                         <span class="btn_sgm font_jua" id="btn-sUniv" onclick="picUpload(this);">업로드</span>          
-                        <input type="file" name="_sUnivPicOri" hidden onchange="ok(this);" >
+                        <input type="file" name="_sUnivPicOri" accept=".gif, .jpg, .png" hidden onchange="ok(this);" >
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
@@ -577,7 +577,7 @@
                         <input class="input_master width_242" type="text" id="fword5" placeholder="학과(대학원 입력필수)" name="sUniv2Dept"
                         value="${SchoolList.sUniv2Dept}">
                         <span class="btn_sgm font_jua" id="btn-sUniv2" onclick="picUpload(this);">업로드</span>
-                        <input type="file"  name="_sUniv2PicOri" hidden onchange="ok(this);">
+                        <input type="file"  name="_sUniv2PicOri" accept=".gif, .jpg, .png" hidden onchange="ok(this);">
                         <span class="upCheck">OK</span>
                     </div>
                 </div>
@@ -663,35 +663,35 @@
                         <input class="input_master" type="text" id="fword6" placeholder="자격증" name="q1"
                          value="${QualifcationList.q1}">
                         <span class="btn_sgm font_jua" id="btn-sUniv3" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="_q1PicOri">
+                        <input type="file" hidden accept=".gif, .jpg, .png" onchange="ok(this);" name="_q1PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" id="fword7" placeholder="자격증" name="q2"
                         value="${QualifcationList.q2}">
                         <span class="btn_sgm font_jua" id="btn-sUniv4" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="_q2PicOri">
+                        <input type="file" hidden accept=".gif, .jpg, .png" onchange="ok(this);" name="_q2PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" id="fword8" placeholder="자격증" name="q3"
                         value="${QualifcationList.q3}">
                         <span class="btn_sgm font_jua" id="btn-sUniv5" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="_q3PicOri">
+                        <input type="file" hidden accept=".gif, .jpg, .png" onchange="ok(this);" name="_q3PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" id="fword9" placeholder="자격증" name="q4"
                         value="${QualifcationList.q4}">
                         <span class="btn_sgm font_jua" id="btn-sUniv6" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="_q4PicOri">
+                        <input type="file" hidden accept=".gif, .jpg, .png" onchange="ok(this);" name="_q4PicOri">
                         <span class="upCheck">OK</span>
                     </div>
                     <div>
                         <input class="input_master" type="text" id="fword10" placeholder="자격증" name="q5"
                         value="${QualifcationList.q5}">
                         <span class="btn_sgm font_jua" id="btn-sUniv7" onclick="picUpload(this);">업로드</span>
-                        <input type="file" hidden onchange="ok(this);" name="_q5PicOri">
+                        <input type="file" hidden accept=".gif, .jpg, .png" onchange="ok(this);" name="_q5PicOri">
                         <span class="upCheck">OK</span>
                     </div>
 

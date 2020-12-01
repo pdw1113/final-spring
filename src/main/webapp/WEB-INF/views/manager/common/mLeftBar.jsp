@@ -47,13 +47,8 @@
             <a href="mBoardForbidden.do"  class="Admin-Atag">금칙어 관리</a>
          </li>
          <li class="Admin-leftbar-li">
-            <a href="#" class="Admin-fistAtag">기본약관</a>
-            <a href="mPolicy.do" class="Admin-Atag">기본정책 관리</a>
-         </li>
-         <li class="Admin-leftbar-li">
             <a href="#" class="Admin-fistAtag">알림,상담</a>
             <a href="mNoticeMail.do" class="Admin-Atag">메일 발송</a>
-            <a href="mNoticeKakao.do" class="Admin-Atag">카카오톡 알림톡</a>
             <a href="mNoticeTalk.do" class="Admin-Atag">1:1채팅상담</a>
          </li>
       </ul>

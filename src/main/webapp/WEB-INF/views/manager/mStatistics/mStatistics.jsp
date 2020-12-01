@@ -35,15 +35,15 @@
             
             <ul class="stat-ul">
                <li class="stat-li">
-                  <h2 class="number"></h2>
+                  <h2 class="number">0</h2>
                   <i>Clients</i>
                </li>
                <li class="stat-li">
-                  <h2 class="number"></h2>
+                  <h2 class="number">0</h2>
                   <i>Gosu</i>
                </li>
                <li class="stat-li">
-                  <h2 class="number"></h2>
+                  <h2 class="number">0</h2>
                   <i>Deal</i>
                </li>
             </ul>
@@ -68,9 +68,9 @@
                   <table class="type07">
                      <thead>
                         <tr class="fontsize">
-                           <th scope="cols">순위</th>
-                           <th scope="cols">조회수</th>
-                           <th scope="cols">주문상품</th>
+                           <th id="th3" scope="cols">순위</th>
+                           <th id="th3" scope="cols">상품</th>
+                           <th id="th3" scope="cols">닉네임</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -95,9 +95,9 @@
                   <table class="type07">
                      <thead>
                         <tr class="fontsize">
-                           <th scope="cols">순위</th>
-                           <th scope="cols">상품</th>
-                           <th scope="cols">닉네임</th>
+                           <th id="th3" scope="cols">순위</th>
+                           <th id="th3" scope="cols">상품</th>
+                           <th id="th3" scope="cols">닉네임</th>
                         </tr>
                      </thead>
                      <tbody>

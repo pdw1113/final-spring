@@ -7,7 +7,7 @@ public class Product {
 	private String nickName;    // 별명    [외래키]
 	private int no;             // 글번호
 	private String title;       // 글제목
-	private String mRankPic;		// 마스터 랭크 이미지	
+	private String mRankPic;	// 마스터 랭크 이미지	
 	private String pic; 		// 사진
 	private String renamePic;	// 사진 저장 파일명
 	private String cateone;		// 1분류 카테고리
