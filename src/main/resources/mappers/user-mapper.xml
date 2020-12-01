@@ -113,6 +113,10 @@
 		<result property="refund" column="USER_BUY_REFUND" />
 	</resultMap>
 	
+	<resultMap type="Admin" id="adminResultSet">
+		<result property="email" column="USER_EMAIL" />
+	</resultMap>
+	
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="User"
 		resultMap="userResultSet">
@@ -679,4 +683,20 @@
 	</choose>
         
 	</update>
+	
+	
+	
+	<select id="rankPic" parameterType="UserMaster" resultMap="userMasterResultSet">
+		SELECT MASTER_RANK_PIC
+		FROM NEEZ_MASTER
+		WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<select id="admin" parameterType="Admin" resultMap="adminResultSet">
+		SELECT *
+		FROM NEEZ_ADIMIN
+		WHERE USER_EMAIL = #{email}
+	</select>
+
+	
 </mapper>

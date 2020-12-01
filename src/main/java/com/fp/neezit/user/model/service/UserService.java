@@ -13,6 +13,7 @@ import com.fp.neezit.user.model.vo.UserMasterSchool;
 import com.fp.neezit.user.model.vo.UserMaster;
 import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
+import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
@@ -119,6 +120,10 @@ public interface UserService {
 	int rankUpdate(HashMap<String, Integer> map2);
 
 	int rank(String nick);
+
+	UserMaster rankPic(User u);
+
+	Admin admin(User u);
 	
 
 

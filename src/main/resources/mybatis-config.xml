@@ -22,6 +22,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.UserAccess"  alias="UserAccess"/>
       <typeAlias type="com.fp.neezit.manager.model.vo.UserBean" alias="UserBean"/>
       <typeAlias type="com.fp.neezit.support.model.vo.Notice" alias="Notice"/>
+      <typeAlias type="com.fp.neezit.user.model.vo.Admin" alias="Admin"/>
    </typeAliases>
    
    <!-- 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
+import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
@@ -234,6 +235,14 @@ public class UserDao {
 
 	public int rank(String nick) {
 		return sqlSession.selectOne("userMapper.rank",nick);
+	}
+
+	public UserMaster rankPic(User u) {
+		return sqlSession.selectOne("userMapper.rankPic",u);
+	}
+
+	public Admin admin(User u) {
+		return sqlSession.selectOne("userMapper.admin",u);
 	}
 
 
