@@ -27,7 +27,7 @@ import com.fp.neezit.user.model.vo.UserMaster;
 /**
  * Handles requests for the application home page.
  */
-@SessionAttributes("master3")
+@SessionAttributes({"master3","mRankPic"})
 @Controller
 public class IndexController {
 	@Autowired
