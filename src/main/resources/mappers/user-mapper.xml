@@ -121,23 +121,36 @@
 			= #{pwd} AND USER_STATUS = 'N' -->
 
 		<!-- 암호화 후 -->
-		SELECT *
-		FROM NEEZ_USER
-		WHERE USER_EMAIL = #{email}
-		AND USER_STATUS = 'N'
+		SELECT 
+		       *
+		  FROM NEEZ_USER
+		 WHERE USER_EMAIL = #{email}
+		   AND USER_STATUS = 'N'
 	</select>
 
 	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO NEEZ_USER
-		VALUES(#{name},#{phone},#{email},#{pwd},default,default,default,default,default)
+		INSERT 
+		  INTO NEEZ_USER
+		VALUES(
+		        #{name}
+		      , #{phone}
+		      , #{email}
+		      , #{pwd}
+		      , default
+		      , default
+		      , default
+		      , default
+		      , default
+		      )
 	</insert>
 
 	<!-- 휴대폰번호 중복 체크 -->
 	<select id="phoneCheck" parameterType="string" resultType="_int">
-		SELECT COUNT(*)
-		FROM NEEZ_USER
-		WHERE USER_PHONE = #{phone}
+		SELECT 
+		       COUNT(*)
+		  FROM NEEZ_USER
+		 WHERE USER_PHONE = #{phone}
 	</select>
 
 	<!-- 이메일 중복 체크 -->
@@ -149,23 +162,47 @@
 
 	<!-- 휴대폰번호 변경 -->
 	<update id="modifyPhone" parameterType="User">
-		UPDATE NEEZ_USER
-		SET USER_PHONE = #{phone}
-		WHERE USER_EMAIL = #{email}
+		UPDATE 
+		       NEEZ_USER
+		   SET USER_PHONE = #{phone}
+		 WHERE USER_EMAIL = #{email}
 	</update>
 
 	<!-- 능력자 등록 -->
 	<insert id="insertMaster" parameterType="UserMaster">
-		INSERT INTO NEEZ_MASTER
-		VALUES(#{email},default,default,#{mProPicOri},#{mProPicRe},#{mNickname},#{mCategory},#{mIdPicOri},#{mIdPicRe},#{mWorkDay},#{mWorkStyle},#{mStartTime},#{mEndTime},DEFAULT)
+		INSERT 
+		  INTO NEEZ_MASTER
+		VALUES(
+		        #{email},default,default,#{mProPicOri},#{mProPicRe},#{mNickname},#{mCategory},#{mIdPicOri},#{mIdPicRe},#{mWorkDay},#{mWorkStyle},#{mStartTime},#{mEndTime},DEFAULT)
 	</insert>
 
 	<!-- 능력자 학력 등록 -->
 	<insert id="insertMasterSchool">
-		INSERT INTO SCHOOL (USER_EMAIL, MASTER_HIGH, MASTER_UNIV, MASTER_UNIV_DEPT,
-		MASTER_UNIV_PIC_ORI, MASTER_UNIV_PIC_RE, MASTER_UNIV2,
-		MASTER_UNIV2_DEPT, MASTER_UNIV2_PIC_ORI, MASTER_UNIV2_PIC_RE)
-		VALUES(#{email},#{sHigh},#{sUniv},#{sUnivDept},#{sUnivPicOri},#{sUnivPicRe},#{sUniv2},#{sUniv2Dept},#{sUniv2PicOri},#{sUniv2PicRe})
+		INSERT 
+		  INTO SCHOOL (
+		                USER_EMAIL
+		              , MASTER_HIGH
+		              , MASTER_UNIV
+		              , MASTER_UNIV_DEPT
+		              , MASTER_UNIV_PIC_ORI
+		              , MASTER_UNIV_PIC_RE
+		              , MASTER_UNIV2
+		              , MASTER_UNIV2_DEPT
+		              , MASTER_UNIV2_PIC_ORI
+		              , MASTER_UNIV2_PIC_RE
+		              )
+	   VALUES( 
+	           #{email}
+	         , #{sHigh}
+	         , #{sUniv}
+	         , #{sUnivDept}
+	         , #{sUnivPicOri}
+	         , #{sUnivPicRe}
+	         , #{sUniv2}
+	         , #{sUniv2Dept}
+	         , #{sUniv2PicOri}
+	         , #{sUniv2PicRe}
+	         )
 	</insert>
 
 	<!-- 능력자 sns 등록 -->
@@ -191,34 +228,35 @@
 	<!-- 별명 중복 체크 -->
 	<select id="nickCheck" parameterType="string" resultType="_int">
 		SELECT
-		COUNT(*)
-		FROM NEEZ_MASTER
-		WHERE MASTER_NICKNAME = #{nickname}
+		       COUNT(*)
+		  FROM NEEZ_MASTER
+		 WHERE MASTER_NICKNAME = #{nickname}
 	</select>
 	
 	<!-- 별명 중복 체크(update) -->
 	<select id="nickCheckUp" parameterType="string" resultType="_int">
 		SELECT
-		COUNT(*)
-		FROM NEEZ_MASTER
-		WHERE USER_EMAIL != #{email2} AND MASTER_NICKNAME = #{nickname2}
+		       COUNT(*)
+		  FROM NEEZ_MASTER
+		 WHERE USER_EMAIL != #{email2} 
+		   AND MASTER_NICKNAME = #{nickname2}
 	</select>
 
 	<!-- 마케팅 수신동의 변경 -->
 	<update id="marketing" parameterType="User">
 		UPDATE NEEZ_USER
-		SET
-		USER_MARKETING_T = #{marketingT},
-		USER_MARKETING_E = #{marketingE}
-		WHERE USER_EMAIL = #{email}
+		   SET
+		       USER_MARKETING_T = #{marketingT}
+		     , USER_MARKETING_E = #{marketingE}
+		 WHERE USER_EMAIL = #{email}
 	</update>
 
 	<!-- 비밀번호 변경 -->
 	<update id="modifyPwd" parameterType="User">
 		UPDATE NEEZ_USER
-		SET
-		USER_PASSWORD = #{pwd}
-		WHERE USER_EMAIL = #{email}
+		   SET
+		       USER_PASSWORD = #{pwd}
+		 WHERE USER_EMAIL = #{email}
 	</update>
 
 	<!-- 유저삭제 -->
@@ -679,4 +717,8 @@
 	</choose>
         
 	</update>
+	<insert id="insertKakao" parameterType="hashmap">
+		INSERT INTO NEEZ_USER(USER_NAME,USER_PHONE,USER_EMAIL,USER_PASSWORD) VALUES(#{name},DEFAULT,#{email},#{pwd})
+	</insert>
+	
 </mapper>

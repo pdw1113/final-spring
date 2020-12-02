@@ -3,6 +3,7 @@ package com.fp.neezit.user.controller;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fp.neezit.user.model.service.KakaoService;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.Getip;
 import com.fp.neezit.user.model.vo.User;
@@ -78,7 +81,7 @@ public class UserContoller {
 				map.put("rankname", "사용자");
 			}
 			
-			int  ipresult = uService.insertIP(map);
+			int ipresult = uService.insertIP(map);
 			
 			return "redirect:index.do";
 		} else {
@@ -94,10 +97,14 @@ public class UserContoller {
 	 * @return
 	 */
 	@RequestMapping("logout.do")
-	public String logout(SessionStatus status) {
-
+	public String logout(SessionStatus status,String token) {
+		
+		// 카카오로그인의 토큰값이 있다면
+		if(token!="") {
+		      KakaoService.kakaoLogout(token);
+		}
+		// 일반로그인 로그아웃
 		status.setComplete();
-
 		return "redirect:logout2.do";
 	}
 
@@ -161,4 +168,90 @@ public class UserContoller {
 		}
 		return "user/changePwd";
 	}
+	
+
+	/**
+	 * 6. 카카오 로그인
+	 * @param email
+	 * @param name
+	 * @param pwd
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("kakaoLogin.do")
+	public String kakaoLogin(String email,String name,String pwd, Model model, HttpServletRequest request){
+
+		// 로그인을 위한 map
+		HashMap<String, String> map = new HashMap<String, String>();
+		String Pwd = (bcryptPasswordEncoder.encode(pwd));
+		  
+		//접속한 아이피 구해오기
+		String ip = new Getip().getClientIP(request);
+		HashMap<String,String> map2 = new HashMap<String, String>();
+		
+		map2.put("ip", ip);
+		map2.put("email", email);
+		map2.put("name", name);
+		
+		// DB에 회원가입 이력 있는지 유효성 검사
+		int emailresult = uService.emailCheck(email);
+		
+		if (emailresult == 1) { // 저장된 이메일 확인
+			User u = new User();
+			u.setEmail(email);
+			u.setPwd(Pwd);
+			// 기존 정보 가져오기
+			User loginUser = uService.loginUser(u);
+			// 능력자 등록 여부 확인
+			int master = uService.master(u);
+
+			
+			model.addAttribute("loginUser", loginUser);
+			
+			if(master == 1) { // 능력자이면
+				String rankname = uService.getMasterRank(loginUser.getEmail());
+				map2.put("rankname", rankname);
+				model.addAttribute("master2", master);
+			}else {
+				map2.put("rankname", "사용자");
+			}
+			
+			int ipresult = uService.insertIP(map2);
+			return "redirect:index.do";
+			
+		}else {
+			// 카카오 정보로 회원가입
+		  map.put("email", email);
+		  map.put("name",name);
+		  map.put("pwd",Pwd);
+		  int result = uService.insertKakao(map);
+		  
+		  if(result == 1) { // 회원가입 성공
+				User u = new User();
+				u.setEmail(email);
+				u.setPwd(Pwd);
+				
+				User loginUser = uService.loginUser(u);
+				int master = uService.master(u);
+				
+				model.addAttribute("loginUser", loginUser);
+				if(master == 1) {
+					String rankname = uService.getMasterRank(loginUser.getEmail());
+					map2.put("rankname", rankname);
+					model.addAttribute("master2", master);
+				}else {
+					map2.put("rankname", "사용자");
+				}
+				
+			  int ipresult = uService.insertIP(map2);
+				
+			  return "redirect:index.do";
+		  }else {
+			  System.out.println("카카오 회원가입 실패");
+			  return "redirect:index.do";
+		  }
+		}
+	}
+
 }

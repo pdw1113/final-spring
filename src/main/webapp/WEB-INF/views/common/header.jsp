@@ -5,6 +5,8 @@
    <head>
       <meta charset="utf-8">
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+      
       <title>HEAD</title>
       <link rel="stylesheet" type="text/css" href="resources/css/header.css">
    </head>
@@ -34,11 +36,6 @@
                      </a>
                   </div>
                   <div class="login_box_Mainhead">
-                     <a href="signUp.do">
-                        <div class="head_login_Mainhead w_100p">회원가입</div>
-                     </a>
-                  </div>
-                  <div class="login_box_Mainhead">
                      <a href="mStatistics.do">
                         <div class="head_login_Mainhead" style="margin-right: 0.7rem;">관리자</div>
                      </a>
@@ -46,11 +43,8 @@
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
-             <div>
-               <div class="login_box_Mainhead">
-                  <a href="logout.do">
+               <div class="login_box_Mainhead" onclick="logout();" style="cursor:pointer;">
                      <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
-                  </a>
                </div>
                <div class="login_box_Mainhead">
                   <a href="profile.do">
@@ -123,5 +117,19 @@
              $('body').css("font-family","Apple Color Emoji").css("line-height","1.6");
          });
       </script>
+      <script type='text/javascript'>
+	        //<![CDATA[
+			// 사용할 앱의 JavaScript 키를 설정해 주세요.
+	        Kakao.init('d9e38ce6222396ec9c46084186906ad7');
+	        function logout(){
+	        	$("#token").val(Kakao.Auth.getAccessToken());
+	        	$('.logout_button_form').trigger("click");
+	        }
+	      //]]>
+	    </script>
+	    <form action="logout.do" method="post">
+			 	<input style="visibility: hidden;" name="token" id="token" value="">
+				<button class="logout_button_form" style="visibility: hidden;"></button>
+		</form>
    </body>
 </html>

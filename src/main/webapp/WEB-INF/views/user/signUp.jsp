@@ -59,21 +59,6 @@
                </span>
             </div>
          </form>
-         
-         <!-- 카카오톡 회원가입 -->
-         <a href="#">
-            <div class="kakao_signup">
-               <img src="./resources/img/kakaotalk_login_img.png" class="kakao_img">
-               <span class="sns_signUp">카카오톡으로 회원가입</span>
-            </div>
-         </a>
-         <!-- 네이버 회원가입 -->
-         <a href="#">
-            <div class="naver_signup">
-               <img src="./resources/img/naver_login_img.png" class="naver_img"> 
-               <span class="sns_signUp">네이버로 회원가입</span>
-            </div>
-         </a>
       </div>
       <%@ include file="../common/footer.jsp" %>
       

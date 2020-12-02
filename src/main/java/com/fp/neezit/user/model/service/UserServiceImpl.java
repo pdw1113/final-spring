@@ -286,5 +286,10 @@ public class UserServiceImpl implements UserService{
 		return uDao.rankUpdate(map2);
 	}
 
+	@Override
+	public int insertKakao(HashMap<String, String> map) {
+		return uDao.insertKakao(map);
+	}
+
 
 }

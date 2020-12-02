@@ -119,6 +119,8 @@ public interface UserService {
 	int rankUpdate(HashMap<String, Integer> map2);
 
 	int rank(String nick);
+
+	int insertKakao(HashMap<String, String> map);
 	
 
 

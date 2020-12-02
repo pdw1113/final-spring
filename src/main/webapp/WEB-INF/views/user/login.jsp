@@ -27,39 +27,74 @@
          <input class="login_input_login" type="password" placeholder="비밀번호를 입력하세요" name="pwd">
          <!-- 버튼폼 -->
          <div class="button_login">
+            <a href="signUp.do">
+               <div class="login_button_login">회원가입</div>
+            </a>
             <a href="findPwd.do">
                <div class="login_button_login">PWD 찾기</div>
             </a>
             <span>
                <button class="login_button_form">로그인</button>
-            <span>
+            </span>
          </div>
          <!-- 카톡로그인 -->
-         <a href="#">
-            <div class="kakao_login">
-               <img src="./resources/img/kakaotalk_login_img.png" class="img_css_1">
-               <span class="span_kakao">카카오톡으로 로그인</span>
-            </div>
-         </a>
-         <!-- 네이버 로그인 -->
-         <a href="#">
-            <div class="naver_login">
-               <img src="./resources/img/naver_login_img.png" class="img_css_2"> 
-               <span class="span_naver">네이버로 로그인</span>
-            </div>
-	      </div>
-	      </a>
-      </form>
+       	<a id="kakao-login-btn"></a>
+	    <script type='text/javascript'>
+	        //<![CDATA[
+	        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	        // Kakao.init('d9e38ce6222396ec9c46084186906ad7'); 헤더 영역에 넣어줌
+	        // 카카오 로그인 버튼을 생성합니다.
+	        Kakao.Auth.createLoginButton({
+	            container: '#kakao-login-btn',
+	            success: function (authObj) {
+	                //console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
+					
+	                // 사용자정보 요청받는 ajax
+	                Kakao.API.request({
+						url:"/v2/user/me",
+						success : function(res){
+							$("#token").val(Kakao.Auth.getAccessToken()); 	// 로그아웃에 활용할 토큰
+	                        $("#email").val(res.kakao_account && res.kakao_account.email);
+	                        $("#name").val(res.properties.nickname);		// 회원 닉네임(이름)
+	                        $("#pwd").val(res.id); 							// (res.id=회원 고유 번호)를 비번으로 지정
+	                        $('.login_button_form').trigger("click");
+						},
+						
+						fail: function (err) {
+			                alert(JSON.stringify(err));
+			            }
+					})
+					var token = authObj.access_token;
+	            },
+	            fail: function (err) {
+	                alert(JSON.stringify(err));
+	            }
+	        });
+	        
+	      //]]>
+		</script>
+		</form>
       
+		<form action="kakaoLogin.do" method="post">
+		 	<input style="visibility: hidden;" name="email" id="email" value="">
+		 	<input style="visibility: hidden;" name="name" id="name" value="">
+		 	<input style="visibility: hidden;" name="pwd" id="pwd" value="">
+			<button class="login_button_form" style="visibility: hidden;"></button>
+		</form>
+
       <script>
     	let msg = "${msg}";
       	if(msg!=null){
       		if(msg==1){
       			alert("등록되지 않은 회원입니다.");
       			location.href="loginPage.do";
+      		}else if(msg==2){
+      			alert("이미 존재하는 이메일 입니다.");
+      			location.href="loginPage.do";
       		}
       	}
       </script>
+      </div>
       <%@ include file="../common/footer.jsp" %>
    </body>
 </html>

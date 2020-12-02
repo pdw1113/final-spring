@@ -233,7 +233,7 @@ public class UserSignUpController {
  		
  		// 이제 서비스로 이동
  		int result = uService.insertMember(u);
- 		if(result > 0) {
+ 		if(result == 1) {
  			return "redirect:index.do";
  		}else {
  			model.addAttribute("msg","회원가입실패");

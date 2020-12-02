@@ -236,5 +236,9 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.rank",nick);
 	}
 
+	public int insertKakao(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.insertKakao",map);
+	}
+
 
 }
