@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fp.neezit.product.model.service.ProductService;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
@@ -34,16 +36,23 @@ public class IndexController {
 	private UserService uService;
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
+	@Autowired
+	ProductService pService;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(User u,Model model,HttpServletRequest request) {
-		
-		
+	public String index(Model model) {
+		// 가성비 상품
+		ArrayList<Product> proCost = pService.getProductCost();
+
+		model.addAttribute("proCost",proCost);
+				
 		List<Thanos> th = uService.thanosList();
 
 		model.addAttribute("thanos", th);
+				
 		return "index";
 	}
 
@@ -61,6 +70,8 @@ public class IndexController {
 			List<Thanos> th = uService.thanosList();
 			model.addAttribute("thanos", th);
 		}
+		ArrayList<Product> proCost = pService.getProductCost();
+		model.addAttribute("proCost",proCost);
 		return "index";
 	}
 
