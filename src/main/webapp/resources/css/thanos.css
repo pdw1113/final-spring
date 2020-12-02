@@ -112,3 +112,27 @@ width: 33rem;
 #power{
 text-align: center;
 }
+#upd{
+	margin-top: -400px;
+    margin-right: 620px;
+}
+#can{
+	margin-top: -400px;
+    margin-right: 300px;
+}
+#upd2{
+    margin-top: -400px;
+    text-align: center;
+    margin-right: 670px;
+}
+#del2{
+    margin-top: -400px;
+    margin-right: 850px;
+}
+#can2{
+	margin-top: -400px;
+    margin-right: 300px;
+}
+.frm{
+	margin-top: 150px;
+}

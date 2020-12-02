@@ -14,6 +14,7 @@ import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
 import com.fp.neezit.user.model.vo.UserMaster;
@@ -244,6 +245,27 @@ public class UserDao {
 	public Admin admin(User u) {
 		return sqlSession.selectOne("userMapper.admin",u);
 	}
+
+	public int thanosInsert(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.thanosInsert",map);
+	}
+
+	public List<Thanos> thanosList() {
+		return sqlSession.selectList("userMapper.thanosList");
+	}
+
+	public List<Thanos> thanosList2(String masterName) {
+		return sqlSession.selectList("userMapper.thanosList2",masterName);
+	}
+
+	public int thanosUpdate(HashMap<String, String> map) {
+		return sqlSession.update("userMapper.thanosUpdate",map);
+	}
+
+	public int thanosDelete(String masterName1) {
+		return sqlSession.delete("userMapper.thanosDelete",masterName1);
+	}
+
 
 
 }

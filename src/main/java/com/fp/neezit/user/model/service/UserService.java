@@ -15,6 +15,7 @@ import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
 import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
 
@@ -124,6 +125,18 @@ public interface UserService {
 	UserMaster rankPic(User u);
 
 	Admin admin(User u);
+
+	int thanosInsert(HashMap<String, String> map);
+
+	List<Thanos> thanosList();
+
+	List<Thanos> thanosList2(String masterName);
+
+	int thanosUpdate(HashMap<String, String> map);
+
+	int thanosDelete(String masterName1);
+
+
 	
 
 

@@ -3,7 +3,10 @@ package com.fp.neezit;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
+import com.fp.neezit.user.model.vo.UserMaster;
 
 /**
  * Handles requests for the application home page.
@@ -40,11 +45,15 @@ public class IndexController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Model model) {
 		// 가성비 상품
-				ArrayList<Product> proCost = pService.getProductCost();
+		ArrayList<Product> proCost = pService.getProductCost();
 
-				model.addAttribute("proCost",proCost);
+		model.addAttribute("proCost",proCost);
 				
-				return "index";
+		List<Thanos> th = uService.thanosList();
+
+		model.addAttribute("thanos", th);
+				
+		return "index";
 	}
 
 	@RequestMapping(value = "index2.do", method = RequestMethod.GET)
@@ -53,9 +62,13 @@ public class IndexController {
 		System.err.println("index2 : " + master );
 		if(master == 1) {
 			String mRankPic = "test";
-			System.out.println(mRankPic);
+			String thanosHand = "인피니티능력자";
+			model.addAttribute("thanosHand", thanosHand);
 			model.addAttribute("mRankPic", mRankPic);
 			model.addAttribute("master3", master);
+			
+			List<Thanos> th = uService.thanosList();
+			model.addAttribute("thanos", th);
 		}
 		ArrayList<Product> proCost = pService.getProductCost();
 		model.addAttribute("proCost",proCost);

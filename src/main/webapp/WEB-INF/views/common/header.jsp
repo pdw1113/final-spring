@@ -38,14 +38,9 @@
                         <div class="head_login_Mainhead w_100p">회원가입</div>
                      </a>
                   </div>
-
-
-                  
-                  
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
-             <div>
                <div class="login_box_Mainhead">
                   <a href="logout.do">
                      <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
@@ -103,7 +98,13 @@
 		               </a>
 		         </div>
 	        </c:if>
-            
+            <c:if test="${ sessionScope.rankPic.mRankname eq '인피니티능력자' }">   
+               <div class="login_box_Mainhead">
+                  <a href="thanos.do">
+                     <div class="head_login_Mainhead" id="power">파워노출</div>
+                  </a>
+               </div>
+              </c:if>
             
             <c:if test="${ !empty sessionScope.loginUser }">
                <span class="user_Mainhead">${ loginUser.name }님 환영합니다.</span>
@@ -120,12 +121,9 @@
                    	<img src="resources/img/lv1.png" class="list_rank_index"> 
                </div>
 			</c:if> 
-               
-               
-               
-               
             </div>
-      </div>
+
+      
       
       <script>
       	console.log("master2 : " + "${sessionScope.master2}");

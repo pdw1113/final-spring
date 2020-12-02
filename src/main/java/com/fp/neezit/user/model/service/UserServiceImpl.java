@@ -20,6 +20,7 @@ import com.fp.neezit.user.model.vo.UserMasterSns;
 import com.fp.neezit.user.model.vo.UserWallet;
 import com.fp.neezit.user.model.vo.Admin;
 import com.fp.neezit.user.model.vo.PageInfo;
+import com.fp.neezit.user.model.vo.Thanos;
 import com.fp.neezit.user.model.vo.User;
 import com.fp.neezit.user.model.vo.UserBuyList;
 
@@ -300,6 +301,32 @@ public class UserServiceImpl implements UserService{
 		Admin admin = uDao.admin(u);
 		return admin;
 	}
+
+	@Override
+	public int thanosInsert(HashMap<String, String> map) {
+		return uDao.thanosInsert(map);
+	}
+
+	@Override
+	public List<Thanos> thanosList() {
+		return uDao.thanosList();
+	}
+
+	@Override
+	public List<Thanos> thanosList2(String masterName) {
+		return uDao.thanosList2(masterName);
+	}
+
+	@Override
+	public int thanosUpdate(HashMap<String, String> map) {
+		return uDao.thanosUpdate(map);
+	}
+
+	@Override
+	public int thanosDelete(String masterName1) {
+		return uDao.thanosDelete(masterName1);
+	}
+
 
 
 }
