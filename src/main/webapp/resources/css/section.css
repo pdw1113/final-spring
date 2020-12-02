@@ -94,6 +94,21 @@ margin-left : 110px;
 content: "\e940"; font-family: "xeicon"; /*검사창에서 xi-angle-left-thin:before 를보면 content: "\e93d" 를 가지고 있으므로 적용 시켜준다*/
 margin-right : 110px;
 }
+.main_star_container_index > .fa-star{
+  color:rgb(250,190,0);
+}
+
+.main_star_container_index > .fa-star:not(:first-child){
+  margin-left:-5px;
+}
+
+.main_star_container_index > .fa-star-half-alt{
+  color:rgb(250,190,0);
+}
+
+.main_star_container_index > .fa-star-half-alt:not(:first-child){	
+  margin-left:-5px;
+}
 /*페이징*/
 .bx-pager{position: absolute; left: 0; bottom: 92; width: 100%; text-align: center;}
 .bx-pager div{display: inline-block; padding: 0 5px;} /*가운데 정렬해놓은상태에서 여백주기위해 양쪽에 5px씩준다(한쪽에만 주면 기울어짐)*/

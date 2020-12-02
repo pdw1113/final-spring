@@ -119,5 +119,5 @@ public interface ProductService {
 
 	public int productListSearchCount(HashMap<String, String> map);
 
-	
+	public ArrayList<Product> getProductCost();
 }

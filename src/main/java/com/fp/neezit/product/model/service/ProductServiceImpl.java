@@ -146,4 +146,8 @@ public class ProductServiceImpl implements ProductService{
 		return pDao.productListSearchCount(map);
 	}
 	
+	@Override
+	public ArrayList<Product> getProductCost() {
+		return pDao.getProductCost();
+	}
 }

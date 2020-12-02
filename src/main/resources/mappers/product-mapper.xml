@@ -336,5 +336,12 @@
 		) b
 	</select>
 	
+	<select id="getProductCost" resultMap="productResultSet">
+		<![CDATA[
+		SELECT *  FROM 
+		(SELECT * FROM PRODUCT A
+                    JOIN NEEZ_MASTER B ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
+                    ORDER BY PRODUCT_COUNT DESC) WHERE ROWNUM<=6 ORDER BY PRODUCT_PRICE]]>
+	</select>
 	
 </mapper>
