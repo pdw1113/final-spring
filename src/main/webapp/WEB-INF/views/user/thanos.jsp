@@ -24,11 +24,11 @@
       <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
       <!-- css파일 -->
-      <link rel="stylesheet" type="text/css" href="./resources/css/noticeInsert.css">	
+      <link rel="stylesheet" type="text/css" href="./resources/css/thanos.css">	
    </head>
    <body >
    	<c:if test="${empty thanos}">
-      <form action="thanosInsert.do" id="frm" enctype="multipart/form-data" method="post">
+      <form action="thanosInsert.do" class="frm" enctype="multipart/form-data" method="post">
          <input type="hidden" value="${ master.mNickname }" name="masterName"/>
         <h2 class="font_jua" id="power">메인 파워노출 등록</h2>
       <div class="container_noticeInsert">
@@ -41,15 +41,15 @@
             </div>
          </div>
          <div class="button_div_noticeInsert">
-            <button class="input_button_noticeInsert" onclick="document.getElementById('frm').submit();">등록하기</button>
+            <button class="input_button_noticeInsert" id="upd" onclick="return validate();">등록하기</button>
          </div>
       </div>
      </form>
-       <button class="deny_button_noticeInsert" onclick="location.href='index.do'">취소하기</button>
+       <button class="deny_button_noticeInsert" id="can" onclick="location.href='index.do'">취소하기</button>
      </c:if>
      
      <c:if test="${!empty thanos}">
-     <form action="thanosUpdate.do" id="frm" enctype="multipart/form-data" method="post">
+     <form action="thanosUpdate.do" class="frm" enctype="multipart/form-data" method="post">
          <input type="hidden" value="${ master.mNickname }" name="masterName"/>
         <h2 class="font_jua" id="power">메인 파워노출 수정</h2>
       <div class="container_noticeInsert">
@@ -62,12 +62,12 @@
             </div>
          </div>
          <div class="button_div_noticeInsert">
-            <button class="input_button_noticeInsert" onclick="document.getElementById('frm').submit();">수정하기</button>
+            <button class="input_button_noticeInsert" id="upd2" onclick="return validate();">수정하기</button>
          </div>
       </div>
      </form>
-      <button class="input_button_noticeInsert" onclick="location.href='thanosDelete.do'">삭제하기</button>
-      <button class="deny_button_noticeInsert" onclick="location.href='index.do'">취소하기</button>
+      <button class="input_button_noticeInsert" id="del2" onclick="location.href='thanosDelete.do'">삭제하기</button>
+      <button class="deny_button_noticeInsert" id="can2" onclick="location.href='index.do'">취소하기</button>
      </c:if>
      
      <script>
@@ -79,6 +79,19 @@
               }
           });
       });
+      
+    function validate(){
+        if(!document.getElementById("upload").value){
+            alert("사진을 넣어주세요"); 
+           return false;
+     }else if(!document.getElementById("input_text").value){
+         alert("내용을 입력해주세요"); 
+         return false;
+   }else{
+  	 alert('완료!');
+  	document.forms[0].submit();
+   }
+      }
 
       </script>
    </body>

@@ -53,7 +53,7 @@ public class IndexController {
 		System.err.println("index2 : " + master );
 		if(master == 1) {
 			String mRankPic = "test";
-			String thanosHand = "타노스손";
+			String thanosHand = "인피니티능력자";
 			model.addAttribute("thanosHand", thanosHand);
 			model.addAttribute("mRankPic", mRankPic);
 			model.addAttribute("master3", master);

@@ -196,3 +196,9 @@ body::-webkit-scrollbar { display:none; }
 width: 1.3rem; 
 object-fit: cover; 
 }
+
+/*파워노출*/
+#power{
+	color : #FF8868;
+	border-color : #FF8868;
+}

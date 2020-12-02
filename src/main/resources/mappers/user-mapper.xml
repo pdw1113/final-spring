@@ -676,7 +676,7 @@
                 </when>
                 
                 <when test="rank gte 16">
-                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '타노스손',  MASTER_RANK_PIC = 'lv6.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
+                    UPDATE NEEZ_MASTER SET MASTER_RANKNAME = '인피니티능력자',  MASTER_RANK_PIC = 'lv6.png' WHERE MASTER_NICKNAME IN (SELECT B.MASTER_NICKNAME
                                                                      FROM  product B
                                                                      WHERE B.PRODUCT_NO = #{a})
                 </when>
