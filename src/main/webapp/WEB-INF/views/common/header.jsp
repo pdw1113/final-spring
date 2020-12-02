@@ -75,11 +75,6 @@
                       </a>
                    </span>
                </div>
-               <div class="login_box_Mainhead">
-                  <a href="signUpMasterManage.do">
-                     <div class="head_login_Mainhead w_100p">능력자관리</div>
-                  </a>
-               </div>
                <c:if test="${ !empty sessionScope.loginUser && !empty sessionScope.master2 || !empty sessionScope.master3 }">
 	               <div class="login_box_Mainhead">
 	                  <a href="signUpMasterManage.do">
