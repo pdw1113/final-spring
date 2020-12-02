@@ -127,4 +127,7 @@ public class ProductDao{
 		return sqlSession.selectOne("productMapper.productListSearchCount",map);
 	}
 
+	public ArrayList<Product> getProductCost() {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductCost");
+	}
 }

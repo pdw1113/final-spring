@@ -1,6 +1,7 @@
 package com.fp.neezit;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fp.neezit.product.model.service.ProductService;
+import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.User;
 
@@ -28,13 +31,20 @@ public class IndexController {
 	private UserService uService;
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
+	@Autowired
+	ProductService pService;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index() {
-		
-		return "index";
+	public String index(Model model) {
+		// 가성비 상품
+				ArrayList<Product> proCost = pService.getProductCost();
+
+				model.addAttribute("proCost",proCost);
+				
+				return "index";
 	}
 
 	@RequestMapping(value = "index2.do", method = RequestMethod.GET)
@@ -47,6 +57,8 @@ public class IndexController {
 			model.addAttribute("mRankPic", mRankPic);
 			model.addAttribute("master3", master);
 		}
+		ArrayList<Product> proCost = pService.getProductCost();
+		model.addAttribute("proCost",proCost);
 		return "index";
 	}
 
