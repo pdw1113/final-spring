@@ -60,7 +60,6 @@
       <%@ include file="common/nav.jsp" %>
       <%@ include file="common/section.jsp" %>
       <%@ include file="common/footer.jsp" %>
-      <%@ include file="common/talk.jsp" %>
       <script>
          (function () {
            const slideList = document.querySelector('.slide_list');  // Slide parent dom
@@ -187,6 +186,8 @@
              });
            });
          })();
+         
+         
       </script>
    </body>
 </html>

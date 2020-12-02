@@ -218,7 +218,7 @@ position: relative;
 position: absolute;
 display: inline-block;
 margin-left: 0.3rem; 
-margin-top: 0.8rem;
+margin-top: 0.6rem;
 }
 /* 온라인 일 때 노란색 점 표시 */
 .chatList_box:before{
@@ -232,14 +232,54 @@ background-color: rgb(250,190,0);
 border: 2px solid white;
 border-radius: 50%;
 }
+.chatList_box2{
+padding: 0.1rem;
+font-size: 1rem;
+height: fit-content;
+line-height: inherit;
+border-bottom: 1px  solid rgb(250,190,0);
+position: relative;
+}
+.chatList_box2 div{
+position: absolute;
+display: inline-block;
+margin-left: 0.3rem; 
+margin-top: 0.6rem;
+}
 .notRead{
 float: right;
 border-radius: 10px; 
 padding: 0.3rem; 
 margin-top: 0.3rem;
+margin-right: 0.3rem;
 color: rgb(87, 87, 87);
+background-color: rgb(250,190,0);
+width:1rem;
+text-align: center;
+animation:blink 0.7s ease-in-out infinite alternate;
+}
+@keyframes blink{
+    0% {opacity:0.3;}
+    100% {opacity:1;}
 }
 .chatList_box:hover{
 opacity: 0.6;
 cursor: pointer;
+}
+.chatList_box2:hover{
+opacity: 0.6;
+cursor: pointer;
+}
+.iconBlink{
+position: fixed;
+bottom: 0px;
+right: 1rem;
+bottom: 1rem;
+border: 3px solid rgb(250,190,0);
+background-color: rgb(250,190,0);
+border-radius: 100%;
+width: 3rem;
+height: 3rem;
+text-align: center;
+animation:blink 0.7s ease-in-out infinite alternate;
 }

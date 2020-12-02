@@ -24,6 +24,8 @@
       <typeAlias type="com.fp.neezit.support.model.vo.Notice" alias="Notice"/>
       <typeAlias type="com.fp.neezit.user.model.vo.Admin" alias="Admin"/>
       <typeAlias type="com.fp.neezit.user.model.vo.Thanos" alias="Thanos"/>
+      <typeAlias type="com.fp.neezit.chat.model.vo.ChatMessage"  alias="ChatMessage"/>
+      <typeAlias type="com.fp.neezit.chat.model.vo.ChatRoom"  alias="ChatRoom"/>
    </typeAliases>
    
    <!-- 
@@ -36,7 +38,7 @@
       <mapper resource="mappers/product-mapper.xml"/>
       <mapper resource="mappers/manager-mapper.xml"/> 
       <mapper resource="mappers/support-mapper.xml"/>
+      <mapper resource="mappers/chat-mapper.xml"/>     
    </mappers>
-
 
 </configuration>

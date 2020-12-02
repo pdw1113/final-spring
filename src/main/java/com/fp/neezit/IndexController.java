@@ -83,4 +83,10 @@ public class IndexController {
 
 		return "redirect:index.do";
 	}
+	
+	@RequestMapping("chat.do")
+	public String chat() {
+
+		return "common/chat";
+	}
 }

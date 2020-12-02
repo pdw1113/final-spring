@@ -318,7 +318,7 @@
 							바로 구매하기 </a></li>
 				</ul>
 				<ul class="btn_area">
-					<li class="apply-2"><a href="#" onclick="alert('로그인이 필요합니다');">
+					<li class="apply-2"><a href="#" onclick="return onChat();">
 							채팅하기 </a></li>
 				</ul>
 				</c:if>
@@ -406,6 +406,42 @@
 
 	</script>
 
+	<script>
+		function onChat(){
+			
+			$.ajax({
+				url:"createChat.do",
+				data:{
+					userName:"${loginUser.name}",
+					userEmail:"${loginUser.email}",
+					masterNickname:"${master.mNickname}"
+				},
+				type:"post",
+				success:function(data){
+					// 채팅방이 닫혀있고, 채팅 리스트가 닫혀있다면
+		            if($('.chatContainer').hasClass("display-none") && $('.chatListContainer').hasClass('display-none')){
+		            	// 리스트를 연다
+		                $('.chatListContainer').toggleClass('display-none');
+		             	// 채팅 방 목록을 불러온다.
+		                getRoomList();		
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains("${master.mNickname}")').parent().trigger("click");
+		            }
+					// 채팅 리스트가 열려 있다면
+		            else if(!$('.chatListContainer').hasClass('display-none')){
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains("${master.mNickname}")').parent().trigger("click");
+		            }
+		            else{
+		            	alert("이미 채팅방이 열려 있습니다.");
+		            }
+				}
+			});
+			
+            return false;
+		}
+	</script>
+	
 	<script>
  		function buyConfirm(){
  			let proM = $("#buy_sum").html();

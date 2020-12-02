@@ -142,7 +142,7 @@
                         자바 뉴비들 드루와
                      </p>
                      <div>
-                        <img src="resources/img/44.jpg" class="main_rank_index">
+                        <img src="resources/img/6.jpeg" class="main_rank_index">
                         <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <img src="resources/img/star.png">
@@ -294,7 +294,7 @@
                         자바 뉴비들 드루와
                      </p>
                      <div>
-                        <img src="resources/img/44.jpg" class="main_rank_index">
+                        <img src="resources/img/6.jpeg" class="main_rank_index">
                         <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <img src="resources/img/star.png">
@@ -447,7 +447,7 @@
                         자바 뉴비들 드루와
                      </p>
                      <div>
-                        <img src="resources/img/44.jpg" class="main_rank_index">
+                        <img src="resources/img/6.jpeg" class="main_rank_index">
                         <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <img src="resources/img/star.png">
@@ -547,6 +547,8 @@
                      <div>
                         <img src="resources/img/${pc.mRankPic}" class="main_rank_index">
                         <span class="font_jua">${pc.nickName}</span>
+                        <img src="resources/img/6.jpeg" class="main_rank_index">
+                        <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <c:forEach var="num" begin="1" end="5" step="1" >     
 	                        <c:choose>
@@ -659,7 +661,7 @@
                         자바 뉴비들 드루와
                      </p>
                      <div>
-                        <img src="resources/img/44.jpg" class="main_rank_index">
+                        <img src="resources/img/6.jpeg" class="main_rank_index">
                         <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <img src="resources/img/star.png">
