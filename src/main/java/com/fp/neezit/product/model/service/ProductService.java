@@ -119,5 +119,27 @@ public interface ProductService {
 
 	public int productListSearchCount(HashMap<String, String> map);
 
+	/**
+	 * 가격순
+	 * @return
+	 */
 	public ArrayList<Product> getProductCost();
+
+	/**
+	 * 별점순
+	 * @return
+	 */
+	public ArrayList<Product> getProductStar();
+
+	/**
+	 * 인기순
+	 * @return
+	 */
+	public ArrayList<Product> getProductBest();
+
+	/**
+	 * 루키순
+	 * @return
+	 */
+	public ArrayList<Product> getProductRookie();
 }

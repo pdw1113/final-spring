@@ -150,4 +150,19 @@ public class ProductServiceImpl implements ProductService{
 	public ArrayList<Product> getProductCost() {
 		return pDao.getProductCost();
 	}
+
+	@Override
+	public ArrayList<Product> getProductStar() {
+		return pDao.getProductStar();
+	}
+
+	@Override
+	public ArrayList<Product> getProductBest() {
+		return pDao.getProductBest();
+	}
+
+	@Override
+	public ArrayList<Product> getProductRookie() {
+		return pDao.getProductRookie();
+	}
 }

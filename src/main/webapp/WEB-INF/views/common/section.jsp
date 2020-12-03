@@ -37,152 +37,80 @@
          <span class="main_title_index">별빛이 내린다</span>
          <div class="slider">
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+               <c:forEach var="ps"  begin="0" end="2" step="1" items="${proStar}">
+                <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${ps.no}" />
+				</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/1.png" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${ps.renamePic}" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${ps.title}
                      </p>
                      <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${ps.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${ps.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >
+	                        <c:choose>
+		                        <c:when test="${num <= ps.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == ps.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${ps.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${ps.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/2.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/3.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
-            <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+             <ul class="main_contents_container_index">
+            <c:forEach var="ps"  begin="3" end="5" step="1" items="${proStar}">
+	         <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${ps.no}"/>
+			</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/5.png" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${ps.renamePic}"  class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${ps.title}
                      </p>
                      <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${ps.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${ps.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >     
+	                        <c:choose>
+		                        <c:when test="${num <= ps.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == ps.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${ps.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${ps.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/6.jpeg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/6.jpeg" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/7.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
          </div>
       </div>
@@ -190,152 +118,80 @@
          <span class="main_title_index">최고 인기</span>
          <div class="slider">
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+               <c:forEach var="pb"  begin="0" end="2" step="1" items="${proBest}">
+                <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${pb.no}" />
+				</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/2.png" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${pb.renamePic}" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${pb.title}
                      </p>
                      <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${pb.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${pb.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >
+	                        <c:choose>
+		                        <c:when test="${num <= pb.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == pb.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${pb.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${pb.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/3.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/4.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
-            <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+             <ul class="main_contents_container_index">
+            <c:forEach var="pb"  begin="3" end="5" step="1" items="${proBest}">
+	         <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${pb.no}"/>
+			</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/5.png" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${pb.renamePic}"  class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${pb.title}
                      </p>
                      <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${pb.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${pb.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >     
+	                        <c:choose>
+		                        <c:when test="${num <= pb.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == pb.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${pb.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${pb.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/6.jpeg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/6.jpeg" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/7.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
          </div>
       </div>
@@ -374,7 +230,6 @@
                         <span class="font_jua">(${pc.star})</span>
                         <span>
                         <span class="font_jua">${pc.count}명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
                         </span>
                      </div>
                   </div>
@@ -413,7 +268,6 @@
                         <span class="font_jua">(${pc.star})</span>
                         <span>
                         <span class="font_jua">${pc.count}명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
                         </span>
                      </div>
                   </div>
@@ -426,152 +280,80 @@
          <span class="main_title_index">루키 인사드립니다</span>
          <div class="slider">
             <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+                <c:forEach var="pr"  begin="0" end="2" step="1" items="${proRookie}">
+                <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${pr.no}" />
+				</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/2.png" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${pr.renamePic}" class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${pr.title}
                      </p>
                      <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${pr.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${pr.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >
+	                        <c:choose>
+		                        <c:when test="${num <= pr.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == pr.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${pr.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${pr.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/3.png" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/4.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
-            <ul class="main_contents_container_index">
-               <li class="main_contents_index">
+             <ul class="main_contents_container_index">
+            <c:forEach var="pr"  begin="3" end="5" step="1" items="${proRookie}">
+	         <c:url var="productDetail" value="productDetail.do">
+					<c:param name="no" value="${pr.no}"/>
+			</c:url>
+	         <li class="main_contents_index" onclick="location.href='${productDetail}'">
                   <div>
-                     <img src="resources/img/6.jpeg" class="main_contents_img_index">
+                     <img src="resources/pUploadFiles/${pr.renamePic}"  class="main_contents_img_index">
                      <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
+                         ${pr.title}
                      </p>
                      <div>
-                        <img src="resources/img/6.jpeg" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
+                        <img src="resources/img/${pr.mRankPic}" class="main_rank_index">
+                        <span class="font_jua">${pr.nickName}</span>
                         <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
+                        <c:forEach var="num" begin="1" end="5" step="1" >     
+	                        <c:choose>
+		                        <c:when test="${num <= pr.star}">
+		                            <i class="fas fa-star" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:when test="${num == pr.star+0.5}">
+		                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+		                        </c:when>
+		                         <c:otherwise>
+		                              <i class="far fa-star" aria-hidden="true"></i>
+		                         </c:otherwise>
+		                    </c:choose>    
+                        </c:forEach>
                         </span>
-                        <span class="font_jua">(5.0)</span>
+                        <span class="font_jua">(${pr.star})</span>
                         <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
+                        <span class="font_jua">${pr.count}명선택</span>
                         </span>
                      </div>
                   </div>
                </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/7.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
-               <li class="main_contents_index">
-                  <div>
-                     <img src="resources/img/8.jpg" class="main_contents_img_index">
-                     <p class="font_jua main_explain_index">
-                        자바 뉴비들 드루와
-                     </p>
-                     <div>
-                        <img src="resources/img/lv1.png" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
-                        <span class="main_star_container_index">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        <img src="resources/img/star.png">
-                        </span>
-                        <span class="font_jua">(5.0)</span>
-                        <span>
-                        <span class="font_jua">213명선택</span>
-                        <img src="resources/img/buy.png" class="main_choice_img_index">
-                        </span>
-                     </div>
-                  </div>
-               </li>
+          </c:forEach>
             </ul>
          </div>
       </div>
