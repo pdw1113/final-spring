@@ -243,8 +243,13 @@ public class UserContoller {
 				map2.put("rankname", "사용자");
 			}
 
-			int ipresult = uService.insertIP(map2);
+			uService.insertIP(map2);
 			kalogin = true;
+			
+			/* 채팅 */
+			// 현재 로그인 한 User 채팅 Session ArrayList에 추가.
+			cSession.addLoginUser(loginUser.getEmail());
+			
 			return "redirect:index.do";
 
 		}else {
@@ -271,8 +276,13 @@ public class UserContoller {
 					map2.put("rankname", "사용자");
 				}
 
-			  int ipresult = uService.insertIP(map2);
+			  uService.insertIP(map2);
 			  kalogin = true;
+			  
+			  /* 채팅 */
+			  // 현재 로그인 한 User 채팅 Session ArrayList에 추가.
+			  cSession.addLoginUser(loginUser.getEmail());
+			  
 			  return "redirect:index.do";
 		  }else {
 			  System.out.println("카카오 회원가입 실패");

@@ -289,7 +289,6 @@
 		     
 	</dependencies>
 
-	
     <build>
         <plugins>
             <plugin>
