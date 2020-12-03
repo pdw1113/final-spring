@@ -303,7 +303,7 @@
                   
                       let all = document.getElementsByTagName("input");
                       $(all).attr("readonly",true);
-                  
+                      $('#text2').attr('readonly', false);
                       console.log(obj);
                       for(link in obj){
                           youtube(obj[link]);
