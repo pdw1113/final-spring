@@ -89,8 +89,8 @@
                         <span>금손</span>
                         <input class="checkboxes_mUserList1" type="checkbox" value="다이아손">
                         <span>다이아손</span>
-                        <input class="checkboxes_mUserList1" type="checkbox" value="타노스">
-                        <span>타노스</span>
+                        <input class="checkboxes_mUserList1" type="checkbox" value="인피니티능력자">
+                        <span>인피니티능력자</span>
                         </span>
                      </td>
                   </tr>

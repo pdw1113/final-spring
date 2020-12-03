@@ -14,8 +14,6 @@
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <script type="text/javascript" src="resources/js/typeit.min.js"></script>
       <link rel="stylesheet" type="text/css" href="resources/css/index.css">
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-	  <link rel="icon" href="/favicon.ico" type="image/x-icon">
    </head>
    <body>
       <!-- header 영역 -->
@@ -33,12 +31,14 @@
                <div class="slide_list clearfix">
                 <c:if test="${!empty thanos }">
                 <c:forEach var="th" items="${ thanos }" varStatus="status2">
+            	  <a href="productListSearch.do?search=${th.nickname}">
                   <div class="slide_content slide01">
                      <p class="type_text1">
                				${th.content }
                      </p>
                      <img src="resources/masterImg/${th.thanosPicRe }" class="img_main_st">
                   </div>
+            	  </a>
                   </c:forEach>
                   </c:if> 
                   

@@ -297,7 +297,7 @@
             (SELECT p.*, S.MASTER_RANK_PIC from PRODUCT p
             JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)  
             JOIN NEEZ_MASTER S ON (p.MASTER_NICKNAME = S.MASTER_NICKNAME)        
-			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%'
+			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%' OR p.MASTER_NICKNAME LIKE '%' ||  #{search} || '%'
 			<choose>
 				<when test="what eq '인기순'.toString()">
 					ORDER BY PRODUCT_COUNT DESC
@@ -319,7 +319,7 @@
             (SELECT p.*, S.MASTER_RANK_PIC from PRODUCT p
             JOIN GOODS_CATEGORY ON (CATENAME = PRODUCT_CATEONE)  
             JOIN NEEZ_MASTER S ON (p.MASTER_NICKNAME = S.MASTER_NICKNAME)        
-			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%'
+			WHERE p.PRODUCT_TITLE LIKE '%' ||  #{search} || '%' OR p.MASTER_NICKNAME LIKE '%' ||  #{search} || '%'
 			
 			<choose>
 				<when test="what eq '인기순'.toString()">

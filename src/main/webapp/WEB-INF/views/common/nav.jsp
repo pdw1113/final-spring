@@ -68,12 +68,6 @@
                   <p>보안</p>
                </a>
             </li>
-            <li>
-               <a href="productList.do?navNo=140">
-                  <img class="nav_img etc_icon" src="resources/img/etc.png"><br>
-                  <p>전체</p>
-               </a>
-            </li>
          </nav>
       </div>
    </body>

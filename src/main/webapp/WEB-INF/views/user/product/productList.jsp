@@ -65,8 +65,6 @@
             </tr>
          </table>
          <div class="checkbox">
-            <label class="font-noto Lsit-checkbox-size">
-            <input type="checkbox" value="" > 접속중  </label>
             <select class="selectbox">
             	<c:if test="${ what == null || what == '최신순'}">
 	            	<option>최신순</option>
