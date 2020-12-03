@@ -261,7 +261,7 @@ public class ProductController {
 	}
 
 	/**
-	 * 6. 상품 목록 ─ 상품 상세 메소드
+	 * 6. 나의 상품 목록 ─ 상품 상세 메소드
 	 * @param product
 	 * @param model
 	 * @param session
@@ -285,6 +285,7 @@ public class ProductController {
 
 		// 찜 정보 가져오기
 		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
+		
 		String str = Integer.toString(p.getNo());
 		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
 		map.put("email", u.getEmail());    
@@ -329,7 +330,11 @@ public class ProductController {
 		fList = mService.fList();
 		
 		// 상품 정보 가져오기
-		Product p = pService.getProductDetail(no);
+		Product p = pService.getProductDetail(no);		
+		
+		String nick = p.getNickName();
+		
+		int rank = uService.rank(nick);
 
 		// 상품 정보 가져오기 2
 		UserMaster m = pService.getProductDetail(p.getNickName());
@@ -340,20 +345,19 @@ public class ProductController {
 		
 		HashMap<String, String> map = new HashMap<String, String>();    // HashMap 선언
 		
+		map.put("no", str);
+
+		int replyCount = pService.getReplyCount(p.getNickName());
+		
 		// 찜 정보 가져오기
 		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
 		if(u != null) { // 로그인
-			map.put("email", u.getEmail()); 
+			map.put("email", u.getEmail()); 		
+			WishList wl = pService.getWishListDetail(map);
+			model.addAttribute("wishList", wl);
 		}else {
 			map.put("email", ""); 
 		}
-		
-		map.put("no", str);
-		WishList wl = pService.getWishListDetail(map);
-		int replyCount = pService.getReplyCount(p.getNickName());
-		
-		String nick = p.getNickName();
-		int rank = uService.rank(nick);
 
 		if(p != null && m != null) {
 
@@ -361,7 +365,6 @@ public class ProductController {
 			model.addAttribute("master", m);
 			model.addAttribute("sns", sns);
 			model.addAttribute("replyCount", replyCount);
-			model.addAttribute("wishList", wl);
 			model.addAttribute("fList", JSONArray.fromObject(fList));
 			model.addAttribute("rank", rank);
 			return "user/product/productDetail";

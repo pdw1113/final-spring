@@ -999,7 +999,7 @@
 
       let all = document.getElementsByTagName("input");
       $(all).attr("readonly", true);
-
+      $('#text2').attr('readonly', false);
       for (link in obj) {
         youtube(obj[link]);
       }
