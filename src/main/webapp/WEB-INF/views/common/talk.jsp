@@ -11,6 +11,18 @@
 <!-- JUA 폰트-->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="resources/css/talk.css">
+<audio id='audio_play' src='resources/pop.mp3'></audio>
+<script type="text/javascript"> 
+function play() { 
+    var audio = document.getElementById('audio_play'); 
+    if (audio.paused) { 
+        audio.play(); 
+    }else{ 
+        audio.pause(); 
+        audio.currentTime = 0 
+    } 
+} 
+</script>
 </head>
 <body>
 	<!-- 채팅 아이콘 -->
@@ -199,6 +211,7 @@
 				if(countAll != 0){
 					// 채팅 icon 깜빡거리기
 					$('.chatIcon').addClass('iconBlink');
+	        		play();
 				}else{
 					// 깜빡거림 없애기
 					$('.chatIcon').removeClass('iconBlink');
