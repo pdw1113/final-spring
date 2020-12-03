@@ -44,6 +44,8 @@ public class UserContoller {
 	@Autowired // spring-security.xml에 등록되어 있음.
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	/*카카오 로그인 유무*/
+	static boolean kaloginsw=false;
 	/**
 	 * 1. 로그인 세션 메소드 ( 암호화 처리 )
 	 * 
@@ -100,8 +102,9 @@ public class UserContoller {
 	public String logout(SessionStatus status,String token) {
 		
 		// 카카오로그인의 토큰값이 있다면
-		if(token!="") {
+		if(kaloginsw) {
 		      KakaoService.kakaoLogout(token);
+		      kaloginsw = false;
 		}
 		// 일반로그인 로그아웃
 		status.setComplete();
@@ -218,6 +221,7 @@ public class UserContoller {
 			}
 			
 			int ipresult = uService.insertIP(map2);
+			kaloginsw = true;
 			return "redirect:index.do";
 			
 		}else {
@@ -245,7 +249,7 @@ public class UserContoller {
 				}
 				
 			  int ipresult = uService.insertIP(map2);
-				
+			  kaloginsw = true;
 			  return "redirect:index.do";
 		  }else {
 			  System.out.println("카카오 회원가입 실패");

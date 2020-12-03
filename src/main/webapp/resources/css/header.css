@@ -38,6 +38,7 @@ body,
          color: black;
          font-family: jua;
          opacity: 0.9;
+         cursor: pointer;
          }
          .head_login_Mainhead:hover {
          opacity: 1;

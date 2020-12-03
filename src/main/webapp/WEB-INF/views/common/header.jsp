@@ -43,8 +43,8 @@
             </div>
          </c:if>
          <c:if test="${ !empty sessionScope.loginUser }">
-               <div class="login_box_Mainhead" onclick="logout();" style="cursor:pointer;">
-                     <div class="head_login_Mainhead" style="margin-right: 0.7rem;">로그아웃</div>
+               <div class="login_box_Mainhead">
+                     <div class="head_login_Mainhead" style="margin-right: 0.7rem;"onclick="logout();">로그아웃</div>
                </div>
                <div class="login_box_Mainhead">
                   <a href="profile.do">
@@ -118,18 +118,12 @@
          });
       </script>
       <script type='text/javascript'>
-	        //<![CDATA[
-			// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	        Kakao.init('d9e38ce6222396ec9c46084186906ad7');
-	        function logout(){
-	        	$("#token").val(Kakao.Auth.getAccessToken());
-	        	$('.logout_button_form').trigger("click");
-	        }
-	      //]]>
-	    </script>
-	    <form action="logout.do" method="post">
-			 	<input style="visibility: hidden;" name="token" id="token" value="">
-				<button class="logout_button_form" style="visibility: hidden;"></button>
-		</form>
+      Kakao.init('d9e38ce6222396ec9c46084186906ad7');
+		
+      function logout(){
+      	window.location.href = "logout.do?token=" + Kakao.Auth.getAccessToken();
+      }
+      </script>
+	 
    </body>
 </html>
