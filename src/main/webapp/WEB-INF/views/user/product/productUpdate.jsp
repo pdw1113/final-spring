@@ -71,7 +71,7 @@
 				<!-- 제목 -->
 				<div class="status_div_addproduct">
 					<span class="input_title_addproduct">상품명 (한 줄 제목)</span>
-					<input type="text" maxlength="25" placeholder="제목 입력(25자 이내로 입력해주세요)" class="input_text_addproduct" name="title" id="title" value="${product.title}">
+					<input type="text" maxlength="20" placeholder="제목 입력(20자 이내로 입력해주세요)" class="input_text_addproduct" name="title" id="title" value="${product.title}">
 				</div>
 				<!-- 카테고리 -->
 				<div class="status_div_addproduct">
