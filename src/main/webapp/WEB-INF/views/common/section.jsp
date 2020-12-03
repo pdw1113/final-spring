@@ -547,8 +547,6 @@
                      <div>
                         <img src="resources/img/${pc.mRankPic}" class="main_rank_index">
                         <span class="font_jua">${pc.nickName}</span>
-                        <img src="resources/img/6.jpeg" class="main_rank_index">
-                        <span class="font_jua">조정호</span>
                         <span class="main_star_container_index">
                         <c:forEach var="num" begin="1" end="5" step="1" >     
 	                        <c:choose>
