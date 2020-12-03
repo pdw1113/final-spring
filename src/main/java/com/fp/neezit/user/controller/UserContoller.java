@@ -72,7 +72,7 @@ public class UserContoller {
 		if (loginUser != null && bcryptPasswordEncoder.matches(u.getPwd(), loginUser.getPwd())) {
 			// model은 request영역이다. 그것을 상단의 @SessionAttributes가 session영역으로 바꿔준다.
 			// request → session
-			System.out.println(loginUser);
+			System.out.println("로그인 유저 : " + loginUser.getName());
 			model.addAttribute("loginUser", loginUser);
 			model.addAttribute("rankPic", rankPic);
 			model.addAttribute("admin", admin);
