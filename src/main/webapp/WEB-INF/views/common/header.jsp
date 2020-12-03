@@ -8,6 +8,8 @@
       <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
       <title>HEAD</title>
       <link rel="stylesheet" type="text/css" href="resources/css/header.css">
+      <link rel="shortcut icon" href="resources/img/favicon.ico" type="image/x-icon">
+	  <link rel="icon" href="resources/img/favicon.ico" type="image/x-icon">
    </head>
    <body>
       <div class="index_head_Mainhead">

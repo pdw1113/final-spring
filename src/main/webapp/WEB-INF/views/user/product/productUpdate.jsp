@@ -70,9 +70,8 @@
 			<div class="input_div_addproduct">
 				<!-- 제목 -->
 				<div class="status_div_addproduct">
-					<span class="input_title_addproduct">상품명 (한 줄 제목)</span> 
-					<input type="text" placeholder="제목 입력" class="input_text_addproduct" name="title" id="title"
-					value="${product.title}">
+					<span class="input_title_addproduct">상품명 (한 줄 제목)</span>
+					<input type="text" maxlength="25" placeholder="제목 입력(25자 이내로 입력해주세요)" class="input_text_addproduct" name="title" id="title" value="${product.title}">
 				</div>
 				<!-- 카테고리 -->
 				<div class="status_div_addproduct">
@@ -446,5 +445,14 @@
        		  // Summernote에 글 내용 추가하는 코드
        		  $("#summernote_Introduce").summernote('code',  '${product.introduce}');
          	});
+      
+      $(document).ready(function(){
+          $('#title').keyup(function(){
+              if ($(this).val().length > $(this).attr('maxlength')) {
+                  alert('제한길이 초과');
+                  $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+              }
+          });
+      });
    </script>
 </html>

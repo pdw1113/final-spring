@@ -14,6 +14,8 @@
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <script type="text/javascript" src="resources/js/typeit.min.js"></script>
       <link rel="stylesheet" type="text/css" href="resources/css/index.css">
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	  <link rel="icon" href="/favicon.ico" type="image/x-icon">
    </head>
    <body>
       <!-- header 영역 -->
