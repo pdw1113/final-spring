@@ -22,7 +22,7 @@
                <tr>
                   <td><a href="introduction.do" class="footerA">회사소개</a></td>
                   <td><a href="provision.do" class="footerA">이용약관</a></td>
-                  <td><a href="noticeList.do" class="footerA">FAQ</a></td>
+                  <td><a href="noticeList.do" class="footerA">고객지원</a></td>
                   <td>운영시간</td>
                   <td rowspan="2"><a href="#" class="footerA"><img src="resources/img/youtubeimg.jpg" alt="youtube_image" class="footeryoutubeimg"></a></td>
                </tr>

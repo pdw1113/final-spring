@@ -266,6 +266,8 @@ public class UserDao {
 		return sqlSession.delete("userMapper.thanosDelete",masterName1);
 	}
 
-
+	public int insertKakao(HashMap<String, String> map) {
+		return sqlSession.insert("userMapper.insertKakao",map);
+	}
 
 }

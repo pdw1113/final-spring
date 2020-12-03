@@ -736,4 +736,10 @@
 	<delete id="thanosDelete" parameterType="String">
 		DELETE FROM THANOS WHERE MASTER_NICKNAME = #{masterName1}
 	</delete>
+	
+	<!-- 카카오 회원가입 -->
+	<insert id="insertKakao" parameterType="hashmap">
+		INSERT INTO NEEZ_USER(USER_NAME,USER_PHONE,USER_EMAIL,USER_PASSWORD) VALUES(#{name},DEFAULT,#{email},#{pwd})
+	</insert>
+	
 </mapper>

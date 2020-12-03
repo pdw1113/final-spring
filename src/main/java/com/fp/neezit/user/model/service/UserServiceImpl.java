@@ -327,6 +327,9 @@ public class UserServiceImpl implements UserService{
 		return uDao.thanosDelete(masterName1);
 	}
 
-
+	@Override
+	public int insertKakao(HashMap<String, String> map) {
+		return uDao.insertKakao(map);
+	}
 
 }
