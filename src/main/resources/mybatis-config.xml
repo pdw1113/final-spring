@@ -26,6 +26,7 @@
       <typeAlias type="com.fp.neezit.user.model.vo.Thanos" alias="Thanos"/>
       <typeAlias type="com.fp.neezit.chat.model.vo.ChatMessage"  alias="ChatMessage"/>
       <typeAlias type="com.fp.neezit.chat.model.vo.ChatRoom"  alias="ChatRoom"/>
+      <typeAlias type="com.fp.neezit.manager.model.vo.Mcomfirm"  alias="Confirm"/>
    </typeAliases>
    
    <!-- 

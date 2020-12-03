@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fp.neezit.manager.model.vo.Mcomfirm;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 import com.fp.neezit.product.model.vo.WishList;
@@ -142,4 +143,6 @@ public interface ProductService {
 	 * @return
 	 */
 	public ArrayList<Product> getProductRookie();
+
+	public Mcomfirm getConfirm(String nickName);
 }

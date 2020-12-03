@@ -294,4 +294,13 @@ public class ManagerDao {
 	public List<Product> mStatistics2() {
 		return (ArrayList)sqlSession.selectList("managerMapper.mStatistics2");
 	}
+
+	public int mMasterUpdate(HashMap<String, String> map) {
+		return sqlSession.update("managerMapper.mMasterUpdate", map);
+	}
+	
+	   public int mComfirm(String masterNicName) {
+		      return sqlSession.insert("managerMapper.mComfirm", masterNicName);
+		   }
+
 }

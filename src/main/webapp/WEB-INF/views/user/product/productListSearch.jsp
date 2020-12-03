@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>list(search)</title>
+<title>NeeziT</title>
 <!--폰트-->
 <!-- BLACK HAN SANS 폰트 -->
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">

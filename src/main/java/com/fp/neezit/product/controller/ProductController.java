@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.manager.model.vo.Mcomfirm;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
@@ -344,6 +344,7 @@ public class ProductController {
 		
 		// 찜 정보 가져오기
 		User u = (User)session.getAttribute("loginUser");         // 로그인 세션 정보
+		
 		if(u != null) { // 로그인
 			map.put("email", u.getEmail()); 		
 			WishList wl = pService.getWishListDetail(map);
@@ -354,7 +355,11 @@ public class ProductController {
 		}else {
 			map.put("email", ""); 
 		}
-
+		
+		Mcomfirm confirm = pService.getConfirm(p.getNickName());
+		if(confirm != null) {
+			model.addAttribute("confirm", confirm);
+		}
 		
 		if(p != null && m != null) {
 			model.addAttribute("product", p);

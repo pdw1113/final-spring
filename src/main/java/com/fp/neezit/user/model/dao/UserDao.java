@@ -270,4 +270,7 @@ public class UserDao {
 		return sqlSession.insert("userMapper.insertKakao",map);
 	}
 
+	public User selectUser(String email) {
+		return sqlSession.selectOne("userMapper.selectUser", email);
+	}
 }

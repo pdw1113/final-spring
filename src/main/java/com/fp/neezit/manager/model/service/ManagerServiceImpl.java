@@ -281,4 +281,17 @@ public class ManagerServiceImpl implements ManagerService{
 		return mDao.mStatistics2();
 	}
 
+	@Override
+	public int mMasterUpdate(HashMap<String, String> map) {
+		return mDao.mMasterUpdate(map);
+	}
+
+	   @Override
+	   public int mComfirm(String masterNicName) {
+	      return mDao.mComfirm(masterNicName);
+	   }
+
+	
+	
+
 }

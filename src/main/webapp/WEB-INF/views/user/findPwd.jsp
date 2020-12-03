@@ -4,7 +4,7 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>MY TEST PAGE</title>
+      <title>NeeziT</title>
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

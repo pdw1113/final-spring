@@ -4,10 +4,10 @@
 <html lang="ko">
    <head>
       <meta charset="UTF-8">
-      <title>Slide Project</title>
+      <title>NeeziT</title>
       <!-- font -->
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
-      
+      <link rel="shortcut icon" type="image/x-icon" href="resources/img/lv6.png">
       <!-- JQuery -->
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
       

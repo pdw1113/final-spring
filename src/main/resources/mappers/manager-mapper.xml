@@ -873,6 +873,28 @@
 		FROM PRODUCT
 		ORDER BY PRODUCT_STAR DESC
 	</select>
+	
+	<update id="mMasterUpdate" parameterType="hashmap">
+		UPDATE M_COMFIRM
+		<if test="a eq 'a'.toString()">
+		SET MASTER_ID = 1
+		</if>
+		<if test="a eq 'b'.toString()">
+		SET MASTER_SCHOOL = 1
+		</if>
+		<if test="a eq 'c'.toString()">
+		SET MASTER_QUALIFICATION = 1
+		</if>
+		WHERE MASTER_NICKNAME = #{mNickname}
+	</update>
+	
+	   <!-- 관리자 확인용 인서트 -->
+   <insert id="mComfirm" parameterType="String">
+      INSERT INTO M_COMFIRM VALUES(#{masterNicName},DEFAULT,DEFAULT,DEFAULT)
+   </insert>
+	
+	
+	
 
 </mapper>
 

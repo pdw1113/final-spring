@@ -5,7 +5,7 @@
    <head>
       <meta charset="utf-8">
       
-      <title>MY TEST PAGE</title>
+      <title>NeeziT</title>
       
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
       

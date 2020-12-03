@@ -130,6 +130,9 @@ public class UserContoller {
 		if(kalogin) {
 		      KakaoService.kakaoLogout(token);
 		      kalogin = false;
+			  System.out.println("카카오 로그아웃 유저 : " + u.getName());
+		}else {
+			  System.out.println("로그아웃 유저 : " + u.getName());
 		}
 
 		return "redirect:logout2.do";

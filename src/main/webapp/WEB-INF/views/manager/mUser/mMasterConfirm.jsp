@@ -5,7 +5,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>NeeziT</title>
+      <title>Document</title>
       <!-- JUA 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
          rel="stylesheet">
@@ -16,7 +16,12 @@
          href="resources/css/signUpMaster.css">
    </head>
    <body>
-      <%@ include file="../common/header.jsp"%>
+      <div class="header">
+         <%@ include file="../common/mheader.jsp" %>
+      </div>
+      <div class="left-bar">
+         <%@ include file="../common/mLeftBar.jsp" %>
+      </div>
       <form action="signUpMasterUpdateView.do" method="POST" enctype="multipart/form-data" name="master">
          <!-- 능력자 사진 등록 -->
          <div class="text-align-center-sgm">
@@ -364,7 +369,22 @@
                </li>
                <hr>
                <!-- 저장 / 취소 버튼 -->
-               <li class="margin-top-sgm"><span class="btn_sgm"  onclick="document.forms[0].submit()">수정</span></li>
+               <c:url var="id" value="mMasterUpdate.do">
+						<c:param name="mNickname" value="${masterList.mNickname}"/>
+						<c:param name="a" value="a"/>
+			   </c:url> 
+			   <c:url var="school" value="mMasterUpdate.do">
+						<c:param name="mNickname" value="${masterList.mNickname}"/>
+						<c:param name="a" value="b"/>
+			   </c:url> 
+			   <c:url var="qualify" value="mMasterUpdate.do">
+						<c:param name="mNickname" value="${masterList.mNickname}"/>
+						<c:param name="a" value="c"/>
+			   </c:url> 
+					
+               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${id}'">본인 확인</span></li>
+               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${school}'">학력 확인</span></li>
+               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${qualify}'">자격증 확인</span></li>
             </ul>
          </div>
       </form>

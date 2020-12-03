@@ -5,7 +5,7 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>MY TEST PAGE</title>
+      <title>NeeziT</title>
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/changePwd.css">

@@ -1,4 +1,4 @@
-		  @charset "UTF-8";
+@charset "UTF-8";
 body,html{
 margin:0;
 padding:0;
@@ -8,17 +8,17 @@ width:100%;
 .signupbox_signup{
 border: 9px solid #fabe00;
 width: 620px;
-height: 770px;
 border-radius: 70px 70px 70px 70px;
 margin: 0 auto;
 text-align: center;
+padding-bottom: 23px;
 }
 /* 니즈 잇 로고 이미지 */
 .signup_img_signup{
-padding-top: 20px;
+padding-top: 45px;
 width: 260px;
 filter: drop-shadow(-4px 5px 3px #808080);
-padding-bottom: 15px;
+padding-bottom: 25px;
 }
 /* 정보 텍스트 입력창 */
 .signup_in{
@@ -27,7 +27,7 @@ border-radius: 7px 7px 7px 7px;
 height: 30px;
 width: 550px;
 font-size: 20px;
-margin-bottom: 15px;
+margin-bottom: 20px;
 }
 /* 버튼들 DIV (버튼아님 버튼 프레임임) */
 .buttons_signup{
@@ -81,36 +81,6 @@ opacity: 0.6;
 cursor: pointer;
 opacity: 0.6;
 }
-/* 카카오톡으로 회원가입 */
-.kakao_signup{
-height: 70px;
-width: 520px;
-margin: 0 auto 15px;
-background-color: #fbe300;
-font-family: jua;
-font-size: 25px;
-display: inline-table;
-color:#3b1e1e;
-border-radius:10px;
-}
-.kakao_signup:hover{
-opacity: 0.6;
-}
-/* 네이버로 회원가입 */
-.naver_signup{
-background-color: #00c73c;
-font-family: jua;
-height: 70px;
-margin: 0 auto 15px;
-font-size: 25px;
-width: 520px;
-display: inline-table;
-color:white;
-border-radius:10px;
-}
-.naver_signup:hover{
-opacity: 0.6;
-}
 /* 시간제한 */
 .timelimit_signup{
 font-size: 22px;
@@ -137,16 +107,6 @@ margin-right: 230px;
 font-family: jua;
 font-size: 22px;
 }
-.naver_img{
-width: 38px; 
-margin-top: 15px; 
-margin-left: 65px;
-}
-.kakao_img{
-width: 38px; 
-margin-top: 15px; 
-margin-left: 78px;
-}
 .color_black{
 color: black;
 }
@@ -154,12 +114,6 @@ color: black;
 width:240px; 
 float: left; 
 margin-left: 30px; 
-}
-.sns_signUp{
-display: table-cell;
-padding-left: 10px;
-text-align: left;
-vertical-align: middle;
 }
 .ph_cover{
    position: relative;

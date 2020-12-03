@@ -7,7 +7,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Header</title>
+      <title>NeeziT</title>
       <!-- 같은 단어 선택 : ctrl + shift + L -->
       <!-- BLACK HAN SANS 폰트 -->
       <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
       <!--bxslider-script-->
       
       <!-- 폰트 어썸 -->
-    <script src="https://kit.fontawesome.com/fef720d792.js" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/fef720d792.js" crossorigin="anonymous"></script>
       <script>
          $(document).ready(function(){
            $('.slider').bxSlider({
@@ -30,7 +30,8 @@
          
       </script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/section.css">
-
+	  <!-- Vue.js -->
+	  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    </head>
    <body>
       <div class="main_container_index">

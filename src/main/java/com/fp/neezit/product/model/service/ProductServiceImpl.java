@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fp.neezit.manager.model.vo.Mcomfirm;
 import com.fp.neezit.product.model.dao.ProductDao;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
@@ -164,5 +165,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<Product> getProductRookie() {
 		return pDao.getProductRookie();
+	}
+
+	@Override
+	public Mcomfirm getConfirm(String nickName) {
+		return pDao.getConfirm(nickName);
 	}
 }

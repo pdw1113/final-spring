@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>NeeziT</title>
     <link rel="stylesheet" type="text/css" href="resources/css/provision.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">

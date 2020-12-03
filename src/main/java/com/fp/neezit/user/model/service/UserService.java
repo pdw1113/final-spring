@@ -137,6 +137,8 @@ public interface UserService {
 	int thanosDelete(String masterName1);
 
 	int insertKakao(HashMap<String, String> map);
+
+	User selectUser(String email);
 	
 
 

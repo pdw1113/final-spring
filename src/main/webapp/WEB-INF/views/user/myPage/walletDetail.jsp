@@ -6,7 +6,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>구매내역</title>
+      <title>NeeziT</title>
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/walletDetail.css">

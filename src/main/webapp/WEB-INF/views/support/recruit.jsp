@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css파일 -->
     <link rel="stylesheet" type="text/css" href="./resources/css/recruit.css">    
-    <title>Document</title>
+    <title>Recruit</title>
 </head>
 <body>
    	<%@ include file="../common/header.jsp" %>

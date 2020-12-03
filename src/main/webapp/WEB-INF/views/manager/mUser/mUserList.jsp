@@ -134,8 +134,12 @@
                   <c:if test="${!empty ul}">
                    <c:set var="num" value="${pi.listCount - ((pi.currentPage-1) * 5) }"/>
                       <c:forEach var="UserList" items="${ ul }" varStatus="status">
+						 <c:if test="${ !empty UserList.userMaster.mNickname and UserList.user.status == 'N'}">
+	                     <tr onclick="location.href='masterConfirm.do?email=${UserList.userMaster.email}'" class="trOnclick">
+	                     </c:if>
+	                     <c:if test="${ empty UserList.userMaster.mNickname and UserList.user.status == 'N'}">
 	                     <tr>
-	                      <!--   <td id="shot_table_mUserList"><input type="checkbox" value="1"></td> -->
+	                     </c:if>
 	                        <td id="shot_table_mUserList">${ num }</td>
 	                        <td id="midle_table_mUserList">
 	                        	<c:if test="${ empty UserList.userMaster.mNickname and UserList.user.status == 'N'}">일반회원</c:if>

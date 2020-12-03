@@ -196,6 +196,14 @@ public class UserMasterController {
 		int schoolresult = uService.insertMasterSchool(msc);
 		int snsresult = uService.insertMasterSns(msn);
 		int qfcresult = uService.insertMasterQfc(mqf);
+		
+		
+	      User u = (User)session.getAttribute("loginUser");
+	      UserMaster master = pService.getMaster(u);
+	      String masterNicName = master.getmNickname();
+	      
+	      int mComfirm = mService.mComfirm(masterNicName);
+
 		if (result > 0) {
 			redirectAttributes.addAttribute("count", 1);
 			return "redirect:index2.do";

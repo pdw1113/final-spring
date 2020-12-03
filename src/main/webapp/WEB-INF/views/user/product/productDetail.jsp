@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/productDetail.css">
 
-<title>Document</title>
+<title>NeeziT</title>
 </head>
 
 <body class="product_body">
@@ -58,10 +58,29 @@
 						</span>
 					</div>
 					<div class="iclass1">
-						<span class="i1"> <i class="far fa-address-card"></i>
-						</span> <span class="i2"> <i class="fas fa-graduation-cap"></i>
-						</span> <span class="i3"> <i class="fas fa-medal"></i>
-						</span>
+						<c:if test="${!empty confirm && confirm.masterId == 1}">
+						<span class="i1"> <i class="far fa-address-card crgb"></i> </span>
+						</c:if>
+						<c:if test="${!empty confirm && confirm.masterId == 0}">
+						<span class="i1"> <i class="far fa-address-card greyaa"></i> </span>
+						</c:if>
+						<c:if test="${!empty confirm && confirm.masterSchool == 1}">
+						<span class="i2"> <i class="fas fa-graduation-cap crgb"></i> </span> 
+						</c:if> 
+						<c:if test="${!empty confirm && confirm.masterSchool == 0}">
+						<span class="i2"> <i class="fas fa-graduation-cap greyaa"></i> </span> 
+						</c:if> 
+						<c:if test="${!empty confirm && confirm.masterQualification == 1}">
+						<span class="i3"> <i class="fas fa-medal crgb"></i> </span>
+						</c:if> 
+						<c:if test="${!empty confirm && confirm.masterQualification == 0}">
+						<span class="i3"> <i class="fas fa-medal greyaa"></i> </span>
+						</c:if>
+						<c:if test="${empty confirm}">
+						<span class="i1"> <i class="far fa-address-card greyaa"></i> </span>
+						<span class="i2"> <i class="fas fa-graduation-cap greyaa"></i> </span> 
+						<span class="i3"> <i class="fas fa-medal greyaa"></i> </span>
+						</c:if>
 					</div>
 				</div>
 			</section>
@@ -198,7 +217,7 @@
 							<li>현재 상품 평균 <i class="fas fa-star"></i>&nbsp;<span class="avg">${ product.star }</span></li>
 						</ul>
 					</div>
-					<c:if test="${ !empty sessionScope.loginUser }">
+					<c:if test="${ !empty sessionScope.loginUser && loginUser.email ne master.email}">
 					<div class="inputReview">
 						<textarea placeholder="상품을 구매한 회원만 상품평을 작성 할 수 있습니다." rows="3" id="rContent"></textarea>
 						<input type="hidden" value="0" id="firstno"/><!-- 나중 대댓글을 위한 -->
@@ -236,8 +255,15 @@
 		<!-- // 왼쪽 영역 -->
 
 		<!-- 오른쪽 가격 영역 -->
+		
+        
 		<div class="sticky_area" id="sticky">
+			<c:if test="${loginUser.email ne master.email}">
 			<div class="sticky_navi">
+			</c:if>
+			<c:if test="${loginUser.email eq master.email}">
+			<div class="sticky_navi2">
+			</c:if>
 				<h2>상품 가격</h2>
 				<ul class="p_flex day_list">
 					<li>월</li>
@@ -290,7 +316,7 @@
 							채팅하기 </a></li>
 				</ul>
          		</c:if>
-         		<c:if test="${ !empty sessionScope.loginUser }">
+         		<c:if test="${ !empty sessionScope.loginUser && loginUser.email ne master.email}">
 				<ul class="p_flex">
 					<li>구매 시간</li>
 					<li class="number_change"><i
@@ -408,7 +434,7 @@
 
 	<script>
 		function onChat(){
-			
+			if("${sessionScope.loginUser.email}" != "${master.email}"){
 			$.ajax({
 				url:"createChat.do",
 				data:{
@@ -439,6 +465,7 @@
 			});
 			
             return false;
+			}
 		}
 	</script>
 	

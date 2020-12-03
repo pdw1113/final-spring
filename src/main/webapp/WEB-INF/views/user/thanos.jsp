@@ -10,7 +10,7 @@
     
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>공지사항</title>
+      <title>NeeziT</title>
       <!-- Noto-Sans 폰트-->
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
       <!-- JUA 폰트-->

@@ -332,4 +332,9 @@ public class UserServiceImpl implements UserService{
 		return uDao.insertKakao(map);
 	}
 
+	@Override
+	public User selectUser(String email) {
+		return uDao.selectUser(email);
+	}
+
 }

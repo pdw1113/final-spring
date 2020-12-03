@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Document</title>
+    <title>NeeziT</title>
 
     <!-- JUA 폰트-->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -16,9 +16,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="resources/css/signUpMaster.css">
-    
-    <!-- favicon 404 에러 해결용 -->
-    <link rel="shortcut icon" href="#">
 
 </head>
 <body>

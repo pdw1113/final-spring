@@ -304,3 +304,7 @@ justify-content: center;
 #red{
 	color:red;
 }
+
+.trOnclick:hover{
+	cursor: pointer;
+}

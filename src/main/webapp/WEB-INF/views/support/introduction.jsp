@@ -13,7 +13,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
       <!-- css파일 -->
       <link rel="stylesheet" type="text/css" href="./resources/css/introduction.css">
-      <title>Document</title>
+      <title>NeeziT</title>
    </head>
    <body>
       <!-- 임시로 넣어놓은 헤더 아이프레임 -->

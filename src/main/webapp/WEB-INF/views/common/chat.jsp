@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NeeziT</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 

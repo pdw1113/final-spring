@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="utf-8">
-<title>MY TEST PAGE</title>
+<title>NeeziT</title>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="resources/css/productInsert.css">

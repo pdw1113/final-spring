@@ -685,14 +685,9 @@
                                                                      FROM  product B
                                                                      WHERE B.PRODUCT_NO = #{a})   
                 </otherwise>
-
-
 	</choose>
         
 	</update>
-	
-	
-	
 	<select id="rankPic" parameterType="UserMaster" resultMap="userMasterResultSet">
 		SELECT *
 		FROM NEEZ_MASTER
@@ -741,5 +736,10 @@
 	<insert id="insertKakao" parameterType="hashmap">
 		INSERT INTO NEEZ_USER(USER_NAME,USER_PHONE,USER_EMAIL,USER_PASSWORD) VALUES(#{name},DEFAULT,#{email},#{pwd})
 	</insert>
+	
+	<select id="selectUser" parameterType="string" resultMap="userResultSet">
+		SELECT * FROM NEEZ_USER
+		WHERE USER_EMAIL = #{email}
+	</select>
 	
 </mapper>

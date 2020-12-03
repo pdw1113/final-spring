@@ -4,7 +4,7 @@
 <html lang="ko">
    <head>
       <meta charset="UTF-8">
-      <title>footer</title>
+      <title>NeeziT</title>
       <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="resources/css/footer.css">
    </head>

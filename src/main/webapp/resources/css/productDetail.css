@@ -336,6 +336,7 @@
       border-radius: 10px;
       background-color: white;
       box-shadow: 0 2px 4px 2px rgba(17, 17, 17, 0.1);
+      width:326px;
     }
 
     .sticky_area.fixed {
@@ -347,8 +348,22 @@
       padding: 25px 19px 25px 19px;
       border-radius: 6px;
     }
-
+   
     .sticky_area .sticky_navi h2 {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .sticky_area .sticky_navi2 {
+      height: 238px;
+      padding: 25px 19px 25px 19px;
+      border-radius: 6px;
+    }
+    
+    .sticky_area .sticky_navi2 h2 {
       font-size: 30px;
       font-weight: bold;
       text-align: left;
@@ -619,8 +634,17 @@
     .iclass1 span i {
       font-size: 2rem;
       margin-right: 5px;
+    }
+    
+    .crgb{
       color: rgb(250, 190, 0);
     }
+    
+    .greyaa{
+    	color: rgb(0,0,0,0.2);
+    }
+    
+    
 
     /* 댓글 별점 모달 */
     .cmt_modal {

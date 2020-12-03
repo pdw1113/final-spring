@@ -76,6 +76,13 @@
 		<result property="refund" column="USER_BUY_REFUND" />
 	</resultMap>
 	
+	<resultMap type="Confirm" id="ConfirmResultSet">
+		<result property="nickname" column="MASTER_NICKNAME" />
+		<result property="masterId" column="MASTER_ID" />
+		<result property="masterSchool" column="MASTER_SCHOOL" />
+		<result property="masterQualification" column="MASTER_QUALIFICATION" />
+	</resultMap>
+	
 	<!-- 상품 리스트 관련 -->
 		<select id="category"
 			resultType="com.fp.neezit.product.model.vo.ProductCategory">
@@ -416,5 +423,10 @@
 		                    HAVING COUNT(MASTER_NICKNAME)=1)
 		ORDER BY PRODUCT_CREATE_DATE DESC
      	]]>
+	</select>
+	
+	<select id="getConfirm" parameterType="string" resultMap="ConfirmResultSet">
+		SELECT * FROM M_COMFIRM
+		WHERE MASTER_NICKNAME = #{nickName}
 	</select>
 </mapper>

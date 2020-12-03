@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NeeziT</title>
 </head>
 <body>
 	<h1 align="center">${ msg }</h1>

@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fp.neezit.manager.model.vo.Mcomfirm;
 import com.fp.neezit.product.model.vo.Product;
 import com.fp.neezit.product.model.vo.ProductCategory;
 
@@ -141,5 +142,9 @@ public class ProductDao{
 
 	public ArrayList<Product> getProductRookie() {
 		return (ArrayList)sqlSession.selectList("productMapper.getProductRookie");
+	}
+
+	public Mcomfirm getConfirm(String nickName) {
+		return sqlSession.selectOne("productMapper.getConfirm", nickName);
 	}
 }

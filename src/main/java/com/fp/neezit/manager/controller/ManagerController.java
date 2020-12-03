@@ -1,6 +1,5 @@
 package com.fp.neezit.manager.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +27,13 @@ import com.fp.neezit.user.model.service.UserService;
 import com.fp.neezit.user.model.vo.PageInfo;
 import com.fp.neezit.user.model.vo.Pagination;
 import com.fp.neezit.user.model.vo.User;
-import com.fp.neezit.user.model.vo.UserBuyList;
-import com.fp.neezit.user.model.vo.UserWithdraw;
 import com.fp.neezit.user.model.vo.UserAccess;
+import com.fp.neezit.user.model.vo.UserBuyList;
+import com.fp.neezit.user.model.vo.UserMaster;
+import com.fp.neezit.user.model.vo.UserMasterQualifcation;
+import com.fp.neezit.user.model.vo.UserMasterSchool;
+import com.fp.neezit.user.model.vo.UserMasterSns;
+import com.fp.neezit.user.model.vo.UserWithdraw;
 
 
 @Controller
@@ -532,13 +535,10 @@ public class ManagerController {
      
      PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
      ArrayList<UserList> ul = mService.getUserList(pi,map);
-//     UserMaster master = mService.getMaster();
-//     ManagerUserList dao = sqlSession.getMapper(ManagerUserList.class);
-//     UserBean ul = dao.getUserList();
      
      model.addAttribute("ul",ul); 
      model.addAttribute("pi",pi);
-//     model.addAttribute("masterList", master);
+     
      model.addAttribute("buttonday",buttonday);
      model.addAttribute("preday",preday); 
      model.addAttribute("postday",postday);
@@ -552,6 +552,56 @@ public class ManagerController {
      return "manager/mUser/mUserList"; 
      }
 	 
-	 
-
+	 /**
+	  * 능력자 본인, 학력, 자격증 확인 페이지 이동 메소드
+	 * @param model
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping("masterConfirm.do")
+     public String masterConfirm(Model model, String email) {
+		 
+		 User u = uService.selectUser(email);
+		 UserMaster master = pService.getMaster(u);
+		 UserMasterSchool masterSch = uService.getMasterSch(u);
+		 UserMasterQualifcation masterQfa = uService.getMasterQfa(u);
+		 UserMasterSns masterSns = uService.getMasterSns(u);
+		 
+		 List<String> category = pService.masterCategory(master);
+	     
+		 String string = category.toString();
+	     String real = string.substring(1,string.length()-1);
+		 
+	     model.addAttribute("masterList", master);
+		 model.addAttribute("SchoolList", masterSch);
+		 model.addAttribute("QualifcationList", masterQfa);
+		 model.addAttribute("SnsList", masterSns);
+		 model.addAttribute("categoryList", real);
+		 
+		 return "manager/mUser/mMasterConfirm";
+	}
+	
+	/**
+	 * 능력자 본인, 학력, 자격증 업데이트 메소드
+	 * @param model
+	 * @param a
+	 * @param mNickname
+	 * @return
+	 */
+	@RequestMapping("mMasterUpdate.do")
+    public String masterConfirm(Model model, String a, String mNickname) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("mNickname", mNickname);
+		map.put("a", a);
+		
+		int result = mService.mMasterUpdate(map);
+		
+		if(result == 1) {
+			return "manager/mUser/mMasterConfirm";
+		}else {
+			return "common/errorPage";
+		}
+	}
 }
