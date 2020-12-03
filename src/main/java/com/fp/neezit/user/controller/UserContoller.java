@@ -121,10 +121,10 @@ public class UserContoller {
 		User u = (User)session.getAttribute("loginUser");
 		
 		// 카카오로그인의 토큰값이 있다면
-				if(kalogin) {
-				      KakaoService.kakaoLogout(token);
-				      kalogin = false;
-				}
+		if(kalogin) {
+		      KakaoService.kakaoLogout(token);
+		      kalogin = false;
+		}
 				
 		/* 채팅 */
 		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
