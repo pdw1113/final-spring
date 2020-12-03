@@ -64,7 +64,7 @@ public class UserMasterController {
 		// 상품 카테고리 3분류
 		List<ProductCategory> category = null;
 		category = uService.category();
-		System.out.println(category);
+		
 		model.addAttribute("category", JSONArray.fromObject(category));
 		model.addAttribute("fList", JSONArray.fromObject(fList));
 		return "user/signUpMaster";
@@ -162,7 +162,7 @@ public class UserMasterController {
 		if (!file7.getOriginalFilename().equals("")) {
 			// 서버에 업로드 해야한다.
 			String renameFileName7 = uPic.saveFile7(file7, request);
-			System.out.println(renameFileName7);
+			
 			if (renameFileName7 != null) { // 파일이 잘 저장된 경우
 				mqf.setQ3PicOri(file7.getOriginalFilename()); // 파일명만 DB에저장
 				mqf.setQ3PicRe(renameFileName7);
@@ -192,7 +192,7 @@ public class UserMasterController {
 		}
 		
 		int result = uService.insertMaster(msu);
-		System.out.println("insert : " + msu);
+		
 		int schoolresult = uService.insertMasterSchool(msc);
 		int snsresult = uService.insertMasterSns(msn);
 		int qfcresult = uService.insertMasterQfc(mqf);

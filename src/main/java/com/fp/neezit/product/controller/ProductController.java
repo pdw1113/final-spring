@@ -65,8 +65,6 @@ public class ProductController {
 		if(what == "최신순") {
 			what = "";
 		}
-		
-		System.out.println("정렬 순서 : " + what);
 
 		String no = Integer.toString(navNo);
 		String start = "1";
@@ -99,11 +97,6 @@ public class ProductController {
 	 */
 	@RequestMapping(value="infinityScroll.do", produces="application/json; charset=UTF-8")
 	public void infinityScroll(HttpServletResponse response, int navNo, int startPage, int endPage, String what) throws JsonIOException, IOException {
-		System.out.println("1분류 : " + navNo);
-		System.out.println("시작페이지 : " + startPage);
-		System.out.println("끝 페이지 : " + endPage);
-		System.out.println("정렬 순서 : " + what);
-		System.out.println("----------------");
 		
 		String no = Integer.toString(navNo);
 		String start = Integer.toString(startPage);
@@ -355,12 +348,13 @@ public class ProductController {
 			map.put("email", u.getEmail()); 		
 			WishList wl = pService.getWishListDetail(map);
 			model.addAttribute("wishList", wl);
+			// 현재 금액 가져오기
+			int cash = uService.userCash(u.getEmail());
+			model.addAttribute("cash", cash);
 		}else {
 			map.put("email", ""); 
 		}
 
-		// 현재 금액 가져오기
-		int cash = uService.userCash(u.getEmail());
 		
 		if(p != null && m != null) {
 			model.addAttribute("product", p);
@@ -369,7 +363,6 @@ public class ProductController {
 			model.addAttribute("replyCount", replyCount);
 			model.addAttribute("fList", JSONArray.fromObject(fList));
 			model.addAttribute("rank", rank);
-			model.addAttribute("cash", cash);
 			return "user/product/productDetail";
 		}
 
@@ -582,24 +575,16 @@ public class ProductController {
 			search="";
          }
 		
-		
-		System.out.println("정렬 순서 : " + what);
-		System.out.println("검색 : "+ search);
-		
-	    
-		
 		HashMap<String, String> map = new HashMap<String, String>();
-		//search = "%"+search+"%";
+		
 		map.put("search", search);
 		map.put("what", what);
-		System.out.println(map);
+		
 		int listCount = pService.productListSearchCount(map);
-		System.out.println("리스트 카운트 : " + listCount);
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,6);
-		System.out.println(pi);
+		
 		List<Product> productList = pService.productListSearch(pi,map);
-		System.out.println(productList);
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("search", search);

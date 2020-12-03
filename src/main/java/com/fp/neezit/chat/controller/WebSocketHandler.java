@@ -64,11 +64,9 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
         // Json객체 → Java객체
         // 출력값 : [roomId=123, messageId=null, message=asd, name=천동민, email=cheon@gmail.com, unReadCount=0]
         ChatMessage chatMessage = objectMapper.readValue(msg,ChatMessage.class);
-        System.out.println("ChatMessage 객체 :" + chatMessage);
         
         // 받은 메세지에 담긴 roomId로 해당 채팅방을 찾아온다.
         ChatRoom chatRoom = cService.selectChatRoom(chatMessage.getRoomId());
-        System.out.println("방 번호 :" + chatRoom.getRoomId());
         
         // 채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어왔고, DB에서의 채팅방이 있을 때
         // 채팅방 생성

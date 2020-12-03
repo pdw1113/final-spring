@@ -119,18 +119,18 @@ public class UserContoller {
 		
 		/* 채팅 */
 		User u = (User)session.getAttribute("loginUser");
-		
-		// 카카오로그인의 토큰값이 있다면
-		if(kalogin) {
-		      KakaoService.kakaoLogout(token);
-		      kalogin = false;
-		}
 				
 		/* 채팅 */
 		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
 		cSession.removeLoginUser(u.getEmail());
 		
 		status.setComplete();
+		
+		// 카카오로그인의 토큰값이 있다면
+		if(kalogin) {
+		      KakaoService.kakaoLogout(token);
+		      kalogin = false;
+		}
 
 		return "redirect:logout2.do";
 	}
@@ -181,8 +181,6 @@ public class UserContoller {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		System.out.println("이메일 :" + email);
-		System.out.println("패스워드 : " + pwd);
 		map.put("email", email);
 		map.put("pwd", pwd);
 		
@@ -250,6 +248,8 @@ public class UserContoller {
 			// 현재 로그인 한 User 채팅 Session ArrayList에 추가.
 			cSession.addLoginUser(loginUser.getEmail());
 			
+			System.out.println("카카오 로그인 유저 : " + loginUser.getName());
+			
 			return "redirect:index.do";
 
 		}else {
@@ -282,6 +282,8 @@ public class UserContoller {
 			  /* 채팅 */
 			  // 현재 로그인 한 User 채팅 Session ArrayList에 추가.
 			  cSession.addLoginUser(loginUser.getEmail());
+			  
+			  System.out.println("카카오 로그인 유저 : " + loginUser.getName());
 			  
 			  return "redirect:index.do";
 		  }else {

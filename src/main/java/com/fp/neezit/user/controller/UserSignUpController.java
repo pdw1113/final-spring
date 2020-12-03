@@ -147,8 +147,7 @@ public class UserSignUpController {
             mailSender.send(message);
             
             return "ok";
-        	} catch (Exception e) {
-        	
+        } catch (Exception e) {
             System.out.println(e);
             return "fail";
         }
@@ -227,9 +226,7 @@ public class UserSignUpController {
  	@RequestMapping("uinsert.do")
  	public String insertMember(User u, Model model) {
  		
- 		System.out.println("암호화 전 : " + u);
  		u.setPwd(bcryptPasswordEncoder.encode(u.getPwd()));
- 		System.out.println("암호화 후 " + u);
  		
  		// 이제 서비스로 이동
  		int result = uService.insertMember(u);
