@@ -44,11 +44,19 @@ public class IndexController {
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Model model) {
-		// 가성비 상품
+		// 가성비순 상품
 		ArrayList<Product> proCost = pService.getProductCost();
-
+		// 별점순 상품
+		ArrayList<Product> proStar = pService.getProductStar();
+		// 최고 인기 상품
+		ArrayList<Product> proBest = pService.getProductBest();
+		// 루키 상품
+		ArrayList<Product> proRookie = pService.getProductRookie();
+		
 		model.addAttribute("proCost",proCost);
-				
+		model.addAttribute("proStar",proStar);
+		model.addAttribute("proBest",proBest);
+		model.addAttribute("proRookie",proRookie);
 		List<Thanos> th = uService.thanosList();
 
 		model.addAttribute("thanos", th);
@@ -71,7 +79,14 @@ public class IndexController {
 			model.addAttribute("thanos", th);
 		}
 		ArrayList<Product> proCost = pService.getProductCost();
+		ArrayList<Product> proStar = pService.getProductStar();
+		ArrayList<Product> proBest = pService.getProductBest();
+		ArrayList<Product> proRookie = pService.getProductRookie();
 		model.addAttribute("proCost",proCost);
+		model.addAttribute("proStar",proStar);
+		model.addAttribute("proBest",proBest);
+		model.addAttribute("proRookie",proRookie);
+		
 		return "index";
 	}
 

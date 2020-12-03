@@ -130,4 +130,16 @@ public class ProductDao{
 	public ArrayList<Product> getProductCost() {
 		return (ArrayList)sqlSession.selectList("productMapper.getProductCost");
 	}
+
+	public ArrayList<Product> getProductStar() {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductStar");
+	}
+
+	public ArrayList<Product> getProductBest() {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductBest");
+	}
+
+	public ArrayList<Product> getProductRookie() {
+		return (ArrayList)sqlSession.selectList("productMapper.getProductRookie");
+	}
 }

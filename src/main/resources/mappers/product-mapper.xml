@@ -336,6 +336,7 @@
 		) b
 	</select>
 	
+	<!-- 가성비순 -->
 	<select id="getProductCost" resultMap="productResultSet">
 		<![CDATA[
 		SELECT *  FROM 
@@ -344,4 +345,76 @@
                     ORDER BY PRODUCT_COUNT DESC) WHERE ROWNUM<=6 ORDER BY PRODUCT_PRICE]]>
 	</select>
 	
+	<!-- 별점순 -->
+	<select id="getProductStar" resultMap="productResultSet">
+		<![CDATA[
+		SELECT *
+		  FROM
+		      (SELECT 
+		              A.PRODUCT_NO
+		            , A.PRODUCT_STAR
+		            , A.PRODUCT_COUNT
+		            , A.PRODUCT_TITLE
+		            , A.PRODUCT_RENAMEPIC
+		            , B.MASTER_RANK_PIC
+		            , B.MASTER_NICKNAME
+		            , COUNT(R.PRODUCT_NO)
+		         FROM PRODUCT A
+		         JOIN NEEZ_MASTER B 
+		           ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
+		    LEFT JOIN REPLY R
+		           ON (A.PRODUCT_NO = R.PRODUCT_NO)
+		     GROUP BY A.PRODUCT_NO
+		            , A.PRODUCT_STAR
+		            , A.PRODUCT_COUNT
+		            , A.PRODUCT_TITLE
+		            , A.PRODUCT_RENAMEPIC
+		            , B.MASTER_RANK_PIC
+		            , B.MASTER_NICKNAME
+		     ORDER BY A.PRODUCT_COUNT DESC)
+		WHERE ROWNUM<=6
+		ORDER BY PRODUCT_STAR DESC
+        ]]>
+	</select>
+	
+	<!-- 판매순 -->
+	<select id="getProductBest" resultMap="productResultSet">
+		<![CDATA[
+     	SELECT A.PRODUCT_NO
+	         , A.PRODUCT_STAR
+	         , A.PRODUCT_COUNT
+	         , A.PRODUCT_TITLE
+	         , A.PRODUCT_RENAMEPIC
+	         , B.MASTER_RANK_PIC
+	         , B.MASTER_NICKNAME
+  		  FROM PRODUCT A
+  		  JOIN NEEZ_MASTER B 
+  		    ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
+  		 WHERE ROWNUM<=6
+		 ORDER BY PRODUCT_COUNT DESC
+     	]]>
+	</select>
+	
+	<!-- 루키순 -->
+	<select id="getProductRookie" resultMap="productResultSet">
+		<![CDATA[
+     	SELECT A.PRODUCT_NO
+		     , A.PRODUCT_STAR
+		     , A.PRODUCT_COUNT
+		     , A.PRODUCT_TITLE
+		     , A.PRODUCT_RENAMEPIC
+		     , B.MASTER_RANK_PIC
+		     , B.MASTER_NICKNAME 
+		     , A.PRODUCT_CREATE_DATE
+		FROM PRODUCT A
+		JOIN NEEZ_MASTER B 
+		  ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
+		WHERE A.MASTER_NICKNAME IN(
+		                    SELECT MASTER_NICKNAME 
+		                      FROM PRODUCT
+		                     GROUP BY MASTER_NICKNAME
+		                    HAVING COUNT(MASTER_NICKNAME)=1)
+		ORDER BY PRODUCT_CREATE_DATE DESC
+     	]]>
+	</select>
 </mapper>

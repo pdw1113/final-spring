@@ -297,7 +297,7 @@ public class ProductController {
 		
 		String nick = p.getNickName();
 		int rank = uService.rank(nick);
-
+		
 		if(p != null && m != null && sns != null) {
 			model.addAttribute("product", p);
 			model.addAttribute("master", m);
@@ -355,8 +355,10 @@ public class ProductController {
 		String nick = p.getNickName();
 		int rank = uService.rank(nick);
 
+		// 현재 금액 가져오기
+		int cash = uService.userCash(u.getEmail());
+		
 		if(p != null && m != null) {
-
 			model.addAttribute("product", p);
 			model.addAttribute("master", m);
 			model.addAttribute("sns", sns);
@@ -364,6 +366,7 @@ public class ProductController {
 			model.addAttribute("wishList", wl);
 			model.addAttribute("fList", JSONArray.fromObject(fList));
 			model.addAttribute("rank", rank);
+			model.addAttribute("cash", cash);
 			return "user/product/productDetail";
 		}
 
