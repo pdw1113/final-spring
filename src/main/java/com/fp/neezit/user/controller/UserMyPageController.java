@@ -29,7 +29,10 @@ import com.fp.neezit.user.model.vo.UserWallet;
 
 @Controller
 public class UserMyPageController {
-
+	
+	@Autowired
+	UserContoller uc;
+	
 	@Autowired
 	private UserService uService;
 	
@@ -55,7 +58,7 @@ public class UserMyPageController {
 		ArrayList<UserWallet> uw = uService.getUserWallet(u.getEmail());
 
 		model.addAttribute("uw",uw);
-
+		model.addAttribute("kalogin",uc.kalogin);
 		model.addAttribute("cash",cash);
 
 		return "user/myPage/wallet";
@@ -133,6 +136,7 @@ public class UserMyPageController {
 		model.addAttribute("preday",preday);
 		model.addAttribute("postday",postday);
 		model.addAttribute("search_way",search_way);
+		model.addAttribute("kalogin",uc.kalogin);
 
 		return "user/myPage/walletDetail";
 	}
@@ -296,8 +300,6 @@ public class UserMyPageController {
 	}
 
 	/**
-	 *
-	 * 
 	 * 9. 비밀번호 변경 메소드
 	 * @param originalPwd
 	 * @param newPwd
@@ -343,10 +345,14 @@ public class UserMyPageController {
 	@RequestMapping("deleteUser.do")
 	public String userdelete(String user_pw, String user_leave, Model model, HttpSession session,
 			SessionStatus status) {
-
+		
+		if(user_pw==null) {
+			user_pw="kakao";
+		}
+		
 		User u = (User) session.getAttribute("loginUser");
-
-		if (u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd())) {
+		
+		if (u != null && bcryptPasswordEncoder.matches(user_pw, u.getPwd()) || user_pw.equals("kakao")) {
 
 			int result = uService.userdelete(u);
 
@@ -358,11 +364,11 @@ public class UserMyPageController {
 			int reason = uService.reason(map);
 
 			if (result == 1 && reason == 1) {
-				status.setComplete();
 				model.addAttribute("sw", 1);
 				return "user/myPage/deleteUser";
 			} else {
 				model.addAttribute("sw", 2);
+				
 				return "user/myPage/deleteUser";
 			}
 		} else {
@@ -455,6 +461,7 @@ public class UserMyPageController {
 		model.addAttribute("preday",preday);
 		model.addAttribute("postday",postday);
 		model.addAttribute("search_way",search_way);
+		model.addAttribute("kalogin",uc.kalogin);
 		
 		return "user/myPage/buyList";
 	}
@@ -590,6 +597,7 @@ public class UserMyPageController {
 
 		// model객체에 키,벨류 값으로 넣어주고 wishList.jsp로 리턴시켜준다.
 		model.addAttribute("product",product);
+		model.addAttribute("kalogin",uc.kalogin);
 		return "user/myPage/wishList";
 	}
 
