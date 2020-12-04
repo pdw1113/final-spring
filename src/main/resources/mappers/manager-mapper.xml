@@ -876,15 +876,7 @@
 	
 	<update id="mMasterUpdate" parameterType="hashmap">
 		UPDATE M_COMFIRM
-		<if test="a eq 'a'.toString()">
-		SET MASTER_ID = 1
-		</if>
-		<if test="a eq 'b'.toString()">
-		SET MASTER_SCHOOL = 1
-		</if>
-		<if test="a eq 'c'.toString()">
-		SET MASTER_QUALIFICATION = 1
-		</if>
+		SET MASTER_ID = #{id}, MASTER_SCHOOL = #{school}, MASTER_QUALIFICATION = #{qualify}
 		WHERE MASTER_NICKNAME = #{mNickname}
 	</update>
 	

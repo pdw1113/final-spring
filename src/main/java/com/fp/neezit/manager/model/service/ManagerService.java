@@ -124,7 +124,7 @@ public interface ManagerService {
 
 		int mBuy();
 
-		int mMasterUpdate(HashMap<String, String> map);
+		int mMasterUpdate(HashMap<String, Object> map);
 		
 		int mComfirm(String masterNicName);
 
