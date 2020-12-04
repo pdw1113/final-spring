@@ -387,18 +387,19 @@
 	<!-- 판매순 -->
 	<select id="getProductBest" resultMap="productResultSet">
 		<![CDATA[
-     	SELECT A.PRODUCT_NO
-	         , A.PRODUCT_STAR
-	         , A.PRODUCT_COUNT
-	         , A.PRODUCT_TITLE
-	         , A.PRODUCT_RENAMEPIC
-	         , B.MASTER_RANK_PIC
-	         , B.MASTER_NICKNAME
-  		  FROM PRODUCT A
-  		  JOIN NEEZ_MASTER B 
-  		    ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
-  		 WHERE ROWNUM<=6
-		 ORDER BY PRODUCT_COUNT DESC
+    SELECT * FROM(
+                SELECT A.PRODUCT_NO
+                     , A.PRODUCT_STAR
+                     , A.PRODUCT_COUNT
+                     , A.PRODUCT_TITLE
+                     , A.PRODUCT_RENAMEPIC
+                     , B.MASTER_RANK_PIC
+                     , B.MASTER_NICKNAME
+                  FROM PRODUCT A
+                  JOIN NEEZ_MASTER B 
+                    ON (A.MASTER_NICKNAME = B.MASTER_NICKNAME)
+                 ORDER BY PRODUCT_COUNT DESC)
+                 WHERE ROWNUM <= 6
      	]]>
 	</select>
 	

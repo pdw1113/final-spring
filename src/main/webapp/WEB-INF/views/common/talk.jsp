@@ -24,13 +24,37 @@ function play() {
 } 
 </script>
 </head>
-<body >
-<div id="talkIcon">
+<body>
 	<!-- 채팅 아이콘 -->
-	<div class="chatIcon font_jua" @click="opentalk">
+	<div class="chatIcon font_jua">
 		<img src="resources/img/chat-icon.png" class="iconImg">
 	</div>
-
+	<!-- 채팅 리스트 / 채팅 방 OPEN / CLOSE -->
+	<script>
+         $(document).on("click", ".chatIcon", function(){            	// 채팅 Icon 클릭 시,
+            if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
+                $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
+            }else{                                                      // else ) 채팅방이 열려있다면,
+                $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
+                websocket.close();
+            }
+         	
+         	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
+                getRoomList();											// 채팅 방 목록을 불러온다.
+         	}
+         });
+         
+         $(document).on("click", "img.close", function(){            	// X 버튼 클릭 시,
+             $('.chatContainer').toggleClass('display-none');           // 채팅방을 닫는다.
+             websocket.close();											// socket 연결 종료
+         });
+         
+         $(document).on("click", "img.down", function(){             	// - 버튼 클릭 시,
+             $('.chatContainer').toggleClass('display-none');           // 채팅방을 닫고,
+             $('.chatListContainer').toggleClass('display-none');       // 리스트를 연다.
+             websocket.close();											// socket 연결 종료
+         });
+    </script>
 	<!-- 채팅 창 -->
 	<div class="chatContainer display-none">
 		<div class="chatTop">
@@ -39,10 +63,10 @@ function play() {
 			</div>
 			<div class="name_container font_noto" id="setName"><!-- 이름 동적 생성 --></div>
 			<div class="floatRight">
-				<img src="resources/img/chat-close.png" class="btnImg close" @click="IconClose">
+				<img src="resources/img/chat-close.png" class="btnImg close">
 			</div>
 			<div class="floatRight">
-				<img src="resources/img/chat-minus.png" class="btnImg down" @click="IconDown">
+				<img src="resources/img/chat-minus.png" class="btnImg down">
 			</div>
 		</div>
 		<div class="chatMiddle">
@@ -78,44 +102,7 @@ function play() {
 			<!-- 동적 생성 -->
 		</div>
 	</div>
-</div>
-
-<!-- Vue.js 관련 -->
-<script>
-    new Vue({
-    	// element : ID or Class로 지정 해 줄 수 있음.
-        el: '#talkIcon',
-        // methods : JS의 function()과 같은 기능
-        methods: {
-        	<!-- 채팅 리스트 / 채팅 방 OPEN / CLOSE -->
-        	opentalk() {
-                if($('.chatContainer').hasClass("display-none")){           // if ) 채팅방이 열려있지 않을 때,
-                    $('.chatListContainer').toggleClass('display-none');    // 리스트를 연다.
-                }else{                                                      // else ) 채팅방이 열려있다면,
-                    $('.chatContainer').toggleClass('display-none');        // 채팅방을 닫는다.
-                    websocket.close();
-                }
-             	
-             	if(!$('.chatListContainer').hasClass('display-none')){	 	// 채팅 리스트가 닫혀 있을 때
-                    getRoomList();											// 채팅 방 목록을 불러온다.
-             	}
-            },
-
-            // X 버튼 클릭 시,
-            IconClose(){
-                $('.chatContainer').toggleClass('display-none');            // 채팅방을 닫는다.
-                websocket.close();											// socket 연결 종료
-            },
-
-        	// - 버튼 클릭 시,
-            IconDown(){
-                $('.chatContainer').toggleClass('display-none');           // 채팅방을 닫고,
-                $('.chatListContainer').toggleClass('display-none');       // 리스트를 연다.
-                websocket.close();											// socket 연결 종료
-            }
-        }
-    })
-</script>
+	
 	<!-- 채팅 목록 관련 -->
 	<script>
 		// 총 읽지 않은 갯수
@@ -246,6 +233,7 @@ function play() {
 			 	 
 	        	 if(search3.replace(/\s|  /gi, "").length == 0){
 			   		return false;
+		   			$('div.chatBottom textarea').focus();
 		   		 }
 	        	 
                  sendMessage(message);

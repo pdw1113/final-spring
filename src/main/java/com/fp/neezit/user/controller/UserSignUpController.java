@@ -152,6 +152,7 @@ public class UserSignUpController {
             return "fail";
         }
     }
+    
     /**
      * 2─1. EMAIL 인증번호 비교 메소드 
      * @param model
