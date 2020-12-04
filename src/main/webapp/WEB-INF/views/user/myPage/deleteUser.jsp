@@ -19,12 +19,14 @@
       <form action="deleteUser.do" method="post">
          <div class="content_myleave">
             <div class="dataInform_myleave">
+               <c:if test="${kalogin == false}">
                <div class="tit2_myleave">비밀번호 및 탈퇴사유를 입력해 주십시오.</div>
                <div class="inform_myleave">
                   <ul>
                      <li><input type="password" class="password_myleave" name="user_pw" id="user_pw" placeholder="비밀번호를 입력해 주십시오."></li>
                   </ul>
                </div>
+               </c:if>
                <div class="tit2_myleave">탈퇴 사유</div>
                <div class="reason_myleave">
                   <ul>
@@ -90,7 +92,7 @@
       		if(sw==1){
       			alert("회원 탈퇴 완료");
       			sw=null;
-      			location.href="index.do";
+      			location.href = "logout.do?token=" + Kakao.Auth.getAccessToken();
       		}else if(sw==2){
       			alert("회원 탈퇴 실패");
       			sw=null;

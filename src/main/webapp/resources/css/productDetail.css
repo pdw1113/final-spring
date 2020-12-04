@@ -642,23 +642,22 @@
     
     .buy_modal{
       border: 10px solid rgb(250, 190, 0);
-      position: fixed;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
-      /* 모달 가운데 오게 하기 */
-      left: 50%;
-      top: 35%;
-      width: 450px;
-      margin-left: -225px;
-      height: 370px;
-      margin-top: -185px;
+	  position: fixed;
+	  background-color: white;
+	  border-radius: 10px;
+	  box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
+	  left: 50%;
+	  top: 35%;
+	  width: 450px;
+	  margin-left: -225px;
+	  height: 382px;
+	  margin-top: -185px;
     }
     
     .buy_top{
       text-align: center;
-      height:40px;
-      border-bottom:10px solid rgb(250,190,0);
+      height: 48px;
+      border-bottom: 10px solid rgb(250,190,0);
       font-size: 1.8rem;
       font-weight: bold;
     }
@@ -767,4 +766,12 @@
     border-right-width:0;
     border-top-width:0;
     padding-bottom: 8px;
+    }
+    
+    .buy_cancelimg{
+    width: 40px;
+    float: right;
+    padding-right: 10px;
+    padding-top: 3px;
+    cursor: pointer;
     }

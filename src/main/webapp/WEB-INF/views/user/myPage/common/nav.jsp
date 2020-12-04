@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
    <head>
@@ -10,9 +11,6 @@
       <script src="https://kit.fontawesome.com/04dc22ed0b.js" crossorigin="anonymous"></script>
       <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
       <link rel="stylesheet" type="text/css" href="resources/css/nav_myPage.css">
-      <style>
-
-      </style>
    </head>
    <body>
       <nav class="contain_mynav">
@@ -23,7 +21,9 @@
                <ul>
                   <li><a class="a_mynav" href="profile.do">프로필</a></li>
                   <li><a class="a_mynav" href="wallet.do">보유 니즈머니</a></li>
+                  <c:if test="${ kalogin == false }">
                   <li><a class="a_mynav" href="modifyPwdPage.do">비밀번호 변경</a></li>
+                  </c:if>
                   <li><a class="a_mynav" href="deleteUserPage.do">회원탈퇴</a></li>
                </ul>
             </li>

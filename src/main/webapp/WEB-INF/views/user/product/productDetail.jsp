@@ -360,6 +360,7 @@
 		<div class="buy_modal">
 			<div class="buy_top">
 			상품 구매 및 결제
+			<img class="buy_cancelimg"alt="" src="resources/img/cancel.png" onclick="buy_cancel();">
 			</div>
 			<div class="buy_middle">
 				<div class="span_con">
@@ -385,7 +386,10 @@
 	</div>
 
 	<script>
-
+	function buy_cancel(){
+		$("#buyModal").css("display", "none");
+	}
+	
 	var jsonData = JSON.parse('${fList}');
 	console.log(jsonData);
     var fListArr = new Array();
