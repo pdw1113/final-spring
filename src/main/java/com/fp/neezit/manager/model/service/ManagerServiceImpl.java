@@ -282,7 +282,7 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public int mMasterUpdate(HashMap<String, String> map) {
+	public int mMasterUpdate(HashMap<String, Object> map) {
 		return mDao.mMasterUpdate(map);
 	}
 

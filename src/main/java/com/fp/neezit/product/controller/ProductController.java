@@ -292,7 +292,13 @@ public class ProductController {
 		String nick = p.getNickName();
 		int rank = uService.rank(nick);
 		
+		Mcomfirm confirm = pService.getConfirm(p.getNickName());
+		
+			
+	
+		
 		if(p != null && m != null && sns != null) {
+			model.addAttribute("confirm", confirm);
 			model.addAttribute("product", p);
 			model.addAttribute("master", m);
 			model.addAttribute("sns", sns);

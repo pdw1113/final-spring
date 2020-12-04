@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fp.neezit.manager.model.service.ManagerService;
 import com.fp.neezit.manager.model.vo.Forbidden;
+import com.fp.neezit.manager.model.vo.Mcomfirm;
 import com.fp.neezit.manager.model.vo.UserList;
 import com.fp.neezit.product.model.service.ProductService;
 import com.fp.neezit.product.model.vo.Product;
@@ -571,7 +572,13 @@ public class ManagerController {
 	     
 		 String string = category.toString();
 	     String real = string.substring(1,string.length()-1);
-		 
+	     
+	     
+	     Mcomfirm confirm = pService.getConfirm(master.getmNickname());
+			if(confirm != null) {
+				model.addAttribute("confirm", confirm);
+			}
+
 	     model.addAttribute("masterList", master);
 		 model.addAttribute("SchoolList", masterSch);
 		 model.addAttribute("QualifcationList", masterQfa);
@@ -589,16 +596,41 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping("mMasterUpdate.do")
-    public String masterConfirm(Model model, String a, String mNickname) {
+    public String masterConfirm(Model model, boolean id, boolean school, boolean qualify, String mNickname, String email) {
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
 		map.put("mNickname", mNickname);
-		map.put("a", a);
+		map.put("id", id);
+		map.put("school", school);
+		map.put("qualify", qualify);
 		
 		int result = mService.mMasterUpdate(map);
 		
 		if(result == 1) {
+
+			 User u = uService.selectUser(email);
+			 UserMaster master = pService.getMaster(u);
+			 UserMasterSchool masterSch = uService.getMasterSch(u);
+			 UserMasterQualifcation masterQfa = uService.getMasterQfa(u);
+			 UserMasterSns masterSns = uService.getMasterSns(u);
+			 
+			 List<String> category = pService.masterCategory(master);
+		     
+			 String string = category.toString();
+		     String real = string.substring(1,string.length()-1);
+
+		     Mcomfirm confirm = pService.getConfirm(master.getmNickname());
+				if(confirm != null) {
+					model.addAttribute("confirm", confirm);
+				}
+
+		     model.addAttribute("masterList", master);
+			 model.addAttribute("SchoolList", masterSch);
+			 model.addAttribute("QualifcationList", masterQfa);
+			 model.addAttribute("SnsList", masterSns);
+			 model.addAttribute("categoryList", real);
+
 			return "manager/mUser/mMasterConfirm";
 		}else {
 			return "common/errorPage";
