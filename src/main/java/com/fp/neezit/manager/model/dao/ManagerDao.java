@@ -295,7 +295,7 @@ public class ManagerDao {
 		return (ArrayList)sqlSession.selectList("managerMapper.mStatistics2");
 	}
 
-	public int mMasterUpdate(HashMap<String, String> map) {
+	public int mMasterUpdate(HashMap<String, Object> map) {
 		return sqlSession.update("managerMapper.mMasterUpdate", map);
 	}
 	

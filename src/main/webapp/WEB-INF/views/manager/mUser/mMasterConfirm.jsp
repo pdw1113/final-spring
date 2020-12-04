@@ -13,16 +13,16 @@
       <script type="text/javascript"
          src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       <link rel="stylesheet" type="text/css"
-         href="resources/css/signUpMaster.css">
+         href="resources/css/mMasterConfirm.css">
    </head>
    <body>
       <div class="header">
          <%@ include file="../common/mheader.jsp" %>
       </div>
-      <div class="left-bar">
+<%--   	 <div class="left-bar" id="left-bar">
          <%@ include file="../common/mLeftBar.jsp" %>
-      </div>
-      <form action="signUpMasterUpdateView.do" method="POST" enctype="multipart/form-data" name="master">
+      </div> --%>
+
          <!-- 능력자 사진 등록 -->
          <div class="text-align-center-sgm">
             <div class="font_jua title-sgm">프로필 사진</div>
@@ -317,7 +317,7 @@
                </script>
                <hr>
                <!-- 작업 가능 시간 -->
-               <li>
+
                   <div class="sub-title-sgm">선호하는 업무 시간 / 방식</div>
                   <div class="margin-first-sgm">
                      <div class="radio-wrap">
@@ -366,28 +366,38 @@
                         class="input_master_3" type="time" name="" id=""
                         value="${ masterList.mEndTime }" disabled>
                   </div>
-               </li>
+
                <hr>
-               <!-- 저장 / 취소 버튼 -->
-               <c:url var="id" value="mMasterUpdate.do">
-						<c:param name="mNickname" value="${masterList.mNickname}"/>
-						<c:param name="a" value="a"/>
-			   </c:url> 
-			   <c:url var="school" value="mMasterUpdate.do">
-						<c:param name="mNickname" value="${masterList.mNickname}"/>
-						<c:param name="a" value="b"/>
-			   </c:url> 
-			   <c:url var="qualify" value="mMasterUpdate.do">
-						<c:param name="mNickname" value="${masterList.mNickname}"/>
-						<c:param name="a" value="c"/>
-			   </c:url> 
-					
-               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${id}'">본인 확인</span></li>
-               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${school}'">학력 확인</span></li>
-               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='${qualify}'">자격증 확인</span></li>
+
+			   
+			<div class="sub-title-sgm2">인증확인</div>
+			
+		<form action="mMasterUpdate.do" method="POST" >
+			    
+			    
+		   		<div class="radio-wrap">
+                       <input type="checkbox" id="id" class="confirmSelect" name="id"/>
+                       <label class="font_jua day11" for="id">본인 확인</label>
+                </div>
+                 <div class="radio-wrap">
+                    <input type="checkbox" id="school" class="confirmSelect" name="school"/>
+                    <label class="font_jua day11" for="school">학력 확인</label>
+                </div>
+                <div class="radio-wrap">
+                    <input type="checkbox" id="qualify" class="confirmSelect" name="qualify"/>
+                    <label class="font_jua day11" for="qualify">자격증 확인</label>
+               	</div>
+        	
+               	<button type="submit" class="btn_sgm_2 font_jua">인증 확인</button>
+               	<input type="hidden" name="mNickname" value="${masterList.mNickname}"/>
+			    <input type="hidden" name="email" value="${masterList.email}"/>
+           </form>      	
+
+			<ul>		
+               <li class="margin-top-sgm"><span class="btn_sgm" onclick="location.href='mUserList.do'">돌아가기</span></li>
             </ul>
-         </div>
-      </form>
+
+    
       <script>
          /*day check*/
            (function(){
@@ -424,6 +434,24 @@
             
                 };
                 
+
+                // 인증 확인
+                let id = '${ confirm.masterId  }';
+                let school = '${ confirm.masterSchool }';
+                let qualify = '${ confirm.masterQualification }';
+
+
+                if(   id == 1  ){
+                	document.getElementsByClassName('confirmSelect')[0].checked = true;
+                };
+    
+                if(   school == 1  ){
+                	document.getElementsByClassName('confirmSelect')[1].checked = true;
+                };
+                
+                if(   qualify == 1  ){
+                	document.getElementsByClassName('confirmSelect')[2].checked = true;
+                };
          
            })();
          
