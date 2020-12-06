@@ -422,6 +422,7 @@
 		                      FROM PRODUCT
 		                     GROUP BY MASTER_NICKNAME
 		                    HAVING COUNT(MASTER_NICKNAME)=1)
+		                    AND ROWNUM <= 6
 		ORDER BY PRODUCT_CREATE_DATE DESC
      	]]>
 	</select>
