@@ -30,8 +30,6 @@
          
       </script>
 	  <link rel="stylesheet" type="text/css" href="resources/css/section.css">
-	  <!-- Vue.js -->
-	  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    </head>
    <body>
       <div class="main_container_index">

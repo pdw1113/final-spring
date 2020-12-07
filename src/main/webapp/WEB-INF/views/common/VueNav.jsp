@@ -15,39 +15,39 @@
 <!-- Nav 영역 -->
       <div class="wrapper_Nav">
          <nav class="wrapper_NavIcon" id="app">
-		    <list-item
+		    <todo-item
 		      v-for="item in navList"
-		      v-bind:list="item"
+		      v-bind:todo="item"
 		      v-bind:key="item.id"
-		    ></list-item>
+		    ></todo-item>
          </nav>
       </div>
    </body>
    
    <script>
-		Vue.component('list-item', {
-		  props: ['list'],
+		Vue.component('todo-item', {
+		  props: ['todo'],
 		  template: `<li>
 		              	<a href="productList.do?navNo=10">
-				        <img class="nav_img web_icon" src={{list.pic}}><br>
-				        <p>{{list.category}}</p>
+				        <img class="nav_img web_icon" src="resources/img/webDev-removebg-preview.png"><br>
+				        <p>{{}}</p>
 				        </a>
 				    </li>`
 		});
 			
 		var app7 = new Vue({
-		  el: '#app',
+		  el: '#app-7',
 		  data: {
 			  navList: [
-		      { id: 0, category: '웹개발', pic:'game.png'},
-		      { id: 1, category: '데이터베이스', pic:"game.png" },
-		      { id: 2, category: '모바일앱', pic:"game.png" },
-		      { id: 3, category: '임베디드', pic:"game.png" },
-		      { id: 4, category: '블록체인', pic:"game.png" },
-		      { id: 5, category: '서버', pic:"game.png" },
-		      { id: 6, category: '게임', pic:"game.png" },
-		      { id: 7, category: '데이터분석', pic:"game.png" },
-		      { id: 8, category: '보안', pic:"game.png" },
+		      { id: 0, text: '웹개발' },
+		      { id: 1, text: '데이터베이스' },
+		      { id: 2, text: '모바일앱' },
+		      { id: 3, text: '임베디드' },
+		      { id: 4, text: '블록체인' },
+		      { id: 5, text: '서버' },
+		      { id: 6, text: '게임' },
+		      { id: 7, text: '데이터분석' },
+		      { id: 8, text: '보안' },
 		    ]
 		  }
 		});
